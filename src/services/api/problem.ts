@@ -175,7 +175,7 @@ class ProblemValidationService {
       const response = await apiClient.invokeEdgeFunction<{
         validation: ProblemValidationResponse
         stream_updates?: StreamingValidationUpdate[]
-      }>('validate-problem', {
+      }>('problem-validation', {
         ...request,
         streaming: true
       }, {
@@ -372,15 +372,29 @@ class ProblemValidationService {
 
   // Private methods
   private async performValidation(request: ProblemValidationRequest): Promise<ProblemValidationResponse> {
-    const response = await apiClient.invokeEdgeFunction<{
-      validation: ProblemValidationResponse
-    }>('validate-problem', request)
+    console.log('[ProblemValidationService] Calling edge function with:', request);
+    
+    const response = await apiClient.invokeEdgeFunction<any>('problem-validation', {
+      problemInput: request.problemInput,
+      projectId: request.projectId
+    })
+
+    console.log('[ProblemValidationService] Edge function response:', response);
 
     if (response.error) {
+      console.error('[ProblemValidationService] Edge function error:', response.error);
       throw new Error(response.error.message)
     }
 
-    return response.data!.validation
+    // The edge function returns the full state, extract what we need
+    const result = response.data;
+    return {
+      isValid: result.isValid || false,
+      validatedProblem: result.validatedProblem,
+      feedback: result.validationFeedback || '',
+      suggestions: result.keyTerms || [],
+      confidenceScore: result.isValid ? 0.9 : 0.3
+    }
   }
 
   private cacheValidation(problemInput: string, result: ProblemValidationResponse, projectId: string): void {
@@ -395,8 +409,25 @@ class ProblemValidationService {
   }
 
   private generateCacheKey(problemInput: string): string {
-    // Create a simple hash of the problem input for caching
-    return btoa(problemInput.toLowerCase().trim()).replace(/[^a-zA-Z0-9]/g, '')
+    // First encode the string to handle Unicode characters
+    try {
+      // Convert to UTF-8 bytes then to base64
+      const encoder = new TextEncoder();
+      const data = encoder.encode(problemInput.toLowerCase().trim());
+      const base64 = btoa(String.fromCharCode(...data));
+      return base64.replace(/[^a-zA-Z0-9]/g, '');
+    } catch (error) {
+      // Fallback: use a simple hash if encoding fails
+      console.warn('[ProblemValidationService] Cache key generation failed, using fallback', error);
+      let hash = 0;
+      const str = problemInput.toLowerCase().trim();
+      for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash; // Convert to 32-bit integer
+      }
+      return Math.abs(hash).toString(36);
+    }
   }
 
   private isCacheValid(cached: CachedValidation): boolean {

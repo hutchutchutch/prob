@@ -2,10 +2,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { ProgressBar } from '@/components/layout/ProgressBar';
-import { ProblemInput } from '@/components/workflow';
-import { Canvas } from '@/components/canvas';
+import { WorkflowCanvas } from '@/components/workflow/WorkflowCanvas';
 import { useWorkflowStore } from '@/stores/workflowStore';
 import useProjectStore from '@/stores/projectStore';
+import { useEffect } from 'react';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,64 +30,143 @@ const stepToNumber = (step: string): number => {
   return stepMap[step] || 1;
 };
 
+// Demo workspace data for development
+const DEMO_WORKSPACES = [
+  {
+    id: 'ws-1',
+    name: 'Product Ideas',
+    description: 'Personal product concepts and experiments',
+    icon: '💡',
+    user_id: 'demo-user',
+    folder_path: null,
+    is_active: true,
+    problemCount: 2,
+    updatedAt: new Date().toISOString(),
+    projects: [
+      { 
+        id: 'proj-1', 
+        name: 'Dog Walking App', 
+        status: 'in-progress' as const,
+        updatedAt: new Date()
+      },
+      { 
+        id: 'proj-2', 
+        name: 'Meal Prep Service', 
+        status: 'draft' as const,
+        updatedAt: new Date()
+      },
+    ]
+  },
+  {
+    id: 'ws-2', 
+    name: 'Client Projects',
+    description: 'Client work and consulting',
+    icon: '💼',
+    user_id: 'demo-user',
+    folder_path: null,
+    is_active: true,
+    problemCount: 1,
+    updatedAt: new Date(Date.now() - 86400000).toISOString(), // Yesterday
+    projects: [
+      { 
+        id: 'proj-3', 
+        name: 'E-commerce Platform', 
+        status: 'completed' as const,
+        updatedAt: new Date(Date.now() - 172800000) // 2 days ago
+      },
+    ]
+  }
+];
+
 export function App() {
   const { currentStep } = useWorkflowStore();
-  const { workspaces, activeWorkspaceId, activeProjectId } = useProjectStore();
+  const { workspaces, activeWorkspaceId, activeProjectId, setActiveWorkspace } = useProjectStore();
 
-  // Show problem input as initial screen
-  if (currentStep === 'problem_input' && !activeProjectId) {
-    return (
-      <QueryClientProvider client={queryClient}>
-        <div className="min-h-screen bg-gray-900 flex items-center justify-center p-8">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key="problem-input"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.3 }}
-              className="w-full max-w-2xl"
-            >
-              <ProblemInput />
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </QueryClientProvider>
-    );
-  }
+  // Initialize with demo data in development
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development' && workspaces.length === 0) {
+      console.log('[App] Initializing with demo workspaces');
+      // Set demo workspaces directly in the store
+      useProjectStore.setState({ 
+        workspaces: DEMO_WORKSPACES as any,
+        activeWorkspaceId: DEMO_WORKSPACES[0].id
+      });
+    }
+  }, [workspaces.length]);
 
-  // Main app layout with sidebar and canvas
+  // Debug logging
+  useEffect(() => {
+    console.log('[App] Current workflow state:', {
+      currentStep,
+      activeWorkspaceId,
+      activeProjectId,
+      workspaces: workspaces.length
+    });
+  }, [currentStep, activeWorkspaceId, activeProjectId, workspaces]);
+
+  // Always show the main app layout with sidebar and canvas
+  // The canvas will handle showing different content based on workflow state
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex h-screen bg-gray-900 text-white overflow-hidden">
+      <div 
+        className="flex h-screen bg-gray-900 text-white overflow-hidden"
+        style={{ backgroundColor: '#111827', color: '#ffffff', minHeight: '100vh' }}
+      >
+        {/* Debug info */}
+        <div className="absolute top-0 left-0 z-50 bg-red-600 text-white p-2 text-xs">
+          Debug: App Rendered, Step: {currentStep}
+        </div>
+        
         {/* Sidebar */}
-        <Sidebar
-          workspaces={workspaces}
-          activeWorkspaceId={activeWorkspaceId}
-          activeProjectId={activeProjectId}
-          onWorkspaceSelect={(id: string) => console.log('Select workspace:', id)}
-          onWorkspaceCreate={() => console.log('Create workspace')}
-          onProjectSelect={(id: string) => console.log('Select project:', id)}
-          onNewProject={() => console.log('New project')}
-          onSettings={() => console.log('Settings')}
-          className="flex-shrink-0"
-        />
+        <div className="border-4 border-red-500" style={{ borderColor: 'red' }}>
+          <Sidebar
+            workspaces={workspaces}
+            activeWorkspaceId={activeWorkspaceId}
+            activeProjectId={activeProjectId}
+            onWorkspaceSelect={(id: string) => {
+              console.log('[App] Select workspace:', id);
+              setActiveWorkspace(id);
+            }}
+            onWorkspaceCreate={() => {
+              console.log('[App] Create workspace');
+              // TODO: Implement workspace creation
+            }}
+            onProjectSelect={(id: string) => {
+              console.log('[App] Select project:', id);
+              // TODO: Implement project selection
+            }}
+            onNewProject={() => {
+              console.log('[App] New project');
+              // Reset workflow for new project
+              useWorkflowStore.getState().resetWorkflow();
+            }}
+            onSettings={() => {
+              console.log('[App] Settings');
+              // TODO: Implement settings
+            }}
+            className="flex-shrink-0"
+          />
+        </div>
 
         {/* Main Content Area */}
-        <div className="flex-1 flex flex-col relative">
+        <div className="flex-1 flex flex-col relative border-4 border-green-500" style={{ borderColor: 'green' }}>
           {/* Header with Progress Bar */}
-          <header className="h-20 bg-gray-800 border-b border-gray-700 flex items-center px-6">
+          <header 
+            className="h-20 bg-gray-800 border-b border-gray-700 flex items-center px-6 z-10 border-4 border-blue-500"
+            style={{ backgroundColor: '#1F2937', borderColor: 'blue' }}
+          >
             <ProgressBar 
               currentStep={stepToNumber(currentStep)}
               totalSteps={7}
             />
           </header>
 
-          {/* Canvas Area */}
-          <main className="flex-1 relative bg-gray-900">
-            <div className="absolute inset-0">
-              <Canvas />
-            </div>
+          {/* Workflow Canvas - handles all workflow states */}
+          <main 
+            className="flex-1 relative bg-gray-900 border-4 border-yellow-500"
+            style={{ backgroundColor: '#111827', borderColor: 'yellow' }}
+          >
+            <WorkflowCanvas />
           </main>
         </div>
       </div>

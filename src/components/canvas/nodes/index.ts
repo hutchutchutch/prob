@@ -21,7 +21,7 @@ export type { PainLevelIndicatorProps } from './PainLevelIndicator';
 
 // Export node types configuration for React Flow
 export const nodeTypes = {
-  coreProblem: CoreProblemNode,
+  problem: CoreProblemNode,
   persona: PersonaNode,
   painPoint: PainPointNode,
   solution: SolutionNode,
