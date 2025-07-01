@@ -1,212 +1,210 @@
 import React, { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { Canvas } from '@/components/canvas';
-import { ProblemInput } from './ProblemInput';
 import { useWorkflowStore } from '@/stores/workflowStore';
 import { useCanvasStore } from '@/stores/canvasStore';
 import { Node, Edge } from '@xyflow/react';
 
-// Demo nodes for the initial canvas state
-const createDemoNodes = (): Node[] => {
-  const nodes: Node[] = [];
-  
-  // Core problem node
-  nodes.push({
-    id: 'demo-problem',
-    type: 'problem',
-    position: { x: 500, y: 50 },
-    data: { 
-      title: 'Core Problem',
-      description: 'Your problem will appear here',
-      isDemo: true,
-      status: 'valid'
-    }
-  });
-
-  // Persona nodes
-  const personaNames = ['Sally Sales-a-lot', 'Tim Tech-savvy', 'Mary Manager', 'Dave Developer', 'Clara Customer'];
-  personaNames.forEach((name, index) => {
-    nodes.push({
-      id: `demo-persona-${index}`,
-      type: 'persona',
-      position: { x: 200 + (index * 150), y: 200 },
-      data: { 
-        name,
-        description: 'Persona description',
-        isDemo: true,
-        demographics: {},
-        psychographics: {}
-      }
-    });
-  });
-
-  // Pain point nodes
-  const painPoints = ['Slow workflow', 'Data silos', 'Poor collaboration'];
-  painPoints.forEach((pain, index) => {
-    nodes.push({
-      id: `demo-pain-${index}`,
-      type: 'painPoint',
-      position: { x: 300 + (index * 200), y: 350 },
-      data: { 
-        title: pain,
-        severity: index === 0 ? 5 : index === 1 ? 4 : 3,
-        isDemo: true
-      }
-    });
-  });
-
-  // Solution nodes
-  const solutions = ['Unified Dashboard', 'API Integration', 'Real-time Sync', 'Mobile App', 'Analytics Suite'];
-  solutions.forEach((solution, index) => {
-    nodes.push({
-      id: `demo-solution-${index}`,
-      type: 'solution',
-      position: { x: 150 + (index * 180), y: 500 },
-      data: { 
-        title: solution,
-        type: index % 2 === 0 ? 'feature' : 'integration',
-        isDemo: true,
-        impact: 'high'
-      }
-    });
-  });
-
-  return nodes;
-};
-
-const createDemoEdges = (): Edge[] => {
-  const edges: Edge[] = [];
-  
-  // Connect problem to personas
-  for (let i = 0; i < 5; i++) {
-    edges.push({
-      id: `demo-edge-problem-persona-${i}`,
-      source: 'demo-problem',
-      target: `demo-persona-${i}`,
-      type: 'animated',
-      animated: true,
-      style: { opacity: 0.3, stroke: '#9CA3AF' }
-    });
-  }
-
-  // Connect personas to pain points
-  edges.push({
-    id: 'demo-edge-persona-pain-0',
-    source: 'demo-persona-0',
-    target: 'demo-pain-0',
-    type: 'animated',
-    animated: true,
-    style: { opacity: 0.3, stroke: '#9CA3AF' }
-  });
-
-  edges.push({
-    id: 'demo-edge-persona-pain-1',
-    source: 'demo-persona-2',
-    target: 'demo-pain-1',
-    type: 'animated',
-    animated: true,
-    style: { opacity: 0.3, stroke: '#9CA3AF' }
-  });
-
-  // Connect pain points to solutions
-  edges.push({
-    id: 'demo-edge-pain-solution-0',
-    source: 'demo-pain-0',
-    target: 'demo-solution-0',
-    type: 'solution',
-    style: { opacity: 0.3, stroke: '#10B981' }
-  });
-
-  edges.push({
-    id: 'demo-edge-pain-solution-1',
-    source: 'demo-pain-1',
-    target: 'demo-solution-1',
-    type: 'solution',
-    style: { opacity: 0.3, stroke: '#F59E0B' }
-  });
-
-  return edges;
-};
-
 export function WorkflowCanvas() {
-  const { currentStep, coreProblem } = useWorkflowStore();
-  const { addNodes, addEdges, zoomTo, resetCanvas } = useCanvasStore();
-  const [showDemoNodes, setShowDemoNodes] = useState(true);
+  const { currentStep, coreProblem, personas } = useWorkflowStore();
+  const { addNodes, addEdges, zoomTo, resetCanvas, nodes } = useCanvasStore();
   const [canvasInitialized, setCanvasInitialized] = useState(false);
 
-  // Initialize demo nodes when component mounts
+  // Initialize the canvas with the problem input node
   useEffect(() => {
     console.log('[WorkflowCanvas] Initializing with currentStep:', currentStep);
     console.log('[WorkflowCanvas] Canvas initialized:', canvasInitialized);
+    console.log('[WorkflowCanvas] Existing nodes:', nodes.length);
     
-    if (currentStep === 'problem_input' && !coreProblem && !canvasInitialized) {
-      console.log('[WorkflowCanvas] Setting up demo nodes...');
+    if (currentStep === 'problem_input' && !canvasInitialized) {
+      console.log('[WorkflowCanvas] Setting up problem input node...');
       
       // Clear canvas first
       resetCanvas();
       
-      // Set demo nodes with low opacity
-      const demoNodes = createDemoNodes();
-      const demoEdges = createDemoEdges();
+      // Create the interactive problem input node positioned in the left column
+      const problemInputNode: Node = {
+        id: 'problem-input',
+        type: 'problem',
+        position: { x: -250, y: 0 }, // Left column center
+        data: { 
+          id: 'problem-input',
+          problem: coreProblem?.description || '',
+          status: coreProblem?.is_validated ? 'valid' : 'editing',
+          isDemo: false
+        },
+        draggable: false, // CoreProblemNode should never be draggable
+      };
+
+      // Create column label nodes
+      const coreProblemLabelNode: Node = {
+        id: 'core-problem-label',
+        type: 'label',
+        position: { x: -350, y: -120 }, // Above the CoreProblemNode
+        data: { 
+          text: 'Core Problem',
+          showRefresh: false
+        },
+        draggable: false,
+        selectable: false,
+      };
+
+      const personasLabelNode: Node = {
+        id: 'personas-label',
+        type: 'label', 
+        position: { x: 520, y: -420 }, // Above the PersonaNodes column
+        data: {
+          text: 'Personas',
+          showRefresh: true,
+          onRefresh: () => {
+            console.log('[WorkflowCanvas] Refreshing personas...');
+            const workflowStore = useWorkflowStore.getState();
+            if (workflowStore.coreProblem) {
+              workflowStore.generatePersonas();
+            }
+          }
+        },
+        draggable: false,
+        selectable: false,
+      };
+
+      // Create 5 PersonaNodes in skeleton state initially - positioned to barely peek from right edge
+      const personaNodes: Node[] = Array.from({ length: 5 }, (_, index) => ({
+        id: `persona-${index + 1}`,
+        type: 'persona',
+        position: { 
+          x: 600, // Far right column - personas will barely peek into view
+          y: -300 + (index * 150) // Vertical spacing of 150px between nodes
+        },
+        data: {
+          id: `persona-${index + 1}`,
+          name: '',
+          industry: '',
+          role: '',
+          painDegree: 0,
+          description: '',
+          isLocked: false,
+          isExpanded: false,
+          isSkeleton: !coreProblem?.description, // Skeleton state when no problem
+          onToggleLock: () => {
+            // TODO: Implement persona locking
+            console.log(`Toggle lock for persona ${index + 1}`);
+          }
+        },
+        draggable: true,
+      }));
       
-      // Make demo nodes semi-transparent
-      demoNodes.forEach(node => {
-        node.style = { ...node.style, opacity: 0.1 };
-      });
+      // Create edges connecting the problem node to each persona node
+      const edges: Edge[] = personaNodes.map((personaNode, index) => ({
+        id: `problem-to-persona-${index + 1}`,
+        source: 'problem-input',
+        target: personaNode.id,
+        type: 'default',
+        style: { 
+          stroke: '#6B7280', 
+          strokeWidth: 2,
+          opacity: 0.7 
+        },
+        animated: true,
+      }));
       
-      console.log('[WorkflowCanvas] Adding nodes:', demoNodes.length);
-      console.log('[WorkflowCanvas] Adding edges:', demoEdges.length);
-      
-      addNodes(demoNodes);
-      addEdges(demoEdges);
+      console.log('[WorkflowCanvas] Adding column labels, problem input node, 5 persona skeleton nodes, and connecting edges');
+      addNodes([coreProblemLabelNode, personasLabelNode, problemInputNode, ...personaNodes]);
+      addEdges(edges);
       
       setCanvasInitialized(true);
       
-      // After a short delay, zoom to the problem area
+      // Center the view on the problem node with appropriate zoom to show persona column edge
       setTimeout(() => {
-        console.log('[WorkflowCanvas] Zooming to problem area...');
-        zoomTo(1.5);
-      }, 500);
+        console.log('[WorkflowCanvas] Centering view on problem node...');
+        zoomTo(0.8); // Reduced zoom to show more of the canvas width
+      }, 100);
     }
-  }, [currentStep, coreProblem, canvasInitialized, addNodes, addEdges, zoomTo, resetCanvas]);
+  }, [currentStep, canvasInitialized, addNodes, zoomTo, resetCanvas, coreProblem, nodes.length]);
 
-  // Hide demo nodes when moving past problem input
+  // Update the problem node when core problem changes
   useEffect(() => {
-    if (currentStep !== 'problem_input' && showDemoNodes) {
-      console.log('[WorkflowCanvas] Hiding demo nodes...');
-      setShowDemoNodes(false);
-      // Clear demo nodes and start fresh
-      resetCanvas();
+    if (coreProblem && canvasInitialized) {
+      console.log('[WorkflowCanvas] Updating problem node with validated problem');
+      
+      // Update the problem input node
+      const canvasStore = useCanvasStore.getState();
+      canvasStore.updateNode('problem-input', {
+        data: {
+          id: 'problem-input',
+          problem: coreProblem.description,
+          status: 'valid',
+          isDemo: false
+        },
+        draggable: false, // CoreProblemNode should never be draggable
+      });
+
+      // Update persona nodes to remove skeleton state (they'll be populated by the personas effect)
+      for (let i = 1; i <= 5; i++) {
+        const nodeId = `persona-${i}`;
+        canvasStore.updateNode(nodeId, {
+          data: {
+            id: nodeId,
+            name: '',
+            industry: '',
+            role: '',
+            painDegree: 0,
+            description: '',
+            isLocked: false,
+            isExpanded: false,
+            isSkeleton: false, // Remove skeleton state
+            onToggleLock: () => {
+              console.log(`Toggle lock for persona ${i}`);
+            }
+          }
+        });
+      }
     }
-  }, [currentStep, showDemoNodes, resetCanvas]);
+  }, [coreProblem, canvasInitialized]);
+
+  // Update PersonaNodes when personas are available
+  useEffect(() => {
+    if (personas.length > 0 && canvasInitialized) {
+      console.log('[WorkflowCanvas] Updating persona nodes with data:', personas.length);
+      
+      const canvasStore = useCanvasStore.getState();
+      
+      // Update the first 5 persona nodes with actual data
+      personas.slice(0, 5).forEach((persona, index) => {
+        const nodeId = `persona-${index + 1}`;
+        canvasStore.updateNode(nodeId, {
+          data: {
+            id: nodeId,
+            name: persona.name,
+            industry: persona.demographics?.industry || 'Unknown',
+            role: persona.demographics?.role || 'Unknown',
+            painDegree: Math.floor(Math.random() * 5) + 1, // Random pain level 1-5, could be from API
+            description: persona.description,
+            isLocked: persona.is_locked,
+            isExpanded: false,
+            isSkeleton: false, // Ensure skeleton state is off
+            onToggleLock: () => {
+              const workflowStore = useWorkflowStore.getState();
+              workflowStore.togglePersonaLock(persona.id);
+            }
+          }
+        });
+      });
+    }
+  }, [personas, canvasInitialized]);
+
+  // Clear canvas when moving past problem input
+  useEffect(() => {
+    if (currentStep !== 'problem_input' && canvasInitialized) {
+      console.log('[WorkflowCanvas] Moving past problem input, updating canvas...');
+      // Don't clear the canvas, just let the workflow store handle the transition
+      // The problem node will remain and new nodes will be added
+    }
+  }, [currentStep, canvasInitialized]);
 
   return (
     <div className="relative w-full h-full">
       {/* React Flow Canvas */}
       <Canvas />
-
-      {/* Problem Input Overlay */}
-      <AnimatePresence>
-        {currentStep === 'problem_input' && !coreProblem?.is_validated && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none"
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
-              className="pointer-events-auto"
-            >
-              <ProblemInput />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Debug info */}
       {process.env.NODE_ENV === 'development' && (
@@ -214,7 +212,7 @@ export function WorkflowCanvas() {
           <div>Step: {currentStep}</div>
           <div>Problem: {coreProblem ? 'Validated' : 'Not validated'}</div>
           <div>Canvas Init: {canvasInitialized ? 'Yes' : 'No'}</div>
-          <div>Demo Nodes: {showDemoNodes ? 'Yes' : 'No'}</div>
+          <div>Nodes: {nodes.length}</div>
         </div>
       )}
     </div>

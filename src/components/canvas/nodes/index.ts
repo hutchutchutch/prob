@@ -3,6 +3,7 @@ import { CoreProblemNode } from './CoreProblemNode';
 import { PersonaNode } from './PersonaNode';
 import { PainPointNode } from './PainPointNode';
 import { SolutionNode } from './SolutionNode';
+import { LabelNode } from './LabelNode';
 
 // Export all node components
 export { BaseNode } from './BaseNode';
@@ -11,6 +12,7 @@ export { PersonaNode } from './PersonaNode';
 export { PainPointNode } from './PainPointNode';
 export { SolutionNode } from './SolutionNode';
 export { PainLevelIndicator } from './PainLevelIndicator';
+export { LabelNode } from './LabelNode';
 
 // Export types
 export type { CoreProblemNodeData } from './CoreProblemNode';
@@ -25,4 +27,5 @@ export const nodeTypes = {
   persona: PersonaNode,
   painPoint: PainPointNode,
   solution: SolutionNode,
+  label: LabelNode,
 };

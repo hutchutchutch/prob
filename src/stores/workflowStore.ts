@@ -294,15 +294,27 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
         // Call Tauri API to validate and analyze problem
         const analysis = await tauriAPI.analyzeProblem(input)
         // TODO: Parse analysis and create CoreProblem object
+        const projectId = get().projectId || crypto.randomUUID()
         const coreProblem: CoreProblem = {
           id: crypto.randomUUID(),
-          project_id: get().projectId || '',
+          project_id: projectId,
           description: input,
           is_validated: true,
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString(),
         }
+        
+        // Ensure we have a project ID
+        if (!get().projectId) {
+          set({ projectId })
+        }
+        
         set({ coreProblem, problemInput: input })
+        
+        // Automatically generate personas after problem validation
+        setTimeout(() => {
+          get().generatePersonas()
+        }, 500)
         
         // Notify canvas and UI stores
         const canvasStore = useCanvasStore.getState()
@@ -320,24 +332,60 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
     // Persona management
     generatePersonas: async () => {
       const state = get()
-      if (!state.coreProblem) return
+      if (!state.coreProblem || !state.projectId) return
 
       const uiStore = useUIStore.getState()
       
       set({ isGeneratingPersonas: true })
-      try {
-        // TODO: Call Tauri API to generate personas
-        // const personas = await tauriAPI.generatePersonas(state.coreProblem.id)
-        const batchId = crypto.randomUUID()
-        set({ 
-          personas: [], // TODO: Set actual personas from API
-          personaGenerationBatch: batchId
-        })
+              try {
+          // Import personas API
+          const { personaService } = await import('@/services/api/personas')
+          
+          const batchId = crypto.randomUUID()
+          
+          // Get locked personas for preservation
+          const lockedPersonas = state.personas.filter(p => state.lockedItems.personas.has(p.id))
+          
+          // Call the edge function to generate personas
+          const response = await personaService.generatePersonas({
+            coreProblem: state.coreProblem,
+            lockedPersonas,
+            projectId: state.projectId,
+            generationBatch: batchId
+          })
+          
+          // Transform the response to match our Persona interface
+          const personas: Persona[] = response.personas.map((persona: any) => ({
+            id: persona.id || crypto.randomUUID(),
+            project_id: state.projectId!,
+            name: persona.name,
+            description: persona.description,
+            demographics: { 
+              industry: persona.industry || 'Unknown',
+              role: persona.role || 'Unknown',
+              ...persona.demographics 
+            },
+            psychographics: persona.psychographics || {},
+            goals: persona.goals || [],
+            frustrations: persona.frustrations || [],
+            batch_id: batchId,
+            is_locked: false,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+          }))
+          
+          // Combine with locked personas
+          const allPersonas = [...lockedPersonas, ...personas]
+          
+          set({ 
+            personas: allPersonas,
+            personaGenerationBatch: batchId
+          })
         
         // Notify canvas and UI stores
         const canvasStore = useCanvasStore.getState()
         canvasStore.syncWithWorkflow(get())
-        uiStore.showSuccess('Personas generated successfully')
+        uiStore.showSuccess(`Generated ${personas.length} new personas`)
         
       } catch (error) {
         console.error('Persona generation failed:', error)

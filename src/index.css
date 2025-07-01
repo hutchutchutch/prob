@@ -11,7 +11,7 @@
   --color-text-secondary: #9ca3af; /* gray-400 */
   
   /* Node colors */
-  --color-node-problem: #DC2626;
+  --color-node-problem: #6B7280;
   --color-node-persona: #14B8A6;
   --color-node-pain: #F97316;
   --color-node-solution: #3B82F6;
@@ -267,7 +267,22 @@ html, body {
 
 /* Gradients for nodes */
 .gradient-problem {
-  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  background: linear-gradient(135deg, var(--color-gray-800), var(--color-gray-700));
+  border: 1px solid var(--color-gray-600);
+}
+
+/* Skeleton shimmer animation */
+.skeleton {
+  animation: skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 .gradient-persona {

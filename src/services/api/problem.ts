@@ -372,29 +372,71 @@ class ProblemValidationService {
 
   // Private methods
   private async performValidation(request: ProblemValidationRequest): Promise<ProblemValidationResponse> {
-    console.log('[ProblemValidationService] Calling edge function with:', request);
+    console.log('[ProblemValidationService] Using local validation for:', request);
     
-    const response = await apiClient.invokeEdgeFunction<any>('problem-validation', {
-      problemInput: request.problemInput,
-      projectId: request.projectId
-    })
+    // For now, use simple local validation to avoid CORS issues
+    // TODO: Set up proper authentication and use edge function
+    return this.performLocalValidation(request);
+  }
 
-    console.log('[ProblemValidationService] Edge function response:', response);
-
-    if (response.error) {
-      console.error('[ProblemValidationService] Edge function error:', response.error);
-      throw new Error(response.error.message)
+  private async performLocalValidation(request: ProblemValidationRequest): Promise<ProblemValidationResponse> {
+    const { problemInput } = request;
+    
+    // Simple validation logic
+    const trimmed = problemInput.trim();
+    
+    if (trimmed.length < 10) {
+      return {
+        isValid: false,
+        feedback: 'Problem statement is too short. Please provide more detail about the specific issue you want to solve.',
+        suggestions: ['Describe the pain point in more detail', 'Explain who is affected by this problem', 'Add context about when this problem occurs'],
+        confidenceScore: 0.2
+      };
     }
-
-    // The edge function returns the full state, extract what we need
-    const result = response.data;
+    
+    if (trimmed.length > 500) {
+      return {
+        isValid: false,
+        feedback: 'Problem statement is too long. Try to focus on the core issue.',
+        suggestions: ['Focus on the main problem', 'Remove unnecessary details', 'Break down into smaller, specific problems'],
+        confidenceScore: 0.3
+      };
+    }
+    
+    // Check for vague terms
+    const vagueTerms = ['something', 'somehow', 'better', 'improve', 'good', 'bad', 'issue', 'problem'];
+    const hasVagueTerms = vagueTerms.some(term => trimmed.toLowerCase().includes(term));
+    
+    if (hasVagueTerms) {
+      return {
+        isValid: false,
+        feedback: 'Problem statement is too vague. Be more specific about what exactly needs to be solved.',
+        suggestions: ['Use specific examples', 'Quantify the impact', 'Describe the current situation vs desired outcome'],
+        confidenceScore: 0.4
+      };
+    }
+    
+    // Check for solution-oriented language
+    const solutionWords = ['build', 'create', 'make', 'develop', 'app', 'website', 'system'];
+    const hasSolutionWords = solutionWords.some(word => trimmed.toLowerCase().includes(word));
+    
+    if (hasSolutionWords) {
+      return {
+        isValid: false,
+        feedback: 'Focus on the problem, not the solution. Describe what people struggle with, not what you want to build.',
+        suggestions: ['Describe the pain point people experience', 'Explain what is currently difficult or impossible', 'Focus on user needs rather than technical solutions'],
+        confidenceScore: 0.5
+      };
+    }
+    
+    // If it passes basic checks, consider it valid
     return {
-      isValid: result.isValid || false,
-      validatedProblem: result.validatedProblem,
-      feedback: result.validationFeedback || '',
-      suggestions: result.keyTerms || [],
-      confidenceScore: result.isValid ? 0.9 : 0.3
-    }
+      isValid: true,
+      validatedProblem: trimmed,
+      feedback: 'Problem statement looks good! It\'s specific and focuses on a real issue.',
+      suggestions: ['Consider who specifically faces this problem', 'Think about the impact and frequency'],
+      confidenceScore: 0.8
+    };
   }
 
   private cacheValidation(problemInput: string, result: ProblemValidationResponse, projectId: string): void {
@@ -519,13 +561,21 @@ export const problemApi = {
       lockedPersonaIds: string[]
     ): Promise<any[]> => {
       // This should call the personas service
-      const { generatePersonas } = await import('./personas');
-      return generatePersonas({
-        coreProblem: { id: coreProblemId } as any,
-        lockedPersonas: [],
-        projectId,
-        generationBatch: crypto.randomUUID()
-      });
+      try {
+        const { generatePersonas } = await import('./personas');
+        const result = await generatePersonas({
+          coreProblem: { id: coreProblemId } as any,
+          lockedPersonas: [],
+          projectId,
+          generationBatch: crypto.randomUUID()
+        });
+        
+        // Extract personas array from the response
+        return result.personas || [];
+      } catch (error) {
+        console.warn('generatePersonas not available yet:', error);
+        return [];
+      }
     },
     
     generatePainPoints: async (

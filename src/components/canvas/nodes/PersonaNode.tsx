@@ -16,18 +16,58 @@ export interface PersonaNodeData {
   description?: string;
   isLocked?: boolean;
   isExpanded?: boolean;
+  isSkeleton?: boolean;
   onToggleLock?: () => void;
 }
 
 export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
   const nodeData = data as unknown as PersonaNodeData;
-  const { isLocked = false, isExpanded = false, onToggleLock } = nodeData;
+  const { isLocked = false, isExpanded = false, isSkeleton = false, onToggleLock } = nodeData;
 
+  // Skeleton state
+  if (isSkeleton) {
+    return (
+      <BaseNode
+        variant="persona"
+        selected={selected}
+        showSourceHandle={false}
+        showTargetHandle={true}
+        className="min-w-[280px] opacity-60"
+      >
+        <div className="space-y-3">
+          {/* Skeleton Header */}
+          <div className="flex items-start justify-between">
+            <div className="h-6 bg-gray-600 rounded skeleton w-32"></div>
+            <div className="w-4 h-4 bg-gray-600 rounded skeleton"></div>
+          </div>
+
+          {/* Skeleton Details */}
+          <div className="space-y-2 text-sm">
+            <div className="flex items-center gap-2">
+              <span className="text-lg opacity-50">🏢</span>
+              <div className="h-4 bg-gray-600 rounded skeleton w-24"></div>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-lg opacity-50">👤</span>
+              <div className="h-4 bg-gray-600 rounded skeleton w-28"></div>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-lg opacity-50">📊</span>
+              <div className="h-4 bg-gray-600 rounded skeleton w-20"></div>
+            </div>
+          </div>
+        </div>
+      </BaseNode>
+    );
+  }
+
+  // Normal state
   return (
     <BaseNode
       variant="persona"
       selected={selected}
       showSourceHandle={isExpanded}
+      showTargetHandle={true}
       className={cn(
         'min-w-[280px]',
         isExpanded ? 'min-w-[350px]' : ''
