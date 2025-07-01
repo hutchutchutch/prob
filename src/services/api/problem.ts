@@ -372,11 +372,37 @@ class ProblemValidationService {
 
   // Private methods
   private async performValidation(request: ProblemValidationRequest): Promise<ProblemValidationResponse> {
-    console.log('[ProblemValidationService] Using local validation for:', request);
+    console.log('[ProblemValidationService] Calling edge function for:', request);
     
-    // For now, use simple local validation to avoid CORS issues
-    // TODO: Set up proper authentication and use edge function
-    return this.performLocalValidation(request);
+    try {
+      // Try the edge function first
+      const response = await apiClient.invokeEdgeFunction<any>('problem-validation', {
+        problemInput: request.problemInput,
+        projectId: request.projectId
+      });
+
+      console.log('[ProblemValidationService] Edge function response:', response);
+
+      if (response.error) {
+        console.error('[ProblemValidationService] Edge function error:', response.error);
+        throw new Error(response.error.message);
+      }
+
+      // The edge function returns the full state, extract what we need
+      const result = response.data;
+      return {
+        isValid: result.isValid || false,
+        validatedProblem: result.validatedProblem,
+        feedback: result.validationFeedback || '',
+        suggestions: result.keyTerms || [],
+        confidenceScore: 0.8 // Default confidence from edge function
+      };
+    } catch (error) {
+      console.warn('[ProblemValidationService] Edge function failed, falling back to local validation:', error);
+      
+      // Fallback to local validation if edge function fails
+      return this.performLocalValidation(request);
+    }
   }
 
   private async performLocalValidation(request: ProblemValidationRequest): Promise<ProblemValidationResponse> {
