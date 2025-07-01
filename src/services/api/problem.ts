@@ -575,10 +575,56 @@ export const {
 // Export a problemApi object that matches what the components expect
 export const problemApi = {
     validateProblem: async (input: string): Promise<ProblemValidationResponse> => {
-      return problemValidationService.validateProblem({
-        problemInput: input,
-        projectId: 'temp-project-id' // You'll need to get this from your store
-      });
+      // Get project ID from workflow store
+      const { useWorkflowStore } = await import('@/stores/workflowStore');
+      const projectId = useWorkflowStore.getState().projectId || crypto.randomUUID();
+      
+      console.log('[problemApi] Validating problem with direct fetch');
+      console.log('[problemApi] Input:', input);
+      console.log('[problemApi] Project ID:', projectId);
+      
+      // Try direct fetch first to bypass Supabase client issues
+      try {
+        const response = await fetch('https://tyfmxjzcocjztocwemun.supabase.co/functions/v1/problem-validation', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR5Zm14anpjb2NqenRvY3dlbXVuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzMTQzMzEsImV4cCI6MjA2Njg5MDMzMX0.jej03NzK7hfVriSh18uOXkVMtNFnKRZoWK37Wdh6lhI`,
+            'x-request-id': crypto.randomUUID()
+          },
+          body: JSON.stringify({
+            problemInput: input,
+            projectId: projectId
+          })
+        });
+        
+        console.log('[problemApi] Response status:', response.status);
+        const data = await response.json();
+        console.log('[problemApi] Response data:', data);
+        
+        if (!response.ok) {
+          throw new Error(data.error?.message || `HTTP ${response.status}`);
+        }
+        
+        // Transform the edge function response to match our interface
+        return {
+          isValid: data.isValid || false,
+          validatedProblem: data.validatedProblem,
+          feedback: data.validationFeedback || '',
+          suggestions: data.keyTerms || [],
+          confidenceScore: 0.8
+        };
+        
+      } catch (error) {
+        console.error('[problemApi] Direct fetch failed:', error);
+        
+        // Fallback to Supabase client
+        console.log('[problemApi] Falling back to Supabase client');
+        return problemValidationService.validateProblem({
+          problemInput: input,
+          projectId: projectId
+        });
+      }
     },
     
     generatePersonas: async (
@@ -621,9 +667,14 @@ export const problemApi = {
       lockedSolutionIds: string[]
     ): Promise<any[]> => {
       // This should call the solutions service
-      const { solutionsService } = await import('./solutions');
-      // TODO: Implement properly
-      console.warn('generateSolutions not fully implemented yet');
-      return [];
+      try {
+        const { solutionsService } = await import('./solutions');
+        // TODO: Implement properly
+        console.warn('generateSolutions not fully implemented yet');
+        return [];
+      } catch (error) {
+        console.warn('generateSolutions not available yet:', error);
+        return [];
+      }
     }
   };

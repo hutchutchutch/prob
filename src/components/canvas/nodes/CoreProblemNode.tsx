@@ -61,6 +61,7 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
       setProblemInput(trimmedText);
       
       console.log('[CoreProblemNode] Calling problemApi.validateProblem...');
+      console.log('[CoreProblemNode] Input text:', trimmedText);
       const validationResult = await problemApi.validateProblem(trimmedText);
       console.log('[CoreProblemNode] Validation result:', validationResult);
       
