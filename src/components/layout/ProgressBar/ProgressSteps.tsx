@@ -18,15 +18,32 @@ export const ProgressSteps: React.FC<ProgressStepsProps> = ({
   const steps = Array.from({ length: totalSteps }, (_, i) => i + 1);
 
   return (
-    <div className={cn('flex items-center justify-between', className)}>
-      {steps.map((step, index) => {
-        const isCompleted = step < currentStep;
-        const isCurrent = step === currentStep;
-        const label = stepLabels[step - 1] || `Step ${step}`;
+    <div className={cn('relative w-full', className)}>
+      {/* Connecting lines background */}
+      <div className="absolute top-4 left-0 right-0 h-0.5 bg-gray-700" />
+      
+      {/* Progress overlay on connecting lines */}
+      <div 
+        className="absolute top-4 left-0 h-0.5 bg-primary-600 transition-all duration-slow"
+        style={{ 
+          width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%` 
+        }}
+      />
+      
+      {/* Steps grid */}
+      <div 
+        className="grid w-full"
+        style={{ 
+          gridTemplateColumns: `repeat(${totalSteps}, 1fr)`,
+        }}
+      >
+        {steps.map((step) => {
+          const isCompleted = step < currentStep;
+          const isCurrent = step === currentStep;
+          const label = stepLabels[step - 1] || `Step ${step}`;
 
-        return (
-          <React.Fragment key={step}>
-            <div className="flex flex-col items-center gap-2">
+          return (
+            <div key={step} className="flex flex-col items-center gap-2 relative z-10">
               <div
                 className={cn(
                   'w-8 h-8 rounded-full flex items-center justify-center transition-all duration-base',
@@ -48,31 +65,15 @@ export const ProgressSteps: React.FC<ProgressStepsProps> = ({
                 )}
               </div>
               <span className={cn(
-                'text-xs font-medium',
+                'text-xs font-medium text-center',
                 (isCompleted || isCurrent) ? 'text-gray-300' : 'text-gray-500'
               )}>
                 {label}
               </span>
             </div>
-            
-            {index < steps.length - 1 && (
-              <div className="flex-1 mx-2">
-                <div className="h-0.5 bg-gray-700 relative overflow-hidden">
-                  <div
-                    className={cn(
-                      'absolute inset-y-0 left-0 bg-primary-600 transition-all duration-slow',
-                      isCompleted && 'w-full'
-                    )}
-                    style={{
-                      width: isCurrent ? '50%' : isCompleted ? '100%' : '0%'
-                    }}
-                  />
-                </div>
-              </div>
-            )}
-          </React.Fragment>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };

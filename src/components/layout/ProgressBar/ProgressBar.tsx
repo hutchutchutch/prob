@@ -21,8 +21,8 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   const progressPercentage = (currentStep / totalSteps) * 100;
 
   return (
-    <div className={cn('space-y-4', className)}>
-      <div className="flex items-center justify-between">
+    <div className={cn('w-full space-y-4', className)}>
+      <div className="flex items-center justify-between w-full">
         <div className="space-y-1">
           <span className="text-sm font-medium text-gray-400">
             Step {currentStep} of {totalSteps}
@@ -37,7 +37,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
         )}
       </div>
       
-      <div className="relative h-2 bg-gray-700 rounded-full overflow-hidden">
+      <div className="relative h-2 bg-gray-700 rounded-full overflow-hidden w-full">
         <div 
           className="absolute inset-y-0 left-0 bg-primary-600 rounded-full transition-all duration-500 ease-out"
           style={{ width: `${progressPercentage}%` }}
@@ -46,10 +46,12 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
         </div>
       </div>
       
-      <ProgressSteps 
-        currentStep={currentStep}
-        totalSteps={totalSteps}
-      />
+      <div className="w-full">
+        <ProgressSteps 
+          currentStep={currentStep}
+          totalSteps={totalSteps}
+        />
+      </div>
     </div>
   );
 }; 

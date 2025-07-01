@@ -152,13 +152,16 @@ export function App() {
         <div className="flex-1 flex flex-col relative border-4 border-green-500" style={{ borderColor: 'green' }}>
           {/* Header with Progress Bar */}
           <header 
-            className="h-20 bg-gray-800 border-b border-gray-700 flex items-center px-6 z-10 border-4 border-blue-500"
+            className="h-20 bg-gray-800 border-b border-gray-700 flex items-center px-6 z-10 border-4 border-blue-500 w-full"
             style={{ backgroundColor: '#1F2937', borderColor: 'blue' }}
           >
-            <ProgressBar 
-              currentStep={stepToNumber(currentStep)}
-              totalSteps={7}
-            />
+            <div className="flex-1 w-full">
+              <ProgressBar 
+                currentStep={stepToNumber(currentStep)}
+                totalSteps={7}
+                className="w-full"
+              />
+            </div>
           </header>
 
           {/* Workflow Canvas - handles all workflow states */}
