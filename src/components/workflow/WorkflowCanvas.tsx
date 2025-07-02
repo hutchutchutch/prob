@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Canvas } from '@/components/canvas';
 import { useWorkflowStore } from '@/stores/workflowStore';
 import { useCanvasStore } from '@/stores/canvasStore';
-import { Node, Edge } from '@xyflow/react';
+import { useCanvasNavigation } from '@/hooks/useCanvasNavigation';
+import { Node, Edge, useReactFlow } from '@xyflow/react';
 
 export function WorkflowCanvas() {
   console.log('[WorkflowCanvas] Component rendering...');
   
   const { currentStep, coreProblem, personas, isGeneratingPersonas } = useWorkflowStore();
   const { addNodes, addEdges, updateEdge, zoomTo, resetCanvas, nodes, edges } = useCanvasStore();
+  const { goToStep1, goToStep } = useCanvasNavigation();
   const [canvasInitialized, setCanvasInitialized] = useState(false);
   const [lastNodeCount, setLastNodeCount] = useState(0);
   const [lastEdgeCount, setLastEdgeCount] = useState(0);
@@ -62,11 +64,18 @@ export function WorkflowCanvas() {
       // Clear canvas first
       resetCanvas();
       
-      // Create the interactive problem input node positioned in the left column
+      // Calculate center position based on viewport
+      // Position the CoreProblemNode more to the left with better spacing
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      const problemNodeX = -viewportWidth / 3; // Move further left
+      const problemNodeY = 0; // Vertical center
+
+      // Create the interactive problem input node positioned at calculated center
       const problemInputNode: Node = {
         id: 'problem-input',
         type: 'problem',
-        position: { x: -250, y: 0 }, // Left column center
+        position: { x: problemNodeX, y: problemNodeY },
         data: { 
           id: 'problem-input',
           problem: coreProblem?.description || '',
@@ -80,19 +89,24 @@ export function WorkflowCanvas() {
       const coreProblemLabelNode: Node = {
         id: 'core-problem-label',
         type: 'label',
-        position: { x: -250, y: -120 }, // Centered above CoreProblemNode (x: -250)
+        position: { x: problemNodeX, y: problemNodeY - 120 }, // Centered above CoreProblemNode
         data: { 
-          text: 'Core Problem',
+          text: 'Define the Core Problem',
           showRefresh: false
         },
         draggable: false,
         selectable: false,
       };
 
+      // Calculate positions for personas column (center third of screen)
+      const personaNodeX = 0; // Center of viewport in React Flow coordinates
+      const personaStartY = -300; // Start position for first persona
+      const personaSpacing = 150; // Vertical spacing between personas
+
       const personasLabelNode: Node = {
         id: 'personas-label',
         type: 'label', 
-        position: { x: 600, y: -420 }, // Centered above PersonaNodes column (x: 600)
+        position: { x: personaNodeX, y: personaStartY - 120 }, // Centered above PersonaNodes column
         data: {
           text: 'Personas',
           showRefresh: true,
@@ -108,13 +122,13 @@ export function WorkflowCanvas() {
         selectable: false,
       };
 
-      // Create 5 PersonaNodes in skeleton state initially - positioned to barely peek from right edge
+      // Create 5 PersonaNodes in skeleton state initially - positioned in center column
       const personaNodes: Node[] = Array.from({ length: 5 }, (_, index) => ({
         id: `persona-${index + 1}`,
         type: 'persona',
         position: { 
-          x: 600, // Far right column - personas will barely peek into view
-          y: -300 + (index * 150) // Vertical spacing of 150px between nodes
+          x: personaNodeX, // Center column
+          y: personaStartY + (index * personaSpacing) // Vertical spacing between nodes
         },
         data: {
           id: `persona-${index + 1}`,
@@ -129,6 +143,18 @@ export function WorkflowCanvas() {
           onToggleLock: () => {
             // TODO: Implement persona locking
             console.log(`Toggle lock for persona ${index + 1}`);
+          },
+          onToggleExpand: () => {
+            const canvasStore = useCanvasStore.getState();
+            const currentNode = canvasStore.getNodeById(`persona-${index + 1}`);
+            if (currentNode) {
+              canvasStore.updateNode(`persona-${index + 1}`, {
+                data: {
+                  ...currentNode.data,
+                  isExpanded: !(currentNode.data as any).isExpanded
+                }
+              });
+            }
           }
         },
         draggable: true,
@@ -161,13 +187,50 @@ export function WorkflowCanvas() {
       
       setCanvasInitialized(true);
       
-      // Center the view on the problem node with appropriate zoom to show persona column edge
+      // Center the view on the problem node with appropriate zoom for Step 1
       setTimeout(() => {
-        console.log('[WorkflowCanvas] Centering view on problem node...');
-        zoomTo(0.6); // Further reduced zoom to show more of the canvas width
+        console.log('[WorkflowCanvas] Centering view on problem node for Step 1...');
+        // Zoom to show just the problem node nicely centered
+        const canvasStore = useCanvasStore.getState();
+        canvasStore.setViewport({
+          x: -problemNodeX + (window.innerWidth / 2) - 200, // Center on problem node (accounting for node width)
+          y: (window.innerHeight / 2) - 100, // Center vertically
+          zoom: 1.2 // More zoomed in for better focus
+        });
       }, 100);
     }
   }, [currentStep, canvasInitialized, addNodes, zoomTo, resetCanvas, coreProblem, nodes.length]);
+
+  // Handle navigation when step changes
+  useEffect(() => {
+    if (!canvasInitialized) return;
+
+    console.log('[WorkflowCanvas] Step changed, handling navigation for:', currentStep);
+    
+    // Navigate to appropriate view based on current step
+    switch (currentStep) {
+      case 'problem_input':
+        // Center on the CoreProblemNode for Step 1
+        setTimeout(() => {
+          console.log('[WorkflowCanvas] Navigating to Step 1 - Problem Input');
+          goToStep1();
+        }, 100);
+        break;
+      
+      case 'persona_discovery':
+        // Could add navigation to persona section
+        console.log('[WorkflowCanvas] Step 2 - Persona Discovery (no specific navigation yet)');
+        break;
+        
+      case 'pain_points':
+        // Could add navigation to pain points section
+        console.log('[WorkflowCanvas] Step 3 - Pain Points (no specific navigation yet)');
+        break;
+        
+      default:
+        console.log('[WorkflowCanvas] No specific navigation for step:', currentStep);
+    }
+  }, [currentStep, canvasInitialized, goToStep1]);
 
   // Update the problem node when core problem changes
   useEffect(() => {
@@ -202,6 +265,18 @@ export function WorkflowCanvas() {
             isSkeleton: false, // Remove skeleton state
             onToggleLock: () => {
               console.log(`Toggle lock for persona ${i}`);
+            },
+            onToggleExpand: () => {
+              const canvasStore = useCanvasStore.getState();
+              const currentNode = canvasStore.getNodeById(nodeId);
+              if (currentNode) {
+                canvasStore.updateNode(nodeId, {
+                  data: {
+                    ...currentNode.data,
+                    isExpanded: !(currentNode.data as any).isExpanded
+                  }
+                });
+              }
             }
           }
         });
@@ -229,11 +304,17 @@ export function WorkflowCanvas() {
         });
       }
 
+      // Calculate positions for pain points column (right third of screen)
+      const viewportWidth = window.innerWidth;
+      const painPointNodeX = viewportWidth / 3; // Right side, mirroring the problem node position
+      const painPointStartY = -300; // Start position for first pain point
+      const painPointSpacing = 150; // Same vertical spacing as personas
+
       // Add Pain Points column label
       const painPointsLabelNode: Node = {
         id: 'pain-points-label',
         type: 'label',
-        position: { x: 1450, y: -420 }, // Right of personas column
+        position: { x: painPointNodeX, y: painPointStartY - 120 }, // Right of personas column
         data: {
           text: 'Pain Points',
           showRefresh: false
@@ -254,8 +335,8 @@ export function WorkflowCanvas() {
           id: painPointId,
           type: 'painPoint',
           position: {
-            x: 1450, // Pain points column
-            y: -300 + (painIndex * 150) // Same vertical spacing as personas (150px)
+            x: painPointNodeX, // Pain points column
+            y: painPointStartY + (painIndex * painPointSpacing) // Same vertical spacing as personas
           },
           data: {
             id: painPointId,
@@ -303,9 +384,23 @@ export function WorkflowCanvas() {
       
       setPainPointsAdded(true);
       
-      // Adjust zoom to show all three columns
+      // Adjust viewport to show all three columns
       setTimeout(() => {
-        zoomTo(0.4); // Zoom out more to show all three columns
+        const canvasStore = useCanvasStore.getState();
+        // Recalculate positions for zoom calculation
+        const vw = window.innerWidth;
+        const problemX = -vw / 3;
+        const painPointX = vw / 3;
+        
+        // Calculate zoom level based on viewport width to fit all columns
+        const totalWidth = painPointX - problemX + 400; // Add some padding
+        const zoomLevel = Math.min(0.8, window.innerWidth / totalWidth);
+        
+        canvasStore.setViewport({
+          x: 0, // Center horizontally
+          y: (window.innerHeight / 2) - 100, // Center vertically
+          zoom: zoomLevel
+        });
       }, 100);
     }
   }, [isGeneratingPersonas, canvasInitialized, painPointsAdded, addNodes, addEdges, updateEdge, zoomTo]);
@@ -325,25 +420,54 @@ export function WorkflowCanvas() {
       // Update the first 5 persona nodes with actual data
       personas.slice(0, 5).forEach((persona, index) => {
         const nodeId = `persona-${index + 1}`;
-        console.log('[WorkflowCanvas] Updating persona node:', nodeId, persona.name);
+        console.log('[WorkflowCanvas] Updating persona node:', nodeId, 'with data:', {
+          name: persona.name,
+          industry: persona.demographics?.industry,
+          role: persona.demographics?.role,
+          description: persona.description
+        });
         
-        canvasStore.updateNode(nodeId, {
-          data: {
-            id: nodeId,
-            name: persona.name,
-            industry: persona.demographics?.industry || 'Unknown',
-            role: persona.demographics?.role || 'Unknown',
-            painDegree: Math.floor(Math.random() * 5) + 1, // Random pain level 1-5, could be from API
-            description: persona.description,
-            isLocked: persona.is_locked,
-            isExpanded: false,
-            isSkeleton: false, // Ensure skeleton state is off
-            onToggleLock: () => {
-              const workflowStore = useWorkflowStore.getState();
-              workflowStore.togglePersonaLock(persona.id);
+        // Get the current node to preserve existing properties
+        const currentNode = canvasStore.getNodeById(nodeId);
+        console.log('[WorkflowCanvas] Current node before update:', currentNode);
+        
+        const updatedData = {
+          id: nodeId,
+          name: persona.name,
+          industry: persona.demographics?.industry || 'Unknown',
+          role: persona.demographics?.role || 'Unknown',
+          painDegree: (persona as any).pain_degree || (persona as any).painDegree || Math.floor(Math.random() * 5) + 1,
+          description: persona.description,
+          isLocked: persona.is_locked || false,
+          isExpanded: currentNode?.data?.isExpanded || false, // Preserve expanded state
+          isSkeleton: false, // Ensure skeleton state is off
+          onToggleLock: () => {
+            const workflowStore = useWorkflowStore.getState();
+            workflowStore.togglePersonaLock(persona.id);
+          },
+          onToggleExpand: () => {
+            const canvasStore = useCanvasStore.getState();
+            const currentNode = canvasStore.getNodeById(nodeId);
+            if (currentNode) {
+              canvasStore.updateNode(nodeId, {
+                data: {
+                  ...currentNode.data,
+                  isExpanded: !(currentNode.data as any).isExpanded
+                }
+              });
             }
           }
+        };
+        
+        console.log('[WorkflowCanvas] About to update with data:', updatedData);
+        
+        canvasStore.updateNode(nodeId, {
+          data: updatedData
         });
+        
+        // Verify the update worked
+        const updatedNode = canvasStore.getNodeById(nodeId);
+        console.log('[WorkflowCanvas] Node after update:', updatedNode);
       });
     }
   }, [personas, canvasInitialized]);
@@ -359,7 +483,20 @@ export function WorkflowCanvas() {
       if (currentStep === 'persona_discovery') {
         console.log('[WorkflowCanvas] Entering persona discovery, adjusting canvas view...');
         // Adjust the canvas view to show both problem and persona columns
-        zoomTo(0.5); // Even more zoomed out to show full layout
+        const vw = window.innerWidth;
+        const problemX = -vw / 3;
+        const personaX = 0; // Center column
+        
+        // Calculate appropriate zoom to show problem and persona columns
+        const columnsWidth = Math.abs(personaX - problemX) + 600; // Add padding for node widths
+        const zoomLevel = Math.min(0.8, window.innerWidth / columnsWidth);
+        
+        const canvasStore = useCanvasStore.getState();
+        canvasStore.setViewport({
+          x: -problemX / 2, // Center between problem and persona columns
+          y: (window.innerHeight / 2) - 200, // Center vertically on personas
+          zoom: zoomLevel
+        });
       }
     }
   }, [currentStep, canvasInitialized, zoomTo]);

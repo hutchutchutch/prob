@@ -70,7 +70,7 @@ serve(async (req) => {
           {
             "personas": [
               {
-                "name": "Full Name",
+                "name": "Punny name that captures the essence of the persona",
                 "industry": "Industry Name",
                 "role": "Job Title",
                 "description": "Brief description of who they are and why they face this problem",
@@ -141,14 +141,16 @@ serve(async (req) => {
     }
     
     console.log('Personas stored successfully:', insertedPersonas?.length)
+    console.log('First inserted persona:', insertedPersonas?.[0])
     
     // Format response to match frontend expectations
-    const formattedPersonas = insertedPersonas.map((persona: any) => ({
+    const formattedPersonas = insertedPersonas?.map((persona: any) => ({
       id: persona.id,
       name: persona.name,
       industry: persona.industry,
       role: persona.role,
       description: result.personas.find((p: any) => p.name === persona.name)?.description || '',
+      pain_degree: persona.pain_degree,
       demographics: {
         industry: persona.industry,
         role: persona.role
@@ -162,7 +164,7 @@ serve(async (req) => {
       updated_at: persona.created_at
     }))
     
-    return new Response(JSON.stringify(formattedPersonas), {
+    return new Response(JSON.stringify({ personas: formattedPersonas || [] }), {
       headers: { 
         "Content-Type": "application/json",
         ...corsHeaders

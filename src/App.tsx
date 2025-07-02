@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { ReactFlowProvider } from '@xyflow/react';
 import { ConnectedSidebar } from '@/components/layout/Sidebar';
-import { ConnectedProgressBar } from '@/components/layout/ProgressBar';
+import { ProgressBar } from '@/components/common/LoadingStates';
 import { WorkflowCanvas } from '@/components/workflow/WorkflowCanvas';
-import { AuthForm } from '@/components/auth/AuthForm';
+import { DemoCanvas } from '@/components/DemoCanvas';
 import { AuthDebug } from '@/components/debug/AuthDebug';
 import { PerformanceOverlay } from '@/components/PerformanceMonitor';
 import { useWorkflowStore } from '@/stores/workflowStore';
@@ -155,9 +155,19 @@ export default function App() {
       }
     };
     
-    // Reset workflow when user changes
+    // Initialize workspace when user changes
     if (user) {
-      resetWorkflow();
+      // Only reset workflow if we don't have a project ID or if the user actually changed
+      // This prevents resetting the workflow on every re-render
+      const currentProjectId = useWorkflowStore.getState().projectId;
+      
+      if (!currentProjectId) {
+        console.log('[App] No project ID found, resetting workflow');
+        resetWorkflow();
+      } else {
+        console.log('[App] Project ID exists, preserving workflow state:', currentProjectId);
+      }
+      
       initializeWorkspace();
     }
   }, [user, resetWorkflow, setProjectId]);
@@ -187,9 +197,9 @@ export default function App() {
     );
   }
 
-  // Show auth form if not authenticated
+  // Show demo canvas if not authenticated
   if (!user) {
-    return <AuthForm />;
+    return <DemoCanvas className="h-screen" />;
   }
 
   // Show workspace initialization loading
@@ -237,7 +247,7 @@ export default function App() {
         {/* Main Content */}
         <div className="flex-1 flex flex-col">
           {/* Progress Bar */}
-          <ConnectedProgressBar />
+          <ProgressBar value={50} max={100} showLabel animated />
 
           {/* Canvas */}
           <div className="flex-1 relative">

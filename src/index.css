@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "./components/ExportModal/ExportModal.css";
-@import "./components/ProgressBar/ProgressBar.css";
 @import "./components/DemoCanvas/DemoCanvas.css";
 
 /* Design Tokens as CSS Variables */

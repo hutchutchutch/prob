@@ -82,6 +82,7 @@ interface CanvasActions {
   setViewport: (viewport: Viewport) => void
   fitView: () => void
   zoomTo: (level: number) => void
+
   
   // Selection
   selectNode: (nodeId: string) => void
@@ -282,6 +283,8 @@ export const useCanvasStore = create<CanvasStoreState & CanvasActions>()(
         }))
         debouncedSave()
       },
+
+
 
       // Selection
       selectNode: (nodeId) => {

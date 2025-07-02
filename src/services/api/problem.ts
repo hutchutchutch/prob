@@ -683,19 +683,24 @@ export const problemApi = {
         console.log('[problemApi] Personas response status:', response.status);
         const data = await response.json();
         console.log('[problemApi] Personas response data:', data);
+        console.log('[problemApi] Response is array:', Array.isArray(data));
+        console.log('[problemApi] First persona detail:', Array.isArray(data) ? data[0] : data.personas?.[0]);
         
         if (!response.ok) {
           throw new Error(data.error?.message || `HTTP ${response.status}`);
         }
         
-        // Return the personas array from the edge function
-        return data.personas || [];
+        // Handle both response structures: direct array or object with personas property
+        const personas = Array.isArray(data) ? data : (data.personas || []);
+        console.log('[problemApi] Returning personas:', personas.length);
+        
+        return personas;
         
       } catch (error) {
         console.error('[problemApi] Generate personas failed:', error);
         
         // Return mock personas for now
-        console.log('[problemApi] Returning mock personas');
+        console.log('[problemApi] USING MOCK PERSONAS DUE TO ERROR');
         return [
           {
             id: crypto.randomUUID(),

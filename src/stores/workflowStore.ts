@@ -198,6 +198,9 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
     setCurrentStep: (step) => {
       set({ currentStep: step })
       
+      // NOTE: Canvas navigation is now handled by WorkflowCanvas component
+      // using the useCanvasNavigation hook for responsive positioning
+      
       // Notify canvas store of step change
       // NOTE: Don't call syncWithWorkflow here - WorkflowCanvas handles the nodes directly
       // const canvasStore = useCanvasStore.getState()
@@ -423,7 +426,9 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
             is_locked: false,
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
-          }))
+            // Add pain_degree to the raw persona object for WorkflowCanvas
+            pain_degree: persona.pain_degree || 3
+          } as Persona & { pain_degree?: number }))
           
           // Combine with locked personas
           const allPersonas = [...lockedPersonas, ...personas]

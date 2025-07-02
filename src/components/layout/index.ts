@@ -1,2 +1,1 @@
-export * from './Sidebar';
-export * from './ProgressBar'; 
+export * from './Sidebar'; 
