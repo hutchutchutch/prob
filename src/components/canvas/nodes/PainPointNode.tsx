@@ -11,12 +11,13 @@ export interface PainPointNodeData {
   severity: 'critical' | 'high' | 'medium' | 'low';
   impactArea: string;
   isLocked?: boolean;
+  isSkeleton?: boolean;
   onToggleLock?: () => void;
 }
 
 export const PainPointNode: React.FC<NodeProps> = ({ data, selected }) => {
   const nodeData = data as unknown as PainPointNodeData;
-  const { isLocked = false, onToggleLock } = nodeData;
+  const { isLocked = false, isSkeleton = false, onToggleLock } = nodeData;
 
   const severityStyles = {
     critical: 'bg-error-600',
@@ -24,6 +25,39 @@ export const PainPointNode: React.FC<NodeProps> = ({ data, selected }) => {
     medium: 'bg-warning-600',
     low: 'bg-gray-600',
   };
+
+  // Skeleton state
+  if (isSkeleton) {
+    return (
+      <BaseNode
+        variant="pain"
+        selected={selected}
+        showSourceHandle={false}
+        showTargetHandle={true}
+        className="min-w-[300px] max-w-[350px] opacity-60"
+      >
+        <div className="space-y-3">
+          {/* Skeleton Header */}
+          <div className="flex items-start justify-between gap-3">
+            <div className="h-6 bg-gray-600 rounded skeleton w-20"></div>
+            <div className="w-4 h-4 bg-gray-600 rounded skeleton"></div>
+          </div>
+
+          {/* Skeleton Description */}
+          <div className="space-y-2">
+            <div className="h-4 bg-gray-600 rounded skeleton w-full"></div>
+            <div className="h-4 bg-gray-600 rounded skeleton w-3/4"></div>
+          </div>
+
+          {/* Skeleton Impact */}
+          <div className="flex items-center gap-2 text-sm">
+            <div className="h-4 bg-gray-600 rounded skeleton w-12"></div>
+            <div className="h-4 bg-gray-600 rounded skeleton w-24"></div>
+          </div>
+        </div>
+      </BaseNode>
+    );
+  }
 
   return (
     <BaseNode

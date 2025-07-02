@@ -506,6 +506,16 @@ export const useCanvasStore = create<CanvasStoreState & CanvasActions>()(
         const nodes: Node[] = []
         const edges: Edge[] = []
         
+        // IMPORTANT: This method is incomplete and was clearing the canvas
+        // For now, just return the current nodes/edges to prevent clearing
+        // The WorkflowCanvas component manages nodes directly
+        console.warn('[canvasStore] transformWorkflowToNodes called - returning current nodes to prevent clearing')
+        return { 
+          nodes: get().nodes, 
+          edges: get().edges 
+        }
+        
+        // TODO: Implement proper transformation logic if needed
         // Transform data based on current workflow step
         switch (currentStep) {
           case 'problem_input':

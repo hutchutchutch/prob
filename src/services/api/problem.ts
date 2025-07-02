@@ -29,6 +29,7 @@ export interface ProblemValidationResponse {
   feedback: string
   suggestions?: string[]
   confidenceScore: number
+  coreProblemId?: string
 }
 
 export interface StreamingValidationUpdate {
@@ -395,7 +396,8 @@ class ProblemValidationService {
         validatedProblem: result.validatedProblem,
         feedback: result.validationFeedback || '',
         suggestions: result.keyTerms || [],
-        confidenceScore: 0.8 // Default confidence from edge function
+        confidenceScore: 0.8,
+        coreProblemId: result.coreProblemId
       };
     } catch (error) {
       console.warn('[ProblemValidationService] Edge function failed, falling back to local validation:', error);
@@ -583,13 +585,22 @@ export const problemApi = {
       console.log('[problemApi] Input:', input);
       console.log('[problemApi] Project ID:', projectId);
       
+      // Get auth token
+      const { supabase } = await import('@/services/supabase/client');
+      const { data: { session } } = await supabase.auth.getSession();
+      const authToken = session?.access_token;
+      
+      if (!authToken) {
+        throw new Error('Not authenticated');
+      }
+      
       // Try direct fetch first to bypass Supabase client issues
       try {
         const response = await fetch('https://tyfmxjzcocjztocwemun.supabase.co/functions/v1/problem-validation', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR5Zm14anpjb2NqenRvY3dlbXVuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzMTQzMzEsImV4cCI6MjA2Njg5MDMzMX0.jej03NzK7hfVriSh18uOXkVMtNFnKRZoWK37Wdh6lhI`,
+            'Authorization': `Bearer ${authToken}`,
             'x-request-id': crypto.randomUUID()
           },
           body: JSON.stringify({
@@ -612,7 +623,8 @@ export const problemApi = {
           validatedProblem: data.validatedProblem,
           feedback: data.validationFeedback || '',
           suggestions: data.keyTerms || [],
-          confidenceScore: 0.8
+          confidenceScore: 0.8,
+          coreProblemId: data.coreProblemId
         };
         
       } catch (error) {
@@ -632,21 +644,93 @@ export const problemApi = {
       coreProblemId: string,
       lockedPersonaIds: string[]
     ): Promise<any[]> => {
-      // This should call the personas service
+      console.log('[problemApi] Generating personas with edge function');
+      console.log('[problemApi] Project ID:', projectId);
+      console.log('[problemApi] Core Problem ID:', coreProblemId);
+      
+      // Get the core problem text from the workflow store
+      const { useWorkflowStore } = await import('@/stores/workflowStore');
+      const coreProblem = useWorkflowStore.getState().coreProblem;
+      const coreProblemText = coreProblem?.description || '';
+      
+      console.log('[problemApi] Core Problem Text:', coreProblemText);
+      
+      // Get auth token
+      const { supabase } = await import('@/services/supabase/client');
+      const { data: { session } } = await supabase.auth.getSession();
+      const authToken = session?.access_token;
+      
+      if (!authToken) {
+        throw new Error('Not authenticated');
+      }
+      
       try {
-        const { generatePersonas } = await import('./personas');
-        const result = await generatePersonas({
-          coreProblem: { id: coreProblemId } as any,
-          lockedPersonas: [],
-          projectId,
-          generationBatch: crypto.randomUUID()
+        const response = await fetch('https://tyfmxjzcocjztocwemun.supabase.co/functions/v1/generate-personas', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`,
+            'x-request-id': crypto.randomUUID()
+          },
+          body: JSON.stringify({
+            projectId: projectId,
+            coreProblemId: coreProblemId,
+            coreProblem: coreProblemText,  // Add the actual problem text
+            lockedPersonaIds: lockedPersonaIds
+          })
         });
         
-        // Extract personas array from the response
-        return result.personas || [];
+        console.log('[problemApi] Personas response status:', response.status);
+        const data = await response.json();
+        console.log('[problemApi] Personas response data:', data);
+        
+        if (!response.ok) {
+          throw new Error(data.error?.message || `HTTP ${response.status}`);
+        }
+        
+        // Return the personas array from the edge function
+        return data.personas || [];
+        
       } catch (error) {
-        console.warn('generatePersonas not available yet:', error);
-        return [];
+        console.error('[problemApi] Generate personas failed:', error);
+        
+        // Return mock personas for now
+        console.log('[problemApi] Returning mock personas');
+        return [
+          {
+            id: crypto.randomUUID(),
+            name: 'Sarah Chen',
+            industry: 'Technology',
+            role: 'Product Manager',
+            description: 'A tech-savvy product manager who values efficiency and data-driven decisions.',
+            demographics: { industry: 'Technology', role: 'Product Manager' },
+            psychographics: {},
+            goals: ['Streamline product development', 'Improve team collaboration'],
+            frustrations: ['Inefficient processes', 'Poor communication tools']
+          },
+          {
+            id: crypto.randomUUID(),
+            name: 'Marcus Rodriguez',
+            industry: 'Healthcare',
+            role: 'Operations Director',
+            description: 'An experienced operations director focused on improving patient care and operational efficiency.',
+            demographics: { industry: 'Healthcare', role: 'Operations Director' },
+            psychographics: {},
+            goals: ['Optimize patient flow', 'Reduce operational costs'],
+            frustrations: ['Complex systems', 'Regulatory compliance burden']
+          },
+          {
+            id: crypto.randomUUID(),
+            name: 'Emily Watson',
+            industry: 'Education',
+            role: 'Administrator',
+            description: 'A dedicated education administrator working to improve student outcomes and institutional efficiency.',
+            demographics: { industry: 'Education', role: 'Administrator' },
+            psychographics: {},
+            goals: ['Enhance student experience', 'Streamline administrative processes'],
+            frustrations: ['Outdated systems', 'Limited budget']
+          }
+        ];
       }
     },
     

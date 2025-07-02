@@ -1,7 +1,7 @@
 // supabase/functions/validate-problem/index.ts
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
-import { OpenAI } from "https://esm.sh/openai@4"
+import { serve } from "std/http/server.ts"
+import { createClient } from "@supabase/supabase-js"
+import { OpenAI } from "openai"
 
 serve(async (req) => {
   const corsHeaders = {
@@ -19,8 +19,11 @@ serve(async (req) => {
     
     // Validate environment variables
     const openaiKey = Deno.env.get('OPENAI_API_KEY')
-    if (!openaiKey) {
-      console.error('Missing OPENAI_API_KEY')
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')
+    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')
+    
+    if (!openaiKey || !supabaseUrl || !supabaseServiceKey) {
+      console.error('Missing required environment variables')
       return new Response(JSON.stringify({ 
         error: { message: 'Service configuration error', code: 'CONFIG_ERROR' }
       }), { 
@@ -29,7 +32,10 @@ serve(async (req) => {
       })
     }
     
-    console.log('OpenAI key found, length:', openaiKey.length)
+    console.log('Environment variables validated')
+    
+    // Initialize Supabase client
+    const supabase = createClient(supabaseUrl, supabaseServiceKey)
     
     // Validate request body
     let requestData
@@ -86,17 +92,121 @@ serve(async (req) => {
     console.log('OpenAI response received')
     const analysis = JSON.parse(completion.choices[0].message.content!)
     
+    // Store in database
+    let coreProblemId = crypto.randomUUID()
+    let actualProjectId = projectId
+    
+    if (projectId) {
+      console.log('Storing core problem in database for project:', projectId)
+      
+      // Check if project exists
+      const { data: project, error: projectError } = await supabase
+        .from('projects')
+        .select('id')
+        .eq('id', projectId)
+        .single()
+      
+      if (projectError || !project) {
+        console.warn('Project not found:', projectError)
+        
+        // Try to create a default project if it doesn't exist
+        // First check if we have any workspace
+        const { data: workspaces, error: wsError } = await supabase
+          .from('workspaces')
+          .select('id')
+          .limit(1)
+        
+        if (wsError || !workspaces || workspaces.length === 0) {
+          console.warn('No workspace found, creating temporary project without workspace')
+          // Create a project without workspace for now
+          const { data: newProject, error: createError } = await supabase
+            .from('projects')
+            .insert({
+              id: projectId,
+              name: 'Untitled Project',
+              status: 'problem_input',
+              current_step: 'problem_input'
+            })
+            .select()
+            .single()
+          
+          if (createError) {
+            console.error('Failed to create project:', createError)
+            // Continue without storing in database
+          } else {
+            console.log('Created new project:', newProject.id)
+          }
+        } else {
+          // Create project with workspace
+          const { data: newProject, error: createError } = await supabase
+            .from('projects')
+            .insert({
+              id: projectId,
+              workspace_id: workspaces[0].id,
+              name: 'Untitled Project',
+              status: 'problem_input',
+              current_step: 'problem_input'
+            })
+            .select()
+            .single()
+          
+          if (createError) {
+            console.error('Failed to create project with workspace:', createError)
+          } else {
+            console.log('Created new project with workspace:', newProject.id)
+          }
+        }
+      }
+      
+      // Now try to insert the core problem
+      const { data: coreProblem, error: coreProblemError } = await supabase
+        .from('core_problems')
+        .insert({
+          id: coreProblemId,
+          project_id: actualProjectId,
+          original_input: problemInput,
+          validated_problem: analysis.isValid ? problemInput : null,
+          is_valid: analysis.isValid,
+          validation_feedback: analysis.feedback,
+          version: 1
+        })
+        .select()
+        .single()
+      
+      if (coreProblemError) {
+        console.error('Error storing core problem:', coreProblemError)
+        // If it's a unique constraint violation, try to get the existing one
+        if (coreProblemError.code === '23505') {
+          const { data: existingProblem } = await supabase
+            .from('core_problems')
+            .select('id')
+            .eq('project_id', actualProjectId)
+            .eq('version', 1)
+            .single()
+          
+          if (existingProblem) {
+            coreProblemId = existingProblem.id
+            console.log('Using existing core problem:', coreProblemId)
+          }
+        }
+      } else {
+        console.log('Core problem stored successfully:', coreProblem.id)
+        coreProblemId = coreProblem.id
+      }
+    }
+    
     const result = {
       originalInput: problemInput,
       isValid: analysis.isValid,
       validationFeedback: analysis.feedback,
       validatedProblem: analysis.isValid ? problemInput : (analysis.suggestedRefinement || problemInput),
       keyTerms: analysis.keyTerms || [],
-      projectId: projectId || crypto.randomUUID(),
-      coreProblemId: crypto.randomUUID()
+      projectId: actualProjectId || crypto.randomUUID(),
+      coreProblemId: coreProblemId
     }
 
     console.log('Validation complete, isValid:', result.isValid)
+    console.log('Returning coreProblemId:', result.coreProblemId)
 
     return new Response(JSON.stringify(result), {
       headers: { 

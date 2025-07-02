@@ -1,179 +1,215 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { AnimatePresence, motion } from 'framer-motion';
-import { Sidebar } from '@/components/layout/Sidebar';
-import { ProgressBar } from '@/components/layout/ProgressBar';
+import React, { useEffect, useState } from 'react';
+import { ReactFlowProvider } from '@xyflow/react';
+import { ConnectedSidebar } from '@/components/layout/Sidebar/ConnectedSidebar';
+import { ConnectedProgressBar } from '@/components/layout/ProgressBar/ConnectedProgressBar';
 import { WorkflowCanvas } from '@/components/workflow/WorkflowCanvas';
+import { AuthForm } from '@/components/auth/AuthForm';
+import { AuthDebug } from '@/components/debug/AuthDebug';
 import { useWorkflowStore } from '@/stores/workflowStore';
-import useProjectStore from '@/stores/projectStore';
-import { useEffect } from 'react';
+import { useUIStore } from '@/stores/uiStore';
+import { useAuth } from '@/hooks/useAuth';
+import { supabase } from '@/services/supabase/client';
+import './App.css';
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutes
-      retry: 1,
-    },
-  },
-});
+function App() {
+  const { user, loading: authLoading } = useAuth();
+  const { resetWorkflow, setProjectId } = useWorkflowStore();
+  const [isInitializing, setIsInitializing] = useState(false);
+  const [initError, setInitError] = useState<string | null>(null);
 
-// Map workflow steps to numeric values
-const stepToNumber = (step: string): number => {
-  const stepMap: Record<string, number> = {
-    'problem_input': 1,
-    'persona_discovery': 2,
-    'pain_points': 3,
-    'solution_generation': 4,
-    'user_stories': 5,
-    'architecture': 6,
-    'export': 7,
-  };
-  return stepMap[step] || 1;
-};
-
-// Demo workspace data for development
-const DEMO_WORKSPACES = [
-  {
-    id: 'ws-1',
-    name: 'Product Ideas',
-    description: 'Personal product concepts and experiments',
-    icon: '💡',
-    user_id: 'demo-user',
-    folder_path: null,
-    is_active: true,
-    problemCount: 2,
-    updatedAt: new Date().toISOString(),
-    projects: [
-      { 
-        id: 'proj-1', 
-        name: 'Dog Walking App', 
-        status: 'in-progress' as const,
-        updatedAt: new Date()
-      },
-      { 
-        id: 'proj-2', 
-        name: 'Meal Prep Service', 
-        status: 'draft' as const,
-        updatedAt: new Date()
-      },
-    ]
-  },
-  {
-    id: 'ws-2', 
-    name: 'Client Projects',
-    description: 'Client work and consulting',
-    icon: '💼',
-    user_id: 'demo-user',
-    folder_path: null,
-    is_active: true,
-    problemCount: 1,
-    updatedAt: new Date(Date.now() - 86400000).toISOString(), // Yesterday
-    projects: [
-      { 
-        id: 'proj-3', 
-        name: 'E-commerce Platform', 
-        status: 'completed' as const,
-        updatedAt: new Date(Date.now() - 172800000) // 2 days ago
-      },
-    ]
-  }
-];
-
-export function App() {
-  const { currentStep } = useWorkflowStore();
-  const { workspaces, activeWorkspaceId, activeProjectId, setActiveWorkspace } = useProjectStore();
-
-  // Initialize with demo data in development
   useEffect(() => {
-    if (process.env.NODE_ENV === 'development' && workspaces.length === 0) {
-      console.log('[App] Initializing with demo workspaces');
-      // Set demo workspaces directly in the store
-      useProjectStore.setState({ 
-        workspaces: DEMO_WORKSPACES as any,
-        activeWorkspaceId: DEMO_WORKSPACES[0].id
-      });
-    }
-  }, [workspaces.length]);
-
-  // Debug logging
-  useEffect(() => {
-    console.log('[App] Current workflow state:', {
-      currentStep,
-      activeWorkspaceId,
-      activeProjectId,
-      workspaces: workspaces.length
-    });
-  }, [currentStep, activeWorkspaceId, activeProjectId, workspaces]);
-
-  // Always show the main app layout with sidebar and canvas
-  // The canvas will handle showing different content based on workflow state
-  return (
-    <QueryClientProvider client={queryClient}>
-      <div 
-        className="flex h-screen bg-gray-900 text-white overflow-hidden"
-        style={{ backgroundColor: '#111827', color: '#ffffff', minHeight: '100vh' }}
-      >
-        {/* Debug info */}
-        <div className="absolute top-0 left-0 z-50 bg-red-600 text-white p-2 text-xs">
-          Debug: App Rendered, Step: {currentStep}
-        </div>
+    const initializeWorkspace = async () => {
+      if (!user) return;
+      
+      try {
+        setIsInitializing(true);
+        console.log('[App] Starting workspace initialization for user:', user.id);
         
-        {/* Sidebar */}
-        <div className="border-4 border-red-500" style={{ borderColor: 'red' }}>
-          <Sidebar
-            workspaces={workspaces}
-            activeWorkspaceId={activeWorkspaceId}
-            activeProjectId={activeProjectId}
-            onWorkspaceSelect={(id: string) => {
-              console.log('[App] Select workspace:', id);
-              setActiveWorkspace(id);
-            }}
-            onWorkspaceCreate={() => {
-              console.log('[App] Create workspace');
-              // TODO: Implement workspace creation
-            }}
-            onProjectSelect={(id: string) => {
-              console.log('[App] Select project:', id);
-              // TODO: Implement project selection
-            }}
-            onNewProject={() => {
-              console.log('[App] New project');
-              // Reset workflow for new project
-              useWorkflowStore.getState().resetWorkflow();
-            }}
-            onSettings={() => {
-              console.log('[App] Settings');
-              // TODO: Implement settings
-            }}
-            className="flex-shrink-0"
-          />
-        </div>
+        // Create or get user record in our custom users table
+        console.log('[App] Creating/getting user record...');
+        let { data: existingUser, error: userCheckError } = await supabase
+          .from('users')
+          .select('id')
+          .eq('id', user.id)
+          .single();
+        
+        if (userCheckError && userCheckError.code !== 'PGRST116') { // PGRST116 = no rows returned
+          console.error('[App] Error checking user:', userCheckError);
+          throw new Error('Failed to check user record');
+        }
+        
+        if (!existingUser) {
+          console.log('[App] User record not found, creating new user record');
+          // Create new user record
+          const { data: newUser, error: createUserError } = await supabase
+            .from('users')
+            .insert({
+              id: user.id,
+              email: user.email!
+            })
+            .select()
+            .single();
+          
+          if (createUserError) {
+            console.error('[App] Failed to create user record:', createUserError);
+            throw new Error('Failed to create user record');
+          }
+          
+          console.log('[App] Created new user record:', newUser.id);
+        } else {
+          console.log('[App] Using existing user record:', existingUser.id);
+        }
+        
+        // Create or get workspace
+        console.log('[App] Creating/getting workspace...');
+        let { data: existingWorkspace, error: wsCheckError } = await supabase
+          .from('workspaces')
+          .select('id')
+          .eq('user_id', user.id)
+          .eq('name', 'Default Workspace')
+          .single();
+        
+        let workspaceId: string;
+        
+        if (wsCheckError && wsCheckError.code !== 'PGRST116') {
+          console.error('[App] Error checking workspace:', wsCheckError);
+          throw new Error('Failed to check workspace');
+        }
+        
+        if (!existingWorkspace) {
+          console.log('[App] Workspace not found, creating new workspace');
+          // Create new workspace
+          const { data: newWorkspace, error: createWsError } = await supabase
+            .from('workspaces')
+            .insert({
+              user_id: user.id,
+              name: 'Default Workspace',
+              is_active: true
+            })
+            .select()
+            .single();
+          
+          if (createWsError) {
+            console.error('[App] Failed to create workspace:', createWsError);
+            throw new Error('Failed to create workspace');
+          }
+          
+          workspaceId = newWorkspace.id;
+          console.log('[App] Created new workspace:', workspaceId);
+        } else {
+          workspaceId = existingWorkspace.id;
+          console.log('[App] Using existing workspace:', workspaceId);
+        }
+        
+        // Create a new project for this session
+        const projectId = crypto.randomUUID();
+        console.log('[App] Creating new project:', projectId);
+        
+        const { data: newProject, error: createProjectError } = await supabase
+          .from('projects')
+          .insert({
+            id: projectId,
+            workspace_id: workspaceId,
+            name: `Project ${new Date().toLocaleDateString()}`,
+            status: 'problem_input',
+            current_step: 'problem_input'
+          })
+          .select()
+          .single();
+        
+        if (createProjectError) {
+          console.error('[App] Failed to create project:', createProjectError);
+          throw new Error('Failed to create project');
+        }
+        
+        console.log('[App] Created project:', newProject);
+        
+        // Set the project ID in the workflow store
+        setProjectId(projectId);
+        console.log('[App] Workspace initialization complete');
+        
+      } catch (error) {
+        console.error('[App] Workspace initialization error:', error);
+        setInitError(error instanceof Error ? error.message : 'Failed to initialize workspace');
+      } finally {
+        setIsInitializing(false);
+      }
+    };
+    
+    // Reset workflow when user changes
+    if (user) {
+      resetWorkflow();
+      initializeWorkspace();
+    }
+  }, [user, resetWorkflow, setProjectId]);
 
-        {/* Main Content Area */}
-        <div className="flex-1 flex flex-col relative border-4 border-green-500" style={{ borderColor: 'green' }}>
-          {/* Header with Progress Bar */}
-          <header 
-            className="h-20 bg-gray-800 border-b border-gray-700 flex items-center px-6 z-10 border-4 border-blue-500 w-full"
-            style={{ backgroundColor: '#1F2937', borderColor: 'blue' }}
-          >
-            <div className="flex-1 w-full">
-              <ProgressBar 
-                currentStep={stepToNumber(currentStep)}
-                totalSteps={7}
-                className="w-full"
-              />
-            </div>
-          </header>
-
-          {/* Workflow Canvas - handles all workflow states */}
-          <main 
-            className="flex-1 relative bg-gray-900 border-4 border-yellow-500"
-            style={{ backgroundColor: '#111827', borderColor: 'yellow' }}
-          >
-            <WorkflowCanvas />
-          </main>
+  // Show auth loading state
+  if (authLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-gray-900 text-white">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+          <p>Loading...</p>
         </div>
       </div>
-    </QueryClientProvider>
+    );
+  }
+
+  // Show auth form if not authenticated
+  if (!user) {
+    return <AuthForm />;
+  }
+
+  // Show workspace initialization loading
+  if (isInitializing) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-gray-900 text-white">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+          <p>Initializing workspace...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show error state
+  if (initError) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-gray-900 text-white">
+        <div className="text-center">
+          <p className="text-red-500 mb-4">Error: {initError}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-4 py-2 bg-gray-700 rounded hover:bg-gray-600"
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <ReactFlowProvider>
+      <div className="flex h-screen bg-gray-900">
+        {/* Sidebar */}
+        <ConnectedSidebar />
+
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col">
+          {/* Progress Bar */}
+          <ConnectedProgressBar />
+
+          {/* Canvas */}
+          <div className="flex-1 relative">
+            <WorkflowCanvas />
+          </div>
+        </div>
+        
+        {/* Debug component for development */}
+        <AuthDebug />
+      </div>
+    </ReactFlowProvider>
   );
 }
 

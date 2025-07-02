@@ -41,6 +41,20 @@
 --color-primary-900: #1E3A8A;
 ```
 
+#### Accent Colors (Gold)
+```css
+--color-accent-50: #FFFBEB;
+--color-accent-100: #FEF3C7;
+--color-accent-200: #FDE68A;
+--color-accent-300: #FCD34D;
+--color-accent-400: #FBBF24;
+--color-accent-500: #F59E0B;  /* Main Accent Gold */
+--color-accent-600: #D97706;
+--color-accent-700: #B45309;
+--color-accent-800: #92400E;
+--color-accent-900: #78350F;
+```
+
 #### Neutral Colors
 ```css
 --color-gray-50: #F9FAFB;

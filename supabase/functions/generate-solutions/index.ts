@@ -1,11 +1,8 @@
 // supabase/functions/generate-solutions/index.ts
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
-// @ts-ignore
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
-// @ts-ignore
-import { StateGraph } from "https://esm.sh/@langchain/langgraph"
-// @ts-ignore
-import { OpenAI } from "https://esm.sh/openai@4"
+import { serve } from "std/http/server.ts"
+import { createClient } from "@supabase/supabase-js"
+import { StateGraph } from "@langchain/langgraph"
+import { OpenAI } from "openai"
 
 const openai = new OpenAI({
   apiKey: Deno.env.get('OPENAI_API_KEY')

@@ -15,7 +15,15 @@ export const ProgressSteps: React.FC<ProgressStepsProps> = ({
   stepLabels = [],
   className = '',
 }) => {
+  console.log('[ProgressSteps] Rendering with currentStep:', currentStep, 'totalSteps:', totalSteps);
   const steps = Array.from({ length: totalSteps }, (_, i) => i + 1);
+  
+  console.log('[ProgressSteps] Steps array:', steps);
+  console.log('[ProgressSteps] Step analysis:', steps.map(step => ({
+    step,
+    isCompleted: step < currentStep,
+    isCurrent: step === currentStep
+  })));
 
   return (
     <div className={cn('relative w-full', className)}>
@@ -24,7 +32,7 @@ export const ProgressSteps: React.FC<ProgressStepsProps> = ({
       
       {/* Progress overlay on connecting lines */}
       <div 
-        className="absolute top-4 left-0 h-0.5 bg-primary-600 transition-all duration-slow"
+        className="absolute top-4 left-0 h-0.5 bg-accent-500 transition-all duration-slow"
         style={{ 
           width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%` 
         }}
@@ -48,7 +56,7 @@ export const ProgressSteps: React.FC<ProgressStepsProps> = ({
                 className={cn(
                   'w-8 h-8 rounded-full flex items-center justify-center transition-all duration-base',
                   'ring-2 ring-offset-2 ring-offset-gray-900',
-                  isCompleted && 'bg-primary-600 ring-primary-600',
+                  isCompleted && 'bg-accent-500 ring-accent-500',
                   isCurrent && 'bg-gray-700 ring-primary-500 animate-pulse-glow',
                   !isCompleted && !isCurrent && 'bg-gray-700 ring-gray-600'
                 )}

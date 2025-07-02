@@ -19,8 +19,12 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
   const [isValidating, setIsValidating] = useState(false);
   const [validationError, setValidationError] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState(!nodeData.problem);
+  const [showGoldFlash, setShowGoldFlash] = useState(false);
   
   const { setProblemInput, proceedToNextStep, coreProblem } = useWorkflowStore();
+  
+  // Derive isValidated from coreProblem state
+  const isValidated = coreProblem?.is_validated === true;
 
   // Update local state when node data changes
   useEffect(() => {
@@ -66,12 +70,48 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
       console.log('[CoreProblemNode] Validation result:', validationResult);
       
       if (validationResult.isValid) {
-        console.log('[CoreProblemNode] Problem is valid, proceeding to next step');
-        const workflowStore = useWorkflowStore.getState();
-        await workflowStore.validateProblem(trimmedText);
+        console.log('[CoreProblemNode] Problem is valid, triggering all actions');
         
+        // 1. Trigger gold flash animation
+        setShowGoldFlash(true);
+        setTimeout(() => setShowGoldFlash(false), 800);
+        
+        // 2. Set validated problem in store
+        const workflowStore = useWorkflowStore.getState();
+        const projectId = workflowStore.projectId || crypto.randomUUID();
+        
+        // Get the coreProblemId from the validation response
+        const coreProblemId = (validationResult as any).coreProblemId || crypto.randomUUID();
+        console.log('[CoreProblemNode] Using coreProblemId from validation:', coreProblemId);
+        
+        const coreProblem = {
+          id: coreProblemId,  // Use the ID from validation response
+          project_id: projectId,
+          description: trimmedText,
+          is_validated: true,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        };
+        
+        // Update store state immediately
+        useWorkflowStore.setState({ 
+          projectId,
+          coreProblem,
+          problemInput: trimmedText
+        });
+        
+        console.log('[CoreProblemNode] Set coreProblem:', coreProblem);
+        
+        // 3. Close editing mode
         setIsEditing(false);
+        
+        // 4. Proceed to next step immediately
+        console.log('[CoreProblemNode] Proceeding to next step');
         proceedToNextStep();
+        
+        // 5. Generate personas immediately
+        console.log('[CoreProblemNode] Triggering persona generation');
+        workflowStore.generatePersonas();
       } else {
         console.log('[CoreProblemNode] Problem is invalid:', validationResult.feedback);
         setValidationError(validationResult.feedback || 'Invalid problem statement');
@@ -122,7 +162,7 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
       selected={selected}
       showTargetHandle={false}
       showSourceHandle={true}
-      className="min-w-[400px] max-w-[500px]"
+      className={`min-w-[400px] max-w-[500px] ${showGoldFlash ? 'animate-gold-flash' : ''} ${isValidated ? 'border-accent-500 border-2' : ''}`}
     >
       <div className="space-y-3">
         <div className="flex items-center gap-2">

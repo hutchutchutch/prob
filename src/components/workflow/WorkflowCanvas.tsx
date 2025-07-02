@@ -6,14 +6,44 @@ import { Node, Edge } from '@xyflow/react';
 
 export function WorkflowCanvas() {
   const { currentStep, coreProblem, personas } = useWorkflowStore();
-  const { addNodes, addEdges, zoomTo, resetCanvas, nodes } = useCanvasStore();
+  const { addNodes, addEdges, zoomTo, resetCanvas, nodes, edges } = useCanvasStore();
   const [canvasInitialized, setCanvasInitialized] = useState(false);
+  const [lastNodeCount, setLastNodeCount] = useState(0);
+  const [lastEdgeCount, setLastEdgeCount] = useState(0);
+
+  // Debug canvas state changes
+  useEffect(() => {
+    if (nodes.length !== lastNodeCount || edges.length !== lastEdgeCount) {
+      console.log('[WorkflowCanvas] Canvas state changed:', {
+        nodeCount: `${lastNodeCount} -> ${nodes.length}`,
+        edgeCount: `${lastEdgeCount} -> ${edges.length}`,
+        nodes: nodes.map(n => ({ id: n.id, type: n.type })),
+        edges: edges.map(e => ({ id: e.id, source: e.source, target: e.target }))
+      });
+      setLastNodeCount(nodes.length);
+      setLastEdgeCount(edges.length);
+      
+      // Track what caused the change
+      if (nodes.length === 0 && lastNodeCount > 0) {
+        console.error('[WorkflowCanvas] CANVAS CLEARED! Nodes went from', lastNodeCount, 'to 0');
+        console.trace('Canvas clear stack trace');
+      }
+    }
+  }, [nodes, edges, lastNodeCount, lastEdgeCount]);
 
   // Initialize the canvas with the problem input node
   useEffect(() => {
-    console.log('[WorkflowCanvas] Initializing with currentStep:', currentStep);
-    console.log('[WorkflowCanvas] Canvas initialized:', canvasInitialized);
-    console.log('[WorkflowCanvas] Existing nodes:', nodes.length);
+    console.log('[WorkflowCanvas] Initialization effect triggered:', {
+      currentStep,
+      canvasInitialized,
+      nodeCount: nodes.length
+    });
+    
+    // Don't re-initialize if we already have nodes (prevent clearing)
+    if (nodes.length > 0 && canvasInitialized) {
+      console.log('[WorkflowCanvas] Canvas already has nodes, skipping initialization');
+      return;
+    }
     
     if (currentStep === 'problem_input' && !canvasInitialized) {
       console.log('[WorkflowCanvas] Setting up problem input node...');
@@ -39,7 +69,7 @@ export function WorkflowCanvas() {
       const coreProblemLabelNode: Node = {
         id: 'core-problem-label',
         type: 'label',
-        position: { x: -350, y: -120 }, // Above the CoreProblemNode
+        position: { x: -250, y: -120 }, // Centered above CoreProblemNode (x: -250)
         data: { 
           text: 'Core Problem',
           showRefresh: false
@@ -51,7 +81,7 @@ export function WorkflowCanvas() {
       const personasLabelNode: Node = {
         id: 'personas-label',
         type: 'label', 
-        position: { x: 520, y: -420 }, // Above the PersonaNodes column
+        position: { x: 600, y: -420 }, // Centered above PersonaNodes column (x: 600)
         data: {
           text: 'Personas',
           showRefresh: true,
@@ -107,7 +137,13 @@ export function WorkflowCanvas() {
         animated: true,
       }));
       
-      console.log('[WorkflowCanvas] Adding column labels, problem input node, 5 persona skeleton nodes, and connecting edges');
+      console.log('[WorkflowCanvas] Adding initial nodes:', {
+        labels: 2,
+        problemNode: 1,
+        personaNodes: personaNodes.length,
+        edges: edges.length
+      });
+      
       addNodes([coreProblemLabelNode, personasLabelNode, problemInputNode, ...personaNodes]);
       addEdges(edges);
       
@@ -116,7 +152,7 @@ export function WorkflowCanvas() {
       // Center the view on the problem node with appropriate zoom to show persona column edge
       setTimeout(() => {
         console.log('[WorkflowCanvas] Centering view on problem node...');
-        zoomTo(0.8); // Reduced zoom to show more of the canvas width
+        zoomTo(0.6); // Further reduced zoom to show more of the canvas width
       }, 100);
     }
   }, [currentStep, canvasInitialized, addNodes, zoomTo, resetCanvas, coreProblem, nodes.length]);
@@ -163,6 +199,11 @@ export function WorkflowCanvas() {
 
   // Update PersonaNodes when personas are available
   useEffect(() => {
+    console.log('[WorkflowCanvas] Personas effect triggered:', {
+      personaCount: personas.length,
+      canvasInitialized
+    });
+    
     if (personas.length > 0 && canvasInitialized) {
       console.log('[WorkflowCanvas] Updating persona nodes with data:', personas.length);
       
@@ -171,6 +212,8 @@ export function WorkflowCanvas() {
       // Update the first 5 persona nodes with actual data
       personas.slice(0, 5).forEach((persona, index) => {
         const nodeId = `persona-${index + 1}`;
+        console.log('[WorkflowCanvas] Updating persona node:', nodeId, persona.name);
+        
         canvasStore.updateNode(nodeId, {
           data: {
             id: nodeId,
@@ -189,17 +232,79 @@ export function WorkflowCanvas() {
           }
         });
       });
-    }
-  }, [personas, canvasInitialized]);
 
-  // Clear canvas when moving past problem input
+      // Add pain point skeleton nodes for each persona
+      const painPointNodes: Node[] = [];
+      const painPointEdges: Edge[] = [];
+
+      personas.slice(0, 5).forEach((persona, personaIndex) => {
+        // Create 3 pain point nodes for each persona
+        for (let painIndex = 0; painIndex < 3; painIndex++) {
+          const painPointId = `pain-point-${personaIndex + 1}-${painIndex + 1}`;
+          const personaNodeId = `persona-${personaIndex + 1}`;
+          
+          painPointNodes.push({
+            id: painPointId,
+            type: 'pain',
+            position: {
+              x: 1000 + (painIndex * 320), // Right side of personas, spread horizontally
+              y: -300 + (personaIndex * 150) // Align with corresponding persona
+            },
+            data: {
+              id: painPointId,
+              description: '',
+              severity: 'medium' as const,
+              impactArea: '',
+              isLocked: false,
+              isSkeleton: true, // Start in skeleton state
+              onToggleLock: () => {
+                console.log(`Toggle lock for pain point ${painPointId}`);
+              }
+            },
+            draggable: true,
+          });
+
+          // Create edge from persona to pain point
+          painPointEdges.push({
+            id: `persona-to-pain-${personaIndex + 1}-${painIndex + 1}`,
+            source: personaNodeId,
+            target: painPointId,
+            type: 'default',
+            style: {
+              stroke: '#F97316', // Orange color for pain point connections
+              strokeWidth: 2,
+              opacity: 0.7
+            },
+            animated: true,
+          });
+        }
+      });
+
+      // Add the pain point nodes and edges
+      console.log('[WorkflowCanvas] Adding pain point skeleton nodes:', {
+        nodeCount: painPointNodes.length,
+        edgeCount: painPointEdges.length
+      });
+      addNodes(painPointNodes);
+      addEdges(painPointEdges);
+    }
+  }, [personas, canvasInitialized, addNodes, addEdges]);
+
+  // Handle step changes and canvas adjustments
   useEffect(() => {
+    console.log('[WorkflowCanvas] Step change detected:', currentStep, 'canvasInitialized:', canvasInitialized);
+    
     if (currentStep !== 'problem_input' && canvasInitialized) {
       console.log('[WorkflowCanvas] Moving past problem input, updating canvas...');
-      // Don't clear the canvas, just let the workflow store handle the transition
-      // The problem node will remain and new nodes will be added
+      console.log('[WorkflowCanvas] Current step:', currentStep);
+      
+      if (currentStep === 'persona_discovery') {
+        console.log('[WorkflowCanvas] Entering persona discovery, adjusting canvas view...');
+        // Adjust the canvas view to show both problem and persona columns
+        zoomTo(0.5); // Even more zoomed out to show full layout
+      }
     }
-  }, [currentStep, canvasInitialized]);
+  }, [currentStep, canvasInitialized, zoomTo]);
 
   return (
     <div className="relative w-full h-full">
@@ -213,6 +318,8 @@ export function WorkflowCanvas() {
           <div>Problem: {coreProblem ? 'Validated' : 'Not validated'}</div>
           <div>Canvas Init: {canvasInitialized ? 'Yes' : 'No'}</div>
           <div>Nodes: {nodes.length}</div>
+          <div>Edges: {edges.length}</div>
+          <div>Personas: {personas.length}</div>
         </div>
       )}
     </div>
