@@ -7,6 +7,7 @@ mod commands;
 mod db;
 
 use commands::*;
+use commands::data_sync::{check_migration_status, run_database_migrations, get_detailed_migration_status};
 use db::init_db;
 use log::info;
 
@@ -53,6 +54,10 @@ async fn main() {
             populate_sqlite_test_data,
             verify_test_data_consistency,
             clear_sqlite_test_data,
+            // Migration management commands
+            check_migration_status,
+            run_database_migrations,
+            get_detailed_migration_status,
             // Legacy analyze command
             analyze_problem,
         ])

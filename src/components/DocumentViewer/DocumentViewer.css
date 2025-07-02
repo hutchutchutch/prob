@@ -1,0 +1,221 @@
+/* DocumentViewer specific styles */
+
+/* Smooth animations for modal appearance */
+.document-viewer-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.document-viewer-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.document-viewer-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.document-viewer-exit-active {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Markdown content styling */
+.markdown-content {
+  color: var(--color-text-secondary);
+  line-height: 1.75;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  color: var(--color-text-primary);
+  font-weight: 600;
+  scroll-margin-top: 5rem;
+}
+
+.markdown-content h1 {
+  font-size: 2.25rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.markdown-content h2 {
+  font-size: 1.875rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.markdown-content h3 {
+  font-size: 1.5rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.markdown-content p {
+  margin-bottom: 1rem;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.markdown-content li {
+  margin-bottom: 0.25rem;
+}
+
+.markdown-content blockquote {
+  border-left: 4px solid var(--color-border);
+  padding-left: 1rem;
+  font-style: italic;
+  color: var(--color-text-secondary);
+  margin: 1rem 0;
+}
+
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.markdown-content th,
+.markdown-content td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.markdown-content th {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+}
+
+.markdown-content code {
+  background: var(--color-surface);
+  color: #60a5fa;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+  font-family: var(--font-mono);
+}
+
+.markdown-content pre {
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+.markdown-content pre code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: 0.875rem;
+}
+
+/* Table of contents */
+.toc-item {
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toc-item:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text-primary);
+}
+
+.toc-item.active {
+  background: var(--color-surface-hover);
+  color: var(--color-text-primary);
+  border-left: 2px solid var(--color-accent-500);
+}
+
+/* Scrollbar styling for content area */
+.document-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.document-content::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+
+.document-content::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+.document-content::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Export dropdown */
+.export-dropdown {
+  transform-origin: top right;
+  animation: dropdownOpen 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes dropdownOpen {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Code block enhancements */
+.code-block-wrapper {
+  position: relative;
+  margin: 1rem 0;
+}
+
+.code-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background: var(--color-surface-hover);
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.code-block-language {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.code-block-copy-button {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 0.25rem;
+  transition: all 150ms;
+  cursor: pointer;
+}
+
+.code-block-copy-button:hover {
+  color: var(--color-text-primary);
+  border-color: var(--color-text-secondary);
+}
+
+.code-block-copy-button.copied {
+  color: #10b981;
+  border-color: #10b981;
+}

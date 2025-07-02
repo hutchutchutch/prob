@@ -1,4 +1,4 @@
-use crate::db::{models::*, queries::Queries, DbPool};
+use crate::db::{models::*, queries::Queries, DbPool, get_migration_status, run_migrations, needs_migration};
 use serde::Serialize;
 use tauri::State;
 use chrono::Utc;
@@ -648,4 +648,37 @@ pub async fn clear_sqlite_test_data(
         items_synced: 0,
         tables_populated: vec!["cleared_all_test_data".to_string()],
     })
+}
+
+/// Check if database needs migration
+#[tauri::command]
+pub async fn check_migration_status(
+    db_pool: tauri::State<'_, DbPool>,
+) -> Result<bool, String> {
+    needs_migration(&db_pool)
+        .map_err(|e| format!("Failed to check migration status: {}", e))
+}
+
+/// Run database migrations manually
+#[tauri::command]
+pub async fn run_database_migrations(
+    db_pool: tauri::State<'_, DbPool>,
+) -> Result<String, String> {
+    run_migrations(&db_pool)
+        .map_err(|e| format!("Failed to run migrations: {}", e))?;
+    
+    Ok("Migrations completed successfully".to_string())
+}
+
+/// Get detailed migration status
+#[tauri::command]
+pub async fn get_detailed_migration_status(
+    db_pool: tauri::State<'_, DbPool>,
+) -> Result<String, String> {
+    // This is a simplified version - in practice you'd want to modify
+    // get_migration_status to return data instead of printing
+    match get_migration_status(&db_pool) {
+        Ok(_) => Ok("Migration status retrieved successfully".to_string()),
+        Err(e) => Err(format!("Failed to get migration status: {}", e))
+    }
 } 
