@@ -1,7 +1,7 @@
 // supabase/functions/generate-personas/index.ts
-import { serve } from "std/http/server.ts";
-import { createClient } from "@supabase/supabase-js";
-import { OpenAI } from "openai";
+import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { OpenAI } from "https://esm.sh/openai@4";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -70,7 +70,7 @@ serve(async (req) => {
           {
             "personas": [
               {
-                "name": "Punny name that captures the essence of the persona",
+                "name": "Punny name that captures the essence of the persona (max 3 words, letters and spaces only, no special characters)",
                 "industry": "Industry Name",
                 "role": "Job Title",
                 "description": "Brief description of who they are and why they face this problem",

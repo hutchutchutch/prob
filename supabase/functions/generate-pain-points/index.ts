@@ -1,8 +1,8 @@
 // supabase/functions/generate-pain-points/index.ts
-import { serve } from "std/http/server.ts"
-import { createClient } from "@supabase/supabase-js"
-import { StateGraph } from "@langchain/langgraph"
-import { OpenAI } from "openai"
+import { serve } from "https://deno.land/std@0.224.0/http/server.ts"
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2"
+import { StateGraph } from "https://esm.sh/@langchain/langgraph@0.0.25"
+import { OpenAI } from "https://esm.sh/openai@4"
 
 const openai = new OpenAI({
   apiKey: Deno.env.get('OPENAI_API_KEY')

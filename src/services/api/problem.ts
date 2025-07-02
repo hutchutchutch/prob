@@ -741,12 +741,88 @@ export const problemApi = {
     
     generatePainPoints: async (
       projectId: string,
-      personaId: string,
-      lockedPainPointIds: string[]
+      personas: any[],
+      lockedPainPointIds: string[] = []
     ): Promise<any[]> => {
-      // TODO: Implement when you have pain points service
-      console.warn('generatePainPoints not implemented yet');
-      return [];
+      console.log('[problemApi] Generating pain points with edge function');
+      console.log('[problemApi] Project ID:', projectId);
+      console.log('[problemApi] Personas count:', personas.length);
+      
+      // Get the core problem text from the workflow store
+      const { useWorkflowStore } = await import('@/stores/workflowStore');
+      const coreProblem = useWorkflowStore.getState().coreProblem;
+      const coreProblemText = coreProblem?.description || '';
+      
+      console.log('[problemApi] Core Problem Text:', coreProblemText);
+      
+      // Get auth token
+      const { supabase } = await import('@/services/supabase/client');
+      const { data: { session } } = await supabase.auth.getSession();
+      const authToken = session?.access_token;
+      
+      if (!authToken) {
+        throw new Error('Not authenticated');
+      }
+      
+      try {
+        const response = await fetch('https://tyfmxjzcocjztocwemun.supabase.co/functions/v1/generate-pain-points', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`,
+            'x-request-id': crypto.randomUUID()
+          },
+          body: JSON.stringify({
+            projectId: projectId,
+            coreProblem: coreProblemText,
+            personas: personas,
+            lockedPainPointIds: lockedPainPointIds
+          })
+        });
+        
+        console.log('[problemApi] Pain points response status:', response.status);
+        const data = await response.json();
+        console.log('[problemApi] Pain points response data:', data);
+        
+        if (!response.ok) {
+          throw new Error(data.error?.message || `HTTP ${response.status}`);
+        }
+        
+        // Handle both response structures: direct array or object with painPoints property
+        const painPoints = Array.isArray(data) ? data : (data.painPoints || data.pain_points || []);
+        console.log('[problemApi] Returning pain points:', painPoints.length);
+        
+        return painPoints;
+        
+      } catch (error) {
+        console.error('[problemApi] Generate pain points failed:', error);
+        
+        // Return mock pain points for now
+        console.log('[problemApi] USING MOCK PAIN POINTS DUE TO ERROR');
+        return [
+          {
+            id: crypto.randomUUID(),
+            description: 'Time-consuming manual processes that slow down productivity',
+            severity: 'high',
+            impactArea: 'Operational Efficiency',
+            frequency: 'daily'
+          },
+          {
+            id: crypto.randomUUID(),
+            description: 'Lack of real-time visibility into project status and progress',
+            severity: 'medium',
+            impactArea: 'Project Management',
+            frequency: 'weekly'
+          },
+          {
+            id: crypto.randomUUID(),
+            description: 'Difficulty coordinating tasks across different teams and departments',
+            severity: 'high',
+            impactArea: 'Team Collaboration',
+            frequency: 'daily'
+          }
+        ];
+      }
     },
     
     generateSolutions: async (

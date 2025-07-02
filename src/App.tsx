@@ -236,10 +236,7 @@ export default function App() {
   return (
     <ReactFlowProvider>
       <div className="flex h-screen bg-gray-900">
-        {/* Test Element */}
-        <div className="absolute top-4 left-4 bg-green-500 text-white p-4 z-50 rounded">
-          App is rendering! User: {user.email}
-        </div>
+
         
         {/* Sidebar */}
         <ConnectedSidebar />

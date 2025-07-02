@@ -1,11 +1,34 @@
 import { create } from 'zustand'
 import { subscribeWithSelector } from 'zustand/middleware'
 import { tauriAPI } from '@/services/tauri/api'
+import { problemApi } from '@/services/api/problem'
 import type { WorkflowStep } from '@/types/workflow.types'
 
 // Import other stores for integration
 import { useCanvasStore } from './canvasStore'
 import { useUIStore } from './uiStore'
+
+// Helper functions for pain point transformation
+const mapSeverityToNumber = (severity: string): number => {
+  const severityMap: Record<string, number> = {
+    'low': 1,
+    'medium': 3,
+    'high': 4,
+    'critical': 5
+  }
+  return severityMap[severity.toLowerCase()] || 3
+}
+
+const mapFrequencyToNumber = (frequency: string): number => {
+  const frequencyMap: Record<string, number> = {
+    'rarely': 1,
+    'monthly': 2,
+    'weekly': 3,
+    'daily': 4,
+    'constantly': 5
+  }
+  return frequencyMap[frequency.toLowerCase()] || 3
+}
 
 // Import or define types (these should match your database schema)
 export interface CoreProblem {
@@ -451,6 +474,15 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
           console.warn('[workflowStore] UIStore showSuccess failed:', error)
         }
         
+        // Automatically trigger pain points generation after personas are generated
+        if (personas.length > 0) {
+          console.log('[workflowStore] Auto-triggering pain points generation...')
+          setTimeout(() => {
+            const { generatePainPoints } = get()
+            generatePainPoints()
+          }, 1000) // Small delay to let UI update
+        }
+        
       } catch (error) {
         console.error('Persona generation failed:', error)
         uiStore.showError('Persona generation failed', error instanceof Error ? error.message : 'Unknown error')
@@ -533,20 +565,60 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
     // Pain point management
     generatePainPoints: async () => {
       const state = get()
-      if (!state.activePersonaId) return
+      if (!state.projectId || !state.coreProblem) {
+        console.warn('[workflowStore] Cannot generate pain points: missing project ID or core problem')
+        return
+      }
 
       const uiStore = useUIStore.getState()
+      const batchId = crypto.randomUUID()
       
       set({ isGeneratingPainPoints: true })
       try {
-        // TODO: Call Tauri API to generate pain points
-        // const painPoints = await tauriAPI.generatePainPoints(state.activePersonaId)
-        set({ painPoints: [] }) // TODO: Set actual pain points from API
+        console.log('[workflowStore] Generating pain points...')
+        console.log('[workflowStore] Using personas:', state.personas.length)
         
-        // Notify canvas and UI stores
-        const canvasStore = useCanvasStore.getState()
-        canvasStore.syncWithWorkflow(get())
-        uiStore.showSuccess('Pain points generated successfully')
+        // Get locked pain points
+        const lockedPainPoints = state.painPoints.filter(p => state.lockedItems.painPoints.has(p.id))
+        
+        const response = await problemApi.generatePainPoints(
+          state.projectId,
+          state.personas, // Pass all personas to the API
+          lockedPainPoints.map(p => p.id)
+        )
+        console.log('[workflowStore] problemApi.generatePainPoints response:', response)
+        
+                 // Transform the response to match our PainPoint interface
+        const painPoints: PainPoint[] = response.map((painPoint: any) => ({
+          id: painPoint.id || crypto.randomUUID(),
+          project_id: state.projectId!,
+          persona_id: '', // Pain points can be associated with multiple personas
+          title: painPoint.title || painPoint.description?.split('.')[0] || 'Untitled Pain Point',
+          description: painPoint.description,
+          severity: mapSeverityToNumber(painPoint.severity || 'medium'),
+          frequency: painPoint.frequency ? mapFrequencyToNumber(painPoint.frequency) : 3,
+          impact: painPoint.impactArea || painPoint.impact || 'General',
+          is_locked: false,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        } as PainPoint))
+        
+        // Combine with locked pain points
+        const allPainPoints = [...lockedPainPoints, ...painPoints]
+        
+        set({ 
+          painPoints: allPainPoints,
+          currentStep: 'pain_points' // Advance to pain points step
+        })
+        
+        console.log('[workflowStore] Pain points generated:', allPainPoints.length)
+        
+        // Show success message
+        try {
+          uiStore.showSuccess(`Generated ${painPoints.length} new pain points`)
+        } catch (error) {
+          console.warn('[workflowStore] UIStore showSuccess failed:', error)
+        }
         
       } catch (error) {
         console.error('Pain point generation failed:', error)
@@ -555,6 +627,8 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
         set({ isGeneratingPainPoints: false })
       }
     },
+
+
 
     regeneratePainPoints: async () => {
       const state = get()
