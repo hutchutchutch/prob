@@ -34,25 +34,25 @@ export const PainPointNode: React.FC<NodeProps> = ({ data, selected }) => {
         selected={selected}
         showSourceHandle={false}
         showTargetHandle={true}
-        className="min-w-[300px] max-w-[350px] opacity-60"
+        className="min-w-[280px] opacity-60"
       >
         <div className="space-y-3">
           {/* Skeleton Header */}
           <div className="flex items-start justify-between gap-3">
-            <div className="h-6 bg-gray-600 rounded skeleton w-20"></div>
-            <div className="w-4 h-4 bg-gray-600 rounded skeleton"></div>
+            <div className="h-6 bg-gray-600 rounded skeleton-shimmer w-20"></div>
+            <div className="w-4 h-4 bg-gray-600 rounded skeleton-shimmer"></div>
           </div>
 
           {/* Skeleton Description */}
           <div className="space-y-2">
-            <div className="h-4 bg-gray-600 rounded skeleton w-full"></div>
-            <div className="h-4 bg-gray-600 rounded skeleton w-3/4"></div>
+            <div className="h-4 bg-gray-600 rounded skeleton-shimmer w-full"></div>
+            <div className="h-4 bg-gray-600 rounded skeleton-shimmer w-3/4"></div>
           </div>
 
           {/* Skeleton Impact */}
           <div className="flex items-center gap-2 text-sm">
-            <div className="h-4 bg-gray-600 rounded skeleton w-12"></div>
-            <div className="h-4 bg-gray-600 rounded skeleton w-24"></div>
+            <div className="h-4 bg-gray-600 rounded skeleton-shimmer w-12"></div>
+            <div className="h-4 bg-gray-600 rounded skeleton-shimmer w-24"></div>
           </div>
         </div>
       </BaseNode>
@@ -63,7 +63,7 @@ export const PainPointNode: React.FC<NodeProps> = ({ data, selected }) => {
     <BaseNode
       variant="pain"
       selected={selected}
-      className="min-w-[300px] max-w-[350px]"
+      className="min-w-[280px]"
     >
       <div className="space-y-3">
         {/* Header with Severity and Lock */}

@@ -5,11 +5,12 @@ import { useCanvasStore } from '@/stores/canvasStore';
 import { Node, Edge } from '@xyflow/react';
 
 export function WorkflowCanvas() {
-  const { currentStep, coreProblem, personas } = useWorkflowStore();
-  const { addNodes, addEdges, zoomTo, resetCanvas, nodes, edges } = useCanvasStore();
+  const { currentStep, coreProblem, personas, isGeneratingPersonas } = useWorkflowStore();
+  const { addNodes, addEdges, updateEdge, zoomTo, resetCanvas, nodes, edges } = useCanvasStore();
   const [canvasInitialized, setCanvasInitialized] = useState(false);
   const [lastNodeCount, setLastNodeCount] = useState(0);
   const [lastEdgeCount, setLastEdgeCount] = useState(0);
+  const [painPointsAdded, setPainPointsAdded] = useState(false);
 
   // Debug canvas state changes
   useEffect(() => {
@@ -124,6 +125,7 @@ export function WorkflowCanvas() {
       }));
       
       // Create edges connecting the problem node to each persona node
+      // Initially solid (not animated) until persona generation starts
       const edges: Edge[] = personaNodes.map((personaNode, index) => ({
         id: `problem-to-persona-${index + 1}`,
         source: 'problem-input',
@@ -134,7 +136,7 @@ export function WorkflowCanvas() {
           strokeWidth: 2,
           opacity: 0.7 
         },
-        animated: true,
+        animated: false, // Start with solid edges
       }));
       
       console.log('[WorkflowCanvas] Adding initial nodes:', {
@@ -197,6 +199,107 @@ export function WorkflowCanvas() {
     }
   }, [coreProblem, canvasInitialized]);
 
+  // Handle persona generation state - animate edges and add pain points
+  useEffect(() => {
+    console.log('[WorkflowCanvas] Persona generation state changed:', {
+      isGeneratingPersonas,
+      painPointsAdded,
+      canvasInitialized
+    });
+
+    if (isGeneratingPersonas && canvasInitialized && !painPointsAdded) {
+      console.log('[WorkflowCanvas] Persona generation started - animating edges and adding pain points');
+      
+      const canvasStore = useCanvasStore.getState();
+      
+      // Animate the problem-to-persona edges
+      for (let i = 1; i <= 5; i++) {
+        canvasStore.updateEdge(`problem-to-persona-${i}`, {
+          animated: true
+        });
+      }
+
+      // Add Pain Points column label
+      const painPointsLabelNode: Node = {
+        id: 'pain-points-label',
+        type: 'label',
+        position: { x: 1450, y: -420 }, // Right of personas column
+        data: {
+          text: 'Pain Points',
+          showRefresh: false
+        },
+        draggable: false,
+        selectable: false,
+      };
+
+      // Create pain point skeleton nodes - only 3 total, card-sized like personas
+      const painPointNodes: Node[] = [];
+      const painPointEdges: Edge[] = [];
+
+      // Create 3 pain points total, positioned vertically
+      for (let painIndex = 0; painIndex < 3; painIndex++) {
+        const painPointId = `pain-point-${painIndex + 1}`;
+        
+        painPointNodes.push({
+          id: painPointId,
+          type: 'pain',
+          position: {
+            x: 1450, // Pain points column
+            y: -300 + (painIndex * 150) // Same vertical spacing as personas (150px)
+          },
+          data: {
+            id: painPointId,
+            description: '',
+            severity: 'medium' as const,
+            impactArea: '',
+            isLocked: false,
+            isSkeleton: true, // Start in skeleton state
+            onToggleLock: () => {
+              console.log(`Toggle lock for pain point ${painPointId}`);
+            }
+          },
+          draggable: true,
+        });
+
+        // Create animated edges from each persona to each pain point
+        // This creates a many-to-many relationship visualization
+        for (let personaIndex = 0; personaIndex < 5; personaIndex++) {
+          const personaNodeId = `persona-${personaIndex + 1}`;
+          
+          painPointEdges.push({
+            id: `persona-${personaIndex + 1}-to-pain-${painIndex + 1}`,
+            source: personaNodeId,
+            target: painPointId,
+            type: 'default',
+            style: {
+              stroke: '#F97316', // Orange color for pain point connections
+              strokeWidth: 1.5, // Thinner for many connections
+              opacity: 0.3 // Lower opacity since there are many edges
+            },
+            animated: true, // Animated edges for pain points
+          });
+        }
+      }
+
+      // Add all pain point nodes and edges
+      console.log('[WorkflowCanvas] Adding pain point skeleton nodes:', {
+        labelNode: 1,
+        nodeCount: painPointNodes.length,
+        edgeCount: painPointEdges.length
+      });
+      
+      addNodes([painPointsLabelNode, ...painPointNodes]);
+      addEdges(painPointEdges);
+      
+      setPainPointsAdded(true);
+      
+      // Adjust zoom to show all three columns
+      setTimeout(() => {
+        zoomTo(0.4); // Zoom out more to show all three columns
+      }, 100);
+    }
+  }, [isGeneratingPersonas, canvasInitialized, painPointsAdded, addNodes, addEdges, updateEdge, zoomTo]);
+
   // Update PersonaNodes when personas are available
   useEffect(() => {
     console.log('[WorkflowCanvas] Personas effect triggered:', {
@@ -232,63 +335,8 @@ export function WorkflowCanvas() {
           }
         });
       });
-
-      // Add pain point skeleton nodes for each persona
-      const painPointNodes: Node[] = [];
-      const painPointEdges: Edge[] = [];
-
-      personas.slice(0, 5).forEach((persona, personaIndex) => {
-        // Create 3 pain point nodes for each persona
-        for (let painIndex = 0; painIndex < 3; painIndex++) {
-          const painPointId = `pain-point-${personaIndex + 1}-${painIndex + 1}`;
-          const personaNodeId = `persona-${personaIndex + 1}`;
-          
-          painPointNodes.push({
-            id: painPointId,
-            type: 'pain',
-            position: {
-              x: 1000 + (painIndex * 320), // Right side of personas, spread horizontally
-              y: -300 + (personaIndex * 150) // Align with corresponding persona
-            },
-            data: {
-              id: painPointId,
-              description: '',
-              severity: 'medium' as const,
-              impactArea: '',
-              isLocked: false,
-              isSkeleton: true, // Start in skeleton state
-              onToggleLock: () => {
-                console.log(`Toggle lock for pain point ${painPointId}`);
-              }
-            },
-            draggable: true,
-          });
-
-          // Create edge from persona to pain point
-          painPointEdges.push({
-            id: `persona-to-pain-${personaIndex + 1}-${painIndex + 1}`,
-            source: personaNodeId,
-            target: painPointId,
-            type: 'default',
-            style: {
-              stroke: '#F97316', // Orange color for pain point connections
-              strokeWidth: 2,
-              opacity: 0.7
-            },
-            animated: true,
-          });
-        }
-      });
-
-      // Add the pain point nodes and edges
-      console.log('[WorkflowCanvas] Adding pain point skeleton nodes:', {
-        nodeCount: painPointNodes.length,
-        edgeCount: painPointEdges.length
-      });
-      addNodes(painPointNodes);
-      addEdges(painPointEdges);
     }
-  }, [personas, canvasInitialized, addNodes, addEdges]);
+  }, [personas, canvasInitialized]);
 
   // Handle step changes and canvas adjustments
   useEffect(() => {
@@ -320,6 +368,8 @@ export function WorkflowCanvas() {
           <div>Nodes: {nodes.length}</div>
           <div>Edges: {edges.length}</div>
           <div>Personas: {personas.length}</div>
+          <div>Generating: {isGeneratingPersonas ? 'Yes' : 'No'}</div>
+          <div>Pain Points: {painPointsAdded ? 'Added' : 'Not added'}</div>
         </div>
       )}
     </div>

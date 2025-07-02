@@ -309,6 +309,28 @@ html, body {
   }
 }
 
+/* Enhanced shimmer animation for pain point skeletons */
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, 
+    rgba(75, 85, 99, 0.5) 0%, 
+    rgba(107, 114, 128, 0.7) 50%, 
+    rgba(75, 85, 99, 0.5) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
 .gradient-persona {
   background: linear-gradient(135deg, var(--color-gray-800), var(--color-gray-700));
   border: 1px solid var(--color-gray-600);
