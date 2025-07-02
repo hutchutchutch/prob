@@ -1,7 +1,7 @@
 // supabase/functions/generate-personas/index.ts
-import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-import { OpenAI } from "https://esm.sh/openai@4";
+import { serve } from "std/http/server.ts";
+import { createClient } from "@supabase/supabase-js";
+import { OpenAI } from "openai";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',

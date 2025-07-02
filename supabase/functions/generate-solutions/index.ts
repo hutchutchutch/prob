@@ -1,7 +1,7 @@
 // supabase/functions/generate-solutions/index.ts
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts"
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2"
-import { StateGraph } from "https://esm.sh/@langchain/langgraph@0.0.25"
+import { StateGraph } from "https://esm.sh/@langchain/langgraph@0.2.0"
 import { OpenAI } from "https://esm.sh/openai@4"
 
 const openai = new OpenAI({
