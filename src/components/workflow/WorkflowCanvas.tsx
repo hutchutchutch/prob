@@ -8,7 +8,7 @@ import { Node, Edge, useReactFlow } from '@xyflow/react';
 export function WorkflowCanvas() {
   console.log('[WorkflowCanvas] Component rendering...');
   
-  const { currentStep, coreProblem, personas, isGeneratingPersonas } = useWorkflowStore();
+  const { currentStep, coreProblem, personas, painPoints, isGeneratingPersonas } = useWorkflowStore();
   const { addNodes, addEdges, updateEdge, zoomTo, resetCanvas, nodes, edges } = useCanvasStore();
   const { goToStep1, goToStep } = useCanvasNavigation();
   const [canvasInitialized, setCanvasInitialized] = useState(false);
@@ -323,12 +323,12 @@ export function WorkflowCanvas() {
         selectable: false,
       };
 
-      // Create pain point skeleton nodes - only 3 total, card-sized like personas
+      // Create pain point skeleton nodes - 7 total, card-sized like personas
       const painPointNodes: Node[] = [];
       const painPointEdges: Edge[] = [];
 
-      // Create 3 pain points total, positioned vertically
-      for (let painIndex = 0; painIndex < 3; painIndex++) {
+      // Create 7 pain points total, positioned vertically
+      for (let painIndex = 0; painIndex < 7; painIndex++) {
         const painPointId = `pain-point-${painIndex + 1}`;
         
         painPointNodes.push({
@@ -471,6 +471,64 @@ export function WorkflowCanvas() {
       });
     }
   }, [personas, canvasInitialized]);
+
+  // Update PainPointNodes when pain points are available
+  useEffect(() => {
+    console.log('[WorkflowCanvas] Pain points effect triggered:', {
+      painPointCount: painPoints.length,
+      canvasInitialized
+    });
+    
+    if (painPoints.length > 0 && canvasInitialized) {
+      console.log('[WorkflowCanvas] Updating pain point nodes with data:', painPoints.length);
+      
+      const canvasStore = useCanvasStore.getState();
+      
+      // Update the first 7 pain point nodes with actual data
+      painPoints.slice(0, 7).forEach((painPoint, index) => {
+        const nodeId = `pain-point-${index + 1}`;
+                 console.log('[WorkflowCanvas] Updating pain point node:', nodeId, 'with data:', {
+           id: painPoint.id,
+           title: painPoint.title,
+           description: painPoint.description,
+           severity: painPoint.severity,
+           impact: painPoint.impact,
+           isLocked: painPoint.is_locked
+         });
+        
+        // Get the current node to preserve existing properties
+        const currentNode = canvasStore.getNodeById(nodeId);
+        console.log('[WorkflowCanvas] Current pain point node before update:', currentNode);
+        
+                 const updatedData = {
+           id: nodeId,
+           title: painPoint.title,
+           description: painPoint.description,
+           severity: painPoint.severity === 1 ? 'low' : 
+                    painPoint.severity === 2 ? 'medium' :
+                    painPoint.severity === 3 ? 'high' :
+                    painPoint.severity === 4 ? 'high' : 'critical',
+           impactArea: painPoint.impact,
+           isLocked: painPoint.is_locked || false,
+           isSkeleton: false, // Ensure skeleton state is off
+           onToggleLock: () => {
+             const workflowStore = useWorkflowStore.getState();
+             workflowStore.togglePainPointLock(painPoint.id);
+           }
+         };
+        
+        console.log('[WorkflowCanvas] About to update pain point with data:', updatedData);
+        
+        canvasStore.updateNode(nodeId, {
+          data: updatedData
+        });
+        
+        // Verify the update worked
+        const updatedNode = canvasStore.getNodeById(nodeId);
+        console.log('[WorkflowCanvas] Pain point node after update:', updatedNode);
+      });
+    }
+  }, [painPoints, canvasInitialized]);
 
   // Handle step changes and canvas adjustments
   useEffect(() => {

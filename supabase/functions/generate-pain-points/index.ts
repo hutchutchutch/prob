@@ -62,7 +62,7 @@ async function generatePainPoints(state: PainPointGenerationState) {
     lockedPainPointIds.includes(pp.id)
   ) || []
   
-  const painPointsToGenerate = 3 - lockedPainPoints.length
+  const painPointsToGenerate = 7 - lockedPainPoints.length
   
   const completion = await openai.chat.completions.create({
     model: "gpt-4-turbo-preview",
@@ -256,14 +256,21 @@ const app = workflow.compile()
 
 serve(async (req) => {
   try {
-    const { projectId, personaId, lockedPainPointIds = [] } = await req.json()
+    const { projectId, personaId, personas, lockedPainPointIds = [] } = await req.json()
+    
+    // Handle both API patterns: single personaId or personas array
+    let activePersonaId = personaId
+    if (!activePersonaId && personas && personas.length > 0) {
+      // Use the first persona if array is provided
+      activePersonaId = personas[0].id
+    }
     
     const startTime = Date.now()
     
     // Execute the workflow
     const result = await app.invoke({
       projectId,
-      personaId,
+      personaId: activePersonaId,
       lockedPainPointIds
     })
     
@@ -271,14 +278,14 @@ serve(async (req) => {
     const { data: allPainPoints } = await supabase
       .from('pain_points')
       .select('*')
-      .eq('persona_id', personaId)
+      .eq('persona_id', activePersonaId)
       .order('position')
     
     // Log execution
     await supabase.from('langgraph_execution_logs').insert({
       project_id: projectId,
       node_name: 'generate_pain_points_workflow',
-      input_state: { projectId, personaId, lockedPainPointIds },
+      input_state: { projectId, personaId: activePersonaId, lockedPainPointIds },
       output_state: { painPointCount: allPainPoints?.length },
       status: 'success',
       execution_time_ms: Date.now() - startTime
