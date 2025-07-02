@@ -8,6 +8,8 @@ import { nodeTypes } from './nodes';
 import { edgeTypes } from './edges';
 
 export function Canvas() {
+  console.log('[Canvas] Component rendering...');
+  
   const {
     nodes,
     edges,
@@ -18,13 +20,19 @@ export function Canvas() {
     setViewport,
   } = useCanvasStore();
 
+  console.log('[Canvas] State:', {
+    nodeCount: nodes.length,
+    edgeCount: edges.length,
+    viewport
+  });
+
   return (
     <div className="w-full h-full relative">
       <ReactFlow
         nodes={nodes}
         edges={edges}
         nodeTypes={nodeTypes}
-        edgeTypes={edgeTypes}
+        // edgeTypes={edgeTypes}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}

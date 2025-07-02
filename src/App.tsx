@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ReactFlowProvider } from '@xyflow/react';
-import { ConnectedSidebar } from '@/components/layout/Sidebar/ConnectedSidebar';
-import { ConnectedProgressBar } from '@/components/layout/ProgressBar/ConnectedProgressBar';
+import { ConnectedSidebar } from '@/components/layout/Sidebar';
+import { ConnectedProgressBar } from '@/components/layout/ProgressBar';
 import { WorkflowCanvas } from '@/components/workflow/WorkflowCanvas';
 import { AuthForm } from '@/components/auth/AuthForm';
 import { AuthDebug } from '@/components/debug/AuthDebug';
@@ -12,12 +12,21 @@ import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/services/supabase/client';
 import './App.css';
 
-function App() {
+export default function App() {
+  console.log('[App] Component mounting...');
+  
   const { user, loading: authLoading } = useAuth();
   const { resetWorkflow, setProjectId } = useWorkflowStore();
   const [isInitializing, setIsInitializing] = useState(false);
   const [initError, setInitError] = useState<string | null>(null);
   const [showPerformanceOverlay, setShowPerformanceOverlay] = useState(false);
+
+  console.log('[App] Initial render state:', {
+    user: user?.email,
+    authLoading,
+    isInitializing,
+    showPerformanceOverlay
+  });
 
   useEffect(() => {
     const initializeWorkspace = async () => {
@@ -129,11 +138,19 @@ function App() {
         // Set the project ID in the workflow store
         setProjectId(projectId);
         console.log('[App] Workspace initialization complete');
+        console.log('[App] Final state after init:', {
+          user: user.id,
+          workspaceId,
+          projectId,
+          isInitializing,
+          initError
+        });
         
       } catch (error) {
         console.error('[App] Workspace initialization error:', error);
         setInitError(error instanceof Error ? error.message : 'Failed to initialize workspace');
       } finally {
+        console.log('[App] Setting isInitializing to false');
         setIsInitializing(false);
       }
     };
@@ -204,9 +221,16 @@ function App() {
     );
   }
 
+  console.log('[App] Rendering main app with user:', user.id, 'projectId:', useWorkflowStore.getState().projectId);
+
   return (
     <ReactFlowProvider>
       <div className="flex h-screen bg-gray-900">
+        {/* Test Element */}
+        <div className="absolute top-4 left-4 bg-green-500 text-white p-4 z-50 rounded">
+          App is rendering! User: {user.email}
+        </div>
+        
         {/* Sidebar */}
         <ConnectedSidebar />
 
@@ -233,5 +257,3 @@ function App() {
     </ReactFlowProvider>
   );
 }
-
-export default App;

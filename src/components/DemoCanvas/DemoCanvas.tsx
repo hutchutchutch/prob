@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
-import ReactFlow, {
+import {
+  ReactFlow,
   Node,
   Edge,
   Background,
@@ -7,8 +8,8 @@ import ReactFlow, {
   NodeTypes,
   EdgeTypes,
   ReactFlowProvider,
-} from 'reactflow';
-import 'reactflow/dist/style.css';
+} from '@xyflow/react';
+import '@xyflow/react/dist/style.css';
 
 import { DemoAnimationController } from './DemoAnimationController';
 import {

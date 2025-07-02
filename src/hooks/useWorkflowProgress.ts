@@ -31,15 +31,17 @@ const stepMapping: Record<WorkflowStep, number> = {
   'problem_input': 0,
   'persona_discovery': 1,
   'pain_points': 2,
-  'solution_mapping': 3,
-  'documentation': 4
+  'solution_generation': 3,
+  'user_stories': 4,
+  'architecture': 5,
+  'export': 6
 };
 
 export const useWorkflowProgress = (): WorkflowProgress => {
   const currentWorkflowStep = useWorkflowStore(state => state.currentStep);
   const nodes = useCanvasStore(state => state.nodes);
   const edges = useCanvasStore(state => state.edges);
-  const lockedNodes = useLockStore(state => state.lockedNodes);
+  const lockedNodes = useLockStore(state => state.lockedItems);
   
   // Map workflow step to progress index
   const currentStep = useMemo(() => {
@@ -66,9 +68,13 @@ export const useWorkflowProgress = (): WorkflowProgress => {
     const solutionNodes = nodes.filter(n => n.type === 'solution');
     if (solutionNodes.length > 0) completed.push(3);
     
-    // Documentation completed if we have document nodes
+    // User stories completed if we have user story nodes
+    const userStoryNodes = nodes.filter(n => n.type === 'userStory');
+    if (userStoryNodes.length > 0) completed.push(4);
+    
+    // Architecture completed if we have document nodes
     const documentNodes = nodes.filter(n => n.type === 'document' && n.data.status === 'completed');
-    if (documentNodes.length > 0) completed.push(4);
+    if (documentNodes.length > 0) completed.push(5);
     
     return completed;
   }, [nodes]);
@@ -99,9 +105,9 @@ export const useWorkflowProgress = (): WorkflowProgress => {
       .filter(n => n.type === 'persona')
       .map(n => ({
         id: n.id,
-        name: n.data.name || 'Unknown',
-        role: n.data.role || 'Unknown Role',
-        pain_degree: n.data.pain_degree || 5
+        name: String(n.data.name || 'Unknown'),
+        role: String(n.data.role || 'Unknown Role'),
+        pain_degree: Number(n.data.pain_degree || 5)
       }));
   }, [nodes]);
 
@@ -123,7 +129,7 @@ export const useWorkflowProgress = (): WorkflowProgress => {
     
     return {
       current: completedDocs.length,
-      total: Math.max(documentNodes.length, 5) // Assume 5 documents total
+      total: Math.max(documentNodes.length, 7) // Assume 7 documents total for all steps
     };
   }, [nodes]);
 
@@ -133,8 +139,10 @@ export const useWorkflowProgress = (): WorkflowProgress => {
       'problem_input',
       'persona_discovery',
       'pain_points',
-      'solution_mapping',
-      'documentation'
+      'solution_generation',
+      'user_stories',
+      'architecture',
+      'export'
     ];
     
     if (stepIndex >= 0 && stepIndex < stepNames.length) {
@@ -148,7 +156,7 @@ export const useWorkflowProgress = (): WorkflowProgress => {
 
   return {
     currentStep,
-    totalSteps: 5,
+    totalSteps: 7,
     completedSteps,
     lockedSteps,
     personas,

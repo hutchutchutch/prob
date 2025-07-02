@@ -5,12 +5,22 @@ import { useCanvasStore } from '@/stores/canvasStore';
 import { Node, Edge } from '@xyflow/react';
 
 export function WorkflowCanvas() {
+  console.log('[WorkflowCanvas] Component rendering...');
+  
   const { currentStep, coreProblem, personas, isGeneratingPersonas } = useWorkflowStore();
   const { addNodes, addEdges, updateEdge, zoomTo, resetCanvas, nodes, edges } = useCanvasStore();
   const [canvasInitialized, setCanvasInitialized] = useState(false);
   const [lastNodeCount, setLastNodeCount] = useState(0);
   const [lastEdgeCount, setLastEdgeCount] = useState(0);
   const [painPointsAdded, setPainPointsAdded] = useState(false);
+
+  console.log('[WorkflowCanvas] Initial state:', {
+    currentStep,
+    coreProblem,
+    canvasInitialized,
+    nodeCount: nodes.length,
+    edgeCount: edges.length
+  });
 
   // Debug canvas state changes
   useEffect(() => {
@@ -242,7 +252,7 @@ export function WorkflowCanvas() {
         
         painPointNodes.push({
           id: painPointId,
-          type: 'pain',
+          type: 'painPoint',
           position: {
             x: 1450, // Pain points column
             y: -300 + (painIndex * 150) // Same vertical spacing as personas (150px)
