@@ -1,0 +1,213 @@
+{
+	"meta": {
+		"generatedAt": "2025-07-02T18:49:32.766Z",
+		"tasksAnalyzed": 25,
+		"totalTasks": 25,
+		"analysisCount": 25,
+		"thresholdScore": 6,
+		"projectName": "Taskmaster",
+		"usedResearch": false
+	},
+	"complexityAnalysis": [
+		{
+			"taskId": 1,
+			"taskTitle": "Implement Complete Database Schema",
+			"complexityScore": 8,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Break down the database schema implementation into subtasks for each major table group (e.g., user-related, project-related, canvas-related) and include tasks for relationship setup and optimization.",
+			"reasoning": "High complexity due to the large number of tables, relationships, and specialized requirements. Multiple subtasks needed to manage the scope effectively."
+		},
+		{
+			"taskId": 2,
+			"taskTitle": "Develop Local SQLite Storage System",
+			"complexityScore": 7,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Divide the local storage system implementation into subtasks for database setup, CRUD operations, sync mechanisms, and backup/recovery processes.",
+			"reasoning": "Moderately complex due to the need for mirroring Supabase tables and implementing various storage management functions. Multiple components require separate focus."
+		},
+		{
+			"taskId": 3,
+			"taskTitle": "Complete State Management Architecture",
+			"complexityScore": 9,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Break down the state management implementation into subtasks for each store (canvas, React Flow, project, version), event sourcing system, and undo/redo functionality.",
+			"reasoning": "High complexity due to the need for multiple stores, complex state transitions, and advanced features like undo/redo. Requires careful separation of concerns."
+		},
+		{
+			"taskId": 4,
+			"taskTitle": "Create Demo Canvas Animation",
+			"complexityScore": 5,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Divide the demo canvas creation into subtasks for layout design, animation implementation, and performance optimization.",
+			"reasoning": "Moderate complexity focused on visual design and animation. Fewer subtasks needed as it's more contained in scope."
+		},
+		{
+			"taskId": 5,
+			"taskTitle": "Polish Welcome Screen and Authentication",
+			"complexityScore": 6,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Break down the welcome screen and authentication enhancements into subtasks for social login integration, transition animations, error handling, and onboarding flow.",
+			"reasoning": "Moderate complexity with multiple components to integrate and polish. Requires attention to user experience details."
+		},
+		{
+			"taskId": 6,
+			"taskTitle": "Implement Problem Validation Flow",
+			"complexityScore": 7,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Divide the problem validation implementation into subtasks for input component creation, animation development, backend validation logic, and feedback system.",
+			"reasoning": "Moderately high complexity due to the combination of frontend animations, backend logic, and integration with AI services."
+		},
+		{
+			"taskId": 7,
+			"taskTitle": "Develop Persona Generation System",
+			"complexityScore": 8,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Break down the persona generation system into subtasks for AI integration, diversity algorithm, pain degree calculation, visualization, and layout management.",
+			"reasoning": "High complexity due to the AI integration, complex algorithms, and visual representation requirements. Multiple components need separate focus."
+		},
+		{
+			"taskId": 8,
+			"taskTitle": "Implement Pain Point Discovery",
+			"complexityScore": 7,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Divide the pain point discovery implementation into subtasks for AI-driven generation, persona attribution, canvas layout transitions, and selection system development.",
+			"reasoning": "Moderately high complexity with a mix of AI integration, data management, and interactive UI components. Multiple interconnected features to implement."
+		},
+		{
+			"taskId": 9,
+			"taskTitle": "Develop Selective Locking System",
+			"complexityScore": 6,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Break down the locking system implementation into subtasks for UI integration, persistence logic, and lock management during operations.",
+			"reasoning": "Moderate complexity focused on state management and UI interactions. Fewer subtasks as the scope is more contained."
+		},
+		{
+			"taskId": 10,
+			"taskTitle": "Create Refresh Controls",
+			"complexityScore": 6,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Divide the refresh control implementation into subtasks for UI component creation, regeneration logic, and batch processing capabilities.",
+			"reasoning": "Moderate complexity with focus on UI interactions and data management. Requires careful handling of state updates."
+		},
+		{
+			"taskId": 11,
+			"taskTitle": "Implement Solution Generation",
+			"complexityScore": 8,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Break down the solution generation system into subtasks for AI integration, mapping logic, scoring algorithms, layout management, and visualization.",
+			"reasoning": "High complexity due to AI integration, complex data relationships, and visualization requirements. Multiple components need separate attention."
+		},
+		{
+			"taskId": 12,
+			"taskTitle": "Develop AI Focus Group System",
+			"complexityScore": 9,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Divide the AI focus group system into subtasks for facilitator AI development, voting system implementation, discussion simulation, data storage, visualization, and UI interactions.",
+			"reasoning": "Very high complexity due to advanced AI interactions, complex data processing, and intricate UI requirements. Multiple sophisticated components to develop."
+		},
+		{
+			"taskId": 13,
+			"taskTitle": "Implement User Story Generation",
+			"complexityScore": 7,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Break down the user story generation system into subtasks for AI-driven story creation, structure implementation, editing capabilities, and validation logic.",
+			"reasoning": "Moderately high complexity with a mix of AI integration, data structuring, and interactive editing features. Multiple interconnected components to implement."
+		},
+		{
+			"taskId": 14,
+			"taskTitle": "Create Document Generation Pipeline",
+			"complexityScore": 9,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Divide the document generation pipeline into subtasks for each document type generation function, dependency management system, progress tracking, and error handling mechanisms.",
+			"reasoning": "High complexity due to multiple document types, complex dependencies, and need for robust error handling and progress management. Requires careful orchestration of multiple processes."
+		},
+		{
+			"taskId": 15,
+			"taskTitle": "Develop Document Nodes and Viewer",
+			"complexityScore": 6,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Break down the document visualization implementation into subtasks for node component creation, preview functionality, and full document viewer development.",
+			"reasoning": "Moderate complexity focused on UI components and document rendering. Fewer subtasks as the scope is more contained within the UI domain."
+		},
+		{
+			"taskId": 16,
+			"taskTitle": "Implement Event Sourcing System",
+			"complexityScore": 8,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Divide the event sourcing system implementation into subtasks for event logging, state diff calculation, event categorization, batching mechanism, and state reconstruction.",
+			"reasoning": "High complexity due to the need for detailed state tracking, efficient data management, and complex reconstruction logic. Multiple interconnected components to develop."
+		},
+		{
+			"taskId": 17,
+			"taskTitle": "Create Timeline Interface",
+			"complexityScore": 7,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Break down the timeline interface implementation into subtasks for UI component creation, event visualization, state reconstruction engine, and time travel transitions.",
+			"reasoning": "Moderately high complexity with a mix of UI design, data visualization, and complex state management. Requires careful attention to user experience and performance."
+		},
+		{
+			"taskId": 18,
+			"taskTitle": "Implement Diff Visualization",
+			"complexityScore": 7,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Divide the diff visualization implementation into subtasks for diff calculation logic, side-by-side viewer creation, change highlighting, and selective restoration functionality.",
+			"reasoning": "Moderately high complexity due to the need for accurate diff calculations, clear visualizations, and interactive restoration features. Multiple interconnected components to develop."
+		},
+		{
+			"taskId": 19,
+			"taskTitle": "Develop File System Integration",
+			"complexityScore": 6,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Break down the file system integration into subtasks for project directory management, file watching implementation, and backup system creation.",
+			"reasoning": "Moderate complexity focused on file system operations and real-time tracking. Fewer subtasks as the scope is more contained within system-level operations."
+		},
+		{
+			"taskId": 20,
+			"taskTitle": "Create Drift Detection Engine",
+			"complexityScore": 8,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Divide the drift detection engine implementation into subtasks for file monitoring, document analysis with LangGraph, cross-referencing logic, and report generation.",
+			"reasoning": "High complexity due to the need for sophisticated document analysis, complex comparison logic, and integration with AI services. Multiple interconnected components to develop."
+		},
+		{
+			"taskId": 21,
+			"taskTitle": "Implement Drift Resolution Interface",
+			"complexityScore": 7,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Break down the drift resolution interface implementation into subtasks for UI component creation, inconsistency visualization, resolution options development, and manual merge editor.",
+			"reasoning": "Moderately high complexity with a mix of UI design, data visualization, and complex user interactions. Requires careful attention to user experience and data integrity."
+		},
+		{
+			"taskId": 22,
+			"taskTitle": "Develop Export and Sharing System",
+			"complexityScore": 7,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Divide the export and sharing system implementation into subtasks for export functionality, sharing mechanism, access control, and management interface.",
+			"reasoning": "Moderately high complexity due to multiple export formats, secure sharing requirements, and user management features. Multiple interconnected components to develop."
+		},
+		{
+			"taskId": 23,
+			"taskTitle": "Optimize Performance",
+			"complexityScore": 9,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Break down the performance optimization into subtasks for animation profiling, canvas rendering optimization, data synchronization improvements, memory usage optimization, and overall application speed enhancements.",
+			"reasoning": "High complexity due to the need for deep technical understanding, extensive profiling, and optimizations across multiple application areas. Requires careful balance of performance and functionality."
+		},
+		{
+			"taskId": 24,
+			"taskTitle": "Implement Comprehensive Error Handling",
+			"complexityScore": 7,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Divide the error handling implementation into subtasks for global error boundary creation, logging system, user-friendly message development, and recovery mechanism implementation.",
+			"reasoning": "Moderately high complexity due to the need for robust error management across the entire application. Requires careful consideration of various error scenarios and user experience."
+		},
+		{
+			"taskId": 25,
+			"taskTitle": "Create User Documentation and Tutorials",
+			"complexityScore": 6,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Break down the documentation creation into subtasks for user guide writing, video tutorial production, and API documentation development.",
+			"reasoning": "Moderate complexity focused on content creation and organization. Fewer subtasks as the scope is more contained within documentation and educational content."
+		}
+	]
+}

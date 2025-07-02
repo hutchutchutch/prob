@@ -1,0 +1,11 @@
+# Task ID: 9
+# Title: Develop Selective Locking System
+# Status: pending
+# Dependencies: 8
+# Priority: medium
+# Description: Implement a comprehensive lock management system for all node types with visual indicators and persistence.
+# Details:
+Add lock icons to all nodes. Implement lock state persistence in the database. Create lock expiration system. Add visual indicators for locked items. Build column-level refresh controls. Ensure locks are respected during regeneration. Example: 'const toggleLock = async (nodeId) => { const node = getNode(nodeId); const newLockState = !node.locked; await updateNodeLock(nodeId, newLockState); updateNodeInStore(nodeId, { locked: newLockState }); };'
+
+# Test Strategy:
+Test locking and unlocking of various node types. Verify lock persistence across sessions. Test lock expiration functionality. Ensure locked items are not modified during refresh operations.

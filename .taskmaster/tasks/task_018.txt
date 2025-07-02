@@ -1,0 +1,11 @@
+# Task ID: 18
+# Title: Implement Diff Visualization
+# Status: pending
+# Dependencies: 17
+# Priority: medium
+# Description: Create version comparison features including side-by-side diff viewer and selective restoration.
+# Details:
+Build side-by-side diff viewer component. Implement change highlighting between versions. Add rollback capabilities for specific changes. Create merge conflict resolution interface. Implement selective restoration of changes. Example: 'const DiffViewer = ({ beforeState, afterState }) => { const diff = calculateDiff(beforeState, afterState); return (<div className="diff-viewer"> <BeforeState state={beforeState} /> <AfterState state={afterState} /> <HighlightedChanges changes={diff} /> </div>); };'
+
+# Test Strategy:
+Test diff calculation for various state changes. Verify correct highlighting of changes. Test rollback and selective restoration functionality. Ensure merge conflict resolution works for complex scenarios.

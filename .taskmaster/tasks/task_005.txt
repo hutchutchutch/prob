@@ -1,0 +1,11 @@
+# Task ID: 5
+# Title: Polish Welcome Screen and Authentication
+# Status: pending
+# Dependencies: 4
+# Priority: medium
+# Description: Enhance the authentication experience with social login options, smooth transitions, and first-time user onboarding.
+# Details:
+Integrate the demo canvas as an animated background. Implement social login (Google, GitHub) using Supabase Auth. Create smooth post-auth transitions using React Router and animation libraries. Add loading states and error handling. Develop a first-time user onboarding flow with step-by-step guidance. Example: 'const { user, signIn } = useSupabaseAuth(); const handleGoogleLogin = async () => { await signIn({ provider: 'google' }); };'
+
+# Test Strategy:
+Test login flows for all providers. Verify error states and loading indicators. Ensure smooth transitions between authentication states. Test onboarding flow completion and state persistence.

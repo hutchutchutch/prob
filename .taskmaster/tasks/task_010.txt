@@ -1,0 +1,11 @@
+# Task ID: 10
+# Title: Create Refresh Controls
+# Status: pending
+# Dependencies: 9
+# Priority: medium
+# Description: Build a regeneration system with refresh buttons, selective regeneration, and batch capabilities.
+# Details:
+Add refresh buttons to column headers. Implement selective regeneration logic. Create loading states during refresh. Design smooth animations for new items. Implement batch regeneration capabilities. Handle locked items appropriately during refresh. Example: 'const refreshColumn = async (columnId) => { setColumnLoading(columnId, true); const nodesToRefresh = getUnlockedNodesInColumn(columnId); const refreshedNodes = await batchRegenerateNodes(nodesToRefresh); updateNodesInStore(refreshedNodes); setColumnLoading(columnId, false); };'
+
+# Test Strategy:
+Test individual and batch refresh operations. Verify correct handling of locked items during refresh. Test loading states and animations. Measure and optimize performance for large-scale refreshes.

@@ -1,0 +1,336 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Implement Complete Database Schema",
+        "description": "Implement the full database schema as specified in the product vision, including all tables, relationships, and specialized tables for version control and performance optimization.",
+        "details": "Create the following tables: users, workspaces, projects, core_problems, personas, pain_points, solutions, user_stories, documents, canvas_states, react_flow_states, solution_pain_point_mappings, persona_pain_points, canvas_events, state_snapshots, lock_management, sync_queue, recent_flows_cache, demo_templates. Ensure proper relationships and constraints are set up. Use SQL to create tables, e.g., 'CREATE TABLE users (id UUID PRIMARY KEY, email TEXT UNIQUE NOT NULL, ...);'",
+        "testStrategy": "Write unit tests for each table creation, relationship, and constraint. Use a test database to verify schema integrity. Test edge cases like unique constraints and foreign key relationships.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 2,
+        "title": "Develop Local SQLite Storage System",
+        "description": "Implement a complete offline storage system using SQLite to mirror all Supabase tables and manage local data operations.",
+        "details": "Use Tauri's SQLite plugin to set up local database. Mirror all Supabase tables in SQLite. Implement CRUD operations for all entities. Create functions for database connection management, sync conflict resolution, backup and recovery, and queue-based synchronization. Example: 'async function createLocalUser(user: User): Promise<void> { await db.execute('INSERT INTO users (id, email, ...) VALUES (?, ?, ...)', [user.id, user.email, ...]); }'",
+        "testStrategy": "Create unit tests for each CRUD operation. Test sync mechanisms with mock online/offline scenarios. Verify data integrity after sync operations. Test backup and recovery processes.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 3,
+        "title": "Complete State Management Architecture",
+        "description": "Finish implementing the separated state management system, including canvas, React Flow, project, and version stores with full lifecycle management and undo/redo capabilities.",
+        "details": "Use a state management library like Redux or MobX. Implement canvasStore for business logic (versioned), reactFlowStore for UI state (not versioned), projectStore for project lifecycle, and versionStore for time travel. Implement event sourcing with before/after states, state diff calculations, and undo/redo. Example: 'const canvasStore = create((set) => ({ nodes: [], addNode: (node) => set((state) => ({ nodes: [...state.nodes, node] })), ... }))'",
+        "testStrategy": "Write unit tests for each store and its actions. Test state transitions and ensure correct separation of concerns. Verify undo/redo functionality works across all stores. Test performance with large state changes.",
+        "priority": "high",
+        "dependencies": [
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 4,
+        "title": "Create Demo Canvas Animation",
+        "description": "Develop an impressive welcome screen demo with an animated canvas showcasing a sample transformation flow.",
+        "details": "Use React Flow to create a demo canvas. Implement a 30-second animation loop with breathing effects (scale 0.98-1.02), edge pulse animations, and node shimmer effects. Use CSS animations and React Spring for smooth transitions. Store demo template in the database. Example: 'const breathingAnimation = useSpring({ from: { scale: 1 }, to: { scale: 1.02 }, config: { duration: 1000 }, loop: { reverse: true } });'",
+        "testStrategy": "Visually inspect animation smoothness and timing. Test across different screen sizes and resolutions. Measure performance impact and optimize if necessary. Ensure demo loads quickly and runs efficiently.",
+        "priority": "medium",
+        "dependencies": [
+          3
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 5,
+        "title": "Polish Welcome Screen and Authentication",
+        "description": "Enhance the authentication experience with social login options, smooth transitions, and first-time user onboarding.",
+        "details": "Integrate the demo canvas as an animated background. Implement social login (Google, GitHub) using Supabase Auth. Create smooth post-auth transitions using React Router and animation libraries. Add loading states and error handling. Develop a first-time user onboarding flow with step-by-step guidance. Example: 'const { user, signIn } = useSupabaseAuth(); const handleGoogleLogin = async () => { await signIn({ provider: 'google' }); };'",
+        "testStrategy": "Test login flows for all providers. Verify error states and loading indicators. Ensure smooth transitions between authentication states. Test onboarding flow completion and state persistence.",
+        "priority": "medium",
+        "dependencies": [
+          4
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 6,
+        "title": "Implement Problem Validation Flow",
+        "description": "Complete the problem validation experience, including input node, animations, and backend validation logic.",
+        "details": "Finish ProblemInputNode component with character limits. Add gradient border animations during processing and gold flash animation on success. Implement problem-validation Edge Function using LangGraph. Create validation scoring and feedback system. Example: 'const [isProcessing, setIsProcessing] = useState(false); const handleValidation = async () => { setIsProcessing(true); const result = await validateProblem(problemStatement); setIsProcessing(false); if (result.isValid) { playGoldFlashAnimation(); } };'",
+        "testStrategy": "Unit test the ProblemInputNode component. Test Edge Function with various inputs. Verify animation triggers and timing. Test error handling and retry logic.",
+        "priority": "high",
+        "dependencies": [
+          3
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 7,
+        "title": "Develop Persona Generation System",
+        "description": "Build the full persona generation experience, including diverse persona creation, pain degree calculation, and visualizations.",
+        "details": "Implement generate-personas Edge Function using LangGraph. Create algorithm for diverse persona generation. Implement pain_degree calculation and visualization. Add staggered appearance animations and edge drawing animations. Create auto-layout algorithm for positioning. Update progress bar with persona circles. Example: 'const generatePersonas = async (problem) => { const personas = await edgeFunction.generatePersonas(problem); return personas.map(p => ({ ...p, painDegree: calculatePainDegree(p) })); };'",
+        "testStrategy": "Test persona generation with various problem statements. Verify diversity and relevance of generated personas. Test layout algorithm with different numbers of personas. Ensure animations work smoothly and consistently.",
+        "priority": "high",
+        "dependencies": [
+          6
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 8,
+        "title": "Implement Pain Point Discovery",
+        "description": "Create the pain point generation system with persona attribution, canvas layout transitions, and selection system.",
+        "details": "Develop generate-pain-points Edge Function. Implement persona attribution system. Create canvas layout transitions with slide/fade effects. Build selection system with blue ring highlights and connected element glow effects. Implement multi-select with Shift+click. Visualize pain severity. Example: 'const PainPointNode = ({ data, isSelected }) => { return (<div className={`pain-point ${isSelected ? 'selected' : ''}`}> <h3>{data.title}</h3> <p>Severity: {data.severity}</p> <p>Attributed to: {data.persona.name}</p> </div>); };'",
+        "testStrategy": "Test pain point generation for relevance and diversity. Verify correct persona attribution. Test selection system with keyboard and mouse interactions. Ensure smooth transitions and performance with many pain points.",
+        "priority": "high",
+        "dependencies": [
+          7
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 9,
+        "title": "Develop Selective Locking System",
+        "description": "Implement a comprehensive lock management system for all node types with visual indicators and persistence.",
+        "details": "Add lock icons to all nodes. Implement lock state persistence in the database. Create lock expiration system. Add visual indicators for locked items. Build column-level refresh controls. Ensure locks are respected during regeneration. Example: 'const toggleLock = async (nodeId) => { const node = getNode(nodeId); const newLockState = !node.locked; await updateNodeLock(nodeId, newLockState); updateNodeInStore(nodeId, { locked: newLockState }); };'",
+        "testStrategy": "Test locking and unlocking of various node types. Verify lock persistence across sessions. Test lock expiration functionality. Ensure locked items are not modified during refresh operations.",
+        "priority": "medium",
+        "dependencies": [
+          8
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 10,
+        "title": "Create Refresh Controls",
+        "description": "Build a regeneration system with refresh buttons, selective regeneration, and batch capabilities.",
+        "details": "Add refresh buttons to column headers. Implement selective regeneration logic. Create loading states during refresh. Design smooth animations for new items. Implement batch regeneration capabilities. Handle locked items appropriately during refresh. Example: 'const refreshColumn = async (columnId) => { setColumnLoading(columnId, true); const nodesToRefresh = getUnlockedNodesInColumn(columnId); const refreshedNodes = await batchRegenerateNodes(nodesToRefresh); updateNodesInStore(refreshedNodes); setColumnLoading(columnId, false); };'",
+        "testStrategy": "Test individual and batch refresh operations. Verify correct handling of locked items during refresh. Test loading states and animations. Measure and optimize performance for large-scale refreshes.",
+        "priority": "medium",
+        "dependencies": [
+          9
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 11,
+        "title": "Implement Solution Generation",
+        "description": "Complete the solution discovery system, including generation, mapping to pain points, and visualization.",
+        "details": "Finish generate-solutions Edge Function. Implement pain point to solution mapping. Add solution complexity scoring and type categorization. Build position-based layout for solutions. Create solution node visualizations. Example: 'const generateSolutions = async (painPoints) => { const solutions = await edgeFunction.generateSolutions(painPoints); return solutions.map(s => ({ ...s, complexity: calculateComplexity(s), type: categorizeSolution(s) })); };'",
+        "testStrategy": "Test solution generation for various pain points. Verify relevance and diversity of solutions. Test mapping accuracy between pain points and solutions. Ensure layout and visualizations work for different numbers of solutions.",
+        "priority": "high",
+        "dependencies": [
+          8
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 12,
+        "title": "Develop AI Focus Group System",
+        "description": "Implement the innovative focus group feature with AI-driven voting and discussion simulation.",
+        "details": "Create Facilitator AI agent using LangGraph. Implement parallel dot-voting system with persona-based logic. Create voting visualization on nodes. Add must-have feature discussions. Store all voting data in the database. Implement hover states showing voting breakdown. Example: 'const simulateFocusGroup = async (solutions) => { const facilitator = new FacilitatorAgent(); const votingResults = await facilitator.runVotingSession(solutions, personas); return processVotingResults(votingResults); };'",
+        "testStrategy": "Test focus group simulation with various solution sets. Verify persona-based voting logic. Test voting visualizations and hover states. Ensure consistent and realistic AI-driven discussions.",
+        "priority": "medium",
+        "dependencies": [
+          11
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 13,
+        "title": "Implement User Story Generation",
+        "description": "Complete the user story creation system, including generation, structure, and editing capabilities.",
+        "details": "Finish generate-user-stories Edge Function. Implement story structure (As a/I want/So that). Add acceptance criteria generation. Create inline editing capabilities for stories. Build story validation system. Add drag-to-reorder functionality. Example: 'const UserStory = ({ story, onEdit }) => { return (<div className=\"user-story\"> <p>{story.asA} {story.iWant} {story.soThat}</p> <AcceptanceCriteria criteria={story.acceptanceCriteria} /> <EditButton onClick={() => onEdit(story)} /> </div>); };'",
+        "testStrategy": "Test user story generation for various solutions. Verify correct story structure and relevance. Test inline editing and validation. Ensure drag-and-drop reordering works smoothly.",
+        "priority": "high",
+        "dependencies": [
+          11
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 14,
+        "title": "Create Document Generation Pipeline",
+        "description": "Implement all document generation functions and build a dependency-aware generation system.",
+        "details": "Implement Edge Functions: generate-product-vision, generate-functional-requirements, generate-data-flow-diagram, generate-entity-relationship-diagram, generate-design-system, generate-system-architecture. Create generation queue with priorities. Implement dependency chain. Add progress tracking, error recovery, and retry logic. Example: 'const generateDocuments = async () => { const queue = new PriorityQueue(); queue.add('vision', 1); queue.add('requirements', 2); while (!queue.isEmpty()) { const doc = queue.pop(); await generateDocument(doc); updateProgress(doc); } };'",
+        "testStrategy": "Test each document generation function individually. Verify correct dependency handling and generation order. Test error recovery and retry mechanisms. Ensure generated documents are consistent and follow best practices.",
+        "priority": "high",
+        "dependencies": [
+          13
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 15,
+        "title": "Develop Document Nodes and Viewer",
+        "description": "Create document visualization components and a full-featured document viewer.",
+        "details": "Build DocumentNode components with status indicators. Create document preview on hover. Implement full document viewer with syntax highlighting. Add table of contents navigation. Build copy/export functionality. Example: 'const DocumentNode = ({ document }) => { return (<div className={`document-node ${document.status}`}> <h3>{document.title}</h3> <StatusIndicator status={document.status} /> <PreviewButton onClick={() => showPreview(document)} /> </div>); };'",
+        "testStrategy": "Test DocumentNode rendering for all document types. Verify preview functionality and full viewer features. Test syntax highlighting for various languages. Ensure navigation and export features work correctly.",
+        "priority": "medium",
+        "dependencies": [
+          14
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 16,
+        "title": "Implement Event Sourcing System",
+        "description": "Create a comprehensive version control system with event logging and state management.",
+        "details": "Implement event logging for all state changes. Capture before/after states for each event. Build efficient state diff calculator. Implement event categorization and metadata tracking. Create event batching for performance. Example: 'const logEvent = async (type, data, beforeState, afterState) => { const event = { type, data, beforeState, afterState, user: getCurrentUser(), timestamp: Date.now() }; await storeEvent(event); updateCurrentState(afterState); };'",
+        "testStrategy": "Test event logging for various actions. Verify correct before/after state capture. Test diff calculation accuracy. Ensure event batching improves performance without losing data integrity.",
+        "priority": "high",
+        "dependencies": [
+          3
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 17,
+        "title": "Create Timeline Interface",
+        "description": "Build the time travel UI with event visualization and state reconstruction capabilities.",
+        "details": "Create VersionTimeline component at the bottom of the canvas. Implement event visualization with hover preview. Build state reconstruction engine. Add restore capabilities. Create filtering by event type. Implement smooth transitions during time travel. Example: 'const TimelineEvent = ({ event, onHover, onRestore }) => { return (<div className=\"timeline-event\" onMouseEnter={() => onHover(event)} onClick={() => onRestore(event)}> <EventIcon type={event.type} /> <span>{formatTimestamp(event.timestamp)}</span> </div>); };'",
+        "testStrategy": "Test timeline rendering with various event types. Verify hover preview functionality. Test state reconstruction and restoration for different points in time. Ensure smooth animations during time travel.",
+        "priority": "medium",
+        "dependencies": [
+          16
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 18,
+        "title": "Implement Diff Visualization",
+        "description": "Create version comparison features including side-by-side diff viewer and selective restoration.",
+        "details": "Build side-by-side diff viewer component. Implement change highlighting between versions. Add rollback capabilities for specific changes. Create merge conflict resolution interface. Implement selective restoration of changes. Example: 'const DiffViewer = ({ beforeState, afterState }) => { const diff = calculateDiff(beforeState, afterState); return (<div className=\"diff-viewer\"> <BeforeState state={beforeState} /> <AfterState state={afterState} /> <HighlightedChanges changes={diff} /> </div>); };'",
+        "testStrategy": "Test diff calculation for various state changes. Verify correct highlighting of changes. Test rollback and selective restoration functionality. Ensure merge conflict resolution works for complex scenarios.",
+        "priority": "medium",
+        "dependencies": [
+          17
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 19,
+        "title": "Develop File System Integration",
+        "description": "Implement project directory management with file system integration and real-time change tracking.",
+        "details": "Create project folders on document generation. Save all documents as markdown/SQL files. Implement file system watcher using Tauri API. Track file modifications in real-time. Create file backup system. Example: 'const watchProjectFiles = async (projectPath) => { const watcher = await fs.watch(projectPath, { recursive: true }); for await (const event of watcher) { handleFileChange(event); } };'",
+        "testStrategy": "Test file creation and modification for all document types. Verify real-time change detection. Test backup system for various scenarios. Ensure file system operations are efficient and don't block the main thread.",
+        "priority": "medium",
+        "dependencies": [
+          14
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 20,
+        "title": "Create Drift Detection Engine",
+        "description": "Build a LangGraph-based drift detection system to identify inconsistencies between documents and the current project state.",
+        "details": "Implement file change monitoring. Create LangGraph flow for loading and analyzing all documents. Develop cross-referencing logic for inconsistency detection. Implement naming mismatch identification. Create feature discrepancy detection. Build technical conflict identification. Generate comprehensive drift reports. Example: 'const detectDrift = async (projectFiles, currentState) => { const langGraph = new LangGraph(); const analysis = await langGraph.analyzeDocuments(projectFiles); return compareWithCurrentState(analysis, currentState); };'",
+        "testStrategy": "Test drift detection with various types of changes. Verify accuracy of inconsistency identification. Test performance with large projects. Ensure drift reports are clear and actionable.",
+        "priority": "medium",
+        "dependencies": [
+          19
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 21,
+        "title": "Implement Drift Resolution Interface",
+        "description": "Create a user interface for handling detected drift, including visualization and resolution options.",
+        "details": "Add drift warning badges to affected documents. Create drift resolution panel component. Implement file diff visualization. List all detected inconsistencies. Provide resolution options (update all/selected/keep/revert). Add manual merge editor for complex cases. Track resolution history. Example: 'const DriftResolutionPanel = ({ driftReport, onResolve }) => { return (<div className=\"drift-panel\"> <InconsistencyList items={driftReport.inconsistencies} /> <ResolutionOptions onSelect={option => onResolve(option)} /> <ManualMergeEditor /> </div>); };'",
+        "testStrategy": "Test drift visualization for various types of inconsistencies. Verify all resolution options work correctly. Test manual merge editor for complex scenarios. Ensure resolution history is accurately tracked and can be reviewed.",
+        "priority": "medium",
+        "dependencies": [
+          20
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 22,
+        "title": "Develop Export and Sharing System",
+        "description": "Implement comprehensive export functionality and secure sharing capabilities.",
+        "details": "Create export modal with format selection. Implement markdown, JSON, and PDF exporters. Create ZIP archive generation with all documents. Build template customization system. Implement share token generation. Create read-only viewer interface. Add access tracking and expiration system. Build share link management UI. Example: 'const exportProject = async (format) => { const exporter = getExporter(format); const data = await exporter.prepareData(currentProject); return exporter.generateFile(data); };'",
+        "testStrategy": "Test export for all supported formats. Verify ZIP archive contains all necessary files. Test share link generation and access control. Ensure exported documents maintain formatting and structure.",
+        "priority": "medium",
+        "dependencies": [
+          14,
+          15
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 23,
+        "title": "Optimize Performance",
+        "description": "Improve overall application performance, focusing on animations, canvas rendering, and data synchronization.",
+        "details": "Profile and optimize all animations. Implement node virtualization for large canvases. Optimize edge rendering algorithms. Add level-of-detail system for improved performance. Implement intelligent sync batching and delta sync. Example: 'const optimizeCanvasRendering = () => { const virtualizedNodes = useVirtualization(nodes); const optimizedEdges = useMemo(() => optimizeEdges(edges), [edges]); return <ReactFlow nodes={virtualizedNodes} edges={optimizedEdges} />; };'",
+        "testStrategy": "Conduct performance profiling for various user scenarios. Measure FPS for animations and canvas interactions. Test sync performance with large datasets. Verify memory usage stays within target (<500MB).",
+        "priority": "high",
+        "dependencies": [
+          3,
+          4,
+          8,
+          15
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 24,
+        "title": "Implement Comprehensive Error Handling",
+        "description": "Develop a robust error handling system with logging, recovery, and user-friendly error messages.",
+        "details": "Create global error boundary component. Implement error logging to database. Create user-friendly error messages. Build automatic error recovery mechanisms. Add error reporting system. Develop fallback UI states for error scenarios. Example: 'class ErrorBoundary extends React.Component { componentDidCatch(error, errorInfo) { logError(error, errorInfo); this.setState({ hasError: true }); } render() { if (this.state.hasError) { return <ErrorFallback />; } return this.props.children; } }'",
+        "testStrategy": "Test error handling for various error types (network, parsing, runtime). Verify error logs are correctly stored and can be retrieved. Test recovery mechanisms for different scenarios. Ensure user-facing error messages are clear and helpful.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 25,
+        "title": "Create User Documentation and Tutorials",
+        "description": "Develop comprehensive user documentation, including a user guide, video tutorials, and API documentation.",
+        "details": "Write user guide with detailed screenshots. Create video tutorials for key features. Document API for Edge Functions. Develop a troubleshooting guide. Create an FAQ section. Example: 'const UserGuide = () => { return (<div className=\"user-guide\"> <TableOfContents /> <GettingStarted /> <FeatureTutorials /> <TroubleshootingTips /> <FAQ /> </div>); };'",
+        "testStrategy": "Review documentation for clarity and completeness. Test video tutorials for audio and visual quality. Verify API documentation accuracy. Conduct user testing to ensure documentation meets user needs.",
+        "priority": "medium",
+        "dependencies": [
+          22
+        ],
+        "status": "pending",
+        "subtasks": []
+      }
+    ],
+    "metadata": {
+      "created": "2025-07-02T18:47:21.807Z",
+      "updated": "2025-07-02T18:47:21.807Z",
+      "description": "Tasks for master context"
+    }
+  }
+}

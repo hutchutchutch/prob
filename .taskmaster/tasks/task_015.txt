@@ -1,0 +1,11 @@
+# Task ID: 15
+# Title: Develop Document Nodes and Viewer
+# Status: pending
+# Dependencies: 14
+# Priority: medium
+# Description: Create document visualization components and a full-featured document viewer.
+# Details:
+Build DocumentNode components with status indicators. Create document preview on hover. Implement full document viewer with syntax highlighting. Add table of contents navigation. Build copy/export functionality. Example: 'const DocumentNode = ({ document }) => { return (<div className={`document-node ${document.status}`}> <h3>{document.title}</h3> <StatusIndicator status={document.status} /> <PreviewButton onClick={() => showPreview(document)} /> </div>); };'
+
+# Test Strategy:
+Test DocumentNode rendering for all document types. Verify preview functionality and full viewer features. Test syntax highlighting for various languages. Ensure navigation and export features work correctly.

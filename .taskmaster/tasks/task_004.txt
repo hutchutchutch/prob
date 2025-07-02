@@ -1,0 +1,11 @@
+# Task ID: 4
+# Title: Create Demo Canvas Animation
+# Status: pending
+# Dependencies: 3
+# Priority: medium
+# Description: Develop an impressive welcome screen demo with an animated canvas showcasing a sample transformation flow.
+# Details:
+Use React Flow to create a demo canvas. Implement a 30-second animation loop with breathing effects (scale 0.98-1.02), edge pulse animations, and node shimmer effects. Use CSS animations and React Spring for smooth transitions. Store demo template in the database. Example: 'const breathingAnimation = useSpring({ from: { scale: 1 }, to: { scale: 1.02 }, config: { duration: 1000 }, loop: { reverse: true } });'
+
+# Test Strategy:
+Visually inspect animation smoothness and timing. Test across different screen sizes and resolutions. Measure performance impact and optimize if necessary. Ensure demo loads quickly and runs efficiently.

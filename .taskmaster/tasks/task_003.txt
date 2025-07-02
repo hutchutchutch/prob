@@ -1,0 +1,11 @@
+# Task ID: 3
+# Title: Complete State Management Architecture
+# Status: pending
+# Dependencies: 2
+# Priority: high
+# Description: Finish implementing the separated state management system, including canvas, React Flow, project, and version stores with full lifecycle management and undo/redo capabilities.
+# Details:
+Use a state management library like Redux or MobX. Implement canvasStore for business logic (versioned), reactFlowStore for UI state (not versioned), projectStore for project lifecycle, and versionStore for time travel. Implement event sourcing with before/after states, state diff calculations, and undo/redo. Example: 'const canvasStore = create((set) => ({ nodes: [], addNode: (node) => set((state) => ({ nodes: [...state.nodes, node] })), ... }))'
+
+# Test Strategy:
+Write unit tests for each store and its actions. Test state transitions and ensure correct separation of concerns. Verify undo/redo functionality works across all stores. Test performance with large state changes.

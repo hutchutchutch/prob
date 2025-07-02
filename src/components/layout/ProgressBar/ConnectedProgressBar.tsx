@@ -1,33 +1,31 @@
 import React from 'react';
-import { ProgressBar } from './ProgressBar';
-import { useWorkflowStore } from '@/stores/workflowStore';
-
-const WORKFLOW_STEPS = [
-  'problem_input',
-  'persona_discovery', 
-  'pain_point_analysis',
-  'solution_ideation',
-  'user_story_creation'
-];
+import { ProgressBar } from '../../ProgressBar/ProgressBar';
+import { useWorkflowProgress } from '../../../hooks/useWorkflowProgress';
 
 export const ConnectedProgressBar: React.FC = () => {
-  const { currentStep, personas } = useWorkflowStore();
-  
-  const currentStepIndex = WORKFLOW_STEPS.indexOf(currentStep) + 1;
-  const totalSteps = WORKFLOW_STEPS.length;
-  
-  const formattedPersonas = personas.slice(0, 5).map(persona => ({
-    id: persona.id,
-    name: persona.name,
-    avatar: undefined // We don't have avatars yet
-  }));
+  const {
+    currentStep,
+    totalSteps,
+    completedSteps,
+    lockedSteps,
+    personas,
+    connections,
+    documentProgress,
+    canNavigate,
+    navigateToStep
+  } = useWorkflowProgress();
 
   return (
     <ProgressBar
-      currentStep={currentStepIndex}
+      currentStep={currentStep}
       totalSteps={totalSteps}
-      personas={formattedPersonas}
-      showPersonas={personas.length > 0}
+      completedSteps={completedSteps}
+      lockedSteps={lockedSteps}
+      personas={personas}
+      connections={connections}
+      documentProgress={documentProgress}
+      canNavigate={canNavigate}
+      onStepClick={navigateToStep}
     />
   );
-}; 
+};

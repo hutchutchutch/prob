@@ -1,0 +1,11 @@
+# Task ID: 6
+# Title: Implement Problem Validation Flow
+# Status: pending
+# Dependencies: 3
+# Priority: high
+# Description: Complete the problem validation experience, including input node, animations, and backend validation logic.
+# Details:
+Finish ProblemInputNode component with character limits. Add gradient border animations during processing and gold flash animation on success. Implement problem-validation Edge Function using LangGraph. Create validation scoring and feedback system. Example: 'const [isProcessing, setIsProcessing] = useState(false); const handleValidation = async () => { setIsProcessing(true); const result = await validateProblem(problemStatement); setIsProcessing(false); if (result.isValid) { playGoldFlashAnimation(); } };'
+
+# Test Strategy:
+Unit test the ProblemInputNode component. Test Edge Function with various inputs. Verify animation triggers and timing. Test error handling and retry logic.

@@ -1,0 +1,11 @@
+# Task ID: 21
+# Title: Implement Drift Resolution Interface
+# Status: pending
+# Dependencies: 20
+# Priority: medium
+# Description: Create a user interface for handling detected drift, including visualization and resolution options.
+# Details:
+Add drift warning badges to affected documents. Create drift resolution panel component. Implement file diff visualization. List all detected inconsistencies. Provide resolution options (update all/selected/keep/revert). Add manual merge editor for complex cases. Track resolution history. Example: 'const DriftResolutionPanel = ({ driftReport, onResolve }) => { return (<div className="drift-panel"> <InconsistencyList items={driftReport.inconsistencies} /> <ResolutionOptions onSelect={option => onResolve(option)} /> <ManualMergeEditor /> </div>); };'
+
+# Test Strategy:
+Test drift visualization for various types of inconsistencies. Verify all resolution options work correctly. Test manual merge editor for complex scenarios. Ensure resolution history is accurately tracked and can be reviewed.

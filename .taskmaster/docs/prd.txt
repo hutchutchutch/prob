@@ -1,0 +1,425 @@
+# Prob Application - Product Requirements Document (PRD)
+
+## Overview
+This PRD outlines the remaining tasks required to complete the Prob application - a macOS desktop tool that transforms vague product ideas into fully architected software projects through an AI-guided visual workflow.
+
+## Current State
+The application has basic infrastructure in place:
+- Tauri + React setup with TypeScript
+- Basic authentication with Supabase
+- Initial React Flow canvas implementation
+- Basic node components (CoreProblem, Persona, PainPoint, Solution)
+- Initial store architecture (canvas, workflow, UI, project)
+- Basic sidebar and progress bar components
+- Partial edge function implementations
+
+## Remaining Implementation Tasks
+
+### 1. Complete Core Infrastructure
+
+#### 1.1 Database Schema Implementation
+Complete the full database schema as specified in the product vision, including:
+- Complete all tables: users, workspaces, projects, core_problems, personas, pain_points, solutions, user_stories, documents
+- Implement canvas_states and react_flow_states separation for proper state management
+- Add all relationship tables: solution_pain_point_mappings, persona_pain_points
+- Implement version control tables: canvas_events, state_snapshots
+- Add lock_management table for selective locking
+- Create sync_queue for offline/online synchronization
+- Implement recent_flows_cache for performance
+- Add demo_templates table for onboarding experience
+
+#### 1.2 Local SQLite Storage
+Implement complete offline storage system:
+- Mirror all Supabase tables in SQLite
+- Create Tauri-side database connection management
+- Implement CRUD operations for all entities
+- Build sync conflict resolution logic
+- Create backup and recovery system
+- Implement queue-based sync mechanism
+
+#### 1.3 State Management Architecture
+Complete the separated state management system:
+- Finish canvasStore for business logic (versioned)
+- Complete reactFlowStore for UI state (not versioned)
+- Implement projectStore with full project lifecycle
+- Add versionStore for time travel functionality
+- Create proper event sourcing with before/after states
+- Implement state diff calculations
+- Add undo/redo capabilities
+
+### 2. Authentication & Welcome Experience
+
+#### 2.1 Demo Canvas Animation
+Create the impressive welcome screen demo:
+- Build demo canvas with example transformation flow
+- Implement 30-second animation loop
+- Add breathing effect animations (scale 0.98-1.02)
+- Create edge pulse animations showing data flow
+- Add node shimmer effects
+- Design smooth transitions between states
+- Store demo template in database
+
+#### 2.2 Welcome Screen Polish
+Complete the authentication experience:
+- Integrate demo canvas as animated background
+- Add social login options (Google, GitHub)
+- Implement smooth post-auth transitions
+- Add loading states and error handling
+- Create first-time user onboarding flow
+
+### 3. Complete Canvas Implementation
+
+#### 3.1 Problem Validation Flow
+Implement the complete problem validation experience:
+- Complete ProblemInputNode with character limits
+- Add gradient border animations during processing
+- Implement gold flash animation (3 times) on success
+- Add error states with red border
+- Complete problem-validation Edge Function with LangGraph
+- Implement validation scoring and feedback
+- Add retry logic and error handling
+
+#### 3.2 Persona Generation System
+Build the full persona generation experience:
+- Complete generate-personas Edge Function
+- Implement diverse persona generation algorithm
+- Add pain_degree calculation and visualization
+- Create staggered appearance animations (150ms delays)
+- Implement edge drawing animations (300ms)
+- Add gold border for highest pain persona
+- Build auto-layout algorithm for positioning
+- Update progress bar with persona circles
+
+#### 3.3 Pain Point Discovery
+Implement pain point generation with attribution:
+- Complete generate-pain-points Edge Function
+- Build persona attribution system
+- Create canvas layout transitions (slide/fade)
+- Implement selection system with blue ring highlights
+- Add connected element glow effects
+- Build multi-select with Shift+click
+- Create pain severity visualization
+
+### 4. Lock & Refresh System
+
+#### 4.1 Selective Locking
+Implement comprehensive lock management:
+- Add lock icons to all nodes
+- Create lock state persistence in database
+- Implement lock expiration system
+- Add visual indicators for locked items
+- Build column-level refresh controls
+- Respect locks during regeneration
+
+#### 4.2 Refresh Controls
+Build regeneration system:
+- Add refresh buttons to column headers
+- Implement selective regeneration
+- Add loading states during refresh
+- Create smooth animations for new items
+- Build batch regeneration capabilities
+- Handle locked items appropriately
+
+### 5. Solutions & Focus Groups
+
+#### 5.1 Solution Generation
+Complete solution discovery system:
+- Finish generate-solutions Edge Function
+- Implement pain point to solution mapping
+- Add solution complexity scoring
+- Create solution type categorization
+- Build position-based layout
+- Add solution node visualizations
+
+#### 5.2 AI Focus Group System
+Implement the innovative focus group feature:
+- Create Facilitator AI agent in LangGraph
+- Build parallel dot-voting system
+- Implement persona-based voting logic
+- Create voting visualization on nodes
+- Add must-have feature discussions
+- Store all voting data in database
+- Create hover states showing voting breakdown
+
+#### 5.3 User Story Generation
+Complete user story creation:
+- Finish generate-user-stories Edge Function
+- Implement story structure (As a/I want/So that)
+- Add acceptance criteria generation
+- Create inline editing capabilities
+- Build story validation system
+- Add drag-to-reorder functionality
+
+### 6. Document Generation Pipeline
+
+#### 6.1 Create Missing Edge Functions
+Implement all document generation functions:
+- generate-product-vision
+- generate-functional-requirements
+- generate-data-flow-diagram (new)
+- generate-entity-relationship-diagram (new)
+- generate-design-system (update existing)
+- Rename generate-system-design to generate-system-architecture
+
+#### 6.2 Progressive Generation
+Build dependency-aware generation:
+- Implement generation queue with priorities
+- Create dependency chain (Vision → Requirements → Others)
+- Add progress tracking per document
+- Build error recovery mechanisms
+- Implement parallel generation where possible
+- Add retry logic with exponential backoff
+
+#### 6.3 Document Nodes & Viewer
+Create document visualization and viewing:
+- Build DocumentNode components
+- Add status indicators (pending/processing/complete/error)
+- Create document preview on hover
+- Implement full document viewer with syntax highlighting
+- Add table of contents navigation
+- Build copy/export functionality
+
+### 7. Version Control & Time Travel
+
+#### 7.1 Event Sourcing System
+Implement comprehensive version control:
+- Create event logging for all state changes
+- Capture before/after states
+- Build efficient state diff calculator
+- Implement event categorization
+- Add event metadata (user, timestamp, trigger)
+- Create event batching for performance
+
+#### 7.2 Timeline Interface
+Build the time travel UI:
+- Create VersionTimeline component at bottom of canvas
+- Implement event visualization
+- Add preview on hover functionality
+- Build state reconstruction engine
+- Add restore capabilities
+- Create filtering by event type
+- Implement smooth transitions during time travel
+
+#### 7.3 Diff Visualization
+Create version comparison features:
+- Build side-by-side diff viewer
+- Highlight changes between versions
+- Add rollback capabilities
+- Create merge conflict resolution
+- Implement selective restoration
+
+### 8. Documentation Drift Detection
+
+#### 8.1 File System Integration
+Implement project directory management:
+- Create project folders on document generation
+- Save all documents as markdown/SQL files
+- Implement file system watcher
+- Track file modifications in real-time
+- Create file backup system
+
+#### 8.2 Drift Detection Engine
+Build the drift detection LangGraph flow:
+- Monitor file changes
+- Load and analyze all documents
+- Cross-reference for inconsistencies
+- Identify naming mismatches
+- Detect feature discrepancies
+- Find technical conflicts
+- Generate drift reports
+
+#### 8.3 Drift Resolution Interface
+Create UI for handling drift:
+- Add drift warning badges to affected documents
+- Create drift resolution panel
+- Show file diffs
+- List all inconsistencies
+- Provide resolution options (update all/selected/keep/revert)
+- Add manual merge editor
+- Track resolution history
+
+### 9. Export & Sharing System
+
+#### 9.1 Export Functionality
+Implement comprehensive export system:
+- Create export modal with format selection
+- Build markdown exporter with templates
+- Implement JSON export for data
+- Add PDF generation with styling
+- Create ZIP archive with all documents
+- Build template customization system
+- Add export history tracking
+
+#### 9.2 Share Links
+Build sharing capabilities:
+- Generate secure share tokens
+- Create read-only viewer interface
+- Implement access tracking
+- Add expiration system
+- Build permission levels
+- Create share link management UI
+
+### 10. Performance & Polish
+
+#### 10.1 Animation Performance
+Optimize all animations:
+- Profile and optimize breathing effects
+- Reduce reflow/repaint operations
+- Implement animation queuing
+- Add performance monitoring
+- Create user preference for animation intensity
+- Build reduced motion support
+
+#### 10.2 Canvas Performance
+Optimize React Flow rendering:
+- Implement node virtualization for large canvases
+- Optimize edge rendering algorithms
+- Add level-of-detail system
+- Create render batching
+- Profile memory usage
+- Implement lazy loading
+
+#### 10.3 Sync Performance
+Optimize data synchronization:
+- Implement intelligent sync batching
+- Add sync queue prioritization
+- Create conflict detection optimization
+- Build retry mechanisms
+- Add offline queue management
+- Implement delta sync
+
+### 11. UI Components & Interactions
+
+#### 11.1 Complete Component Library
+Finish all UI components:
+- Complete Button variants (primary/secondary/ghost)
+- Finish Input components with validation
+- Add Modal system with animations
+- Create Tooltip components
+- Build LoadingStates for all async operations
+- Add Toast notification system
+- Create context menus
+- Implement keyboard shortcuts
+
+#### 11.2 Canvas Controls
+Complete canvas control system:
+- Finish zoom controls
+- Add minimap with custom styling
+- Create viewport controls
+- Build selection tools
+- Add canvas export options
+- Implement grid snap settings
+
+#### 11.3 Progress Indicators
+Enhance progress tracking:
+- Complete 5-segment progress bar
+- Add persona circles visualization
+- Create step animations
+- Build progress persistence
+- Add time estimates
+- Create progress tooltips
+
+### 12. Error Handling & Recovery
+
+#### 12.1 Comprehensive Error System
+Implement robust error handling:
+- Create global error boundary
+- Add error logging to database
+- Implement user-friendly error messages
+- Build automatic error recovery
+- Add error reporting system
+- Create fallback UI states
+
+#### 12.2 Data Recovery
+Build data protection:
+- Implement auto-save functionality
+- Create recovery from corrupted state
+- Add data validation on load
+- Build migration system for schema changes
+- Create backup restoration UI
+
+### 13. Testing & Quality Assurance
+
+#### 13.1 Test Infrastructure
+Set up comprehensive testing:
+- Unit tests for all utilities
+- Integration tests for stores
+- Component testing with React Testing Library
+- E2E tests with Playwright
+- Performance benchmarks
+- Accessibility testing
+
+#### 13.2 Quality Metrics
+Implement monitoring:
+- Canvas performance metrics (60 FPS target)
+- AI generation response times (<5s)
+- Memory usage tracking (<500MB)
+- Error rate monitoring
+- User interaction analytics
+
+### 14. Documentation & Deployment
+
+#### 14.1 User Documentation
+Create comprehensive docs:
+- User guide with screenshots
+- Video tutorials for key features
+- API documentation for Edge Functions
+- Troubleshooting guide
+- FAQ section
+
+#### 14.2 Deployment Pipeline
+Set up release process:
+- Configure GitHub Actions for CI/CD
+- Set up code signing for macOS
+- Create auto-update system
+- Build release notes generation
+- Implement crash reporting
+
+## Success Criteria
+
+The application will be considered ready for launch when:
+
+1. **Core Flow Complete**: Users can go from problem input to full documentation
+2. **Performance Targets Met**: 60 FPS canvas, <5s AI responses, <500MB memory
+3. **Data Integrity**: No data loss, successful sync, proper version control
+4. **Polish Level**: Smooth animations, consistent UI, no jarring transitions
+5. **Error Handling**: Graceful degradation, clear error messages, data recovery
+6. **Export Quality**: Professional documents, multiple formats, customizable templates
+
+## Technical Priorities
+
+1. **Must Have** (Launch Blockers):
+   - Complete problem → solution flow
+   - All Edge Functions working
+   - Basic version control
+   - Export functionality
+   - Error handling
+
+2. **Should Have** (Important but not blocking):
+   - Animation polish
+   - Advanced time travel
+   - Drift detection
+   - Share links
+
+3. **Nice to Have** (Post-launch):
+   - Advanced templates
+   - Collaboration features
+   - API access
+   - Plugin system
+
+## Implementation Order
+
+Recommended implementation sequence based on dependencies:
+
+1. Complete database schema and state management
+2. Finish all Edge Functions
+3. Complete core canvas flow (problem → personas → pain points → solutions)
+4. Add document generation pipeline
+5. Implement version control basics
+6. Add export functionality
+7. Polish animations and performance
+8. Add advanced features (drift detection, focus groups)
+9. Complete testing and documentation
+10. Prepare for deployment
+
+This implementation order ensures that each phase builds upon the previous one, allowing for continuous testing and validation of the core user experience. 

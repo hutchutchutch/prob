@@ -5,6 +5,7 @@ import { ConnectedProgressBar } from '@/components/layout/ProgressBar/ConnectedP
 import { WorkflowCanvas } from '@/components/workflow/WorkflowCanvas';
 import { AuthForm } from '@/components/auth/AuthForm';
 import { AuthDebug } from '@/components/debug/AuthDebug';
+import { PerformanceOverlay } from '@/components/PerformanceMonitor';
 import { useWorkflowStore } from '@/stores/workflowStore';
 import { useUIStore } from '@/stores/uiStore';
 import { useAuth } from '@/hooks/useAuth';
@@ -16,6 +17,7 @@ function App() {
   const { resetWorkflow, setProjectId } = useWorkflowStore();
   const [isInitializing, setIsInitializing] = useState(false);
   const [initError, setInitError] = useState<string | null>(null);
+  const [showPerformanceOverlay, setShowPerformanceOverlay] = useState(false);
 
   useEffect(() => {
     const initializeWorkspace = async () => {
@@ -143,6 +145,19 @@ function App() {
     }
   }, [user, resetWorkflow, setProjectId]);
 
+  // Add keyboard shortcut for performance overlay
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key === 'P') {
+        e.preventDefault();
+        setShowPerformanceOverlay(prev => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   // Show auth loading state
   if (authLoading) {
     return (
@@ -208,6 +223,12 @@ function App() {
         
         {/* Debug component for development */}
         <AuthDebug />
+        
+        {/* Performance Monitor Overlay */}
+        <PerformanceOverlay 
+          isOpen={showPerformanceOverlay}
+          onClose={() => setShowPerformanceOverlay(false)}
+        />
       </div>
     </ReactFlowProvider>
   );
