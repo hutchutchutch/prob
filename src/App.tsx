@@ -8,25 +8,16 @@ import { AuthDebug } from '@/components/debug/AuthDebug';
 import { PerformanceOverlay } from '@/components/PerformanceMonitor';
 import { useWorkflowStore } from '@/stores/workflowStore';
 import { useUIStore } from '@/stores/uiStore';
+import { useCanvasNavigation } from '@/hooks/useCanvasNavigation';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/services/supabase/client';
+import type { WorkflowStep } from '@/types/workflow.types';
 import './App.css';
 
-export default function App() {
-  console.log('[App] Component mounting...');
-  
-  const { user, loading: authLoading } = useAuth();
-  const { currentStep, resetWorkflow, setProjectId } = useWorkflowStore();
-  const [isInitializing, setIsInitializing] = useState(false);
-  const [initError, setInitError] = useState<string | null>(null);
-  const [showPerformanceOverlay, setShowPerformanceOverlay] = useState(false);
-
-  console.log('[App] Initial render state:', {
-    user: user?.email,
-    authLoading,
-    isInitializing,
-    showPerformanceOverlay
-  });
+// Component that uses canvas navigation inside ReactFlowProvider
+function AppContent() {
+  const { currentStep, setCurrentStep } = useWorkflowStore();
+  const { goToStep1, goToStep2, goToStep } = useCanvasNavigation();
 
   // Map workflow step to progress step index
   const getProgressStepIndex = (step: string): number => {
@@ -41,6 +32,100 @@ export default function App() {
     };
     return stepMap[step] || 0;
   };
+
+  // Map progress step index back to workflow step
+  const getWorkflowStep = (stepIndex: number): WorkflowStep => {
+    const stepMap: Record<number, WorkflowStep> = {
+      0: 'problem_input',
+      1: 'persona_discovery',
+      2: 'pain_points',
+      3: 'solution_generation',
+      4: 'user_stories', // Skip focus_group for now
+      5: 'user_stories',
+      6: 'architecture'
+    };
+    return stepMap[stepIndex] || 'problem_input';
+  };
+
+  // Handle step click for navigation
+  const handleStepClick = (stepIndex: number) => {
+    console.log('[App] Step clicked:', stepIndex);
+    console.log('[App] Available navigation functions:', { goToStep1: typeof goToStep1, goToStep2: typeof goToStep2, goToStep: typeof goToStep });
+    
+    // Update workflow step
+    const workflowStep = getWorkflowStep(stepIndex);
+    setCurrentStep(workflowStep);
+    
+    // Navigate canvas based on step
+    switch (stepIndex) {
+      case 0: // Problem
+        console.log('[App] Calling goToStep1...');
+        goToStep1();
+        break;
+      case 1: // Persona
+        console.log('[App] Calling goToStep2...');
+        goToStep2();
+        break;
+      case 2: // Pain Points
+        goToStep(3);
+        break;
+      case 3: // Solutions
+      case 4: // Focus Group
+      case 5: // User Stories
+      case 6: // Documentation
+        // Use step 3 layout for remaining steps for now
+        goToStep(3);
+        break;
+      default:
+        goToStep1();
+    }
+  };
+
+  return (
+    <div className="flex h-screen bg-gray-900">
+      {/* Sidebar */}
+      <ConnectedSidebar />
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col">
+        {/* Progress Steps Container */}
+        <div className="bg-obsidian-800 border-b border-obsidian-700 py-8 px-12">
+          <ProgressSteps 
+            currentStep={getProgressStepIndex(currentStep)}
+            variant="horizontal"
+            size="md"
+            className="max-w-none"
+            onStepClick={handleStepClick}
+          />
+        </div>
+
+        {/* Canvas */}
+        <div className="flex-1 relative">
+          <WorkflowCanvas />
+        </div>
+      </div>
+      
+      {/* Debug component for development */}
+      <AuthDebug />
+    </div>
+  );
+}
+
+export default function App() {
+  console.log('[App] Component mounting...');
+  
+  const { user, loading: authLoading } = useAuth();
+  const { resetWorkflow, setProjectId } = useWorkflowStore();
+  const [isInitializing, setIsInitializing] = useState(false);
+  const [initError, setInitError] = useState<string | null>(null);
+  const [showPerformanceOverlay, setShowPerformanceOverlay] = useState(false);
+
+  console.log('[App] Initial render state:', {
+    user: user?.email,
+    authLoading,
+    isInitializing,
+    showPerformanceOverlay
+  });
 
   useEffect(() => {
     const initializeWorkspace = async () => {
@@ -249,39 +334,13 @@ export default function App() {
 
   return (
     <ReactFlowProvider>
-      <div className="flex h-screen bg-gray-900">
-
-        
-        {/* Sidebar */}
-        <ConnectedSidebar />
-
-        {/* Main Content */}
-        <div className="flex-1 flex flex-col">
-          {/* Progress Steps Container */}
-          <div className="bg-obsidian-800 border-b border-obsidian-700 py-8 px-12">
-            <ProgressSteps 
-              currentStep={getProgressStepIndex(currentStep)}
-              variant="horizontal"
-              size="md"
-              className="max-w-none"
-            />
-          </div>
-
-          {/* Canvas */}
-          <div className="flex-1 relative">
-            <WorkflowCanvas />
-          </div>
-        </div>
-        
-        {/* Debug component for development */}
-        <AuthDebug />
-        
-        {/* Performance Monitor Overlay */}
-        <PerformanceOverlay 
-          isOpen={showPerformanceOverlay}
-          onClose={() => setShowPerformanceOverlay(false)}
-        />
-      </div>
+      <AppContent />
+      
+      {/* Performance Monitor Overlay */}
+      <PerformanceOverlay 
+        isOpen={showPerformanceOverlay}
+        onClose={() => setShowPerformanceOverlay(false)}
+      />
     </ReactFlowProvider>
   );
 }

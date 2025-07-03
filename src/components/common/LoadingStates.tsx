@@ -186,6 +186,7 @@ export interface ProgressStepsProps {
   className?: string;
   variant?: 'horizontal' | 'vertical';
   size?: 'sm' | 'md' | 'lg';
+  onStepClick?: (stepIndex: number) => void;
 }
 
 const defaultWorkflowSteps: ProgressStep[] = [
@@ -246,6 +247,7 @@ export const ProgressSteps: React.FC<ProgressStepsProps> = ({
   className,
   variant = 'horizontal',
   size = 'md',
+  onStepClick,
 }) => {
   const sizeClasses = stepSizes[size];
 
@@ -290,15 +292,18 @@ export const ProgressSteps: React.FC<ProgressStepsProps> = ({
             <div key={step.id} className="flex items-start">
               <div className="flex flex-col items-center">
                 {/* Progress Circle */}
-                <div
+                <button
+                  onClick={() => onStepClick?.(index)}
                   className={cn(
                     'progress-circle',
                     'flex items-center justify-center rounded-full',
                     'transition-all duration-300 ease-default',
                     'font-medium',
                     sizeClasses.circle,
-                    styles.circle
+                    styles.circle,
+                    onStepClick && 'cursor-pointer hover:scale-110 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-obsidian-800'
                   )}
+                  disabled={!onStepClick}
                 >
                   {status === 'completed' ? (
                     <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
@@ -307,7 +312,7 @@ export const ProgressSteps: React.FC<ProgressStepsProps> = ({
                   ) : (
                     <span className={sizeClasses.text}>{index + 1}</span>
                   )}
-                </div>
+                </button>
 
                 {/* Progress Line */}
                 {!isLast && (
@@ -348,15 +353,18 @@ export const ProgressSteps: React.FC<ProgressStepsProps> = ({
             {/* Progress Step */}
             <div className={cn('progress-step flex items-center', sizeClasses.spacing)}>
               {/* Progress Circle */}
-              <div
+              <button
+                onClick={() => onStepClick?.(index)}
                 className={cn(
                   'progress-circle',
                   'flex items-center justify-center rounded-full',
                   'transition-all duration-300 ease-default',
                   'font-medium flex-shrink-0',
                   sizeClasses.circle,
-                  styles.circle
+                  styles.circle,
+                  onStepClick && 'cursor-pointer hover:scale-110 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-obsidian-800'
                 )}
+                disabled={!onStepClick}
               >
                 {status === 'completed' ? (
                   <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
@@ -365,7 +373,7 @@ export const ProgressSteps: React.FC<ProgressStepsProps> = ({
                 ) : (
                   <span className={sizeClasses.text}>{index + 1}</span>
                 )}
-              </div>
+              </button>
 
               {/* Step Label */}
               <div className="ml-3">

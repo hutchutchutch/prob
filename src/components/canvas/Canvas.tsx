@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ReactFlow, Background, BackgroundVariant, Controls, MiniMap, ReactFlowProvider } from '@xyflow/react';
+import { ReactFlow, Background, BackgroundVariant, Controls, MiniMap } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
 import { useCanvasStore } from '@/stores/canvasStore';
@@ -8,7 +8,7 @@ import { CanvasControls } from './controls';
 import { nodeTypes } from './nodes';
 import { edgeTypes } from './edges';
 
-const CanvasInner: React.FC = () => {
+export const Canvas: React.FC = () => {
   console.log('[Canvas] Component rendering...');
   
   const {
@@ -58,7 +58,7 @@ const CanvasInner: React.FC = () => {
         minZoom={0.3}
         maxZoom={2}
         defaultViewport={{ x: 0, y: 0, zoom: 1 }}
-        className="bg-gray-900"
+        className="bg-obsidian-900"
         proOptions={{ hideAttribution: true }}
       >
         {/* Background pattern */}
@@ -66,12 +66,12 @@ const CanvasInner: React.FC = () => {
           variant={BackgroundVariant.Dots}
           gap={12}
           size={1}
-          color="#374151"
+          color="#495057" /* var(--color-obsidian-500) */
         />
         
         {/* Controls */}
         <Controls
-          className="bg-gray-800 border border-gray-700 rounded-lg"
+          className="bg-obsidian-800 border border-obsidian-700 rounded-lg shadow-obsidian-deep"
           showZoom
           showFitView
           showInteractive
@@ -79,27 +79,28 @@ const CanvasInner: React.FC = () => {
         
         {/* MiniMap with improved visibility */}
         <MiniMap
-          className="bg-gray-900 border border-gray-600 rounded-lg shadow-lg"
+          className="bg-obsidian-800 border border-obsidian-700 rounded-lg shadow-obsidian-deep"
           style={{
-            backgroundColor: '#111827',
+            backgroundColor: '#16191C', // obsidian-800
             width: 200,
             height: 150,
             bottom: 120
           }}
-          maskColor="rgba(17, 24, 39, 0.2)" // Lighter mask for better visibility
+          maskColor="rgba(5, 7, 8, 0.2)" // Lighter mask for better visibility
           nodeColor={(node) => {
             const type = node.type || 'default';
             const colorMap: Record<string, string> = {
-              problem: '#DC2626',
-              persona: '#14B8A6',
-              painPoint: '#F97316',
-              solution: '#3B82F6',
-              userStory: '#8B5CF6',
+              problem: '#16191C', // Obsidian-800 for problems
+              persona: '#16191C', // Obsidian-800 for personas
+              painPoint: '#16191C', // Obsidian-800 for pain points
+              solution: '#D4AF37', // Metallic gold for solutions
+              userStory: '#16191C', // Obsidian-800 for user stories
+              coreProblem: '#D4AF37', // Metallic gold for core problems
             };
-            return colorMap[type] || '#6B7280';
+            return colorMap[type] || '#495057'; // Obsidian-500 default
           }}
-          nodeStrokeColor="#374151"
-          nodeStrokeWidth={1}
+          nodeStrokeColor="#FFD700" // Gold border for visibility
+          nodeStrokeWidth={2}
           zoomable
           pannable
         />
@@ -111,11 +112,4 @@ const CanvasInner: React.FC = () => {
   );
 };
 
-// Main Canvas Component with Provider
-export function Canvas() {
-  return (
-    <ReactFlowProvider>
-      <CanvasInner />
-    </ReactFlowProvider>
-  );
-}
+// Canvas component is now directly exported above

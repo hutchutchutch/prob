@@ -37,7 +37,7 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
   // Auto-focus when in editing mode
   useEffect(() => {
     if (isEditing && !nodeData.isDemo) {
-      const textarea = document.querySelector('.problem-input-textarea') as HTMLTextAreaElement;
+      const textarea = document.querySelector('.problem-textarea') as HTMLTextAreaElement;
       if (textarea) {
         textarea.focus();
       }
@@ -164,7 +164,7 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
       showSourceHandle={true}
       className={`min-w-[400px] max-w-[500px] ${showGoldFlash ? 'animate-gold-flash' : ''} ${isValidated ? 'border-accent-500 border-2' : ''}`}
     >
-      <div className="space-y-3">
+      <div className="problem-input-container">
         <div className="flex items-center gap-2">
           <Sparkles className="w-4 h-4 text-gray-400" />
           <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-300">
@@ -191,7 +191,7 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
                 e.stopPropagation();
               }}
               placeholder="Describe your problem in detail..."
-              className="problem-input-textarea w-full h-24 p-3 bg-gray-800/80 text-white rounded-lg border border-gray-600 focus:border-gray-400 focus:outline-none resize-none transition-all duration-300 placeholder-gray-500 text-sm"
+              className="problem-textarea"
               disabled={isValidating}
               autoComplete="off"
               autoCorrect="off"
@@ -213,7 +213,7 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
               <button
                 onClick={handleSubmit}
                 disabled={!problemText.trim() || isValidating}
-                className="px-4 py-2 bg-gray-700 text-white rounded-lg font-medium hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center gap-2 text-sm"
+                className="btn-gold"
               >
                 {isValidating ? (
                   <>

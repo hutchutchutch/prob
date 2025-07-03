@@ -97,32 +97,224 @@ export const useCanvasNavigation = () => {
     );
   }, [getNode, getEffectiveViewport, setViewport]);
 
-  // Smart Step 1 positioning that adapts to content
+  // Smart Step 1 positioning that centers CoreProblemNode with PersonaNodes to the right
   const goToStep1 = useCallback(() => {
+    console.log('[useCanvasNavigation] goToStep1 called');
+    
+    const allNodes = getNodes();
+    console.log('[useCanvasNavigation] All available nodes:', allNodes.map(n => ({ id: n.id, type: n.type })));
+    
     const coreNode = getNode('problem-input');
-    if (!coreNode) return;
+    if (!coreNode) {
+      console.warn('[useCanvasNavigation] Core node "problem-input" not found! Trying alternative IDs...');
+      
+      // Try alternative node IDs
+      const alternativeNode = allNodes.find(node => 
+        node.id.includes('problem') || 
+        node.type === 'problem' ||
+        node.id.includes('core')
+      );
+      
+      if (alternativeNode) {
+        console.log('[useCanvasNavigation] Found alternative core node:', alternativeNode.id);
+        centerOnNode(alternativeNode.id, { padding: 100, zoom: 1.2, duration: 1000 });
+      } else {
+        console.error('[useCanvasNavigation] No core problem node found at all!');
+      }
+      return;
+    }
+    
+    console.log('[useCanvasNavigation] Core node found:', coreNode.id);
 
     // Get all nodes to understand the current layout
-    const allNodes = getNodes();
+    // (allNodes already defined above)
     const viewport = getEffectiveViewport(false);
-
-    // Calculate optimal zoom based on screen size
-    const baseZoom = Math.min(
-      viewport.width / 1200,  // Normalize to base width
-      viewport.height / 800   // Normalize to base height
-    );
     
-    const optimalZoom = Math.max(0.8, Math.min(1.5, baseZoom * 1.2));
+    // Find persona nodes
+    const personaNodes = allNodes.filter(node => 
+      node.id.startsWith('persona-') && node.id !== 'personas-label'
+    );
 
-    // Dynamic padding based on screen size
-    const dynamicPadding = Math.max(50, viewport.width * 0.08);
-
-    centerOnNode('problem-input', {
-      padding: dynamicPadding,
-      zoom: optimalZoom,
-      duration: 1000
+    console.log('[useCanvasNavigation] Step 1 positioning:', {
+      coreNode: coreNode.id,
+      personaNodes: personaNodes.map(n => n.id),
+      viewport
     });
-  }, [centerOnNode, getNode, getNodes, getEffectiveViewport]);
+
+    // Calculate optimal zoom to fit both problem node and persona nodes
+    const sidebarOffset = 256; // Account for sidebar
+    const availableWidth = viewport.width - sidebarOffset;
+    const availableHeight = viewport.height;
+
+    // Calculate bounding box of all relevant nodes (problem + personas)
+    const allRelevantNodes = [coreNode, ...personaNodes];
+    const bounds = allRelevantNodes.reduce((acc, node) => {
+      const nodeWidth = node.measured?.width || node.width || 300;
+      const nodeHeight = node.measured?.height || node.height || 150;
+      
+      return {
+        minX: Math.min(acc.minX, node.position.x),
+        minY: Math.min(acc.minY, node.position.y),
+        maxX: Math.max(acc.maxX, node.position.x + nodeWidth),
+        maxY: Math.max(acc.maxY, node.position.y + nodeHeight)
+      };
+    }, {
+      minX: Infinity,
+      minY: Infinity,
+      maxX: -Infinity,
+      maxY: -Infinity
+    });
+
+    const totalWidth = bounds.maxX - bounds.minX;
+    const totalHeight = bounds.maxY - bounds.minY;
+
+    // Calculate optimal zoom to fit content with padding
+    const padding = 100;
+    const zoomX = availableWidth / (totalWidth + padding * 2);
+    const zoomY = availableHeight / (totalHeight + padding * 2);
+    const optimalZoom = Math.min(zoomX, zoomY, 1.2); // Cap at 1.2x for readability
+
+    // Calculate the center point of the view layout
+    const layoutCenterX = bounds.minX + (totalWidth / 2);
+    const layoutCenterY = bounds.minY + (totalHeight / 2);
+
+    // Calculate the viewport position to center the layout
+    const viewportCenterX = (availableWidth / 2) + sidebarOffset;
+    const viewportCenterY = availableHeight / 2;
+
+    const flowX = viewportCenterX - (layoutCenterX * optimalZoom);
+    const flowY = viewportCenterY - (layoutCenterY * optimalZoom);
+
+    console.log('[useCanvasNavigation] Step 1 calculation:', {
+      bounds,
+      totalWidth,
+      totalHeight,
+      optimalZoom,
+      layoutCenter: { x: layoutCenterX, y: layoutCenterY },
+      viewportCenter: { x: viewportCenterX, y: viewportCenterY },
+      targetViewport: { x: flowX, y: flowY, zoom: optimalZoom }
+    });
+
+    // Animate to the calculated viewport
+    setViewport(
+      {
+        x: flowX,
+        y: flowY,
+        zoom: optimalZoom
+      },
+      { duration: 1000 }
+    );
+  }, [getNode, getNodes, getEffectiveViewport, setViewport]);
+
+  // Smart Step 2 positioning that shows CoreProblemNode and PersonaNodes in optimal persona discovery layout
+  const goToStep2 = useCallback(() => {
+    console.log('[useCanvasNavigation] goToStep2 called');
+    
+    const allNodes = getNodes();
+    console.log('[useCanvasNavigation] All available nodes:', allNodes.map(n => ({ id: n.id, type: n.type })));
+    
+    const coreNode = getNode('problem-input');
+    if (!coreNode) {
+      console.warn('[useCanvasNavigation] Core node "problem-input" not found! Trying alternative IDs...');
+      
+      // Try alternative node IDs
+      const alternativeNode = allNodes.find(node => 
+        node.id.includes('problem') || 
+        node.type === 'problem' ||
+        node.id.includes('core')
+      );
+      
+      if (alternativeNode) {
+        console.log('[useCanvasNavigation] Found alternative node:', alternativeNode.id);
+        centerOnNode(alternativeNode.id, { padding: 100, zoom: 1.0, duration: 1000 });
+      } else {
+        console.error('[useCanvasNavigation] No core problem node found at all!');
+      }
+      return;
+    }
+
+    console.log('[useCanvasNavigation] Core node found:', coreNode.id);
+
+    // Get all nodes to understand the current layout
+    // (allNodes already defined above)
+    const viewport = getEffectiveViewport(false);
+    
+    // Find persona nodes
+    const personaNodes = allNodes.filter(node => 
+      node.id.startsWith('persona-') && node.id !== 'personas-label'
+    );
+
+    console.log('[useCanvasNavigation] Step 2 positioning:', {
+      coreNode: coreNode.id,
+      personaNodes: personaNodes.map(n => n.id),
+      viewport
+    });
+
+    // Calculate optimal zoom to fit both problem node and persona nodes with more focus on personas
+    const sidebarOffset = 256; // Account for sidebar
+    const availableWidth = viewport.width - sidebarOffset;
+    const availableHeight = viewport.height;
+
+    // Calculate bounding box of all relevant nodes (problem + personas)
+    const allRelevantNodes = [coreNode, ...personaNodes];
+    const bounds = allRelevantNodes.reduce((acc, node) => {
+      const nodeWidth = node.measured?.width || node.width || 300;
+      const nodeHeight = node.measured?.height || node.height || 150;
+      
+      return {
+        minX: Math.min(acc.minX, node.position.x),
+        minY: Math.min(acc.minY, node.position.y),
+        maxX: Math.max(acc.maxX, node.position.x + nodeWidth),
+        maxY: Math.max(acc.maxY, node.position.y + nodeHeight)
+      };
+    }, {
+      minX: Infinity,
+      minY: Infinity,
+      maxX: -Infinity,
+      maxY: -Infinity
+    });
+
+    const totalWidth = bounds.maxX - bounds.minX;
+    const totalHeight = bounds.maxY - bounds.minY;
+
+    // Step 2 specific positioning: More focused on personas with problem visible
+    const padding = 80; // Tighter padding for more focused view
+    const zoomX = availableWidth / (totalWidth + padding * 2);
+    const zoomY = availableHeight / (totalHeight + padding * 2);
+    const optimalZoom = Math.min(zoomX, zoomY, 1.1); // Slightly higher zoom than Step 1
+
+    // For Step 2, we want to position so the core problem is visible on the left
+    // and personas are prominently displayed on the right
+    const layoutCenterX = bounds.minX + (totalWidth * 0.6); // Shift center toward personas
+    const layoutCenterY = bounds.minY + (totalHeight / 2);
+
+    // Calculate the viewport position to center the layout
+    const viewportCenterX = (availableWidth / 2) + sidebarOffset;
+    const viewportCenterY = availableHeight / 2;
+
+    const flowX = viewportCenterX - (layoutCenterX * optimalZoom);
+    const flowY = viewportCenterY - (layoutCenterY * optimalZoom);
+
+    console.log('[useCanvasNavigation] Step 2 calculation:', {
+      bounds,
+      totalWidth,
+      totalHeight,
+      optimalZoom,
+      layoutCenter: { x: layoutCenterX, y: layoutCenterY },
+      viewportCenter: { x: viewportCenterX, y: viewportCenterY },
+      targetViewport: { x: flowX, y: flowY, zoom: optimalZoom }
+    });
+
+    // Animate to the calculated viewport
+    setViewport(
+      {
+        x: flowX,
+        y: flowY,
+        zoom: optimalZoom
+      },
+      { duration: 1000 }
+    );
+  }, [getNode, getNodes, getEffectiveViewport, setViewport]);
 
   // Progressive reveal for multi-step workflows
   const goToStep = useCallback((stepNumber: number) => {
@@ -239,6 +431,7 @@ export const useCanvasNavigation = () => {
   return {
     centerOnNode,
     goToStep1,
+    goToStep2,
     goToStep,
     setupResponsiveCanvas,
     getOptimalNodePosition,

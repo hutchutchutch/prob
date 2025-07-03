@@ -345,6 +345,57 @@
 }
 ```
 
+#### Gold CTA Button
+```css
+.btn-gold {
+  /* Sizing */
+  padding: var(--space-3) var(--space-6) !important; /* 12px 24px */
+  min-width: 140px;
+  height: 48px;
+  
+  /* Typography */
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  
+  /* Colors */
+  background: var(--color-gold-600); /* Metallic Gold */
+  color: var(--color-obsidian-950); /* Deepest black text */
+  
+  /* Border & Shape */
+  border: none;
+  border-radius: var(--radius-lg);
+  
+  /* Layout */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  
+  /* Effects */
+  transition: all var(--duration-base) var(--ease-out);
+  cursor: pointer;
+  box-shadow: var(--shadow-base);
+}
+
+.btn-gold:hover {
+  background: var(--color-gold-700);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-gold:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-base);
+}
+
+.btn-gold:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+```
+
 ### A3. Icons
 
 ```css
@@ -890,7 +941,34 @@
   text-align: center;
 }
 
+/* Problem Text Input Areas - Compact Version */
 .problem-textarea {
+  width: 100%;
+  min-height: 96px;
+  padding: 8px 12px !important; /* 8px top/bottom, 12px left/right - Override CSS reset */
+  background: rgba(22, 25, 28, 0.8);
+  border: 1px solid #495057;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.5;
+  resize: none;
+  transition: all 300ms ease-out;
+}
+
+.problem-textarea:focus {
+  outline: none;
+  border-color: #6C757D;
+  box-shadow: none;
+}
+
+.problem-textarea::placeholder {
+  color: #6C757D;
+  opacity: 1;
+}
+
+/* Alternative Large Problem Input */
+.problem-textarea--large {
   width: 100%;
   min-height: 160px;
   padding: var(--space-4);
@@ -903,7 +981,7 @@
   transition: all var(--duration-base) var(--ease-out);
 }
 
-.problem-textarea:focus {
+.problem-textarea--large:focus {
   outline: none;
   border-color: var(--color-primary-500);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
