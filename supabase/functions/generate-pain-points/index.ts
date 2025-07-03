@@ -204,11 +204,10 @@ serve(async (req) => {
       .update({ is_active: true })
       .eq('id', activePersonaId)
     
-    // Deactivate other personas
+    // Deactivate ALL other personas globally
     await supabase
       .from('personas')
       .update({ is_active: false })
-      .eq('core_problem_id', persona.core_problem_id)
       .neq('id', activePersonaId)
     
     // Get all pain points for response
