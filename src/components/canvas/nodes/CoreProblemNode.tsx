@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NodeProps } from '@xyflow/react';
 import { BaseNode } from './BaseNode';
 import { useWorkflowStore } from '@/stores/workflowStore';
+import { useCanvasStore } from '@/stores/canvasStore';
 import { problemApi } from '@/services/api/problem';
 import { Sparkles, Loader2, CheckCircle } from 'lucide-react';
 
@@ -66,6 +67,16 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
       
       console.log('[CoreProblemNode] Calling problemApi.validateProblem...');
       console.log('[CoreProblemNode] Input text:', trimmedText);
+      
+      // Animate edges when validation starts
+      const canvasStore = useCanvasStore.getState();
+      for (let i = 1; i <= 5; i++) {
+        canvasStore.updateEdge(`problem-to-persona-${i}`, {
+          animated: true
+        });
+      }
+      console.log('[CoreProblemNode] Started edge animations during validation');
+      
       const validationResult = await problemApi.validateProblem(trimmedText);
       console.log('[CoreProblemNode] Validation result:', validationResult);
       
@@ -165,13 +176,13 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
       className={`min-w-[400px] max-w-[500px] ${showGoldFlash ? 'animate-gold-flash' : ''} ${isValidated ? 'border-accent-500 border-2' : ''}`}
     >
       <div className="problem-input-container">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 mb-3">
           <Sparkles className="w-4 h-4 text-gray-400" />
           <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-300">
             Core Problem
           </h3>
           {coreProblem?.is_validated && !isEditing && (
-            <CheckCircle className="w-4 h-4 text-blue-400 ml-auto" />
+            <CheckCircle className="w-4 h-4 text-gold-500 ml-auto" />
           )}
         </div>
 
@@ -229,7 +240,7 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
         ) : (
           <div className="space-y-2">
             <p 
-              className="text-base leading-relaxed cursor-pointer hover:opacity-80 transition-opacity"
+              className="text-base leading-relaxed cursor-pointer"
               onClick={handleEdit}
             >
               {problemText || 'Click to enter your problem description...'}
@@ -237,7 +248,7 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
             {problemText && (
               <button
                 onClick={handleEdit}
-                className="text-xs text-gray-400 hover:text-gray-300 transition-colors"
+                className="text-xs text-gray-400"
               >
                 Click to edit
               </button>

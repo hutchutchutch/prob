@@ -278,17 +278,29 @@ export function WorkflowCanvas() {
         });
       }
 
-      // Calculate positions for pain points column (right third of screen)
+      // Calculate positions for pain points in two columns (right third of screen)
       const viewportWidth = window.innerWidth;
-      const painPointNodeX = viewportWidth / 3; // Right side, mirroring the problem node position
+      const painPointBaseX = viewportWidth / 3; // Base position for pain points
+      const painPointColumn1X = painPointBaseX - 220; // First column (3 nodes) - increased spacing
+      const painPointColumn2X = painPointBaseX + 220; // Second column (4 nodes) - increased spacing
       const painPointStartY = -300; // Start position for first pain point
-      const painPointSpacing = 150; // Same vertical spacing as personas
+      const painPointSpacing = 180; // Increased vertical spacing for better separation
+      
+      console.log('[WorkflowCanvas] Pain point positioning calculations:', {
+        viewportWidth,
+        painPointBaseX,
+        painPointColumn1X,
+        painPointColumn2X,
+        columnSpacing: painPointColumn2X - painPointColumn1X,
+        painPointStartY,
+        painPointSpacing
+      });
 
-      // Add Pain Points column label
+      // Add Pain Points column label (centered between the two columns)
       const painPointsLabelNode: Node = {
         id: 'pain-points-label',
         type: 'label',
-        position: { x: painPointNodeX, y: painPointStartY - 120 }, // Right of personas column
+        position: { x: painPointBaseX, y: painPointStartY - 120 }, // Centered above both columns
         data: {
           text: 'Pain Points',
           showRefresh: false
@@ -297,20 +309,35 @@ export function WorkflowCanvas() {
         selectable: false,
       };
 
-      // Create pain point skeleton nodes - 7 total, card-sized like personas
+      // Create pain point skeleton nodes - 7 total, arranged in two columns
       const painPointNodes: Node[] = [];
       const painPointEdges: Edge[] = [];
 
-      // Create 7 pain points total, positioned vertically
+      // Create 7 pain points total, positioned in two columns (3 left, 4 right)
       for (let painIndex = 0; painIndex < 7; painIndex++) {
         const painPointId = `pain-point-${painIndex + 1}`;
+        
+        // Determine column and position within column
+        const isFirstColumn = painIndex < 3;
+        const columnX = isFirstColumn ? painPointColumn1X : painPointColumn2X;
+        const columnIndex = isFirstColumn ? painIndex : painIndex - 3;
+        const positionY = painPointStartY + (columnIndex * painPointSpacing);
+        
+        console.log(`[WorkflowCanvas] Creating ${painPointId} at position:`, {
+          painIndex,
+          isFirstColumn,
+          columnX,
+          columnIndex,
+          positionY,
+          column: isFirstColumn ? 'left' : 'right'
+        });
         
         painPointNodes.push({
           id: painPointId,
           type: 'painPoint',
           position: {
-            x: painPointNodeX, // Pain points column
-            y: painPointStartY + (painIndex * painPointSpacing) // Same vertical spacing as personas
+            x: columnX, // Column-specific X position
+            y: positionY // Y position based on index within column
           },
           data: {
             id: painPointId,
@@ -358,24 +385,9 @@ export function WorkflowCanvas() {
       
       setPainPointsAdded(true);
       
-      // Adjust viewport to show all three columns
-      setTimeout(() => {
-        const canvasStore = useCanvasStore.getState();
-        // Recalculate positions for zoom calculation
-        const vw = window.innerWidth;
-        const problemX = -vw / 3;
-        const painPointX = vw / 3;
-        
-        // Calculate zoom level based on viewport width to fit all columns
-        const totalWidth = painPointX - problemX + 400; // Add some padding
-        const zoomLevel = Math.min(0.8, window.innerWidth / totalWidth);
-        
-        canvasStore.setViewport({
-          x: 0, // Center horizontally
-          y: (window.innerHeight / 2) - 100, // Center vertically
-          zoom: zoomLevel
-        });
-      }, 100);
+      // NOTE: Canvas navigation is now handled by ProgressSteps in App.tsx
+      // Removed competing viewport change that was interrupting smooth Step 2 navigation
+      // The appropriate Step 2 navigation will be triggered by App.tsx useEffect
     }
   }, [isGeneratingPersonas, canvasInitialized, painPointsAdded, addNodes, addEdges, updateEdge, zoomTo]);
 
@@ -383,13 +395,19 @@ export function WorkflowCanvas() {
   useEffect(() => {
     console.log('[WorkflowCanvas] Personas effect triggered:', {
       personaCount: personas.length,
-      canvasInitialized
+      canvasInitialized,
+      isGeneratingPersonas
     });
     
     if (personas.length > 0 && canvasInitialized) {
       console.log('[WorkflowCanvas] Updating persona nodes with data:', personas.length);
       
       const canvasStore = useCanvasStore.getState();
+      
+      // Find persona with highest pain_degree
+      let highestPainPersona: any = null;
+      let highestPainDegree = 0;
+      let highestPainIndex = -1;
       
       // Update the first 5 persona nodes with actual data
       personas.slice(0, 5).forEach((persona, index) => {
@@ -442,9 +460,49 @@ export function WorkflowCanvas() {
         // Verify the update worked
         const updatedNode = canvasStore.getNodeById(nodeId);
         console.log('[WorkflowCanvas] Node after update:', updatedNode);
+        
+        // Check if this persona has the highest pain degree
+        const painDegree = (persona as any).pain_degree || (persona as any).painDegree || updatedData.painDegree;
+        if (painDegree > highestPainDegree) {
+          highestPainDegree = painDegree;
+          highestPainPersona = persona;
+          highestPainIndex = index;
+        }
       });
+      
+      // If personas are generated (no longer generating), update edges
+      if (!isGeneratingPersonas) {
+        console.log('[WorkflowCanvas] Persona generation complete - updating edges');
+        
+        // Make all edges solid and grey by default
+        for (let i = 1; i <= 5; i++) {
+          const edgeId = `problem-to-persona-${i}`;
+          canvasStore.updateEdge(edgeId, {
+            animated: false,
+            style: {
+              stroke: '#6B7280', // Default grey
+              strokeWidth: 2,
+              opacity: 0.7
+            }
+          });
+        }
+        
+        // Color the edge to the highest pain persona gold
+        if (highestPainIndex >= 0) {
+          console.log('[WorkflowCanvas] Highlighting edge to highest pain persona:', highestPainPersona.name, 'with pain degree:', highestPainDegree);
+          const goldEdgeId = `problem-to-persona-${highestPainIndex + 1}`;
+          canvasStore.updateEdge(goldEdgeId, {
+            animated: false,
+            style: {
+              stroke: '#FFD700', // Gold color
+              strokeWidth: 3, // Slightly thicker
+              opacity: 1 // Full opacity
+            }
+          });
+        }
+      }
     }
-  }, [personas, canvasInitialized]);
+  }, [personas, canvasInitialized, isGeneratingPersonas]);
 
   // Update PainPointNodes when pain points are available
   useEffect(() => {

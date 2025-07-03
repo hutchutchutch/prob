@@ -1016,6 +1016,10 @@
 
 ## Motion & Choreography
 
+### Animation Philosophy
+
+**Important**: We use pure CSS animations and transitions exclusively. Framer Motion and other JavaScript animation libraries are not used in this project to maintain optimal performance with React Flow and prevent conflicts with drag-and-drop functionality.
+
 ### Animation Sequences
 
 #### 1. Initial Load Sequence
@@ -1027,7 +1031,7 @@
 .stagger-4 { animation-delay: 450ms; }
 .stagger-5 { animation-delay: 600ms; }
 
-/* Canvas node appearance */
+/* Canvas node appearance - CSS only */
 .node-sequence {
   opacity: 0;
   animation: nodeSequence var(--duration-base) var(--ease-out) forwards;
@@ -1266,11 +1270,17 @@
 3. Separate structural and skin styles
 4. Use utility classes sparingly
 
+### Animation Framework Policy
+1. **No Framer Motion**: We exclusively use CSS animations and transitions
+2. **React Flow Compatibility**: All node animations must be CSS-based to prevent conflicts with React Flow's drag handling
+3. **Performance First**: CSS animations are GPU-accelerated and don't interfere with React's reconciliation
+
 ### Performance Considerations
 1. Use `transform` and `opacity` for animations (GPU accelerated)
 2. Avoid animating `width`, `height`, or `top/left` properties
 3. Use `will-change` sparingly on elements that will animate
 4. Implement virtual scrolling for long lists
+5. Disable hover effects during drag operations (use `.react-flow__node-dragging` selector)
 
 ### Accessibility
 1. Maintain WCAG AA contrast ratios (4.5:1 for normal text, 3:1 for large text)

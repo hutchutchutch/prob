@@ -36,7 +36,6 @@ export const PainPointNode: React.FC<NodeProps> = ({ data, selected }) => {
         showTargetHandle={true}
         className={cn(
           "w-[320px] max-w-[320px]",
-          "opacity-70",
           "ethereal-glow", // Add ethereal glow animation
           "transition-opacity duration-1000"
         )}

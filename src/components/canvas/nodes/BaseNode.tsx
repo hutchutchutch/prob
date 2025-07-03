@@ -1,7 +1,6 @@
 import React from 'react';
 import { Handle, Position } from '@xyflow/react';
 import { cn } from '@/utils/cn';
-import { motion } from 'framer-motion';
 
 // Base Node Wrapper
 interface BaseNodeProps {
@@ -40,9 +39,7 @@ export const BaseNode: React.FC<BaseNodeProps> = ({
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
+    <div
       className={cn(
         'canvas-node text-white',
         variantClasses[variant],
@@ -54,7 +51,9 @@ export const BaseNode: React.FC<BaseNodeProps> = ({
         <Handle
           type="target"
           position={positionMap[targetHandlePosition]}
+          id="target"
           className="!w-3 !h-3 !bg-gray-600 !border-2 !border-gray-900"
+          isConnectable={true}
         />
       )}
       {children}
@@ -62,10 +61,12 @@ export const BaseNode: React.FC<BaseNodeProps> = ({
         <Handle
           type="source"
           position={positionMap[sourceHandlePosition]}
+          id="source"
           className="!w-3 !h-3 !bg-gray-600 !border-2 !border-gray-900"
+          isConnectable={true}
         />
       )}
-    </motion.div>
+    </div>
   );
 };
 

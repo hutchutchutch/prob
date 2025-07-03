@@ -737,20 +737,21 @@ export function initializeCanvasSubscriptions() {
       const workflowState = useWorkflowStore.getState()
       
       // React to step changes with appropriate layout
-      switch (currentStep) {
-        case 'persona_discovery':
-          canvasStore.applyLayout('hierarchical')
-          break
-        case 'pain_points':
-          canvasStore.applyLayout('hierarchical')
-          break
-        case 'solution_generation':
-          canvasStore.applyLayout('force')
-          break
-        case 'user_stories':
-          canvasStore.applyLayout('hierarchical')
-          break
-      }
+      // NOTE: Commented out automatic layout application to preserve custom positioning
+      // switch (currentStep) {
+      //   case 'persona_discovery':
+      //     canvasStore.applyLayout('hierarchical')
+      //     break
+      //   case 'pain_points':
+      //     canvasStore.applyLayout('hierarchical')
+      //     break
+      //   case 'solution_generation':
+      //     canvasStore.applyLayout('force')
+      //     break
+      //   case 'user_stories':
+      //     canvasStore.applyLayout('hierarchical')
+      //     break
+      // }
       
       // Sync with current workflow state
       canvasStore.syncWithWorkflow(workflowState)

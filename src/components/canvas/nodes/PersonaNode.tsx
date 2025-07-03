@@ -38,7 +38,7 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
             className={cn(
               'w-3 h-3',
               index < painLevel 
-                ? 'text-orange-400 fill-orange-400/50' 
+                ? 'text-gold-500 fill-gold-500/50' 
                 : 'text-gray-500 fill-gray-600/30'
             )}
           />
@@ -57,7 +57,6 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
         showTargetHandle={true}
         className={cn(
           "min-w-[280px]",
-          "opacity-70",
           "shadow-lg shadow-teal-500/20", // Add ethereal glow with teal color
           "transition-shadow duration-1000"
         )}

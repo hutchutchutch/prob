@@ -57,6 +57,11 @@ function AppContent() {
     setCurrentStep(workflowStep);
     
     // Navigate canvas based on step
+    navigateToStep(stepIndex);
+  };
+
+  // Navigate canvas to appropriate view based on step index
+  const navigateToStep = (stepIndex: number) => {
     switch (stepIndex) {
       case 0: // Problem
         console.log('[App] Calling goToStep1...');
@@ -80,6 +85,18 @@ function AppContent() {
         goToStep1();
     }
   };
+
+  // Watch for workflow step changes and automatically navigate canvas
+  useEffect(() => {
+    const stepIndex = getProgressStepIndex(currentStep);
+    console.log('[App] Workflow step changed to:', currentStep, '-> step index:', stepIndex);
+    console.log('[App] Automatically navigating canvas to match workflow step');
+    
+    // Small delay to ensure canvas is ready
+    setTimeout(() => {
+      navigateToStep(stepIndex);
+    }, 100);
+  }, [currentStep]);
 
   return (
     <div className="flex h-screen bg-gray-900">
