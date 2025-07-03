@@ -138,7 +138,7 @@ export const ConnectedSidebar: React.FC = () => {
     localStorage.setItem(`workspace_dir_${workspaceId}`, directory);
   };
 
-  const handleOpenTerminal = (workspaceId: string) => {
+  const handleOpenTerminal = async (workspaceId: string) => {
     const directory = workspaceDirectories[workspaceId];
     console.log('[ConnectedSidebar] Opening terminal for workspace:', workspaceId, 'at:', directory);
     
@@ -183,16 +183,20 @@ export const ConnectedSidebar: React.FC = () => {
 
     try {
       // Get current workflow state
-      const workflowState = workflowStore.getState();
+      const workflowState = {
+        currentStep: workflowStore.currentStep,
+        projectId: workflowStore.projectId,
+        coreProblem: workflowStore.coreProblem,
+        personas: workflowStore.personas,
+        painPoints: workflowStore.painPoints,
+        solutions: workflowStore.solutions,
+        userStories: workflowStore.userStories,
+        lockedItems: workflowStore.lockedItems,
+      };
       
       await WorkspaceStorage.saveWorkspace(
         { workspaceId, directory },
-        {
-          nodes: workflowState.nodes,
-          edges: workflowState.edges,
-          nodeStates: workflowState.nodeStates,
-          focusGroups: workflowState.focusGroups,
-        }
+        workflowState
       );
       
       console.log('[ConnectedSidebar] Workspace saved successfully');
@@ -205,18 +209,22 @@ export const ConnectedSidebar: React.FC = () => {
 
   const handleExportWorkspace = async (workspaceId: string) => {
     try {
-      const workflowState = workflowStore.getState();
+      const workflowState = {
+        currentStep: workflowStore.currentStep,
+        projectId: workflowStore.projectId,
+        coreProblem: workflowStore.coreProblem,
+        personas: workflowStore.personas,
+        painPoints: workflowStore.painPoints,
+        solutions: workflowStore.solutions,
+        userStories: workflowStore.userStories,
+        lockedItems: workflowStore.lockedItems,
+      };
       const workspace = workspaces.find(w => w.id === workspaceId);
       const filename = `${workspace?.name || 'workspace'}-${new Date().toISOString().split('T')[0]}.json`;
       
       await WorkspaceStorage.exportWorkspace(
         workspaceId,
-        {
-          nodes: workflowState.nodes,
-          edges: workflowState.edges,
-          nodeStates: workflowState.nodeStates,
-          focusGroups: workflowState.focusGroups,
-        },
+        workflowState,
         filename
       );
       
