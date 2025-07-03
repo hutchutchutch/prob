@@ -540,7 +540,7 @@ export function WorkflowCanvas() {
       console.log('[WorkflowCanvas] Current step:', currentStep);
       
       if (currentStep === 'persona_discovery') {
-        console.log('[WorkflowCanvas] Entering persona discovery, adjusting canvas view...');
+        console.log('[WorkflowCanvas] Entering persona discovery, smoothly panning to show personas...');
         // Adjust the canvas view to show both problem and persona columns
         const vw = window.innerWidth;
         const problemX = -vw / 3;
@@ -550,15 +550,13 @@ export function WorkflowCanvas() {
         const columnsWidth = Math.abs(personaX - problemX) + 600; // Add padding for node widths
         const zoomLevel = Math.min(0.8, window.innerWidth / columnsWidth);
         
-        const canvasStore = useCanvasStore.getState();
-        canvasStore.setViewport({
-          x: -problemX / 2, // Center between problem and persona columns
-          y: (window.innerHeight / 2) - 200, // Center vertically on personas
-          zoom: zoomLevel
-        });
+        // Use setTimeout to ensure smooth transition after state updates
+        setTimeout(() => {
+          goToStep(2); // Use the navigation hook for smooth transition
+        }, 100);
       }
     }
-  }, [currentStep, canvasInitialized, zoomTo]);
+  }, [currentStep, canvasInitialized, goToStep]);
 
   return (
     <div className="relative w-full h-full">

@@ -99,7 +99,7 @@ export const useCanvasNavigation = () => {
 
   // Smart Step 1 positioning that adapts to content
   const goToStep1 = useCallback(() => {
-    const coreNode = getNode('core-problem');
+    const coreNode = getNode('problem-input');
     if (!coreNode) return;
 
     // Get all nodes to understand the current layout
@@ -117,7 +117,7 @@ export const useCanvasNavigation = () => {
     // Dynamic padding based on screen size
     const dynamicPadding = Math.max(50, viewport.width * 0.08);
 
-    centerOnNode('core-problem', {
+    centerOnNode('problem-input', {
       padding: dynamicPadding,
       zoom: optimalZoom,
       duration: 1000
@@ -128,19 +128,21 @@ export const useCanvasNavigation = () => {
   const goToStep = useCallback((stepNumber: number) => {
     const stepConfigs = {
       1: { 
-        nodeIds: ['core-problem'],
+        nodeIds: ['problem-input'],
         zoom: 1.2,
-        focus: 'core-problem'
+        focus: 'problem-input'
       },
       2: { 
-        nodeIds: ['core-problem', 'persona-1', 'persona-2', 'persona-3'],
-        zoom: 0.8,
-        focus: 'persona-2' // Center persona
+        nodeIds: ['problem-input', 'persona-1', 'persona-2', 'persona-3', 'persona-4', 'persona-5'],
+        zoom: 0.9,
+        focus: null // Let fitView handle centering
       },
       3: {
-        nodeIds: ['persona-1', 'persona-2', 'persona-3', 'pain-point-1', 'pain-point-2'],
-        zoom: 0.6,
-        focus: 'pain-point-1'
+        nodeIds: ['problem-input', 'persona-1', 'persona-2', 'persona-3', 'persona-4', 'persona-5', 
+                  'pain-point-1', 'pain-point-2', 'pain-point-3', 'pain-point-4', 'pain-point-5', 
+                  'pain-point-6', 'pain-point-7'],
+        zoom: 0.7,
+        focus: null // Let fitView handle centering
       }
     };
 
@@ -184,8 +186,9 @@ export const useCanvasNavigation = () => {
     fitView({
       nodes: relevantNodes,
       padding,
-      duration: 1000,
-      maxZoom: config.zoom
+      duration: 1200, // Slightly longer for smoother transition
+      maxZoom: config.zoom,
+      minZoom: config.zoom * 0.8 // Prevent over-zooming out
     });
   }, [goToStep1, getNodes, getEffectiveViewport, fitView]);
 
