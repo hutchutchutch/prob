@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NodeProps } from '@xyflow/react';
 import { Lock, Unlock, AlertTriangle } from 'lucide-react';
 import { cn } from '@/utils/cn';
 import { BaseNode } from './BaseNode';
+import { useCanvasStore } from '@/stores/canvasStore';
 
 // Pain Point Node
 export interface PainPointNodeData {
@@ -15,9 +16,45 @@ export interface PainPointNodeData {
   onToggleLock?: () => void;
 }
 
-export const PainPointNode: React.FC<NodeProps> = ({ data, selected }) => {
+export const PainPointNode: React.FC<NodeProps> = ({ data, selected, id }) => {
   const nodeData = data as unknown as PainPointNodeData;
   const { isLocked = false, isSkeleton = false, onToggleLock } = nodeData;
+  const { updateNode } = useCanvasStore();
+  const [floatOffset, setFloatOffset] = useState({ x: 0, y: 0 });
+
+  // Create ethereal floating effect for skeleton nodes
+  useEffect(() => {
+    if (!isSkeleton) return;
+
+    // Random parameters for each node to create variety
+    const baseAmplitude = 15 + Math.random() * 10; // 15-25 pixels
+    const xSpeed = 0.0003 + Math.random() * 0.0002; // Vary the speed
+    const ySpeed = 0.0004 + Math.random() * 0.0002;
+    const phaseOffset = Math.random() * Math.PI * 2; // Random starting phase
+
+    let animationFrame: number;
+    const startTime = Date.now();
+
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      
+      // Create smooth sinusoidal movement
+      const xOffset = Math.sin(elapsed * xSpeed + phaseOffset) * baseAmplitude;
+      const yOffset = Math.sin(elapsed * ySpeed + phaseOffset + Math.PI/3) * baseAmplitude * 0.7;
+
+      setFloatOffset({ x: xOffset, y: yOffset });
+      
+      animationFrame = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
+    };
+  }, [isSkeleton]);
 
   const severityStyles = {
     critical: 'text-red-400 bg-red-900/30 border-red-500/30',
@@ -26,39 +63,51 @@ export const PainPointNode: React.FC<NodeProps> = ({ data, selected }) => {
     low: 'text-gray-400 bg-gray-800/30 border-gray-500/30',
   };
 
-  // Skeleton state
+  // Skeleton state with ethereal floating
   if (isSkeleton) {
     return (
-      <BaseNode
-        variant="pain"
-        selected={selected}
-        showSourceHandle={false}
-        showTargetHandle={true}
-        className="w-[320px] max-w-[320px] opacity-60"
+      <div 
+        style={{
+          transform: `translate(${floatOffset.x}px, ${floatOffset.y}px)`,
+          transition: 'none', // Disable transitions for smooth animation
+        }}
       >
-        <div className="space-y-6">
-          {/* Skeleton Header */}
-          <div className="flex items-start justify-between mb-2">
-            <div className="h-6 rounded skeleton-shimmer w-20"></div>
-            <div className="w-4 h-4 rounded skeleton-shimmer"></div>
-          </div>
-
-          {/* Skeleton Description */}
-          <div className="space-y-5">
-            <div className="py-1">
-              <div className="h-4 rounded skeleton-shimmer w-full"></div>
+        <BaseNode
+          variant="pain"
+          selected={selected}
+          showSourceHandle={false}
+          showTargetHandle={true}
+          className={cn(
+            "w-[320px] max-w-[320px]",
+            "opacity-70",
+            "ethereal-glow", // Add ethereal glow animation
+            "transition-opacity duration-1000"
+          )}
+        >
+          <div className="space-y-6">
+            {/* Skeleton Header */}
+            <div className="flex items-start justify-between mb-2">
+              <div className="h-6 rounded skeleton-shimmer w-20"></div>
+              <div className="w-4 h-4 rounded skeleton-shimmer"></div>
             </div>
-            <div className="py-1">
-              <div className="h-4 rounded skeleton-shimmer w-3/4"></div>
+
+            {/* Skeleton Description */}
+            <div className="space-y-5">
+              <div className="py-1">
+                <div className="h-4 rounded skeleton-shimmer w-full"></div>
+              </div>
+              <div className="py-1">
+                <div className="h-4 rounded skeleton-shimmer w-3/4"></div>
+              </div>
+            </div>
+
+            {/* Skeleton Impact */}
+            <div className="flex items-center gap-4 py-1">
+              <div className="h-4 rounded skeleton-shimmer w-24"></div>
             </div>
           </div>
-
-          {/* Skeleton Impact */}
-          <div className="flex items-center gap-4 py-1">
-            <div className="h-4 rounded skeleton-shimmer w-24"></div>
-          </div>
-        </div>
-      </BaseNode>
+        </BaseNode>
+      </div>
     );
   }
 

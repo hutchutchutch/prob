@@ -11,6 +11,8 @@ interface BaseNodeProps {
   variant: 'problem' | 'persona' | 'pain' | 'solution';
   showSourceHandle?: boolean;
   showTargetHandle?: boolean;
+  sourceHandlePosition?: 'left' | 'right' | 'top' | 'bottom';
+  targetHandlePosition?: 'left' | 'right' | 'top' | 'bottom';
 }
 
 export const BaseNode: React.FC<BaseNodeProps> = ({
@@ -20,12 +22,21 @@ export const BaseNode: React.FC<BaseNodeProps> = ({
   variant,
   showSourceHandle = true,
   showTargetHandle = true,
+  sourceHandlePosition = 'right',
+  targetHandlePosition = 'left',
 }) => {
   const variantClasses = {
     problem: 'gradient-problem',
     persona: 'gradient-persona',
     pain: 'gradient-pain',
     solution: 'gradient-solution',
+  };
+
+  const positionMap = {
+    left: Position.Left,
+    right: Position.Right,
+    top: Position.Top,
+    bottom: Position.Bottom,
   };
 
   return (
@@ -42,7 +53,7 @@ export const BaseNode: React.FC<BaseNodeProps> = ({
       {showTargetHandle && (
         <Handle
           type="target"
-          position={Position.Left}
+          position={positionMap[targetHandlePosition]}
           className="!w-3 !h-3 !bg-gray-600 !border-2 !border-gray-900"
         />
       )}
@@ -50,7 +61,7 @@ export const BaseNode: React.FC<BaseNodeProps> = ({
       {showSourceHandle && (
         <Handle
           type="source"
-          position={Position.Right}
+          position={positionMap[sourceHandlePosition]}
           className="!w-3 !h-3 !bg-gray-600 !border-2 !border-gray-900"
         />
       )}

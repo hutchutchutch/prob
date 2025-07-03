@@ -1,434 +1,273 @@
 // supabase/functions/generate-solutions/index.ts
-import { serve } from "https://deno.land/std@0.224.0/http/server.ts"
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2"
-import { StateGraph } from "https://esm.sh/@langchain/langgraph@0.2.0"
-import { OpenAI } from "https://esm.sh/openai@4"
+import { serve } from "std/http/server.ts"
+import { createClient } from "@supabase/supabase-js"
+import { OpenAI } from "openai"
 
-const openai = new OpenAI({
-  apiKey: Deno.env.get('OPENAI_API_KEY')
-})
-
-const supabaseUrl = Deno.env.get('SUPABASE_URL')!
-const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
-const supabase = createClient(supabaseUrl, supabaseKey)
-
-interface SolutionGenerationState {
-  projectId: string
-  personaId: string
-  persona?: any
-  coreProblem?: string
-  painPoints?: any[]
-  lockedSolutionIds: string[]
-  existingSolutions?: any[]
-  newSolutions?: any[]
-  solutionMappings?: any[]
-  generationBatch?: string
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-request-id',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS'
 }
 
-// Node: Load context including persona and pain points
-async function loadContext(state: SolutionGenerationState) {
-  // Get persona with core problem
-  const { data: persona } = await supabase
-    .from('personas')
-    .select(`
-      *,
-      core_problems!inner(
-        validated_problem
-      )
-    `)
-    .eq('id', state.personaId)
-    .single()
-  
-  // Get pain points
-  const { data: painPoints } = await supabase
-    .from('pain_points')
-    .select('*')
-    .eq('persona_id', state.personaId)
-    .order('position')
-  
-  // Get existing solutions
-  const { data: existingSolutions } = await supabase
-    .from('key_solutions')
-    .select('*')
-    .eq('persona_id', state.personaId)
-    .order('position')
-  
-  return {
-    ...state,
-    persona,
-    coreProblem: persona.core_problems.validated_problem,
-    painPoints: painPoints || [],
-    existingSolutions: existingSolutions || [],
-    generationBatch: crypto.randomUUID()
+serve(async (req) => {
+  // Handle CORS preflight
+  if (req.method === 'OPTIONS') {
+    return new Response('ok', { headers: corsHeaders })
   }
-}
-
-// Node: Generate solutions that address the pain points
-async function generateSolutions(state: SolutionGenerationState) {
-  const { persona, coreProblem, painPoints, existingSolutions, lockedSolutionIds } = state
   
-  const lockedSolutions = existingSolutions?.filter(s => 
-    lockedSolutionIds.includes(s.id)
-  ) || []
-  
-  const solutionsToGenerate = 5 - lockedSolutions.length
-  
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4-turbo-preview",
-    messages: [
-      {
-        role: "system",
-        content: `You are an expert product strategist and solution architect.
-        Generate innovative software solutions that directly address the identified pain points.
-        Solutions should be specific, implementable, and valuable.`
-      },
-      {
-        role: "user",
-        content: `Core Problem: "${coreProblem}"
-        
-        Persona: ${persona.name} (${persona.role} in ${persona.industry})
-        
-        Pain Points:
-        ${painPoints?.map((pp, i) => `${i + 1}. [${pp.severity}] ${pp.description}`).join('\n') || 'None'}
-        
-        ${lockedSolutions.length > 0 ? `Keep these existing solutions: ${JSON.stringify(lockedSolutions.map(s => s.title))}` : ''}
-        
-        Generate ${solutionsToGenerate} software solutions.
-        
-        Return as JSON:
-        {
-          "solutions": [
-            {
-              "title": "Solution title",
-              "description": "How this solution works and what it accomplishes",
-              "solutionType": "Feature|Integration|Automation|Analytics|Platform",
-              "complexity": "Low|Medium|High",
-              "addressedPainPoints": [0, 1, 2] // indices of pain points this solution addresses
-            }
-          ]
-        }`
-      }
-    ],
-    response_format: { type: "json_object" }
-  })
-  
-  const { solutions } = JSON.parse(completion.choices[0].message.content!)
-  
-  return {
-    ...state,
-    newSolutions: solutions
-  }
-}
-
-// Node: Calculate solution-pain point relevance scores
-async function calculateRelevanceScores(state: SolutionGenerationState) {
-  const { newSolutions, painPoints } = state
-  
-  const mappings: any[] = []
-  
-  for (const solution of newSolutions!) {
-    for (const painPointIndex of solution.addressedPainPoints) {
-      const painPoint = painPoints![painPointIndex]
-      if (!painPoint) continue
-      
-      // Calculate relevance score using GPT-4
-      const completion = await openai.chat.completions.create({
-        model: "gpt-4-turbo-preview",
-        messages: [
-          {
-            role: "system",
-            content: `Rate how well a solution addresses a specific pain point on a scale of 0.0 to 1.0.`
-          },
-          {
-            role: "user",
-            content: `Pain Point: ${painPoint.description}
-            Solution: ${solution.title} - ${solution.description}
-            
-            Rate the relevance (0.0-1.0) and explain briefly.
-            Return as JSON: { "score": 0.0-1.0, "reasoning": "brief explanation" }`
-          }
-        ],
-        response_format: { type: "json_object" }
-      })
-      
-      const { score } = JSON.parse(completion.choices[0].message.content!)
-      
-      mappings.push({
-        solution,
-        painPointId: painPoint.id,
-        relevanceScore: score
+  try {
+    console.log('Generate solutions function started')
+    
+    // Initialize clients
+    const openaiKey = Deno.env.get('OPENAI_API_KEY')
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')
+    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')
+    
+    if (!openaiKey || !supabaseUrl || !supabaseServiceKey) {
+      console.error('Missing required environment variables')
+      return new Response(JSON.stringify({ 
+        error: { message: 'Service configuration error', code: 'CONFIG_ERROR' }
+      }), { 
+        status: 500, 
+        headers: { ...corsHeaders, "Content-Type": "application/json" }
       })
     }
-  }
-  
-  return {
-    ...state,
-    solutionMappings: mappings
-  }
-}
-
-// Node: Ensure solution diversity and coverage
-async function ensureCoverage(state: SolutionGenerationState) {
-  const { newSolutions, painPoints, solutionMappings } = state
-  
-  // Check if all pain points are addressed
-  const addressedPainPointIds = new Set(solutionMappings!.map(m => m.painPointId))
-  const unaddressedPainPoints = painPoints!.filter(pp => !addressedPainPointIds.has(pp.id))
-  
-  if (unaddressedPainPoints.length > 0) {
-    // Generate additional solution for unaddressed pain points
+    
+    const openai = new OpenAI({ apiKey: openaiKey })
+    const supabase = createClient(supabaseUrl, supabaseServiceKey)
+    
+    // Parse request
+    const { projectId, personaId, lockedSolutionIds = [] } = await req.json()
+    
+    if (!projectId || !personaId) {
+      return new Response(JSON.stringify({ 
+        error: { message: 'Missing required fields', code: 'INVALID_REQUEST' }
+      }), { 
+        status: 400, 
+        headers: { ...corsHeaders, "Content-Type": "application/json" }
+      })
+    }
+    
+    console.log('Processing persona:', personaId)
+    
+    // Step 1: Load persona and problem context
+    const { data: persona, error: personaError } = await supabase
+      .from('personas')
+      .select(`
+        *,
+        core_problems!inner(
+          validated_problem
+        )
+      `)
+      .eq('id', personaId)
+      .single()
+    
+    if (personaError || !persona) {
+      console.error('Error loading persona:', personaError)
+      throw new Error('Failed to load persona data')
+    }
+    
+    const coreProblem = persona.core_problems.validated_problem
+    console.log('Core problem:', coreProblem?.substring(0, 50) + '...')
+    
+    // Step 2: Get pain points
+    const { data: painPoints } = await supabase
+      .from('pain_points')
+      .select('*')
+      .eq('persona_id', personaId)
+      .order('position')
+    
+    const painPointsArray = painPoints || []
+    
+    if (painPointsArray.length === 0) {
+      console.log('No pain points found for persona')
+      return new Response(JSON.stringify({ 
+        error: { message: 'No pain points found for this persona', code: 'NO_PAIN_POINTS' }
+      }), { 
+        status: 400, 
+        headers: { ...corsHeaders, "Content-Type": "application/json" }
+      })
+    }
+    
+    console.log('Found', painPointsArray.length, 'pain points')
+    
+    // Step 3: Get existing solutions
+    const { data: existingSolutions } = await supabase
+      .from('key_solutions')
+      .select('*')
+      .eq('persona_id', personaId)
+      .order('position')
+    
+    const existingSolutionsArray = existingSolutions || []
+    const lockedSolutions = existingSolutionsArray.filter(s => 
+      lockedSolutionIds.includes(s.id)
+    )
+    
+    const solutionsToGenerate = 5 - lockedSolutions.length
+    console.log('Generating', solutionsToGenerate, 'solutions')
+    
+    // Step 4: Generate solutions
     const completion = await openai.chat.completions.create({
       model: "gpt-4-turbo-preview",
       messages: [
         {
           role: "system",
-          content: `Generate a solution that specifically addresses unaddressed pain points.`
+          content: `You are an expert product strategist and solution architect.
+          Generate innovative software solutions that directly address the identified pain points.
+          Solutions should be specific, implementable, and valuable.
+          
+          CRITICAL REQUIREMENT: Each solution MUST directly address one or more of the provided pain points.
+          
+          Solutions should be:
+          - Specific software features or capabilities
+          - Technically feasible to implement
+          - Clearly valuable to the persona
+          - Different from each other (diverse approaches)
+          - Appropriately scoped (not too broad or narrow)`
         },
         {
           role: "user",
-          content: `These pain points are not well addressed:
-          ${unaddressedPainPoints.map(pp => pp.description).join('\n')}
+          content: `Generate ${solutionsToGenerate} software solutions that address these pain points:
+
+          CORE PROBLEM: "${coreProblem}"
           
-          Generate one comprehensive solution that addresses these.
-          Use the same JSON format as before.`
+          PERSONA: ${persona.name} (${persona.role} in ${persona.industry})
+          
+          PAIN POINTS TO SOLVE:
+          ${painPointsArray.map((pp, i) => `${i}. [${pp.severity}] ${pp.description}`).join('\n')}
+          
+          ${lockedSolutions.length > 0 ? `KEEP these existing solutions: ${JSON.stringify(lockedSolutions.map(s => s.title))}` : ''}
+          
+          INSTRUCTIONS:
+          1. Each solution must clearly address at least one pain point
+          2. Reference pain points by their index numbers (0, 1, 2, etc.)
+          3. Solutions should be implementable software features
+          4. Vary the complexity and approach across solutions
+          5. Focus on practical, valuable solutions
+          
+          Return a JSON object with a 'solutions' array:
+          {
+            "solutions": [
+              {
+                "title": "Clear, specific solution title",
+                "description": "Detailed explanation of how this solution works and what value it provides",
+                "solutionType": "Feature|Integration|Automation|Analytics|Platform",
+                "complexity": "Low|Medium|High",
+                "addressedPainPoints": [0, 1] // array of pain point indices this addresses
+              }
+            ]
+          }`
         }
       ],
       response_format: { type: "json_object" }
     })
     
     const { solutions } = JSON.parse(completion.choices[0].message.content!)
+    console.log('Generated', solutions.length, 'solutions')
     
-    // Add the new solution and its mappings
-    newSolutions!.push(solutions[0])
-    
-    for (const pp of unaddressedPainPoints) {
-      solutionMappings!.push({
-        solution: solutions[0],
-        painPointId: pp.id,
-        relevanceScore: 0.8 // Default high relevance for targeted solution
-      })
-    }
-  }
-  
-  return state
-}
-
-// Node: Save solutions and mappings to database
-async function saveSolutions(state: SolutionGenerationState) {
-  const { projectId, personaId, newSolutions, solutionMappings, lockedSolutionIds, generationBatch } = state
-  
-  // Delete non-locked solutions and their mappings
-  if (lockedSolutionIds.length > 0) {
-    const { data: solutionsToDelete } = await supabase
-      .from('key_solutions')
-      .select('id')
-      .eq('persona_id', personaId)
-      .not('id', 'in', `(${lockedSolutionIds.join(',')})`)
-    
-    if (solutionsToDelete && solutionsToDelete.length > 0) {
-      const idsToDelete = solutionsToDelete.map(s => s.id)
-      
-      // Delete mappings first
-      await supabase
-        .from('solution_pain_point_mappings')
-        .delete()
-        .in('solution_id', idsToDelete)
-      
-      // Then delete solutions
+    // Step 5: Delete non-locked solutions
+    if (lockedSolutionIds.length > 0) {
       await supabase
         .from('key_solutions')
         .delete()
-        .in('id', idsToDelete)
-    }
-  } else {
-    // Delete all mappings for this persona's solutions
-    const { data: allSolutions } = await supabase
-      .from('key_solutions')
-      .select('id')
-      .eq('persona_id', personaId)
-    
-    if (allSolutions && allSolutions.length > 0) {
+        .eq('persona_id', personaId)
+        .not('id', 'in', `(${lockedSolutionIds.join(',')})`)
+    } else {
       await supabase
-        .from('solution_pain_point_mappings')
+        .from('key_solutions')
         .delete()
-        .in('solution_id', allSolutions.map(s => s.id))
+        .eq('persona_id', personaId)
     }
     
-    // Delete all solutions
-    await supabase
-      .from('key_solutions')
-      .delete()
-      .eq('persona_id', personaId)
-  }
-  
-  // Insert new solutions
-  const solutionsToInsert = newSolutions!.map((solution, index) => ({
-    project_id: projectId,
-    persona_id: personaId,
-    title: solution.title,
-    description: solution.description,
-    solution_type: solution.solutionType,
-    complexity: solution.complexity,
-    position: index + lockedSolutionIds.length,
-    is_locked: false,
-    is_selected: false,
-    generation_batch: generationBatch
-  }))
-  
-  const { data: insertedSolutions, error } = await supabase
-    .from('key_solutions')
-    .insert(solutionsToInsert)
-    .select()
-  
-  if (error) throw error
-  
-  // Create solution ID map
-  const solutionIdMap = new Map()
-  insertedSolutions.forEach((sol, index) => {
-    solutionIdMap.set(newSolutions![index], sol.id)
-  })
-  
-  // Insert mappings
-  const mappingsToInsert = solutionMappings!
-    .filter(m => solutionIdMap.has(m.solution))
-    .map(m => ({
-      solution_id: solutionIdMap.get(m.solution),
-      pain_point_id: m.painPointId,
-      relevance_score: m.relevanceScore
+    // Step 6: Insert new solutions
+    const generationBatch = crypto.randomUUID()
+    const solutionsToInsert = solutions.map((solution: any, index: number) => ({
+      persona_id: personaId,
+      title: solution.title,
+      description: solution.description,
+      solution_type: solution.solutionType,
+      complexity: solution.complexity,
+      position: index + lockedSolutionIds.length,
+      is_locked: false,
+      generation_batch: generationBatch
     }))
-  
-  await supabase
-    .from('solution_pain_point_mappings')
-    .insert(mappingsToInsert)
-  
-  // Update project status
-  await supabase
-    .from('projects')
-    .update({ 
-      current_step: 'solution_discovery',
-      status: 'solution_discovery'
-    })
-    .eq('id', projectId)
-  
-  // Log event
-  await supabase.from('langgraph_state_events').insert({
-    project_id: projectId,
-    event_type: 'solutions_generated',
-    event_data: {
-      personaId,
-      generationBatch,
-      solutionCount: insertedSolutions.length,
-      mappingCount: mappingsToInsert.length,
-      lockedCount: lockedSolutionIds.length
-    },
-    sequence_number: await getNextSequenceNumber(projectId)
-  })
-  
-  return {
-    ...state,
-    insertedSolutions,
-    insertedMappings: mappingsToInsert
-  }
-}
-
-// Helper function
-async function getNextSequenceNumber(projectId: string): Promise<number> {
-  const { data } = await supabase
-    .from('langgraph_state_events')
-    .select('sequence_number')
-    .eq('project_id', projectId)
-    .order('sequence_number', { ascending: false })
-    .limit(1)
-    .single()
-  
-  return (data?.sequence_number || 0) + 1
-}
-
-// Create the workflow
-const workflow = new StateGraph<SolutionGenerationState>({
-  channels: {
-    projectId: null,
-    personaId: null,
-    persona: null,
-    coreProblem: null,
-    painPoints: null,
-    lockedSolutionIds: null,
-    existingSolutions: null,
-    newSolutions: null,
-    solutionMappings: null,
-    generationBatch: null,
-    insertedSolutions: null,
-    insertedMappings: null
-  }
-})
-
-// Add nodes
-workflow.addNode("loadContext", loadContext)
-workflow.addNode("generateSolutions", generateSolutions)
-workflow.addNode("calculateRelevanceScores", calculateRelevanceScores)
-workflow.addNode("ensureCoverage", ensureCoverage)
-workflow.addNode("saveSolutions", saveSolutions)
-
-// Define the flow
-workflow.setEntryPoint("loadContext")
-workflow.addEdge("loadContext", "generateSolutions")
-workflow.addEdge("generateSolutions", "calculateRelevanceScores")
-workflow.addEdge("calculateRelevanceScores", "ensureCoverage")
-workflow.addEdge("ensureCoverage", "saveSolutions")
-workflow.setFinishPoint("saveSolutions")
-
-const app = workflow.compile()
-
-serve(async (req) => {
-  try {
-    const { projectId, personaId, lockedSolutionIds = [] } = await req.json()
     
-    const startTime = Date.now()
+    const { data: insertedSolutions, error: insertError } = await supabase
+      .from('key_solutions')
+      .insert(solutionsToInsert)
+      .select()
     
-    // Execute the workflow
-    const result = await app.invoke({
-      projectId,
-      personaId,
-      lockedSolutionIds
-    })
+    if (insertError) {
+      console.error('Error inserting solutions:', insertError)
+      throw new Error('Failed to save solutions')
+    }
     
-    // Get all solutions with mappings
+    console.log('Inserted', insertedSolutions?.length, 'solutions')
+    
+    // Step 7: Create solution-pain point mappings
+    const mappings: Array<{
+      solution_id: string;
+      pain_point_id: string;
+      relevance_score: number;
+      generation_batch: string;
+    }> = []
+    
+    for (let solutionIndex = 0; solutionIndex < solutions.length; solutionIndex++) {
+      const solution = solutions[solutionIndex]
+      const insertedSolution = insertedSolutions![solutionIndex]
+      
+      for (const painPointIndex of solution.addressedPainPoints) {
+        const painPoint = painPointsArray[painPointIndex]
+        if (!painPoint) continue
+        
+        mappings.push({
+          solution_id: insertedSolution.id,
+          pain_point_id: painPoint.id,
+          relevance_score: 0.8, // Default high relevance since solutions are generated to address specific pain points
+          generation_batch: generationBatch
+        })
+      }
+    }
+    
+    if (mappings.length > 0) {
+      const { error: mappingError } = await supabase
+        .from('solution_pain_point_mappings')
+        .insert(mappings)
+      
+      if (mappingError) {
+        console.error('Error inserting mappings:', mappingError)
+        // Don't throw - solutions were successful
+      } else {
+        console.log('Inserted', mappings.length, 'solution-pain point mappings')
+      }
+    }
+    
+    // Get all solutions for response
     const { data: allSolutions } = await supabase
       .from('key_solutions')
-      .select(`
-        *,
-        solution_pain_point_mappings(
-          pain_point_id,
-          relevance_score
-        )
-      `)
+      .select('*')
       .eq('persona_id', personaId)
       .order('position')
     
-    // Log execution
-    await supabase.from('langgraph_execution_logs').insert({
-      project_id: projectId,
-      node_name: 'generate_solutions_workflow',
-      input_state: { projectId, personaId, lockedSolutionIds },
-      output_state: { 
-        solutionCount: allSolutions?.length,
-        mappingCount: result.insertedMappings?.length
-      },
-      status: 'success',
-      execution_time_ms: Date.now() - startTime
-    })
+    console.log('Returning', allSolutions?.length, 'total solutions')
     
     return new Response(JSON.stringify({ 
-      solutions: allSolutions,
-      mappings: result.insertedMappings
+      solutions: allSolutions || [],
+      mappings: mappings
     }), {
-      headers: { "Content-Type": "application/json" },
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
     })
+    
   } catch (error) {
     console.error('Error in generate-solutions:', error)
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ 
+      error: { 
+        message: error.message || 'Internal server error', 
+        code: 'GENERATION_ERROR' 
+      }
+    }), {
       status: 500,
-      headers: { "Content-Type": "application/json" },
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
     })
   }
 })

@@ -262,6 +262,38 @@ html, body {
       box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
     }
   }
+
+  /* Ethereal float animation for pain point skeletons */
+  .ethereal-float {
+    animation: etherealFloat 4s ease-in-out infinite;
+  }
+
+  @keyframes etherealFloat {
+    0%, 100% {
+      transform: translateY(0px);
+      filter: brightness(1);
+    }
+    50% {
+      transform: translateY(-8px);
+      filter: brightness(1.1);
+    }
+  }
+
+  /* Ethereal glow for pain points */
+  .ethereal-glow {
+    animation: etherealGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes etherealGlow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(249, 115, 22, 0.3),
+                  0 0 40px rgba(249, 115, 22, 0.1);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(249, 115, 22, 0.5),
+                  0 0 60px rgba(249, 115, 22, 0.2);
+    }
+  }
 }
 
 /* Component styles */
