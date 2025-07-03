@@ -122,6 +122,7 @@ interface WorkflowState {
   
   // Pain points data
   painPoints: PainPoint[]
+  focusedPainPointId: string | null
   
   // Solutions data
   solutions: Solution[]
@@ -166,6 +167,8 @@ interface WorkflowActions {
   generatePainPoints: () => Promise<void>
   regeneratePainPoints: () => Promise<void>
   togglePainPointLock: (painPointId: string) => void
+  focusOnPainPoint: (painPointId: string) => void
+  clearPainPointFocus: () => void
   
   // Solution management
   generateSolutions: () => Promise<void>
@@ -198,6 +201,7 @@ const initialState: WorkflowState = {
   activePersonaId: null,
   personaGenerationBatch: null,
   painPoints: [],
+  focusedPainPointId: null,
   solutions: [],
   solutionMappings: [],
   selectedSolutionIds: new Set(),
@@ -273,6 +277,7 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
         'persona_discovery',
         'pain_points',
         'solution_generation',
+        'focus_group',
         'user_stories',
         'architecture'
       ]
@@ -307,6 +312,7 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
         'persona_discovery',
         'pain_points',
         'solution_generation',
+        'focus_group',
         'user_stories',
         'architecture'
       ]
@@ -492,20 +498,84 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
     },
 
     regeneratePersonas: async () => {
+      console.log('[workflowStore] regeneratePersonas called')
       const state = get()
-      const unlockedPersonas = state.personas.filter(p => !state.lockedItems.personas.has(p.id))
+      
+      if (!state.coreProblem || !state.projectId) {
+        console.log('[workflowStore] regeneratePersonas early return - missing coreProblem or projectId')
+        return
+      }
+      
+      const lockedPersonas = state.personas.filter(p => state.lockedItems.personas.has(p.id))
+      const unlockedPersonasCount = state.personas.length - lockedPersonas.length
+      
+      console.log('[workflowStore] Regenerating personas:', {
+        totalPersonas: state.personas.length,
+        lockedPersonas: lockedPersonas.length,
+        toRegenerate: unlockedPersonasCount
+      })
+      
       const uiStore = useUIStore.getState()
       
       set({ isGeneratingPersonas: true })
       try {
-        // TODO: Call Tauri API to regenerate unlocked personas
-        // const newPersonas = await tauriAPI.regeneratePersonas(unlockedPersonas.map(p => p.id))
-        // Update only unlocked personas
+        // Import personas API
+        const { problemApi } = await import('@/services/api/problem')
         
-        // Notify canvas store
-        const canvasStore = useCanvasStore.getState()
-        canvasStore.syncWithWorkflow(get())
-        uiStore.showSuccess(`Regenerated ${unlockedPersonas.length} personas`)
+        const batchId = crypto.randomUUID()
+        
+        // Call the edge function to generate personas, passing locked persona IDs
+        console.log('[workflowStore] Calling problemApi.generatePersonas with locked personas:', lockedPersonas.map(p => p.id))
+        const response = await problemApi.generatePersonas(
+          state.projectId,
+          state.coreProblem.id,
+          lockedPersonas.map(p => p.id)
+        )
+        console.log('[workflowStore] Regeneration response:', response)
+        
+        // Transform the response to match our Persona interface
+        const newPersonas: Persona[] = response.map((persona: any) => ({
+          id: persona.id || crypto.randomUUID(),
+          project_id: state.projectId!,
+          name: persona.name,
+          description: persona.description,
+          demographics: { 
+            industry: persona.industry || 'Unknown',
+            role: persona.role || 'Unknown',
+            ...persona.demographics 
+          },
+          psychographics: persona.psychographics || {},
+          goals: persona.goals || [],
+          frustrations: persona.frustrations || [],
+          batch_id: batchId,
+          is_locked: false,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          // Add pain_degree to the raw persona object for WorkflowCanvas
+          pain_degree: persona.pain_degree || 3
+        } as Persona & { pain_degree?: number }))
+        
+        // Combine locked personas with new personas
+        const allPersonas = [...lockedPersonas, ...newPersonas]
+        
+        set({ 
+          personas: allPersonas,
+          personaGenerationBatch: batchId
+        })
+        
+        console.log('[workflowStore] Personas regenerated:', {
+          locked: lockedPersonas.length,
+          new: newPersonas.length,
+          total: allPersonas.length
+        })
+        
+        // Notify canvas and UI stores
+        // NOTE: Don't call syncWithWorkflow here - WorkflowCanvas handles the nodes directly
+        try {
+          uiStore.showSuccess(`Regenerated ${newPersonas.length} personas (${lockedPersonas.length} locked)`)
+        } catch (error) {
+          console.warn('[workflowStore] UIStore showSuccess failed:', error)
+        }
         
       } catch (error) {
         console.error('Persona regeneration failed:', error)
@@ -684,6 +754,30 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
         `Pain point ${isLocked ? 'locked' : 'unlocked'}`,
         painPoint ? painPoint.title : undefined
       )
+    },
+
+    focusOnPainPoint: (painPointId) => {
+      set({ focusedPainPointId: painPointId })
+      
+      // Find the pain point and its associated persona
+      const state = get()
+      const painPoint = state.painPoints.find(p => p.id === painPointId)
+      if (painPoint) {
+        // Set the active persona to the one associated with this pain point
+        set({ activePersonaId: painPoint.persona_id })
+        
+        // Notify UI
+        const uiStore = useUIStore.getState()
+        uiStore.showInfo('Focused on pain point', painPoint.title)
+      }
+    },
+
+    clearPainPointFocus: () => {
+      set({ focusedPainPointId: null })
+      
+      // Notify UI
+      const uiStore = useUIStore.getState()
+      uiStore.showInfo('Returned to main view')
     },
 
     // Solution management

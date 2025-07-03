@@ -13,11 +13,12 @@ export interface PainPointNodeData {
   isLocked?: boolean;
   isSkeleton?: boolean;
   onToggleLock?: () => void;
+  onFocus?: () => void;
 }
 
 export const PainPointNode: React.FC<NodeProps> = ({ data, selected }) => {
   const nodeData = data as unknown as PainPointNodeData;
-  const { isLocked = false, isSkeleton = false, onToggleLock } = nodeData;
+  const { isLocked = false, isSkeleton = false, onToggleLock, onFocus } = nodeData;
 
   const severityStyles = {
     critical: 'text-red-400 bg-red-900/30 border-red-500/30',
@@ -74,7 +75,14 @@ export const PainPointNode: React.FC<NodeProps> = ({ data, selected }) => {
       showTargetHandle={true}
       className="w-[320px] max-w-[320px]"
     >
-      <div className="space-y-3">
+      <div 
+        className="space-y-3 cursor-pointer"
+        onClick={() => {
+          if (!isSkeleton && onFocus) {
+            onFocus();
+          }
+        }}
+      >
         {/* Header with Severity and Lock */}
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-2">

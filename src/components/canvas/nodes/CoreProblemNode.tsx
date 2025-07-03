@@ -57,7 +57,7 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
     const trimmedText = problemText.trim();
     if (!trimmedText) return;
     
-    console.log('[CoreProblemNode] Starting validation for:', trimmedText);
+    console.log('[CoreProblemNode] Starting validation and persona generation for:', trimmedText);
     
     setIsValidating(true);
     setValidationError(null);
@@ -65,7 +65,7 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
     try {
       setProblemInput(trimmedText);
       
-      console.log('[CoreProblemNode] Calling problemApi.validateProblem...');
+      console.log('[CoreProblemNode] Calling both problemApi.validateProblem and generatePersonas in parallel...');
       console.log('[CoreProblemNode] Input text:', trimmedText);
       
       // Animate edges when validation starts
@@ -77,41 +77,58 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
       }
       console.log('[CoreProblemNode] Started edge animations during validation');
       
-      const validationResult = await problemApi.validateProblem(trimmedText);
-      console.log('[CoreProblemNode] Validation result:', validationResult);
+      // Set up core problem data first for persona generation
+      const workflowStore = useWorkflowStore.getState();
+      const projectId = workflowStore.projectId || crypto.randomUUID();
+      const coreProblemId = crypto.randomUUID();
       
-      if (validationResult.isValid) {
-        console.log('[CoreProblemNode] Problem is valid, triggering all actions');
+      const coreProblem = {
+        id: coreProblemId,
+        project_id: projectId,
+        description: trimmedText,
+        is_validated: false, // Will be updated if validation succeeds
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      };
+      
+      // Update store state immediately so persona generation can access it
+      useWorkflowStore.setState({ 
+        projectId,
+        coreProblem,
+        problemInput: trimmedText
+      });
+      
+      console.log('[CoreProblemNode] Set preliminary coreProblem for persona generation:', coreProblem);
+      
+      // Run validation and persona generation in parallel
+      const [validationResult, personaGenerationResult] = await Promise.allSettled([
+        problemApi.validateProblem(trimmedText),
+        workflowStore.generatePersonas()
+      ]);
+      
+      console.log('[CoreProblemNode] Validation result:', validationResult);
+      console.log('[CoreProblemNode] Persona generation result:', personaGenerationResult);
+      
+      // Process validation result
+      if (validationResult.status === 'fulfilled' && validationResult.value.isValid) {
+        console.log('[CoreProblemNode] Problem is valid, triggering UI updates');
         
         // 1. Trigger gold flash animation
         setShowGoldFlash(true);
         setTimeout(() => setShowGoldFlash(false), 800);
         
-        // 2. Set validated problem in store
-        const workflowStore = useWorkflowStore.getState();
-        const projectId = workflowStore.projectId || crypto.randomUUID();
-        
-        // Get the coreProblemId from the validation response
-        const coreProblemId = (validationResult as any).coreProblemId || crypto.randomUUID();
-        console.log('[CoreProblemNode] Using coreProblemId from validation:', coreProblemId);
-        
-        const coreProblem = {
-          id: coreProblemId,  // Use the ID from validation response
-          project_id: projectId,
-          description: trimmedText,
+        // 2. Update the core problem as validated
+        const updatedCoreProblem = {
+          ...coreProblem,
+          id: (validationResult.value as any).coreProblemId || coreProblem.id,
           is_validated: true,
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
         };
         
-        // Update store state immediately
         useWorkflowStore.setState({ 
-          projectId,
-          coreProblem,
-          problemInput: trimmedText
+          coreProblem: updatedCoreProblem
         });
         
-        console.log('[CoreProblemNode] Set coreProblem:', coreProblem);
+        console.log('[CoreProblemNode] Updated coreProblem as validated:', updatedCoreProblem);
         
         // 3. Close editing mode
         setIsEditing(false);
@@ -120,16 +137,25 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
         console.log('[CoreProblemNode] Proceeding to next step');
         proceedToNextStep();
         
-        // 5. Generate personas immediately
-        console.log('[CoreProblemNode] Triggering persona generation');
-        workflowStore.generatePersonas();
       } else {
-        console.log('[CoreProblemNode] Problem is invalid:', validationResult.feedback);
-        setValidationError(validationResult.feedback || 'Invalid problem statement');
+        console.log('[CoreProblemNode] Problem validation failed');
+        if (validationResult.status === 'fulfilled') {
+          setValidationError(validationResult.value.feedback || 'Invalid problem statement');
+        } else {
+          setValidationError('Validation failed with an error');
+        }
       }
+      
+      // Handle persona generation result
+      if (personaGenerationResult.status === 'rejected') {
+        console.warn('[CoreProblemNode] Persona generation failed:', personaGenerationResult.reason);
+      } else {
+        console.log('[CoreProblemNode] Persona generation completed successfully');
+      }
+      
     } catch (error) {
-      console.error('[CoreProblemNode] Validation error:', error);
-      setValidationError(error instanceof Error ? error.message : 'Failed to validate problem');
+      console.error('[CoreProblemNode] Error in handleSubmit:', error);
+      setValidationError(error instanceof Error ? error.message : 'Failed to process problem');
     } finally {
       setIsValidating(false);
     }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ReactFlowProvider } from '@xyflow/react';
 import { ConnectedSidebar } from '@/components/layout/Sidebar';
 import { ProgressSteps } from '@/components/common/LoadingStates';
+import { PainPointDropdown } from '@/components/common';
 import { WorkflowCanvas } from '@/components/workflow';
 import { DemoCanvas } from '@/components/DemoCanvas';
 import { AuthDebug } from '@/components/debug/AuthDebug';
@@ -14,10 +15,61 @@ import { supabase } from '@/services/supabase/client';
 import type { WorkflowStep } from '@/types/workflow.types';
 import './App.css';
 
+// Container component that positions dropdown relative to step 3
+function PainPointDropdownContainer({ 
+  onPainPointSelect, 
+  onGoToProblem 
+}: {
+  onPainPointSelect: (painPointId: string) => void;
+  onGoToProblem: () => void;
+}) {
+  const [position, setPosition] = useState({ top: 0, left: 0 });
+
+  useEffect(() => {
+    const positionDropdown = () => {
+      const step3Element = document.querySelector('[data-step-index="2"]');
+      if (step3Element) {
+        const rect = step3Element.getBoundingClientRect();
+        const progressContainer = document.querySelector('.bg-obsidian-800');
+        const containerRect = progressContainer?.getBoundingClientRect();
+        
+        if (containerRect) {
+          setPosition({
+            top: rect.bottom - containerRect.top + 8, // 8px gap below step 3
+            left: rect.left - containerRect.left + (rect.width / 2) // Center align with step 3
+          });
+        }
+      }
+    };
+
+    // Position immediately
+    positionDropdown();
+    
+    // Reposition on window resize
+    window.addEventListener('resize', positionDropdown);
+    return () => window.removeEventListener('resize', positionDropdown);
+  }, []);
+
+  return (
+    <div 
+      className="absolute z-50 transform -translate-x-1/2"
+      style={{ top: position.top, left: position.left }}
+      data-pain-point-dropdown
+    >
+      <PainPointDropdown
+        onPainPointSelect={onPainPointSelect}
+        onGoToProblem={onGoToProblem}
+        className="shadow-2xl"
+      />
+    </div>
+  );
+}
+
 // Component that uses canvas navigation inside ReactFlowProvider
 function AppContent() {
   const { currentStep, setCurrentStep } = useWorkflowStore();
   const { goToStep1, goToStep2, goToStep } = useCanvasNavigation();
+  const [showPainPointDropdown, setShowPainPointDropdown] = useState(false);
 
   // Map workflow step to progress step index
   const getProgressStepIndex = (step: string): number => {
@@ -26,7 +78,7 @@ function AppContent() {
       'persona_discovery': 1,
       'pain_points': 2,
       'solution_generation': 3,
-      'focus_group': 4, // This might not exist in workflow, mapping to index 4
+      'focus_group': 4,
       'user_stories': 5,
       'architecture': 6 // Maps to our "documentation" step
     };
@@ -40,7 +92,7 @@ function AppContent() {
       1: 'persona_discovery',
       2: 'pain_points',
       3: 'solution_generation',
-      4: 'user_stories', // Skip focus_group for now
+      4: 'focus_group',
       5: 'user_stories',
       6: 'architecture'
     };
@@ -52,12 +104,39 @@ function AppContent() {
     console.log('[App] Step clicked:', stepIndex);
     console.log('[App] Available navigation functions:', { goToStep1: typeof goToStep1, goToStep2: typeof goToStep2, goToStep: typeof goToStep });
     
+    // Special handling for Step 3 (Pain Points) - show dropdown instead of immediate navigation
+    if (stepIndex === 2) {
+      console.log('[App] Pain Points step clicked - showing dropdown');
+      setShowPainPointDropdown(true);
+      return;
+    }
+    
     // Update workflow step
     const workflowStep = getWorkflowStep(stepIndex);
     setCurrentStep(workflowStep);
     
     // Navigate canvas based on step
     navigateToStep(stepIndex);
+  };
+
+  // Handle pain point selection from dropdown
+  const handlePainPointSelect = (painPointId: string) => {
+    console.log('[App] Pain point selected:', painPointId);
+    setShowPainPointDropdown(false);
+    
+    // Update workflow step to pain_points and navigate
+    setCurrentStep('pain_points');
+    goToStep(3);
+  };
+
+  // Handle "Enter Problem" CTA from dropdown
+  const handleGoToProblem = () => {
+    console.log('[App] Going back to problem step');
+    setShowPainPointDropdown(false);
+    
+    // Navigate to Step 1 (Problem)
+    setCurrentStep('problem_input');
+    goToStep1();
   };
 
   // Navigate canvas to appropriate view based on step index
@@ -75,11 +154,15 @@ function AppContent() {
         goToStep(3);
         break;
       case 3: // Solutions
+        goToStep(4);
+        break;
       case 4: // Focus Group
+        goToStep(5); // Navigate to focus group view
+        break;
       case 5: // User Stories
       case 6: // Documentation
-        // Use step 3 layout for remaining steps for now
-        goToStep(3);
+        // Use step 4 layout for remaining steps for now
+        goToStep(4);
         break;
       default:
         goToStep1();
@@ -98,6 +181,28 @@ function AppContent() {
     }, 100);
   }, [currentStep]);
 
+  // Close pain point dropdown when clicking elsewhere or when no selection is made
+  useEffect(() => {
+    if (showPainPointDropdown) {
+      const handleClickOutside = (event: MouseEvent) => {
+        const dropdown = document.querySelector('[data-pain-point-dropdown]');
+        const step3Element = document.querySelector('[data-step-index="2"]');
+        
+        if (dropdown && !dropdown.contains(event.target as Node) && 
+            step3Element && !step3Element.contains(event.target as Node)) {
+          console.log('[App] Clicking outside pain point dropdown - showing Step 2 view');
+          setShowPainPointDropdown(false);
+          // Fallback to Step 2 behavior when no pain point is selected
+          setCurrentStep('persona_discovery');
+          goToStep2();
+        }
+      };
+
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [showPainPointDropdown, goToStep2, setCurrentStep]);
+
   return (
     <div className="flex h-screen bg-gray-900">
       {/* Sidebar */}
@@ -106,7 +211,7 @@ function AppContent() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Progress Steps Container */}
-        <div className="bg-obsidian-800 border-b border-obsidian-700 py-8 px-12">
+        <div className="bg-obsidian-800 border-b border-obsidian-700 py-8 px-12 relative">
           <ProgressSteps 
             currentStep={getProgressStepIndex(currentStep)}
             variant="horizontal"
@@ -114,6 +219,14 @@ function AppContent() {
             className="max-w-none"
             onStepClick={handleStepClick}
           />
+          
+          {/* Pain Point Dropdown Overlay */}
+          {showPainPointDropdown && (
+            <PainPointDropdownContainer
+              onPainPointSelect={handlePainPointSelect}
+              onGoToProblem={handleGoToProblem}
+            />
+          )}
         </div>
 
         {/* Canvas */}

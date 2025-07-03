@@ -219,6 +219,40 @@ export const useCanvasNavigation = () => {
       });
     });
 
+    // Reset pain point nodes to their original positions (matching WorkflowCanvas.tsx initial setup)
+    const painPointNodes = allNodes.filter(node => 
+      node.id.startsWith('pain-point-') && node.id !== 'pain-points-label'
+    );
+    
+    if (painPointNodes.length > 0) {
+      const viewportWidth = window.innerWidth;
+      const painPointBaseX = viewportWidth / 3; // Base position for pain points
+      const painPointColumn1X = painPointBaseX - 220; // First column (3 nodes) - increased spacing
+      const painPointColumn2X = painPointBaseX + 220; // Second column (4 nodes) - increased spacing
+      const painPointStartY = -300; // Start position for first pain point
+      const painPointSpacing = 180; // Increased vertical spacing for better separation
+      
+      console.log('[useCanvasNavigation] Resetting pain point nodes to original positions');
+      painPointNodes.forEach((node, index) => {
+        // Determine column and position within column (same logic as WorkflowCanvas.tsx)
+        const isFirstColumn = index < 3;
+        const columnX = isFirstColumn ? painPointColumn1X : painPointColumn2X;
+        const columnIndex = isFirstColumn ? index : index - 3;
+        const positionY = painPointStartY + (columnIndex * painPointSpacing);
+        
+        const originalPosition = {
+          x: columnX,
+          y: positionY
+        };
+        
+        console.log(`[useCanvasNavigation] Resetting ${node.id} to position:`, originalPosition);
+        
+        updateNode(node.id, {
+          position: originalPosition
+        });
+      });
+    }
+
     // Calculate optimal zoom to fit both problem node and persona nodes with more focus on personas
     const sidebarOffset = 256; // Account for sidebar
     const availableWidth = viewport.width - sidebarOffset;
@@ -314,6 +348,15 @@ export const useCanvasNavigation = () => {
                   'pain-point-1', 'pain-point-2', 'pain-point-3', 'pain-point-4', 'pain-point-5', 
                   'pain-point-6', 'pain-point-7'],
         zoom: 0.7,
+        focus: null // Let fitView handle centering
+      },
+      4: {
+        nodeIds: ['problem-input', 'persona-1', 'persona-2', 'persona-3', 'persona-4', 'persona-5',
+                  'pain-point-1', 'pain-point-2', 'pain-point-3', 'pain-point-4', 'pain-point-5',
+                  'pain-point-6', 'pain-point-7',
+                  'solution-1', 'solution-2', 'solution-3', 'solution-4', 'solution-5',
+                  'solution-6', 'solution-7', 'solution-8'],
+        zoom: 0.5,
         focus: null // Let fitView handle centering
       }
     };

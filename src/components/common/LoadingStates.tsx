@@ -294,6 +294,7 @@ export const ProgressSteps: React.FC<ProgressStepsProps> = ({
                 {/* Progress Circle */}
                 <button
                   onClick={() => onStepClick?.(index)}
+                  data-step-index={index}
                   className={cn(
                     'progress-circle',
                     'flex items-center justify-center rounded-full',
@@ -349,6 +350,7 @@ export const ProgressSteps: React.FC<ProgressStepsProps> = ({
               {/* Progress Circle */}
               <button
                 onClick={() => onStepClick?.(index)}
+                data-step-index={index}
                 className={cn(
                   'progress-circle',
                   'flex items-center justify-center rounded-full',

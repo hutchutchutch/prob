@@ -5,6 +5,7 @@ import { PainPointNode } from './PainPointNode';
 import { SolutionNode } from './SolutionNode';
 import { UserStoryNode } from './UserStoryNode';
 import { LabelNode } from './LabelNode';
+import { QuoteNode } from './QuoteNode';
 
 // Export all node components
 export { BaseNode } from './BaseNode';
@@ -15,6 +16,7 @@ export { SolutionNode } from './SolutionNode';
 export { UserStoryNode } from './UserStoryNode';
 export { PainLevelIndicator } from './PainLevelIndicator';
 export { LabelNode } from './LabelNode';
+export { QuoteNode } from './QuoteNode';
 
 // Export types
 export type { CoreProblemNodeData } from './CoreProblemNode';
@@ -23,6 +25,7 @@ export type { PainPointNodeData } from './PainPointNode';
 export type { SolutionNodeData } from './SolutionNode';
 export type { UserStoryNodeData } from './UserStoryNode';
 export type { PainLevelIndicatorProps } from './PainLevelIndicator';
+export type { QuoteNodeData } from './QuoteNode';
 
 // Export node types configuration for React Flow
 export const nodeTypes = {

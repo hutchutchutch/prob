@@ -3,4 +3,5 @@ export { Input } from './Input';
 export { Modal } from './Modal';
 export { Spinner, Skeleton, LoadingOverlay, ProgressBar, ProgressSteps } from './LoadingStates';
 export type { ProgressStep, ProgressStepsProps } from './LoadingStates';
-export { Tooltip } from './Tooltip'; 
+export { Tooltip } from './Tooltip';
+export { PainPointDropdown } from './PainPointDropdown'; 

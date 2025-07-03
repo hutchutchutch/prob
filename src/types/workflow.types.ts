@@ -3,6 +3,7 @@ export type WorkflowStep =
   | 'persona_discovery'
   | 'pain_points'
   | 'solution_generation'
+  | 'focus_group'
   | 'user_stories'
   | 'architecture'
   | 'export';

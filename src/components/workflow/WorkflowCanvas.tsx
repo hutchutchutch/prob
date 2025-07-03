@@ -9,13 +9,14 @@ import { ForceLayoutCanvas } from '@/components/canvas/ForceLayoutCanvas';
 export function WorkflowCanvas() {
   console.log('[WorkflowCanvas] Component rendering...');
   
-  const { currentStep, coreProblem, personas, painPoints, isGeneratingPersonas } = useWorkflowStore();
+  const { currentStep, coreProblem, personas, painPoints, solutions, isGeneratingPersonas, lockedItems, focusedPainPointId, focusOnPainPoint, clearPainPointFocus } = useWorkflowStore();
   const { addNodes, addEdges, updateEdge, zoomTo, resetCanvas, nodes, edges } = useCanvasStore();
   const { goToStep1 } = useCanvasNavigation();
   const [canvasInitialized, setCanvasInitialized] = useState(false);
   const [lastNodeCount, setLastNodeCount] = useState(0);
   const [lastEdgeCount, setLastEdgeCount] = useState(0);
   const [painPointsAdded, setPainPointsAdded] = useState(false);
+  const [solutionsAdded, setSolutionsAdded] = useState(false);
 
   console.log('[WorkflowCanvas] Initial state:', {
     currentStep,
@@ -115,7 +116,7 @@ export function WorkflowCanvas() {
             console.log('[WorkflowCanvas] Refreshing personas...');
             const workflowStore = useWorkflowStore.getState();
             if (workflowStore.coreProblem) {
-              workflowStore.generatePersonas();
+              workflowStore.regeneratePersonas();
             }
           }
         },
@@ -263,11 +264,13 @@ export function WorkflowCanvas() {
     console.log('[WorkflowCanvas] Persona generation state changed:', {
       isGeneratingPersonas,
       painPointsAdded,
-      canvasInitialized
+      canvasInitialized,
+      coreProblemValidated: coreProblem?.is_validated
     });
 
-    if (isGeneratingPersonas && canvasInitialized && !painPointsAdded) {
-      console.log('[WorkflowCanvas] Persona generation started - animating edges and adding pain points');
+    // Only add pain points AFTER a problem has been validated and submitted
+    if (isGeneratingPersonas && canvasInitialized && !painPointsAdded && coreProblem?.is_validated) {
+      console.log('[WorkflowCanvas] Persona generation started - animating edges and adding pain point skeletons');
       
       const canvasStore = useCanvasStore.getState();
       
@@ -311,7 +314,6 @@ export function WorkflowCanvas() {
 
       // Create pain point skeleton nodes - 7 total, arranged in two columns
       const painPointNodes: Node[] = [];
-      const painPointEdges: Edge[] = [];
 
       // Create 7 pain points total, positioned in two columns (3 left, 4 right)
       for (let painIndex = 0; painIndex < 7; painIndex++) {
@@ -348,48 +350,29 @@ export function WorkflowCanvas() {
             isSkeleton: true, // Start in skeleton state
             onToggleLock: () => {
               console.log(`Toggle lock for pain point ${painPointId}`);
+            },
+            onFocus: () => {
+              console.log(`Focus on pain point ${painPointId}`);
+              focusOnPainPoint(painPointId);
             }
           },
           draggable: true,
         });
-
-        // Create animated edges from each persona to each pain point
-        // This creates a many-to-many relationship visualization
-        for (let personaIndex = 0; personaIndex < 5; personaIndex++) {
-          const personaNodeId = `persona-${personaIndex + 1}`;
-          
-          painPointEdges.push({
-            id: `persona-${personaIndex + 1}-to-pain-${painIndex + 1}`,
-            source: personaNodeId,
-            target: painPointId,
-            type: 'default',
-            style: {
-              stroke: '#F97316', // Orange color for pain point connections
-              strokeWidth: 1.5, // Thinner for many connections
-              opacity: 0.3 // Lower opacity since there are many edges
-            },
-            animated: true, // Animated edges for pain points
-          });
-        }
       }
 
-      // Add all pain point nodes and edges
+      // Add pain point nodes first (without edges yet)
       console.log('[WorkflowCanvas] Adding pain point skeleton nodes:', {
         labelNode: 1,
-        nodeCount: painPointNodes.length,
-        edgeCount: painPointEdges.length
+        nodeCount: painPointNodes.length
       });
       
       addNodes([painPointsLabelNode, ...painPointNodes]);
-      addEdges(painPointEdges);
-      
       setPainPointsAdded(true);
       
       // NOTE: Canvas navigation is now handled by ProgressSteps in App.tsx
-      // Removed competing viewport change that was interrupting smooth Step 2 navigation
-      // The appropriate Step 2 navigation will be triggered by App.tsx useEffect
+      // NOTE: Edges will be created later when personas have source handles ready
     }
-  }, [isGeneratingPersonas, canvasInitialized, painPointsAdded, addNodes, addEdges, updateEdge, zoomTo]);
+  }, [isGeneratingPersonas, canvasInitialized, painPointsAdded, coreProblem, addNodes, addEdges, updateEdge, zoomTo]);
 
   // Update PersonaNodes when personas are available
   useEffect(() => {
@@ -430,7 +413,7 @@ export function WorkflowCanvas() {
           role: persona.demographics?.role || 'Unknown',
           painDegree: (persona as any).pain_degree || (persona as any).painDegree || Math.floor(Math.random() * 5) + 1,
           description: persona.description,
-          isLocked: persona.is_locked || false,
+          isLocked: lockedItems.personas.has(persona.id),
           isExpanded: currentNode?.data?.isExpanded || false, // Preserve expanded state
           isSkeleton: false, // Ensure skeleton state is off
           onToggleLock: () => {
@@ -470,11 +453,11 @@ export function WorkflowCanvas() {
         }
       });
       
-      // If personas are generated (no longer generating), update edges
+      // If personas are generated (no longer generating), update edges and create pain point connections
       if (!isGeneratingPersonas) {
-        console.log('[WorkflowCanvas] Persona generation complete - updating edges');
+        console.log('[WorkflowCanvas] Persona generation complete - updating edges and creating pain point connections');
         
-        // Make all edges solid and grey by default
+        // Make all problem-to-persona edges solid and grey by default
         for (let i = 1; i <= 5; i++) {
           const edgeId = `problem-to-persona-${i}`;
           canvasStore.updateEdge(edgeId, {
@@ -500,9 +483,44 @@ export function WorkflowCanvas() {
             }
           });
         }
+
+        // Now create the persona-to-pain-point edges since personas have source handles
+        if (painPointsAdded) {
+          console.log('[WorkflowCanvas] Creating persona-to-pain-point edges now that personas have source handles');
+          
+          const painPointEdges: Edge[] = [];
+          
+          // Create edges from each persona to each pain point (many-to-many relationship)
+          for (let painIndex = 0; painIndex < 7; painIndex++) {
+            const painPointId = `pain-point-${painIndex + 1}`;
+            
+            for (let personaIndex = 0; personaIndex < 5; personaIndex++) {
+              const personaNodeId = `persona-${personaIndex + 1}`;
+              
+              painPointEdges.push({
+                id: `persona-${personaIndex + 1}-to-pain-${painIndex + 1}`,
+                source: personaNodeId,
+                target: painPointId,
+                type: 'default',
+                style: {
+                  stroke: '#F97316', // Orange color for pain point connections
+                  strokeWidth: 1.5, // Thinner for many connections
+                  opacity: 0.3 // Lower opacity since there are many edges
+                },
+                animated: true, // Animated edges for pain points
+              });
+            }
+          }
+          
+          console.log('[WorkflowCanvas] Adding persona-to-pain-point edges:', {
+            edgeCount: painPointEdges.length
+          });
+          
+          addEdges(painPointEdges);
+        }
       }
     }
-  }, [personas, canvasInitialized, isGeneratingPersonas]);
+  }, [personas, canvasInitialized, isGeneratingPersonas, painPointsAdded, addEdges, lockedItems]);
 
   // Update PainPointNodes when pain points are available
   useEffect(() => {
@@ -546,6 +564,10 @@ export function WorkflowCanvas() {
            onToggleLock: () => {
              const workflowStore = useWorkflowStore.getState();
              workflowStore.togglePainPointLock(painPoint.id);
+           },
+           onFocus: () => {
+             console.log(`Focus on pain point ${painPoint.id}`);
+             focusOnPainPoint(painPoint.id);
            }
          };
         
@@ -561,6 +583,185 @@ export function WorkflowCanvas() {
       });
     }
   }, [painPoints, canvasInitialized]);
+
+  // Handle solution generation when moving to solution_generation step
+  useEffect(() => {
+    console.log('[WorkflowCanvas] Solution generation step check:', {
+      currentStep,
+      solutionsAdded,
+      canvasInitialized,
+      painPointsLength: painPoints.length
+    });
+
+    if (currentStep === 'solution_generation' && canvasInitialized && !solutionsAdded && painPoints.length > 0) {
+      console.log('[WorkflowCanvas] Moving to solution generation step - adding solution nodes');
+      
+      const canvasStore = useCanvasStore.getState();
+      
+      // Calculate positions for solutions in two columns (right of pain points)
+      const viewportWidth = window.innerWidth;
+      const solutionBaseX = (viewportWidth / 3) * 2; // Right third of screen
+      const solutionColumn1X = solutionBaseX - 220; // First column
+      const solutionColumn2X = solutionBaseX + 220; // Second column  
+      const solutionStartY = -300; // Same vertical start as pain points
+      const solutionSpacing = 200; // Slightly more spacing for solution nodes
+      
+      console.log('[WorkflowCanvas] Solution positioning calculations:', {
+        viewportWidth,
+        solutionBaseX,
+        solutionColumn1X,
+        solutionColumn2X,
+        columnSpacing: solutionColumn2X - solutionColumn1X,
+        solutionStartY,
+        solutionSpacing
+      });
+
+      // Add Solutions column label (centered between the two columns)
+      const solutionsLabelNode: Node = {
+        id: 'solutions-label',
+        type: 'label',
+        position: { x: solutionBaseX, y: solutionStartY - 120 }, // Centered above both columns
+        data: {
+          text: 'Solutions',
+          showRefresh: false
+        },
+        draggable: false,
+        selectable: false,
+      };
+
+      // Create solution skeleton nodes - 8 total, arranged in two columns (4 in each)
+      const solutionNodes: Node[] = [];
+      const solutionEdges: Edge[] = [];
+
+      // Create 8 solutions total, positioned in two columns (4 in each)
+      for (let solutionIndex = 0; solutionIndex < 8; solutionIndex++) {
+        const solutionId = `solution-${solutionIndex + 1}`;
+        
+        // Determine column and position within column
+        const isFirstColumn = solutionIndex < 4;
+        const columnX = isFirstColumn ? solutionColumn1X : solutionColumn2X;
+        const columnIndex = isFirstColumn ? solutionIndex : solutionIndex - 4;
+        const positionY = solutionStartY + (columnIndex * solutionSpacing);
+        
+        console.log(`[WorkflowCanvas] Creating ${solutionId} at position:`, {
+          solutionIndex,
+          isFirstColumn,
+          columnX,
+          columnIndex,
+          positionY,
+          column: isFirstColumn ? 'left' : 'right'
+        });
+        
+        solutionNodes.push({
+          id: solutionId,
+          type: 'solution',
+          position: {
+            x: columnX,
+            y: positionY
+          },
+          data: {
+            id: solutionId,
+            title: '',
+            description: '',
+            solutionType: 'feature' as const,
+            complexity: 'medium' as const,
+            isLocked: false,
+            isSelected: false,
+            isSkeleton: true, // Start in skeleton state
+            onToggleLock: () => {
+              console.log(`Toggle lock for solution ${solutionId}`);
+            },
+            onToggleSelect: () => {
+              console.log(`Toggle selection for solution ${solutionId}`);
+            }
+          },
+          draggable: true,
+        });
+
+        // Create edges from each persona to each solution for focus group mode
+        for (let personaIndex = 0; personaIndex < 5; personaIndex++) {
+          const personaId = `persona-${personaIndex + 1}`;
+          
+          solutionEdges.push({
+            id: `persona-${personaIndex + 1}-to-solution-${solutionIndex + 1}`,
+            source: personaId,
+            target: solutionId,
+            type: 'default',
+            style: {
+              stroke: '#FFD700', // Gold color for solution connections
+              strokeWidth: 1.5,
+              opacity: 0.2 // Very low opacity since there are many edges
+            },
+            animated: true, // Animated edges for solutions
+          });
+        }
+      }
+
+      // Add all solution nodes and edges
+      console.log('[WorkflowCanvas] Adding solution skeleton nodes:', {
+        labelNode: 1,
+        nodeCount: solutionNodes.length,
+        edgeCount: solutionEdges.length
+      });
+      
+      addNodes([solutionsLabelNode, ...solutionNodes]);
+      addEdges(solutionEdges);
+      
+      setSolutionsAdded(true);
+    }
+  }, [currentStep, canvasInitialized, solutionsAdded, painPoints.length, addNodes, addEdges]);
+
+  // Handle focus group mode - add quotes to edges between personas and solutions
+  useEffect(() => {
+    console.log('[WorkflowCanvas] Focus group mode check:', {
+      currentStep,
+      canvasInitialized,
+      solutionsAdded,
+      personasLength: personas.length,
+      solutionsLength: solutions.length
+    });
+
+    if (currentStep === 'focus_group' && canvasInitialized && solutionsAdded && personas.length > 0) {
+      console.log('[WorkflowCanvas] Entering focus group mode - updating edges with quotes');
+      
+      const canvasStore = useCanvasStore.getState();
+      
+      // Sample quotes for demo purposes - in real app, these would come from API
+      const sampleQuotes = [
+        "This would save me hours every week",
+        "Finally, a solution that understands our workflow",
+        "I've been waiting for something like this",
+        "This addresses my biggest pain point",
+        "My team would love this feature"
+      ];
+      
+      // Update existing edges to focus group type with quotes
+      let quoteIndex = 0;
+      for (let personaIndex = 0; personaIndex < Math.min(5, personas.length); personaIndex++) {
+        for (let solutionIndex = 0; solutionIndex < 8; solutionIndex++) {
+          const edgeId = `persona-${personaIndex + 1}-to-solution-${solutionIndex + 1}`;
+          const persona = personas[personaIndex];
+          
+          // Only add quotes to some edges (e.g., high-value connections)
+          if (Math.random() > 0.7 && persona) { // 30% chance to show quote
+            canvasStore.updateEdge(edgeId, {
+              type: 'focusGroup',
+              data: {
+                quote: sampleQuotes[quoteIndex % sampleQuotes.length],
+                personaName: persona.name,
+                personaId: persona.id,
+                solutionId: `solution-${solutionIndex + 1}`,
+                isHighlighted: Math.random() > 0.8 // 20% chance to highlight
+              }
+            });
+            quoteIndex++;
+          }
+        }
+      }
+      
+      console.log('[WorkflowCanvas] Focus group mode edges updated with quotes');
+    }
+  }, [currentStep, canvasInitialized, solutionsAdded, personas, solutions]);
 
   // NOTE: Removed competing step change navigation - now handled by ProgressSteps in App.tsx
 

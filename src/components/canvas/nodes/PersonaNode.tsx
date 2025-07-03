@@ -94,22 +94,28 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
       showTargetHandle={true}
       className={cn(
         'min-w-[280px] transition-all duration-300',
-        isExpanded && 'min-h-[200px]'
+        isExpanded && 'w-[336px] h-[240px]' // 1.2x width (280 * 1.2 = 336), 1.5x height (160 * 1.5 = 240)
       )}
     >
       <div 
-        className="space-y-3 cursor-pointer"
+        className={cn(
+          "cursor-pointer h-full flex flex-col",
+          isExpanded ? "space-y-2" : "space-y-3"
+        )}
         onClick={handleNodeClick}
       >
         {/* Header with Lock */}
         <div className="flex items-start justify-between">
-          <h3 className="text-lg font-bold">{nodeData.name || 'Loading...'}</h3>
+          <h3 className={cn(
+            "font-bold",
+            isExpanded ? "text-lg" : "text-lg"
+          )}>{nodeData.name || 'Loading...'}</h3>
           <button
             onClick={(e) => {
               e.stopPropagation();
               onToggleLock?.();
             }}
-            className="p-1 hover:bg-teal-600/20 rounded transition-colors"
+            className="p-1 hover:bg-teal-600/20 rounded transition-colors flex-shrink-0"
           >
             {isLocked ? (
               <Lock className="w-4 h-4" />
@@ -120,37 +126,37 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
         </div>
 
         {/* Details */}
-        <div className="space-y-3 text-sm">
+        <div className={cn(
+          "text-sm flex-1",
+          isExpanded ? "space-y-2" : "space-y-3"
+        )}>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-medium text-teal-400 uppercase tracking-wide">Industry</span>
-            <span className="opacity-90">{nodeData.industry}</span>
+            <span className="text-xs font-medium text-teal-400 uppercase tracking-wide min-w-0 flex-shrink-0">Industry</span>
+            <span className="opacity-90 truncate">{nodeData.industry}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-medium text-teal-400 uppercase tracking-wide">Role</span>
-            <span className="opacity-90">{nodeData.role}</span>
+            <span className="text-xs font-medium text-teal-400 uppercase tracking-wide min-w-0 flex-shrink-0">Role</span>
+            <span className="opacity-90 truncate">{nodeData.role}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-medium text-teal-400 uppercase tracking-wide">Pain Level</span>
-            <div className="flex items-center gap-2 flex-1">
+            <span className="text-xs font-medium text-teal-400 uppercase tracking-wide min-w-0 flex-shrink-0">Pain Level</span>
+            <div className="flex items-center gap-2">
               {renderPainRating(nodeData.painDegree)}
             </div>
           </div>
-        </div>
 
-        {/* Expanded Description */}
-        {isExpanded && nodeData.description && (
-          <div className="pt-3 border-t border-teal-600/30 transition-all duration-300">
-            <div className="space-y-2">
-              <span className="text-xs font-medium text-teal-400 uppercase tracking-wide">Description</span>
-              <p className="text-sm opacity-80 leading-relaxed">
+          {/* Expanded Description */}
+          {isExpanded && nodeData.description && (
+            <div className="pt-2 border-t border-teal-600/30">
+              <p className="text-xs opacity-80 leading-relaxed">
                 {nodeData.description}
               </p>
             </div>
-          </div>
-        )}
+          )}
+        </div>
 
         {/* Expand/Collapse Indicator */}
-        <div className="flex justify-center pt-2">
+        <div className="flex justify-center pt-1 flex-shrink-0">
           <div className={cn(
             "text-xs text-teal-400 opacity-60 transition-transform duration-200",
             isExpanded && "rotate-180"
