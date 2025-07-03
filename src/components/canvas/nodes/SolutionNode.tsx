@@ -95,6 +95,9 @@ export const SolutionNode: React.FC<NodeProps> = ({ data, selected }) => {
                 e.stopPropagation();
                 onToggleSelect?.();
               }}
+              onMouseDown={(e) => {
+                e.stopPropagation();
+              }}
               className="mt-0.5 hover:scale-110 transition-transform"
             >
               {isSelected ? (
@@ -109,6 +112,9 @@ export const SolutionNode: React.FC<NodeProps> = ({ data, selected }) => {
             onClick={(e) => {
               e.stopPropagation();
               onToggleLock?.();
+            }}
+            onMouseDown={(e) => {
+              e.stopPropagation();
             }}
             className="p-1 hover:bg-blue-600/20 rounded transition-colors"
           >

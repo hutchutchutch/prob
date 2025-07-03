@@ -62,7 +62,7 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
           "transition-shadow duration-1000"
         )}
       >
-          <div className="space-y-6">
+          <div className="space-y-6 pointer-events-none">
             {/* Skeleton Header */}
             <div className="flex items-start justify-between mb-2">
               <div className="h-6 rounded skeleton-shimmer w-32"></div>
@@ -102,13 +102,12 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
     >
       <div 
         className={cn(
-          "cursor-pointer h-full flex flex-col relative",
+          "h-full flex flex-col relative",
           isExpanded ? "space-y-2" : "space-y-3"
         )}
-        onClick={handleNodeClick}
       >
         {/* Header with Lock */}
-        <div className="flex items-start justify-between">
+        <div className="flex items-start justify-between cursor-pointer" onClick={handleNodeClick} onMouseDown={(e) => e.stopPropagation()}>
           <h3 className={cn(
             "font-bold",
             isExpanded ? "text-lg" : "text-lg"
@@ -117,6 +116,9 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
             onClick={(e) => {
               e.stopPropagation();
               onToggleLock?.();
+            }}
+            onMouseDown={(e) => {
+              e.stopPropagation();
             }}
             className={cn(
               "p-1 rounded transition-all flex-shrink-0",
@@ -135,9 +137,9 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
 
         {/* Details */}
         <div className={cn(
-          "text-sm flex-1",
+          "text-sm flex-1 cursor-pointer",
           isExpanded ? "space-y-2" : "space-y-3"
-        )}>
+        )} onClick={handleNodeClick} onMouseDown={(e) => e.stopPropagation()}>
           <div className="flex items-center gap-2">
             <span className="text-xs font-medium text-gold-500 uppercase tracking-wide min-w-0 flex-shrink-0">Industry</span>
             <span className="opacity-90 truncate">{nodeData.industry}</span>
@@ -164,7 +166,7 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
         </div>
 
         {/* Expand/Collapse Indicator - moved to bottom right */}
-        <div className="absolute bottom-2 right-2">
+        <div className="absolute bottom-2 right-2 pointer-events-none">
           <div className={cn(
             "text-xs text-gold-500 opacity-60 transition-transform duration-200",
             isExpanded && "rotate-180"

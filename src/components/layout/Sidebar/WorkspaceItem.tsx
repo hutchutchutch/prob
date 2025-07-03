@@ -1,7 +1,8 @@
 import React from 'react';
 import { ChevronRight, Folder, File } from 'lucide-react';
 import { cn } from '@/utils/cn';
-import type { Workspace, Project } from './types';
+import type { Workspace, ProjectWithGoldiDocs } from './types';
+import { GoldiDocsProgress } from './GoldiDocsProgress';
 
 export interface WorkspaceItemProps {
   workspace: Workspace;
@@ -79,7 +80,7 @@ export const WorkspaceItem: React.FC<WorkspaceItemProps> = ({
 
 // Project Item Sub-component
 interface ProjectItemProps {
-  project: Project;
+  project: ProjectWithGoldiDocs;
   isActive: boolean;
   onSelect: () => void;
   statusColor: string;
@@ -92,21 +93,30 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
   statusColor,
 }) => {
   return (
-    <button
-      onClick={onSelect}
-      className={cn(
-        'project-item',
-        isActive && 'project-item--active'
+    <div className="project-item-wrapper">
+      <button
+        onClick={onSelect}
+        className={cn(
+          'project-item',
+          isActive && 'project-item--active'
+        )}
+      >
+        <File className="icon icon-sm" />
+        <span className="project-name">
+          {project.name}
+        </span>
+        <div
+          className={cn('status-dot', statusColor)}
+          title={project.status}
+        />
+      </button>
+      
+      {project.goldiDocs && (
+        <GoldiDocsProgress
+          projectId={project.id}
+          status={project.goldiDocs}
+        />
       )}
-    >
-      <File className="icon icon-sm" />
-      <span className="project-name">
-        {project.name}
-      </span>
-      <div
-        className={cn('status-dot', statusColor)}
-        title={project.status}
-      />
-    </button>
+    </div>
   );
 };

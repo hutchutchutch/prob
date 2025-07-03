@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { ReactFlowProvider } from '@xyflow/react';
 import { ConnectedSidebar } from '@/components/layout/Sidebar';
 import { ProgressSteps } from '@/components/common/LoadingStates';
@@ -207,7 +207,7 @@ function AppContent() {
   return (
     <div className="flex h-screen bg-gray-900">
       {/* Fixed Progress Bar at top of screen */}
-      <div className="fixed top-0 left-64 right-0 z-50 bg-obsidian-800 border-b border-obsidian-700 py-6 px-12">
+      <div className="fixed top-0 left-64 right-0 z-50 bg-obsidian-800 border-b border-obsidian-700 py-8 px-12">
         <ProgressSteps 
           currentStep={getProgressStepIndex(currentStep)}
           variant="horizontal"
@@ -226,12 +226,14 @@ function AppContent() {
       </div>
 
       {/* Sidebar */}
-      <ConnectedSidebar />
+      <div className="fixed left-0 top-0 bottom-0 w-64 z-40">
+        <ConnectedSidebar />
+      </div>
 
-      {/* Main Content - adjusted for fixed progress bar */}
-      <div className="flex-1 flex flex-col pt-24"> {/* Increased from pt-20 to account for larger progress bar */}
+      {/* Main Content - adjusted for fixed sidebar and progress bar */}
+      <div className="ml-64 flex-1 flex flex-col pt-24"> {/* Added ml-64 for sidebar offset */}
         {/* Canvas */}
-        <div className="flex-1 relative">
+        <div className="flex-1 relative overflow-hidden"> {/* Added overflow-hidden */}
           <WorkflowCanvas />
         </div>
       </div>
@@ -246,10 +248,12 @@ export default function App() {
   console.log('[App] Component mounting...');
   
   const { user, loading: authLoading } = useAuth();
-  const { resetWorkflow, setProjectId } = useWorkflowStore();
+  const { resetWorkflow, setProjectId, projectId } = useWorkflowStore();
   const [isInitializing, setIsInitializing] = useState(false);
   const [initError, setInitError] = useState<string | null>(null);
   const [showPerformanceOverlay, setShowPerformanceOverlay] = useState(false);
+  const [workspaceInitialized, setWorkspaceInitialized] = useState(false);
+  const initializingRef = React.useRef(false);
 
   console.log('[App] Initial render state:', {
     user: user?.email,
@@ -260,7 +264,9 @@ export default function App() {
 
   useEffect(() => {
     const initializeWorkspace = async () => {
-      if (!user) return;
+      if (!user || workspaceInitialized || initializingRef.current) return;
+      
+      initializingRef.current = true;
       
       try {
         setIsInitializing(true);
@@ -376,17 +382,19 @@ export default function App() {
           initError
         });
         
+        setWorkspaceInitialized(true);
       } catch (error) {
         console.error('[App] Workspace initialization error:', error);
         setInitError(error instanceof Error ? error.message : 'Failed to initialize workspace');
       } finally {
         console.log('[App] Setting isInitializing to false');
         setIsInitializing(false);
+        // Don't reset initializingRef here - keep it true to prevent re-runs
       }
     };
     
     // Initialize workspace when user changes
-    if (user) {
+    if (user && !workspaceInitialized) {
       // Only reset workflow if we don't have a project ID or if the user actually changed
       // This prevents resetting the workflow on every re-render
       const currentProjectId = useWorkflowStore.getState().projectId;
@@ -400,7 +408,7 @@ export default function App() {
       
       initializeWorkspace();
     }
-  }, [user, resetWorkflow, setProjectId]);
+  }, [user?.id]); // Use user.id instead of user object to prevent re-renders
 
   // Add keyboard shortcut for performance overlay
   useEffect(() => {

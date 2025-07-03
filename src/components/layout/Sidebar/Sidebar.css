@@ -1,0 +1,165 @@
+.sidebar-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-wrapper.terminal-open .sidebar {
+  /* Ensure sidebar content doesn't overlap with terminal */
+  height: calc(100% - 300px);
+}
+
+/* Ensure the sidebar itself is properly positioned */
+.sidebar {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Smooth transition when terminal opens/closes */
+.sidebar-wrapper .sidebar {
+  transition: height 0.3s ease;
+}
+
+/* GoldiDocs Progress Styles */
+.goldidocs-progress {
+  padding: 8px 12px;
+  border-top: 1px solid #374151;
+  background: rgba(31, 41, 55, 0.5);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.goldidocs-progress:hover {
+  background: rgba(31, 41, 55, 0.8);
+}
+
+.goldidocs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: #9CA3AF;
+}
+
+.goldidocs-progress-bar {
+  flex: 1;
+  height: 4px;
+  background: #1F2937;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-left: 12px;
+}
+
+.goldidocs-progress-fill {
+  height: 100%;
+  background: #10B981;
+  transition: width 0.3s ease;
+}
+
+.goldidocs-slots {
+  display: flex;
+  gap: 4px;
+  height: 24px;
+}
+
+.goldidoc-slot {
+  flex: 1;
+  background: #1F2937;
+  border: 1px solid #374151;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 150ms ease;
+  color: #6B7280;
+}
+
+.goldidoc-slot:hover {
+  background: #374151;
+  border-color: #4B5563;
+  transform: translateY(-1px);
+}
+
+.goldidoc-slot--complete {
+  background: #065F46;
+  border-color: #10B981;
+  color: #10B981;
+}
+
+.goldidoc-slot--processing {
+  background: #1E3A8A;
+  border-color: #3B82F6;
+  color: #3B82F6;
+  animation: pulse 2s infinite;
+}
+
+.goldidoc-slot--error {
+  background: #7F1D1D;
+  border-color: #EF4444;
+  color: #EF4444;
+}
+
+.goldidoc-slot--drift {
+  background: #7C2D12;
+  border-color: #F59E0B;
+  color: #F59E0B;
+}
+
+.goldidocs-hint {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #6B7280;
+  text-align: center;
+}
+
+/* Project item wrapper to contain both button and progress */
+.project-item-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-item {
+  width: 100%;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: #9CA3AF;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.project-item:hover {
+  background: rgba(55, 65, 81, 0.3);
+  color: white;
+}
+
+.project-item--active {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3B82F6;
+}
+
+/* Pulse animation for processing documents */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+} 

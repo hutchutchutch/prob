@@ -1,7 +1,9 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { tauriAPI } from '@/services/tauri/api'
+import { goldiDocsAPI, type GoldiDocsStatusResponse } from '@/services/api/goldidocs'
 import type { Workspace, Project, User } from '@/types/database.types'
+import type { ProjectWithGoldiDocs } from '@/components/layout/Sidebar/types'
 
 // Import other stores for integration
 import { useWorkflowStore } from './workflowStore'
@@ -17,7 +19,8 @@ interface ProjectStoreState {
   activeWorkspaceId: string | null
   
   // Project data
-  projects: Project[]
+  projects: ProjectWithGoldiDocs[]
+  projectMap: Map<string, ProjectWithGoldiDocs>
   activeProjectId: string | null
   recentProjects: string[] // Project IDs
   
@@ -68,6 +71,7 @@ const useProjectStore = create<ProjectStore>()(
       workspaces: [],
       activeWorkspaceId: null,
       projects: [],
+      projectMap: new Map<string, ProjectWithGoldiDocs>(),
       activeProjectId: null,
       recentProjects: [],
       isLoadingWorkspaces: false,
@@ -180,15 +184,57 @@ const useProjectStore = create<ProjectStore>()(
         
         set({ isLoadingProjects: true })
         try {
+          // Fetch projects from API or database
           // TODO: Implement getProjects in Tauri API
-          console.warn('loadProjects not yet implemented in Tauri API')
-          set({ isLoadingProjects: false, projects: [] })
+          // For now, return empty array or mock data
+          const projects: Project[] = []
           
-          // For now, show placeholder message
-          uiStore.showInfo('Projects loading not yet implemented')
+          // Fetch GoldiDocs status for each project
+          const projectsWithGoldiDocs: ProjectWithGoldiDocs[] = await Promise.all(
+            projects.map(async (project: Project) => {
+              try {
+                const docsStatus = await goldiDocsAPI.getStatus(project.id)
+                
+                // Transform the API response to our frontend format
+                const documents = docsStatus.map((doc: GoldiDocsStatusResponse) => ({
+                  type: doc.document_type,
+                  status: doc.doc_status || 'pending',
+                  generatedAt: doc.doc_generated_at ? new Date(doc.doc_generated_at) : undefined,
+                  version: doc.doc_version ? parseInt(doc.doc_version) : 1
+                }))
+                
+                const completedCount = documents.filter(d => d.status === 'complete').length
+                
+                return {
+                  ...project,
+                  goldiDocs: {
+                    documents,
+                    totalCount: 6,
+                    completedCount
+                  }
+                }
+              } catch (error) {
+                console.error(`Error fetching GoldiDocs status for project ${project.id}:`, error)
+                // Return project without GoldiDocs data if fetch fails
+                return project as ProjectWithGoldiDocs
+              }
+            })
+          )
+          
+          // Update project map
+          const projectMap = new Map(get().projectMap)
+          projectsWithGoldiDocs.forEach(project => {
+            projectMap.set(project.id, project)
+          })
+          
+          set({ 
+            projects: projectsWithGoldiDocs,
+            projectMap,
+            isLoadingProjects: false 
+          })
         } catch (error) {
-          console.error('Failed to load projects:', error)
-          uiStore.showError('Failed to load projects', error instanceof Error ? error.message : 'Unknown error')
+          console.error('Error loading projects:', error)
+          uiStore.showError('Failed to load projects')
           set({ isLoadingProjects: false })
         }
       },

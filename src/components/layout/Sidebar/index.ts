@@ -1,7 +1,11 @@
 // Export components
-export { Sidebar } from './Sidebar';
-export { WorkspaceItem } from './WorkspaceItem';
-export { ConnectedSidebar } from './ConnectedSidebar';
+export * from './Sidebar';
+export * from './ConnectedSidebar';
+export * from './WorkspaceItem';
 
 // Export types
-export type { Workspace, Project, SidebarProps } from './types';
+export * from './types';
+
+// Export GoldiDocs components
+export * from './GoldiDocsProgress';
+export * from './DocumentPreviewModal';

@@ -114,3 +114,14 @@ button {
     background-color: #0f0f0f69;
   }
 }
+
+/* Ensure full height inheritance for React Flow */
+.react-flow__container {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* Gold flash animation */

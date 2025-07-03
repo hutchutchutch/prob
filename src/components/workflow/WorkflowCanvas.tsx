@@ -20,13 +20,17 @@ export function WorkflowCanvas() {
 
   // Constants for node positioning
   const problemNodeX = -400; // Left side of canvas for problem node
-  const personaBaseX = 0; // Center for personas
+  const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1920; // Default to 1920 for SSR
+  const personaBaseX = viewportWidth * 0.1; // Shift personas right by 10% of view width
   const personaStartY = -200;
   const personaSpacing = 150;
 
   // Function to initialize problem input nodes
   const initializeProblemInputNodes = () => {
     console.log('[WorkflowCanvas] Initializing problem input nodes...');
+    
+    // Use the component-level viewportWidth and personaBaseX
+    const currentPersonaBaseX = personaBaseX;
     
     // Add core problem node
     const problemNode: Node = {
@@ -46,7 +50,7 @@ export function WorkflowCanvas() {
     const personasLabelNode: Node = {
       id: 'personas-label',
       type: 'label',
-      position: { x: personaBaseX, y: personaStartY - 80 },
+      position: { x: currentPersonaBaseX, y: personaStartY - 80 },
       data: {
         text: 'Personas',
         showRefresh: true
@@ -62,7 +66,7 @@ export function WorkflowCanvas() {
         id: `persona-${i}`,
         type: 'persona',
         position: {
-          x: personaBaseX,
+          x: currentPersonaBaseX,
           y: personaStartY + ((i - 1) * personaSpacing)
         },
         data: {

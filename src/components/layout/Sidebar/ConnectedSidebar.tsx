@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Sidebar } from './Sidebar';
+import { Terminal } from '../Terminal';
 import { useAuth } from '@/hooks/useAuth';
 import { useWorkflowStore } from '@/stores/workflowStore';
+import useProjectStore from '@/stores/projectStore';
 import { supabase } from '@/services/supabase/client';
 import { WorkspaceStorage } from '@/utils/workspaceStorage';
 import { TauriFileSystem } from '@/services/tauri/fileSystem';
 import type { Workspace, Project } from './types';
+import './Sidebar.css';
 
 export const ConnectedSidebar: React.FC = () => {
   const { user } = useAuth();
@@ -15,6 +18,8 @@ export const ConnectedSidebar: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [activeWorkspaceId, setActiveWorkspaceId] = useState<string | undefined>();
   const [workspaceDirectories, setWorkspaceDirectories] = useState<Record<string, string>>({});
+  const [terminalVisible, setTerminalVisible] = useState(false);
+  const [terminalWorkingDir, setTerminalWorkingDir] = useState<string>('/');
 
   useEffect(() => {
     const fetchWorkspaces = async () => {
@@ -48,12 +53,7 @@ export const ConnectedSidebar: React.FC = () => {
           id: ws.id,
           name: ws.name,
           updatedAt: ws.updated_at,
-          projects: ws.projects.map((p: any) => ({
-            id: p.id,
-            name: p.name,
-            status: p.status,
-            updatedAt: new Date(p.updated_at)
-          }))
+          projects: [] // Projects will be loaded from projectStore
         }));
 
         setWorkspaces(formattedWorkspaces);
@@ -68,6 +68,10 @@ export const ConnectedSidebar: React.FC = () => {
           if (savedDir) {
             setWorkspaceDirectories({ [firstWorkspaceId]: savedDir });
           }
+          
+          // Load projects for the first workspace
+          const projectStore = useProjectStore.getState();
+          await projectStore.loadProjects(firstWorkspaceId);
         }
       } catch (error) {
         console.error('[ConnectedSidebar] Error fetching workspaces:', error);
@@ -78,6 +82,17 @@ export const ConnectedSidebar: React.FC = () => {
 
     fetchWorkspaces();
   }, [user]);
+
+  // Subscribe to project store updates
+  const projects = useProjectStore(state => state.projects);
+  
+  // Update workspaces with projects from the store
+  const workspacesWithProjects = workspaces.map(workspace => ({
+    ...workspace,
+    projects: workspace.id === activeWorkspaceId 
+      ? projects.filter(p => p.workspace_id === workspace.id)
+      : workspace.projects
+  }));
 
   const handleWorkspaceCreate = async () => {
     if (!user) return;
@@ -140,24 +155,21 @@ export const ConnectedSidebar: React.FC = () => {
 
   const handleOpenTerminal = async (workspaceId: string) => {
     const directory = workspaceDirectories[workspaceId];
-    console.log('[ConnectedSidebar] Opening terminal for workspace:', workspaceId, 'at:', directory);
+    console.log('[ConnectedSidebar] Opening embedded terminal for workspace:', workspaceId, 'at:', directory);
     
     if (!directory) {
       alert('Please select a repository directory first');
       return;
     }
     
-    // Use Tauri API if available
-    if (TauriFileSystem && TauriFileSystem.isTauri()) {
-      try {
-        await TauriFileSystem.openTerminal(directory);
-      } catch (error) {
-        console.error('[ConnectedSidebar] Error opening terminal:', error);
-        alert('Failed to open terminal. Please make sure you have a terminal application installed.');
-      }
+    // Toggle terminal visibility and set working directory
+    if (terminalVisible && terminalWorkingDir === directory) {
+      // If terminal is already open for this directory, close it
+      setTerminalVisible(false);
     } else {
-      // Fallback for web: Try to open VS Code integrated terminal
-      window.open(`vscode://file/${directory}?windowId=_blank`);
+      // Open terminal with new directory
+      setTerminalWorkingDir(directory);
+      setTerminalVisible(true);
     }
   };
 
@@ -172,6 +184,10 @@ export const ConnectedSidebar: React.FC = () => {
         [workspaceId]: savedDir
       }));
     }
+    
+    // Load projects for this workspace
+    const projectStore = useProjectStore.getState();
+    await projectStore.loadProjects(workspaceId);
   };
 
   const handleSaveWorkspace = async (workspaceId: string) => {
@@ -249,19 +265,28 @@ export const ConnectedSidebar: React.FC = () => {
   }
 
   return (
-    <Sidebar
-      workspaces={workspaces}
-      activeWorkspaceId={activeWorkspaceId}
-      activeProjectId={projectId || undefined}
-      onWorkspaceSelect={handleWorkspaceSelect}
-      onWorkspaceCreate={handleWorkspaceCreate}
-      onProjectSelect={handleProjectSelect}
-      onSettings={handleSettings}
-      onDirectorySelect={handleDirectorySelect}
-      onOpenTerminal={handleOpenTerminal}
-      onSaveWorkspace={handleSaveWorkspace}
-      onExportWorkspace={handleExportWorkspace}
-      workspaceDirectory={workspaceDirectories}
-    />
+    <>
+      <div className={`sidebar-wrapper ${terminalVisible ? 'terminal-open' : ''}`}>
+        <Sidebar
+          workspaces={workspacesWithProjects}
+          activeWorkspaceId={activeWorkspaceId}
+          activeProjectId={projectId || undefined}
+          onWorkspaceSelect={handleWorkspaceSelect}
+          onWorkspaceCreate={handleWorkspaceCreate}
+          onProjectSelect={handleProjectSelect}
+          onSettings={handleSettings}
+          onDirectorySelect={handleDirectorySelect}
+          onOpenTerminal={handleOpenTerminal}
+          onSaveWorkspace={handleSaveWorkspace}
+          onExportWorkspace={handleExportWorkspace}
+          workspaceDirectory={workspaceDirectories}
+        />
+        <Terminal 
+          workingDirectory={terminalWorkingDir}
+          isVisible={terminalVisible}
+          onClose={() => setTerminalVisible(false)}
+        />
+      </div>
+    </>
   );
 }; 

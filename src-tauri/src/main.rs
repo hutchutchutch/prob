@@ -66,6 +66,11 @@ async fn main() {
             // Filesystem commands
             get_platform,
             open_terminal,
+            // Terminal commands
+            start_terminal_session,
+            write_to_terminal,
+            close_terminal_session,
+            resize_terminal,
         ])
         .setup(|_app| {
             info!("GoldiDocs setup complete");

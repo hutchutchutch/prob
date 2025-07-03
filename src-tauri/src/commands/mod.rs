@@ -4,6 +4,7 @@ pub mod canvas;
 pub mod data_sync;
 pub mod workspace;
 pub mod filesystem;
+pub mod terminal;
 
 use crate::db::{Queries, DbPool, Workspace};
 use serde::{Deserialize, Serialize};
@@ -26,6 +27,9 @@ pub use workspace::{create_new_project, delete_project_with_data, rename_project
 
 // Re-export filesystem commands
 pub use filesystem::{get_platform, open_terminal};
+
+// Re-export terminal commands
+pub use terminal::{start_terminal_session, write_to_terminal, close_terminal_session, resize_terminal};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct AppState {
@@ -66,8 +70,6 @@ pub async fn list_workspaces(
     queries.list_workspaces(&user_id)
         .map_err(|e| e.to_string())
 }
-
-
 
 #[tauri::command]
 pub async fn analyze_problem(problem: String) -> Result<String, String> {

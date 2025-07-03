@@ -24,10 +24,9 @@
   "plugins": {
     "fs": {
       "all": true,
-      "scope": ["**"]
-    },
-    "dialog": {
-      "all": true
+      "scope": [
+        "**"
+      ]
     },
     "shell": {
       "all": true,

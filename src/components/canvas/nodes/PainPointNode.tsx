@@ -75,16 +75,13 @@ export const PainPointNode: React.FC<NodeProps> = ({ data, selected }) => {
       showTargetHandle={true}
       className="w-[320px] max-w-[320px]"
     >
-      <div 
-        className="space-y-3 cursor-pointer"
-        onClick={() => {
+      <div className="space-y-3">
+        {/* Header with Severity and Lock */}
+        <div className="flex items-start justify-between cursor-pointer" onClick={() => {
           if (!isSkeleton && onFocus) {
             onFocus();
           }
-        }}
-      >
-        {/* Header with Severity and Lock */}
-        <div className="flex items-start justify-between">
+        }}>
           <div className="flex items-center gap-2">
             <AlertTriangle className="w-4 h-4 text-amber-400" />
             <span
@@ -100,6 +97,9 @@ export const PainPointNode: React.FC<NodeProps> = ({ data, selected }) => {
             onClick={(e) => {
               e.stopPropagation();
               onToggleLock?.();
+            }}
+            onMouseDown={(e) => {
+              e.stopPropagation();
             }}
             className="p-1 hover:bg-amber-600/20 rounded transition-colors"
           >
