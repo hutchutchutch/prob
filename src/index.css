@@ -4,24 +4,92 @@
 
 /* Design Tokens as CSS Variables */
 :root {
-  /* Colors - Direct values for dark theme */
-  --color-background: #111827; /* gray-900 */
-  --color-surface: #1f2937; /* gray-800 */
-  --color-surface-hover: #374151; /* gray-700 */
-  --color-border: #374151; /* gray-700 */
-  --color-text-primary: #ffffff; /* white */
-  --color-text-secondary: #9ca3af; /* gray-400 */
+  /* Obsidian Scale (Primary Dark) */
+  --color-obsidian-50: #F8F9FA;   /* Ultra light for text on dark */
+  --color-obsidian-100: #E9ECEF;  /* Light text/borders */
+  --color-obsidian-200: #CED4DA;  /* Medium light borders */
+  --color-obsidian-300: #ADB5BD;  /* Secondary text */
+  --color-obsidian-400: #6C757D;  /* Muted text */
+  --color-obsidian-500: #495057;  /* Medium contrast */
+  --color-obsidian-600: #343A40;  /* Dark surfaces */
+  --color-obsidian-700: #212529;  /* Darker surfaces */
+  --color-obsidian-800: #16191C;  /* Card backgrounds */
+  --color-obsidian-900: #0B1215;  /* Main Background */
+  --color-obsidian-950: #050708;  /* Deepest black */
+
+  /* Gold Scale (Primary Accent) */
+  --color-gold-50: #FFFEF7;    /* Ultra light gold tint */
+  --color-gold-100: #FFF9E6;   /* Light gold backgrounds */
+  --color-gold-200: #FFF1CC;   /* Subtle gold highlights */
+  --color-gold-300: #FFE499;   /* Light gold accents */
+  --color-gold-400: #FFD966;   /* Medium gold */
+  --color-gold-500: #FFD700;   /* Standard Gold (Primary) */
+  --color-gold-600: #D4AF37;   /* Metallic Gold (Secondary) */
+  --color-gold-700: #B8941F;   /* Dark gold */
+  --color-gold-800: #9C7A0C;   /* Darker gold */
+  --color-gold-900: #7A5F00;   /* Deep gold */
+  --color-gold-950: #4D3D00;   /* Darkest gold */
+
+  /* Slate Scale (Neutral Greys) */
+  --color-slate-50: #F8FAFC;   /* Light text on dark */
+  --color-slate-100: #F1F5F9;  /* Very light borders */
+  --color-slate-200: #E2E8F0;  /* Light borders */
+  --color-slate-300: #CBD5E1;  /* Medium borders */
+  --color-slate-400: #94A3B8;  /* Secondary text */
+  --color-slate-500: #64748B;  /* Muted text */
+  --color-slate-600: #475569;  /* Dark text */
+  --color-slate-700: #334155;  /* Surface borders */
+  --color-slate-800: #1E293B;  /* Dark surfaces */
+  --color-slate-900: #0F172A;  /* Very dark surfaces */
+
+  /* Core Design Tokens (Obsidian Theme) */
+  --color-background: var(--color-obsidian-900); /* Main background */
+  --color-surface: var(--color-obsidian-800); /* Card backgrounds */
+  --color-surface-hover: var(--color-obsidian-700); /* Hover states */
+  --color-border: var(--color-obsidian-700); /* Border color */
+  --color-text-primary: var(--color-obsidian-50); /* Primary text */
+  --color-text-secondary: var(--color-slate-400); /* Secondary text */
   
   /* Accent colors (Gold) */
-  --color-accent-500: #F59E0B; /* Main Accent Gold */
-  --color-accent-600: #D97706;
-  --color-accent-700: #B45309;
+  --color-accent-500: var(--color-gold-500); /* Main Accent Gold */
+  --color-accent-600: var(--color-gold-600); /* Metallic Gold */
+  --color-accent-700: var(--color-gold-700); /* Dark Gold */
   
-  /* Node colors */
-  --color-node-problem: #6B7280;
-  --color-node-persona: #14B8A6;
-  --color-node-pain: #F97316;
-  --color-node-solution: #3B82F6;
+  /* Semantic Colors */
+  --color-success-500: #22C55E;   /* Green for success states */
+  --color-success-600: #16A34A;   /* Darker green */
+  --color-warning-500: var(--color-gold-500);   /* Gold for warnings */
+  --color-warning-600: var(--color-gold-600);   /* Metallic gold */
+  --color-error-500: #EF4444;     /* Red for errors */
+  --color-error-600: #DC2626;     /* Darker red */
+  --color-info-500: #3B82F6;      /* Blue for info */
+  --color-info-600: #2563EB;      /* Darker blue */
+  
+  /* Node colors (Obsidian Theme) */
+  --color-node-problem: #EF4444;   /* Red for problems */
+  --color-node-persona: #8B5CF6;   /* Purple for personas */
+  --color-node-pain: #F97316;      /* Orange for pain points */
+  --color-node-solution: var(--color-gold-500);  /* Gold for solutions */
+  --color-node-story: #3B82F6;     /* Blue for user stories */
+  --color-node-core: var(--color-gold-600);      /* Metallic gold for core problems */
+
+  /* Shadows (Obsidian Theme) */
+  --shadow-sm: 0 1px 2px 0 rgba(5, 7, 8, 0.3);
+  --shadow-base: 0 1px 3px 0 rgba(5, 7, 8, 0.4), 0 1px 2px 0 rgba(5, 7, 8, 0.2);
+  --shadow-md: 0 4px 6px -1px rgba(5, 7, 8, 0.4), 0 2px 4px -1px rgba(5, 7, 8, 0.2);
+  --shadow-lg: 0 10px 15px -3px rgba(5, 7, 8, 0.4), 0 4px 6px -2px rgba(5, 7, 8, 0.2);
+  --shadow-xl: 0 20px 25px -5px rgba(5, 7, 8, 0.5), 0 10px 10px -5px rgba(5, 7, 8, 0.3);
+  --shadow-2xl: 0 25px 50px -12px rgba(5, 7, 8, 0.6);
+
+  /* Glow effects */
+  --shadow-glow-gold: 0 0 20px rgba(255, 215, 0, 0.4);
+  --shadow-glow-metallic: 0 0 20px rgba(212, 175, 55, 0.3);
+  --shadow-glow-success: 0 0 20px rgba(34, 197, 94, 0.3);
+  --shadow-glow-error: 0 0 20px rgba(239, 68, 68, 0.3);
+
+  /* Obsidian-specific shadows */
+  --shadow-obsidian-inset: inset 0 2px 4px rgba(5, 7, 8, 0.8);
+  --shadow-obsidian-deep: 0 8px 32px rgba(5, 7, 8, 0.8);
   
   /* Spacing */
   --space-xs: 0.25rem; /* 1 */
@@ -66,21 +134,39 @@ html, body {
 
 /* Utility classes for Tailwind v4 */
 @layer base {
-  /* Colors */
-  .bg-gray-900 { background-color: #111827; }
-  .bg-gray-800 { background-color: #1f2937; }
-  .bg-gray-700 { background-color: #374151; }
-  .bg-gray-600 { background-color: #4b5563; }
-  .bg-gray-500 { background-color: #6b7280; }
+  /* Colors - Obsidian Theme */
+  .bg-obsidian-950 { background-color: var(--color-obsidian-950); }
+  .bg-obsidian-900 { background-color: var(--color-obsidian-900); }
+  .bg-obsidian-800 { background-color: var(--color-obsidian-800); }
+  .bg-obsidian-700 { background-color: var(--color-obsidian-700); }
+  .bg-obsidian-600 { background-color: var(--color-obsidian-600); }
+  .bg-obsidian-500 { background-color: var(--color-obsidian-500); }
   
-  .text-white { color: #ffffff; }
-  .text-gray-200 { color: #e5e7eb; }
-  .text-gray-300 { color: #d1d5db; }
-  .text-gray-400 { color: #9ca3af; }
-  .text-gray-500 { color: #6b7280; }
+  /* Legacy gray classes mapped to obsidian */
+  .bg-gray-900 { background-color: var(--color-obsidian-900); }
+  .bg-gray-800 { background-color: var(--color-obsidian-800); }
+  .bg-gray-700 { background-color: var(--color-obsidian-700); }
+  .bg-gray-600 { background-color: var(--color-obsidian-600); }
+  .bg-gray-500 { background-color: var(--color-obsidian-500); }
   
-  .border-gray-700 { border-color: #374151; }
-  .border-gray-600 { border-color: #4b5563; }
+  .text-white { color: var(--color-obsidian-50); }
+  .text-obsidian-50 { color: var(--color-obsidian-50); }
+  .text-obsidian-100 { color: var(--color-obsidian-100); }
+  .text-obsidian-300 { color: var(--color-obsidian-300); }
+  .text-slate-400 { color: var(--color-slate-400); }
+  
+  /* Legacy gray text classes mapped to obsidian/slate */
+  .text-gray-200 { color: var(--color-obsidian-100); }
+  .text-gray-300 { color: var(--color-obsidian-300); }
+  .text-gray-400 { color: var(--color-slate-400); }
+  .text-gray-500 { color: var(--color-slate-500); }
+  
+  .border-obsidian-700 { border-color: var(--color-obsidian-700); }
+  .border-slate-700 { border-color: var(--color-slate-700); }
+  
+  /* Legacy gray border classes mapped to obsidian */
+  .border-gray-700 { border-color: var(--color-obsidian-700); }
+  .border-gray-600 { border-color: var(--color-obsidian-600); }
   
   /* Layout */
   .flex { display: flex; }
@@ -157,10 +243,24 @@ html, body {
   .rounded-xl { border-radius: 0.75rem; }
   .rounded-full { border-radius: 9999px; }
   
-  /* Effects */
-  .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
-  .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
-  .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+  /* Effects - Obsidian Theme */
+  .shadow-sm { box-shadow: var(--shadow-sm); }
+  .shadow-base { box-shadow: var(--shadow-base); }
+  .shadow-md { box-shadow: var(--shadow-md); }
+  .shadow-lg { box-shadow: var(--shadow-lg); }
+  .shadow-xl { box-shadow: var(--shadow-xl); }
+  .shadow-2xl { box-shadow: var(--shadow-2xl); }
+  
+  /* Glow effects */
+  .shadow-glow-gold { box-shadow: var(--shadow-glow-gold); }
+  .shadow-glow-metallic { box-shadow: var(--shadow-glow-metallic); }
+  .shadow-glow-success { box-shadow: var(--shadow-glow-success); }
+  .shadow-glow-error { box-shadow: var(--shadow-glow-error); }
+  
+  /* Obsidian-specific shadows */
+  .shadow-obsidian-inset { box-shadow: var(--shadow-obsidian-inset); }
+  .shadow-obsidian-deep { box-shadow: var(--shadow-obsidian-deep); }
+  
   .opacity-50 { opacity: 0.5; }
   
   /* Z-index */
@@ -183,42 +283,84 @@ html, body {
   .duration-300 { transition-duration: 300ms; }
   .duration-fast { transition-duration: var(--duration-fast); }
   
-  /* Custom colors */
-  .bg-red-600 { background-color: #dc2626; }
-  .bg-red-900\/30 { background-color: rgb(127 29 29 / 0.3); }
-  .bg-blue-400 { background-color: #60a5fa; }
-  .bg-blue-500 { background-color: #3b82f6; }
-  .bg-blue-600 { background-color: #2563eb; }
-  .bg-blue-700 { background-color: #1d4ed8; }
-  .bg-green-500 { background-color: #10b981; }
-  .bg-yellow-500 { background-color: #f59e0b; }
+  /* Custom colors - Obsidian/Gold Theme */
+  .bg-red-600 { background-color: var(--color-error-600); }
+  .bg-red-900\/30 { background-color: rgb(220 38 38 / 0.3); }
+  .bg-blue-400 { background-color: var(--color-gold-400); }
+  .bg-blue-500 { background-color: var(--color-gold-500); }
+  .bg-blue-600 { background-color: var(--color-gold-600); }
+  .bg-blue-700 { background-color: var(--color-gold-700); }
+  .bg-green-500 { background-color: var(--color-success-500); }
+  .bg-yellow-500 { background-color: var(--color-warning-500); }
+  
+  /* Gold background utilities */
+  .bg-gold-500 { background-color: var(--color-gold-500); }
+  .bg-gold-600 { background-color: var(--color-gold-600); }
+  .bg-gold-700 { background-color: var(--color-gold-700); }
+  
+  /* Accent colors (mapped to gold) */
   .bg-accent-500 { background-color: var(--color-accent-500); }
   .bg-accent-600 { background-color: var(--color-accent-600); }
-  .bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)); }
-  .from-gray-800 { --tw-gradient-from: #1f2937; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
-  .to-gray-900 { --tw-gradient-to: #111827; }
+  .bg-accent-700 { background-color: var(--color-accent-700); }
   
-  .text-red-400 { color: #f87171; }
-  .text-blue-400 { color: #60a5fa; }
+  /* Gradients - Obsidian theme */
+  .bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)); }
+  .from-obsidian-800 { --tw-gradient-from: var(--color-obsidian-800); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+  .to-obsidian-900 { --tw-gradient-to: var(--color-obsidian-900); }
+  .from-gray-800 { --tw-gradient-from: var(--color-obsidian-800); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+  .to-gray-900 { --tw-gradient-to: var(--color-obsidian-900); }
+  
+  .text-red-400 { color: var(--color-error-400); }
+  .text-red-500 { color: var(--color-error-500); }
+  .text-blue-400 { color: var(--color-gold-400); }
+  .text-blue-500 { color: var(--color-gold-500); }
+  
+  /* Gold text utilities */
+  .text-gold-500 { color: var(--color-gold-500); }
+  .text-gold-600 { color: var(--color-gold-600); }
+  .text-gold-700 { color: var(--color-gold-700); }
+  
+  /* Accent text colors (mapped to gold) */
   .text-accent-500 { color: var(--color-accent-500); }
   .text-accent-600 { color: var(--color-accent-600); }
+  .text-accent-700 { color: var(--color-accent-700); }
   
-  .border-red-500 { border-color: #ef4444; }
-  .border-red-700 { border-color: #b91c1c; }
-  .border-green-500 { border-color: #10b981; }
-  .border-blue-500 { border-color: #3b82f6; }
-  .border-yellow-500 { border-color: #f59e0b; }
+  /* Success/Warning/Error text */
+  .text-success-500 { color: var(--color-success-500); }
+  .text-warning-500 { color: var(--color-warning-500); }
+  .text-error-500 { color: var(--color-error-500); }
+  
+  .border-red-500 { border-color: var(--color-error-500); }
+  .border-red-700 { border-color: var(--color-error-600); }
+  .border-green-500 { border-color: var(--color-success-500); }
+  .border-blue-500 { border-color: var(--color-info-500); }
+  .border-yellow-500 { border-color: var(--color-warning-500); }
+  
+  /* Gold border utilities */
+  .border-gold-500 { border-color: var(--color-gold-500); }
+  .border-gold-600 { border-color: var(--color-gold-600); }
+  .border-gold-700 { border-color: var(--color-gold-700); }
+  
+  /* Accent border colors (mapped to gold) */
   .border-accent-500 { border-color: var(--color-accent-500); }
   .border-accent-600 { border-color: var(--color-accent-600); }
+  .border-accent-700 { border-color: var(--color-accent-700); }
   
   /* Focus states */
-  .focus\:border-blue-500:focus { border-color: #3b82f6; }
+  .focus\:border-blue-500:focus { border-color: var(--color-gold-500); }
   .focus\:outline-none:focus { outline: 2px solid transparent; outline-offset: 2px; }
   
-  /* Hover states */
-  .hover\:bg-gray-700:hover { background-color: #374151; }
-  .hover\:bg-blue-700:hover { background-color: #1d4ed8; }
-  .hover\:text-white:hover { color: #ffffff; }
+  /* Hover states - Obsidian Theme */
+  .hover\:bg-obsidian-700:hover { background-color: var(--color-obsidian-700); }
+  .hover\:bg-obsidian-600:hover { background-color: var(--color-obsidian-600); }
+  .hover\:bg-gold-600:hover { background-color: var(--color-gold-600); }
+  .hover\:bg-gold-700:hover { background-color: var(--color-gold-700); }
+  
+  /* Legacy hover states mapped to obsidian */
+  .hover\:bg-gray-700:hover { background-color: var(--color-obsidian-700); }
+  .hover\:bg-blue-700:hover { background-color: var(--color-gold-700); }
+  .hover\:text-white:hover { color: var(--color-obsidian-50); }
+  .hover\:text-gold-400:hover { color: var(--color-gold-400); }
   
   /* Disabled states */
   .disabled\:opacity-50:disabled { opacity: 0.5; }
@@ -330,19 +472,19 @@ html, body {
 .react-flow__handle {
   width: 12px;
   height: 12px;
-  background: #4b5563;
-  border: 2px solid #111827;
+  background: var(--color-slate-600);
+  border: 2px solid var(--color-obsidian-800);
 }
 
 .react-flow__edge-path {
-  stroke: #4b5563;
+  stroke: var(--color-slate-600);
   stroke-width: 2;
 }
 
 /* Gradients for nodes */
 .gradient-problem {
-  background: linear-gradient(135deg, var(--color-gray-800), var(--color-gray-700));
-  border: 1px solid var(--color-gray-600);
+  background: linear-gradient(135deg, var(--color-obsidian-800), var(--color-obsidian-700));
+  border: 1px solid var(--color-obsidian-600);
 }
 
 /* Skeleton shimmer animation */
@@ -364,9 +506,9 @@ html, body {
   position: relative;
   overflow: hidden;
   background: linear-gradient(90deg, 
-    rgba(75, 85, 99, 0.5) 0%, 
-    rgba(107, 114, 128, 0.7) 50%, 
-    rgba(75, 85, 99, 0.5) 100%
+    rgba(5, 7, 8, 0.5) 0%, 
+    rgba(11, 18, 21, 0.7) 50%, 
+    rgba(5, 7, 8, 0.5) 100%
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
@@ -382,16 +524,16 @@ html, body {
 }
 
 .gradient-persona {
-  background: linear-gradient(135deg, var(--color-gray-800), var(--color-gray-700));
-  border: 1px solid var(--color-gray-600);
+  background: linear-gradient(135deg, var(--color-obsidian-800), var(--color-obsidian-700));
+  border: 1px solid var(--color-obsidian-600);
 }
 
 .gradient-pain {
-  background: linear-gradient(135deg, #f97316, #ea580c);
+  background: linear-gradient(135deg, var(--color-error-600), var(--color-error-700));
 }
 
 .gradient-solution {
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  background: linear-gradient(135deg, var(--color-gold-600), var(--color-gold-700));
 }
 
 /* Canvas node base styles */
@@ -416,16 +558,16 @@ html, body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1f2937;
+  background: var(--color-obsidian-800);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #4b5563;
+  background: var(--color-obsidian-600);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #6b7280;
+  background: var(--color-obsidian-500);
 }
 
 /* Sidebar Component Styles - Following Design System */
@@ -435,14 +577,14 @@ html, body {
   font-size: 1.25rem; /* text-xl */
   font-weight: 600;
   line-height: 1.5;
-  color: white;
+  color: var(--color-obsidian-50);
 }
 
 .body-sm {
   font-size: 0.875rem; /* text-sm */
   font-weight: 400;
   line-height: 1.5;
-  color: #9CA3AF; /* gray-400 */
+  color: var(--color-slate-400);
 }
 
 /* Icons from Design System */
@@ -465,18 +607,18 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #1F2937; /* gray-800 */
-  color: #9CA3AF; /* gray-400 */
+  background: var(--color-obsidian-800);
+  color: var(--color-slate-400);
   border-radius: 0.5rem; /* radius-lg */
-  border: 1px solid #374151; /* gray-700 */
+  border: 1px solid var(--color-obsidian-700);
   transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 }
 
 .btn-icon:hover {
-  background: #374151; /* gray-700 */
-  color: white;
-  border-color: #4B5563; /* gray-600 */
+  background: var(--color-obsidian-700);
+  color: var(--color-obsidian-50);
+  border-color: var(--color-obsidian-600);
 }
 
 .btn-icon--small {
@@ -488,8 +630,8 @@ html, body {
 .sidebar {
   width: 256px;
   height: 100vh;
-  background: #1F2937; /* gray-800 */
-  border-right: 1px solid #374151; /* gray-700 */
+  background: var(--color-obsidian-800);
+  border-right: 1px solid var(--color-obsidian-700);
   display: flex;
   flex-direction: column;
 }
@@ -497,7 +639,7 @@ html, body {
 .sidebar-header {
   height: 64px;
   padding: 1rem;
-  border-bottom: 1px solid #374151; /* gray-700 */
+  border-bottom: 1px solid var(--color-obsidian-700);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -511,13 +653,13 @@ html, body {
 
 .sidebar-footer {
   padding: 1rem;
-  border-top: 1px solid #374151; /* gray-700 */
+  border-top: 1px solid var(--color-obsidian-700);
 }
 
 .sidebar-item {
   padding: 0.5rem 0.75rem;
   border-radius: 0.375rem; /* radius-md */
-  color: #D1D5DB; /* gray-300 */
+  color: var(--color-obsidian-300);
   transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   display: flex;
@@ -531,12 +673,12 @@ html, body {
 }
 
 .sidebar-item:hover {
-  background: #374151; /* gray-700 */
-  color: white;
+  background: var(--color-obsidian-700);
+  color: var(--color-obsidian-50);
 }
 
 .sidebar-item--active {
-  background: #374151; /* gray-700 */
+  background: var(--color-obsidian-700);
   color: white;
 }
 
@@ -585,7 +727,7 @@ html, body {
   gap: 0.75rem;
   margin-top: 0.5rem;
   font-size: 0.75rem;
-  color: #6B7280; /* gray-500 */
+  color: var(--color-slate-500);
 }
 
 .workspace-meta-item {
@@ -593,7 +735,7 @@ html, body {
 }
 
 .workspace-meta-separator {
-  color: #4B5563; /* gray-600 */
+  color: var(--color-slate-600);
 }
 
 /* Project List Styles */
@@ -601,7 +743,7 @@ html, body {
   margin-left: 1.5rem;
   margin-top: 0.25rem;
   padding-left: 0.75rem;
-  border-left: 1px solid #374151; /* gray-700 */
+  border-left: 1px solid var(--color-slate-700);
 }
 
 .project-item {
@@ -612,7 +754,7 @@ html, body {
   padding: 0.375rem 0.5rem;
   margin-bottom: 0.125rem;
   border-radius: 0.375rem; /* radius-md */
-  color: #9CA3AF; /* gray-400 */
+  color: var(--color-slate-400);
   background: transparent;
   border: none;
   font-size: 0.875rem;
@@ -627,7 +769,7 @@ html, body {
 }
 
 .project-item--active {
-  background: #374151; /* gray-700 */
+  background: var(--color-slate-700);
   color: white;
 }
 
@@ -647,15 +789,15 @@ html, body {
 }
 
 .status-dot--draft {
-  background-color: #6B7280; /* gray-500 */
+  background-color: var(--color-slate-500);
 }
 
 .status-dot--progress {
-  background-color: #F59E0B; /* yellow-500 */
+  background-color: var(--color-warning-500);
 }
 
 .status-dot--completed {
-  background-color: #10B981; /* green-500 */
+  background-color: var(--color-success-500);
 }
 
 /* Version Timeline Controls */
@@ -1041,14 +1183,14 @@ html, body {
   position: relative;
   padding: 1rem;
   background: rgba(31, 41, 55, 0.5); /* gray-800/50 */
-  border: 1px solid #374151; /* gray-700 */
+  border: 1px solid var(--color-slate-700);
   border-radius: 0.5rem;
   transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 }
 
 .project-card:hover {
-  border-color: #4B5563; /* gray-600 */
+  border-color: var(--color-slate-600);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   transform: translateY(-1px);
 }
@@ -1072,16 +1214,16 @@ kbd {
   padding: 0.125rem 0.375rem;
   font-size: 0.75rem;
   font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
-  background: #374151; /* gray-700 */
-  border: 1px solid #4B5563; /* gray-600 */
+  background: var(--color-slate-700);
+  border: 1px solid var(--color-slate-600);
   border-radius: 0.25rem;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 2px #1F2937;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 2px var(--color-slate-800);
 }
 
 /* Sidebar scroll behavior */
 .sidebar-content {
   scrollbar-width: thin;
-  scrollbar-color: #4B5563 #1F2937;
+  scrollbar-color: var(--color-obsidian-600) var(--color-obsidian-800);
 }
 
 .sidebar-content::-webkit-scrollbar {
@@ -1089,16 +1231,16 @@ kbd {
 }
 
 .sidebar-content::-webkit-scrollbar-track {
-  background: #1F2937;
+  background: var(--color-obsidian-800);
 }
 
 .sidebar-content::-webkit-scrollbar-thumb {
-  background: #4B5563;
+  background: var(--color-obsidian-600);
   border-radius: 3px;
 }
 
 .sidebar-content::-webkit-scrollbar-thumb:hover {
-  background: #6B7280;
+  background: var(--color-obsidian-500);
 }
 
 /* Drag and drop styles */
@@ -1108,8 +1250,8 @@ kbd {
 }
 
 .project-card.drag-over {
-  border-color: #3B82F6; /* blue-500 */
-  background: rgba(59, 130, 246, 0.1);
+  border-color: var(--color-gold-500);
+  background: rgba(255, 215, 0, 0.1);
 }
 
 /* Context menu */
@@ -1130,12 +1272,12 @@ kbd {
 
 /* Multi-select styles */
 .project-card.selected {
-  background: rgba(59, 130, 246, 0.1);
-  border-color: #3B82F6;
+  background: rgba(255, 215, 0, 0.1);
+  border-color: var(--color-gold-500);
 }
 
 .project-card.focused {
-  outline: 2px solid #3B82F6;
+  outline: 2px solid var(--color-gold-500);
   outline-offset: 2px;
 }
 
@@ -1203,8 +1345,8 @@ kbd {
   left: 50%;
   transform: translateX(-50%);
   padding: 0.25rem 0.5rem;
-  background: #1F2937;
-  border: 1px solid #374151;
+  background: var(--color-obsidian-800);
+  border: 1px solid var(--color-obsidian-700);
   border-radius: 0.25rem;
   font-size: 0.75rem;
   white-space: nowrap;
@@ -1220,8 +1362,8 @@ kbd {
 /* Search input focus styles */
 .search-input:focus {
   outline: none;
-  border-color: #3B82F6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: var(--color-gold-500);
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
 }
 
 /* Smooth height transitions for expanding sections */
@@ -1232,8 +1374,8 @@ kbd {
 
 /* Fuse.js search highlighting */
 mark {
-  background: rgba(245, 158, 11, 0.3);
-  color: #FCD34D;
+  background: rgba(255, 215, 0, 0.3);
+  color: var(--color-gold-300);
   padding: 0 0.125rem;
   border-radius: 0.125rem;
 }

@@ -27,64 +27,70 @@
 
 ### Color Palette
 
-#### Primary Colors
+#### Obsidian Scale (Primary Dark)
 ```css
---color-primary-50: #EFF6FF;
---color-primary-100: #DBEAFE;
---color-primary-200: #BFDBFE;
---color-primary-300: #93BBFD;
---color-primary-400: #60A5FA;
---color-primary-500: #3B82F6;
---color-primary-600: #2563EB;  /* Main Primary */
---color-primary-700: #1D4ED8;
---color-primary-800: #1E40AF;
---color-primary-900: #1E3A8A;
+--color-obsidian-50: #F8F9FA;   /* Ultra light for text on dark */
+--color-obsidian-100: #E9ECEF;  /* Light text/borders */
+--color-obsidian-200: #CED4DA;  /* Medium light borders */
+--color-obsidian-300: #ADB5BD;  /* Secondary text */
+--color-obsidian-400: #6C757D;  /* Muted text */
+--color-obsidian-500: #495057;  /* Medium contrast */
+--color-obsidian-600: #343A40;  /* Dark surfaces */
+--color-obsidian-700: #212529;  /* Darker surfaces */
+--color-obsidian-800: #16191C;  /* Card backgrounds */
+--color-obsidian-900: #0B1215;  /* Main Background */
+--color-obsidian-950: #050708;  /* Deepest black */
 ```
 
-#### Accent Colors (Gold)
+#### Gold Scale (Primary Accent)
 ```css
---color-accent-50: #FFFBEB;
---color-accent-100: #FEF3C7;
---color-accent-200: #FDE68A;
---color-accent-300: #FCD34D;
---color-accent-400: #FBBF24;
---color-accent-500: #F59E0B;  /* Main Accent Gold */
---color-accent-600: #D97706;
---color-accent-700: #B45309;
---color-accent-800: #92400E;
---color-accent-900: #78350F;
+--color-gold-50: #FFFEF7;    /* Ultra light gold tint */
+--color-gold-100: #FFF9E6;   /* Light gold backgrounds */
+--color-gold-200: #FFF1CC;   /* Subtle gold highlights */
+--color-gold-300: #FFE499;   /* Light gold accents */
+--color-gold-400: #FFD966;   /* Medium gold */
+--color-gold-500: #FFD700;   /* Standard Gold (Primary) */
+--color-gold-600: #D4AF37;   /* Metallic Gold (Secondary) */
+--color-gold-700: #B8941F;   /* Dark gold */
+--color-gold-800: #9C7A0C;   /* Darker gold */
+--color-gold-900: #7A5F00;   /* Deep gold */
+--color-gold-950: #4D3D00;   /* Darkest gold */
 ```
 
-#### Neutral Colors
+#### Slate Scale (Neutral Greys)
 ```css
---color-gray-50: #F9FAFB;
---color-gray-100: #F3F4F6;
---color-gray-200: #E5E7EB;
---color-gray-300: #D1D5DB;
---color-gray-400: #9CA3AF;  /* Secondary Text */
---color-gray-500: #6B7280;
---color-gray-600: #4B5563;
---color-gray-700: #374151;  /* Borders */
---color-gray-800: #1F2937;  /* Card Background */
---color-gray-900: #111827;  /* Main Background */
+--color-slate-50: #F8FAFC;   /* Light text on dark */
+--color-slate-100: #F1F5F9;  /* Very light borders */
+--color-slate-200: #E2E8F0;  /* Light borders */
+--color-slate-300: #CBD5E1;  /* Medium borders */
+--color-slate-400: #94A3B8;  /* Secondary text */
+--color-slate-500: #64748B;  /* Muted text */
+--color-slate-600: #475569;  /* Dark text */
+--color-slate-700: #334155;  /* Surface borders */
+--color-slate-800: #1E293B;  /* Dark surfaces */
+--color-slate-900: #0F172A;  /* Very dark surfaces */
 ```
 
 #### Semantic Colors
 ```css
---color-success-500: #10B981;
---color-success-600: #059669;
---color-warning-500: #F59E0B;
---color-warning-600: #D97706;
---color-error-500: #EF4444;
---color-error-600: #DC2626;
+--color-success-500: #22C55E;   /* Green for success states */
+--color-success-600: #16A34A;   /* Darker green */
+--color-warning-500: #FFD700;   /* Gold for warnings */
+--color-warning-600: #D4AF37;   /* Metallic gold */
+--color-error-500: #EF4444;     /* Red for errors */
+--color-error-600: #DC2626;     /* Darker red */
+--color-info-500: #3B82F6;      /* Blue for info */
+--color-info-600: #2563EB;      /* Darker blue */
 ```
 
-#### Node Colors
+#### Node Colors (Obsidian Theme)
 ```css
---color-node-problem: #DC2626;   /* Red-600 */
---color-node-persona: #14B8A6;   /* Teal-500 */
---color-node-pain: #F97316;      /* Orange-500 */
---color-node-solution: #3B82F6;  /* Blue-500 */
+--color-node-problem: #EF4444;   /* Red for problems */
+--color-node-persona: #8B5CF6;   /* Purple for personas */
+--color-node-pain: #F97316;      /* Orange for pain points */
+--color-node-solution: #FFD700;  /* Gold for solutions */
+--color-node-story: #3B82F6;     /* Blue for user stories */
+--color-node-core: #D4AF37;      /* Metallic gold for core problems */
 ```
 
 ### Typography
@@ -153,16 +159,25 @@
 --radius-full: 9999px;
 ```
 
-### Shadows
+### Shadows (Obsidian Theme)
 
 ```css
---shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
---shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
---shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
---shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
---shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
---shadow-glow-primary: 0 0 20px rgba(37, 99, 235, 0.5);
---shadow-glow-success: 0 0 20px rgba(16, 185, 129, 0.5);
+--shadow-sm: 0 1px 2px 0 rgba(5, 7, 8, 0.3);
+--shadow-base: 0 1px 3px 0 rgba(5, 7, 8, 0.4), 0 1px 2px 0 rgba(5, 7, 8, 0.2);
+--shadow-md: 0 4px 6px -1px rgba(5, 7, 8, 0.4), 0 2px 4px -1px rgba(5, 7, 8, 0.2);
+--shadow-lg: 0 10px 15px -3px rgba(5, 7, 8, 0.4), 0 4px 6px -2px rgba(5, 7, 8, 0.2);
+--shadow-xl: 0 20px 25px -5px rgba(5, 7, 8, 0.5), 0 10px 10px -5px rgba(5, 7, 8, 0.3);
+--shadow-2xl: 0 25px 50px -12px rgba(5, 7, 8, 0.6);
+
+/* Glow effects */
+--shadow-glow-gold: 0 0 20px rgba(255, 215, 0, 0.4);
+--shadow-glow-metallic: 0 0 20px rgba(212, 175, 55, 0.3);
+--shadow-glow-success: 0 0 20px rgba(34, 197, 94, 0.3);
+--shadow-glow-error: 0 0 20px rgba(239, 68, 68, 0.3);
+
+/* Obsidian-specific shadows */
+--shadow-obsidian-inset: inset 0 2px 4px rgba(5, 7, 8, 0.8);
+--shadow-obsidian-deep: 0 8px 32px rgba(5, 7, 8, 0.8);
 ```
 
 ### Transitions
