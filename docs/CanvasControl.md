@@ -343,6 +343,44 @@ Successfully tested on localhost:1420 with complete functionality:
 **Step 1 Navigation**: Users can click on the "1" in the ProgressSteps to intelligently center the CoreProblemNode with PersonaNodes visible to the right, providing an optimal view for the problem definition phase.
 
 **Step 2 Navigation**: Users can click on the "2" in the ProgressSteps to transition to persona discovery mode with enhanced persona-focused positioning and closer zoom level for detailed persona analysis.
+
+#### 🚨 Critical Transition Bug Fix - RESOLVED
+
+**🔍 Problem Identified**: Double-Click Navigation Requirement
+- Users had to click Step 2 **twice** to achieve proper canvas positioning
+- First click would partially work but not reach the optimal view
+- Second click would complete the navigation as expected
+
+**🕵️ Root Cause Analysis**:
+- **Competing Navigation Logic**: WorkflowCanvas.tsx contained `useEffect` blocks that intercepted workflow step changes
+- **Navigation Override**: ProgressSteps `goToStep2()` would execute correctly, but WorkflowCanvas effects would immediately override the positioning
+- **Timing Conflict**: First click triggered both navigation systems simultaneously, causing positioning conflicts
+
+**🛠️ Technical Solution Applied**:
+1. **Removed Competing Effects**: Eliminated conflicting `useEffect` blocks in WorkflowCanvas.tsx:
+   - Removed step-change-based navigation effects
+   - Removed persona_discovery-specific canvas adjustments
+   - Preserved only essential canvas initialization logic
+
+2. **Clean Navigation Architecture**: 
+   - ProgressSteps navigation now executes without interference
+   - Workflow state changes are handled cleanly by App.tsx
+   - Single source of truth for step-based navigation
+
+**✅ Final Results - Single-Click Smooth Transitions**:
+- **Step 1 → Step 2**: ✅ Single click, immediate transition to persona discovery mode
+- **Step 2 → Step 1**: ✅ Single click, immediate transition to problem input mode  
+- **Numbers Always Visible**: ✅ All ProgressBar numbers 1-7 remain visible during transitions
+- **Workflow State Sync**: ✅ Debug info properly shows "problem_input" ↔ "persona_discovery"
+- **Console Logs**: ✅ Clean execution without competing navigation effects
+
+**🎯 Verified via Playwright MCP Testing**:
+- No double-click requirement
+- Smooth bidirectional transitions
+- Proper workflow state management
+- Professional 1-second animation transitions
+
+This fix resolved the core transition system issue, providing the smooth, responsive navigation experience expected by users.
 - **Smooth animation** (1 second) transitions from current view to Step 1 layout
 - **Sidebar accommodation** ensures content doesn't overlap with the navigation sidebar
 

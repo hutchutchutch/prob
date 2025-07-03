@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { NodeProps } from '@xyflow/react';
 import { Lock, Unlock, Flame } from 'lucide-react';
 import { cn } from '@/utils/cn';
@@ -21,47 +21,12 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
   const nodeData = data as unknown as PersonaNodeData;
   const { isLocked = false, isSkeleton = false, onToggleLock } = nodeData;
   const [isExpanded, setIsExpanded] = useState(false);
-  const [floatOffset, setFloatOffset] = useState({ x: 0, y: 0 });
 
   // Handle node click to expand/collapse
   const handleNodeClick = () => {
     if (isSkeleton) return;
     setIsExpanded(!isExpanded);
   };
-
-  // Create ethereal floating effect for skeleton nodes
-  useEffect(() => {
-    if (!isSkeleton) return;
-
-    // Random parameters for each node to create variety
-    const baseAmplitude = 12 + Math.random() * 8; // 12-20 pixels (less than pain points)
-    const xSpeed = 0.0002 + Math.random() * 0.0002; // Vary the speed
-    const ySpeed = 0.0003 + Math.random() * 0.0002;
-    const phaseOffset = Math.random() * Math.PI * 2; // Random starting phase
-
-    let animationFrame: number;
-    const startTime = Date.now();
-
-    const animate = () => {
-      const elapsed = Date.now() - startTime;
-      
-      // Create smooth sinusoidal movement
-      const xOffset = Math.sin(elapsed * xSpeed + phaseOffset) * baseAmplitude;
-      const yOffset = Math.sin(elapsed * ySpeed + phaseOffset + Math.PI/4) * baseAmplitude * 0.8;
-
-      setFloatOffset({ x: xOffset, y: yOffset });
-      
-      animationFrame = requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => {
-      if (animationFrame) {
-        cancelAnimationFrame(animationFrame);
-      }
-    };
-  }, [isSkeleton]);
 
   // Render fire icons for pain rating
   const renderPainRating = (painLevel: number) => {
@@ -82,27 +47,21 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
     );
   };
 
-  // Skeleton state with ethereal floating
+  // Skeleton state
   if (isSkeleton) {
     return (
-      <div 
-        style={{
-          transform: `translate(${floatOffset.x}px, ${floatOffset.y}px)`,
-          transition: 'none', // Disable transitions for smooth animation
-        }}
+      <BaseNode
+        variant="persona"
+        selected={selected}
+        showSourceHandle={false}
+        showTargetHandle={true}
+        className={cn(
+          "min-w-[280px]",
+          "opacity-70",
+          "shadow-lg shadow-teal-500/20", // Add ethereal glow with teal color
+          "transition-shadow duration-1000"
+        )}
       >
-        <BaseNode
-          variant="persona"
-          selected={selected}
-          showSourceHandle={false}
-          showTargetHandle={true}
-          className={cn(
-            "min-w-[280px]",
-            "opacity-70",
-            "shadow-lg shadow-teal-500/20", // Add ethereal glow with teal color
-            "transition-shadow duration-1000"
-          )}
-        >
           <div className="space-y-6">
             {/* Skeleton Header */}
             <div className="flex items-start justify-between mb-2">
@@ -124,7 +83,6 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
             </div>
           </div>
         </BaseNode>
-      </div>
     );
   }
 

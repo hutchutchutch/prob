@@ -11,7 +11,7 @@ export function WorkflowCanvas() {
   
   const { currentStep, coreProblem, personas, painPoints, isGeneratingPersonas } = useWorkflowStore();
   const { addNodes, addEdges, updateEdge, zoomTo, resetCanvas, nodes, edges } = useCanvasStore();
-  const { goToStep1, goToStep } = useCanvasNavigation();
+  const { goToStep1 } = useCanvasNavigation();
   const [canvasInitialized, setCanvasInitialized] = useState(false);
   const [lastNodeCount, setLastNodeCount] = useState(0);
   const [lastEdgeCount, setLastEdgeCount] = useState(0);
@@ -202,36 +202,9 @@ export function WorkflowCanvas() {
     }
   }, [currentStep, canvasInitialized, addNodes, zoomTo, resetCanvas, coreProblem, nodes.length]);
 
-  // Handle navigation when step changes
-  useEffect(() => {
-    if (!canvasInitialized) return;
-
-    console.log('[WorkflowCanvas] Step changed, handling navigation for:', currentStep);
-    
-    // Navigate to appropriate view based on current step
-    switch (currentStep) {
-      case 'problem_input':
-        // Center on the CoreProblemNode for Step 1
-        setTimeout(() => {
-          console.log('[WorkflowCanvas] Navigating to Step 1 - Problem Input');
-          goToStep1();
-        }, 100);
-        break;
-      
-      case 'persona_discovery':
-        // Could add navigation to persona section
-        console.log('[WorkflowCanvas] Step 2 - Persona Discovery (no specific navigation yet)');
-        break;
-        
-      case 'pain_points':
-        // Could add navigation to pain points section
-        console.log('[WorkflowCanvas] Step 3 - Pain Points (no specific navigation yet)');
-        break;
-        
-      default:
-        console.log('[WorkflowCanvas] No specific navigation for step:', currentStep);
-    }
-  }, [currentStep, canvasInitialized, goToStep1]);
+  // NOTE: Navigation is now handled by ProgressSteps component in App.tsx
+  // This effect previously had competing navigation logic that interfered with ProgressSteps
+  // Removed to allow smooth single-click navigation from ProgressSteps
 
   // Update the problem node when core problem changes
   useEffect(() => {
@@ -362,7 +335,7 @@ export function WorkflowCanvas() {
             id: `persona-${personaIndex + 1}-to-pain-${painIndex + 1}`,
             source: personaNodeId,
             target: painPointId,
-            type: 'floating', // Use floating edge type to follow the node animation
+            type: 'default',
             style: {
               stroke: '#F97316', // Orange color for pain point connections
               strokeWidth: 1.5, // Thinner for many connections
@@ -531,32 +504,7 @@ export function WorkflowCanvas() {
     }
   }, [painPoints, canvasInitialized]);
 
-  // Handle step changes and canvas adjustments
-  useEffect(() => {
-    console.log('[WorkflowCanvas] Step change detected:', currentStep, 'canvasInitialized:', canvasInitialized);
-    
-    if (currentStep !== 'problem_input' && canvasInitialized) {
-      console.log('[WorkflowCanvas] Moving past problem input, updating canvas...');
-      console.log('[WorkflowCanvas] Current step:', currentStep);
-      
-      if (currentStep === 'persona_discovery') {
-        console.log('[WorkflowCanvas] Entering persona discovery, smoothly panning to show personas...');
-        // Adjust the canvas view to show both problem and persona columns
-        const vw = window.innerWidth;
-        const problemX = -vw / 3;
-        const personaX = 0; // Center column
-        
-        // Calculate appropriate zoom to show problem and persona columns
-        const columnsWidth = Math.abs(personaX - problemX) + 600; // Add padding for node widths
-        const zoomLevel = Math.min(0.8, window.innerWidth / columnsWidth);
-        
-        // Use setTimeout to ensure smooth transition after state updates
-        setTimeout(() => {
-          goToStep(2); // Use the navigation hook for smooth transition
-        }, 100);
-      }
-    }
-  }, [currentStep, canvasInitialized, goToStep]);
+  // NOTE: Removed competing step change navigation - now handled by ProgressSteps in App.tsx
 
   return (
     <div className="relative w-full h-full">

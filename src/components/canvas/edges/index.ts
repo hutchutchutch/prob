@@ -3,18 +3,15 @@ import { AnimatedEdge } from './AnimatedEdge';
 import { SolutionEdge } from './SolutionEdge';
 import { HighlightedEdge } from './HighlightedEdge';
 import { DependencyEdge } from './DependencyEdge';
-import { FloatingEdge } from './FloatingEdge';
 
 // Export all edge components
 export { AnimatedEdge } from './AnimatedEdge';
 export { SolutionEdge } from './SolutionEdge';
 export { HighlightedEdge } from './HighlightedEdge';
 export { DependencyEdge } from './DependencyEdge';
-export { FloatingEdge } from './FloatingEdge';
 
 // Export edge types
 export type { SolutionEdgeData } from './SolutionEdge';
-export type { FloatingEdgeData } from './FloatingEdge';
 
 // Export edge types configuration for React Flow
 export const edgeTypes = {
@@ -22,7 +19,6 @@ export const edgeTypes = {
   solution: SolutionEdge,
   highlighted: HighlightedEdge,
   dependency: DependencyEdge,
-  floating: FloatingEdge,
 };
 
 // Add CSS for edge animations
