@@ -621,6 +621,11 @@ html, body {
   border: 0;
 }
 
+/* Label nodes should always be on top */
+.react-flow__node-label {
+  z-index: 100 !important;
+}
+
 .react-flow__handle {
   width: 12px;
   height: 12px;
@@ -2235,4 +2240,29 @@ mark {
 
 .focus-group-quote:hover {
   z-index: 1000;
+}
+
+/* Ensure problem nodes respect max-width */
+.react-flow__node-problem .canvas-node,
+.react-flow__node-coreProblem .canvas-node {
+  max-width: 500px !important;
+  min-width: 400px !important;
+  width: 450px !important;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Ensure problem input container doesn't overflow */
+.problem-input-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Ensure ring styles don't affect node dimensions */
+.react-flow__node .ring-2 {
+  box-sizing: border-box;
+}
+
+.react-flow__node .ring-accent-500 {
+  --tw-ring-color: var(--color-accent-500);
 }

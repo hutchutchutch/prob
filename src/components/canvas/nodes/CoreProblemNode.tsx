@@ -5,6 +5,7 @@ import { useWorkflowStore } from '@/stores/workflowStore';
 import { useCanvasStore } from '@/stores/canvasStore';
 import { problemApi } from '@/services/api/problem';
 import { Sparkles, Loader2, CheckCircle } from 'lucide-react';
+import { cn } from '@/utils/cn';
 
 // Core Problem Node
 export interface CoreProblemNodeData {
@@ -138,6 +139,11 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
         console.log('[CoreProblemNode] Proceeding to next step');
         proceedToNextStep();
         
+        // 4. Small delay to ensure state updates before navigation
+        setTimeout(() => {
+          console.log('[CoreProblemNode] Navigation should happen automatically via App.tsx');
+        }, 100);
+        
       } else {
         console.log('[CoreProblemNode] Problem validation failed');
         setValidationError(validationResult.feedback || 'Invalid problem statement');
@@ -189,7 +195,11 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
       selected={selected}
       showTargetHandle={false}
       showSourceHandle={true}
-      className={`min-w-[400px] max-w-[500px] ${showGoldFlash ? 'animate-gold-flash' : ''} ${isValidated ? 'border-accent-500 border-2' : ''}`}
+      className={cn(
+        "min-w-[400px] max-w-[500px]",
+        showGoldFlash && "animate-gold-flash",
+        isValidated && "ring-2 ring-accent-500"
+      )}
     >
       <div className="problem-input-container">
         <div className="flex items-center gap-2 mb-3">

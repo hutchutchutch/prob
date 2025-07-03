@@ -21,7 +21,7 @@ export function WorkflowCanvas() {
   // Constants for node positioning
   const problemNodeX = -400; // Left side of canvas for problem node
   const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1920; // Default to 1920 for SSR
-  const personaBaseX = viewportWidth * 0.1; // Shift personas right by 10% of view width
+  const personaBaseX = viewportWidth * 0.2; // Shift personas right by 20% of view width (increased from 0.1)
   const personaStartY = -200;
   const personaSpacing = 150;
 
@@ -44,19 +44,27 @@ export function WorkflowCanvas() {
         isDemo: false
       },
       draggable: false, // CoreProblemNode should never be draggable
+      width: 450, // Fixed width between min and max
+      height: 180, // Fixed height
     };
 
-    // Add Personas column label
+    // Create label node for personas column
     const personasLabelNode: Node = {
       id: 'personas-label',
       type: 'label',
-      position: { x: currentPersonaBaseX, y: personaStartY - 80 },
+      position: { x: personaBaseX, y: personaStartY - 100 }, // Aligned with personas X position and moved further up
       data: {
         text: 'Personas',
-        showRefresh: true
+        showRefresh: true,
+        onRefresh: async () => {
+          console.log('[WorkflowCanvas] Refresh personas clicked');
+          const workflowStore = useWorkflowStore.getState();
+          await workflowStore.regeneratePersonas();
+        }
       },
       draggable: false,
       selectable: false,
+      zIndex: 100, // Higher z-index to ensure it's above other nodes
     };
 
     // Create skeleton persona nodes
@@ -212,6 +220,8 @@ export function WorkflowCanvas() {
           isDemo: false
         },
         draggable: false, // CoreProblemNode should never be draggable
+        width: 450, // Maintain fixed width
+        height: 180, // Maintain fixed height
       });
 
       // Update persona nodes to remove skeleton state (they'll be populated by the personas effect)
@@ -293,7 +303,7 @@ export function WorkflowCanvas() {
       const painPointColumn1X = painPointBaseX - 220; // First column (3 nodes) - increased spacing
       const painPointColumn2X = painPointBaseX + 220; // Second column (4 nodes) - increased spacing
       const painPointStartY = -300; // Start position for first pain point
-      const painPointSpacing = 180; // Increased vertical spacing for better separation
+      const painPointSpacing = 240; // Further increased vertical spacing to prevent overlap
       
       console.log('[WorkflowCanvas] Pain point positioning calculations:', {
         viewportWidth,

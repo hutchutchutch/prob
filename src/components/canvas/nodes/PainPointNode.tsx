@@ -116,13 +116,6 @@ export const PainPointNode: React.FC<NodeProps> = ({ data, selected }) => {
           <p className="text-base leading-relaxed break-words">"{nodeData.description}"</p>
         </div>
 
-        {/* Impact Area */}
-        <div className="space-y-3 text-sm">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-medium text-amber-400 uppercase tracking-wide">Impact Area</span>
-            <span className="opacity-90">{nodeData.impactArea}</span>
-          </div>
-        </div>
       </div>
     </BaseNode>
   );

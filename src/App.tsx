@@ -147,12 +147,9 @@ function AppContent() {
         goToStep1();
         break;
       case 1: // Persona
-        console.log('[App] Calling goToStep2...');
+      case 2: // Pain Points - use same view as Personas
+        console.log('[App] Calling goToStep2 for Personas/Pain Points view...');
         goToStep2();
-        break;
-      case 2: // Pain Points
-        console.log('[App] Pain Points - using same view as Step 2');
-        goToStep2(); // Use the same view as Step 2
         break;
       case 3: // Solutions
         goToStep(4);
