@@ -1,4 +1,4 @@
-# Prob - Detailed UI Screen Specifications
+# GoldiDocs - Detailed UI Screen Specifications
 
 ## Table of Contents
 1. [Global Layout Structure](#global-layout-structure)
@@ -390,4 +390,4 @@ The application maintains a consistent layout across all screens:
 | Node Stagger | 150ms delay | ease-out |
 | Edge Draw | 600ms | ease-in-out |
 
-This specification provides exact measurements and positions for implementing the Prob interface, ensuring a consistent and professional user experience throughout the entire workflow.
+This specification provides exact measurements and positions for implementing the GoldiDocs interface, ensuring a consistent and professional user experience throughout the entire workflow.

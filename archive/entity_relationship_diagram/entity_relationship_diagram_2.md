@@ -1,4 +1,4 @@
-# Prob - Entity Relationship Diagram
+# GoldiDocs - Entity Relationship Diagram
 
 ## Core Tables
 

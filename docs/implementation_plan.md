@@ -1,7 +1,7 @@
-# Prob - Implementation Plan
+# GoldiDocs - Implementation Plan
 
 ## Project Overview
-Prob is a macOS desktop application that transforms vague product ideas into fully architected, implementation-ready software projects through an AI-guided visual workflow using React Flow canvas visualization with separated UI and business state management.
+GoldiDocs is a macOS desktop application that transforms vague product ideas into fully architected, implementation-ready software projects through an AI-guided visual workflow using React Flow canvas visualization with separated UI and business state management.
 
 ## Phase 1: Foundation & Infrastructure
 

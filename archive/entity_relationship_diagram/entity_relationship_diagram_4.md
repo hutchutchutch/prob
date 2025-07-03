@@ -1,4 +1,4 @@
-# Prob - Complete Entity Relationship Diagram
+# GoldiDocs - Complete Entity Relationship Diagram
 
 ## Overview
 This comprehensive ERD incorporates all updates from the data flow analysis, including AI focus groups, document drift detection, file system integration, and enhanced animation support. The schema fully supports all features described in the product vision and data flow diagrams.

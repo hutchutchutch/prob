@@ -1,4 +1,4 @@
-# Prob - Minimal Atomic Design System
+# GoldiDocs - Minimal Atomic Design System
 
 ## Table of Contents
 1. [Design Principles](#design-principles)
@@ -1186,4 +1186,4 @@
 4. Include ARIA labels where necessary
 5. Respect `prefers-reduced-motion` settings
 
-This minimal atomic design system provides a solid foundation for building Prob while maintaining consistency, performance, and accessibility across the entire application.
+This minimal atomic design system provides a solid foundation for building GoldiDocs while maintaining consistency, performance, and accessibility across the entire application.

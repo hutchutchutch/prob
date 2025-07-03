@@ -1,4 +1,4 @@
--- Seed data for testing Prob application
+-- Seed data for testing GoldiDocs application
 -- This data matches the mock data generated in our Rust commands
 
 -- Insert test user

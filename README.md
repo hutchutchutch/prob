@@ -11,7 +11,7 @@ Transform vague product ideas into fully architected, implementation-ready softw
 
 ## Overview
 
-Prob is a macOS desktop application that helps developers and product teams go from "I need a solution for X" to a complete technical specification with database schemas, UI components, and architectural decisions in under 30 minutes. Using an interactive canvas powered by React Flow and intelligent AI processing via LangGraph, Prob turns product ideation into actionable development plans.
+GoldiDocs is a macOS desktop application that helps developers and product teams go from "I need a solution for X" to a complete technical specification with database schemas, UI components, and architectural decisions in under 30 minutes. Using an interactive canvas powered by React Flow and intelligent AI processing via LangGraph, GoldiDocs turns product ideation into actionable development plans.
 
 ## Key Features
 
@@ -123,7 +123,7 @@ Export your project as:
 ## Architecture
 
 ### Canvas-First Design
-Unlike traditional wizards, Prob uses a single continuous canvas where nodes appear and transform based on workflow state, providing seamless transitions and spatial context.
+Unlike traditional wizards, GoldiDocs uses a single continuous canvas where nodes appear and transform based on workflow state, providing seamless transitions and spatial context.
 
 ### Event Sourcing
 Every change is stored as an immutable event, enabling:

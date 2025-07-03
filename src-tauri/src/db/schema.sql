@@ -1,4 +1,4 @@
--- SQLite Schema for Prob - Complete Schema with All Features
+-- SQLite Schema for GoldiDocs - Complete Schema with All Features
 -- Synchronized with Supabase PostgreSQL schema
 -- Includes AI Focus Groups, Document Management, Animation States, and Enhanced Sync
 

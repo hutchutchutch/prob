@@ -1,4 +1,4 @@
-# Prob - Entity Relationship Diagram (Updated)
+# GoldiDocs - Entity Relationship Diagram (Updated)
 
 ## Overview
 This updated ERD reflects the separated canvas state architecture and addresses all integration issues identified in the data flow analysis. The schema now fully supports animations, UI state management, comprehensive event sourcing, and all features described in the product vision.

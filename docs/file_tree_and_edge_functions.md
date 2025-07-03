@@ -244,7 +244,7 @@ export function AuthForm({ onAuthSuccess }: AuthFormProps) {
             {isSignUp ? 'Create your account' : 'Sign in to your account'}
           </h2>
           <p className="mt-2 text-center text-sm text-gray-400">
-            Welcome to Prob - Problem Discovery Tool
+            Welcome to GoldiDocs - Problem Discovery Tool
           </p>
         </div>
         
@@ -14041,7 +14041,7 @@ File: /Users/hutch/Documents/projects/gauntlet/p3/prob/supabase/import_map.json
 
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/supabase/seed.sql
 ```sql
--- Seed data for testing Prob application
+-- Seed data for testing GoldiDocs application
 -- This data matches the mock data generated in our Rust commands
 
 -- Insert test user

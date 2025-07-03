@@ -1,4 +1,4 @@
-# Prob - Data Flow Diagram with Local Storage
+# GoldiDocs - Data Flow Diagram with Local Storage
 
 ## Overview
 
@@ -850,7 +850,7 @@ graph TD
 ```mermaid
 sequenceDiagram
     participant User as User
-    participant App as Prob App
+    participant App as GoldiDocs App
     participant DB as SQLite
     participant Supa as Supabase
     participant Viewer as Share Viewer

@@ -1,14 +1,14 @@
-# Prob - Product Vision Document
+# GoldiDocs - Product Vision Document
 
 ## Executive Summary
 
-Prob is a macOS desktop application that transforms vague product ideas into fully architected, implementation-ready software projects through an AI-guided visual workflow. Built with Tauri, React Flow, and powered by LangGraph AI orchestration via Supabase Edge Functions, Prob enables developers and product teams to go from "I need a solution for X" to comprehensive technical specifications including product vision, functional requirements, system architecture, data flows, database schemas, and design systems—all within a visually intuitive canvas interface.
+GoldiDocs is a macOS desktop application that transforms vague product ideas into fully architected, implementation-ready software projects through an AI-guided visual workflow. Built with Tauri, React Flow, and powered by LangGraph AI orchestration via Supabase Edge Functions, GoldiDocs enables developers and product teams to go from "I need a solution for X" to comprehensive technical specifications including product vision, functional requirements, system architecture, data flows, database schemas, and design systems—all within a visually intuitive canvas interface.
 
 ## Core Value Proposition
 
 **For**: Product managers, developers, and startup founders who struggle to translate ideas into actionable technical specifications
 
-**Prob is**: An AI-powered visual workflow tool that systematically transforms problems into complete software architectures
+**GoldiDocs is**: An AI-powered visual workflow tool that systematically transforms problems into complete software architectures
 
 **Unlike**: Traditional planning tools that require manual specification writing or disconnected AI assistants
 
@@ -76,7 +76,7 @@ graph LR
         A[Left Sidebar<br/>256px width] 
         B[Workspace Area<br/>Remaining width]
         
-        A --> C[Prob Logo]
+        A --> C[GoldiDocs Logo]
         A --> D[New Problem Button]
         A --> E[Recent Problem Flows<br/>List]
         
@@ -90,7 +90,7 @@ graph LR
 
 #### Left Sidebar Components
 The sidebar contains:
-- **Header**: Prob branding
+- **Header**: GoldiDocs branding
 - **New Problem Button**: Primary action to start new flow
 - **Recent Problem Flows**: Scrollable list of past projects
 
@@ -412,7 +412,7 @@ graph LR
 ## Key Design Decisions
 
 ### 1. Single Canvas Architecture
-Unlike traditional multi-step wizards, Prob uses one continuous canvas that reveals content progressively. This maintains context and allows users to see their journey visually.
+Unlike traditional multi-step wizards, GoldiDocs uses one continuous canvas that reveals content progressively. This maintains context and allows users to see their journey visually.
 
 ### 2. Selective Locking & Regeneration
 Users maintain control over AI generation through:
@@ -481,4 +481,4 @@ Every async operation has visual feedback:
 
 ## Conclusion
 
-Prob revolutionizes the journey from idea to implementation by providing a visual, AI-powered workflow that maintains user control while automating the tedious parts of specification writing. Through its innovative use of React Flow for visualization, LangGraph for intelligent processing, and comprehensive version control, it enables teams to create better software specifications faster than ever before.
+GoldiDocs revolutionizes the journey from idea to implementation by providing a visual, AI-powered workflow that maintains user control while automating the tedious parts of specification writing. Through its innovative use of React Flow for visualization, LangGraph for intelligent processing, and comprehensive version control, it enables teams to create better software specifications faster than ever before.

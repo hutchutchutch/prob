@@ -1,5 +1,5 @@
 Product Vision
-Prob is a macOS desktop application built with Tauri that transforms vague product ideas into fully architected, implementation-ready software projects through an AI-guided visual workflow. By combining LangGraph's intelligent processing via Supabase Edge Functions with React Flow's interactive canvas, developers and product teams can go from "I need a solution for X" to a complete technical specification with database schemas, UI components, and architectural decisions in under 30 minutes.
+GoldiDocs is a macOS desktop application built with Tauri that transforms vague product ideas into fully architected, implementation-ready software projects through an AI-guided visual workflow. By combining LangGraph's intelligent processing via Supabase Edge Functions with React Flow's interactive canvas, developers and product teams can go from "I need a solution for X" to a complete technical specification with database schemas, UI components, and architectural decisions in under 30 minutes.
 Technical Architecture Overview
 Frontend Stack
 
@@ -19,7 +19,7 @@ Real-time Sync: Supabase Realtime for collaborative features
 
 The User Journey - Implementation Details
 Act 1: The Problem Statement
-Sarah opens Prob on her Mac. The application launches instantly thanks to Tauri's native performance. She's greeted by the ProblemInput component:
+Sarah opens GoldiDocs on her Mac. The application launches instantly thanks to Tauri's native performance. She's greeted by the ProblemInput component:
 typescript// The canvas shows a demo of the full workflow
 const demoNodes = createDemoNodes(); // 5 personas, 3 pain points, 5 solutions
 const demoEdges = createDemoEdges(); // Animated connections
@@ -170,7 +170,7 @@ export const exportProject = {
 };
 Key Implementation Details
 1. Single Canvas Architecture
-Unlike traditional multi-step wizards, Prob uses one continuous canvas:
+Unlike traditional multi-step wizards, GoldiDocs uses one continuous canvas:
 
 ProblemInput: Special intro with demo preview
 WorkflowCanvas: Handles all other steps seamlessly

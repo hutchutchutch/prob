@@ -1,4 +1,4 @@
-# Prob - Simplified Architecture
+# GoldiDocs - Simplified Architecture
 ## Interactive Canvas for Product Development
 
 ### 1. Technology Stack

@@ -1,7 +1,7 @@
-# Prob Application - Product Requirements Document (PRD)
+# GoldiDocs Application - Product Requirements Document (PRD)
 
 ## Overview
-This PRD outlines the remaining tasks required to complete the Prob application - a macOS desktop tool that transforms vague product ideas into fully architected software projects through an AI-guided visual workflow.
+This PRD outlines the remaining tasks required to complete the GoldiDocs application - a macOS desktop tool that transforms vague product ideas into fully architected software projects through an AI-guided visual workflow.
 
 ## Current State
 The application has basic infrastructure in place:

@@ -186,7 +186,7 @@ export const markdownExporter = async (
 
   // Add footer
   markdown += '\n---\n\n';
-  markdown += `*Generated with Prob on ${new Date().toLocaleDateString()}*\n`;
+  markdown += `*Generated with GoldiDocs on ${new Date().toLocaleDateString()}*\n`;
 
   const content = markdown;
   const size = new TextEncoder().encode(content).length;

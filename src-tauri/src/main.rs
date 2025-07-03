@@ -62,7 +62,7 @@ async fn main() {
             analyze_problem,
         ])
         .setup(|_app| {
-            info!("Prob setup complete");
+            info!("GoldiDocs setup complete");
             Ok(())
         })
         .run(tauri::generate_context!())

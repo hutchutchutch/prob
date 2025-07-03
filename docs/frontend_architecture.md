@@ -1,4 +1,4 @@
-# Prob - Frontend Architecture
+# GoldiDocs - Frontend Architecture
 
 ## Overview
 
@@ -883,4 +883,4 @@ npm run tauri build
 - High contrast themes
 - Reduced motion options
 
-This architecture provides a solid foundation for building Prob while maintaining flexibility for future enhancements and scaling.
+This architecture provides a solid foundation for building GoldiDocs while maintaining flexibility for future enhancements and scaling.
