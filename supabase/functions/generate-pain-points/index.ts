@@ -219,6 +219,28 @@ serve(async (req) => {
     
     console.log('Returning', allPainPoints?.length, 'total pain points')
     
+    // Step 7: Automatically trigger generate-solutions
+    console.log('Triggering generate-solutions for persona:', activePersonaId)
+    try {
+      const solutionsResponse = await supabase.functions.invoke('generate-solutions', {
+        body: { 
+          projectId, 
+          personaId: activePersonaId, 
+          lockedSolutionIds: []
+        }
+      })
+      
+      if (solutionsResponse.error) {
+        console.error('Failed to generate solutions:', solutionsResponse.error)
+        // Don't throw - pain points were successful, log the solutions error
+      } else {
+        console.log('Successfully triggered solutions generation:', solutionsResponse.data?.solutions?.length || 0, 'solutions')
+      }
+    } catch (solutionError) {
+      console.error('Error calling generate-solutions:', solutionError)
+      // Don't throw - pain points were successful, just log the error
+    }
+    
     return new Response(JSON.stringify({ painPoints: allPainPoints || [] }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     })
