@@ -4,6 +4,7 @@ import { useWorkflowStore } from '@/stores/workflowStore';
 import { useCanvasStore } from '@/stores/canvasStore';
 import { useCanvasNavigation } from '@/hooks/useCanvasNavigation';
 import { Node, Edge, useReactFlow } from '@xyflow/react';
+import { ForceLayoutCanvas } from '@/components/canvas/ForceLayoutCanvas';
 
 export function WorkflowCanvas() {
   console.log('[WorkflowCanvas] Component rendering...');

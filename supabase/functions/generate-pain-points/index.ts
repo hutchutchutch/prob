@@ -91,65 +91,73 @@ serve(async (req) => {
     console.log('Generating', painPointsToGenerate, 'pain points')
     
     // Step 3: Generate pain points
+ 
     const completion = await openai.chat.completions.create({
       model: "gpt-4-turbo-preview",
       messages: [
         {
           role: "system",
           content: `You are an expert at identifying specific, actionable pain points that personas experience with particular problems.
-
-CRITICAL REQUIREMENT: Every pain point MUST be directly related to how the persona experiences the specified core problem in their daily work/life. Do not generate generic pain points - only those that stem from or connect to the core problem.
-
-Pain points should be:
-- Specific manifestations of the core problem for this persona
-- Detailed problems they actually face, not vague statements
-- Actionable (something that could theoretically be solved)
-- Realistic for their role, industry, and demographics
-- Varied in severity and impact areas`
+  
+          CRITICAL REQUIREMENT: Every pain point MUST be directly related to how the persona experiences the specified core problem in their daily work/life. Do not generate generic pain points - only those that stem from or connect to the core problem.
+  
+          Pain points should be:
+          - Specific manifestations of the core problem for this persona
+          - Written as single sentence descriptions of the pain point itself
+          - Never mention the persona by name or use pronouns (he/she/they)
+          - Detailed problems they actually face, not vague statements
+          - Actionable (something that could theoretically be solved)
+          - Realistic for their role, industry, and demographics
+          - Varied in severity and impact areas`
         },
         {
           role: "user",
           content: `Generate ${painPointsToGenerate} pain points that specifically show how this persona experiences the core problem:
-
-CORE PROBLEM TO ADDRESS: "${coreProblem}"
-
-Persona Details:
-- Name: ${persona.name}
-- Role: ${persona.role} in ${persona.industry}
-- Demographics: ${JSON.stringify(persona.demographics || {})}
-- Psychographics: ${JSON.stringify(persona.psychographics || {})}
-
-AVOID duplicating these existing pain points:
-${lockedPainPoints.map((p) => p.description).join('\n')}
-
-INSTRUCTIONS:
-1. Each pain point MUST directly relate to "${coreProblem}"
-2. Think about how someone in their specific role/industry would experience this problem
-3. Consider their demographics and psychographics when crafting pain points
-4. Make each pain point specific to their daily work/life context
-5. Vary the severity and impact areas across the pain points
-
-Return a JSON object with a 'painPoints' array. Each pain point should have:
-- description: detailed, specific pain point that directly connects to the core problem
-- severity: low/medium/high/critical  
-- impactArea: category of impact (time, money, productivity, stress, reputation, growth, efficiency, etc.)
-
-Example format:
-{
-  "painPoints": [
-    {
-      "description": "Spends 3+ hours daily manually tracking customer interactions across multiple platforms because the core problem of [specific manifestation] prevents centralized visibility",
-      "severity": "high",
-      "impactArea": "time"
-    }
-  ]
-}`
+  
+          CORE PROBLEM TO ADDRESS: "${coreProblem}"
+          
+          Persona Details:
+          - Name: ${persona.name}
+          - Role: ${persona.role} in ${persona.industry}
+          - Demographics: ${JSON.stringify(persona.demographics)}
+          - Psychographics: ${JSON.stringify(persona.psychographics)}
+          
+          AVOID duplicating these existing pain points:
+          ${lockedPainPoints.map((p)=>p.description).join('\n')}
+          
+          INSTRUCTIONS:
+          1. Each pain point MUST directly relate to "${coreProblem}"
+          2. Think about how someone in their specific role/industry would experience this problem
+          3. Consider their demographics and psychographics when crafting pain points
+          4. Write each pain point as a single sentence describing the problem itself
+          5. NEVER mention the persona by name or use pronouns (he/she/they/their/etc.)
+          6. Make each pain point specific to their daily work/life context
+          7. Vary the severity and impact areas across the pain points
+          
+          Return a JSON object with a 'painPoints' array. Each pain point should have:
+          - description: single sentence describing the pain point itself (NO persona names or pronouns)
+          - severity: low/medium/high/critical  
+          - impactArea: category of impact (time, money, productivity, stress, reputation, growth, efficiency, etc.)
+          
+          Example format:
+          {
+            "painPoints": [
+              {
+                "description": "Manual tracking of customer interactions across multiple platforms takes 3+ hours daily due to lack of centralized visibility",
+                "severity": "high",
+                "impactArea": "time"
+              }
+            ]
+          }`
         }
       ],
-      response_format: { type: "json_object" }
-    })
+      response_format: {
+        type: "json_object"
+      }
+    });
     
-    const { painPoints } = JSON.parse(completion.choices[0].message.content!)
+    const { painPoints } = JSON.parse(completion.choices[0].message.content!);
+
     console.log('Generated', painPoints.length, 'pain points')
     
     // Step 4: Delete non-locked pain points

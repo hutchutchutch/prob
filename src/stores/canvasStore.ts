@@ -60,6 +60,10 @@ interface CanvasStoreState {
   // Layout
   layoutType: 'hierarchical' | 'force' | 'grid'
   nodeSpacing: { x: number; y: number }
+  
+  // Force layout state
+  forceLayoutMode: boolean
+  selectedPersonaId: string | null
 }
 
 interface CanvasActions {
@@ -94,6 +98,10 @@ interface CanvasActions {
   applyLayout: (layoutType: 'hierarchical' | 'force' | 'grid') => void
   calculateNodePositions: (nodes: Node[]) => Node[]
   setNodeSpacing: (spacing: { x: number; y: number }) => void
+  
+  // Force layout
+  setForceLayoutMode: (enabled: boolean) => void
+  setSelectedPersonaId: (personaId: string | null) => void
   
   // Persistence
   saveCanvasState: () => Promise<void>
@@ -137,7 +145,9 @@ const initialState: CanvasStoreState = {
   hoveredNodeId: null,
   isAnimating: false,
   layoutType: 'hierarchical',
-  nodeSpacing: { x: 200, y: 150 }
+  nodeSpacing: { x: 200, y: 150 },
+  forceLayoutMode: false,
+  selectedPersonaId: null
 }
 
 // Debounce utility for auto-save
@@ -577,6 +587,23 @@ export const useCanvasStore = create<CanvasStoreState & CanvasActions>()(
           [edge.source, edge.target].filter(id => id !== nodeId)
         )
         return state.nodes.filter(node => connectedNodeIds.includes(node.id))
+      },
+
+      // Force layout
+      setForceLayoutMode: (enabled: boolean) => {
+        set({ forceLayoutMode: enabled })
+        if (!enabled) {
+          // Reset to hierarchical layout when disabling force mode
+          set({ selectedPersonaId: null })
+        }
+      },
+
+      setSelectedPersonaId: (personaId: string | null) => {
+        set({ selectedPersonaId: personaId })
+        if (personaId) {
+          // Enable force layout when selecting a persona
+          set({ forceLayoutMode: true })
+        }
       },
 
       // Reset

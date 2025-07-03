@@ -34,7 +34,7 @@ export const PainPointNode: React.FC<NodeProps> = ({ data, selected }) => {
         selected={selected}
         showSourceHandle={false}
         showTargetHandle={true}
-        className="min-w-[320px] opacity-60"
+        className="w-[320px] max-w-[320px] opacity-60"
       >
         <div className="space-y-6">
           {/* Skeleton Header */}
@@ -68,7 +68,7 @@ export const PainPointNode: React.FC<NodeProps> = ({ data, selected }) => {
       selected={selected}
       showSourceHandle={!!nodeData.description}
       showTargetHandle={true}
-      className="min-w-[320px]"
+      className="w-[320px] max-w-[320px]"
     >
       <div className="space-y-3">
         {/* Header with Severity and Lock */}
@@ -101,7 +101,7 @@ export const PainPointNode: React.FC<NodeProps> = ({ data, selected }) => {
 
         {/* Description */}
         <div className="space-y-3">
-          <p className="text-base leading-relaxed">"{nodeData.description}"</p>
+          <p className="text-base leading-relaxed break-words">"{nodeData.description}"</p>
         </div>
 
         {/* Impact Area */}
