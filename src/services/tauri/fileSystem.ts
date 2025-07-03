@@ -1,6 +1,6 @@
 import { invoke } from '@tauri-apps/api/core';
 import { open, save } from '@tauri-apps/plugin-dialog';
-import { readTextFile, writeTextFile, exists, createDir } from '@tauri-apps/plugin-fs';
+import { readTextFile, writeTextFile, exists, mkdir } from '@tauri-apps/plugin-fs';
 import { join, appDataDir } from '@tauri-apps/api/path';
 import { Command } from '@tauri-apps/plugin-shell';
 
@@ -179,7 +179,7 @@ export class TauriFileSystem {
     // Ensure directory exists
     const dirExists = await exists(workspacesDir);
     if (!dirExists) {
-      await createDir(workspacesDir, { recursive: true });
+      await mkdir(workspacesDir, { recursive: true });
     }
     
     return workspacesDir;
@@ -244,36 +244,33 @@ export class TauriFileSystem {
     // Platform-specific terminal commands
     const platform = await invoke<string>('get_platform');
     
-    let command: Command;
-    switch (platform) {
-      case 'darwin': // macOS
-        command = new Command('open', ['-a', 'Terminal', directory]);
-        break;
-      case 'windows':
-        command = new Command('cmd', ['/c', 'start', 'cmd', '/k', 'cd', directory]);
-        break;
-      case 'linux':
-        // Try common terminal emulators
-        command = new Command('gnome-terminal', ['--working-directory', directory]);
-        break;
-      default:
-        throw new Error(`Unsupported platform: ${platform}`);
-    }
-
     try {
-      await command.execute();
+      switch (platform) {
+        case 'darwin': // macOS
+          await Command.create('open', ['-a', 'Terminal', directory]).execute();
+          break;
+        case 'windows':
+          await Command.create('cmd', ['/c', 'start', 'cmd', '/k', 'cd', directory]).execute();
+          break;
+        case 'linux':
+          // Try common terminal emulators
+          try {
+            await Command.create('gnome-terminal', ['--working-directory', directory]).execute();
+          } catch {
+            // Try alternative terminals
+            try {
+              await Command.create('xterm', ['-e', `cd ${directory} && bash`]).execute();
+            } catch {
+              await Command.create('konsole', ['--workdir', directory]).execute();
+            }
+          }
+          break;
+        default:
+          throw new Error(`Unsupported platform: ${platform}`);
+      }
     } catch (error) {
       console.error('Error opening terminal:', error);
-      // Try alternative terminals on Linux
-      if (platform === 'linux') {
-        try {
-          const xterm = new Command('xterm', ['-e', `cd ${directory} && bash`]);
-          await xterm.execute();
-        } catch {
-          const konsole = new Command('konsole', ['--workdir', directory]);
-          await konsole.execute();
-        }
-      }
+      throw error;
     }
   }
 }

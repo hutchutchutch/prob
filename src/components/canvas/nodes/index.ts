@@ -30,9 +30,11 @@ export type { QuoteNodeData } from './QuoteNode';
 // Export node types configuration for React Flow
 export const nodeTypes = {
   problem: CoreProblemNode,
+  coreProblem: CoreProblemNode, // Add alias for coreProblem type
   persona: PersonaNode,
   painPoint: PainPointNode,
   solution: SolutionNode,
   userStory: UserStoryNode,
   label: LabelNode,
+  quote: QuoteNode,
 };
