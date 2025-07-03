@@ -19,7 +19,7 @@ export interface PainPointNodeData {
 export const PainPointNode: React.FC<NodeProps> = ({ data, selected, id }) => {
   const nodeData = data as unknown as PainPointNodeData;
   const { isLocked = false, isSkeleton = false, onToggleLock } = nodeData;
-  const { updateNode } = useCanvasStore();
+  const { updateNode, updateNodeData } = useCanvasStore();
   const [floatOffset, setFloatOffset] = useState({ x: 0, y: 0 });
 
   // Create ethereal floating effect for skeleton nodes
@@ -44,6 +44,12 @@ export const PainPointNode: React.FC<NodeProps> = ({ data, selected, id }) => {
 
       setFloatOffset({ x: xOffset, y: yOffset });
       
+      // Store the offset in node data so edges can access it
+      updateNodeData(id, {
+        ...nodeData,
+        floatOffset: { x: xOffset, y: yOffset }
+      });
+      
       animationFrame = requestAnimationFrame(animate);
     };
 
@@ -54,7 +60,7 @@ export const PainPointNode: React.FC<NodeProps> = ({ data, selected, id }) => {
         cancelAnimationFrame(animationFrame);
       }
     };
-  }, [isSkeleton]);
+  }, [isSkeleton, id, updateNodeData, nodeData]);
 
   const severityStyles = {
     critical: 'text-red-400 bg-red-900/30 border-red-500/30',

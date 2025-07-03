@@ -277,16 +277,27 @@ export const useCanvasNavigation = () => {
     const totalWidth = bounds.maxX - bounds.minX;
     const totalHeight = bounds.maxY - bounds.minY;
 
-    // Step 2 specific positioning: More focused on personas with problem visible
-    const padding = 80; // Tighter padding for more focused view
+    // Step 2 specific positioning: Much more focused on personas 
+    const padding = 60; // Even tighter padding for persona focus
     const zoomX = availableWidth / (totalWidth + padding * 2);
     const zoomY = availableHeight / (totalHeight + padding * 2);
-    const optimalZoom = Math.min(zoomX, zoomY, 1.1); // Slightly higher zoom than Step 1
+    const optimalZoom = Math.min(zoomX, zoomY, 1.3); // Higher zoom for persona detail
 
-    // For Step 2, we want to position so the core problem is visible on the left
-    // and personas are prominently displayed on the right
-    const layoutCenterX = bounds.minX + (totalWidth * 0.6); // Shift center toward personas
-    const layoutCenterY = bounds.minY + (totalHeight / 2);
+    // For Step 2, personas should be the main focus - shift very dramatically to center them
+    // Calculate the actual center of just the persona nodes for better positioning
+    const personaBounds = personaNodes.reduce((acc, node) => {
+      const pos = node.position;
+      return {
+        minX: Math.min(acc.minX, pos.x),
+        maxX: Math.max(acc.maxX, pos.x + (node.measured?.width || 200)),
+        minY: Math.min(acc.minY, pos.y),
+        maxY: Math.max(acc.maxY, pos.y + (node.measured?.height || 150))
+      };
+    }, { minX: Infinity, maxX: -Infinity, minY: Infinity, maxY: -Infinity });
+    
+    // Center on the actual persona cluster
+    const layoutCenterX = personaBounds.minX + (personaBounds.maxX - personaBounds.minX) / 2;
+    const layoutCenterY = personaBounds.minY + (personaBounds.maxY - personaBounds.minY) / 2;
 
     // Calculate the viewport position to center the layout
     const viewportCenterX = (availableWidth / 2) + sidebarOffset;

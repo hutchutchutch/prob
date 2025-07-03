@@ -362,7 +362,7 @@ export function WorkflowCanvas() {
             id: `persona-${personaIndex + 1}-to-pain-${painIndex + 1}`,
             source: personaNodeId,
             target: painPointId,
-            type: 'default',
+            type: 'floating', // Use floating edge type to follow the node animation
             style: {
               stroke: '#F97316', // Orange color for pain point connections
               strokeWidth: 1.5, // Thinner for many connections
