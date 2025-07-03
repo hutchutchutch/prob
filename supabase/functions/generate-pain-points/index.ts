@@ -1,7 +1,6 @@
 // supabase/functions/generate-pain-points/index.ts
 import { serve } from "std/http/server.ts"
 import { createClient } from "@supabase/supabase-js"
-import "langsmith" // Force working langsmith version
 import { StateGraph } from "@langchain/langgraph"
 import { OpenAI } from "openai"
 
@@ -69,43 +68,66 @@ async function generatePainPoints(state: PainPointGenerationState) {
     messages: [
       {
         role: "system",
-        content: `You are an expert at understanding user pain points in specific contexts.
-        Generate pain points that are specific, actionable, and directly related to the persona's role and industry.`
+        content: `You are an expert at identifying specific, actionable pain points that personas experience with particular problems.
+
+        CRITICAL REQUIREMENT: Every pain point MUST be directly related to how the persona experiences the specified core problem in their daily work/life. Do not generate generic pain points - only those that stem from or connect to the core problem.
+
+        Pain points should be:
+        - Specific manifestations of the core problem for this persona
+        - Detailed problems they actually face, not vague statements
+        - Actionable (something that could theoretically be solved)
+        - Realistic for their role, industry, and demographics
+        - Varied in severity and impact areas`
       },
       {
         role: "user",
-        content: `Core Problem: "${coreProblem}"
+        content: `Generate ${painPointsToGenerate} pain points that specifically show how this persona experiences the core problem:
+
+        CORE PROBLEM TO ADDRESS: "${coreProblem}"
         
-        Persona: ${persona.name}
-        Industry: ${persona.industry}
-        Role: ${persona.role}
-        Pain Level: ${persona.pain_degree}/5
+        Persona Details:
+        - Name: ${persona.name}
+        - Role: ${persona.role} in ${persona.industry}
+        - Demographics: ${JSON.stringify(persona.demographics)}
+        - Psychographics: ${JSON.stringify(persona.psychographics)}
         
-        ${lockedPainPoints.length > 0 ? `Keep these existing pain points: ${JSON.stringify(lockedPainPoints.map(pp => pp.description))}` : ''}
+        AVOID duplicating these existing pain points:
+        ${lockedPainPoints.map((p)=>p.description).join('\n')}
         
-        Generate ${painPointsToGenerate} specific pain points this persona experiences.
+        INSTRUCTIONS:
+        1. Each pain point MUST directly relate to "${coreProblem}"
+        2. Think about how someone in their specific role/industry would experience this problem
+        3. Consider their demographics and psychographics when crafting pain points
+        4. Make each pain point specific to their daily work/life context
+        5. Vary the severity and impact areas across the pain points
         
-        Return as JSON:
+        Return a JSON object with a 'painPoints' array. Each pain point should have:
+        - description: detailed, specific pain point that directly connects to the core problem
+        - severity: low/medium/high/critical  
+        - impactArea: category of impact (time, money, productivity, stress, reputation, growth, efficiency, etc.)
+        
+        Example format:
         {
           "painPoints": [
             {
-              "description": "Specific pain point description",
-              "severity": "Critical|High|Medium",
-              "impactArea": "Operations|Productivity|Revenue|Customer Experience|Compliance"
+              "description": "Spends 3+ hours daily manually tracking customer interactions across multiple platforms because the core problem of [specific manifestation] prevents centralized visibility",
+              "severity": "high",
+              "impactArea": "time"
             }
           ]
         }`
       }
     ],
-    response_format: { type: "json_object" }
-  })
+    response_format: {
+      type: "json_object"
+    }
+  });
   
-  const { painPoints } = JSON.parse(completion.choices[0].message.content!)
-  
+  const { painPoints } = JSON.parse(completion.choices[0].message.content!);
   return {
     ...state,
     newPainPoints: painPoints
-  }
+  };
 }
 
 // Node: Validate pain point relevance
