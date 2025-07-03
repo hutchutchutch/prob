@@ -1,5 +1,6 @@
 import { useCallback, useRef } from 'react';
 import { useReactFlow, Node } from '@xyflow/react';
+import { useCanvasStore } from '@/stores/canvasStore';
 
 interface ViewportDimensions {
   width: number;
@@ -21,6 +22,8 @@ export const useCanvasNavigation = () => {
     getNodes,
     fitView 
   } = useReactFlow();
+  
+  const { updateNode } = useCanvasStore();
   
   const viewportRef = useRef<ViewportDimensions>({ width: 0, height: 0 });
 
@@ -197,6 +200,25 @@ export const useCanvasNavigation = () => {
       viewport
     });
 
+    // Reset persona nodes to their original positions (matching WorkflowCanvas.tsx initial setup)
+    const personaNodeX = 0; // Center column
+    const personaStartY = -300; // Start position for first persona
+    const personaSpacing = 150; // Vertical spacing between personas
+    
+    console.log('[useCanvasNavigation] Resetting persona nodes to original positions');
+    personaNodes.forEach((node, index) => {
+      const originalPosition = {
+        x: personaNodeX,
+        y: personaStartY + (index * personaSpacing)
+      };
+      
+      console.log(`[useCanvasNavigation] Resetting ${node.id} to position:`, originalPosition);
+      
+      updateNode(node.id, {
+        position: originalPosition
+      });
+    });
+
     // Calculate optimal zoom to fit both problem node and persona nodes with more focus on personas
     const sidebarOffset = 256; // Account for sidebar
     const availableWidth = viewport.width - sidebarOffset;
@@ -272,7 +294,7 @@ export const useCanvasNavigation = () => {
       },
       { duration: 1000 }
     );
-  }, [getNode, getNodes, getEffectiveViewport, setViewport]);
+  }, [getNode, getNodes, getEffectiveViewport, setViewport, updateNode]);
 
   // Progressive reveal for multi-step workflows
   const goToStep = useCallback((stepNumber: number) => {
