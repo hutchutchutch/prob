@@ -58,6 +58,11 @@ export const Canvas: React.FC = () => {
         minZoom={0.3}
         maxZoom={2}
         defaultViewport={{ x: 0, y: 0, zoom: 1 }}
+        zoomOnScroll={true}
+        zoomOnPinch={true}
+        panOnScroll={false}
+        zoomOnDoubleClick={true}
+        preventScrolling={true}
         className="bg-obsidian-900"
         proOptions={{ hideAttribution: true }}
       >

@@ -24,5 +24,10 @@ export interface SidebarProps {
   onProjectSelect?: (projectId: string) => void;
   onNewProject?: () => void;
   onSettings?: () => void;
+  onDirectorySelect?: (workspaceId: string, directory: string) => void;
+  onOpenTerminal?: (workspaceId: string) => void;
+  onSaveWorkspace?: (workspaceId: string) => void;
+  onExportWorkspace?: (workspaceId: string) => void;
+  workspaceDirectory?: Record<string, string>;
   className?: string;
 }

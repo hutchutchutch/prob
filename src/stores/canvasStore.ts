@@ -275,8 +275,9 @@ export const useCanvasStore = create<CanvasStoreState & CanvasActions>()(
 
       // Viewport
       setViewport: (viewport) => {
-        set({ viewport, isDirty: true })
-        debouncedSave()
+        set({ viewport })
+        // Don't mark as dirty or trigger save for viewport changes
+        // Viewport changes are frequent and don't need to be persisted immediately
       },
 
       fitView: () => {
@@ -288,10 +289,9 @@ export const useCanvasStore = create<CanvasStoreState & CanvasActions>()(
 
       zoomTo: (level) => {
         set((state) => ({ 
-          viewport: { ...state.viewport, zoom: level },
-          isDirty: true
+          viewport: { ...state.viewport, zoom: level }
         }))
-        debouncedSave()
+        // Don't mark as dirty or trigger save for programmatic zoom changes
       },
 
 

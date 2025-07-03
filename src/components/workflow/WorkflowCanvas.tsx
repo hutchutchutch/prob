@@ -18,6 +18,112 @@ export function WorkflowCanvas() {
   const [painPointsAdded, setPainPointsAdded] = useState(false);
   const [solutionsAdded, setSolutionsAdded] = useState(false);
 
+  // Constants for node positioning
+  const problemNodeX = -400; // Left side of canvas for problem node
+  const personaBaseX = 0; // Center for personas
+  const personaStartY = -200;
+  const personaSpacing = 150;
+
+  // Function to initialize problem input nodes
+  const initializeProblemInputNodes = () => {
+    console.log('[WorkflowCanvas] Initializing problem input nodes...');
+    
+    // Add core problem node
+    const problemNode: Node = {
+      id: 'problem-input',
+      type: 'coreProblem',
+      position: { x: problemNodeX, y: 0 },
+      data: {
+        id: 'problem-input',
+        problem: '',
+        status: 'empty',
+        isDemo: false
+      },
+      draggable: false, // CoreProblemNode should never be draggable
+    };
+
+    // Add Personas column label
+    const personasLabelNode: Node = {
+      id: 'personas-label',
+      type: 'label',
+      position: { x: personaBaseX, y: personaStartY - 80 },
+      data: {
+        text: 'Personas',
+        showRefresh: true
+      },
+      draggable: false,
+      selectable: false,
+    };
+
+    // Create skeleton persona nodes
+    const personaNodes: Node[] = [];
+    for (let i = 1; i <= 5; i++) {
+      personaNodes.push({
+        id: `persona-${i}`,
+        type: 'persona',
+        position: {
+          x: personaBaseX,
+          y: personaStartY + ((i - 1) * personaSpacing)
+        },
+        data: {
+          id: `persona-${i}`,
+          name: '',
+          industry: '',
+          role: '',
+          painDegree: 0,
+          description: '',
+          isLocked: false,
+          isExpanded: false,
+          isSkeleton: true, // Start in skeleton state
+          isRefreshing: false,
+          onToggleLock: () => {
+            console.log(`Toggle lock for persona ${i}`);
+          },
+          onToggleExpand: () => {
+            const canvasStore = useCanvasStore.getState();
+            const currentNode = canvasStore.getNodeById(`persona-${i}`);
+            if (currentNode) {
+              canvasStore.updateNode(`persona-${i}`, {
+                data: {
+                  ...currentNode.data,
+                  isExpanded: !(currentNode.data as any).isExpanded
+                }
+              });
+            }
+          }
+        },
+        draggable: true,
+      });
+    }
+
+    // Create edges from problem to personas
+    const personaEdges: Edge[] = [];
+    for (let i = 1; i <= 5; i++) {
+      personaEdges.push({
+        id: `problem-to-persona-${i}`,
+        source: 'problem-input',
+        target: `persona-${i}`,
+        type: 'default',
+        style: { 
+          stroke: '#6B7280', 
+          strokeWidth: 2,
+          opacity: 0.7 
+        },
+        animated: false, // Will be animated when personas are generated
+      });
+    }
+
+    console.log('[WorkflowCanvas] Adding initial nodes:', {
+      problemNode: 1,
+      labelNodes: 1,
+      personaNodes: personaNodes.length,
+      edges: personaEdges.length
+    });
+
+    addNodes([problemNode, personasLabelNode, ...personaNodes]);
+    addEdges(personaEdges);
+  };
+
   console.log('[WorkflowCanvas] Initial state:', {
     currentStep,
     coreProblem,
@@ -48,148 +154,28 @@ export function WorkflowCanvas() {
 
   // Initialize the canvas with the problem input node
   useEffect(() => {
-    console.log('[WorkflowCanvas] Initialization effect triggered:', {
-      currentStep,
-      canvasInitialized,
-      nodeCount: nodes.length
-    });
+    if (!canvasInitialized) {
+      console.log('[WorkflowCanvas] Initializing canvas for workflow...');
+      // Clear any existing state before initializing
+      resetCanvas();
+      setCanvasInitialized(true);
+    }
+  }, []); // Remove canvasInitialized from dependencies to prevent re-initialization
+
+  // Initialize canvas nodes based on current step
+  useEffect(() => {
+    if (!canvasInitialized) return;
+
+    console.log('[WorkflowCanvas] Current step updated:', currentStep);
     
-    // Don't re-initialize if we already have nodes (prevent clearing)
-    if (nodes.length > 0 && canvasInitialized) {
-      console.log('[WorkflowCanvas] Canvas already has nodes, skipping initialization');
-      return;
+    // Handle step-specific node initialization
+    if (currentStep === 'problem_input' && nodes.length === 0) {
+      // Only initialize if nodes haven't been added yet
+      initializeProblemInputNodes();
     }
     
-    if (currentStep === 'problem_input' && !canvasInitialized) {
-      console.log('[WorkflowCanvas] Setting up problem input node...');
-      
-      // Clear canvas first
-      resetCanvas();
-      
-      // Calculate center position based on viewport
-      // Position the CoreProblemNode more to the left with better spacing
-      const viewportWidth = window.innerWidth;
-      const viewportHeight = window.innerHeight;
-      const problemNodeX = -viewportWidth / 3; // Move further left
-      const problemNodeY = 0; // Vertical center
-
-      // Create the interactive problem input node positioned at calculated center
-      const problemInputNode: Node = {
-        id: 'problem-input',
-        type: 'problem',
-        position: { x: problemNodeX, y: problemNodeY },
-        data: { 
-          id: 'problem-input',
-          problem: coreProblem?.description || '',
-          status: coreProblem?.is_validated ? 'valid' : 'editing',
-          isDemo: false
-        },
-        draggable: false, // CoreProblemNode should never be draggable
-      };
-
-      // Create column label nodes
-      const coreProblemLabelNode: Node = {
-        id: 'core-problem-label',
-        type: 'label',
-        position: { x: problemNodeX, y: problemNodeY - 120 }, // Centered above CoreProblemNode
-        data: { 
-          text: 'Define the Core Problem',
-          showRefresh: false
-        },
-        draggable: false,
-        selectable: false,
-      };
-
-      // Calculate positions for personas column (center third of screen)
-      const personaNodeX = 0; // Center of viewport in React Flow coordinates
-      const personaStartY = -300; // Start position for first persona
-      const personaSpacing = 150; // Vertical spacing between personas
-
-      const personasLabelNode: Node = {
-        id: 'personas-label',
-        type: 'label', 
-        position: { x: personaNodeX, y: personaStartY - 120 }, // Centered above PersonaNodes column
-        data: {
-          text: 'Personas',
-          showRefresh: true,
-          onRefresh: () => {
-            console.log('[WorkflowCanvas] Refreshing personas...');
-            const workflowStore = useWorkflowStore.getState();
-            if (workflowStore.coreProblem) {
-              workflowStore.regeneratePersonas();
-            }
-          }
-        },
-        draggable: false,
-        selectable: false,
-      };
-
-      // Create 5 PersonaNodes in skeleton state initially - positioned in center column
-      const personaNodes: Node[] = Array.from({ length: 5 }, (_, index) => ({
-        id: `persona-${index + 1}`,
-        type: 'persona',
-        position: { 
-          x: personaNodeX, // Center column
-          y: personaStartY + (index * personaSpacing) // Vertical spacing between nodes
-        },
-        data: {
-          id: `persona-${index + 1}`,
-          name: '',
-          industry: '',
-          role: '',
-          painDegree: 0,
-          description: '',
-          isLocked: false,
-          isExpanded: false,
-          isSkeleton: !coreProblem?.description, // Skeleton state when no problem
-          onToggleLock: () => {
-            // TODO: Implement persona locking
-            console.log(`Toggle lock for persona ${index + 1}`);
-          },
-          onToggleExpand: () => {
-            const canvasStore = useCanvasStore.getState();
-            const currentNode = canvasStore.getNodeById(`persona-${index + 1}`);
-            if (currentNode) {
-              canvasStore.updateNode(`persona-${index + 1}`, {
-                data: {
-                  ...currentNode.data,
-                  isExpanded: !(currentNode.data as any).isExpanded
-                }
-              });
-            }
-          }
-        },
-        draggable: true,
-      }));
-      
-      // Create edges connecting the problem node to each persona node
-      // Initially solid (not animated) until persona generation starts
-      const edges: Edge[] = personaNodes.map((personaNode, index) => ({
-        id: `problem-to-persona-${index + 1}`,
-        source: 'problem-input',
-        target: personaNode.id,
-        type: 'default',
-        style: { 
-          stroke: '#6B7280', 
-          strokeWidth: 2,
-          opacity: 0.7 
-        },
-        animated: false, // Start with solid edges
-      }));
-      
-      console.log('[WorkflowCanvas] Adding initial nodes:', {
-        labels: 2,
-        problemNode: 1,
-        personaNodes: personaNodes.length,
-        edges: edges.length
-      });
-      
-      addNodes([coreProblemLabelNode, personasLabelNode, problemInputNode, ...personaNodes]);
-      addEdges(edges);
-      
-      setCanvasInitialized(true);
-      
-      // Center the view on the problem node with appropriate zoom for Step 1
+    if (currentStep === 'problem_input' && coreProblem && nodes.length > 0) {
+      // Center view on problem node after problem is validated
       setTimeout(() => {
         console.log('[WorkflowCanvas] Centering view on problem node for Step 1...');
         // Zoom to show just the problem node nicely centered
@@ -201,7 +187,7 @@ export function WorkflowCanvas() {
         });
       }, 100);
     }
-  }, [currentStep, canvasInitialized, addNodes, zoomTo, resetCanvas, coreProblem, nodes.length]);
+  }, [currentStep, canvasInitialized, addNodes, zoomTo, resetCanvas, coreProblem]); // Remove nodes.length dependency
 
   // NOTE: Navigation is now handled by ProgressSteps component in App.tsx
   // This effect previously had competing navigation logic that interfered with ProgressSteps
@@ -238,6 +224,7 @@ export function WorkflowCanvas() {
             isLocked: false,
             isExpanded: false,
             isSkeleton: false, // Remove skeleton state
+            isRefreshing: false, // Remove refreshing state
             onToggleLock: () => {
               console.log(`Toggle lock for persona ${i}`);
             },
@@ -259,28 +246,43 @@ export function WorkflowCanvas() {
     }
   }, [coreProblem, canvasInitialized]);
 
-  // Handle persona generation state - animate edges and add pain points
+  // Update persona nodes' refreshing state when generation status changes
   useEffect(() => {
-    console.log('[WorkflowCanvas] Persona generation state changed:', {
-      isGeneratingPersonas,
-      painPointsAdded,
+    if (canvasInitialized && nodes.some(n => n.type === 'persona')) {
+      console.log('[WorkflowCanvas] Updating persona nodes refreshing state:', isGeneratingPersonas);
+      const canvasStore = useCanvasStore.getState();
+      
+      // Update all persona nodes with refreshing state
+      for (let i = 1; i <= 5; i++) {
+        const nodeId = `persona-${i}`;
+        const currentNode = canvasStore.getNodeById(nodeId);
+        if (currentNode) {
+          canvasStore.updateNode(nodeId, {
+            data: {
+              ...currentNode.data,
+              isRefreshing: isGeneratingPersonas
+            }
+          });
+        }
+      }
+    }
+  }, [isGeneratingPersonas, canvasInitialized]); // Remove nodes dependency to prevent infinite loop
+
+  // Handle step transitions - add pain point skeletons when reaching persona discovery
+  useEffect(() => {
+    console.log('[WorkflowCanvas] Step transition effect triggered:', {
+      currentStep,
       canvasInitialized,
+      painPointsAdded,
       coreProblemValidated: coreProblem?.is_validated
     });
 
-    // Only add pain points AFTER a problem has been validated and submitted
-    if (isGeneratingPersonas && canvasInitialized && !painPointsAdded && coreProblem?.is_validated) {
-      console.log('[WorkflowCanvas] Persona generation started - animating edges and adding pain point skeletons');
+    // Add pain point skeletons immediately when reaching persona discovery step
+    if (currentStep === 'persona_discovery' && canvasInitialized && !painPointsAdded && coreProblem?.is_validated) {
+      console.log('[WorkflowCanvas] Reached persona discovery step - adding pain point skeleton nodes');
       
       const canvasStore = useCanvasStore.getState();
       
-      // Animate the problem-to-persona edges
-      for (let i = 1; i <= 5; i++) {
-        canvasStore.updateEdge(`problem-to-persona-${i}`, {
-          animated: true
-        });
-      }
-
       // Calculate positions for pain points in two columns (right third of screen)
       const viewportWidth = window.innerWidth;
       const painPointBaseX = viewportWidth / 3; // Base position for pain points
@@ -347,32 +349,92 @@ export function WorkflowCanvas() {
             severity: 'medium' as const,
             impactArea: '',
             isLocked: false,
-            isSkeleton: true, // Start in skeleton state
+            isSkeleton: true, // Show skeleton state
+            isRefreshing: false, // Initially not refreshing
             onToggleLock: () => {
-              console.log(`Toggle lock for pain point ${painPointId}`);
+              console.log(`Toggle lock for pain point ${painIndex + 1}`);
             },
             onFocus: () => {
-              console.log(`Focus on pain point ${painPointId}`);
-              focusOnPainPoint(painPointId);
+              console.log(`Focus on pain point ${painIndex + 1}`);
             }
           },
           draggable: true,
         });
       }
 
-      // Add pain point nodes first (without edges yet)
-      console.log('[WorkflowCanvas] Adding pain point skeleton nodes:', {
-        labelNode: 1,
-        nodeCount: painPointNodes.length
+      // Add edges from each persona to pain points (initially not animated)
+      const painPointEdges: Edge[] = [];
+      for (let personaIndex = 1; personaIndex <= 5; personaIndex++) {
+        for (let painIndex = 1; painIndex <= 7; painIndex++) {
+          painPointEdges.push({
+            id: `persona-${personaIndex}-to-pain-${painIndex}`,
+            source: `persona-${personaIndex}`,
+            target: `pain-point-${painIndex}`,
+            type: 'default',
+            style: { 
+              stroke: '#6B7280', 
+              strokeWidth: 1,
+              opacity: 0.3 
+            },
+            animated: false, // Start with solid edges
+          });
+        }
+      }
+
+      console.log('[WorkflowCanvas] Adding pain point nodes and edges:', {
+        painPointNodes: painPointNodes.length,
+        painPointEdges: painPointEdges.length,
+        labelNodes: 1
       });
-      
+
       addNodes([painPointsLabelNode, ...painPointNodes]);
+      addEdges(painPointEdges);
+      
       setPainPointsAdded(true);
       
-      // NOTE: Canvas navigation is now handled by ProgressSteps in App.tsx
-      // NOTE: Edges will be created later when personas have source handles ready
+      console.log('[WorkflowCanvas] Pain point skeleton nodes added successfully');
     }
-  }, [isGeneratingPersonas, canvasInitialized, painPointsAdded, coreProblem, addNodes, addEdges, updateEdge, zoomTo]);
+  }, [currentStep, canvasInitialized, painPointsAdded, coreProblem, addNodes, addEdges, setPainPointsAdded]);
+
+  // Handle persona generation state - animate edges and add pain points
+  useEffect(() => {
+    console.log('[WorkflowCanvas] Persona generation state changed:', {
+      isGeneratingPersonas,
+      painPointsAdded,
+      canvasInitialized,
+      coreProblemValidated: coreProblem?.is_validated
+    });
+
+    // Only animate edges when persona generation starts (pain points already added by step transition)
+    if (isGeneratingPersonas && canvasInitialized && painPointsAdded && coreProblem?.is_validated) {
+      console.log('[WorkflowCanvas] Persona generation started - animating edges');
+      
+      const canvasStore = useCanvasStore.getState();
+      
+      // Animate the problem-to-persona edges
+      for (let i = 1; i <= 5; i++) {
+        canvasStore.updateEdge(`problem-to-persona-${i}`, {
+          animated: true
+        });
+      }
+
+      // Animate persona-to-pain-point edges
+      for (let personaIndex = 1; personaIndex <= 5; personaIndex++) {
+        for (let painIndex = 1; painIndex <= 7; painIndex++) {
+          canvasStore.updateEdge(`persona-${personaIndex}-to-pain-${painIndex}`, {
+            animated: true,
+            style: { 
+              stroke: '#F59E0B', 
+              strokeWidth: 2,
+              opacity: 0.6 
+            }
+          });
+        }
+      }
+
+      console.log('[WorkflowCanvas] Edge animations started for persona generation');
+    }
+  }, [isGeneratingPersonas, canvasInitialized, painPointsAdded, coreProblem, updateEdge]);
 
   // Update PersonaNodes when personas are available
   useEffect(() => {
@@ -406,6 +468,9 @@ export function WorkflowCanvas() {
         const currentNode = canvasStore.getNodeById(nodeId);
         console.log('[WorkflowCanvas] Current node before update:', currentNode);
         
+        // Get locked state from current store state
+        const currentLockedItems = useWorkflowStore.getState().lockedItems;
+        
         const updatedData = {
           id: nodeId,
           name: persona.name,
@@ -413,9 +478,10 @@ export function WorkflowCanvas() {
           role: persona.demographics?.role || 'Unknown',
           painDegree: (persona as any).pain_degree || (persona as any).painDegree || Math.floor(Math.random() * 5) + 1,
           description: persona.description,
-          isLocked: lockedItems.personas.has(persona.id),
+          isLocked: currentLockedItems.personas.has(persona.id),
           isExpanded: currentNode?.data?.isExpanded || false, // Preserve expanded state
           isSkeleton: false, // Ensure skeleton state is off
+          isRefreshing: isGeneratingPersonas, // Set based on current generation state
           onToggleLock: () => {
             const workflowStore = useWorkflowStore.getState();
             workflowStore.togglePersonaLock(persona.id);
@@ -520,7 +586,7 @@ export function WorkflowCanvas() {
         }
       }
     }
-  }, [personas, canvasInitialized, isGeneratingPersonas, painPointsAdded, addEdges, lockedItems]);
+  }, [personas, canvasInitialized, isGeneratingPersonas, painPointsAdded, addEdges]); // Remove lockedItems dependency
 
   // Update PainPointNodes when pain points are available
   useEffect(() => {
@@ -561,6 +627,7 @@ export function WorkflowCanvas() {
            impactArea: painPoint.impact,
            isLocked: painPoint.is_locked || false,
            isSkeleton: false, // Ensure skeleton state is off
+           isRefreshing: false, // Remove refreshing state
            onToggleLock: () => {
              const workflowStore = useWorkflowStore.getState();
              workflowStore.togglePainPointLock(painPoint.id);
@@ -668,6 +735,7 @@ export function WorkflowCanvas() {
             isLocked: false,
             isSelected: false,
             isSkeleton: true, // Start in skeleton state
+            isRefreshing: false, // Initially not refreshing
             onToggleLock: () => {
               console.log(`Toggle lock for solution ${solutionId}`);
             },
@@ -763,7 +831,296 @@ export function WorkflowCanvas() {
     }
   }, [currentStep, canvasInitialized, solutionsAdded, personas, solutions]);
 
-  // NOTE: Removed competing step change navigation - now handled by ProgressSteps in App.tsx
+  // Handle pain point focus mode - show focused view with persona, pain point, and solutions
+  useEffect(() => {
+    console.log('[WorkflowCanvas] Pain point focus mode check:', {
+      focusedPainPointId,
+      canvasInitialized,
+      painPointsLength: painPoints.length,
+      solutionsLength: solutions.length
+    });
+
+    if (focusedPainPointId && canvasInitialized && painPoints.length > 0) {
+      console.log('[WorkflowCanvas] Entering pain point focus mode');
+      
+      const canvasStore = useCanvasStore.getState();
+      
+      // Find the focused pain point
+      const focusedPainPoint = painPoints.find(p => p.id === focusedPainPointId);
+      if (!focusedPainPoint) {
+        console.error('[WorkflowCanvas] Focused pain point not found:', focusedPainPointId);
+        return;
+      }
+
+      // Find the associated persona
+      const associatedPersona = personas.find(p => p.id === focusedPainPoint.persona_id);
+      if (!associatedPersona) {
+        console.error('[WorkflowCanvas] Associated persona not found:', focusedPainPoint.persona_id);
+        return;
+      }
+
+      console.log('[WorkflowCanvas] Creating focused view for:', {
+        painPoint: focusedPainPoint.title,
+        persona: associatedPersona.name
+      });
+
+      // Clear the canvas for focused view
+      resetCanvas();
+
+      // Calculate positions for focused view
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      
+      // Center the persona node
+      const personaX = -200;
+      const personaY = -100;
+      
+      // Position pain point below persona
+      const painPointX = personaX;
+      const painPointY = personaY + 200;
+      
+      // Position solutions to the right of pain point
+      const solutionBaseX = personaX + 400;
+      const solutionStartY = painPointY - 100;
+      const solutionSpacing = 120;
+
+      // Create focused persona node
+      const focusedPersonaNode: Node = {
+        id: 'focused-persona',
+        type: 'persona',
+        position: { x: personaX, y: personaY },
+        data: {
+          id: 'focused-persona',
+          name: associatedPersona.name,
+          industry: associatedPersona.demographics?.industry || 'Unknown',
+          role: associatedPersona.demographics?.role || 'Unknown',
+          painDegree: (associatedPersona as any).pain_degree || (associatedPersona as any).painDegree || 3,
+          description: associatedPersona.description,
+          isLocked: lockedItems.personas.has(associatedPersona.id),
+          isExpanded: true, // Expand in focused view
+          isSkeleton: false,
+          isRefreshing: false,
+          onToggleLock: () => {
+            const workflowStore = useWorkflowStore.getState();
+            workflowStore.togglePersonaLock(associatedPersona.id);
+          }
+        },
+        draggable: false, // Fixed position in focused view
+      };
+
+      // Create focused pain point node
+      const focusedPainPointNode: Node = {
+        id: 'focused-pain-point',
+        type: 'painPoint',
+        position: { x: painPointX, y: painPointY },
+        data: {
+          id: 'focused-pain-point',
+          description: focusedPainPoint.description,
+          severity: focusedPainPoint.severity === 1 ? 'low' : 
+                   focusedPainPoint.severity === 2 ? 'medium' :
+                   focusedPainPoint.severity === 3 ? 'high' :
+                   focusedPainPoint.severity === 4 ? 'high' : 'critical',
+          impactArea: focusedPainPoint.impact,
+          isLocked: lockedItems.painPoints.has(focusedPainPoint.id),
+          isSkeleton: false,
+          isRefreshing: false,
+          onToggleLock: () => {
+            const workflowStore = useWorkflowStore.getState();
+            workflowStore.togglePainPointLock(focusedPainPoint.id);
+          },
+          onFocus: () => {
+            // Already focused, could implement unfocus or ignore
+            console.log('[WorkflowCanvas] Already focused on this pain point');
+          }
+        },
+        draggable: false, // Fixed position in focused view
+      };
+
+      // Create solution nodes (show up to 5 solutions)
+      const solutionNodes: Node[] = [];
+      const solutionEdges: Edge[] = [];
+
+      // Get solutions related to this pain point (from solutionMappings)
+      const relatedSolutions = solutions.filter(solution => {
+        // Check if this solution addresses the focused pain point
+        return painPoints.some(pp => pp.id === focusedPainPointId); // For now, show all solutions
+      }).slice(0, 5);
+
+      if (relatedSolutions.length === 0) {
+        // Show placeholder solutions if no specific solutions found
+        for (let i = 0; i < 3; i++) {
+          const solutionId = `focused-solution-${i + 1}`;
+          solutionNodes.push({
+            id: solutionId,
+            type: 'solution',
+            position: {
+              x: solutionBaseX,
+              y: solutionStartY + (i * solutionSpacing)
+            },
+            data: {
+              id: solutionId,
+              title: 'Solution coming soon...',
+              description: 'Solutions will be generated based on this pain point',
+              solutionType: 'feature' as const,
+              complexity: 'medium' as const,
+              isLocked: false,
+              isSelected: false,
+              isSkeleton: true,
+              isRefreshing: false,
+              onToggleLock: () => console.log(`Toggle lock for ${solutionId}`),
+              onToggleSelect: () => console.log(`Toggle selection for ${solutionId}`)
+            },
+            draggable: false,
+          });
+        }
+      } else {
+        // Show actual solutions
+        relatedSolutions.forEach((solution, index) => {
+          const solutionId = `focused-solution-${solution.id}`;
+          solutionNodes.push({
+            id: solutionId,
+            type: 'solution',
+            position: {
+              x: solutionBaseX,
+              y: solutionStartY + (index * solutionSpacing)
+            },
+            data: {
+              id: solutionId,
+              title: solution.title,
+              description: solution.description,
+              solutionType: 'feature' as const,
+              complexity: solution.feasibility_score <= 3 ? 'low' : 
+                         solution.feasibility_score <= 6 ? 'medium' : 'high',
+              isLocked: lockedItems.solutions.has(solution.id),
+              isSelected: false,
+              isSkeleton: false,
+              isRefreshing: false,
+              onToggleLock: () => {
+                const workflowStore = useWorkflowStore.getState();
+                workflowStore.toggleSolutionLock(solution.id);
+              },
+              onToggleSelect: () => {
+                const workflowStore = useWorkflowStore.getState();
+                workflowStore.toggleSolutionSelection(solution.id);
+              }
+            },
+            draggable: false,
+          });
+          
+          // Create edge from pain point to solution
+          solutionEdges.push({
+            id: `pain-to-solution-${solution.id}`,
+            source: 'focused-pain-point',
+            target: solutionId,
+            type: 'default',
+            style: {
+              stroke: '#10B981', // Green color for solution connections
+              strokeWidth: 2,
+              opacity: 0.8
+            },
+            animated: true,
+          });
+        });
+      }
+
+      // Create edge from persona to pain point
+      const personaToPainEdge: Edge = {
+        id: 'persona-to-pain-focused',
+        source: 'focused-persona',
+        target: 'focused-pain-point',
+        type: 'default',
+        style: {
+          stroke: '#F97316', // Orange color
+          strokeWidth: 3,
+          opacity: 1
+        },
+        animated: false,
+      };
+
+      // Add back button (as a label node)
+      const backButtonNode: Node = {
+        id: 'back-button',
+        type: 'label',
+        position: { x: personaX - 100, y: personaY - 150 },
+        data: {
+          text: '← Back to Overview',
+          showRefresh: false,
+          onClick: () => {
+            console.log('[WorkflowCanvas] Back button clicked');
+            clearPainPointFocus();
+          }
+        },
+        draggable: false,
+        selectable: true,
+      };
+
+      // Add title for focused view
+      const titleNode: Node = {
+        id: 'focused-title',
+        type: 'label',
+        position: { x: personaX + 50, y: personaY - 150 },
+        data: {
+          text: `Focus: ${focusedPainPoint.title}`,
+          showRefresh: false
+        },
+        draggable: false,
+        selectable: false,
+      };
+
+      console.log('[WorkflowCanvas] Adding focused view nodes:', {
+        personas: 1,
+        painPoints: 1,
+        solutions: solutionNodes.length,
+        edges: solutionEdges.length + 1,
+        labels: 2
+      });
+
+      // Add all nodes and edges for focused view
+      addNodes([
+        backButtonNode,
+        titleNode,
+        focusedPersonaNode,
+        focusedPainPointNode,
+        ...solutionNodes
+      ]);
+      
+      addEdges([personaToPainEdge, ...solutionEdges]);
+
+      // Center the view on the focused content
+      setTimeout(() => {
+        canvasStore.setViewport({
+          x: -personaX + (viewportWidth / 2) - 200,
+          y: -personaY + (viewportHeight / 2) - 50,
+          zoom: 1.0
+        });
+      }, 100);
+    }
+     }, [focusedPainPointId, canvasInitialized, painPoints, personas, solutions, lockedItems, resetCanvas, addNodes, addEdges, clearPainPointFocus]);
+
+  // Handle clearing pain point focus - restore main view
+  useEffect(() => {
+    console.log('[WorkflowCanvas] Pain point focus clear check:', {
+      focusedPainPointId,
+      canvasInitialized,
+      currentStep
+    });
+
+    // If focus is cleared and we have initialized canvas, restore the main view
+    if (!focusedPainPointId && canvasInitialized && currentStep !== 'problem_input') {
+      console.log('[WorkflowCanvas] Restoring main view after focus clear');
+      
+      // Trigger a re-initialization to restore the main view
+      // We do this by temporarily clearing canvasInitialized and letting the main effects rebuild
+      setCanvasInitialized(false);
+      
+      // Force a small delay then re-initialize
+      setTimeout(() => {
+        setCanvasInitialized(true);
+      }, 50);
+    }
+  }, [focusedPainPointId, canvasInitialized, currentStep]);
+  
+    // NOTE: Removed competing step change navigation - now handled by ProgressSteps in App.tsx
 
   return (
     <div className="relative w-full h-full">

@@ -3,6 +3,7 @@ pub mod personas;
 pub mod canvas;
 pub mod data_sync;
 pub mod workspace;
+pub mod filesystem;
 
 use crate::db::{Queries, DbPool, Workspace};
 use serde::{Deserialize, Serialize};
@@ -22,6 +23,9 @@ pub use data_sync::{populate_sqlite_test_data, verify_test_data_consistency, cle
 
 // Re-export workspace commands
 pub use workspace::{create_new_project, delete_project_with_data, rename_project, duplicate_project, import_project, export_project};
+
+// Re-export filesystem commands
+pub use filesystem::{get_platform, open_terminal};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct AppState {

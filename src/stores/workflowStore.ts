@@ -347,22 +347,25 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
       
       set({ isValidating: true })
       try {
-        // Call Tauri API to validate and analyze problem
-        const analysis = await tauriAPI.analyzeProblem(input)
-        // TODO: Parse analysis and create CoreProblem object
+        // Call the problem validation edge function
+        const { problemApi } = await import('@/services/api/problem')
         const projectId = get().projectId || crypto.randomUUID()
-        const coreProblem: CoreProblem = {
-          id: crypto.randomUUID(),
-          project_id: projectId,
-          description: input,
-          is_validated: true,
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
-        }
         
         // Ensure we have a project ID
         if (!get().projectId) {
           set({ projectId })
+        }
+        
+        // Call the actual problem validation API
+        const validationResult = await problemApi.validateProblem(input)
+        
+        const coreProblem: CoreProblem = {
+          id: validationResult.coreProblemId || crypto.randomUUID(), // Use the ID returned from the API, fallback to random UUID
+          project_id: projectId,
+          description: input,
+          is_validated: validationResult.isValid,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
         }
         
         set({ coreProblem, problemInput: input })
@@ -618,11 +621,8 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
         }
       })
       
-      // Notify canvas and UI stores
-      const canvasStore = useCanvasStore.getState()
+      // Notify UI store only - WorkflowCanvas handles the visual updates
       const uiStore = useUIStore.getState()
-      
-      canvasStore.syncWithWorkflow(get())
       
       const persona = get().personas.find(p => p.id === personaId)
       const isLocked = get().lockedItems.personas.has(personaId)

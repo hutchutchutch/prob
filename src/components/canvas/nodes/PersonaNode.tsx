@@ -14,12 +14,13 @@ export interface PersonaNodeData {
   description?: string;
   isLocked?: boolean;
   isSkeleton?: boolean;
+  isRefreshing?: boolean;
   onToggleLock?: () => void;
 }
 
 export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
   const nodeData = data as unknown as PersonaNodeData;
-  const { isLocked = false, isSkeleton = false, onToggleLock } = nodeData;
+  const { isLocked = false, isSkeleton = false, isRefreshing = false, onToggleLock } = nodeData;
   const [isExpanded, setIsExpanded] = useState(false);
 
   // Handle node click to expand/collapse
@@ -57,7 +58,7 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
         showTargetHandle={true}
         className={cn(
           "min-w-[280px]",
-          "shadow-lg shadow-teal-500/20", // Add ethereal glow with teal color
+          "shadow-lg shadow-gold-500/20", // Add ethereal glow with gold color
           "transition-shadow duration-1000"
         )}
       >
@@ -94,12 +95,14 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
       showTargetHandle={true}
       className={cn(
         'min-w-[280px] transition-all duration-300',
-        isExpanded && 'w-[336px] h-[240px]' // 1.2x width (280 * 1.2 = 336), 1.5x height (160 * 1.5 = 240)
+        isExpanded && 'w-[336px] h-[240px]', // 1.2x width (280 * 1.2 = 336), 1.5x height (160 * 1.5 = 240)
+        // Add animated gold border when refreshing and not locked
+        nodeData.isRefreshing && !nodeData.isLocked && 'gold-pulse-border'
       )}
     >
       <div 
         className={cn(
-          "cursor-pointer h-full flex flex-col",
+          "cursor-pointer h-full flex flex-col relative",
           isExpanded ? "space-y-2" : "space-y-3"
         )}
         onClick={handleNodeClick}
@@ -115,10 +118,15 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
               e.stopPropagation();
               onToggleLock?.();
             }}
-            className="p-1 hover:bg-teal-600/20 rounded transition-colors flex-shrink-0"
+            className={cn(
+              "p-1 rounded transition-all flex-shrink-0",
+              isLocked 
+                ? "bg-gold-500 border border-gold-600 hover:bg-gold-600" 
+                : "hover:bg-teal-600/20"
+            )}
           >
             {isLocked ? (
-              <Lock className="w-4 h-4" />
+              <Lock className="w-4 h-4 text-obsidian-950" />
             ) : (
               <Unlock className="w-4 h-4 opacity-60" />
             )}
@@ -131,15 +139,15 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
           isExpanded ? "space-y-2" : "space-y-3"
         )}>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-medium text-teal-400 uppercase tracking-wide min-w-0 flex-shrink-0">Industry</span>
+            <span className="text-xs font-medium text-gold-500 uppercase tracking-wide min-w-0 flex-shrink-0">Industry</span>
             <span className="opacity-90 truncate">{nodeData.industry}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-medium text-teal-400 uppercase tracking-wide min-w-0 flex-shrink-0">Role</span>
+            <span className="text-xs font-medium text-gold-500 uppercase tracking-wide min-w-0 flex-shrink-0">Role</span>
             <span className="opacity-90 truncate">{nodeData.role}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-medium text-teal-400 uppercase tracking-wide min-w-0 flex-shrink-0">Pain Level</span>
+            <span className="text-xs font-medium text-gold-500 uppercase tracking-wide min-w-0 flex-shrink-0">Pain Level</span>
             <div className="flex items-center gap-2">
               {renderPainRating(nodeData.painDegree)}
             </div>
@@ -147,7 +155,7 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
 
           {/* Expanded Description */}
           {isExpanded && nodeData.description && (
-            <div className="pt-2 border-t border-teal-600/30">
+            <div className="pt-2 border-t border-gold-600/30">
               <p className="text-xs opacity-80 leading-relaxed">
                 {nodeData.description}
               </p>
@@ -155,10 +163,10 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
           )}
         </div>
 
-        {/* Expand/Collapse Indicator */}
-        <div className="flex justify-center pt-1 flex-shrink-0">
+        {/* Expand/Collapse Indicator - moved to bottom right */}
+        <div className="absolute bottom-2 right-2">
           <div className={cn(
-            "text-xs text-teal-400 opacity-60 transition-transform duration-200",
+            "text-xs text-gold-500 opacity-60 transition-transform duration-200",
             isExpanded && "rotate-180"
           )}>
             ▼

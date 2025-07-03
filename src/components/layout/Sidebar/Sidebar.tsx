@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, Settings } from 'lucide-react';
 import { WorkspaceItem } from './WorkspaceItem';
+import { FileDirectoryPicker } from '@/components/sidebar/FileDirectoryPicker';
 import type { SidebarProps } from './types';
 import { cn } from '@/utils/cn';
 
@@ -13,6 +14,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onProjectSelect,
   onNewProject,
   onSettings,
+  onDirectorySelect,
+  onOpenTerminal,
+  onSaveWorkspace,
+  onExportWorkspace,
+  workspaceDirectory,
   className = '',
 }) => {
   const [expandedWorkspaces, setExpandedWorkspaces] = useState<Set<string>>(new Set());
@@ -50,6 +56,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Workspace List */}
       <div className="sidebar-content">
+        {/* File Directory Picker for active workspace */}
+        {activeWorkspaceId && (
+          <div className="px-4 pb-4 border-b border-obsidian-700">
+            <FileDirectoryPicker
+              workspaceId={activeWorkspaceId}
+              currentDirectory={workspaceDirectory?.[activeWorkspaceId]}
+              onDirectorySelect={(dir) => onDirectorySelect?.(activeWorkspaceId, dir)}
+              onOpenTerminal={() => onOpenTerminal?.(activeWorkspaceId)}
+              onSaveWorkspace={() => onSaveWorkspace?.(activeWorkspaceId)}
+              onExportWorkspace={() => onExportWorkspace?.(activeWorkspaceId)}
+            />
+          </div>
+        )}
+        
         {workspaces.map((workspace) => (
           <WorkspaceItem
             key={workspace.id}

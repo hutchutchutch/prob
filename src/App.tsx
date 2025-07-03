@@ -134,9 +134,9 @@ function AppContent() {
     console.log('[App] Going back to problem step');
     setShowPainPointDropdown(false);
     
-    // Navigate to Step 1 (Problem)
+    // Navigate to Step 1 (Problem) - let the automatic navigation handle the smooth transition
     setCurrentStep('problem_input');
-    goToStep1();
+    // Removed direct goToStep1() call to prevent double navigation and jarring transition
   };
 
   // Navigate canvas to appropriate view based on step index
@@ -151,7 +151,8 @@ function AppContent() {
         goToStep2();
         break;
       case 2: // Pain Points
-        goToStep(3);
+        console.log('[App] Pain Points - using same view as Step 2');
+        goToStep2(); // Use the same view as Step 2
         break;
       case 3: // Solutions
         goToStep(4);
@@ -175,10 +176,10 @@ function AppContent() {
     console.log('[App] Workflow step changed to:', currentStep, '-> step index:', stepIndex);
     console.log('[App] Automatically navigating canvas to match workflow step');
     
-    // Small delay to ensure canvas is ready
+    // Slightly longer delay to ensure smooth transitions, especially from dropdown interactions
     setTimeout(() => {
       navigateToStep(stepIndex);
-    }, 100);
+    }, 300);
   }, [currentStep]);
 
   // Close pain point dropdown when clicking elsewhere or when no selection is made
@@ -205,30 +206,30 @@ function AppContent() {
 
   return (
     <div className="flex h-screen bg-gray-900">
+      {/* Fixed Progress Bar at top of screen */}
+      <div className="fixed top-0 left-64 right-0 z-50 bg-obsidian-800 border-b border-obsidian-700 py-6 px-12">
+        <ProgressSteps 
+          currentStep={getProgressStepIndex(currentStep)}
+          variant="horizontal"
+          size="md"
+          className="max-w-none"
+          onStepClick={handleStepClick}
+        />
+        
+        {/* Pain Point Dropdown Overlay */}
+        {showPainPointDropdown && (
+          <PainPointDropdownContainer
+            onPainPointSelect={handlePainPointSelect}
+            onGoToProblem={handleGoToProblem}
+          />
+        )}
+      </div>
+
       {/* Sidebar */}
       <ConnectedSidebar />
 
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col">
-        {/* Progress Steps Container */}
-        <div className="bg-obsidian-800 border-b border-obsidian-700 py-8 px-12 relative">
-          <ProgressSteps 
-            currentStep={getProgressStepIndex(currentStep)}
-            variant="horizontal"
-            size="md"
-            className="max-w-none"
-            onStepClick={handleStepClick}
-          />
-          
-          {/* Pain Point Dropdown Overlay */}
-          {showPainPointDropdown && (
-            <PainPointDropdownContainer
-              onPainPointSelect={handlePainPointSelect}
-              onGoToProblem={handleGoToProblem}
-            />
-          )}
-        </div>
-
+      {/* Main Content - adjusted for fixed progress bar */}
+      <div className="flex-1 flex flex-col pt-24"> {/* Increased from pt-20 to account for larger progress bar */}
         {/* Canvas */}
         <div className="flex-1 relative">
           <WorkflowCanvas />

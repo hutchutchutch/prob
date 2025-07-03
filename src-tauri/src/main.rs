@@ -19,6 +19,9 @@ async fn main() {
     let db_pool = init_db().await.expect("Failed to initialize database");
     
     tauri::Builder::default()
+        .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_fs::init())
+        .plugin(tauri_plugin_shell::init())
         .manage(db_pool)
         .invoke_handler(tauri::generate_handler![
             // App state
@@ -60,6 +63,9 @@ async fn main() {
             get_detailed_migration_status,
             // Legacy analyze command
             analyze_problem,
+            // Filesystem commands
+            get_platform,
+            open_terminal,
         ])
         .setup(|_app| {
             info!("GoldiDocs setup complete");
