@@ -155,6 +155,244 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   );
 };
 
+// Progress Steps Component (Following Design System M4)
+// Usage Example:
+// <ProgressSteps 
+//   currentStep={2} 
+//   variant="horizontal" 
+//   size="md"
+// />
+//
+// Or with custom steps:
+// <ProgressSteps
+//   currentStep={1}
+//   steps={[
+//     { id: 'step1', label: 'Step 1', description: 'First step' },
+//     { id: 'step2', label: 'Step 2', description: 'Second step' }
+//   ]}
+//   variant="vertical"
+// />
+
+export interface ProgressStep {
+  id: string;
+  label: string;
+  description?: string;
+  icon?: React.ReactNode;
+}
+
+export interface ProgressStepsProps {
+  steps?: ProgressStep[];
+  currentStep: number;
+  className?: string;
+  variant?: 'horizontal' | 'vertical';
+  size?: 'sm' | 'md' | 'lg';
+}
+
+const defaultWorkflowSteps: ProgressStep[] = [
+  {
+    id: 'problem',
+    label: 'Problem'
+  },
+  {
+    id: 'persona',
+    label: 'Persona'
+  },
+  {
+    id: 'pain-points',
+    label: 'Pain Points'
+  },
+  {
+    id: 'solutions',
+    label: 'Solutions'
+  },
+  {
+    id: 'focus-group',
+    label: 'Focus Group'
+  },
+  {
+    id: 'user-stories',
+    label: 'User Stories'
+  },
+  {
+    id: 'documentation',
+    label: 'Documentation'
+  }
+];
+
+const stepSizes = {
+  sm: {
+    circle: 'w-6 h-6',
+    text: 'text-xs',
+    line: 'h-px',
+    spacing: 'gap-1'
+  },
+  md: {
+    circle: 'w-8 h-8',
+    text: 'text-sm',
+    line: 'h-0.5',
+    spacing: 'gap-2'
+  },
+  lg: {
+    circle: 'w-10 h-10',
+    text: 'text-base',
+    line: 'h-px',
+    spacing: 'gap-3'
+  }
+};
+
+export const ProgressSteps: React.FC<ProgressStepsProps> = ({
+  steps = defaultWorkflowSteps,
+  currentStep,
+  className,
+  variant = 'horizontal',
+  size = 'md',
+}) => {
+  const sizeClasses = stepSizes[size];
+
+  const getStepStatus = (index: number): 'completed' | 'active' | 'pending' => {
+    if (index < currentStep) return 'completed';
+    if (index === currentStep) return 'active';
+    return 'pending';
+  };
+
+  const getStepStyles = (status: 'completed' | 'active' | 'pending') => {
+    switch (status) {
+      case 'completed':
+        return {
+          circle: 'bg-accent-600 text-white shadow-glow-metallic',
+          text: 'text-accent-600',
+          line: 'bg-accent-600'
+        };
+      case 'active':
+        return {
+          circle: 'bg-transparent text-accent-500 border-2 border-accent-500',
+          text: 'text-accent-500',
+          line: 'bg-obsidian-600'
+        };
+      case 'pending':
+        return {
+          circle: 'bg-obsidian-700 text-slate-400 border-2 border-obsidian-600',
+          text: 'text-slate-400',
+          line: 'bg-obsidian-700'
+        };
+    }
+  };
+
+  if (variant === 'vertical') {
+    return (
+      <div className={cn('flex flex-col', className)}>
+        {steps.map((step, index) => {
+          const status = getStepStatus(index);
+          const styles = getStepStyles(status);
+          const isLast = index === steps.length - 1;
+
+          return (
+            <div key={step.id} className="flex items-start">
+              <div className="flex flex-col items-center">
+                {/* Progress Circle */}
+                <div
+                  className={cn(
+                    'progress-circle',
+                    'flex items-center justify-center rounded-full',
+                    'transition-all duration-300 ease-default',
+                    'font-medium',
+                    sizeClasses.circle,
+                    styles.circle
+                  )}
+                >
+                  {status === 'completed' ? (
+                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  ) : (
+                    <span className={sizeClasses.text}>{index + 1}</span>
+                  )}
+                </div>
+
+                {/* Progress Line */}
+                {!isLast && (
+                  <div
+                    className={cn(
+                      'progress-line',
+                      'w-0.5 min-h-[40px] my-2',
+                      'transition-all duration-slow ease-default',
+                      styles.line
+                    )}
+                  />
+                )}
+              </div>
+
+              {/* Step Content */}
+              <div className={cn('ml-4 pb-8 min-h-[60px]', sizeClasses.spacing)}>
+                <div className={cn('font-medium', sizeClasses.text, styles.text)}>
+                  {step.label}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
+  // Horizontal layout
+  return (
+    <div className={cn('flex items-center gap-8', className)}>
+      {steps.map((step, index) => {
+        const status = getStepStatus(index);
+        const styles = getStepStyles(status);
+        const isLast = index === steps.length - 1;
+
+        return (
+          <div key={step.id} className="flex items-center">
+            {/* Progress Step */}
+            <div className={cn('progress-step flex items-center', sizeClasses.spacing)}>
+              {/* Progress Circle */}
+              <div
+                className={cn(
+                  'progress-circle',
+                  'flex items-center justify-center rounded-full',
+                  'transition-all duration-300 ease-default',
+                  'font-medium flex-shrink-0',
+                  sizeClasses.circle,
+                  styles.circle
+                )}
+              >
+                {status === 'completed' ? (
+                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                ) : (
+                  <span className={sizeClasses.text}>{index + 1}</span>
+                )}
+              </div>
+
+              {/* Step Label */}
+              <div className="ml-3">
+                <div className={cn('font-medium whitespace-nowrap', sizeClasses.text, styles.text)}>
+                  {step.label}
+                </div>
+              </div>
+            </div>
+
+            {/* Progress Line */}
+            {!isLast && (
+              <div
+                className={cn(
+                  'progress-line',
+                  'w-16 h-0.5 mx-6',
+                  'transition-all duration-slow ease-default',
+                  styles.line
+                )}
+              />
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
 // Dots Loading Component
 export const DotsLoading: React.FC = () => {
   return (

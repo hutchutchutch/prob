@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { ReactFlowProvider } from '@xyflow/react';
 import { ConnectedSidebar } from '@/components/layout/Sidebar';
-import { ProgressBar } from '@/components/common/LoadingStates';
-import { WorkflowCanvas } from '@/components/workflow/WorkflowCanvas';
+import { ProgressSteps } from '@/components/common/LoadingStates';
+import { WorkflowCanvas } from '@/components/workflow';
 import { DemoCanvas } from '@/components/DemoCanvas';
 import { AuthDebug } from '@/components/debug/AuthDebug';
 import { PerformanceOverlay } from '@/components/PerformanceMonitor';
@@ -16,7 +16,7 @@ export default function App() {
   console.log('[App] Component mounting...');
   
   const { user, loading: authLoading } = useAuth();
-  const { resetWorkflow, setProjectId } = useWorkflowStore();
+  const { currentStep, resetWorkflow, setProjectId } = useWorkflowStore();
   const [isInitializing, setIsInitializing] = useState(false);
   const [initError, setInitError] = useState<string | null>(null);
   const [showPerformanceOverlay, setShowPerformanceOverlay] = useState(false);
@@ -27,6 +27,20 @@ export default function App() {
     isInitializing,
     showPerformanceOverlay
   });
+
+  // Map workflow step to progress step index
+  const getProgressStepIndex = (step: string): number => {
+    const stepMap: Record<string, number> = {
+      'problem_input': 0,
+      'persona_discovery': 1,
+      'pain_points': 2,
+      'solution_generation': 3,
+      'focus_group': 4, // This might not exist in workflow, mapping to index 4
+      'user_stories': 5,
+      'architecture': 6 // Maps to our "documentation" step
+    };
+    return stepMap[step] || 0;
+  };
 
   useEffect(() => {
     const initializeWorkspace = async () => {
@@ -243,8 +257,15 @@ export default function App() {
 
         {/* Main Content */}
         <div className="flex-1 flex flex-col">
-          {/* Progress Bar */}
-          <ProgressBar value={50} max={100} showLabel animated />
+          {/* Progress Steps Container */}
+          <div className="bg-obsidian-800 border-b border-obsidian-700 py-8 px-12">
+            <ProgressSteps 
+              currentStep={getProgressStepIndex(currentStep)}
+              variant="horizontal"
+              size="md"
+              className="max-w-none"
+            />
+          </div>
 
           {/* Canvas */}
           <div className="flex-1 relative">

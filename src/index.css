@@ -177,6 +177,7 @@ html, body {
   .justify-between { justify-content: space-between; }
   .gap-2 { gap: 0.5rem; }
   .gap-3 { gap: 0.75rem; }
+  .gap-8 { gap: 2rem; }
   
   /* Spacing */
   .p-2 { padding: 0.5rem; }
@@ -186,8 +187,11 @@ html, body {
   .p-8 { padding: 2rem; }
   .px-4 { padding-left: 1rem; padding-right: 1rem; }
   .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .px-8 { padding-left: 2rem; padding-right: 2rem; }
+  .px-12 { padding-left: 3rem; padding-right: 3rem; }
   .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
   .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+  .py-8 { padding-top: 2rem; padding-bottom: 2rem; }
   .mt-2 { margin-top: 0.5rem; }
   .mt-4 { margin-top: 1rem; }
   .mb-6 { margin-bottom: 1.5rem; }
@@ -437,6 +441,12 @@ html, body {
     }
   }
 }
+
+/* High-priority utility classes (outside @layer to ensure they apply) */
+.px-8 { padding-left: 2rem !important; padding-right: 2rem !important; }
+.px-12 { padding-left: 3rem !important; padding-right: 3rem !important; }
+.py-8 { padding-top: 2rem !important; padding-bottom: 2rem !important; }
+.gap-8 { gap: 2rem !important; }
 
 /* Component styles */
 .btn {
