@@ -37,27 +37,37 @@ export class SolutionsService {
       painPointsCount: request.painPoints.length
     });
 
-    const response = await apiClient.invokeEdgeFunction<SolutionGenerationResponse>(
-      'generate-solutions',
-      {
-        coreProblem: {
-          id: request.coreProblem.id,
-          validated_problem: request.coreProblem.validatedProblem || request.coreProblem.originalInput
-        },
-        personas: request.personas.map(p => ({
-          id: p.id,
-          name: p.name,
-          role: p.demographics?.role || 'Unknown',
-          industry: p.demographics?.industry || 'Unknown',
-          description: p.description
-        })),
-        painPoints: request.painPoints.map(pp => ({
+    const edgeFunctionPayload = {
+      coreProblem: {
+        id: request.coreProblem.id,
+        validated_problem: request.coreProblem.validatedProblem || request.coreProblem.originalInput
+      },
+      personas: request.personas.map(p => ({
+        id: p.id,
+        name: p.name,
+        role: p.demographics?.role || 'Unknown',
+        industry: p.demographics?.industry || 'Unknown',
+        description: p.description
+      })),
+      painPoints: request.painPoints.map(pp => {
+        // Handle both number and string severity types
+        const severityNum = typeof pp.severity === 'number' ? pp.severity : 
+                           pp.severity === 'high' ? 8 : pp.severity === 'medium' ? 5 : 3;
+        return {
           id: pp.id,
           description: pp.description,
-          severity: pp.severity,
+          severity: severityNum <= 3 ? 'low' : severityNum <= 6 ? 'medium' : 'high',
           persona_id: pp.persona_id
-        }))
-      }
+        }
+      })
+    }
+    
+    console.log('[SolutionsService] Edge function payload:', edgeFunctionPayload)
+    console.log('[SolutionsService] Payload JSON string:', JSON.stringify(edgeFunctionPayload))
+    
+    const response = await apiClient.invokeEdgeFunction<SolutionGenerationResponse>(
+      'generate-solutions',
+      edgeFunctionPayload
     )
 
     if (response.error) {

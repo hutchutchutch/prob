@@ -70,6 +70,13 @@ class ApiClient {
         // Add request interceptors
         const headers = await this.addRequestInterceptors()
         
+        // Debug logging
+        console.log('[ApiClient] Invoking edge function:', functionName, {
+          payload,
+          headers,
+          payloadStringified: JSON.stringify(payload)
+        })
+        
         // Create a promise that rejects when the signal is aborted
         const requestPromise = this.supabase.functions.invoke(functionName, {
           body: payload,

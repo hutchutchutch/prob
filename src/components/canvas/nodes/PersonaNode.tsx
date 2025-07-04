@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NodeProps } from '@xyflow/react';
 import { Lock, Unlock, Flame } from 'lucide-react';
 import { cn } from '@/utils/cn';
 import { BaseNode } from './BaseNode';
+import { useCanvasStore } from '@/stores/canvasStore';
 
 // Persona Node
 export interface PersonaNodeData {
@@ -15,18 +16,39 @@ export interface PersonaNodeData {
   isLocked?: boolean;
   isSkeleton?: boolean;
   isRefreshing?: boolean;
+  isExpanded?: boolean;
   onToggleLock?: () => void;
+  onToggleExpand?: () => void;
 }
 
-export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
+export const PersonaNode: React.FC<NodeProps> = ({ data, selected, id }) => {
   const nodeData = data as unknown as PersonaNodeData;
-  const { isLocked = false, isSkeleton = false, isRefreshing = false, onToggleLock } = nodeData;
-  const [isExpanded, setIsExpanded] = useState(false);
+  const { isLocked = false, isSkeleton = false, isRefreshing = false, onToggleLock, isExpanded: expandedFromProps = false } = nodeData;
+  const [isExpanded, setIsExpanded] = useState(expandedFromProps);
+  
+  // Import canvas store
+  const { handleNodeExpansion } = useCanvasStore();
+  
+  // Sync expanded state with props
+  useEffect(() => {
+    setIsExpanded(expandedFromProps);
+  }, [expandedFromProps]);
 
   // Handle node click to expand/collapse
   const handleNodeClick = () => {
     if (isSkeleton) return;
-    setIsExpanded(!isExpanded);
+    const newExpanded = !isExpanded;
+    setIsExpanded(newExpanded);
+    
+    // Notify canvas about expansion change
+    if (nodeData.onToggleExpand) {
+      // Use the provided handler which already handles node shifting
+      nodeData.onToggleExpand();
+    } else {
+      // Fallback: directly handle expansion if no handler provided
+      const heightDiff = newExpanded ? 160 : -160;
+      handleNodeExpansion(id, heightDiff);
+    }
   };
 
   // Render fire icons for pain rating
@@ -95,15 +117,19 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
       showTargetHandle={true}
       className={cn(
         'min-w-[280px] transition-all duration-300',
-        isExpanded && 'w-[336px] h-[240px]', // 1.2x width (280 * 1.2 = 336), 1.5x height (160 * 1.5 = 240)
+        isExpanded ? 'w-[400px]' : '', // Wider when expanded, height handled by content
         // Add animated gold border when refreshing and not locked
         nodeData.isRefreshing && !nodeData.isLocked && 'gold-pulse-border'
       )}
+      style={{
+        minHeight: isExpanded ? '320px' : '160px',
+        height: isExpanded ? 'auto' : '160px'
+      }}
     >
       <div 
         className={cn(
-          "h-full flex flex-col relative",
-          isExpanded ? "space-y-2" : "space-y-3"
+          "flex flex-col relative h-full",
+          isExpanded ? "space-y-3 p-1" : "space-y-3"
         )}
       >
         {/* Header with Lock */}
@@ -137,43 +163,48 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
 
         {/* Details */}
         <div className={cn(
-          "text-sm flex-1 cursor-pointer",
-          isExpanded ? "space-y-2" : "space-y-3"
+          "text-sm cursor-pointer",
+          isExpanded ? "space-y-2" : "space-y-3",
+          isExpanded ? "flex-1 flex flex-col" : ""
         )} onClick={handleNodeClick} onMouseDown={(e) => e.stopPropagation()}>
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-medium text-gold-500 uppercase tracking-wide min-w-0 flex-shrink-0">Industry</span>
-            <span className="opacity-90 truncate">{nodeData.industry}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-medium text-gold-500 uppercase tracking-wide min-w-0 flex-shrink-0">Role</span>
-            <span className="opacity-90 truncate">{nodeData.role}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-medium text-gold-500 uppercase tracking-wide min-w-0 flex-shrink-0">Pain Level</span>
+          <div className="space-y-2">
             <div className="flex items-center gap-2">
-              {renderPainRating(nodeData.painDegree)}
+              <span className="text-xs font-medium text-gold-500 uppercase tracking-wide min-w-0 flex-shrink-0">Industry</span>
+              <span className="opacity-90 truncate">{nodeData.industry}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-medium text-gold-500 uppercase tracking-wide min-w-0 flex-shrink-0">Role</span>
+              <span className="opacity-90 truncate">{nodeData.role}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-medium text-gold-500 uppercase tracking-wide min-w-0 flex-shrink-0">Pain Level</span>
+              <div className="flex items-center gap-2">
+                {renderPainRating(nodeData.painDegree)}
+              </div>
             </div>
           </div>
 
           {/* Expanded Description */}
           {isExpanded && nodeData.description && (
-            <div className="pt-2 border-t border-gold-600/30">
-              <p className="text-xs opacity-80 leading-relaxed">
+            <div className="pt-3 mt-2 border-t border-gold-600/30 flex-1 min-h-0">
+              <p className="text-xs opacity-80 leading-relaxed pr-4 pb-8">
                 {nodeData.description}
               </p>
             </div>
           )}
         </div>
 
-        {/* Expand/Collapse Indicator - moved to bottom right */}
-        <div className="absolute bottom-2 right-2 pointer-events-none">
-          <div className={cn(
-            "text-xs text-gold-500 opacity-60 transition-transform duration-200",
-            isExpanded && "rotate-180"
-          )}>
-            ▼
+        {/* Expand/Collapse Indicator */}
+        {!isSkeleton && (
+          <div className="absolute bottom-3 right-3 pointer-events-none">
+            <div className={cn(
+              "text-xs text-gold-500 opacity-60 transition-transform duration-200",
+              isExpanded && "rotate-180"
+            )}>
+              ▼
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </BaseNode>
   );

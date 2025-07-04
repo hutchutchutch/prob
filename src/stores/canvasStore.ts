@@ -73,6 +73,7 @@ interface CanvasActions {
   updateNode: (nodeId: string, updates: Partial<Node>) => void
   removeNode: (nodeId: string) => void
   onNodesChange: (changes: NodeChange[]) => void
+  handleNodeExpansion: (nodeId: string, heightDiff: number) => void
   
   // Edge operations
   addEdge: (edge: Edge) => void
@@ -220,6 +221,43 @@ export const useCanvasStore = create<CanvasStoreState & CanvasActions>()(
           isDirty: true
         }))
         debouncedSave()
+      },
+
+      handleNodeExpansion: (nodeId, heightDiff) => {
+        set((state) => {
+          const expandedNode = state.nodes.find(n => n.id === nodeId);
+          if (!expandedNode) return state;
+          
+          // Find all nodes below the expanded node
+          const expandedNodeY = expandedNode.position.y;
+          const nodesBelow = state.nodes.filter(n => 
+            n.id !== nodeId && n.position.y > expandedNodeY
+          );
+          
+          // Update positions of nodes below
+          const updatedNodes = state.nodes.map(node => {
+            if (node.id === nodeId) {
+              // Don't update height here - let React Flow handle it
+              return node;
+            } else if (nodesBelow.some(n => n.id === node.id)) {
+              // Shift nodes below
+              return {
+                ...node,
+                position: {
+                  ...node.position,
+                  y: node.position.y + heightDiff
+                }
+              };
+            }
+            return node;
+          });
+          
+          return {
+            nodes: updatedNodes,
+            isDirty: true
+          };
+        });
+        debouncedSave();
       },
 
       // Edge operations

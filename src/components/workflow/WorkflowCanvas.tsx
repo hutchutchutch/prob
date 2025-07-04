@@ -17,6 +17,8 @@ export function WorkflowCanvas() {
   const [lastEdgeCount, setLastEdgeCount] = useState(0);
   const [painPointsAdded, setPainPointsAdded] = useState(false);
   const [solutionsAdded, setSolutionsAdded] = useState(false);
+  const [previousStep, setPreviousStep] = useState<string | null>(null);
+  const [focusGroupActive, setFocusGroupActive] = useState(false);
 
   // Constants for node positioning
   const problemNodeX = -400; // Left side of canvas for problem node
@@ -103,12 +105,19 @@ export function WorkflowCanvas() {
             const canvasStore = useCanvasStore.getState();
             const currentNode = canvasStore.getNodeById(`persona-${i}`);
             if (currentNode) {
+              const isCurrentlyExpanded = (currentNode.data as any).isExpanded || false;
+              const heightDiff = isCurrentlyExpanded ? -160 : 160;
+              
+              // Update node data
               canvasStore.updateNode(`persona-${i}`, {
                 data: {
                   ...currentNode.data,
-                  isExpanded: !(currentNode.data as any).isExpanded
+                  isExpanded: !isCurrentlyExpanded
                 }
               });
+              
+              // Handle node expansion and shift other nodes
+              canvasStore.handleNodeExpansion(`persona-${i}`, heightDiff);
             }
           }
         },
@@ -182,19 +191,34 @@ export function WorkflowCanvas() {
     }
   }, []); // Remove canvasInitialized from dependencies to prevent re-initialization
 
-  // Initialize canvas nodes based on current step
+  // Handle step transitions and reset from focus group mode
   useEffect(() => {
     if (!canvasInitialized) return;
 
-    console.log('[WorkflowCanvas] Current step updated:', currentStep);
+    console.log('[WorkflowCanvas] Current step updated:', currentStep, 'Previous step:', previousStep);
+    
+    // If leaving focus group mode, reset the canvas and rebuild for the new step
+    if (previousStep === 'focus_group' && currentStep !== 'focus_group' && focusGroupActive) {
+      console.log('[WorkflowCanvas] Leaving focus group mode - resetting canvas');
+      setFocusGroupActive(false);
+      setPainPointsAdded(false);
+      setSolutionsAdded(false);
+      setCanvasInitialized(false);
+      resetCanvas();
+      
+      // Re-initialize after a short delay
+      setTimeout(() => {
+        setCanvasInitialized(true);
+      }, 50);
+    }
     
     // Handle step-specific node initialization
-    if (currentStep === 'problem_input' && nodes.length === 0) {
+    if (currentStep === 'problem_input' && nodes.length === 0 && !focusGroupActive) {
       // Only initialize if nodes haven't been added yet
       initializeProblemInputNodes();
     }
     
-    if (currentStep === 'problem_input' && coreProblem && nodes.length > 0) {
+    if (currentStep === 'problem_input' && coreProblem && nodes.length > 0 && !focusGroupActive) {
       // Center view on problem node after problem is validated
       setTimeout(() => {
         console.log('[WorkflowCanvas] Centering view on problem node for Step 1...');
@@ -207,7 +231,10 @@ export function WorkflowCanvas() {
         });
       }, 100);
     }
-  }, [currentStep, canvasInitialized, addNodes, zoomTo, resetCanvas, coreProblem]); // Remove nodes.length dependency
+    
+    // Update previous step
+    setPreviousStep(currentStep);
+  }, [currentStep, canvasInitialized, addNodes, zoomTo, resetCanvas, coreProblem, previousStep, focusGroupActive]); // Remove nodes.length dependency
 
   // NOTE: Navigation is now handled by ProgressSteps component in App.tsx
   // This effect previously had competing navigation logic that interfered with ProgressSteps
@@ -254,12 +281,17 @@ export function WorkflowCanvas() {
               const canvasStore = useCanvasStore.getState();
               const currentNode = canvasStore.getNodeById(nodeId);
               if (currentNode) {
+                const isCurrentlyExpanded = (currentNode.data as any).isExpanded || false;
+                const heightDiff = isCurrentlyExpanded ? -160 : 160;
+                
                 canvasStore.updateNode(nodeId, {
                   data: {
                     ...currentNode.data,
-                    isExpanded: !(currentNode.data as any).isExpanded
+                    isExpanded: !isCurrentlyExpanded
                   }
                 });
+                
+                canvasStore.handleNodeExpansion(nodeId, heightDiff);
               }
             }
           }
@@ -300,7 +332,7 @@ export function WorkflowCanvas() {
     });
 
     // Add pain point skeletons immediately when reaching persona discovery step
-    if (currentStep === 'persona_discovery' && canvasInitialized && !painPointsAdded && coreProblem?.is_validated) {
+    if (currentStep === 'persona_discovery' && canvasInitialized && !painPointsAdded && coreProblem?.is_validated && !focusGroupActive) {
       console.log('[WorkflowCanvas] Reached persona discovery step - adding pain point skeleton nodes');
       
       const canvasStore = useCanvasStore.getState();
@@ -419,7 +451,7 @@ export function WorkflowCanvas() {
       
       console.log('[WorkflowCanvas] Pain point skeleton nodes added successfully');
     }
-  }, [currentStep, canvasInitialized, painPointsAdded, coreProblem, addNodes, addEdges, setPainPointsAdded]);
+  }, [currentStep, canvasInitialized, painPointsAdded, coreProblem, addNodes, addEdges, setPainPointsAdded, focusGroupActive]);
 
   // Handle persona generation state - animate edges and add pain points
   useEffect(() => {
@@ -515,12 +547,17 @@ export function WorkflowCanvas() {
             const canvasStore = useCanvasStore.getState();
             const currentNode = canvasStore.getNodeById(nodeId);
             if (currentNode) {
+              const isCurrentlyExpanded = (currentNode.data as any).isExpanded || false;
+              const heightDiff = isCurrentlyExpanded ? -160 : 160;
+              
               canvasStore.updateNode(nodeId, {
                 data: {
                   ...currentNode.data,
-                  isExpanded: !(currentNode.data as any).isExpanded
+                  isExpanded: !isCurrentlyExpanded
                 }
               });
+              
+              canvasStore.handleNodeExpansion(nodeId, heightDiff);
             }
           }
         };
@@ -672,7 +709,7 @@ export function WorkflowCanvas() {
       painPointsLength: painPoints.length
     });
 
-    if (currentStep === 'solution_generation' && canvasInitialized && !solutionsAdded && painPoints.length > 0) {
+    if (currentStep === 'solution_generation' && canvasInitialized && !solutionsAdded && painPoints.length > 0 && !focusGroupActive) {
       console.log('[WorkflowCanvas] Moving to solution generation step - adding solution nodes');
       
       const canvasStore = useCanvasStore.getState();
@@ -792,7 +829,7 @@ export function WorkflowCanvas() {
       
       setSolutionsAdded(true);
     }
-  }, [currentStep, canvasInitialized, solutionsAdded, painPoints.length, addNodes, addEdges]);
+  }, [currentStep, canvasInitialized, solutionsAdded, painPoints.length, addNodes, addEdges, focusGroupActive]);
 
   // Update solution nodes when solutions are available from the edge function
   useEffect(() => {
@@ -860,57 +897,209 @@ export function WorkflowCanvas() {
     }
   }, [solutions, canvasInitialized, solutionsAdded]);
 
-  // Handle focus group mode - add quotes to edges between personas and solutions
+  // Handle focus group mode - create special layout with solutions in a row and personas around center
   useEffect(() => {
     console.log('[WorkflowCanvas] Focus group mode check:', {
       currentStep,
       canvasInitialized,
-      solutionsAdded,
       personasLength: personas.length,
       solutionsLength: solutions.length
     });
 
-    if (currentStep === 'focus_group' && canvasInitialized && solutionsAdded && personas.length > 0) {
-      console.log('[WorkflowCanvas] Entering focus group mode - updating edges with quotes');
+    if (currentStep === 'focus_group' && canvasInitialized && personas.length > 0 && solutions.length > 0) {
+      console.log('[WorkflowCanvas] Entering focus group mode - creating special layout');
       
-      const canvasStore = useCanvasStore.getState();
+      // Set focus group active flag
+      setFocusGroupActive(true);
       
-      // Sample quotes for demo purposes - in real app, these would come from API
-      const sampleQuotes = [
-        "This would save me hours every week",
-        "Finally, a solution that understands our workflow",
-        "I've been waiting for something like this",
-        "This addresses my biggest pain point",
-        "My team would love this feature"
+      // Clear canvas for focus group view
+      resetCanvas();
+      
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      
+      // Position solutions in a row beneath the progress steps (top of view)
+      const solutionRowY = -300; // Near top of canvas
+      const solutionRowStartX = -(viewportWidth * 0.3); // Start left of center
+      const solutionSpacing = 380; // Space between solution cards
+      
+      // Create solution row nodes (first 4 solutions)
+      const solutionRowNodes: Node[] = [];
+      solutions.slice(0, 4).forEach((solution, index) => {
+        solutionRowNodes.push({
+          id: `solution-row-${index + 1}`,
+          type: 'solution',
+          position: {
+            x: solutionRowStartX + (index * solutionSpacing),
+            y: solutionRowY
+          },
+          data: {
+            id: `solution-row-${index + 1}`,
+            title: solution.title,
+            description: solution.description,
+            solutionType: solution.solution_type as 'feature' | 'integration' | 'automation' | 'analytics',
+            complexity: solution.complexity as 'low' | 'medium' | 'high',
+            isLocked: lockedItems.solutions.has(solution.id),
+            isSelected: false,
+            isSkeleton: false,
+            isRefreshing: false,
+            onToggleLock: () => {
+              const workflowStore = useWorkflowStore.getState();
+              workflowStore.toggleSolutionLock(solution.id);
+            },
+            onToggleSelect: () => {
+              const workflowStore = useWorkflowStore.getState();
+              workflowStore.toggleSolutionSelection(solution.id);
+            }
+          },
+          draggable: false, // Fixed position for focus group
+        });
+      });
+      
+      // Position the central solution (best solution or first one)
+      const centralSolution = solutions[0]; // Use first solution as central
+      const centralX = 0;
+      const centralY = 100;
+      
+      const centralSolutionNode: Node = {
+        id: 'central-solution',
+        type: 'solution',
+        position: { x: centralX - 190, y: centralY }, // Center accounting for node width
+        data: {
+          id: 'central-solution',
+          title: centralSolution.title,
+          description: centralSolution.description,
+          solutionType: centralSolution.solution_type as 'feature' | 'integration' | 'automation' | 'analytics',
+          complexity: centralSolution.complexity as 'low' | 'medium' | 'high',
+          isLocked: lockedItems.solutions.has(centralSolution.id),
+          isSelected: true, // Highlight central solution
+          isSkeleton: false,
+          isRefreshing: false,
+          onToggleLock: () => {
+            const workflowStore = useWorkflowStore.getState();
+            workflowStore.toggleSolutionLock(centralSolution.id);
+          },
+          onToggleSelect: () => {
+            const workflowStore = useWorkflowStore.getState();
+            workflowStore.toggleSolutionSelection(centralSolution.id);
+          }
+        },
+        draggable: false,
+      };
+      
+      // Position personas in a circle around the central solution
+      const radius = 400; // Distance from center
+      const personaNodes: Node[] = [];
+      const personaEdges: Edge[] = [];
+      
+      // Position 5 personas: 2 left, 1 bottom, 2 right
+      const personaPositions = [
+        { x: centralX - radius - 100, y: centralY - 100 }, // Left top
+        { x: centralX - radius - 100, y: centralY + 100 }, // Left bottom
+        { x: centralX, y: centralY + radius - 50 }, // Bottom center
+        { x: centralX + radius - 100, y: centralY + 100 }, // Right bottom
+        { x: centralX + radius - 100, y: centralY - 100 }, // Right top
       ];
       
-      // Update existing edges to focus group type with quotes
-      let quoteIndex = 0;
-      for (let personaIndex = 0; personaIndex < Math.min(5, personas.length); personaIndex++) {
-        for (let solutionIndex = 0; solutionIndex < 8; solutionIndex++) {
-          const edgeId = `persona-${personaIndex + 1}-to-solution-${solutionIndex + 1}`;
-          const persona = personas[personaIndex];
-          
-          // Only add quotes to some edges (e.g., high-value connections)
-          if (Math.random() > 0.7 && persona) { // 30% chance to show quote
-            canvasStore.updateEdge(edgeId, {
-              type: 'focusGroup',
-              data: {
-                quote: sampleQuotes[quoteIndex % sampleQuotes.length],
-                personaName: persona.name,
-                personaId: persona.id,
-                solutionId: `solution-${solutionIndex + 1}`,
-                isHighlighted: Math.random() > 0.8 // 20% chance to highlight
-              }
-            });
-            quoteIndex++;
-          }
-        }
-      }
+      personas.slice(0, 5).forEach((persona, index) => {
+        const position = personaPositions[index];
+        const nodeId = `focus-persona-${index + 1}`;
+        
+        personaNodes.push({
+          id: nodeId,
+          type: 'persona',
+          position: position,
+          data: {
+            id: nodeId,
+            name: persona.name,
+            industry: persona.demographics?.industry || 'Unknown',
+            role: persona.demographics?.role || 'Unknown',
+            painDegree: (persona as any).pain_degree || (persona as any).painDegree || 3,
+            description: persona.description,
+            isLocked: lockedItems.personas.has(persona.id),
+            isExpanded: false,
+            isSkeleton: false,
+            isRefreshing: false,
+            onToggleLock: () => {
+              const workflowStore = useWorkflowStore.getState();
+              workflowStore.togglePersonaLock(persona.id);
+            }
+          },
+          draggable: false, // Fixed position for focus group
+        });
+        
+        // Create edge from persona to central solution
+        personaEdges.push({
+          id: `${nodeId}-to-central`,
+          source: nodeId,
+          target: 'central-solution',
+          type: 'focusGroup',
+          data: {
+            quote: getPersonaQuote(persona, centralSolution),
+            personaName: persona.name,
+            personaId: persona.id,
+            solutionId: centralSolution.id,
+            isHighlighted: index === 0 // Highlight first persona's connection
+          },
+          style: {
+            stroke: '#FFD700',
+            strokeWidth: 2,
+            opacity: 0.8
+          },
+          animated: true,
+        });
+      });
       
-      console.log('[WorkflowCanvas] Focus group mode edges updated with quotes');
+      // Add label for Focus Group view
+      const focusGroupLabel: Node = {
+        id: 'focus-group-label',
+        type: 'label',
+        position: { x: 0, y: -450 },
+        data: {
+          text: 'Focus Group: Persona Feedback',
+          showRefresh: false
+        },
+        draggable: false,
+        selectable: false,
+      };
+      
+      // Add all nodes and edges
+      console.log('[WorkflowCanvas] Adding focus group nodes:', {
+        solutionRow: solutionRowNodes.length,
+        centralSolution: 1,
+        personas: personaNodes.length,
+        edges: personaEdges.length
+      });
+      
+      addNodes([focusGroupLabel, ...solutionRowNodes, centralSolutionNode, ...personaNodes]);
+      addEdges(personaEdges);
+      
+      // Center the view
+      setTimeout(() => {
+        const canvasStore = useCanvasStore.getState();
+        canvasStore.setViewport({
+          x: viewportWidth / 2,
+          y: viewportHeight / 2 - 100,
+          zoom: 0.8
+        });
+      }, 100);
     }
-  }, [currentStep, canvasInitialized, solutionsAdded, personas, solutions]);
+  }, [currentStep, canvasInitialized, personas, solutions, resetCanvas, addNodes, addEdges, lockedItems]);
+  
+  // Helper function to generate persona quotes
+  const getPersonaQuote = (persona: any, solution: any) => {
+    const quotes = [
+      `As a ${persona.demographics?.role}, this would solve my biggest challenge`,
+      `This ${solution.solution_type} would save our team hours every week`,
+      `Finally, a solution that understands the ${persona.demographics?.industry} industry`,
+      `I've been waiting for something like this in my role`,
+      `My team would adopt this immediately`
+    ];
+    
+    // Use persona index to select a consistent quote
+    const index = personas.findIndex(p => p.id === persona.id);
+    return quotes[index % quotes.length];
+  };
 
   // Handle pain point focus mode - show focused view with persona, pain point, and solutions
   useEffect(() => {

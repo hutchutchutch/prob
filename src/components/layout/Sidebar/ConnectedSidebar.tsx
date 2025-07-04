@@ -255,7 +255,7 @@ export const ConnectedSidebar: React.FC = () => {
     return (
       <aside className="sidebar">
         <div className="sidebar-header">
-          <h2 className="heading-3">Workspaces</h2>
+          <h2 className="heading-3">GoldiDocs</h2>
         </div>
         <div className="sidebar-content">
           <div className="p-4 text-gray-400">Loading...</div>

@@ -52,84 +52,108 @@ serve(async (req) => {
   try {
     console.log('Generate solutions function started')
     console.log('Request method:', req.method)
-    console.log('Request headers:', Object.fromEntries(req.headers.entries()))
+    console.log('Request headers:', JSON.stringify(Object.fromEntries(req.headers.entries())))
+    console.log('Request URL:', req.url)
     
     // Initialize OpenAI client
     const openaiKey = Deno.env.get('OPENAI_API_KEY')
-    
     if (!openaiKey) {
       console.error('Missing OpenAI API key')
-      return new Response(JSON.stringify({ 
-        error: { message: 'Service configuration error', code: 'CONFIG_ERROR' }
-      }), { 
-        status: 500, 
-        headers: { ...corsHeaders, "Content-Type": "application/json" }
-      })
+      return new Response(
+        JSON.stringify({ error: { message: 'Service configuration error', code: 'CONFIG_ERROR' } }), 
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      )
     }
     
     const openai = new OpenAI({ apiKey: openaiKey })
     
     // Parse request body with better error handling
     let requestBody: GenerateSolutionsRequest;
+    let rawBody: string = '';
     try {
-      const bodyText = await req.text()
-      console.log('Request body text:', bodyText)
+      // First, try to read the body as text to log it
+      const bodyClone = req.clone()
+      rawBody = await bodyClone.text()
+      console.log('Raw request body:', rawBody)
+      console.log('Body length:', rawBody.length)
       
-      if (!bodyText) {
-        throw new Error('Empty request body')
+      // Check if body is empty
+      if (!rawBody || rawBody.trim() === '') {
+        console.error('Empty request body received')
+        return new Response(
+          JSON.stringify({ 
+            error: { 
+              message: 'Empty request body. Expected JSON with coreProblem, personas, and painPoints fields', 
+              code: 'EMPTY_REQUEST_BODY'
+            }
+          }), 
+          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        )
       }
       
-      requestBody = JSON.parse(bodyText)
-      console.log('Parsed request body:', requestBody)
+      // Now parse the original request
+      requestBody = await req.json()
+      console.log('Parsed request body:', JSON.stringify(requestBody))
     } catch (parseError) {
       console.error('Error parsing request body:', parseError)
-      return new Response(JSON.stringify({ 
-        error: { 
-          message: 'Invalid request body. Expected JSON with coreProblem, personas, and painPoints fields', 
-          code: 'INVALID_REQUEST_BODY',
-          details: parseError.message 
-        }
-      }), { 
-        status: 400, 
-        headers: { ...corsHeaders, "Content-Type": "application/json" }
-      })
+      console.error('Raw body that failed to parse:', rawBody)
+      return new Response(
+        JSON.stringify({ 
+          error: { 
+            message: `Invalid JSON in request body: ${parseError.message}. Body received: ${rawBody.substring(0, 200)}${rawBody.length > 200 ? '...' : ''}`, 
+            code: 'INVALID_REQUEST_BODY'
+          }
+        }), 
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      )
     }
     
     const { coreProblem, personas, painPoints } = requestBody
     
-    if (!coreProblem || !personas || !painPoints) {
-      console.error('Missing required fields:', { 
-        hasCoreProblem: !!coreProblem, 
-        hasPersonas: !!personas, 
-        hasPainPoints: !!painPoints 
-      })
-      return new Response(JSON.stringify({ 
-        error: { message: 'Missing required fields: coreProblem, personas, painPoints', code: 'INVALID_REQUEST' }
-      }), { 
-        status: 400, 
-        headers: { ...corsHeaders, "Content-Type": "application/json" }
-      })
+    // Validate required fields with detailed logging
+    if (!coreProblem) {
+      console.error('Missing coreProblem in request')
+      return new Response(
+        JSON.stringify({ error: { message: 'Missing required field: coreProblem', code: 'MISSING_CORE_PROBLEM' } }), 
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      )
+    }
+    
+    if (!personas) {
+      console.error('Missing personas in request')
+      return new Response(
+        JSON.stringify({ error: { message: 'Missing required field: personas', code: 'MISSING_PERSONAS' } }), 
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      )
+    }
+    
+    if (!painPoints) {
+      console.error('Missing painPoints in request')
+      return new Response(
+        JSON.stringify({ error: { message: 'Missing required field: painPoints', code: 'MISSING_PAIN_POINTS' } }), 
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      )
     }
     
     if (!Array.isArray(personas) || personas.length === 0) {
-      return new Response(JSON.stringify({ 
-        error: { message: 'At least one persona is required', code: 'INVALID_REQUEST' }
-      }), { 
-        status: 400, 
-        headers: { ...corsHeaders, "Content-Type": "application/json" }
-      })
+      console.error('Invalid personas array:', personas)
+      return new Response(
+        JSON.stringify({ error: { message: 'At least one persona is required', code: 'INVALID_PERSONAS' } }), 
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      )
     }
     
     if (!Array.isArray(painPoints)) {
-      return new Response(JSON.stringify({ 
-        error: { message: 'painPoints must be an array', code: 'INVALID_REQUEST' }
-      }), { 
-        status: 400, 
-        headers: { ...corsHeaders, "Content-Type": "application/json" }
-      })
+      console.error('Invalid painPoints array:', painPoints)
+      return new Response(
+        JSON.stringify({ error: { message: 'painPoints must be an array', code: 'INVALID_PAIN_POINTS' } }), 
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      )
     }
     
-    console.log('Processing request for', personas.length, 'personas and', painPoints.length, 'pain points')
+    console.log(`Processing request for ${personas.length} personas and ${painPoints.length} pain points`)
+    console.log('Core problem:', coreProblem.validated_problem)
+    console.log('First persona:', JSON.stringify(personas[0]))
     
     // Group pain points by persona for better context
     const painPointsByPersona = painPoints.reduce((acc, pp) => {
@@ -214,11 +238,6 @@ serve(async (req) => {
       throw new Error('Invalid response format from AI')
     }
     
-    // Validate that we have exactly 5 solutions
-    if (result.solutions.length !== 5) {
-      console.warn(`Expected 5 solutions, got ${result.solutions.length}`)
-    }
-    
     // Validate solution structure
     const validatedSolutions: Solution[] = result.solutions.map((solution: any, index: number) => {
       if (!solution.id) {
@@ -241,24 +260,24 @@ serve(async (req) => {
       }
     })
     
-    console.log('Generated', validatedSolutions.length, 'solutions')
+    console.log(`Successfully generated ${validatedSolutions.length} solutions`)
     
-    return new Response(JSON.stringify({ 
-      solutions: validatedSolutions
-    }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    })
+    return new Response(
+      JSON.stringify({ solutions: validatedSolutions }), 
+      { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    )
     
   } catch (error) {
     console.error('Error in generate-solutions:', error)
-    return new Response(JSON.stringify({ 
-      error: { 
-        message: error.message || 'Internal server error', 
-        code: 'GENERATION_ERROR' 
-      }
-    }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    })
+    console.error('Error stack:', error.stack)
+    return new Response(
+      JSON.stringify({ 
+        error: { 
+          message: error.message || 'Internal server error', 
+          code: 'GENERATION_ERROR' 
+        }
+      }), 
+      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    )
   }
 })

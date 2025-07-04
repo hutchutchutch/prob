@@ -58,7 +58,7 @@ serve(async (req) => {
       messages: [
         {
           role: "system",
-          content: `You are a persona generator. Create diverse personas that would experience the given problem.`
+          content: `You are a persona generator. Create diverse personas that would experience the given problem. IMPORTANT: Always include all required fields in your response.`
         },
         {
           role: "user",
@@ -66,34 +66,99 @@ serve(async (req) => {
           
           Generate 5 diverse personas who would face this problem.
           
+          IMPORTANT: Each persona MUST have ALL of these fields:
+          - name: A punny name that captures the essence of the persona (max 3 words, letters and spaces only, NO special characters)
+          - industry: The industry they work in
+          - role: Their job title
+          - description: Brief description of who they are and why they face this problem
+          - painDegree: A number from 1 to 5 indicating how severely they experience this problem
+          
           Return as JSON:
           {
             "personas": [
               {
-                "name": "Punny name that captures the essence of the persona (max 3 words, letters and spaces only, no special characters)",
-                "industry": "Industry Name",
-                "role": "Job Title",
-                "description": "Brief description of who they are and why they face this problem",
-                "painDegree": 1-5
+                "name": "Punny name (REQUIRED - max 3 words, letters and spaces only)",
+                "industry": "Industry Name (REQUIRED)",
+                "role": "Job Title (REQUIRED)",
+                "description": "Brief description (REQUIRED)",
+                "painDegree": 3
               }
             ]
           }`
         }
       ],
-      response_format: { type: "json_object" }
+      response_format: { type: "json_object" },
+      temperature: 0.7
     })
     
-    const result = JSON.parse(completion.choices[0].message.content!)
+    const aiResponse = completion.choices[0].message.content!
+    console.log('AI Response:', aiResponse)
+    
+    let result;
+    try {
+      result = JSON.parse(aiResponse)
+    } catch (parseError) {
+      console.error('Failed to parse AI response:', parseError)
+      throw new Error('Invalid AI response format')
+    }
+    
+    // Validate the AI response structure
+    if (!result.personas || !Array.isArray(result.personas)) {
+      console.error('Invalid AI response structure:', result)
+      throw new Error('AI response missing personas array')
+    }
+    
+    // Validate and clean each persona
+    const validatedPersonas = result.personas.map((persona: any, index: number) => {
+      // Validate required fields
+      if (!persona.name || typeof persona.name !== 'string' || persona.name.trim() === '') {
+        console.error(`Persona ${index} missing or invalid name:`, persona)
+        throw new Error(`Persona ${index} is missing a valid name`)
+      }
+      
+      if (!persona.industry || typeof persona.industry !== 'string' || persona.industry.trim() === '') {
+        console.error(`Persona ${index} missing or invalid industry:`, persona)
+        throw new Error(`Persona ${index} is missing a valid industry`)
+      }
+      
+      if (!persona.role || typeof persona.role !== 'string' || persona.role.trim() === '') {
+        console.error(`Persona ${index} missing or invalid role:`, persona)
+        throw new Error(`Persona ${index} is missing a valid role`)
+      }
+      
+      // Clean the name - remove any special characters and ensure max 3 words
+      const cleanedName = persona.name
+        .replace(/[^a-zA-Z\s]/g, '') // Remove non-letter characters
+        .trim()
+        .split(/\s+/) // Split by whitespace
+        .slice(0, 3) // Max 3 words
+        .join(' ')
+      
+      if (!cleanedName) {
+        throw new Error(`Persona ${index} has an invalid name after cleaning: ${persona.name}`)
+      }
+      
+      return {
+        name: cleanedName,
+        industry: persona.industry.trim(),
+        role: persona.role.trim(),
+        description: persona.description || '',
+        painDegree: Math.min(5, Math.max(1, parseInt(persona.painDegree) || 3))
+      }
+    })
+    
+    console.log('Validated personas:', validatedPersonas)
+    
     const generationBatch = crypto.randomUUID()
     
     // Store personas in database
-    const personasToInsert = result.personas.map((persona: any, index: number) => ({
+    const personasToInsert = validatedPersonas.map((persona: any, index: number) => ({
       id: crypto.randomUUID(),
       core_problem_id: coreProblemId,
       name: persona.name,
       industry: persona.industry,
       role: persona.role,
-      pain_degree: persona.painDegree || 3,
+      pain_degree: persona.painDegree,
       position: index + 1,
       is_locked: false,
       is_active: false,
@@ -102,7 +167,7 @@ serve(async (req) => {
     
     console.log('Inserting personas into database...')
     console.log('Core problem ID:', coreProblemId)
-    console.log('Personas to insert:', personasToInsert.length)
+    console.log('Personas to insert:', JSON.stringify(personasToInsert, null, 2))
     
     const { data: insertedPersonas, error: insertError } = await supabase
       .from('personas')
@@ -149,7 +214,7 @@ serve(async (req) => {
       name: persona.name,
       industry: persona.industry,
       role: persona.role,
-      description: result.personas.find((p: any) => p.name === persona.name)?.description || '',
+      description: validatedPersonas.find((p: any) => p.name === persona.name)?.description || '',
       pain_degree: persona.pain_degree,
       demographics: {
         industry: persona.industry,

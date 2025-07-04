@@ -222,11 +222,54 @@ serve(async (req) => {
     // Step 7: Automatically trigger generate-solutions
     console.log('Triggering generate-solutions for persona:', activePersonaId)
     try {
+      // Load all required data for generate-solutions
+      
+      // Get core problem details
+      const { data: coreProblemData } = await supabase
+        .from('core_problems')
+        .select('*')
+        .eq('id', persona.core_problem_id)
+        .single()
+      
+      // Get all personas for this project
+      const { data: allPersonas } = await supabase
+        .from('personas')
+        .select('*')
+        .eq('core_problem_id', persona.core_problem_id)
+        .order('position')
+      
+      // Get all pain points for all personas
+      const personaIds = allPersonas?.map(p => p.id) || []
+      const { data: allPainPointsForSolutions } = await supabase
+        .from('pain_points')
+        .select('*')
+        .in('persona_id', personaIds)
+      
+      console.log('Preparing data for generate-solutions:')
+      console.log('- Core problem:', coreProblemData?.validated_problem?.substring(0, 50) + '...')
+      console.log('- Personas count:', allPersonas?.length)
+      console.log('- Pain points count:', allPainPointsForSolutions?.length)
+      
+      // Call generate-solutions with the correct data structure
       const solutionsResponse = await supabase.functions.invoke('generate-solutions', {
         body: { 
-          projectId, 
-          personaId: activePersonaId, 
-          lockedSolutionIds: []
+          coreProblem: {
+            id: coreProblemData?.id || persona.core_problem_id,
+            validated_problem: coreProblemData?.validated_problem || coreProblem
+          },
+          personas: allPersonas?.map(p => ({
+            id: p.id,
+            name: p.name,
+            role: p.role,
+            industry: p.industry,
+            description: p.description || `${p.role} in ${p.industry}`
+          })) || [],
+          painPoints: allPainPointsForSolutions?.map(pp => ({
+            id: pp.id,
+            description: pp.description,
+            severity: pp.severity,
+            persona_id: pp.persona_id
+          })) || []
         }
       })
       
