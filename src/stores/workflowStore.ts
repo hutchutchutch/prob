@@ -74,6 +74,8 @@ export interface Solution {
   project_id: string
   title: string
   description: string
+  solution_type?: string
+  complexity?: string
   feasibility_score: number
   impact_score: number
   effort_estimate: string
@@ -690,6 +692,13 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
           console.warn('[workflowStore] UIStore showSuccess failed:', error)
         }
         
+        // Generate solutions after pain points are generated
+        console.log('[workflowStore] Triggering solution generation after pain points...')
+        setTimeout(() => {
+          const workflowStore = useWorkflowStore.getState()
+          workflowStore.generateSolutions()
+        }, 1000) // Small delay to ensure UI updates first
+        
       } catch (error) {
         console.error('Pain point generation failed:', error)
         uiStore.showError('Pain point generation failed', error instanceof Error ? error.message : 'Unknown error')
@@ -697,8 +706,6 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
         set({ isGeneratingPainPoints: false })
       }
     },
-
-
 
     regeneratePainPoints: async () => {
       const state = get()
@@ -783,15 +790,67 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
     // Solution management
     generateSolutions: async () => {
       const state = get()
-      if (state.painPoints.length === 0) return
+      if (!state.coreProblem || state.personas.length === 0 || state.painPoints.length === 0) {
+        console.warn('[workflowStore] Cannot generate solutions without core problem, personas, and pain points')
+        return
+      }
 
       const uiStore = useUIStore.getState()
       
       set({ isGeneratingSolutions: true })
       try {
-        // TODO: Call Tauri API to generate solutions
-        // const solutions = await tauriAPI.generateSolutions(state.painPoints.map(p => p.id))
-        set({ solutions: [], solutionMappings: [] }) // TODO: Set actual data from API
+        console.log('[workflowStore] generateSolutions called, importing solutions API...')
+        const { solutionsService } = await import('@/services/api/solutions')
+        
+        // Call the edge function with the new format
+        const response = await solutionsService.generateSolutions({
+          coreProblem: {
+            id: state.coreProblem.id,
+            projectId: state.projectId!,
+            originalInput: state.coreProblem.description,
+            validatedProblem: state.coreProblem.description, // Use description as validated problem
+            isValid: state.coreProblem.is_validated,
+            validationFeedback: '',
+            version: 1,
+            createdAt: state.coreProblem.created_at
+          },
+          personas: state.personas.map(p => ({
+            ...p,
+            behaviors: [],
+            is_selected: false
+          })) as any,
+          painPoints: state.painPoints.map(pp => ({
+            ...pp,
+            category: 'general',
+            is_selected: false
+          })) as any
+        })
+        
+        console.log('[workflowStore] Solutions response:', response)
+        
+        // Transform the response solutions to match our Solution interface
+        const solutions: Solution[] = response.solutions.map((sol, index) => ({
+          id: sol.id,
+          project_id: state.projectId!,
+          title: sol.title,
+          description: sol.description,
+          solution_type: 'feature', // Default type since edge function doesn't return it
+          complexity: sol.complexity,
+          feasibility_score: sol.complexity === 'low' ? 3 : sol.complexity === 'medium' ? 6 : 9,
+          impact_score: sol.impact === 'low' ? 3 : sol.impact === 'medium' ? 6 : 9,
+          effort_estimate: sol.complexity,
+          is_locked: false,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        }))
+        
+        set({ 
+          solutions,
+          solutionMappings: [], // No mappings in the new format
+          currentStep: 'solution_generation' // Advance to solutions step
+        })
+        
+        console.log('[workflowStore] Solutions set in store:', solutions.length)
         
         // Notify canvas and UI stores
         const canvasStore = useCanvasStore.getState()

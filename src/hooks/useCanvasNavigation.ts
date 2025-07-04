@@ -180,11 +180,12 @@ export const useCanvasNavigation = () => {
     // Reset any manually moved pain points to their original positions
     if (painPointNodes.length > 0) {
       const viewportWidth = window.innerWidth;
-      const painPointBaseX = viewportWidth / 3;
-      const painPointColumn1X = painPointBaseX - 220;
-      const painPointColumn2X = painPointBaseX + 220;
-      const painPointStartY = -300;
+      const painPointBaseX = viewportWidth * 0.45; // Updated to match WorkflowCanvas positioning
+      const painPointColumn1X = painPointBaseX - 170;
+      const painPointColumn2X = painPointBaseX + 170;
       const painPointSpacing = 240;
+      const painPointTallestHeight = 3 * painPointSpacing;
+      const painPointStartY = -(painPointTallestHeight / 2); // Center vertically
 
       painPointNodes.forEach((node, index) => {
         const isFirstColumn = index < 3;
@@ -201,64 +202,39 @@ export const useCanvasNavigation = () => {
       });
     }
 
-    // Calculate bounding box for all relevant nodes (problem + personas + pain points)
-    const allRelevantNodes = [coreNode, ...personaNodes, ...painPointNodes];
-    const bounds = allRelevantNodes.reduce((acc, node) => {
-      const nodeWidth = node.measured?.width || node.width || 300;
-      const nodeHeight = node.measured?.height || node.height || 150;
-      
-      return {
-        minX: Math.min(acc.minX, node.position.x),
-        minY: Math.min(acc.minY, node.position.y),
-        maxX: Math.max(acc.maxX, node.position.x + nodeWidth),
-        maxY: Math.max(acc.maxY, node.position.y + nodeHeight)
-      };
-    }, {
-      minX: Infinity,
-      minY: Infinity,
-      maxX: -Infinity,
-      maxY: -Infinity
-    });
-
-    const totalWidth = bounds.maxX - bounds.minX;
-    const totalHeight = bounds.maxY - bounds.minY;
-
+    // Shift the view more to the left to show more of the canvas
+    const coreNodeX = coreNode.position.x;
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    
     // Account for sidebar
     const sidebarOffset = 256;
-    const availableWidth = viewport.width - sidebarOffset;
-    const availableHeight = viewport.height;
+    const availableWidth = viewportWidth - sidebarOffset;
+    
+    // Position CoreProblemNode on the left side of the visible area (not centered)
+    // This shifts everything to the left, making more room for personas and pain points
+    const leftPadding = 100; // Small padding from left edge
+    const targetX = sidebarOffset + leftPadding - coreNodeX;
+    const targetY = (viewportHeight / 2) - 100;
+    
+    // Use a wider zoom to show more content
+    const optimalZoom = 0.7; // Fixed zoom that shows a good amount of content
 
-    // Calculate zoom to fit everything with some padding
-    const padding = 120; // Good padding for visibility
-    const zoomX = availableWidth / (totalWidth + padding * 2);
-    const zoomY = availableHeight / (totalHeight + padding * 2);
-    const optimalZoom = Math.min(Math.max(zoomX, zoomY, 0.55), 0.85); // Min 0.55, Max 0.85 for good visibility
-
-    // Center the view on the entire canvas content
-    const layoutCenterX = bounds.minX + totalWidth / 2;
-    const layoutCenterY = bounds.minY + totalHeight / 2;
-
-    const viewportCenterX = (availableWidth / 2) + sidebarOffset;
-    const viewportCenterY = availableHeight / 2;
-
-    const flowX = viewportCenterX - (layoutCenterX * optimalZoom);
-    const flowY = viewportCenterY - (layoutCenterY * optimalZoom);
-
-    console.log('[useCanvasNavigation] Step 2/3 calculation:', {
-      bounds,
-      totalWidth,
-      totalHeight,
-      optimalZoom,
-      layoutCenter: { x: layoutCenterX, y: layoutCenterY },
-      viewportCenter: { x: viewportCenterX, y: viewportCenterY },
-      targetViewport: { x: flowX, y: flowY, zoom: optimalZoom }
+    console.log('[useCanvasNavigation] Step 2 calculation (shifted left):', {
+      coreNodeX,
+      sidebarOffset,
+      availableWidth,
+      leftPadding,
+      targetX,
+      targetY,
+      optimalZoom
     });
 
     // Animate to the calculated viewport
     setViewport(
       {
-        x: flowX,
-        y: flowY,
+        x: targetX,
+        y: targetY,
         zoom: optimalZoom
       },
       { duration: 1000 }

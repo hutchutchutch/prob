@@ -1,22 +1,22 @@
 import { apiClient } from './client'
 import type { Solution, PainPoint, Persona, SolutionPainPointMapping } from '@/types/database.types'
+import type { CoreProblem } from '@/types/workflow.types'
 
 export interface SolutionGenerationRequest {
-  persona: Persona
+  coreProblem: CoreProblem
+  personas: Persona[]
   painPoints: PainPoint[]
-  lockedSolutions: Solution[]
-  projectId: string
-  generationBatch: string
 }
 
 export interface SolutionGenerationResponse {
-  solutions: Solution[]
-  mappings: SolutionPainPointMapping[]
-  analysisMetadata: {
-    feasibilityScores: Record<string, number>
-    complexityAnalysis: Record<string, string>
-    implementationTimeEstimates: Record<string, string>
-  }
+  solutions: Array<{
+    id: string
+    title: string
+    description: string
+    complexity: 'low' | 'medium' | 'high'
+    impact: 'low' | 'medium' | 'high'
+    aligned_personas: string[]
+  }>
 }
 
 export interface SolutionAnalysis {
@@ -28,28 +28,49 @@ export interface SolutionAnalysis {
 
 export class SolutionsService {
   /**
-   * Generates solutions based on selected persona and pain points
+   * Generates solutions based on core problem, personas and pain points
    */
   async generateSolutions(request: SolutionGenerationRequest): Promise<SolutionGenerationResponse> {
+    console.log('[SolutionsService] Calling generate-solutions edge function with:', {
+      coreProblem: request.coreProblem.validatedProblem || request.coreProblem.originalInput,
+      personasCount: request.personas.length,
+      painPointsCount: request.painPoints.length
+    });
+
     const response = await apiClient.invokeEdgeFunction<SolutionGenerationResponse>(
       'generate-solutions',
       {
-        persona: request.persona,
-        painPoints: request.painPoints,
-        lockedSolutions: request.lockedSolutions,
-        projectId: request.projectId,
-        generationBatch: request.generationBatch,
+        coreProblem: {
+          id: request.coreProblem.id,
+          validated_problem: request.coreProblem.validatedProblem || request.coreProblem.originalInput
+        },
+        personas: request.personas.map(p => ({
+          id: p.id,
+          name: p.name,
+          role: p.demographics?.role || 'Unknown',
+          industry: p.demographics?.industry || 'Unknown',
+          description: p.description
+        })),
+        painPoints: request.painPoints.map(pp => ({
+          id: pp.id,
+          description: pp.description,
+          severity: pp.severity,
+          persona_id: pp.persona_id
+        }))
       }
     )
 
     if (response.error) {
+      console.error('[SolutionsService] Edge function error:', response.error);
       throw new Error(`Solution generation failed: ${response.error.message}`)
     }
 
     if (!response.data) {
+      console.error('[SolutionsService] No data in response');
       throw new Error('No solution data received')
     }
 
+    console.log('[SolutionsService] Solutions generated:', response.data.solutions);
     return response.data
   }
 

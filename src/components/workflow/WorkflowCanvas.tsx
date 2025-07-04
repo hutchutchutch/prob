@@ -21,9 +21,17 @@ export function WorkflowCanvas() {
   // Constants for node positioning
   const problemNodeX = -400; // Left side of canvas for problem node
   const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1920; // Default to 1920 for SSR
-  const personaBaseX = viewportWidth * 0.2; // Shift personas right by 20% of view width (increased from 0.1)
-  const personaStartY = -200;
+  const viewportHeight = typeof window !== 'undefined' ? window.innerHeight : 1080; // Default to 1080 for SSR
+  const personaBaseX = viewportWidth * 0.15; // Shift personas left to 15% of view width (reduced from 0.2)
+  
+  // Calculate vertical centering for personas (5 nodes with 150 spacing)
+  // React Flow positions nodes by their top-left corner, not center
+  // PersonaNode height is approximately 160px, CoreProblemNode height is approximately 180px
+  // To align centers: CoreProblem center is at y=0 + 90px = 90px
+  // Middle PersonaNode should have its center at 90px, so top at 90 - 80 = 10px
   const personaSpacing = 150;
+  const middleNodeTopY = 10; // Top of middle node to align centers
+  const personaStartY = middleNodeTopY - (2 * personaSpacing); // Start 2 nodes above middle
 
   // Function to initialize problem input nodes
   const initializeProblemInputNodes = () => {
@@ -52,7 +60,7 @@ export function WorkflowCanvas() {
     const personasLabelNode: Node = {
       id: 'personas-label',
       type: 'label',
-      position: { x: personaBaseX, y: personaStartY - 100 }, // Aligned with personas X position and moved further up
+      position: { x: personaBaseX, y: personaStartY - 80 }, // Aligned with personas X position and above the top persona
       data: {
         text: 'Personas',
         showRefresh: true,
@@ -299,11 +307,14 @@ export function WorkflowCanvas() {
       
       // Calculate positions for pain points in two columns (right third of screen)
       const viewportWidth = window.innerWidth;
-      const painPointBaseX = viewportWidth / 3; // Base position for pain points
-      const painPointColumn1X = painPointBaseX - 220; // First column (3 nodes) - increased spacing
-      const painPointColumn2X = painPointBaseX + 220; // Second column (4 nodes) - increased spacing
-      const painPointStartY = -300; // Start position for first pain point
+      const painPointBaseX = viewportWidth * 0.45; // Moved right from 38.33% to 45% for more spacing from personas
+      const painPointColumn1X = painPointBaseX - 170; // Reduced from 220 to bring columns closer together
+      const painPointColumn2X = painPointBaseX + 170; // Reduced from 220 to bring columns closer together
+      
+      // Calculate vertical centering for pain points (tallest column has 4 nodes)
       const painPointSpacing = 240; // Further increased vertical spacing to prevent overlap
+      // Align pain points with personas - start slightly higher than personas
+      const painPointStartY = personaStartY - 60; // Start 60px above first persona for visual balance
       
       console.log('[WorkflowCanvas] Pain point positioning calculations:', {
         viewportWidth,
@@ -564,39 +575,26 @@ export function WorkflowCanvas() {
           });
         }
 
-        // Now create the persona-to-pain-point edges since personas have source handles
+        // Now update the persona-to-pain-point edges to animated state
         if (painPointsAdded) {
-          console.log('[WorkflowCanvas] Creating persona-to-pain-point edges now that personas have source handles');
+          console.log('[WorkflowCanvas] Updating persona-to-pain-point edges to animated state');
           
-          const painPointEdges: Edge[] = [];
-          
-          // Create edges from each persona to each pain point (many-to-many relationship)
-          for (let painIndex = 0; painIndex < 7; painIndex++) {
-            const painPointId = `pain-point-${painIndex + 1}`;
-            
-            for (let personaIndex = 0; personaIndex < 5; personaIndex++) {
-              const personaNodeId = `persona-${personaIndex + 1}`;
-              
-              painPointEdges.push({
-                id: `persona-${personaIndex + 1}-to-pain-${painIndex + 1}`,
-                source: personaNodeId,
-                target: painPointId,
-                type: 'default',
+          // Update existing edges to animated state (they were already created in step transition)
+          for (let personaIndex = 1; personaIndex <= 5; personaIndex++) {
+            for (let painIndex = 1; painIndex <= 7; painIndex++) {
+              const edgeId = `persona-${personaIndex}-to-pain-${painIndex}`;
+              canvasStore.updateEdge(edgeId, {
+                animated: true,
                 style: {
                   stroke: '#F97316', // Orange color for pain point connections
                   strokeWidth: 1.5, // Thinner for many connections
-                  opacity: 0.3 // Lower opacity since there are many edges
-                },
-                animated: true, // Animated edges for pain points
+                  opacity: 0.5 // Slightly higher opacity when animated
+                }
               });
             }
           }
           
-          console.log('[WorkflowCanvas] Adding persona-to-pain-point edges:', {
-            edgeCount: painPointEdges.length
-          });
-          
-          addEdges(painPointEdges);
+          console.log('[WorkflowCanvas] Updated persona-to-pain-point edges to animated state');
         }
       }
     }
@@ -681,12 +679,15 @@ export function WorkflowCanvas() {
       
       // Calculate positions for solutions in two columns (right of pain points)
       const viewportWidth = window.innerWidth;
-      const solutionBaseX = (viewportWidth / 3) * 2; // Right third of screen
-      const solutionColumn1X = solutionBaseX - 220; // First column
+      const solutionBaseX = viewportWidth * 0.75; // Moved right from 71.67% to 75% to maintain spacing with shifted pain points
+      const solutionColumn1X = solutionBaseX - 110; // First column - moved right to split the difference with second column
       const solutionColumn2X = solutionBaseX + 220; // Second column  
-      const solutionStartY = -300; // Same vertical start as pain points
       const solutionSpacing = 200; // Slightly more spacing for solution nodes
       
+      // Calculate vertical centering for solutions (8 nodes, 4 per column)
+      const solutionTallestHeight = 3 * solutionSpacing; // 3 gaps between 4 nodes
+      const solutionStartY = -(solutionTallestHeight / 2); // Center vertically
+
       console.log('[WorkflowCanvas] Solution positioning calculations:', {
         viewportWidth,
         solutionBaseX,
@@ -792,6 +793,72 @@ export function WorkflowCanvas() {
       setSolutionsAdded(true);
     }
   }, [currentStep, canvasInitialized, solutionsAdded, painPoints.length, addNodes, addEdges]);
+
+  // Update solution nodes when solutions are available from the edge function
+  useEffect(() => {
+    console.log('[WorkflowCanvas] Solutions update effect triggered:', {
+      solutionsLength: solutions.length,
+      canvasInitialized,
+      solutionsAdded
+    });
+    
+    if (solutions.length > 0 && canvasInitialized && solutionsAdded) {
+      console.log('[WorkflowCanvas] Updating solution nodes with data:', solutions.length);
+      
+      const canvasStore = useCanvasStore.getState();
+      
+      // Update the first 8 solution nodes with actual data
+      solutions.slice(0, 8).forEach((solution, index) => {
+        const nodeId = `solution-${index + 1}`;
+        console.log('[WorkflowCanvas] Updating solution node:', nodeId, 'with data:', {
+          title: solution.title,
+          description: solution.description,
+          complexity: solution.feasibility_score
+        });
+        
+        // Get the current node to preserve existing properties
+        const currentNode = canvasStore.getNodeById(nodeId);
+        console.log('[WorkflowCanvas] Current solution node before update:', currentNode);
+        
+        if (currentNode) {
+          // Get locked state from current store state
+          const currentLockedItems = useWorkflowStore.getState().lockedItems;
+          
+          const updatedData = {
+            ...currentNode.data,
+            id: nodeId,
+            title: solution.title,
+            description: solution.description,
+            solutionType: solution.solution_type as 'feature' | 'integration' | 'automation' | 'analytics',
+            complexity: solution.complexity as 'low' | 'medium' | 'high',
+            isLocked: currentLockedItems.solutions.has(solution.id),
+            isSelected: false,
+            isSkeleton: false, // Remove skeleton state
+            isRefreshing: false,
+            onToggleLock: () => {
+              const workflowStore = useWorkflowStore.getState();
+              workflowStore.toggleSolutionLock(solution.id);
+            },
+            onToggleSelect: () => {
+              const workflowStore = useWorkflowStore.getState();
+              workflowStore.toggleSolutionSelection(solution.id);
+            }
+          };
+          
+          canvasStore.updateNode(nodeId, {
+            data: updatedData
+          });
+          
+          console.log('[WorkflowCanvas] Solution node updated:', nodeId);
+        }
+      });
+      
+      // If we have more than 8 solutions, log a warning
+      if (solutions.length > 8) {
+        console.warn('[WorkflowCanvas] More than 8 solutions available, only showing first 8');
+      }
+    }
+  }, [solutions, canvasInitialized, solutionsAdded]);
 
   // Handle focus group mode - add quotes to edges between personas and solutions
   useEffect(() => {

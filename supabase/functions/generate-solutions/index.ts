@@ -1,12 +1,46 @@
 // supabase/functions/generate-solutions/index.ts
 import { serve } from "std/http/server.ts"
-import { createClient } from "@supabase/supabase-js"
 import { OpenAI } from "openai"
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-request-id',
   'Access-Control-Allow-Methods': 'POST, OPTIONS'
+}
+
+interface CoreProblem {
+  id: string
+  validated_problem: string
+}
+
+interface Persona {
+  id: string
+  name: string
+  role: string
+  industry: string
+  description?: string
+}
+
+interface PainPoint {
+  id: string
+  description: string
+  severity: string
+  persona_id: string
+}
+
+interface GenerateSolutionsRequest {
+  coreProblem: CoreProblem
+  personas: Persona[]
+  painPoints: PainPoint[]
+}
+
+interface Solution {
+  id: string
+  title: string
+  description: string
+  complexity: "low" | "medium" | "high"
+  impact: "low" | "medium" | "high"
+  aligned_personas: string[]
 }
 
 serve(async (req) => {
@@ -17,14 +51,14 @@ serve(async (req) => {
   
   try {
     console.log('Generate solutions function started')
+    console.log('Request method:', req.method)
+    console.log('Request headers:', Object.fromEntries(req.headers.entries()))
     
-    // Initialize clients
+    // Initialize OpenAI client
     const openaiKey = Deno.env.get('OPENAI_API_KEY')
-    const supabaseUrl = Deno.env.get('SUPABASE_URL')
-    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')
     
-    if (!openaiKey || !supabaseUrl || !supabaseServiceKey) {
-      console.error('Missing required environment variables')
+    if (!openaiKey) {
+      console.error('Missing OpenAI API key')
       return new Response(JSON.stringify({ 
         error: { message: 'Service configuration error', code: 'CONFIG_ERROR' }
       }), { 
@@ -34,226 +68,183 @@ serve(async (req) => {
     }
     
     const openai = new OpenAI({ apiKey: openaiKey })
-    const supabase = createClient(supabaseUrl, supabaseServiceKey)
     
-    // Parse request
-    const { projectId, personaId, lockedSolutionIds = [] } = await req.json()
-    
-    if (!projectId || !personaId) {
+    // Parse request body with better error handling
+    let requestBody: GenerateSolutionsRequest;
+    try {
+      const bodyText = await req.text()
+      console.log('Request body text:', bodyText)
+      
+      if (!bodyText) {
+        throw new Error('Empty request body')
+      }
+      
+      requestBody = JSON.parse(bodyText)
+      console.log('Parsed request body:', requestBody)
+    } catch (parseError) {
+      console.error('Error parsing request body:', parseError)
       return new Response(JSON.stringify({ 
-        error: { message: 'Missing required fields', code: 'INVALID_REQUEST' }
+        error: { 
+          message: 'Invalid request body. Expected JSON with coreProblem, personas, and painPoints fields', 
+          code: 'INVALID_REQUEST_BODY',
+          details: parseError.message 
+        }
       }), { 
         status: 400, 
         headers: { ...corsHeaders, "Content-Type": "application/json" }
       })
     }
     
-    console.log('Processing persona:', personaId)
+    const { coreProblem, personas, painPoints } = requestBody
     
-    // Step 1: Load persona and problem context
-    const { data: persona, error: personaError } = await supabase
-      .from('personas')
-      .select(`
-        *,
-        core_problems!inner(
-          validated_problem
-        )
-      `)
-      .eq('id', personaId)
-      .single()
-    
-    if (personaError || !persona) {
-      console.error('Error loading persona:', personaError)
-      throw new Error('Failed to load persona data')
-    }
-    
-    const coreProblem = persona.core_problems.validated_problem
-    console.log('Core problem:', coreProblem?.substring(0, 50) + '...')
-    
-    // Step 2: Get pain points
-    const { data: painPoints } = await supabase
-      .from('pain_points')
-      .select('*')
-      .eq('persona_id', personaId)
-      .order('position')
-    
-    const painPointsArray = painPoints || []
-    
-    if (painPointsArray.length === 0) {
-      console.log('No pain points found for persona')
+    if (!coreProblem || !personas || !painPoints) {
+      console.error('Missing required fields:', { 
+        hasCoreProblem: !!coreProblem, 
+        hasPersonas: !!personas, 
+        hasPainPoints: !!painPoints 
+      })
       return new Response(JSON.stringify({ 
-        error: { message: 'No pain points found for this persona', code: 'NO_PAIN_POINTS' }
+        error: { message: 'Missing required fields: coreProblem, personas, painPoints', code: 'INVALID_REQUEST' }
       }), { 
         status: 400, 
         headers: { ...corsHeaders, "Content-Type": "application/json" }
       })
     }
     
-    console.log('Found', painPointsArray.length, 'pain points')
+    if (!Array.isArray(personas) || personas.length === 0) {
+      return new Response(JSON.stringify({ 
+        error: { message: 'At least one persona is required', code: 'INVALID_REQUEST' }
+      }), { 
+        status: 400, 
+        headers: { ...corsHeaders, "Content-Type": "application/json" }
+      })
+    }
     
-    // Step 3: Get existing solutions
-    const { data: existingSolutions } = await supabase
-      .from('key_solutions')
-      .select('*')
-      .eq('persona_id', personaId)
-      .order('position')
+    if (!Array.isArray(painPoints)) {
+      return new Response(JSON.stringify({ 
+        error: { message: 'painPoints must be an array', code: 'INVALID_REQUEST' }
+      }), { 
+        status: 400, 
+        headers: { ...corsHeaders, "Content-Type": "application/json" }
+      })
+    }
     
-    const existingSolutionsArray = existingSolutions || []
-    const lockedSolutions = existingSolutionsArray.filter(s => 
-      lockedSolutionIds.includes(s.id)
-    )
+    console.log('Processing request for', personas.length, 'personas and', painPoints.length, 'pain points')
     
-    const solutionsToGenerate = 5 - lockedSolutions.length
-    console.log('Generating', solutionsToGenerate, 'solutions')
+    // Group pain points by persona for better context
+    const painPointsByPersona = painPoints.reduce((acc, pp) => {
+      if (!acc[pp.persona_id]) {
+        acc[pp.persona_id] = []
+      }
+      acc[pp.persona_id].push(pp)
+      return acc
+    }, {} as Record<string, PainPoint[]>)
     
-    // Step 4: Generate solutions
+    // Generate solutions using OpenAI
     const completion = await openai.chat.completions.create({
       model: "gpt-4-turbo-preview",
       messages: [
         {
           role: "system",
           content: `You are an expert product strategist and solution architect.
-          Generate innovative software solutions that directly address the identified pain points.
-          Solutions should be specific, implementable, and valuable.
-          
-          CRITICAL REQUIREMENT: Each solution MUST directly address one or more of the provided pain points.
+          Generate innovative software solutions that directly address the identified pain points across multiple personas.
+          Each solution should align with exactly 2 personas who would benefit most from it.
           
           Solutions should be:
           - Specific software features or capabilities
           - Technically feasible to implement
-          - Clearly valuable to the persona
+          - Clearly valuable to the aligned personas
           - Different from each other (diverse approaches)
-          - Appropriately scoped (not too broad or narrow)`
+          - Appropriately scoped (not too broad or narrow)
+          
+          CRITICAL REQUIREMENTS:
+          1. Generate exactly 5 solutions
+          2. Each solution must align with exactly 2 personas (use their names)
+          3. Each solution must address pain points from the aligned personas
+          4. Vary complexity and impact levels across solutions
+          5. Ensure solutions are complementary and cover different aspects of the problem`
         },
         {
           role: "user",
-          content: `Generate ${solutionsToGenerate} software solutions that address these pain points:
+          content: `Generate 5 software solutions for this problem context:
 
-          CORE PROBLEM: "${coreProblem}"
+          CORE PROBLEM: "${coreProblem.validated_problem}"
           
-          PERSONA: ${persona.name} (${persona.role} in ${persona.industry})
+          PERSONAS:
+          ${personas.map(p => `- ${p.name} (${p.role} in ${p.industry})`).join('\n')}
           
-          PAIN POINTS TO SOLVE:
-          ${painPointsArray.map((pp, i) => `${i}. [${pp.severity}] ${pp.description}`).join('\n')}
-          
-          ${lockedSolutions.length > 0 ? `KEEP these existing solutions: ${JSON.stringify(lockedSolutions.map(s => s.title))}` : ''}
+          PAIN POINTS BY PERSONA:
+          ${personas.map(persona => {
+            const personaPainPoints = painPointsByPersona[persona.id] || []
+            return `${persona.name}:
+            ${personaPainPoints.map(pp => `  • [${pp.severity}] ${pp.description}`).join('\n')}`
+          }).join('\n\n')}
           
           INSTRUCTIONS:
-          1. Each solution must clearly address at least one pain point
-          2. Reference pain points by their index numbers (0, 1, 2, etc.)
-          3. Solutions should be implementable software features
-          4. Vary the complexity and approach across solutions
-          5. Focus on practical, valuable solutions
+          1. Each solution must address pain points from its 2 aligned personas
+          2. Use exact persona names from the list above
+          3. Vary complexity: include low, medium, and high complexity solutions
+          4. Vary impact: include different impact levels (low, medium, high)
+          5. Make solutions complementary - they should work together as a cohesive product suite
+          6. Focus on practical, implementable software solutions
           
-          Return a JSON object with a 'solutions' array:
+          Return a JSON object with this exact structure:
           {
             "solutions": [
               {
+                "id": "sol_1",
                 "title": "Clear, specific solution title",
-                "description": "Detailed explanation of how this solution works and what value it provides",
-                "solutionType": "Feature|Integration|Automation|Analytics|Platform",
-                "complexity": "Low|Medium|High",
-                "addressedPainPoints": [0, 1] // array of pain point indices this addresses
+                "description": "Detailed explanation of how this solution works and what value it provides to the aligned personas",
+                "complexity": "low|medium|high",
+                "impact": "low|medium|high",
+                "aligned_personas": ["Persona Name 1", "Persona Name 2"]
               }
             ]
-          }`
+          }
+          
+          Ensure each solution has a unique id (sol_1, sol_2, sol_3, sol_4, sol_5).`
         }
       ],
       response_format: { type: "json_object" }
     })
     
-    const { solutions } = JSON.parse(completion.choices[0].message.content!)
-    console.log('Generated', solutions.length, 'solutions')
+    const result = JSON.parse(completion.choices[0].message.content!)
     
-    // Step 5: Delete non-locked solutions
-    if (lockedSolutionIds.length > 0) {
-      await supabase
-        .from('key_solutions')
-        .delete()
-        .eq('persona_id', personaId)
-        .not('id', 'in', `(${lockedSolutionIds.join(',')})`)
-    } else {
-      await supabase
-        .from('key_solutions')
-        .delete()
-        .eq('persona_id', personaId)
+    if (!result.solutions || !Array.isArray(result.solutions)) {
+      throw new Error('Invalid response format from AI')
     }
     
-    // Step 6: Insert new solutions
-    const generationBatch = crypto.randomUUID()
-    const solutionsToInsert = solutions.map((solution: any, index: number) => ({
-      persona_id: personaId,
-      title: solution.title,
-      description: solution.description,
-      solution_type: solution.solutionType,
-      complexity: solution.complexity,
-      position: index + lockedSolutionIds.length,
-      is_locked: false,
-      generation_batch: generationBatch
-    }))
-    
-    const { data: insertedSolutions, error: insertError } = await supabase
-      .from('key_solutions')
-      .insert(solutionsToInsert)
-      .select()
-    
-    if (insertError) {
-      console.error('Error inserting solutions:', insertError)
-      throw new Error('Failed to save solutions')
+    // Validate that we have exactly 5 solutions
+    if (result.solutions.length !== 5) {
+      console.warn(`Expected 5 solutions, got ${result.solutions.length}`)
     }
     
-    console.log('Inserted', insertedSolutions?.length, 'solutions')
-    
-    // Step 7: Create solution-pain point mappings
-    const mappings: Array<{
-      solution_id: string;
-      pain_point_id: string;
-      relevance_score: number;
-      generation_batch: string;
-    }> = []
-    
-    for (let solutionIndex = 0; solutionIndex < solutions.length; solutionIndex++) {
-      const solution = solutions[solutionIndex]
-      const insertedSolution = insertedSolutions![solutionIndex]
-      
-      for (const painPointIndex of solution.addressedPainPoints) {
-        const painPoint = painPointsArray[painPointIndex]
-        if (!painPoint) continue
-        
-        mappings.push({
-          solution_id: insertedSolution.id,
-          pain_point_id: painPoint.id,
-          relevance_score: 0.8, // Default high relevance since solutions are generated to address specific pain points
-          generation_batch: generationBatch
-        })
+    // Validate solution structure
+    const validatedSolutions: Solution[] = result.solutions.map((solution: any, index: number) => {
+      if (!solution.id) {
+        solution.id = `sol_${index + 1}`
       }
-    }
-    
-    if (mappings.length > 0) {
-      const { error: mappingError } = await supabase
-        .from('solution_pain_point_mappings')
-        .insert(mappings)
       
-      if (mappingError) {
-        console.error('Error inserting mappings:', mappingError)
-        // Don't throw - solutions were successful
-      } else {
-        console.log('Inserted', mappings.length, 'solution-pain point mappings')
+      // Ensure aligned_personas is an array of exactly 2 strings
+      if (!Array.isArray(solution.aligned_personas) || solution.aligned_personas.length !== 2) {
+        console.warn(`Solution ${solution.id} has invalid aligned_personas, using first 2 personas`)
+        solution.aligned_personas = [personas[0].name, personas[1] ? personas[1].name : personas[0].name]
       }
-    }
+      
+      return {
+        id: solution.id,
+        title: solution.title || `Solution ${index + 1}`,
+        description: solution.description || 'No description provided',
+        complexity: solution.complexity || 'medium',
+        impact: solution.impact || 'medium',
+        aligned_personas: solution.aligned_personas
+      }
+    })
     
-    // Get all solutions for response
-    const { data: allSolutions } = await supabase
-      .from('key_solutions')
-      .select('*')
-      .eq('persona_id', personaId)
-      .order('position')
-    
-    console.log('Returning', allSolutions?.length, 'total solutions')
+    console.log('Generated', validatedSolutions.length, 'solutions')
     
     return new Response(JSON.stringify({ 
-      solutions: allSolutions || [],
-      mappings: mappings
+      solutions: validatedSolutions
     }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     })
