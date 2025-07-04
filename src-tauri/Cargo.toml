@@ -39,3 +39,6 @@ env_logger = "0.10"
 # PTY support for terminal
 portable-pty = "0.8"
 lazy_static = "1.4"
+# HTTP client for LLM calls
+reqwest = { version = "0.11", features = ["json"] }
+base64 = "0.21"

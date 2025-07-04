@@ -5,6 +5,7 @@
 
 mod commands;
 mod db;
+mod tools;
 
 use commands::*;
 use commands::data_sync::{check_migration_status, run_database_migrations, get_detailed_migration_status};
@@ -71,6 +72,16 @@ async fn main() {
             write_to_terminal,
             close_terminal_session,
             resize_terminal,
+            // LangGraph tools
+            tools::call_llm,
+            tools::query_local_sqlite,
+            tools::get_problem_context,
+            tools::save_generation_result,
+            tools::get_available_tools,
+            // LangGraph orchestrator
+            tools::execute_langgraph_workflow,
+            tools::list_langgraph_workflows,
+            tools::get_langgraph_workflow_definition,
         ])
         .setup(|_app| {
             info!("GoldiDocs setup complete");

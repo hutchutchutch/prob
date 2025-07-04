@@ -204,14 +204,16 @@ function AppContent() {
   return (
     <div className="flex h-screen bg-gray-900">
       {/* Fixed Progress Bar at top of screen */}
-      <div className="fixed top-0 left-64 right-0 z-50 bg-obsidian-800 border-b border-obsidian-700 py-8 px-12">
-        <ProgressSteps 
-          currentStep={getProgressStepIndex(currentStep)}
-          variant="horizontal"
-          size="md"
-          className="max-w-none"
-          onStepClick={handleStepClick}
-        />
+      <div className="fixed top-0 left-64 right-0 z-50 bg-obsidian-800 border-b border-obsidian-700">
+        <div className="overflow-x-auto overflow-y-hidden py-8 px-12 scrollbar-thin scrollbar-thumb-obsidian-600 scrollbar-track-obsidian-800">
+          <ProgressSteps 
+            currentStep={getProgressStepIndex(currentStep)}
+            variant="horizontal"
+            size="md"
+            className="max-w-none inline-flex"
+            onStepClick={handleStepClick}
+          />
+        </div>
         
         {/* Pain Point Dropdown Overlay */}
         {showPainPointDropdown && (

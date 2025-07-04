@@ -224,19 +224,16 @@ const stepSizes = {
   sm: {
     circle: 'w-6 h-6',
     text: 'text-xs',
-    line: 'h-px',
     spacing: 'gap-1'
   },
   md: {
     circle: 'w-8 h-8',
     text: 'text-sm',
-    line: 'h-0.5',
     spacing: 'gap-2'
   },
   lg: {
     circle: 'w-10 h-10',
     text: 'text-base',
-    line: 'h-px',
     spacing: 'gap-3'
   }
 };
@@ -261,21 +258,18 @@ export const ProgressSteps: React.FC<ProgressStepsProps> = ({
     switch (status) {
       case 'completed':
         return {
-          circle: 'bg-accent-600 text-white shadow-glow-metallic',
-          text: 'text-accent-600',
-          line: 'bg-accent-600'
+          circle: 'bg-transparent text-white',
+          text: 'text-white'
         };
       case 'active':
         return {
-          circle: 'bg-transparent text-accent-500 border-2 border-accent-500',
-          text: 'text-accent-500',
-          line: 'bg-obsidian-600'
+          circle: 'bg-accent-600 text-white shadow-glow-metallic',
+          text: 'text-accent-500'
         };
       case 'pending':
         return {
-          circle: 'bg-obsidian-700 text-slate-400 border-2 border-obsidian-600',
-          text: 'text-slate-400',
-          line: 'bg-obsidian-700'
+          circle: 'bg-transparent text-slate-400',
+          text: 'text-slate-400'
         };
     }
   };
@@ -316,7 +310,7 @@ export const ProgressSteps: React.FC<ProgressStepsProps> = ({
                       'progress-line',
                       'w-0.5 min-h-[40px] my-2',
                       'transition-all duration-slow ease-default',
-                      styles.line
+                      'bg-obsidian-600'
                     )}
                   />
                 )}
@@ -341,50 +335,41 @@ export const ProgressSteps: React.FC<ProgressStepsProps> = ({
       {steps.map((step, index) => {
         const status = getStepStatus(index);
         const styles = getStepStyles(status);
-        const isLast = index === steps.length - 1;
 
         return (
-          <div key={step.id} className="flex items-center">
-            {/* Progress Step */}
-            <div className={cn('progress-step flex items-center', sizeClasses.spacing)}>
-              {/* Progress Circle */}
-              <button
-                onClick={() => onStepClick?.(index)}
-                data-step-index={index}
-                className={cn(
-                  'progress-circle',
-                  'flex items-center justify-center rounded-full',
-                  'transition-all duration-300 ease-default',
-                  'font-medium flex-shrink-0',
-                  sizeClasses.circle,
-                  styles.circle,
-                  onStepClick && 'cursor-pointer hover:scale-110 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-obsidian-800'
-                )}
-                disabled={!onStepClick}
-              >
-                <span className={sizeClasses.text}>{index + 1}</span>
-              </button>
-
-              {/* Step Label */}
-              <div className="ml-3">
-                <div className={cn('font-medium whitespace-nowrap', sizeClasses.text, styles.text)}>
-                  {step.label}
-                </div>
-              </div>
+          <button
+            key={step.id}
+            onClick={() => onStepClick?.(index)}
+            data-step-index={index}
+            className={cn(
+              'progress-step flex items-center',
+              'transition-all duration-300 ease-default',
+              'focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-obsidian-800',
+              sizeClasses.spacing,
+              onStepClick && 'cursor-pointer hover:scale-105 hover:shadow-lg'
+            )}
+            disabled={!onStepClick}
+          >
+            {/* Progress Circle */}
+            <div
+              className={cn(
+                'progress-circle',
+                'flex items-center justify-center rounded-full',
+                'font-medium flex-shrink-0',
+                sizeClasses.circle,
+                styles.circle
+              )}
+            >
+              <span className={sizeClasses.text}>{index + 1}</span>
             </div>
 
-            {/* Progress Line */}
-            {!isLast && (
-              <div
-                className={cn(
-                  'progress-line',
-                  'w-16 h-0.5 mx-6',
-                  'transition-all duration-slow ease-default',
-                  styles.line
-                )}
-              />
-            )}
-          </div>
+            {/* Step Label */}
+            <div className="ml-3">
+              <div className={cn('font-medium whitespace-nowrap', sizeClasses.text, styles.text)}>
+                {step.label}
+              </div>
+            </div>
+          </button>
         );
       })}
     </div>

@@ -125,3 +125,44 @@ button {
 }
 
 /* Gold flash animation */
+
+/* Custom scrollbar styles for progress steps */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thumb-obsidian-600 {
+  scrollbar-color: #4a5568 transparent;
+}
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+.scrollbar-thin::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: rgba(26, 32, 44, 0.5); /* obsidian-800 with transparency */
+  border-radius: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #4a5568; /* obsidian-600 */
+  border-radius: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #718096; /* obsidian-500 */
+}
+
+/* Ensure progress steps container allows horizontal scrolling */
+.overflow-x-auto {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Add padding to the bottom of scrollable area on macOS to account for scroll bar */
+@supports (-webkit-appearance: none) {
+  .overflow-x-auto {
+    padding-bottom: 8px;
+  }
+}

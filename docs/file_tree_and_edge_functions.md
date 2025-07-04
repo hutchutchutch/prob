@@ -17,54 +17,157 @@
 │   │   │   ├── edges
 │   │   │   │   ├── AnimatedEdge.tsx
 │   │   │   │   ├── DependencyEdge.tsx
+│   │   │   │   ├── FocusGroupEdge.tsx
 │   │   │   │   ├── HighlightedEdge.tsx
 │   │   │   │   ├── index.ts
 │   │   │   │   └── SolutionEdge.tsx
 │   │   │   ├── nodes
+│   │   │   │   ├── BaseDocumentNode.tsx
 │   │   │   │   ├── BaseNode.tsx
 │   │   │   │   ├── CoreProblemNode.tsx
+│   │   │   │   ├── DataFlowDiagramNode.tsx
+│   │   │   │   ├── DesignSystemNode.tsx
+│   │   │   │   ├── documentNodes.ts
+│   │   │   │   ├── EntityRelationshipDiagramNode.tsx
+│   │   │   │   ├── FunctionalRequirementsNode.tsx
 │   │   │   │   ├── index.ts
 │   │   │   │   ├── LabelNode.tsx
+│   │   │   │   ├── LockableNode.tsx
 │   │   │   │   ├── PainLevelIndicator.tsx
 │   │   │   │   ├── PainPointNode.tsx
 │   │   │   │   ├── PersonaNode.tsx
-│   │   │   │   └── SolutionNode.tsx
+│   │   │   │   ├── ProductVisionNode.tsx
+│   │   │   │   ├── QuoteNode.tsx
+│   │   │   │   ├── SolutionNode.tsx
+│   │   │   │   ├── SystemArchitectureNode.tsx
+│   │   │   │   └── UserStoryNode.tsx
 │   │   │   ├── Canvas.tsx
-│   │   │   └── index.ts
+│   │   │   ├── ForceLayoutCanvas.tsx
+│   │   │   ├── index.ts
+│   │   │   └── LockRefreshExample.tsx
 │   │   ├── common
 │   │   │   ├── Button.tsx
 │   │   │   ├── index.ts
 │   │   │   ├── Input.tsx
 │   │   │   ├── LoadingStates.tsx
 │   │   │   ├── Modal.tsx
+│   │   │   ├── PainPointDropdown.tsx
 │   │   │   └── Tooltip.tsx
 │   │   ├── debug
 │   │   │   └── AuthDebug.tsx
+│   │   ├── DemoCanvas
+│   │   │   ├── DemoAnimationController.tsx
+│   │   │   ├── DemoCanvas.css
+│   │   │   ├── DemoCanvas.tsx
+│   │   │   └── index.ts
+│   │   ├── DocumentNode
+│   │   │   ├── DocumentNode.css
+│   │   │   ├── DocumentNode.tsx
+│   │   │   ├── DocumentPreview.tsx
+│   │   │   └── index.ts
+│   │   ├── DocumentViewer
+│   │   │   ├── CodeBlock.tsx
+│   │   │   ├── DocumentToolbar.tsx
+│   │   │   ├── DocumentViewer.css
+│   │   │   ├── DocumentViewer.tsx
+│   │   │   ├── index.ts
+│   │   │   ├── MarkdownRenderer.tsx
+│   │   │   └── TableOfContents.tsx
+│   │   ├── ExportModal
+│   │   │   ├── ExportModal.css
+│   │   │   ├── ExportModal.tsx
+│   │   │   ├── ExportPreview.tsx
+│   │   │   ├── FormatSelector.tsx
+│   │   │   ├── index.ts
+│   │   │   └── TemplateSelector.tsx
 │   │   ├── layout
-│   │   │   ├── ProgressBar
-│   │   │   │   ├── ConnectedProgressBar.tsx
-│   │   │   │   ├── index.ts
-│   │   │   │   ├── PersonaCircles.tsx
-│   │   │   │   ├── ProgressBar.tsx
-│   │   │   │   └── ProgressSteps.tsx
 │   │   │   ├── Sidebar
 │   │   │   │   ├── ConnectedSidebar.tsx
+│   │   │   │   ├── DocumentPreviewModal.tsx
+│   │   │   │   ├── GoldiDocsProgress.tsx
 │   │   │   │   ├── index.ts
+│   │   │   │   ├── Sidebar.css
 │   │   │   │   ├── Sidebar.tsx
 │   │   │   │   ├── types.ts
 │   │   │   │   └── WorkspaceItem.tsx
+│   │   │   ├── Terminal
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── Terminal.css
+│   │   │   │   └── Terminal.tsx
 │   │   │   └── index.ts
+│   │   ├── LockSystem
+│   │   │   ├── BulkLockControls.tsx
+│   │   │   ├── index.ts
+│   │   │   ├── LockButton.tsx
+│   │   │   ├── LockIndicator.tsx
+│   │   │   └── LockTooltip.tsx
+│   │   ├── PerformanceMonitor
+│   │   │   ├── FPSCounter.tsx
+│   │   │   ├── index.ts
+│   │   │   ├── MemoryGraph.tsx
+│   │   │   ├── NetworkMonitor.tsx
+│   │   │   ├── PerformanceOverlay.tsx
+│   │   │   └── RenderMetrics.tsx
+│   │   ├── ProjectContextMenu
+│   │   │   ├── index.ts
+│   │   │   └── ProjectContextMenu.tsx
+│   │   ├── RefreshControl
+│   │   │   ├── index.ts
+│   │   │   ├── RefreshButton.tsx
+│   │   │   ├── RefreshModal.tsx
+│   │   │   ├── RefreshProgress.tsx
+│   │   │   └── RegenerationOptions.tsx
+│   │   ├── ShareDialog
+│   │   │   ├── index.ts
+│   │   │   ├── ShareDialog.tsx
+│   │   │   └── ShareLinkGenerator.tsx
+│   │   ├── sidebar
+│   │   │   └── FileDirectoryPicker.tsx
+│   │   ├── VersionDiff
+│   │   │   ├── DiffViewer.tsx
+│   │   │   ├── index.ts
+│   │   │   └── VersionDiff.tsx
+│   │   ├── VersionTimeline
+│   │   │   ├── EventPreview.tsx
+│   │   │   ├── index.ts
+│   │   │   ├── TimelineControls.tsx
+│   │   │   ├── TimelineEvent.tsx
+│   │   │   ├── VersionTimeline.css
+│   │   │   └── VersionTimeline.tsx
 │   │   └── workflow
 │   │       ├── index.ts
 │   │       ├── ProblemInput.tsx
 │   │       └── WorkflowCanvas.tsx
+│   ├── data
+│   │   └── demoFlowData.json
 │   ├── hooks
+│   │   ├── useAnimationLoop.ts
 │   │   ├── useAuth.ts
-│   │   └── useKeyboardShortcuts.ts
+│   │   ├── useBulkOperations.ts
+│   │   ├── useCanvasNavigation.ts
+│   │   ├── useDemoAnimation.ts
+│   │   ├── useDocumentExport.ts
+│   │   ├── useDocumentGeneration.ts
+│   │   ├── useExport.ts
+│   │   ├── useFPSMonitor.ts
+│   │   ├── useKeyboardNavigation.ts
+│   │   ├── useKeyboardShortcuts.ts
+│   │   ├── useLockManagement.ts
+│   │   ├── useMemoryTracking.ts
+│   │   ├── usePerformanceMetrics.ts
+│   │   ├── useProgressAnimation.ts
+│   │   ├── useProjectSearch.ts
+│   │   ├── useRecentFlows.ts
+│   │   ├── useRefreshWorkflow.ts
+│   │   ├── useShareLink.ts
+│   │   ├── useStateReconstruction.ts
+│   │   ├── useVersionHistory.ts
+│   │   └── useWorkflowProgress.ts
 │   ├── services
 │   │   ├── api
 │   │   │   ├── client.ts
 │   │   │   ├── export.ts
+│   │   │   ├── goldidocs.ts
 │   │   │   ├── personas.ts
 │   │   │   ├── problem.ts
 │   │   │   └── solutions.ts
@@ -72,22 +175,41 @@
 │   │   │   ├── client.ts
 │   │   │   └── database.ts
 │   │   ├── tauri
-│   │   │   └── api.ts
+│   │   │   ├── api.ts
+│   │   │   └── fileSystem.ts
 │   │   └── index.ts
 │   ├── stores
 │   │   ├── canvasStore.ts
 │   │   ├── index.ts
+│   │   ├── lockStore.ts
 │   │   ├── projectStore.ts
 │   │   ├── uiStore.ts
+│   │   ├── versionStore.ts
 │   │   └── workflowStore.ts
 │   ├── types
 │   │   ├── database.types.ts
+│   │   ├── documentNodes.types.ts
+│   │   ├── export.types.ts
 │   │   ├── index.ts
+│   │   ├── tauri.d.ts
 │   │   └── workflow.types.ts
 │   ├── utils
+│   │   ├── exportGenerators
+│   │   │   ├── index.ts
+│   │   │   ├── jsonExporter.ts
+│   │   │   ├── markdownExporter.ts
+│   │   │   ├── pdfExporter.ts
+│   │   │   └── zipExporter.ts
 │   │   ├── animations.ts
 │   │   ├── cn.ts
-│   │   └── index.ts
+│   │   ├── documentFormatters.ts
+│   │   ├── index.ts
+│   │   ├── nodeMeasurer.ts
+│   │   ├── performanceProfiler.ts
+│   │   ├── progressCalculations.ts
+│   │   ├── shareTokenGenerator.ts
+│   │   ├── syntaxHighlighting.ts
+│   │   └── workspaceStorage.ts
 │   ├── App.css
 │   ├── App.tsx
 │   ├── index.css
@@ -196,8 +318,7 @@ File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/auth/AuthF
 ```tsx
 import React, { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
-import { Button } from '@/components/common/Button';
-import { Input } from '@/components/common/Input';
+import { DemoCanvas } from '@/components/DemoCanvas';
 
 interface AuthFormProps {
   onAuthSuccess?: () => void;
@@ -205,8 +326,8 @@ interface AuthFormProps {
 
 export function AuthForm({ onAuthSuccess }: AuthFormProps) {
   const { signInWithEmail, signUpWithEmail, error, loading } = useAuth();
-  const [email, setEmail] = useState('hutchenbach@gmail.com');
-  const [password, setPassword] = useState('password123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
   const [localError, setLocalError] = useState<string | null>(null);
 
@@ -215,7 +336,12 @@ export function AuthForm({ onAuthSuccess }: AuthFormProps) {
     setLocalError(null);
 
     if (!email || !password) {
-      setLocalError('Email and password are required');
+      setLocalError('Please enter both email and password.');
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setLocalError('Please enter a valid email address.');
       return;
     }
 
@@ -234,79 +360,102 @@ export function AuthForm({ onAuthSuccess }: AuthFormProps) {
     }
   };
 
+  const validateEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
   const displayError = localError || error;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900">
-      <div className="max-w-md w-full space-y-8 p-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
-            {isSignUp ? 'Create your account' : 'Sign in to your account'}
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-400">
-            Welcome to GoldiDocs - Problem Discovery Tool
-          </p>
-        </div>
-        
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="space-y-4">
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              required
-              placeholder="Email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              disabled={loading}
-            />
-            
-            <Input
-              id="password"
-              name="password"
-              type="password"
-              autoComplete={isSignUp ? 'new-password' : 'current-password'}
-              required
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              disabled={loading}
-            />
+    <div className="min-h-screen relative overflow-hidden bg-gray-900">
+      {/* Demo Canvas Background Animation */}
+      <div className="absolute inset-0 z-0 opacity-50">
+        <DemoCanvas showAuthForm={false} />
+      </div>
+      
+      {/* Auth Form Overlay */}
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center p-8">
+        {/* Glass Card */}
+        <div className="relative w-full max-w-sm rounded-3xl bg-gradient-to-br from-gray-800/40 to-gray-900/40 backdrop-blur-xl shadow-2xl p-8 flex flex-col items-center border border-gray-700/50">
+          {/* Logo */}
+          <div className="flex items-center justify-center w-12 h-12 rounded-full bg-accent-500/20 mb-6 shadow-lg backdrop-blur-sm">
+            <svg className="w-6 h-6 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
           </div>
+          
+          {/* Title */}
+          <h2 className="text-2xl font-semibold text-white mb-6 text-center">
+            Prob
+          </h2>
+          
+          {/* Form */}
+          <form className="flex flex-col w-full gap-4" onSubmit={handleSubmit}>
+            <div className="w-full flex flex-col gap-3">
+              <input
+                placeholder="Email"
+                type="email"
+                value={email}
+                className="w-full px-5 py-3 rounded-xl bg-gray-800/50 text-white placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500/50 focus:bg-gray-800/70 transition-all duration-300 backdrop-blur-sm border border-gray-700/30"
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={loading}
+              />
+              <input
+                placeholder="Password"
+                type="password"
+                value={password}
+                className="w-full px-5 py-3 rounded-xl bg-gray-800/50 text-white placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500/50 focus:bg-gray-800/70 transition-all duration-300 backdrop-blur-sm border border-gray-700/30"
+                onChange={(e) => setPassword(e.target.value)}
+                disabled={loading}
+              />
+              {displayError && (
+                <div className="text-sm text-red-400 text-left px-1">
+                  {displayError}
+                </div>
+              )}
+            </div>
+            
+            <hr className="opacity-10 border-gray-600" />
 
-          {displayError && (
-            <div className="rounded-md bg-red-900/20 border border-red-800 p-3">
-              <div className="text-sm text-red-400">
-                {displayError}
+            <div>
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-accent-500/20 hover:bg-accent-500/30 text-white font-medium px-5 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 mb-3 text-sm backdrop-blur-sm border border-accent-500/30 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-accent-600/40"
+              >
+                {loading ? 'Please wait...' : (isSignUp ? 'Sign up' : 'Sign in')}
+              </button>
+              
+              <div className="w-full text-center mt-4">
+                <span className="text-xs text-gray-400">
+                  {isSignUp ? 'Already have an account? ' : "Don't have an account? "}
+                  <button
+                    type="button"
+                    onClick={() => setIsSignUp(!isSignUp)}
+                    className="underline text-accent-500 hover:text-accent-400 transition-colors duration-200"
+                    disabled={loading}
+                  >
+                    {isSignUp ? 'Sign in' : 'Sign up, it\'s free!'}
+                  </button>
+                </span>
               </div>
             </div>
-          )}
-
-          <div>
-            <Button
-              type="submit"
-              disabled={loading}
-              className="w-full"
-            >
-              {loading ? 'Please wait...' : (isSignUp ? 'Sign up' : 'Sign in')}
-            </Button>
+          </form>
+        </div>
+        
+        {/* User count and avatars */}
+        <div className="relative z-10 mt-12 flex flex-col items-center text-center">
+          <p className="text-gray-400 text-sm mb-2">
+            Join <span className="font-medium text-white">thousands</span> of teams
+            discovering problems that matter.
+          </p>
+          <div className="flex -space-x-2">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent-500 to-accent-600 border-2 border-gray-900"></div>
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-gray-900"></div>
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 border-2 border-gray-900"></div>
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent-400 to-accent-500 border-2 border-gray-900"></div>
           </div>
-
-          <div className="text-center">
-            <button
-              type="button"
-              onClick={() => setIsSignUp(!isSignUp)}
-              className="text-sm text-blue-400 hover:text-blue-300"
-              disabled={loading}
-            >
-              {isSignUp 
-                ? 'Already have an account? Sign in' 
-                : "Don't have an account? Sign up"
-              }
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   );
@@ -694,37 +843,91 @@ export const CONTROLS_TODO = 'Controls components need to be implemented';
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/controls/LockToggle.tsx
 ```tsx
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Lock, Unlock } from 'lucide-react';
 import { cn } from '@/utils/cn';
-import { IconButton } from '@/components/common/Button';
-import { SimpleTooltip } from '@/components/common/Tooltip';
+import { useLockManagement } from '@/hooks/useLockManagement';
+import { LockTooltip } from '@/components/LockSystem';
 
 interface LockToggleProps {
-  isLocked: boolean;
-  onToggle: () => void;
+  nodeId: string;
+  nodeType: string;
   size?: 'sm' | 'md' | 'lg';
   className?: string;
+  showTooltip?: boolean;
+  onLockChange?: (isLocked: boolean) => void;
 }
 
+const sizeMap = {
+  sm: { button: 24, icon: 14 },
+  md: { button: 32, icon: 16 },
+  lg: { button: 40, icon: 20 },
+};
+
 export const LockToggle: React.FC<LockToggleProps> = ({
-  isLocked,
-  onToggle,
+  nodeId,
+  nodeType,
   size = 'sm',
   className,
+  showTooltip = true,
+  onLockChange,
 }) => {
+  const { isLocked, toggleLock } = useLockManagement();
+  const locked = isLocked(nodeId);
+  const [isHovered, setIsHovered] = React.useState(false);
+  const { button: buttonSize, icon: iconSize } = sizeMap[size];
+  
+  const handleToggle = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    await toggleLock(nodeId, nodeType);
+    onLockChange?.(!locked);
+  };
+  
   return (
-    <SimpleTooltip content={isLocked ? 'Unlock' : 'Lock'}>
-      <IconButton
-        icon={isLocked ? Lock : Unlock}
-        size={size}
-        onClick={onToggle}
+    <>
+      <motion.button
         className={cn(
-          isLocked && 'text-warning-500 hover:text-warning-400',
+          'lock-button',
+          locked && 'lock-button--locked',
           className
         )}
-        aria-label={isLocked ? 'Unlock item' : 'Lock item'}
-      />
-    </SimpleTooltip>
+        onClick={handleToggle}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        initial={false}
+        animate={{
+          backgroundColor: locked ? 'rgba(245, 158, 11, 0.2)' : 'rgba(0, 0, 0, 0.2)',
+          borderColor: locked ? 'var(--color-accent-500)' : 'transparent',
+        }}
+        transition={{ duration: 0.2 }}
+        style={{
+          width: buttonSize,
+          height: buttonSize,
+        }}
+        aria-label={locked ? 'Unlock item' : 'Lock item'}
+      >
+        <motion.div
+          animate={{ rotate: locked ? 0 : -45 }}
+          transition={{ duration: 0.3, type: 'spring', stiffness: 200 }}
+        >
+          {locked ? (
+            <Lock size={iconSize} className="lock-icon lock-icon--locked" />
+          ) : (
+            <Unlock size={iconSize} className="lock-icon" />
+          )}
+        </motion.div>
+      </motion.button>
+      
+      {showTooltip && (
+        <LockTooltip
+          nodeId={nodeId}
+          visible={isHovered && locked}
+          position="top"
+        />
+      )}
+    </>
   );
 };
 
@@ -998,6 +1201,94 @@ export const DependencyEdge: React.FC<EdgeProps> = ({
 export default DependencyEdge;
 ```
 
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/edges/FocusGroupEdge.tsx
+```tsx
+import React from 'react';
+import {
+  EdgeProps,
+  getBezierPath,
+  EdgeLabelRenderer,
+  BaseEdge,
+} from '@xyflow/react';
+import { QuoteNode, QuoteNodeData } from '../nodes/QuoteNode';
+import { cn } from '@/utils/cn';
+
+export interface FocusGroupEdgeData {
+  quote?: string;
+  personaName?: string;
+  personaId?: string;
+  solutionId?: string;
+  isHighlighted?: boolean;
+}
+
+export const FocusGroupEdge: React.FC<EdgeProps<FocusGroupEdgeData>> = ({
+  id,
+  sourceX,
+  sourceY,
+  targetX,
+  targetY,
+  sourcePosition,
+  targetPosition,
+  data,
+  selected,
+  markerEnd,
+}) => {
+  const [edgePath, labelX, labelY] = getBezierPath({
+    sourceX,
+    sourceY,
+    sourcePosition,
+    targetX,
+    targetY,
+    targetPosition,
+  });
+
+  const hasQuote = data?.quote && data?.personaName;
+  const isHighlighted = data?.isHighlighted || selected;
+
+  return (
+    <>
+      <BaseEdge
+        id={id}
+        path={edgePath}
+        markerEnd={markerEnd}
+        className={cn(
+          'transition-all duration-300',
+          isHighlighted && 'drop-shadow-lg'
+        )}
+        style={{
+          stroke: isHighlighted ? '#FFD700' : '#6B7280', // Gold when highlighted, grey otherwise
+          strokeWidth: isHighlighted ? 3 : 2,
+          opacity: isHighlighted ? 1 : 0.6,
+          strokeDasharray: hasQuote ? 'none' : '5 5', // Solid line when has quote
+        }}
+      />
+      
+      {hasQuote && (
+        <EdgeLabelRenderer>
+          <div
+            className="absolute pointer-events-auto"
+            style={{
+              transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY}px)`,
+            }}
+          >
+            <QuoteNode 
+              data={{
+                quote: data.quote!,
+                personaName: data.personaName!,
+                personaId: data.personaId || '',
+                solutionId: data.solutionId || ''
+              } as QuoteNodeData}
+            />
+          </div>
+        </EdgeLabelRenderer>
+      )}
+    </>
+  );
+};
+
+export default FocusGroupEdge;
+```
+
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/edges/HighlightedEdge.tsx
 ```tsx
 import React from 'react';
@@ -1101,15 +1392,18 @@ import { AnimatedEdge } from './AnimatedEdge';
 import { SolutionEdge } from './SolutionEdge';
 import { HighlightedEdge } from './HighlightedEdge';
 import { DependencyEdge } from './DependencyEdge';
+import { FocusGroupEdge } from './FocusGroupEdge';
 
 // Export all edge components
 export { AnimatedEdge } from './AnimatedEdge';
 export { SolutionEdge } from './SolutionEdge';
 export { HighlightedEdge } from './HighlightedEdge';
 export { DependencyEdge } from './DependencyEdge';
+export { FocusGroupEdge } from './FocusGroupEdge';
 
 // Export edge types
 export type { SolutionEdgeData } from './SolutionEdge';
+export type { FocusGroupEdgeData } from './FocusGroupEdge';
 
 // Export edge types configuration for React Flow
 export const edgeTypes = {
@@ -1117,6 +1411,7 @@ export const edgeTypes = {
   solution: SolutionEdge,
   highlighted: HighlightedEdge,
   dependency: DependencyEdge,
+  focusGroup: FocusGroupEdge,
 };
 
 // Add CSS for edge animations
@@ -1230,12 +1525,169 @@ export interface SolutionEdgeData {
   };
 ```
 
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/nodes/BaseDocumentNode.tsx
+```tsx
+import React from 'react';
+import { BaseNode } from './BaseNode';
+import { NodeProps } from '@xyflow/react';
+import { cn } from '@/utils/cn';
+import { CheckCircle, AlertCircle, Clock, FileText } from 'lucide-react';
+import { BaseDocumentNode } from '@/types/documentNodes.types';
+
+interface BaseDocumentNodeProps extends NodeProps {
+  data: BaseDocumentNode & {
+    onClick?: () => void;
+    onEdit?: () => void;
+    onPreview?: () => void;
+    onExport?: () => void;
+  };
+  variant?: 'default' | 'product' | 'technical' | 'design';
+  icon?: React.ReactNode;
+  children: React.ReactNode;
+}
+
+export const BaseDocumentNodeComponent: React.FC<BaseDocumentNodeProps> = ({ 
+  data, 
+  selected, 
+  variant = 'default',
+  icon,
+  children 
+}) => {
+  const getStatusIcon = () => {
+    switch (data.metadata.status) {
+      case 'published':
+      case 'approved':
+        return <CheckCircle className="w-4 h-4 text-gold-500" />;
+      case 'review':
+        return <Clock className="w-4 h-4 text-gold-400" />;
+      case 'draft':
+      default:
+        return <FileText className="w-4 h-4 text-gray-400" />;
+    }
+  };
+
+  const getVariantStyles = () => {
+    switch (variant) {
+      case 'product':
+        return 'border-gold-500/50 hover:border-gold-500';
+      case 'technical':
+        return 'border-teal-500/50 hover:border-teal-500';
+      case 'design':
+        return 'border-purple-500/50 hover:border-purple-500';
+      default:
+        return 'border-gray-600/50 hover:border-gray-600';
+    }
+  };
+
+  const getHealthColor = () => {
+    if (!data.validation.isComplete) return 'text-red-500';
+    if (data.validation.warnings?.length) return 'text-yellow-500';
+    return 'text-green-500';
+  };
+
+  return (
+    <BaseNode
+      variant="default"
+      selected={selected}
+      showSourceHandle={true}
+      showTargetHandle={true}
+      className={cn(
+        'min-w-[320px] max-w-[400px]',
+        getVariantStyles(),
+        'transition-all duration-300'
+      )}
+    >
+      <div className="space-y-3">
+        {/* Header */}
+        <div className="flex items-start justify-between">
+          <div className="flex items-center gap-2">
+            {icon || <FileText className="w-5 h-5 text-gray-400" />}
+            <div>
+              <h3 className="text-sm font-semibold text-gray-200">
+                {data.type.replace(/_/g, ' ').toUpperCase()}
+              </h3>
+              <p className="text-xs text-gray-400">v{data.version}</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            {getStatusIcon()}
+            <AlertCircle className={cn('w-4 h-4', getHealthColor())} />
+          </div>
+        </div>
+
+        {/* Content - Custom per document type */}
+        {children}
+
+        {/* Footer - Metadata */}
+        <div className="pt-2 border-t border-gray-700">
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-gray-500">
+              Updated: {new Date(data.metadata.updatedAt).toLocaleDateString()}
+            </span>
+            <div className="flex gap-1">
+              {data.validation.missingFields.length > 0 && (
+                <span className="px-2 py-1 bg-red-900/30 text-red-400 rounded">
+                  {data.validation.missingFields.length} missing
+                </span>
+              )}
+              {data.validation.warnings?.length > 0 && (
+                <span className="px-2 py-1 bg-yellow-900/30 text-yellow-400 rounded">
+                  {data.validation.warnings.length} warnings
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Actions */}
+        <div className="flex gap-2 pt-2">
+          {data.onEdit && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                data.onEdit?.();
+              }}
+              className="flex-1 px-3 py-1 text-xs bg-gray-800 hover:bg-gray-700 rounded transition-colors"
+            >
+              Edit
+            </button>
+          )}
+          {data.onPreview && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                data.onPreview?.();
+              }}
+              className="flex-1 px-3 py-1 text-xs bg-gray-800 hover:bg-gray-700 rounded transition-colors"
+            >
+              Preview
+            </button>
+          )}
+          {data.onExport && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                data.onExport?.();
+              }}
+              className="flex-1 px-3 py-1 text-xs bg-gray-800 hover:bg-gray-700 rounded transition-colors"
+            >
+              Export
+            </button>
+          )}
+        </div>
+      </div>
+    </BaseNode>
+  );
+};
+
+export default BaseDocumentNodeComponent;
+```
+
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/nodes/BaseNode.tsx
 ```tsx
 import React from 'react';
 import { Handle, Position } from '@xyflow/react';
 import { cn } from '@/utils/cn';
-import { motion } from 'framer-motion';
 
 // Base Node Wrapper
 interface BaseNodeProps {
@@ -1245,6 +1697,8 @@ interface BaseNodeProps {
   variant: 'problem' | 'persona' | 'pain' | 'solution';
   showSourceHandle?: boolean;
   showTargetHandle?: boolean;
+  sourceHandlePosition?: 'left' | 'right' | 'top' | 'bottom';
+  targetHandlePosition?: 'left' | 'right' | 'top' | 'bottom';
 }
 
 export const BaseNode: React.FC<BaseNodeProps> = ({
@@ -1254,6 +1708,8 @@ export const BaseNode: React.FC<BaseNodeProps> = ({
   variant,
   showSourceHandle = true,
   showTargetHandle = true,
+  sourceHandlePosition = 'right',
+  targetHandlePosition = 'left',
 }) => {
   const variantClasses = {
     problem: 'gradient-problem',
@@ -1262,10 +1718,15 @@ export const BaseNode: React.FC<BaseNodeProps> = ({
     solution: 'gradient-solution',
   };
 
+  const positionMap = {
+    left: Position.Left,
+    right: Position.Right,
+    top: Position.Top,
+    bottom: Position.Bottom,
+  };
+
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
+    <div
       className={cn(
         'canvas-node text-white',
         variantClasses[variant],
@@ -1276,19 +1737,23 @@ export const BaseNode: React.FC<BaseNodeProps> = ({
       {showTargetHandle && (
         <Handle
           type="target"
-          position={Position.Left}
+          position={positionMap[targetHandlePosition]}
+          id="target"
           className="!w-3 !h-3 !bg-gray-600 !border-2 !border-gray-900"
+          isConnectable={true}
         />
       )}
       {children}
       {showSourceHandle && (
         <Handle
           type="source"
-          position={Position.Right}
+          position={positionMap[sourceHandlePosition]}
+          id="source"
           className="!w-3 !h-3 !bg-gray-600 !border-2 !border-gray-900"
+          isConnectable={true}
         />
       )}
-    </motion.div>
+    </div>
   );
 };
 
@@ -1301,8 +1766,10 @@ import React, { useState, useEffect } from 'react';
 import { NodeProps } from '@xyflow/react';
 import { BaseNode } from './BaseNode';
 import { useWorkflowStore } from '@/stores/workflowStore';
+import { useCanvasStore } from '@/stores/canvasStore';
 import { problemApi } from '@/services/api/problem';
 import { Sparkles, Loader2, CheckCircle } from 'lucide-react';
+import { cn } from '@/utils/cn';
 
 // Core Problem Node
 export interface CoreProblemNodeData {
@@ -1336,7 +1803,7 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
   // Auto-focus when in editing mode
   useEffect(() => {
     if (isEditing && !nodeData.isDemo) {
-      const textarea = document.querySelector('.problem-input-textarea') as HTMLTextAreaElement;
+      const textarea = document.querySelector('.problem-textarea') as HTMLTextAreaElement;
       if (textarea) {
         textarea.focus();
       }
@@ -1355,7 +1822,7 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
     const trimmedText = problemText.trim();
     if (!trimmedText) return;
     
-    console.log('[CoreProblemNode] Starting validation for:', trimmedText);
+    console.log('[CoreProblemNode] Starting validation and persona generation for:', trimmedText);
     
     setIsValidating(true);
     setValidationError(null);
@@ -1363,28 +1830,43 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
     try {
       setProblemInput(trimmedText);
       
-      console.log('[CoreProblemNode] Calling problemApi.validateProblem...');
+      console.log('[CoreProblemNode] Calling both problemApi.validateProblem and generatePersonas in parallel...');
       console.log('[CoreProblemNode] Input text:', trimmedText);
-      const validationResult = await problemApi.validateProblem(trimmedText);
-      console.log('[CoreProblemNode] Validation result:', validationResult);
       
-      if (validationResult.isValid) {
-        console.log('[CoreProblemNode] Problem is valid, triggering all actions');
-        
-        // 1. Trigger gold flash animation
-        setShowGoldFlash(true);
-        setTimeout(() => setShowGoldFlash(false), 800);
-        
-        // 2. Set validated problem in store
-        const workflowStore = useWorkflowStore.getState();
-        const projectId = workflowStore.projectId || crypto.randomUUID();
-        
-        // Get the coreProblemId from the validation response
-        const coreProblemId = (validationResult as any).coreProblemId || crypto.randomUUID();
-        console.log('[CoreProblemNode] Using coreProblemId from validation:', coreProblemId);
-        
+      // Animate edges when validation starts
+      const canvasStore = useCanvasStore.getState();
+      for (let i = 1; i <= 5; i++) {
+        canvasStore.updateEdge(`problem-to-persona-${i}`, {
+          animated: true
+        });
+      }
+      console.log('[CoreProblemNode] Started edge animations during validation');
+      
+      // Set up project ID
+      const workflowStore = useWorkflowStore.getState();
+      const projectId = workflowStore.projectId || crypto.randomUUID();
+      
+      // Ensure we have a project ID
+      if (!workflowStore.projectId) {
+        useWorkflowStore.setState({ projectId });
+      }
+      
+      console.log('[CoreProblemNode] Starting validation with projectId:', projectId);
+      
+      // First, validate the problem
+      let validationResult;
+      try {
+        validationResult = await problemApi.validateProblem(trimmedText);
+        console.log('[CoreProblemNode] Validation result:', validationResult);
+      } catch (error) {
+        console.error('[CoreProblemNode] Validation failed:', error);
+        throw error;
+      }
+      
+      // If validation succeeded, update the store with the validated problem
+      if (validationResult.isValid && validationResult.coreProblemId) {
         const coreProblem = {
-          id: coreProblemId,  // Use the ID from validation response
+          id: validationResult.coreProblemId, // Use the ID from the API
           project_id: projectId,
           description: trimmedText,
           is_validated: true,
@@ -1392,32 +1874,48 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
           updated_at: new Date().toISOString(),
         };
         
-        // Update store state immediately
+        // Update store with the validated problem
         useWorkflowStore.setState({ 
-          projectId,
           coreProblem,
           problemInput: trimmedText
         });
         
-        console.log('[CoreProblemNode] Set coreProblem:', coreProblem);
+        console.log('[CoreProblemNode] Set validated coreProblem:', coreProblem);
         
-        // 3. Close editing mode
+        // Now generate personas with the correct coreProblemId
+        console.log('[CoreProblemNode] Starting persona generation...');
+        const personaGenerationResult = await workflowStore.generatePersonas();
+        console.log('[CoreProblemNode] Persona generation result:', personaGenerationResult);
+      }
+      
+      // Process validation result
+      if (validationResult.isValid) {
+        console.log('[CoreProblemNode] Problem is valid, triggering UI updates');
+        
+        // 1. Trigger gold flash animation
+        setShowGoldFlash(true);
+        setTimeout(() => setShowGoldFlash(false), 800);
+        
+        // 2. Close editing mode
         setIsEditing(false);
         
-        // 4. Proceed to next step immediately
+        // 3. Proceed to next step immediately
         console.log('[CoreProblemNode] Proceeding to next step');
         proceedToNextStep();
         
-        // 5. Generate personas immediately
-        console.log('[CoreProblemNode] Triggering persona generation');
-        workflowStore.generatePersonas();
+        // 4. Small delay to ensure state updates before navigation
+        setTimeout(() => {
+          console.log('[CoreProblemNode] Navigation should happen automatically via App.tsx');
+        }, 100);
+        
       } else {
-        console.log('[CoreProblemNode] Problem is invalid:', validationResult.feedback);
+        console.log('[CoreProblemNode] Problem validation failed');
         setValidationError(validationResult.feedback || 'Invalid problem statement');
       }
+      
     } catch (error) {
-      console.error('[CoreProblemNode] Validation error:', error);
-      setValidationError(error instanceof Error ? error.message : 'Failed to validate problem');
+      console.error('[CoreProblemNode] Error in handleSubmit:', error);
+      setValidationError(error instanceof Error ? error.message : 'Failed to process problem');
     } finally {
       setIsValidating(false);
     }
@@ -1461,16 +1959,20 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
       selected={selected}
       showTargetHandle={false}
       showSourceHandle={true}
-      className={`min-w-[400px] max-w-[500px] ${showGoldFlash ? 'animate-gold-flash' : ''} ${isValidated ? 'border-accent-500 border-2' : ''}`}
+      className={cn(
+        "min-w-[400px] max-w-[500px]",
+        showGoldFlash && "animate-gold-flash",
+        isValidated && "ring-2 ring-accent-500"
+      )}
     >
-      <div className="space-y-3">
-        <div className="flex items-center gap-2">
+      <div className="problem-input-container">
+        <div className="flex items-center gap-2 mb-3">
           <Sparkles className="w-4 h-4 text-gray-400" />
           <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-300">
             Core Problem
           </h3>
           {coreProblem?.is_validated && !isEditing && (
-            <CheckCircle className="w-4 h-4 text-blue-400 ml-auto" />
+            <CheckCircle className="w-4 h-4 text-gold-500 ml-auto" />
           )}
         </div>
 
@@ -1490,7 +1992,7 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
                 e.stopPropagation();
               }}
               placeholder="Describe your problem in detail..."
-              className="problem-input-textarea w-full h-24 p-3 bg-gray-800/80 text-white rounded-lg border border-gray-600 focus:border-gray-400 focus:outline-none resize-none transition-all duration-300 placeholder-gray-500 text-sm"
+              className="problem-textarea"
               disabled={isValidating}
               autoComplete="off"
               autoCorrect="off"
@@ -1512,7 +2014,7 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
               <button
                 onClick={handleSubmit}
                 disabled={!problemText.trim() || isValidating}
-                className="px-4 py-2 bg-gray-700 text-white rounded-lg font-medium hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center gap-2 text-sm"
+                className="btn-gold"
               >
                 {isValidating ? (
                   <>
@@ -1528,7 +2030,7 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
         ) : (
           <div className="space-y-2">
             <p 
-              className="text-base leading-relaxed cursor-pointer hover:opacity-80 transition-opacity"
+              className="text-base leading-relaxed cursor-pointer"
               onClick={handleEdit}
             >
               {problemText || 'Click to enter your problem description...'}
@@ -1536,7 +2038,7 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
             {problemText && (
               <button
                 onClick={handleEdit}
-                className="text-xs text-gray-400 hover:text-gray-300 transition-colors"
+                className="text-xs text-gray-400"
               >
                 Click to edit
               </button>
@@ -1551,6 +2053,640 @@ export const CoreProblemNode: React.FC<NodeProps> = ({ data, selected }) => {
 export default CoreProblemNode; 
 ```
 
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/nodes/DataFlowDiagramNode.tsx
+```tsx
+import React from 'react';
+import { NodeProps } from '@xyflow/react';
+import { BaseDocumentNodeComponent } from './BaseDocumentNode';
+import { DataFlowDiagramNodeData } from '@/types/documentNodes.types';
+import { Network, Circle, Square, ArrowRight, AlertCircle } from 'lucide-react';
+import { cn } from '@/utils/cn';
+
+export const DataFlowDiagramNode: React.FC<NodeProps<DataFlowDiagramNodeData>> = ({ data, selected }) => {
+  const totalElements = data.summary.entityCount + data.summary.processCount + data.summary.dataStoreCount;
+  const hasValidationIssues = !data.validation.noOrphanedProcesses || 
+                             !data.validation.allFlowsValid || 
+                             !data.validation.balancedAcrossLevels;
+
+  return (
+    <BaseDocumentNodeComponent
+      data={data}
+      selected={selected}
+      variant="technical"
+      icon={<Network className="w-5 h-5 text-teal-500" />}
+    >
+      <div className="space-y-3">
+        {/* DFD Summary */}
+        <div className="grid grid-cols-4 gap-2 text-center">
+          <div className="p-2 bg-gray-800/50 rounded">
+            <Circle className="w-4 h-4 mx-auto mb-1 text-blue-400" />
+            <p className="text-lg font-bold text-blue-400">{data.summary.entityCount}</p>
+            <p className="text-xs text-gray-500">Entities</p>
+          </div>
+          <div className="p-2 bg-gray-800/50 rounded">
+            <Square className="w-4 h-4 mx-auto mb-1 text-green-400" />
+            <p className="text-lg font-bold text-green-400">{data.summary.processCount}</p>
+            <p className="text-xs text-gray-500">Processes</p>
+          </div>
+          <div className="p-2 bg-gray-800/50 rounded">
+            <div className="w-4 h-4 mx-auto mb-1 border-t-2 border-b-2 border-purple-400" />
+            <p className="text-lg font-bold text-purple-400">{data.summary.dataStoreCount}</p>
+            <p className="text-xs text-gray-500">Stores</p>
+          </div>
+          <div className="p-2 bg-gray-800/50 rounded">
+            <ArrowRight className="w-4 h-4 mx-auto mb-1 text-yellow-400" />
+            <p className="text-lg font-bold text-yellow-400">{data.summary.flowCount}</p>
+            <p className="text-xs text-gray-500">Flows</p>
+          </div>
+        </div>
+
+        {/* Level Status */}
+        <div className="space-y-2">
+          <p className="text-xs text-gray-400 uppercase tracking-wide">Diagram Levels</p>
+          <div className="space-y-1">
+            <div className={cn(
+              "flex items-center justify-between p-2 rounded text-xs",
+              data.levels.context.complete ? "bg-green-900/20" : "bg-gray-800/50"
+            )}>
+              <span className="text-gray-300">Context (Level 0)</span>
+              <div className="flex items-center gap-2">
+                {data.levels.context.complete ? (
+                  <>
+                    <span className="text-green-400">✓</span>
+                    <span className="text-gray-500">{data.levels.context.externalEntityCount} entities</span>
+                  </>
+                ) : (
+                  <span className="text-gray-600">Incomplete</span>
+                )}
+              </div>
+            </div>
+            
+            <div className={cn(
+              "flex items-center justify-between p-2 rounded text-xs",
+              data.levels.level1.complete ? "bg-green-900/20" : "bg-gray-800/50"
+            )}>
+              <span className="text-gray-300">Level 1</span>
+              <div className="flex items-center gap-2">
+                {data.levels.level1.complete ? (
+                  <>
+                    <span className="text-green-400">✓</span>
+                    <span className="text-gray-500">{data.levels.level1.processCount} processes</span>
+                    {!data.levels.level1.balanced && (
+                      <span className="text-yellow-400" title="Not balanced with context">⚠</span>
+                    )}
+                  </>
+                ) : (
+                  <span className="text-gray-600">Incomplete</span>
+                )}
+              </div>
+            </div>
+            
+            {data.levels.level2Plus.exists && (
+              <div className="flex items-center justify-between p-2 bg-gray-800/50 rounded text-xs">
+                <span className="text-gray-300">Level 2+</span>
+                <span className="text-gray-500">
+                  {data.levels.level2Plus.decomposedProcesses.length} decomposed (depth: {data.levels.level2Plus.maxDepth})
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Validation Status */}
+        {hasValidationIssues && (
+          <div className="space-y-1 p-2 bg-red-900/20 rounded">
+            <p className="text-xs text-red-400 font-semibold flex items-center gap-1">
+              <AlertCircle className="w-3 h-3" />
+              Validation Issues
+            </p>
+            {!data.validation.noOrphanedProcesses && (
+              <p className="text-xs text-red-300 ml-4">• Orphaned processes detected</p>
+            )}
+            {!data.validation.allFlowsValid && (
+              <p className="text-xs text-red-300 ml-4">• Invalid data flows found</p>
+            )}
+            {!data.validation.balancedAcrossLevels && (
+              <p className="text-xs text-red-300 ml-4">• Diagrams not balanced across levels</p>
+            )}
+          </div>
+        )}
+
+        {/* Complexity Metrics */}
+        <div className="space-y-1 pt-2 border-t border-gray-700">
+          <div className="flex justify-between text-xs">
+            <span className="text-gray-400">Avg flows per process</span>
+            <span className="text-teal-400">{data.complexity.averageFlowsPerProcess.toFixed(1)}</span>
+          </div>
+          {data.complexity.criticalPaths.length > 0 && (
+            <div className="text-xs">
+              <span className="text-gray-400">Critical paths: </span>
+              <span className="text-teal-400">{data.complexity.criticalPaths.length}</span>
+              {data.complexity.criticalPaths[0] && (
+                <span className="text-gray-500"> (longest: {data.complexity.criticalPaths[0].length} steps)</span>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </BaseDocumentNodeComponent>
+  );
+};
+
+export default DataFlowDiagramNode;
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/nodes/DesignSystemNode.tsx
+```tsx
+import React from 'react';
+import { NodeProps } from '@xyflow/react';
+import { BaseDocumentNodeComponent } from './BaseDocumentNode';
+import { DesignSystemNodeData } from '@/types/documentNodes.types';
+import { Palette, Type, Grid3x3, Sparkles } from 'lucide-react';
+import { cn } from '@/utils/cn';
+
+export const DesignSystemNode: React.FC<NodeProps<DesignSystemNodeData>> = ({ data, selected }) => {
+  const totalComponents = data.summary.componentCount;
+  const documentedComponents = Math.round((data.components.documentationCoverage / 100) * totalComponents);
+
+  return (
+    <BaseDocumentNodeComponent
+      data={data}
+      selected={selected}
+      variant="design"
+      icon={<Palette className="w-5 h-5 text-purple-500" />}
+    >
+      <div className="space-y-3">
+        {/* Design System Summary */}
+        <div className="space-y-2">
+          <h4 className="text-lg font-bold text-purple-400">
+            {data.summary.brandName || 'Untitled Design System'}
+          </h4>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
+              <div 
+                className="w-5 h-5 rounded border-2 border-gray-600"
+                style={{ backgroundColor: data.summary.primaryColor }}
+                title={data.summary.primaryColor}
+              />
+              <span className="text-xs text-gray-400">{data.summary.primaryColor}</span>
+            </div>
+            <span className="text-xs text-gray-500">•</span>
+            <span className="text-xs text-gray-400 font-mono">{data.summary.fontFamily}</span>
+          </div>
+        </div>
+
+        {/* Component Overview */}
+        <div className="grid grid-cols-2 gap-2">
+          <div className="text-center p-2 bg-gray-800/50 rounded">
+            <p className="text-2xl font-bold text-purple-400">{totalComponents}</p>
+            <p className="text-xs text-gray-400">Components</p>
+          </div>
+          <div className="text-center p-2 bg-gray-800/50 rounded">
+            <p className="text-2xl font-bold text-purple-400">{documentedComponents}</p>
+            <p className="text-xs text-gray-400">Documented</p>
+          </div>
+        </div>
+
+        {/* Foundation Status */}
+        <div className="space-y-2">
+          <p className="text-xs text-gray-400 uppercase tracking-wide">Foundations</p>
+          <div className="grid grid-cols-3 gap-2">
+            <div className={cn(
+              "flex flex-col items-center p-2 rounded text-xs",
+              data.foundations.colors.complete ? "bg-purple-900/20" : "bg-gray-800/50"
+            )}>
+              <Palette className={cn(
+                "w-4 h-4 mb-1",
+                data.foundations.colors.complete ? "text-purple-500" : "text-gray-600"
+              )} />
+              <span className={cn(
+                data.foundations.colors.complete ? "text-purple-300" : "text-gray-500"
+              )}>Colors</span>
+              <span className="text-gray-500 text-xs">{data.foundations.colors.paletteSize}</span>
+            </div>
+            
+            <div className={cn(
+              "flex flex-col items-center p-2 rounded text-xs",
+              data.foundations.typography.complete ? "bg-purple-900/20" : "bg-gray-800/50"
+            )}>
+              <Type className={cn(
+                "w-4 h-4 mb-1",
+                data.foundations.typography.complete ? "text-purple-500" : "text-gray-600"
+              )} />
+              <span className={cn(
+                data.foundations.typography.complete ? "text-purple-300" : "text-gray-500"
+              )}>Type</span>
+              <span className="text-gray-500 text-xs">{data.foundations.typography.scaleSteps} sizes</span>
+            </div>
+            
+            <div className={cn(
+              "flex flex-col items-center p-2 rounded text-xs",
+              data.foundations.spacing.complete ? "bg-purple-900/20" : "bg-gray-800/50"
+            )}>
+              <Grid3x3 className={cn(
+                "w-4 h-4 mb-1",
+                data.foundations.spacing.complete ? "text-purple-500" : "text-gray-600"
+              )} />
+              <span className={cn(
+                data.foundations.spacing.complete ? "text-purple-300" : "text-gray-500"
+              )}>Spacing</span>
+              {data.foundations.spacing.gridDefined && (
+                <span className="text-gray-500 text-xs">✓ Grid</span>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Component Details */}
+        <div className="space-y-1">
+          <div className="flex justify-between text-xs">
+            <span className="text-gray-400">Components with variants</span>
+            <span className="text-purple-400">{data.components.withVariants}</span>
+          </div>
+          <div className="flex justify-between text-xs">
+            <span className="text-gray-400">Components with states</span>
+            <span className="text-purple-400">{data.components.withStates}</span>
+          </div>
+          <div className="flex justify-between text-xs">
+            <span className="text-gray-400">Documentation coverage</span>
+            <span className="text-purple-400">{data.components.documentationCoverage}%</span>
+          </div>
+        </div>
+
+        {/* Maturity Indicators */}
+        <div className="flex flex-wrap gap-2 pt-2 border-t border-gray-700">
+          {data.maturity.hasDesignPrinciples && (
+            <span className="px-2 py-1 text-xs bg-purple-900/30 text-purple-400 rounded flex items-center gap-1">
+              <Sparkles className="w-3 h-3" />
+              Principles
+            </span>
+          )}
+          {data.maturity.hasAccessibilityGuidelines && (
+            <span className="px-2 py-1 text-xs bg-green-900/30 text-green-400 rounded">
+              ♿ A11y
+            </span>
+          )}
+          {data.maturity.hasMotionPrinciples && (
+            <span className="px-2 py-1 text-xs bg-blue-900/30 text-blue-400 rounded">
+              ⚡ Motion
+            </span>
+          )}
+          {data.maturity.patternCount > 0 && (
+            <span className="px-2 py-1 text-xs bg-gray-800 text-gray-400 rounded">
+              {data.maturity.patternCount} patterns
+            </span>
+          )}
+        </div>
+
+        {/* Accessibility & Compliance */}
+        {(data.foundations.colors.accessibilityCompliant || data.foundations.typography.hasResponsiveScale) && (
+          <div className="flex items-center gap-2 text-xs">
+            {data.foundations.colors.accessibilityCompliant && (
+              <span className="text-green-400">✓ WCAG compliant colors</span>
+            )}
+            {data.foundations.typography.hasResponsiveScale && (
+              <span className="text-green-400">✓ Responsive type</span>
+            )}
+          </div>
+        )}
+
+        {/* Assets Summary */}
+        <div className="flex justify-between text-xs text-gray-500 pt-2 border-t border-gray-700">
+          <span>{data.assets.logoVariations} logos</span>
+          <span>{data.assets.iconCount} icons</span>
+          <span>{data.assets.illustrationCount} illustrations</span>
+        </div>
+
+        {/* Adoption Metrics */}
+        {data.maturity.adoptionMetrics && (
+          <div className="space-y-1">
+            <p className="text-xs text-gray-400">Adoption</p>
+            <div className="flex justify-between text-xs">
+              <span className="text-gray-500">Components in use</span>
+              <span className="text-purple-400">
+                {Math.round((data.maturity.adoptionMetrics.componentsInUse / totalComponents) * 100)}%
+              </span>
+            </div>
+            <div className="flex justify-between text-xs">
+              <span className="text-gray-500">Consistency score</span>
+              <span className="text-purple-400">{data.maturity.adoptionMetrics.consistencyScore}%</span>
+            </div>
+          </div>
+        )}
+      </div>
+    </BaseDocumentNodeComponent>
+  );
+};
+
+export default DesignSystemNode;
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/nodes/documentNodes.ts
+```ts
+// Export all document node components
+export { ProductVisionNode } from './ProductVisionNode';
+export { FunctionalRequirementsNode } from './FunctionalRequirementsNode';
+export { SystemArchitectureNode } from './SystemArchitectureNode';
+export { DataFlowDiagramNode } from './DataFlowDiagramNode';
+export { EntityRelationshipDiagramNode } from './EntityRelationshipDiagramNode';
+export { DesignSystemNode } from './DesignSystemNode';
+
+// Export the base component if needed
+export { BaseDocumentNodeComponent } from './BaseDocumentNode';
+
+// Export all types
+export * from '@/types/documentNodes.types';
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/nodes/EntityRelationshipDiagramNode.tsx
+```tsx
+import React from 'react';
+import { NodeProps } from '@xyflow/react';
+import { BaseDocumentNodeComponent } from './BaseDocumentNode';
+import { EntityRelationshipDiagramNodeData } from '@/types/documentNodes.types';
+import { Database, Key, Link, Shield, AlertTriangle } from 'lucide-react';
+import { cn } from '@/utils/cn';
+
+export const EntityRelationshipDiagramNode: React.FC<NodeProps<EntityRelationshipDiagramNodeData>> = ({ data, selected }) => {
+  const totalRelationships = Object.values(data.relationships.byCardinality).reduce((a, b) => a + b, 0);
+  const hasDataIssues = data.entities.withoutRelationships.length > 0 || 
+                       data.relationships.cyclicRelationships.length > 0;
+
+  return (
+    <BaseDocumentNodeComponent
+      data={data}
+      selected={selected}
+      variant="technical"
+      icon={<Database className="w-5 h-5 text-teal-500" />}
+    >
+      <div className="space-y-3">
+        {/* ERD Summary */}
+        <div className="grid grid-cols-3 gap-2">
+          <div className="text-center p-2 bg-gray-800/50 rounded">
+            <p className="text-2xl font-bold text-teal-400">{data.summary.entityCount}</p>
+            <p className="text-xs text-gray-400">Entities</p>
+          </div>
+          <div className="text-center p-2 bg-gray-800/50 rounded">
+            <p className="text-2xl font-bold text-blue-400">{totalRelationships}</p>
+            <p className="text-xs text-gray-400">Relations</p>
+          </div>
+          <div className="text-center p-2 bg-gray-800/50 rounded">
+            <p className="text-2xl font-bold text-purple-400">{data.summary.attributeCount}</p>
+            <p className="text-xs text-gray-400">Attributes</p>
+          </div>
+        </div>
+
+        {/* Normal Form Badge */}
+        <div className="flex items-center justify-between">
+          <span className="text-xs text-gray-400">Normalization</span>
+          <span className="px-2 py-1 text-xs font-semibold bg-teal-900/30 text-teal-400 rounded">
+            {data.summary.normalForm}
+          </span>
+        </div>
+
+        {/* Relationship Breakdown */}
+        <div className="space-y-2">
+          <p className="text-xs text-gray-400 uppercase tracking-wide">Relationships</p>
+          <div className="space-y-1">
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-gray-300">One-to-One</span>
+              <span className="text-gray-400">{data.relationships.byCardinality.oneToOne}</span>
+            </div>
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-gray-300">One-to-Many</span>
+              <span className="text-gray-400">{data.relationships.byCardinality.oneToMany}</span>
+            </div>
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-gray-300">Many-to-Many</span>
+              <div className="flex items-center gap-2">
+                <span className="text-gray-400">{data.relationships.byCardinality.manyToMany}</span>
+                {data.relationships.junctionTablesNeeded > 0 && (
+                  <span className="text-yellow-400">({data.relationships.junctionTablesNeeded} junction tables needed)</span>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Data Issues */}
+        {hasDataIssues && (
+          <div className="space-y-1 p-2 bg-yellow-900/20 rounded">
+            <p className="text-xs text-yellow-400 font-semibold flex items-center gap-1">
+              <AlertTriangle className="w-3 h-3" />
+              Structure Issues
+            </p>
+            {data.entities.withoutRelationships.length > 0 && (
+              <p className="text-xs text-yellow-300 ml-4">
+                • {data.entities.withoutRelationships.length} isolated entities
+              </p>
+            )}
+            {data.relationships.cyclicRelationships.length > 0 && (
+              <p className="text-xs text-yellow-300 ml-4">
+                • {data.relationships.cyclicRelationships.length} cyclic relationships
+              </p>
+            )}
+          </div>
+        )}
+
+        {/* Data Integrity */}
+        <div className="grid grid-cols-2 gap-2 text-xs">
+          <div className="flex items-center gap-2 p-1 bg-gray-800/50 rounded">
+            <Key className="w-3 h-3 text-gold-500" />
+            <span className="text-gray-300">{data.dataIntegrity.foreignKeyCount} FKs</span>
+          </div>
+          <div className="flex items-center gap-2 p-1 bg-gray-800/50 rounded">
+            <Link className="w-3 h-3 text-blue-500" />
+            <span className="text-gray-300">{data.dataIntegrity.uniqueConstraints} Unique</span>
+          </div>
+          <div className="flex items-center gap-2 p-1 bg-gray-800/50 rounded">
+            <span className="text-green-400">⚡</span>
+            <span className="text-gray-300">{data.dataIntegrity.indexCount} Indexes</span>
+          </div>
+          <div className="flex items-center gap-2 p-1 bg-gray-800/50 rounded">
+            <span className="text-purple-400">📋</span>
+            <span className="text-gray-300">{data.dataIntegrity.businessRulesImplemented} Rules</span>
+          </div>
+        </div>
+
+        {/* Data Classification */}
+        {(data.dataClassification.hasPII || data.dataClassification.complianceFlags.length > 0) && (
+          <div className="pt-2 border-t border-gray-700">
+            <div className="flex items-center gap-2 text-xs">
+              <Shield className={cn(
+                "w-3 h-3",
+                data.dataClassification.hasPII ? "text-red-500" : "text-gray-500"
+              )} />
+              {data.dataClassification.hasPII && (
+                <span className="text-red-400">Contains PII</span>
+              )}
+              {data.dataClassification.complianceFlags.map((flag, i) => (
+                <span key={i} className="px-2 py-1 bg-red-900/30 text-red-400 rounded">
+                  {flag}
+                </span>
+              ))}
+            </div>
+            {data.dataClassification.sensitiveEntities.length > 0 && (
+              <p className="text-xs text-gray-500 mt-1">
+                {data.dataClassification.sensitiveEntities.length} sensitive entities
+              </p>
+            )}
+          </div>
+        )}
+
+        {/* Largest Entity Info */}
+        {data.entities.largestEntity.name && (
+          <div className="text-xs text-gray-500">
+            Largest entity: <span className="text-gray-400">{data.entities.largestEntity.name}</span>
+            <span className="text-gray-600"> ({data.entities.largestEntity.attributeCount} attrs)</span>
+          </div>
+        )}
+      </div>
+    </BaseDocumentNodeComponent>
+  );
+};
+
+export default EntityRelationshipDiagramNode;
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/nodes/FunctionalRequirementsNode.tsx
+```tsx
+import React from 'react';
+import { NodeProps } from '@xyflow/react';
+import { BaseDocumentNodeComponent } from './BaseDocumentNode';
+import { FunctionalRequirementsNodeData } from '@/types/documentNodes.types';
+import { FileCode, Flag, CheckSquare, GitBranch } from 'lucide-react';
+import { cn } from '@/utils/cn';
+
+export const FunctionalRequirementsNode: React.FC<NodeProps<FunctionalRequirementsNodeData>> = ({ data, selected }) => {
+  const totalRequirements = data.summary.requirementCount;
+  const totalPriority = data.summary.priorityBreakdown.mustHave + 
+                       data.summary.priorityBreakdown.shouldHave + 
+                       data.summary.priorityBreakdown.niceToHave;
+
+  return (
+    <BaseDocumentNodeComponent
+      data={data}
+      selected={selected}
+      variant="technical"
+      icon={<FileCode className="w-5 h-5 text-teal-500" />}
+    >
+      <div className="space-y-3">
+        {/* Summary Stats */}
+        <div className="grid grid-cols-2 gap-2">
+          <div className="text-center p-2 bg-gray-800/50 rounded">
+            <p className="text-2xl font-bold text-teal-400">{data.summary.featureCount}</p>
+            <p className="text-xs text-gray-400">Features</p>
+          </div>
+          <div className="text-center p-2 bg-gray-800/50 rounded">
+            <p className="text-2xl font-bold text-teal-400">{totalRequirements}</p>
+            <p className="text-xs text-gray-400">Requirements</p>
+          </div>
+        </div>
+
+        {/* Priority Breakdown */}
+        <div className="space-y-2">
+          <p className="text-xs text-gray-400 uppercase tracking-wide">Priority Distribution</p>
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <Flag className="w-3 h-3 text-red-500" />
+              <span className="text-xs text-gray-300 w-20">Must Have</span>
+              <div className="flex-1 h-2 bg-gray-800 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-red-500"
+                  style={{ width: `${(data.summary.priorityBreakdown.mustHave / totalPriority) * 100}%` }}
+                />
+              </div>
+              <span className="text-xs text-gray-400 w-8 text-right">
+                {data.summary.priorityBreakdown.mustHave}
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Flag className="w-3 h-3 text-yellow-500" />
+              <span className="text-xs text-gray-300 w-20">Should Have</span>
+              <div className="flex-1 h-2 bg-gray-800 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-yellow-500"
+                  style={{ width: `${(data.summary.priorityBreakdown.shouldHave / totalPriority) * 100}%` }}
+                />
+              </div>
+              <span className="text-xs text-gray-400 w-8 text-right">
+                {data.summary.priorityBreakdown.shouldHave}
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Flag className="w-3 h-3 text-green-500" />
+              <span className="text-xs text-gray-300 w-20">Nice to Have</span>
+              <div className="flex-1 h-2 bg-gray-800 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-green-500"
+                  style={{ width: `${(data.summary.priorityBreakdown.niceToHave / totalPriority) * 100}%` }}
+                />
+              </div>
+              <span className="text-xs text-gray-400 w-8 text-right">
+                {data.summary.priorityBreakdown.niceToHave}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Section Status */}
+        <div className="space-y-2">
+          <p className="text-xs text-gray-400 uppercase tracking-wide">Section Progress</p>
+          <div className="grid grid-cols-2 gap-2 text-xs">
+            {Object.entries(data.sections).map(([key, section]) => (
+              <div
+                key={key}
+                className={cn(
+                  "flex items-center gap-2 p-2 rounded",
+                  section.complete ? "bg-teal-900/20" : "bg-gray-800/50"
+                )}
+              >
+                <CheckSquare className={cn(
+                  "w-3 h-3",
+                  section.complete ? "text-teal-500" : "text-gray-600"
+                )} />
+                <span className={cn(
+                  "capitalize",
+                  section.complete ? "text-teal-300" : "text-gray-400"
+                )}>
+                  {key.replace(/_/g, ' ')}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Coverage Metrics */}
+        <div className="space-y-1 pt-2 border-t border-gray-700">
+          <div className="flex justify-between text-xs">
+            <span className="text-gray-400">Requirements Coverage</span>
+            <span className="text-teal-400">{data.coverage.featuresWithRequirements}%</span>
+          </div>
+          <div className="flex justify-between text-xs">
+            <span className="text-gray-400">Acceptance Criteria</span>
+            <span className="text-teal-400">{data.coverage.featuresWithAcceptanceCriteria}%</span>
+          </div>
+          <div className="flex justify-between text-xs">
+            <span className="text-gray-400">Traceability</span>
+            <span className="text-teal-400">{data.coverage.requirementsTraceability}%</span>
+          </div>
+        </div>
+
+        {/* Dependencies */}
+        {data.sections.integrations.externalDependencies.length > 0 && (
+          <div className="flex items-center gap-2 text-xs text-gray-500">
+            <GitBranch className="w-3 h-3" />
+            <span>{data.sections.integrations.externalDependencies.length} external dependencies</span>
+          </div>
+        )}
+      </div>
+    </BaseDocumentNodeComponent>
+  );
+};
+
+export default FunctionalRequirementsNode;
+```
+
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/nodes/index.ts
 ```ts
 // Import components for nodeTypes configuration
@@ -1558,7 +2694,17 @@ import { CoreProblemNode } from './CoreProblemNode';
 import { PersonaNode } from './PersonaNode';
 import { PainPointNode } from './PainPointNode';
 import { SolutionNode } from './SolutionNode';
+import { UserStoryNode } from './UserStoryNode';
 import { LabelNode } from './LabelNode';
+import { QuoteNode } from './QuoteNode';
+
+// Import document nodes
+import { ProductVisionNode } from './ProductVisionNode';
+import { FunctionalRequirementsNode } from './FunctionalRequirementsNode';
+import { SystemArchitectureNode } from './SystemArchitectureNode';
+import { DataFlowDiagramNode } from './DataFlowDiagramNode';
+import { EntityRelationshipDiagramNode } from './EntityRelationshipDiagramNode';
+import { DesignSystemNode } from './DesignSystemNode';
 
 // Export all node components
 export { BaseNode } from './BaseNode';
@@ -1566,44 +2712,87 @@ export { CoreProblemNode } from './CoreProblemNode';
 export { PersonaNode } from './PersonaNode';
 export { PainPointNode } from './PainPointNode';
 export { SolutionNode } from './SolutionNode';
+export { UserStoryNode } from './UserStoryNode';
 export { PainLevelIndicator } from './PainLevelIndicator';
 export { LabelNode } from './LabelNode';
+export { QuoteNode } from './QuoteNode';
+
+// Export document nodes
+export { ProductVisionNode } from './ProductVisionNode';
+export { FunctionalRequirementsNode } from './FunctionalRequirementsNode';
+export { SystemArchitectureNode } from './SystemArchitectureNode';
+export { DataFlowDiagramNode } from './DataFlowDiagramNode';
+export { EntityRelationshipDiagramNode } from './EntityRelationshipDiagramNode';
+export { DesignSystemNode } from './DesignSystemNode';
 
 // Export types
 export type { CoreProblemNodeData } from './CoreProblemNode';
 export type { PersonaNodeData } from './PersonaNode';
 export type { PainPointNodeData } from './PainPointNode';
 export type { SolutionNodeData } from './SolutionNode';
+export type { UserStoryNodeData } from './UserStoryNode';
 export type { PainLevelIndicatorProps } from './PainLevelIndicator';
+export type { QuoteNodeData } from './QuoteNode';
+
+// Export document node types
+export type {
+  ProductVisionNodeData,
+  FunctionalRequirementsNodeData,
+  SystemArchitectureNodeData,
+  DataFlowDiagramNodeData,
+  EntityRelationshipDiagramNodeData,
+  DesignSystemNodeData
+} from '@/types/documentNodes.types';
 
 // Export node types configuration for React Flow
 export const nodeTypes = {
   problem: CoreProblemNode,
+  coreProblem: CoreProblemNode, // Add alias for coreProblem type
   persona: PersonaNode,
   painPoint: PainPointNode,
   solution: SolutionNode,
+  userStory: UserStoryNode,
   label: LabelNode,
+  quote: QuoteNode,
+  
+  // Document nodes
+  productVision: ProductVisionNode,
+  functionalRequirements: FunctionalRequirementsNode,
+  systemArchitecture: SystemArchitectureNode,
+  dataFlowDiagram: DataFlowDiagramNode,
+  entityRelationshipDiagram: EntityRelationshipDiagramNode,
+  designSystem: DesignSystemNode,
 };
 ```
 
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/nodes/LabelNode.tsx
 ```tsx
-import React from 'react';
+import React, { useState } from 'react';
 import { NodeProps } from '@xyflow/react';
 import { RefreshCw } from 'lucide-react';
+import { cn } from '@/utils/cn';
+import { useWorkflowStore } from '@/stores/workflowStore';
 
 export interface LabelNodeData {
   text: string;
   showRefresh?: boolean;
   onRefresh?: () => void;
+  onClick?: () => void;
 }
 
 export const LabelNode: React.FC<NodeProps> = ({ data }) => {
   const nodeData = data as unknown as LabelNodeData;
-  const { text, showRefresh = false, onRefresh } = nodeData;
+  const { text, showRefresh = false, onRefresh, onClick } = nodeData;
+  const isGeneratingPersonas = useWorkflowStore(state => state.isGeneratingPersonas);
 
   return (
-    <div className="flex items-center gap-2 text-sm font-semibold text-gray-400 uppercase tracking-wider">
+    <div 
+      className={cn(
+        "flex items-center gap-2 text-sm font-semibold text-gray-400 uppercase tracking-wider",
+        onClick && "cursor-pointer hover:text-gray-300 transition-colors"
+      )}
+      onClick={onClick}
+    >
       <span>{text}</span>
       {showRefresh && (
         <button
@@ -1611,10 +2800,21 @@ export const LabelNode: React.FC<NodeProps> = ({ data }) => {
             e.stopPropagation();
             onRefresh?.();
           }}
-          className="p-1 hover:bg-gray-700 rounded transition-colors group"
+          className={cn(
+            "p-1.5 rounded transition-all duration-200 group",
+            isGeneratingPersonas 
+              ? "bg-gold-500/20" 
+              : "hover:bg-gold-500/20"
+          )}
           title="Refresh personas"
+          disabled={isGeneratingPersonas}
         >
-          <RefreshCw className="w-4 h-4 group-hover:text-gray-300 transition-colors" />
+          <RefreshCw className={cn(
+            "w-4 h-4 transition-all duration-200",
+            isGeneratingPersonas 
+              ? "animate-spin text-gold-500" 
+              : "text-gray-400 group-hover:text-gold-500"
+          )} />
         </button>
       )}
     </div>
@@ -1622,6 +2822,165 @@ export const LabelNode: React.FC<NodeProps> = ({ data }) => {
 };
 
 export default LabelNode; 
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/nodes/LockableNode.tsx
+```tsx
+import React, { useState } from 'react';
+import { Handle, Position } from '@xyflow/react';
+import { motion } from 'framer-motion';
+import { cn } from '@/utils/cn';
+import { LockToggle } from '../controls/LockToggle';
+import { LockIndicator } from '@/components/LockSystem';
+import { useLockStore } from '@/stores/lockStore';
+
+interface LockableNodeProps {
+  id: string;
+  data: {
+    label: string;
+    type: string;
+    content?: string;
+    [key: string]: any;
+  };
+  selected?: boolean;
+  variant: 'problem' | 'persona' | 'pain' | 'solution';
+  showSourceHandle?: boolean;
+  showTargetHandle?: boolean;
+  children?: React.ReactNode;
+}
+
+export const LockableNode: React.FC<LockableNodeProps> = ({
+  id,
+  data,
+  selected,
+  variant,
+  showSourceHandle = true,
+  showTargetHandle = true,
+  children,
+}) => {
+  const [showLockButton, setShowLockButton] = useState(false);
+  const isLocked = useLockStore((state) => state.isLocked(id));
+  
+  const variantClasses = {
+    problem: 'gradient-problem',
+    persona: 'gradient-persona',
+    pain: 'gradient-pain',
+    solution: 'gradient-solution',
+  };
+  
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      onMouseEnter={() => setShowLockButton(true)}
+      onMouseLeave={() => setShowLockButton(false)}
+      className={cn(
+        'canvas-node text-white relative',
+        variantClasses[variant],
+        selected && 'ring-2 ring-white ring-offset-2 ring-offset-gray-900',
+        isLocked && 'canvas-node--locked'
+      )}
+    >
+      {showTargetHandle && (
+        <Handle
+          type="target"
+          position={Position.Left}
+          className="!w-3 !h-3 !bg-gray-600 !border-2 !border-gray-900"
+        />
+      )}
+      
+      {/* Lock Indicator - Always visible when locked */}
+      {isLocked && (
+        <LockIndicator nodeId={id} size="small" showTooltip={false} />
+      )}
+      
+      {/* Lock Toggle - Visible on hover */}
+      <motion.div
+        initial={false}
+        animate={{
+          opacity: showLockButton || isLocked ? 1 : 0,
+          scale: showLockButton || isLocked ? 1 : 0.8,
+        }}
+        transition={{ duration: 0.2 }}
+        className="absolute top-2 right-2"
+      >
+        <LockToggle
+          nodeId={id}
+          nodeType={data.type}
+          size="sm"
+          showTooltip={true}
+        />
+      </motion.div>
+      
+      {/* Node Content */}
+      <div className="node-content">
+        <h3 className="text-sm font-semibold mb-2">{data.label}</h3>
+        {data.content && (
+          <p className="text-xs opacity-90">{data.content}</p>
+        )}
+        {children}
+      </div>
+      
+      {showSourceHandle && (
+        <Handle
+          type="source"
+          position={Position.Right}
+          className="!w-3 !h-3 !bg-gray-600 !border-2 !border-gray-900"
+        />
+      )}
+    </motion.div>
+  );
+};
+
+// Example usage for different node types
+export const LockablePersonaNode: React.FC<{ id: string; data: any }> = (props) => (
+  <LockableNode {...props} variant="persona">
+    {props.data.painDegree && (
+      <div className="mt-2 text-xs">
+        <span className="opacity-70">Pain Level:</span>
+        <span className="ml-1 font-medium">{props.data.painDegree}/10</span>
+      </div>
+    )}
+  </LockableNode>
+);
+
+export const LockablePainPointNode: React.FC<{ id: string; data: any }> = (props) => (
+  <LockableNode {...props} variant="pain">
+    {props.data.severity && (
+      <div className="mt-2">
+        <div className="flex items-center gap-1">
+          {Array.from({ length: 5 }, (_, i) => (
+            <div
+              key={i}
+              className={cn(
+                'w-2 h-2 rounded-full',
+                i < props.data.severity
+                  ? 'bg-orange-400'
+                  : 'bg-gray-600'
+              )}
+            />
+          ))}
+        </div>
+      </div>
+    )}
+  </LockableNode>
+);
+
+export const LockableSolutionNode: React.FC<{ id: string; data: any }> = (props) => (
+  <LockableNode {...props} variant="solution">
+    {props.data.votingResults && (
+      <div className="mt-2 flex items-center gap-1 text-xs">
+        <span className="opacity-70">Votes:</span>
+        <span className="font-medium">{props.data.votingResults.totalVotes}</span>
+        <div className="flex gap-0.5 ml-2">
+          {Array.from({ length: Math.min(props.data.votingResults.totalVotes, 10) }, (_, i) => (
+            <div key={i} className="w-1.5 h-1.5 rounded-full bg-yellow-400" />
+          ))}
+        </div>
+      </div>
+    )}
+  </LockableNode>
+);
 ```
 
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/nodes/PainLevelIndicator.tsx
@@ -1680,7 +3039,7 @@ File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/nod
 ```tsx
 import React from 'react';
 import { NodeProps } from '@xyflow/react';
-import { Lock, Unlock } from 'lucide-react';
+import { Lock, Unlock, AlertTriangle } from 'lucide-react';
 import { cn } from '@/utils/cn';
 import { BaseNode } from './BaseNode';
 
@@ -1693,17 +3052,18 @@ export interface PainPointNodeData {
   isLocked?: boolean;
   isSkeleton?: boolean;
   onToggleLock?: () => void;
+  onFocus?: () => void;
 }
 
 export const PainPointNode: React.FC<NodeProps> = ({ data, selected }) => {
   const nodeData = data as unknown as PainPointNodeData;
-  const { isLocked = false, isSkeleton = false, onToggleLock } = nodeData;
+  const { isLocked = false, isSkeleton = false, onToggleLock, onFocus } = nodeData;
 
   const severityStyles = {
-    critical: 'bg-error-600',
-    high: 'bg-orange-600',
-    medium: 'bg-warning-600',
-    low: 'bg-gray-600',
+    critical: 'text-red-400 bg-red-900/30 border-red-500/30',
+    high: 'text-orange-400 bg-orange-900/30 border-orange-500/30',
+    medium: 'text-yellow-400 bg-yellow-900/30 border-yellow-500/30',
+    low: 'text-gray-400 bg-gray-800/30 border-gray-500/30',
   };
 
   // Skeleton state
@@ -1714,28 +3074,35 @@ export const PainPointNode: React.FC<NodeProps> = ({ data, selected }) => {
         selected={selected}
         showSourceHandle={false}
         showTargetHandle={true}
-        className="min-w-[280px] opacity-60"
+        className={cn(
+          "w-[320px] max-w-[320px]",
+          "ethereal-glow", // Add ethereal glow animation
+          "transition-opacity duration-1000"
+        )}
       >
-        <div className="space-y-3">
-          {/* Skeleton Header */}
-          <div className="flex items-start justify-between gap-3">
-            <div className="h-6 bg-gray-600 rounded skeleton-shimmer w-20"></div>
-            <div className="w-4 h-4 bg-gray-600 rounded skeleton-shimmer"></div>
-          </div>
+          <div className="space-y-6">
+            {/* Skeleton Header */}
+            <div className="flex items-start justify-between mb-2">
+              <div className="h-6 rounded skeleton-shimmer w-20"></div>
+              <div className="w-4 h-4 rounded skeleton-shimmer"></div>
+            </div>
 
-          {/* Skeleton Description */}
-          <div className="space-y-2">
-            <div className="h-4 bg-gray-600 rounded skeleton-shimmer w-full"></div>
-            <div className="h-4 bg-gray-600 rounded skeleton-shimmer w-3/4"></div>
-          </div>
+            {/* Skeleton Description */}
+            <div className="space-y-5">
+              <div className="py-1">
+                <div className="h-4 rounded skeleton-shimmer w-full"></div>
+              </div>
+              <div className="py-1">
+                <div className="h-4 rounded skeleton-shimmer w-3/4"></div>
+              </div>
+            </div>
 
-          {/* Skeleton Impact */}
-          <div className="flex items-center gap-2 text-sm">
-            <div className="h-4 bg-gray-600 rounded skeleton-shimmer w-12"></div>
-            <div className="h-4 bg-gray-600 rounded skeleton-shimmer w-24"></div>
+            {/* Skeleton Impact */}
+            <div className="flex items-center gap-4 py-1">
+              <div className="h-4 rounded skeleton-shimmer w-24"></div>
+            </div>
           </div>
-        </div>
-      </BaseNode>
+        </BaseNode>
     );
   }
 
@@ -1743,25 +3110,37 @@ export const PainPointNode: React.FC<NodeProps> = ({ data, selected }) => {
     <BaseNode
       variant="pain"
       selected={selected}
-      className="min-w-[280px]"
+      showSourceHandle={!!nodeData.description}
+      showTargetHandle={true}
+      className="w-[320px] max-w-[320px]"
     >
       <div className="space-y-3">
         {/* Header with Severity and Lock */}
-        <div className="flex items-start justify-between gap-3">
-          <span
-            className={cn(
-              'px-2 py-1 text-xs font-medium rounded-full capitalize',
-              severityStyles[nodeData.severity]
-            )}
-          >
-            {nodeData.severity}
-          </span>
+        <div className="flex items-start justify-between cursor-pointer" onClick={() => {
+          if (!isSkeleton && onFocus) {
+            onFocus();
+          }
+        }}>
+          <div className="flex items-center gap-2">
+            <AlertTriangle className="w-4 h-4 text-amber-400" />
+            <span
+              className={cn(
+                'px-2 py-1 text-xs font-medium rounded border capitalize',
+                severityStyles[nodeData.severity]
+              )}
+            >
+              {nodeData.severity}
+            </span>
+          </div>
           <button
             onClick={(e) => {
               e.stopPropagation();
               onToggleLock?.();
             }}
-            className="p-1 hover:bg-orange-600/20 rounded transition-colors"
+            onMouseDown={(e) => {
+              e.stopPropagation();
+            }}
+            className="p-1 hover:bg-amber-600/20 rounded transition-colors"
           >
             {isLocked ? (
               <Lock className="w-4 h-4" />
@@ -1772,13 +3151,10 @@ export const PainPointNode: React.FC<NodeProps> = ({ data, selected }) => {
         </div>
 
         {/* Description */}
-        <p className="text-base leading-relaxed">"{nodeData.description}"</p>
-
-        {/* Impact Area */}
-        <div className="flex items-center gap-2 text-sm opacity-80">
-          <span>Impact:</span>
-          <span className="font-medium">{nodeData.impactArea}</span>
+        <div className="space-y-3">
+          <p className="text-base leading-relaxed break-words">"{nodeData.description}"</p>
         </div>
+
       </div>
     </BaseNode>
   );
@@ -1789,13 +3165,12 @@ export default PainPointNode;
 
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/nodes/PersonaNode.tsx
 ```tsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NodeProps } from '@xyflow/react';
-import { Lock, Unlock } from 'lucide-react';
+import { Lock, Unlock, Flame } from 'lucide-react';
 import { cn } from '@/utils/cn';
-import { motion } from 'framer-motion';
 import { BaseNode } from './BaseNode';
-import { PainLevelIndicator } from './PainLevelIndicator';
+import { useCanvasStore } from '@/stores/canvasStore';
 
 // Persona Node
 export interface PersonaNodeData {
@@ -1806,14 +3181,61 @@ export interface PersonaNodeData {
   painDegree: number;
   description?: string;
   isLocked?: boolean;
-  isExpanded?: boolean;
   isSkeleton?: boolean;
+  isRefreshing?: boolean;
+  isExpanded?: boolean;
   onToggleLock?: () => void;
+  onToggleExpand?: () => void;
 }
 
-export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
+export const PersonaNode: React.FC<NodeProps> = ({ data, selected, id }) => {
   const nodeData = data as unknown as PersonaNodeData;
-  const { isLocked = false, isExpanded = false, isSkeleton = false, onToggleLock } = nodeData;
+  const { isLocked = false, isSkeleton = false, isRefreshing = false, onToggleLock, isExpanded: expandedFromProps = false } = nodeData;
+  const [isExpanded, setIsExpanded] = useState(expandedFromProps);
+  
+  // Import canvas store
+  const { handleNodeExpansion } = useCanvasStore();
+  
+  // Sync expanded state with props
+  useEffect(() => {
+    setIsExpanded(expandedFromProps);
+  }, [expandedFromProps]);
+
+  // Handle node click to expand/collapse
+  const handleNodeClick = () => {
+    if (isSkeleton) return;
+    const newExpanded = !isExpanded;
+    setIsExpanded(newExpanded);
+    
+    // Notify canvas about expansion change
+    if (nodeData.onToggleExpand) {
+      // Use the provided handler which already handles node shifting
+      nodeData.onToggleExpand();
+    } else {
+      // Fallback: directly handle expansion if no handler provided
+      const heightDiff = newExpanded ? 160 : -160;
+      handleNodeExpansion(id, heightDiff);
+    }
+  };
+
+  // Render fire icons for pain rating
+  const renderPainRating = (painLevel: number) => {
+    return (
+      <div className="flex items-center gap-1">
+        {Array.from({ length: 5 }, (_, index) => (
+          <Flame
+            key={index}
+            className={cn(
+              'w-3 h-3',
+              index < painLevel 
+                ? 'text-gold-500 fill-gold-500/50' 
+                : 'text-gray-500 fill-gray-600/30'
+            )}
+          />
+        ))}
+      </div>
+    );
+  };
 
   // Skeleton state
   if (isSkeleton) {
@@ -1823,32 +3245,33 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
         selected={selected}
         showSourceHandle={false}
         showTargetHandle={true}
-        className="min-w-[280px] opacity-60"
+        className={cn(
+          "min-w-[280px]",
+          "shadow-lg shadow-gold-500/20", // Add ethereal glow with gold color
+          "transition-shadow duration-1000"
+        )}
       >
-        <div className="space-y-3">
-          {/* Skeleton Header */}
-          <div className="flex items-start justify-between">
-            <div className="h-6 bg-gray-600 rounded skeleton w-32"></div>
-            <div className="w-4 h-4 bg-gray-600 rounded skeleton"></div>
-          </div>
+          <div className="space-y-6 pointer-events-none">
+            {/* Skeleton Header */}
+            <div className="flex items-start justify-between mb-2">
+              <div className="h-6 rounded skeleton-shimmer w-32"></div>
+              <div className="w-4 h-4 rounded skeleton-shimmer"></div>
+            </div>
 
-          {/* Skeleton Details */}
-          <div className="space-y-2 text-sm">
-            <div className="flex items-center gap-2">
-              <span className="text-lg opacity-50">🏢</span>
-              <div className="h-4 bg-gray-600 rounded skeleton w-24"></div>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-lg opacity-50">👤</span>
-              <div className="h-4 bg-gray-600 rounded skeleton w-28"></div>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-lg opacity-50">📊</span>
-              <div className="h-4 bg-gray-600 rounded skeleton w-20"></div>
+            {/* Skeleton Details */}
+            <div className="space-y-5 text-sm">
+              <div className="flex items-center gap-4 py-1">
+                <div className="h-4 rounded skeleton-shimmer w-24"></div>
+              </div>
+              <div className="flex items-center gap-4 py-1">
+                <div className="h-4 rounded skeleton-shimmer w-28"></div>
+              </div>
+              <div className="flex items-center gap-4 py-1">
+                <div className="h-4 rounded skeleton-shimmer w-20"></div>
+              </div>
             </div>
           </div>
-        </div>
-      </BaseNode>
+        </BaseNode>
     );
   }
 
@@ -1857,26 +3280,48 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
     <BaseNode
       variant="persona"
       selected={selected}
-      showSourceHandle={isExpanded}
+      showSourceHandle={!!nodeData.name}
       showTargetHandle={true}
       className={cn(
-        'min-w-[280px]',
-        isExpanded ? 'min-w-[350px]' : ''
+        'min-w-[280px] transition-all duration-300',
+        isExpanded ? 'w-[400px]' : '', // Wider when expanded, height handled by content
+        // Add animated gold border when refreshing and not locked
+        nodeData.isRefreshing && !nodeData.isLocked && 'gold-pulse-border'
       )}
+      style={{
+        minHeight: isExpanded ? '320px' : '160px',
+        height: isExpanded ? 'auto' : '160px'
+      }}
     >
-      <div className="space-y-3">
+      <div 
+        className={cn(
+          "flex flex-col relative h-full",
+          isExpanded ? "space-y-3 p-1" : "space-y-3"
+        )}
+      >
         {/* Header with Lock */}
-        <div className="flex items-start justify-between">
-          <h3 className="text-lg font-bold">{nodeData.name}</h3>
+        <div className="flex items-start justify-between cursor-pointer" onClick={handleNodeClick} onMouseDown={(e) => e.stopPropagation()}>
+          <h3 className={cn(
+            "font-bold",
+            isExpanded ? "text-lg" : "text-lg"
+          )}>{nodeData.name || 'Loading...'}</h3>
           <button
             onClick={(e) => {
               e.stopPropagation();
               onToggleLock?.();
             }}
-            className="p-1 hover:bg-teal-600/20 rounded transition-colors"
+            onMouseDown={(e) => {
+              e.stopPropagation();
+            }}
+            className={cn(
+              "p-1 rounded transition-all flex-shrink-0",
+              isLocked 
+                ? "bg-gold-500 border border-gold-600 hover:bg-gold-600" 
+                : "hover:bg-teal-600/20"
+            )}
           >
             {isLocked ? (
-              <Lock className="w-4 h-4" />
+              <Lock className="w-4 h-4 text-obsidian-950" />
             ) : (
               <Unlock className="w-4 h-4 opacity-60" />
             )}
@@ -1884,35 +3329,48 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
         </div>
 
         {/* Details */}
-        <div className="space-y-2 text-sm">
-          <div className="flex items-center gap-2">
-            <span className="text-lg">🏢</span>
-            <span className="opacity-90">{nodeData.industry}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-lg">👤</span>
-            <span className="opacity-90">{nodeData.role}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-lg">📊</span>
-            <div className="flex items-center gap-2 flex-1">
-              <span className="opacity-90">Pain Level:</span>
-              <PainLevelIndicator level={nodeData.painDegree} maxLevel={5} showLabel={true} />
+        <div className={cn(
+          "text-sm cursor-pointer",
+          isExpanded ? "space-y-2" : "space-y-3",
+          isExpanded ? "flex-1 flex flex-col" : ""
+        )} onClick={handleNodeClick} onMouseDown={(e) => e.stopPropagation()}>
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-medium text-gold-500 uppercase tracking-wide min-w-0 flex-shrink-0">Industry</span>
+              <span className="opacity-90 truncate">{nodeData.industry}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-medium text-gold-500 uppercase tracking-wide min-w-0 flex-shrink-0">Role</span>
+              <span className="opacity-90 truncate">{nodeData.role}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-medium text-gold-500 uppercase tracking-wide min-w-0 flex-shrink-0">Pain Level</span>
+              <div className="flex items-center gap-2">
+                {renderPainRating(nodeData.painDegree)}
+              </div>
             </div>
           </div>
+
+          {/* Expanded Description */}
+          {isExpanded && nodeData.description && (
+            <div className="pt-3 mt-2 border-t border-gold-600/30 flex-1 min-h-0">
+              <p className="text-xs opacity-80 leading-relaxed pr-4 pb-8">
+                {nodeData.description}
+              </p>
+            </div>
+          )}
         </div>
 
-        {/* Expanded Description */}
-        {isExpanded && nodeData.description && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            className="pt-3 border-t border-teal-600/30"
-          >
-            <p className="text-sm opacity-80 leading-relaxed">
-              {nodeData.description}
-            </p>
-          </motion.div>
+        {/* Expand/Collapse Indicator */}
+        {!isSkeleton && (
+          <div className="absolute bottom-3 right-3 pointer-events-none">
+            <div className={cn(
+              "text-xs text-gold-500 opacity-60 transition-transform duration-200",
+              isExpanded && "rotate-180"
+            )}>
+              ▼
+            </div>
+          </div>
         )}
       </div>
     </BaseNode>
@@ -1920,6 +3378,171 @@ export const PersonaNode: React.FC<NodeProps> = ({ data, selected }) => {
 };
 
 export default PersonaNode; 
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/nodes/ProductVisionNode.tsx
+```tsx
+import React from 'react';
+import { NodeProps } from '@xyflow/react';
+import { BaseDocumentNodeComponent } from './BaseDocumentNode';
+import { ProductVisionNodeData } from '@/types/documentNodes.types';
+import { Lightbulb, Target, Users, Milestone } from 'lucide-react';
+import { cn } from '@/utils/cn';
+
+export const ProductVisionNode: React.FC<NodeProps<ProductVisionNodeData>> = ({ data, selected }) => {
+  const completedSections = Object.values(data.sections).filter(s => s.complete).length;
+  const totalSections = Object.keys(data.sections).length;
+  const sectionProgress = (completedSections / totalSections) * 100;
+
+  return (
+    <BaseDocumentNodeComponent
+      data={data}
+      selected={selected}
+      variant="product"
+      icon={<Lightbulb className="w-5 h-5 text-gold-500" />}
+    >
+      <div className="space-y-3">
+        {/* Product Summary */}
+        <div className="space-y-2">
+          <h4 className="text-lg font-bold text-gold-400">
+            {data.summary.productName || 'Untitled Product'}
+          </h4>
+          <p className="text-sm text-gray-300 leading-relaxed">
+            {data.summary.elevatorPitch || 'No elevator pitch defined'}
+          </p>
+        </div>
+
+        {/* Progress Bar */}
+        <div className="space-y-1">
+          <div className="flex justify-between text-xs text-gray-400">
+            <span>Completion</span>
+            <span>{Math.round(data.summary.completionPercentage)}%</span>
+          </div>
+          <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+            <div 
+              className="h-full bg-gradient-to-r from-gold-600 to-gold-400 transition-all duration-500"
+              style={{ width: `${data.summary.completionPercentage}%` }}
+            />
+          </div>
+        </div>
+
+        {/* Section Status */}
+        <div className="grid grid-cols-5 gap-1">
+          {Object.entries(data.sections).map(([key, section]) => (
+            <div
+              key={key}
+              className={cn(
+                "h-1 rounded-full transition-colors",
+                section.complete ? "bg-gold-500" : "bg-gray-700"
+              )}
+              title={`${key}: ${section.complete ? 'Complete' : 'Incomplete'}`}
+            />
+          ))}
+        </div>
+
+        {/* Key Metrics */}
+        <div className="grid grid-cols-2 gap-2 text-xs">
+          <div className="flex items-center gap-2 p-2 bg-gray-800/50 rounded">
+            <Users className="w-3 h-3 text-gold-500" />
+            <span className="text-gray-300">
+              {data.metrics.targetAudienceCount} Audiences
+            </span>
+          </div>
+          <div className="flex items-center gap-2 p-2 bg-gray-800/50 rounded">
+            <Target className="w-3 h-3 text-gold-500" />
+            <span className="text-gray-300">
+              {data.metrics.valuePropositionCount} Value Props
+            </span>
+          </div>
+          <div className="flex items-center gap-2 p-2 bg-gray-800/50 rounded">
+            <Milestone className="w-3 h-3 text-gold-500" />
+            <span className="text-gray-300">
+              {data.metrics.milestoneCount} Milestones
+            </span>
+          </div>
+          <div className="flex items-center gap-2 p-2 bg-gray-800/50 rounded">
+            <span className="text-red-400">⚠</span>
+            <span className="text-gray-300">
+              {data.metrics.riskCount} Risks
+            </span>
+          </div>
+        </div>
+
+        {/* Relationships */}
+        {data.relationships.feeds.length > 0 && (
+          <div className="pt-2 border-t border-gray-700">
+            <p className="text-xs text-gray-500">
+              Feeds into: {data.relationships.feeds.map(d => d.replace(/_/g, ' ')).join(', ')}
+            </p>
+          </div>
+        )}
+      </div>
+    </BaseDocumentNodeComponent>
+  );
+};
+
+export default ProductVisionNode;
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/nodes/QuoteNode.tsx
+```tsx
+import React from 'react';
+import { Quote } from 'lucide-react';
+import { cn } from '@/utils/cn';
+
+// QuoteNode Component - Acts as an Edge Label for Focus Group Mode
+export interface QuoteNodeData {
+  quote: string;
+  personaName: string;
+  personaId: string;
+  solutionId: string;
+}
+
+export const QuoteNode: React.FC<{ data: QuoteNodeData }> = ({ data }) => {
+  const { quote, personaName } = data;
+
+  if (!quote) return null;
+
+  return (
+    <div className={cn(
+      "relative max-w-xs p-4 rounded-lg",
+      "bg-obsidian-800/95 backdrop-blur-sm",
+      "border border-gold-600/50",
+      "shadow-lg shadow-gold-500/10",
+      "transition-all duration-300",
+      "hover:shadow-xl hover:shadow-gold-500/20",
+      "hover:border-gold-500"
+    )}>
+      {/* Quote Icon */}
+      <Quote className="absolute top-2 left-2 w-4 h-4 text-gold-500/50" />
+      
+      {/* Quote Content */}
+      <div className="pl-6">
+        <p className="text-sm text-obsidian-50 leading-relaxed italic">
+          "{quote}"
+        </p>
+        
+        {/* Attribution */}
+        <div className="mt-2 flex items-center gap-2">
+          <div className="h-px flex-1 bg-gold-600/30" />
+          <p className="text-xs text-gold-500 font-medium">
+            {personaName}
+          </p>
+        </div>
+      </div>
+      
+      {/* Corner Accent */}
+      <div className="absolute bottom-0 right-0 w-8 h-8">
+        <div className="absolute bottom-0 right-0 w-0 h-0 
+          border-l-[16px] border-l-transparent
+          border-b-[16px] border-b-gold-600/20
+          rounded-bl-sm" />
+      </div>
+    </div>
+  );
+};
+
+export default QuoteNode;
 ```
 
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/nodes/SolutionNode.tsx
@@ -1939,13 +3562,14 @@ export interface SolutionNodeData {
   complexity: 'low' | 'medium' | 'high';
   isLocked?: boolean;
   isSelected?: boolean;
+  isSkeleton?: boolean;
   onToggleLock?: () => void;
   onToggleSelect?: () => void;
 }
 
 export const SolutionNode: React.FC<NodeProps> = ({ data, selected }) => {
   const nodeData = data as unknown as SolutionNodeData;
-  const { isLocked = false, isSelected = false, onToggleLock, onToggleSelect } = nodeData;
+  const { isLocked = false, isSelected = false, isSkeleton = false, onToggleLock, onToggleSelect } = nodeData;
 
   const typeIcons = {
     feature: '⚡',
@@ -1959,6 +3583,50 @@ export const SolutionNode: React.FC<NodeProps> = ({ data, selected }) => {
     medium: 'text-warning-400',
     high: 'text-error-400',
   };
+
+  // Skeleton state
+  if (isSkeleton) {
+    return (
+      <BaseNode
+        variant="solution"
+        selected={selected}
+        showSourceHandle={false}
+        showTargetHandle={true}
+        className={cn(
+          "min-w-[320px] max-w-[380px]",
+          "shadow-lg shadow-gold-500/20", // Gold glow for solution nodes
+          "transition-shadow duration-1000"
+        )}
+      >
+        <div className="space-y-6">
+          {/* Skeleton Header */}
+          <div className="flex items-start justify-between mb-2">
+            <div className="flex items-start gap-3">
+              <div className="w-5 h-5 rounded skeleton-shimmer"></div>
+              <div className="h-6 rounded skeleton-shimmer w-40"></div>
+            </div>
+            <div className="w-4 h-4 rounded skeleton-shimmer"></div>
+          </div>
+
+          {/* Skeleton Description */}
+          <div className="space-y-5">
+            <div className="py-1">
+              <div className="h-4 rounded skeleton-shimmer w-full"></div>
+            </div>
+            <div className="py-1">
+              <div className="h-4 rounded skeleton-shimmer w-4/5"></div>
+            </div>
+          </div>
+
+          {/* Skeleton Tags */}
+          <div className="flex items-center gap-3">
+            <div className="h-6 rounded-full skeleton-shimmer w-24"></div>
+            <div className="h-4 rounded skeleton-shimmer w-28"></div>
+          </div>
+        </div>
+      </BaseNode>
+    );
+  }
 
   return (
     <BaseNode
@@ -1976,6 +3644,9 @@ export const SolutionNode: React.FC<NodeProps> = ({ data, selected }) => {
                 e.stopPropagation();
                 onToggleSelect?.();
               }}
+              onMouseDown={(e) => {
+                e.stopPropagation();
+              }}
               className="mt-0.5 hover:scale-110 transition-transform"
             >
               {isSelected ? (
@@ -1990,6 +3661,9 @@ export const SolutionNode: React.FC<NodeProps> = ({ data, selected }) => {
             onClick={(e) => {
               e.stopPropagation();
               onToggleLock?.();
+            }}
+            onMouseDown={(e) => {
+              e.stopPropagation();
             }}
             className="p-1 hover:bg-blue-600/20 rounded transition-colors"
           >
@@ -2024,18 +3698,549 @@ export const SolutionNode: React.FC<NodeProps> = ({ data, selected }) => {
 export default SolutionNode; 
 ```
 
-File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/Canvas.tsx
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/nodes/SystemArchitectureNode.tsx
 ```tsx
 import React from 'react';
+import { NodeProps } from '@xyflow/react';
+import { BaseDocumentNodeComponent } from './BaseDocumentNode';
+import { SystemArchitectureNodeData } from '@/types/documentNodes.types';
+import { Cpu, Layers, Shield, AlertTriangle } from 'lucide-react';
+import { cn } from '@/utils/cn';
+
+export const SystemArchitectureNode: React.FC<NodeProps<SystemArchitectureNodeData>> = ({ data, selected }) => {
+  const totalComponents = Object.values(data.sections.components.breakdown).reduce((a, b) => a + b, 0);
+  const hasIssues = data.healthMetrics.circularDependencies.length > 0 || 
+                   data.healthMetrics.componentsWithoutDependencies > 0;
+
+  return (
+    <BaseDocumentNodeComponent
+      data={data}
+      selected={selected}
+      variant="technical"
+      icon={<Cpu className="w-5 h-5 text-teal-500" />}
+    >
+      <div className="space-y-3">
+        {/* Architecture Summary */}
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <Layers className="w-4 h-4 text-teal-400" />
+            <h4 className="text-sm font-semibold text-teal-300">
+              {data.summary.architecturePattern || 'No Pattern Defined'}
+            </h4>
+          </div>
+          <p className="text-xs text-gray-400">
+            {data.summary.technologySummary || 'Technology stack not defined'}
+          </p>
+        </div>
+
+        {/* Component Breakdown */}
+        <div className="space-y-2">
+          <div className="flex justify-between items-center">
+            <p className="text-xs text-gray-400 uppercase tracking-wide">Components</p>
+            <span className="text-sm font-bold text-teal-400">{totalComponents}</span>
+          </div>
+          <div className="grid grid-cols-4 gap-1">
+            <div className="text-center p-2 bg-gray-800/50 rounded">
+              <p className="text-lg font-bold text-blue-400">{data.sections.components.breakdown.frontend}</p>
+              <p className="text-xs text-gray-500">Frontend</p>
+            </div>
+            <div className="text-center p-2 bg-gray-800/50 rounded">
+              <p className="text-lg font-bold text-green-400">{data.sections.components.breakdown.backend}</p>
+              <p className="text-xs text-gray-500">Backend</p>
+            </div>
+            <div className="text-center p-2 bg-gray-800/50 rounded">
+              <p className="text-lg font-bold text-purple-400">{data.sections.components.breakdown.database}</p>
+              <p className="text-xs text-gray-500">Database</p>
+            </div>
+            <div className="text-center p-2 bg-gray-800/50 rounded">
+              <p className="text-lg font-bold text-yellow-400">{data.sections.components.breakdown.infrastructure}</p>
+              <p className="text-xs text-gray-500">Infra</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Health Metrics */}
+        <div className="space-y-2">
+          <p className="text-xs text-gray-400 uppercase tracking-wide">Health Check</p>
+          <div className="space-y-1">
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-gray-300">Security Coverage</span>
+              <div className="flex items-center gap-2">
+                <div className="w-20 h-2 bg-gray-800 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-green-500"
+                    style={{ width: `${data.healthMetrics.securityMeasuresCoverage}%` }}
+                  />
+                </div>
+                <span className="text-gray-400 w-10 text-right">
+                  {data.healthMetrics.securityMeasuresCoverage}%
+                </span>
+              </div>
+            </div>
+            
+            {hasIssues && (
+              <div className="space-y-1 pt-1">
+                {data.healthMetrics.circularDependencies.length > 0 && (
+                  <div className="flex items-center gap-2 text-xs text-red-400">
+                    <AlertTriangle className="w-3 h-3" />
+                    <span>{data.healthMetrics.circularDependencies.length} circular dependencies</span>
+                  </div>
+                )}
+                {data.healthMetrics.componentsWithoutDependencies > 0 && (
+                  <div className="flex items-center gap-2 text-xs text-yellow-400">
+                    <AlertTriangle className="w-3 h-3" />
+                    <span>{data.healthMetrics.componentsWithoutDependencies} isolated components</span>
+                  </div>
+                )}
+              </div>
+            )}
+            
+            <div className="flex items-center gap-2 text-xs">
+              <Shield className={cn(
+                "w-3 h-3",
+                data.healthMetrics.performanceTargetsDefined ? "text-green-500" : "text-gray-600"
+              )} />
+              <span className={cn(
+                data.healthMetrics.performanceTargetsDefined ? "text-green-400" : "text-gray-500"
+              )}>
+                Performance targets {data.healthMetrics.performanceTargetsDefined ? 'defined' : 'missing'}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Deployment Info */}
+        {data.sections.deployment.environments.length > 0 && (
+          <div className="flex items-center gap-2 pt-2 border-t border-gray-700">
+            <div className="flex gap-1">
+              {data.sections.deployment.environments.map((env, i) => (
+                <span key={i} className="px-2 py-1 text-xs bg-gray-800 rounded">
+                  {env}
+                </span>
+              ))}
+            </div>
+            {data.sections.deployment.hasProductionConfig && (
+              <span className="text-xs text-green-400">✓ Prod ready</span>
+            )}
+          </div>
+        )}
+
+        {/* Critical Decisions */}
+        {data.sections.decisions.criticalDecisions.length > 0 && (
+          <div className="text-xs text-gray-500">
+            <span className="font-semibold">{data.sections.decisions.documentedDecisions}</span> architectural decisions documented
+          </div>
+        )}
+      </div>
+    </BaseDocumentNodeComponent>
+  );
+};
+
+export default SystemArchitectureNode;
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/nodes/UserStoryNode.tsx
+```tsx
+import React, { useState, useEffect } from 'react';
+import { NodeProps } from '@xyflow/react';
+import { Lock, Unlock, Edit2, MoreVertical, Plus, X, FileText } from 'lucide-react';
+import { cn } from '@/utils/cn';
+import { BaseNode } from './BaseNode';
+import { useCanvasStore } from '@/stores/canvasStore';
+
+// User Story Node
+export interface UserStoryNodeData {
+  id: string;
+  storyNumber: number;
+  asA: string;
+  iWant: string;
+  soThat: string;
+  acceptanceCriteria: string[];
+  priority: 'Low' | 'Medium' | 'High' | 'Critical';
+  storyPoints: number;
+  connectedSolutions: string[];
+  isLocked?: boolean;
+  isSkeleton?: boolean;
+  estimatedHours?: number;
+  onToggleLock?: () => void;
+  onUpdate?: (data: Partial<UserStoryNodeData>) => void;
+}
+
+export const UserStoryNode: React.FC<NodeProps> = ({ data, selected, id }) => {
+  const nodeData = data as unknown as UserStoryNodeData;
+  const { isLocked = false, isSkeleton = false, onToggleLock, onUpdate } = nodeData;
+  const { updateNode } = useCanvasStore();
+  
+  // Local state for editing
+  const [isEditing, setIsEditing] = useState(false);
+  const [draftData, setDraftData] = useState({
+    asA: nodeData.asA || '',
+    iWant: nodeData.iWant || '',
+    soThat: nodeData.soThat || '',
+    acceptanceCriteria: nodeData.acceptanceCriteria || []
+  });
+  const [newCriterion, setNewCriterion] = useState('');
+  const [floatOffset, setFloatOffset] = useState({ x: 0, y: 0 });
+
+  // Create ethereal floating effect for skeleton nodes
+  useEffect(() => {
+    if (!isSkeleton) return;
+
+    // Random parameters for each node to create variety
+    const baseAmplitude = 10 + Math.random() * 8; // 10-18 pixels (subtle for user stories)
+    const xSpeed = 0.0002 + Math.random() * 0.0001; // Slower speed
+    const ySpeed = 0.0003 + Math.random() * 0.0001;
+    const phaseOffset = Math.random() * Math.PI * 2; // Random starting phase
+
+    let animationFrame: number;
+    const startTime = Date.now();
+
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      
+      // Create smooth sinusoidal movement
+      const xOffset = Math.sin(elapsed * xSpeed + phaseOffset) * baseAmplitude;
+      const yOffset = Math.sin(elapsed * ySpeed + phaseOffset + Math.PI/2) * baseAmplitude * 0.6;
+
+      setFloatOffset({ x: xOffset, y: yOffset });
+      
+      animationFrame = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
+    };
+  }, [isSkeleton]);
+
+  // Auto-save draft changes
+  useEffect(() => {
+    if (!isEditing) return;
+    
+    const saveTimer = setTimeout(() => {
+      // Auto-save logic here
+      console.log('Auto-saving draft:', draftData);
+    }, 2000);
+
+    return () => clearTimeout(saveTimer);
+  }, [draftData, isEditing]);
+
+  const handleEdit = () => {
+    if (!isLocked) {
+      setIsEditing(true);
+    }
+  };
+
+  const handleSave = () => {
+    onUpdate?.(draftData);
+    setIsEditing(false);
+  };
+
+  const handleCancel = () => {
+    setDraftData({
+      asA: nodeData.asA || '',
+      iWant: nodeData.iWant || '',
+      soThat: nodeData.soThat || '',
+      acceptanceCriteria: nodeData.acceptanceCriteria || []
+    });
+    setIsEditing(false);
+  };
+
+  const handleAddCriterion = () => {
+    if (newCriterion.trim()) {
+      setDraftData(prev => ({
+        ...prev,
+        acceptanceCriteria: [...prev.acceptanceCriteria, newCriterion.trim()]
+      }));
+      setNewCriterion('');
+    }
+  };
+
+  const handleRemoveCriterion = (index: number) => {
+    setDraftData(prev => ({
+      ...prev,
+      acceptanceCriteria: prev.acceptanceCriteria.filter((_, i) => i !== index)
+    }));
+  };
+
+  const priorityColors = {
+    Low: 'bg-gray-600 text-gray-200',
+    Medium: 'bg-yellow-600 text-yellow-100',
+    High: 'bg-orange-600 text-orange-100',
+    Critical: 'bg-red-600 text-red-100'
+  };
+
+  // Skeleton state with ethereal floating
+  if (isSkeleton) {
+    return (
+      <div 
+        style={{
+          transform: `translate(${floatOffset.x}px, ${floatOffset.y}px)`,
+          transition: 'none',
+        }}
+      >
+        <BaseNode
+          variant="solution"
+          selected={selected}
+          showSourceHandle={false}
+          showTargetHandle={true}
+          targetHandlePosition="left"
+          className={cn(
+            "w-[400px] h-[320px]",
+            "opacity-70",
+            "shadow-lg shadow-blue-500/20",
+            "transition-shadow duration-1000"
+          )}
+        >
+          <div className="space-y-4">
+            {/* Skeleton Header */}
+            <div className="flex items-center justify-between h-12 border-b border-blue-500/20 pb-3">
+              <div className="h-6 rounded skeleton-shimmer w-24"></div>
+              <div className="flex gap-2">
+                <div className="w-8 h-8 rounded skeleton-shimmer"></div>
+                <div className="w-8 h-8 rounded skeleton-shimmer"></div>
+              </div>
+            </div>
+
+            {/* Skeleton Story Template */}
+            <div className="bg-white/5 rounded-lg p-4 space-y-3">
+              <div className="h-4 rounded skeleton-shimmer w-3/4"></div>
+              <div className="h-4 rounded skeleton-shimmer w-full"></div>
+              <div className="h-4 rounded skeleton-shimmer w-5/6"></div>
+            </div>
+
+            {/* Skeleton Acceptance Criteria */}
+            <div className="space-y-2">
+              <div className="h-4 rounded skeleton-shimmer w-32"></div>
+              <div className="h-3 rounded skeleton-shimmer w-full"></div>
+              <div className="h-3 rounded skeleton-shimmer w-4/5"></div>
+            </div>
+
+            {/* Skeleton Footer */}
+            <div className="flex items-center gap-3 pt-2 border-t border-blue-500/20">
+              <div className="h-5 rounded skeleton-shimmer w-20"></div>
+              <div className="h-5 rounded skeleton-shimmer w-16"></div>
+              <div className="h-5 rounded skeleton-shimmer w-16"></div>
+            </div>
+          </div>
+        </BaseNode>
+      </div>
+    );
+  }
+
+  return (
+    <BaseNode
+      variant="solution"
+      selected={selected}
+      showSourceHandle={false}
+      showTargetHandle={true}
+      targetHandlePosition="left"
+      className={cn(
+        "w-[400px] min-h-[320px]",
+        isEditing && "ring-2 ring-white",
+        isLocked && "border-2 border-yellow-400"
+      )}
+    >
+      <div className="space-y-4">
+        {/* Header Section */}
+        <div className="flex items-center justify-between h-12 border-b border-blue-500/20 pb-3">
+          <h3 className="text-base font-semibold text-white flex items-center gap-2">
+            <FileText className="w-4 h-4 text-blue-400" />
+            Story #{nodeData.storyNumber}
+          </h3>
+          <div className="flex items-center gap-2">
+            {isEditing ? (
+              <>
+                <button
+                  onClick={handleSave}
+                  className="px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700 transition-colors"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={handleCancel}
+                  className="px-3 py-1 bg-gray-600 text-white text-xs rounded hover:bg-gray-700 transition-colors"
+                >
+                  Cancel
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={handleEdit}
+                  disabled={isLocked}
+                  className={cn(
+                    "p-1.5 rounded transition-colors",
+                    isLocked ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-600/20"
+                  )}
+                >
+                  <Edit2 className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onToggleLock?.();
+                  }}
+                  className="p-1.5 hover:bg-blue-600/20 rounded transition-colors"
+                >
+                  {isLocked ? (
+                    <Lock className="w-4 h-4 text-yellow-400" />
+                  ) : (
+                    <Unlock className="w-4 h-4 opacity-60" />
+                  )}
+                </button>
+                <button className="p-1.5 hover:bg-blue-600/20 rounded transition-colors">
+                  <MoreVertical className="w-4 h-4" />
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* Story Template Section */}
+        <div className="bg-white/10 rounded-lg p-4 space-y-3">
+          <div className="space-y-2">
+            <label className="text-xs text-gray-300">As a:</label>
+            {isEditing ? (
+              <input
+                type="text"
+                value={draftData.asA}
+                onChange={(e) => setDraftData(prev => ({ ...prev, asA: e.target.value }))}
+                className="w-full bg-blue-900/50 border border-blue-500/30 rounded px-3 py-1 text-sm text-white focus:border-blue-400 focus:outline-none"
+                placeholder="User role..."
+              />
+            ) : (
+              <p className="text-sm text-white">{nodeData.asA || 'User role'}</p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-xs text-gray-300">I want:</label>
+            {isEditing ? (
+              <textarea
+                value={draftData.iWant}
+                onChange={(e) => setDraftData(prev => ({ ...prev, iWant: e.target.value }))}
+                className="w-full bg-blue-900/50 border border-blue-500/30 rounded px-3 py-1 text-sm text-white focus:border-blue-400 focus:outline-none resize-none"
+                rows={2}
+                placeholder="Feature or functionality..."
+              />
+            ) : (
+              <p className="text-sm text-white">{nodeData.iWant || 'Feature description'}</p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-xs text-gray-300">So that:</label>
+            {isEditing ? (
+              <textarea
+                value={draftData.soThat}
+                onChange={(e) => setDraftData(prev => ({ ...prev, soThat: e.target.value }))}
+                className="w-full bg-blue-900/50 border border-blue-500/30 rounded px-3 py-1 text-sm text-white focus:border-blue-400 focus:outline-none resize-none"
+                rows={2}
+                placeholder="Business value..."
+              />
+            ) : (
+              <p className="text-sm text-white">{nodeData.soThat || 'Business value'}</p>
+            )}
+          </div>
+        </div>
+
+        {/* Acceptance Criteria Section */}
+        <div className="space-y-2 max-h-[100px] overflow-y-auto">
+          <h4 className="text-xs font-medium text-gray-300 uppercase tracking-wide">
+            Acceptance Criteria:
+          </h4>
+          <ul className="space-y-1">
+            {(isEditing ? draftData.acceptanceCriteria : nodeData.acceptanceCriteria).map((criterion, index) => (
+              <li key={index} className="flex items-start gap-2 text-sm">
+                <span className="text-blue-400 mt-0.5">•</span>
+                <span className="flex-1 text-white">{criterion}</span>
+                {isEditing && (
+                  <button
+                    onClick={() => handleRemoveCriterion(index)}
+                    className="text-red-400 hover:text-red-300 transition-colors"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                )}
+              </li>
+            ))}
+          </ul>
+          {isEditing && (
+            <div className="flex items-center gap-2 mt-2">
+              <input
+                type="text"
+                value={newCriterion}
+                onChange={(e) => setNewCriterion(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleAddCriterion();
+                  }
+                }}
+                className="flex-1 bg-blue-900/50 border border-blue-500/30 rounded px-2 py-1 text-xs text-white focus:border-blue-400 focus:outline-none"
+                placeholder="New criterion..."
+              />
+              <button
+                onClick={handleAddCriterion}
+                className="text-blue-300 hover:text-blue-200 transition-colors"
+              >
+                <Plus className="w-4 h-4" />
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Metadata Footer */}
+        <div className="flex items-center gap-3 text-xs pt-2 border-t border-blue-500/20">
+          <span className={cn(
+            "px-2 py-1 rounded font-medium",
+            priorityColors[nodeData.priority]
+          )}>
+            {nodeData.priority}
+          </span>
+          <span className="text-gray-300">
+            Points: <span className="text-white font-medium">{nodeData.storyPoints}</span>
+          </span>
+          <span className="text-gray-300">|</span>
+          <span className="text-gray-300">
+            {nodeData.connectedSolutions.length} sols
+          </span>
+          {nodeData.estimatedHours && (
+            <>
+              <span className="text-gray-300">|</span>
+              <span className="text-gray-300">
+                {nodeData.estimatedHours}h
+              </span>
+            </>
+          )}
+        </div>
+      </div>
+    </BaseNode>
+  );
+};
+
+export default UserStoryNode;
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/Canvas.tsx
+```tsx
+import React, { useEffect } from 'react';
 import { ReactFlow, Background, BackgroundVariant, Controls, MiniMap } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
 import { useCanvasStore } from '@/stores/canvasStore';
+import { useCanvasNavigation } from '@/hooks/useCanvasNavigation';
 import { CanvasControls } from './controls';
 import { nodeTypes } from './nodes';
 import { edgeTypes } from './edges';
 
-export function Canvas() {
+export const Canvas: React.FC = () => {
+  console.log('[Canvas] Component rendering...');
+  
   const {
     nodes,
     edges,
@@ -2045,6 +4250,23 @@ export function Canvas() {
     onConnect,
     setViewport,
   } = useCanvasStore();
+
+  const {
+    setupResponsiveCanvas,
+    getEffectiveViewport
+  } = useCanvasNavigation();
+
+  console.log('[Canvas] State:', {
+    nodeCount: nodes.length,
+    edgeCount: edges.length,
+    viewport
+  });
+
+  // Setup responsive behavior
+  useEffect(() => {
+    const cleanup = setupResponsiveCanvas();
+    return cleanup;
+  }, [setupResponsiveCanvas]);
 
   return (
     <div className="w-full h-full relative">
@@ -2058,40 +4280,64 @@ export function Canvas() {
         onConnect={onConnect}
         viewport={viewport}
         onViewportChange={setViewport}
-        fitView
-        className="bg-gray-900"
+        fitView={false} // We handle this manually with navigation hook
+        fitViewOptions={{
+          padding: 0.1,
+          includeHiddenNodes: false
+        }}
+        minZoom={0.3}
+        maxZoom={2}
+        defaultViewport={{ x: 0, y: 0, zoom: 1 }}
+        zoomOnScroll={true}
+        zoomOnPinch={true}
+        panOnScroll={false}
+        zoomOnDoubleClick={true}
+        preventScrolling={true}
+        className="bg-obsidian-900"
+        proOptions={{ hideAttribution: true }}
       >
         {/* Background pattern */}
         <Background
           variant={BackgroundVariant.Dots}
           gap={12}
           size={1}
-          color="#374151"
+          color="#495057" /* var(--color-obsidian-500) */
         />
         
         {/* Controls */}
         <Controls
-          className="bg-gray-800 border border-gray-700 rounded-lg"
+          className="bg-obsidian-800 border border-obsidian-700 rounded-lg shadow-obsidian-deep"
           showZoom
           showFitView
           showInteractive
         />
         
-        {/* MiniMap */}
+        {/* MiniMap with improved visibility */}
         <MiniMap
-          className="bg-gray-800 border border-gray-700 rounded-lg"
-          maskColor="rgba(0, 0, 0, 0.6)"
+          className="bg-obsidian-800 border border-obsidian-700 rounded-lg shadow-obsidian-deep"
+          style={{
+            backgroundColor: '#16191C', // obsidian-800
+            width: 200,
+            height: 150,
+            bottom: 120
+          }}
+          maskColor="rgba(5, 7, 8, 0.2)" // Lighter mask for better visibility
           nodeColor={(node) => {
             const type = node.type || 'default';
             const colorMap: Record<string, string> = {
-              problem: '#DC2626',
-              persona: '#14B8A6',
-              painPoint: '#F97316',
-              solution: '#3B82F6',
-              userStory: '#8B5CF6',
+              problem: '#16191C', // Obsidian-800 for problems
+              persona: '#16191C', // Obsidian-800 for personas
+              painPoint: '#16191C', // Obsidian-800 for pain points
+              solution: '#D4AF37', // Metallic gold for solutions
+              userStory: '#16191C', // Obsidian-800 for user stories
+              coreProblem: '#D4AF37', // Metallic gold for core problems
             };
-            return colorMap[type] || '#6B7280';
+            return colorMap[type] || '#495057'; // Obsidian-500 default
           }}
+          nodeStrokeColor="#FFD700" // Gold border for visibility
+          nodeStrokeWidth={2}
+          zoomable
+          pannable
         />
         
         {/* Custom Canvas Controls - temporarily disabled */}
@@ -2099,7 +4345,113 @@ export function Canvas() {
       </ReactFlow>
     </div>
   );
+};
+
+// Canvas component is now directly exported above
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/ForceLayoutCanvas.tsx
+```tsx
+import React, { useEffect, useRef } from 'react';
+import { Node } from '@xyflow/react';
+import * as d3 from 'd3-force';
+import { useCanvasStore } from '@/stores/canvasStore';
+
+interface ForceLayoutCanvasProps {
+  children: React.ReactNode;
 }
+
+interface SimulationNode extends d3.SimulationNodeDatum {
+  id: string;
+  isSelected: boolean;
+}
+
+export const ForceLayoutCanvas: React.FC<ForceLayoutCanvasProps> = ({ children }) => {
+  const simulationRef = useRef<d3.Simulation<SimulationNode, undefined> | null>(null);
+  const { 
+    nodes, 
+    updateNode, 
+    forceLayoutMode, 
+    selectedPersonaId 
+  } = useCanvasStore();
+
+  useEffect(() => {
+    if (!forceLayoutMode || !selectedPersonaId) {
+      // Stop simulation if force layout is disabled
+      if (simulationRef.current) {
+        simulationRef.current.stop();
+        simulationRef.current = null;
+      }
+      return;
+    }
+
+    console.log('[ForceLayoutCanvas] Starting force simulation for persona:', selectedPersonaId);
+
+    // Filter to persona nodes only
+    const personaNodes = nodes.filter(node => node.type === 'persona');
+    if (personaNodes.length === 0) return;
+
+    // Find the selected persona
+    const selectedNode = personaNodes.find(node => node.id === selectedPersonaId);
+    if (!selectedNode) return;
+
+    // Create simulation nodes with current positions
+    const simulationNodes: SimulationNode[] = personaNodes.map(node => ({
+      id: node.id,
+      x: node.position.x + 160, // Center of node (assuming 320px width)
+      y: node.position.y + 100, // Center of node (assuming 200px height)
+      fx: node.id === selectedPersonaId ? node.position.x + 160 : undefined, // Fix selected node
+      fy: node.id === selectedPersonaId ? node.position.y + 100 : undefined,
+      isSelected: node.id === selectedPersonaId
+    }));
+
+    // Create d3 force simulation
+    const simulation = d3.forceSimulation(simulationNodes)
+      .force('center', d3.forceCenter(selectedNode.position.x + 160, selectedNode.position.y + 100))
+      .force('charge', d3.forceManyBody()
+        .strength((d: any) => d.isSelected ? 0 : -200) // Selected node has no repulsion
+        .distanceMax(300)
+      )
+      .force('collision', d3.forceCollide()
+        .radius((d: any) => d.isSelected ? 200 : 180) // Selected node has larger radius
+      )
+      .force('link', d3.forceRadial(250, selectedNode.position.x + 160, selectedNode.position.y + 100)
+        .radius((d: any) => d.isSelected ? 0 : 250) // Other nodes orbit around selected
+        .strength(0.3)
+      )
+      .alpha(0.8)
+      .alphaDecay(0.02)
+      .velocityDecay(0.4);
+
+    // Update node positions on each tick
+    simulation.on('tick', () => {
+      simulationNodes.forEach(simNode => {
+        const reactFlowNode = personaNodes.find(node => node.id === simNode.id);
+        if (reactFlowNode && simNode.id !== selectedPersonaId) {
+          // Don't move the selected persona
+          updateNode(simNode.id, {
+            position: {
+              x: (simNode.x || 0) - 160, // Convert back to top-left position
+              y: (simNode.y || 0) - 100
+            }
+          });
+        }
+      });
+    });
+
+    // Store simulation reference
+    simulationRef.current = simulation;
+
+    // Cleanup on unmount
+    return () => {
+      if (simulationRef.current) {
+        simulationRef.current.stop();
+      }
+    };
+  }, [forceLayoutMode, selectedPersonaId, nodes, updateNode]);
+
+  return <>{children}</>;
+}; 
 ```
 
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/index.ts
@@ -2109,6 +4461,152 @@ export { Canvas } from './Canvas';
 export * from './nodes';
 export * from './edges';
 export * from './controls'; 
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/canvas/LockRefreshExample.tsx
+```tsx
+import React from 'react';
+import { RefreshButton } from '@/components/RefreshControl';
+import { BulkLockControls } from '@/components/LockSystem';
+import { useBulkOperations } from '@/hooks/useBulkOperations';
+import { useCanvasStore } from '@/stores/canvasStore';
+import { useLockManagement } from '@/hooks/useLockManagement';
+import { Lock, Unlock, RefreshCw } from 'lucide-react';
+
+/**
+ * Example component showing how to integrate lock and refresh controls
+ * into a React Flow canvas interface
+ */
+export const LockRefreshExample: React.FC = () => {
+  const nodes = useCanvasStore((state) => state.nodes);
+  const {
+    selectedNodes,
+    isSelecting,
+    selectionBox,
+    handleNodeClick,
+    startBoxSelection,
+    updateBoxSelection,
+    endBoxSelection,
+  } = useBulkOperations();
+  
+  return (
+    <div className="relative w-full h-full">
+      {/* React Flow Canvas would go here */}
+      <div 
+        className="react-flow-wrapper"
+        onMouseDown={startBoxSelection}
+        onMouseMove={updateBoxSelection}
+        onMouseUp={endBoxSelection}
+      >
+        {/* Your React Flow component */}
+      </div>
+      
+      {/* Selection Box */}
+      {isSelecting && selectionBox && (
+        <div
+          className="selection-box"
+          style={{
+            left: Math.min(selectionBox.startX, selectionBox.endX),
+            top: Math.min(selectionBox.startY, selectionBox.endY),
+            width: Math.abs(selectionBox.endX - selectionBox.startX),
+            height: Math.abs(selectionBox.endY - selectionBox.startY),
+          }}
+        />
+      )}
+      
+      {/* Floating Refresh Button */}
+      <RefreshButton position="bottom-right" />
+      
+      {/* Bulk Lock Controls - Shows when multiple nodes are selected */}
+      <BulkLockControls
+        visible={selectedNodes.length > 1}
+        selectedNodes={selectedNodes}
+        nodeType="mixed"
+      />
+      
+      {/* Example of column refresh buttons */}
+      <div className="absolute top-4 left-4 flex flex-col gap-2">
+        <RefreshColumnButton type="personas" count={5} />
+        <RefreshColumnButton type="painPoints" count={7} />
+        <RefreshColumnButton type="solutions" count={6} />
+      </div>
+    </div>
+  );
+};
+
+// Column-specific refresh button
+const RefreshColumnButton: React.FC<{
+  type: string;
+  count: number;
+}> = ({ type, count }) => {
+  const { getLockedItemsByType } = useLockManagement();
+  const lockedCount = getLockedItemsByType(type).length;
+  
+  return (
+    <div className="bg-gray-800 rounded-lg p-3 border border-gray-700">
+      <div className="flex items-center justify-between mb-2">
+        <h4 className="text-sm font-medium text-white capitalize">{type}</h4>
+        <span className="text-xs text-gray-400">
+          {count - lockedCount} / {count} unlocked
+        </span>
+      </div>
+      <button
+        className="w-full flex items-center justify-center gap-2 px-3 py-1.5 
+                   bg-gray-700 hover:bg-gray-600 rounded-md transition-colors
+                   text-xs text-gray-300 hover:text-white"
+        onClick={() => {
+          // Handle column refresh
+          console.log(`Refreshing ${type}`);
+        }}
+        disabled={count === lockedCount}
+      >
+        <RefreshCw size={12} />
+        <span>Refresh Unlocked</span>
+      </button>
+    </div>
+  );
+};
+
+// Example of right-click context menu for lock/unlock
+export const NodeContextMenu: React.FC<{
+  nodeId: string;
+  nodeType: string;
+  x: number;
+  y: number;
+  onClose: () => void;
+}> = ({ nodeId, nodeType, x, y, onClose }) => {
+  const { isLocked, toggleLock } = useLockManagement();
+  const locked = isLocked(nodeId);
+  
+  return (
+    <div
+      className="fixed bg-gray-800 border border-gray-700 rounded-lg shadow-xl py-1 z-50"
+      style={{ left: x, top: y }}
+    >
+      <button
+        className="w-full px-4 py-2 text-sm text-left hover:bg-gray-700 
+                   flex items-center gap-2 text-gray-300 hover:text-white"
+        onClick={() => {
+          toggleLock(nodeId, nodeType);
+          onClose();
+        }}
+      >
+        {locked ? (
+          <>
+            <Unlock size={14} />
+            <span>Unlock Node</span>
+          </>
+        ) : (
+          <>
+            <Lock size={14} />
+            <span>Lock Node</span>
+          </>
+        )}
+      </button>
+      {/* Other context menu items */}
+    </div>
+  );
+};
 ```
 
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/common/Button.tsx
@@ -2254,8 +4752,10 @@ File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/common/ind
 export { Button } from './Button';
 export { Input } from './Input';
 export { Modal } from './Modal';
-export { Spinner, Skeleton, LoadingOverlay } from './LoadingStates';
-export { Tooltip } from './Tooltip'; 
+export { Spinner, Skeleton, LoadingOverlay, ProgressBar, ProgressSteps } from './LoadingStates';
+export type { ProgressStep, ProgressStepsProps } from './LoadingStates';
+export { Tooltip } from './Tooltip';
+export { PainPointDropdown } from './PainPointDropdown'; 
 ```
 
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/common/Input.tsx
@@ -2561,6 +5061,227 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   );
 };
 
+// Progress Steps Component (Following Design System M4)
+// Usage Example:
+// <ProgressSteps 
+//   currentStep={2} 
+//   variant="horizontal" 
+//   size="md"
+// />
+//
+// Or with custom steps:
+// <ProgressSteps
+//   currentStep={1}
+//   steps={[
+//     { id: 'step1', label: 'Step 1', description: 'First step' },
+//     { id: 'step2', label: 'Step 2', description: 'Second step' }
+//   ]}
+//   variant="vertical"
+// />
+
+export interface ProgressStep {
+  id: string;
+  label: string;
+  description?: string;
+  icon?: React.ReactNode;
+}
+
+export interface ProgressStepsProps {
+  steps?: ProgressStep[];
+  currentStep: number;
+  className?: string;
+  variant?: 'horizontal' | 'vertical';
+  size?: 'sm' | 'md' | 'lg';
+  onStepClick?: (stepIndex: number) => void;
+}
+
+const defaultWorkflowSteps: ProgressStep[] = [
+  {
+    id: 'problem',
+    label: 'Problem'
+  },
+  {
+    id: 'persona',
+    label: 'Persona'
+  },
+  {
+    id: 'pain-points',
+    label: 'Pain Points'
+  },
+  {
+    id: 'solutions',
+    label: 'Solutions'
+  },
+  {
+    id: 'focus-group',
+    label: 'Focus Group'
+  },
+  {
+    id: 'user-stories',
+    label: 'User Stories'
+  },
+  {
+    id: 'documentation',
+    label: 'Documentation'
+  }
+];
+
+const stepSizes = {
+  sm: {
+    circle: 'w-6 h-6',
+    text: 'text-xs',
+    spacing: 'gap-1'
+  },
+  md: {
+    circle: 'w-8 h-8',
+    text: 'text-sm',
+    spacing: 'gap-2'
+  },
+  lg: {
+    circle: 'w-10 h-10',
+    text: 'text-base',
+    spacing: 'gap-3'
+  }
+};
+
+export const ProgressSteps: React.FC<ProgressStepsProps> = ({
+  steps = defaultWorkflowSteps,
+  currentStep,
+  className,
+  variant = 'horizontal',
+  size = 'md',
+  onStepClick,
+}) => {
+  const sizeClasses = stepSizes[size];
+
+  const getStepStatus = (index: number): 'completed' | 'active' | 'pending' => {
+    if (index < currentStep) return 'completed';
+    if (index === currentStep) return 'active';
+    return 'pending';
+  };
+
+  const getStepStyles = (status: 'completed' | 'active' | 'pending') => {
+    switch (status) {
+      case 'completed':
+        return {
+          circle: 'bg-transparent text-white',
+          text: 'text-white'
+        };
+      case 'active':
+        return {
+          circle: 'bg-accent-600 text-white shadow-glow-metallic',
+          text: 'text-accent-500'
+        };
+      case 'pending':
+        return {
+          circle: 'bg-transparent text-slate-400',
+          text: 'text-slate-400'
+        };
+    }
+  };
+
+  if (variant === 'vertical') {
+    return (
+      <div className={cn('flex flex-col', className)}>
+        {steps.map((step, index) => {
+          const status = getStepStatus(index);
+          const styles = getStepStyles(status);
+          const isLast = index === steps.length - 1;
+
+          return (
+            <div key={step.id} className="flex items-start">
+              <div className="flex flex-col items-center">
+                {/* Progress Circle */}
+                <button
+                  onClick={() => onStepClick?.(index)}
+                  data-step-index={index}
+                  className={cn(
+                    'progress-circle',
+                    'flex items-center justify-center rounded-full',
+                    'transition-all duration-300 ease-default',
+                    'font-medium',
+                    sizeClasses.circle,
+                    styles.circle,
+                    onStepClick && 'cursor-pointer hover:scale-110 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-obsidian-800'
+                  )}
+                  disabled={!onStepClick}
+                >
+                                  <span className={sizeClasses.text}>{index + 1}</span>
+                </button>
+
+                {/* Progress Line */}
+                {!isLast && (
+                  <div
+                    className={cn(
+                      'progress-line',
+                      'w-0.5 min-h-[40px] my-2',
+                      'transition-all duration-slow ease-default',
+                      'bg-obsidian-600'
+                    )}
+                  />
+                )}
+              </div>
+
+              {/* Step Content */}
+              <div className={cn('ml-4 pb-8 min-h-[60px]', sizeClasses.spacing)}>
+                <div className={cn('font-medium', sizeClasses.text, styles.text)}>
+                  {step.label}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
+  // Horizontal layout
+  return (
+    <div className={cn('flex items-center gap-8', className)}>
+      {steps.map((step, index) => {
+        const status = getStepStatus(index);
+        const styles = getStepStyles(status);
+
+        return (
+          <button
+            key={step.id}
+            onClick={() => onStepClick?.(index)}
+            data-step-index={index}
+            className={cn(
+              'progress-step flex items-center',
+              'transition-all duration-300 ease-default',
+              'focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-obsidian-800',
+              sizeClasses.spacing,
+              onStepClick && 'cursor-pointer hover:scale-105 hover:shadow-lg'
+            )}
+            disabled={!onStepClick}
+          >
+            {/* Progress Circle */}
+            <div
+              className={cn(
+                'progress-circle',
+                'flex items-center justify-center rounded-full',
+                'font-medium flex-shrink-0',
+                sizeClasses.circle,
+                styles.circle
+              )}
+            >
+              <span className={sizeClasses.text}>{index + 1}</span>
+            </div>
+
+            {/* Step Label */}
+            <div className="ml-3">
+              <div className={cn('font-medium whitespace-nowrap', sizeClasses.text, styles.text)}>
+                {step.label}
+              </div>
+            </div>
+          </button>
+        );
+      })}
+    </div>
+  );
+};
+
 // Dots Loading Component
 export const DotsLoading: React.FC = () => {
   return (
@@ -2818,6 +5539,195 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
 };
 ```
 
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/common/PainPointDropdown.tsx
+```tsx
+import React, { useState, useRef, useEffect } from 'react';
+import { ChevronDown, AlertTriangle, ArrowLeft } from 'lucide-react';
+import { cn } from '@/utils/cn';
+import { useWorkflowStore } from '@/stores/workflowStore';
+
+interface PainPointDropdownProps {
+  onPainPointSelect?: (painPointId: string) => void;
+  onGoToProblem?: () => void;
+  className?: string;
+}
+
+export const PainPointDropdown: React.FC<PainPointDropdownProps> = ({
+  onPainPointSelect,
+  onGoToProblem,
+  className
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const { painPoints, coreProblem } = useWorkflowStore();
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handlePainPointClick = (painPointId: string) => {
+    onPainPointSelect?.(painPointId);
+    setIsOpen(false);
+  };
+
+  const handleGoToProblem = () => {
+    onGoToProblem?.();
+    setIsOpen(false);
+  };
+
+  // Show "Enter Problem" CTA if no core problem exists
+  if (!coreProblem) {
+    return (
+      <div ref={dropdownRef} className={cn("relative", className)}>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg transition-colors"
+        >
+          <AlertTriangle className="w-4 h-4" />
+          <span>Pain Points</span>
+          <ChevronDown className={cn("w-4 h-4 transition-transform", isOpen && "rotate-180")} />
+        </button>
+
+        {isOpen && (
+          <div className="absolute top-full left-0 mt-2 w-64 bg-gray-800 border border-gray-700 rounded-lg shadow-lg z-50">
+            <div className="p-4">
+              <div className="text-center">
+                <AlertTriangle className="w-8 h-8 text-amber-400 mx-auto mb-2" />
+                <p className="text-gray-300 text-sm mb-4">
+                  No problem defined yet. Please enter your core problem first.
+                </p>
+                <button
+                  onClick={handleGoToProblem}
+                  className="flex items-center gap-2 px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-lg transition-colors mx-auto"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  Enter Problem
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // Show "No Pain Points" CTA if core problem exists but no pain points
+  if (painPoints.length === 0) {
+    return (
+      <div ref={dropdownRef} className={cn("relative", className)}>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg transition-colors"
+        >
+          <AlertTriangle className="w-4 h-4" />
+          <span>Pain Points</span>
+          <ChevronDown className={cn("w-4 h-4 transition-transform", isOpen && "rotate-180")} />
+        </button>
+
+        {isOpen && (
+          <div className="absolute top-full left-0 mt-2 w-64 bg-gray-800 border border-gray-700 rounded-lg shadow-lg z-50">
+            <div className="p-4">
+              <div className="text-center">
+                <AlertTriangle className="w-8 h-8 text-amber-400 mx-auto mb-2" />
+                <p className="text-gray-300 text-sm mb-4">
+                  No pain points generated yet. Generate personas first to create pain points.
+                </p>
+                <button
+                  onClick={handleGoToProblem}
+                  className="flex items-center gap-2 px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-lg transition-colors mx-auto"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  Go to Problem
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // Show pain points dropdown
+  return (
+    <div ref={dropdownRef} className={cn("relative", className)}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg transition-colors"
+      >
+        <AlertTriangle className="w-4 h-4" />
+        <span>Pain Points ({painPoints.length})</span>
+        <ChevronDown className={cn("w-4 h-4 transition-transform", isOpen && "rotate-180")} />
+      </button>
+
+      {isOpen && (
+        <div className="absolute top-full left-0 mt-2 w-80 bg-gray-800 border border-gray-700 rounded-lg shadow-lg z-50 max-h-96 overflow-y-auto">
+          <div className="p-2">
+            <div className="text-xs text-gray-400 px-3 py-2 border-b border-gray-700">
+              Select a pain point to focus on:
+            </div>
+            {painPoints.map((painPoint, index) => (
+              <button
+                key={painPoint.id}
+                onClick={() => handlePainPointClick(painPoint.id)}
+                className="w-full text-left p-3 hover:bg-gray-700 rounded-lg transition-colors group"
+              >
+                <div className="flex items-start gap-3">
+                  <div className="flex-shrink-0">
+                    <div className={cn(
+                      "w-2 h-2 rounded-full mt-2",
+                      painPoint.severity === 1 ? "bg-red-500" :
+                      painPoint.severity === 2 ? "bg-orange-500" :
+                      painPoint.severity === 3 ? "bg-yellow-500" :
+                      "bg-gray-500"
+                    )} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-sm font-medium text-white">
+                        Pain Point {index + 1}
+                      </span>
+                      <span className={cn(
+                        "px-1.5 py-0.5 text-xs rounded",
+                        painPoint.severity === 1 ? "bg-red-900/50 text-red-300" :
+                        painPoint.severity === 2 ? "bg-orange-900/50 text-orange-300" :
+                        painPoint.severity === 3 ? "bg-yellow-900/50 text-yellow-300" :
+                        "bg-gray-900/50 text-gray-300"
+                      )}>
+                        {painPoint.severity === 1 ? "Critical" :
+                         painPoint.severity === 2 ? "High" :
+                         painPoint.severity === 3 ? "Medium" : "Low"}
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-300 line-clamp-2 group-hover:text-white transition-colors">
+                      {painPoint.description}
+                    </p>
+                    {painPoint.impact && (
+                      <p className="text-xs text-gray-500 mt-1">
+                        Impact: {painPoint.impact}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default PainPointDropdown; 
+```
+
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/common/Tooltip.tsx
 ```tsx
 import React, { useState, useRef, useEffect } from 'react';
@@ -3043,270 +5953,2784 @@ export const AuthDebug: React.FC = () => {
 }; 
 ```
 
-File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/layout/ProgressBar/ConnectedProgressBar.tsx
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/DemoCanvas/DemoAnimationController.tsx
 ```tsx
-import React from 'react';
-import { ProgressBar } from './ProgressBar';
-import { useWorkflowStore } from '@/stores/workflowStore';
+import { useReactFlow } from '@xyflow/react';
+import React, { useEffect } from 'react';
+import demoData from '../../data/demoFlowData.json';
 
-const WORKFLOW_STEPS = [
-  'problem_input',
-  'persona_discovery', 
-  'pain_point_analysis',
-  'solution_ideation',
-  'user_story_creation'
-];
-
-export const ConnectedProgressBar: React.FC = () => {
-  const { currentStep, personas } = useWorkflowStore();
-  
-  const currentStepIndex = WORKFLOW_STEPS.indexOf(currentStep) + 1;
-  const totalSteps = WORKFLOW_STEPS.length;
-  
-  const formattedPersonas = personas.slice(0, 5).map(persona => ({
-    id: persona.id,
-    name: persona.name,
-    avatar: undefined // We don't have avatars yet
-  }));
-
-  return (
-    <ProgressBar
-      currentStep={currentStepIndex}
-      totalSteps={totalSteps}
-      personas={formattedPersonas}
-      showPersonas={personas.length > 0}
-    />
-  );
-}; 
-```
-
-File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/layout/ProgressBar/index.ts
-```ts
-// Export components
-export { ProgressBar } from './ProgressBar';
-export { ProgressSteps } from './ProgressSteps';
-export { PersonaCircles } from './PersonaCircles';
-export { ConnectedProgressBar } from './ConnectedProgressBar';
-
-// Export types
-export type { Persona } from './PersonaCircles';
-```
-
-File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/layout/ProgressBar/PersonaCircles.tsx
-```tsx
-import React from 'react';
-import { cn } from '@/utils/cn';
-
-export interface Persona {
-  id: string;
-  name: string;
-  avatar?: string;
+interface DemoAnimationControllerProps {
+  onPhaseChange?: (phase: string) => void;
+  onProgressUpdate?: (progress: number) => void;
 }
 
-interface PersonaCirclesProps {
-  personas: Persona[];
-  maxVisible?: number;
-  className?: string;
-}
-
-export const PersonaCircles: React.FC<PersonaCirclesProps> = ({
-  personas,
-  maxVisible = 3,
-  className = '',
+export const DemoAnimationController: React.FC<DemoAnimationControllerProps> = ({
+  onPhaseChange,
+  onProgressUpdate,
 }) => {
-  const visiblePersonas = personas.slice(0, maxVisible);
-  const remainingCount = personas.length - maxVisible;
+  const { setNodes, setEdges } = useReactFlow();
 
-  return (
-    <div className={cn('flex -space-x-2', className)}>
-      {visiblePersonas.map((persona, index) => (
-        <div
-          key={persona.id}
-          className={cn(
-            'relative w-10 h-10 rounded-full ring-2 ring-gray-800',
-            'transition-transform duration-fast hover:z-10 hover:scale-110'
-          )}
-          style={{ zIndex: visiblePersonas.length - index }}
-          title={persona.name}
-        >
-          {persona.avatar ? (
-            <img 
-              src={persona.avatar} 
-              alt={persona.name}
-              className="w-full h-full rounded-full object-cover"
-            />
-          ) : (
-            <div className="w-full h-full rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center">
-              <span className="text-sm font-medium text-white">
-                {persona.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)}
-              </span>
-            </div>
-          )}
-        </div>
-      ))}
+  useEffect(() => {
+    // Set up the demo layout with just the core problem node
+    const setupDemo = () => {
+      // Create core problem node
+      const problemNode = {
+        id: 'demo-problem',
+        type: 'coreProblem',
+        position: { x: 100, y: 200 },
+        data: {
+          id: 'demo-problem',
+          problem: demoData.problem.statement,
+          isDemo: true,
+        },
+      };
+
+      // Set only the problem node, no personas or edges
+      setNodes([problemNode]);
+      setEdges([]);
       
-      {remainingCount > 0 && (
-        <div 
-          className="relative w-10 h-10 rounded-full bg-gray-700 ring-2 ring-gray-800 flex items-center justify-center"
-          style={{ zIndex: 0 }}
+      onPhaseChange?.('Demo Ready');
+      onProgressUpdate?.(100);
+    };
+
+    // Small delay to ensure canvas is ready
+    setTimeout(setupDemo, 100);
+  }, [setNodes, setEdges, onPhaseChange, onProgressUpdate]);
+
+  return null;
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/DemoCanvas/DemoCanvas.css
+```css
+/* Demo Canvas Styles */
+
+/* Smooth interactions */
+.react-flow__node {
+  transition: transform 200ms ease-in-out;
+}
+
+.react-flow__node:hover {
+  transform: scale(1.02);
+}
+
+/* Clean background */
+.demo-canvas-container {
+  background: #111827;
+}
+
+/* Smaller persona nodes for demo */
+.react-flow__node[data-type="persona"] {
+  transform: scale(0.75) !important;
+}
+
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/DemoCanvas/DemoCanvas.tsx
+```tsx
+import React, { useCallback, useMemo, useState } from 'react';
+import {
+  ReactFlow,
+  Node,
+  Edge,
+  Background,
+  BackgroundVariant,
+  NodeTypes,
+  EdgeTypes,
+  ReactFlowProvider,
+} from '@xyflow/react';
+import '@xyflow/react/dist/style.css';
+import './DemoCanvas.css';
+
+import { DemoAnimationController } from './DemoAnimationController';
+import { CoreProblemNode } from '../canvas/nodes/CoreProblemNode';
+import { PersonaNode } from '../canvas/nodes/PersonaNode';
+import { useAuth } from '@/hooks/useAuth';
+
+interface DemoCanvasProps {
+  className?: string;
+  showControls?: boolean;
+  onPhaseChange?: (phase: string) => void;
+  onProgressUpdate?: (progress: number) => void;
+  showAuthForm?: boolean;
+  onAuthSuccess?: () => void;
+}
+
+const nodeTypes: NodeTypes = {
+  coreProblem: CoreProblemNode,
+  persona: PersonaNode,
+};
+
+const DemoCanvasContent: React.FC<DemoCanvasProps> = ({
+  className = '',
+  showControls = false,
+  onPhaseChange,
+  onProgressUpdate,
+  showAuthForm = true,
+  onAuthSuccess,
+}) => {
+  const { signInWithEmail, signUpWithEmail, error, loading } = useAuth();
+  const [currentPhase, setCurrentPhase] = useState('');
+  const [progress, setProgress] = useState(0);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [localError, setLocalError] = useState<string | null>(null);
+
+  const handlePhaseChange = useCallback((phase: string) => {
+    setCurrentPhase(phase);
+    onPhaseChange?.(phase);
+  }, [onPhaseChange]);
+
+  const handleProgressUpdate = useCallback((progress: number) => {
+    setProgress(progress);
+    onProgressUpdate?.(progress);
+  }, [onProgressUpdate]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLocalError(null);
+
+    if (!email || !password) {
+      setLocalError('Please enter both email and password.');
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setLocalError('Please enter a valid email address.');
+      return;
+    }
+
+    try {
+      const result = isSignUp 
+        ? await signUpWithEmail(email, password)
+        : await signInWithEmail(email, password);
+
+      if (result.error) {
+        setLocalError(typeof result.error === 'string' ? result.error : result.error.message);
+      } else {
+        onAuthSuccess?.();
+      }
+    } catch (error) {
+      setLocalError(error instanceof Error ? error.message : 'Authentication failed');
+    }
+  };
+
+  const validateEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const displayError = localError || error;
+
+  const defaultViewport = { x: 0, y: 0, zoom: 1.0 };
+  
+  return (
+    <div className={`flex w-full h-full ${className}`}>
+      {/* Left Side - Demo Canvas (60%) */}
+      <div className="relative w-3/5 h-full bg-gray-900">
+        <ReactFlow
+          defaultNodes={[]}
+          defaultEdges={[]}
+          nodeTypes={nodeTypes}
+          defaultViewport={defaultViewport}
+          minZoom={0.5}
+          maxZoom={1.5}
+          fitView
+          proOptions={{ hideAttribution: true }}
+          nodesDraggable={true}
+          nodesConnectable={false}
+          elementsSelectable={true}
+          panOnDrag={true}
+          zoomOnScroll={true}
+          zoomOnPinch={true}
+          zoomOnDoubleClick={true}
         >
-          <span className="text-sm font-medium text-gray-300">
-            +{remainingCount}
-          </span>
+          <Background
+            variant={BackgroundVariant.Dots}
+            gap={12}
+            size={1}
+            color="#374151"
+          />
+          
+          <DemoAnimationController
+            onPhaseChange={handlePhaseChange}
+            onProgressUpdate={handleProgressUpdate}
+          />
+        </ReactFlow>
+        
+        {/* Overlay gradient for depth */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/20 via-transparent to-gray-900/20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-gray-900/40" />
+        </div>
+        
+        {/* Phase indicator - Hidden */}
+        <div className="absolute top-6 left-6 hidden">
+          <div className="bg-gray-800/80 backdrop-blur-sm rounded-lg px-4 py-3">
+            <span className="text-white text-sm font-medium">
+              {currentPhase || 'Initializing...'}
+            </span>
+          </div>
+        </div>
+        
+        {/* Progress indicator */}
+        <div className="absolute bottom-6 left-6 right-6">
+          <div className="bg-gray-800/80 backdrop-blur-sm rounded-full p-3">
+            <div className="relative h-1.5 bg-gray-700 rounded-full overflow-hidden">
+              <div
+                className="absolute inset-y-0 left-0 bg-gradient-to-r from-blue-500 to-accent-500 transition-all duration-300"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      {/* Right Side - Auth Form (40%) */}
+      {showAuthForm && (
+        <div className="w-2/5 h-full bg-gray-900 flex flex-col items-center justify-center relative overflow-hidden">
+          {/* Gradient overlay for depth */}
+          <div className="absolute inset-0 bg-gradient-to-l from-gray-900 via-gray-900/95 to-transparent pointer-events-none" />
+          
+          {/* Glass Card */}
+          <div className="relative w-full max-w-sm rounded-3xl bg-gradient-to-br from-gray-800/40 to-gray-900/40 backdrop-blur-xl shadow-2xl p-8 flex flex-col items-center border border-gray-700/50 mx-8">
+            {/* Logo */}
+            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-accent-500/20 mb-6 shadow-lg backdrop-blur-sm">
+              <svg className="w-6 h-6 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            
+            {/* Title */}
+            <h2 className="text-2xl font-semibold text-white mb-6 text-center">
+              Prob
+            </h2>
+            
+            {/* Form */}
+            <form className="flex flex-col w-full gap-4" onSubmit={handleSubmit}>
+              <div className="w-full flex flex-col gap-3">
+                <input
+                  placeholder="Email"
+                  type="email"
+                  value={email}
+                  className="w-full px-5 py-3 rounded-xl bg-gray-800/50 text-white placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500/50 focus:bg-gray-800/70 transition-all duration-300 backdrop-blur-sm border border-gray-700/30"
+                  onChange={(e) => setEmail(e.target.value)}
+                  disabled={loading}
+                />
+                <input
+                  placeholder="Password"
+                  type="password"
+                  value={password}
+                  className="w-full px-5 py-3 rounded-xl bg-gray-800/50 text-white placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500/50 focus:bg-gray-800/70 transition-all duration-300 backdrop-blur-sm border border-gray-700/30"
+                  onChange={(e) => setPassword(e.target.value)}
+                  disabled={loading}
+                />
+                {displayError && (
+                  <div className="text-sm text-red-400 text-left px-1">
+                    {displayError}
+                  </div>
+                )}
+              </div>
+              
+              <hr className="opacity-10 border-gray-600" />
+
+              <div>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full bg-accent-500/20 hover:bg-accent-500/30 text-white font-medium px-5 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 mb-3 text-sm backdrop-blur-sm border border-accent-500/30 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-accent-600/40"
+                >
+                  {loading ? 'Please wait...' : (isSignUp ? 'Sign up' : 'Sign in')}
+                </button>
+                
+                <div className="w-full text-center mt-4">
+                  <span className="text-xs text-gray-400">
+                    {isSignUp ? 'Already have an account? ' : "Don't have an account? "}
+                    <button
+                      type="button"
+                      onClick={() => setIsSignUp(!isSignUp)}
+                      className="underline text-accent-500 hover:text-accent-400 transition-colors duration-200"
+                      disabled={loading}
+                    >
+                      {isSignUp ? 'Sign in' : 'Sign up, it\'s free!'}
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </form>
+          </div>
+          
+          {/* User count and avatars */}
+          <div className="relative z-10 mt-12 flex flex-col items-center text-center px-8">
+            <p className="text-gray-400 text-sm mb-2">
+              Join <span className="font-medium text-white">thousands</span> of teams
+              discovering problems that matter.
+            </p>
+            <div className="flex -space-x-2">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent-500 to-accent-600 border-2 border-gray-900"></div>
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-gray-900"></div>
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 border-2 border-gray-900"></div>
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent-400 to-accent-500 border-2 border-gray-900"></div>
+            </div>
+          </div>
         </div>
       )}
     </div>
   );
 };
+
+export const DemoCanvas: React.FC<DemoCanvasProps> = (props) => {
+  return (
+    <ReactFlowProvider>
+      <DemoCanvasContent {...props} />
+    </ReactFlowProvider>
+  );
+};
 ```
 
-File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/layout/ProgressBar/ProgressBar.tsx
-```tsx
-import React from 'react';
-import { cn } from '@/utils/cn';
-import { PersonaCircles } from './PersonaCircles';
-import { ProgressSteps } from './ProgressSteps';
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/DemoCanvas/index.ts
+```ts
+export { DemoCanvas } from './DemoCanvas';
+export { DemoAnimationController } from './DemoAnimationController';
+```
 
-interface ProgressBarProps {
-  currentStep: number;
-  totalSteps: number;
-  personas?: Array<{ id: string; name: string; avatar?: string }>;
-  showPersonas?: boolean;
-  className?: string;
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/DocumentNode/DocumentNode.css
+```css
+/* DocumentNode specific styles */
+
+/* Node status animations */
+.document-node-pending {
+  background: linear-gradient(135deg, var(--color-gray-800), var(--color-gray-700));
+  border-color: var(--color-gray-600);
 }
 
-export const ProgressBar: React.FC<ProgressBarProps> = ({
-  currentStep,
-  totalSteps,
-  personas = [],
-  showPersonas = true,
-  className = '',
-}) => {
-  const progressPercentage = (currentStep / totalSteps) * 100;
+.document-node-processing {
+  position: relative;
+  overflow: hidden;
+}
+
+.document-node-processing::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(59, 130, 246, 0.1),
+    transparent
+  );
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.document-node-complete {
+  background: linear-gradient(135deg, var(--color-gray-800), var(--color-gray-700));
+  border-color: var(--color-success-500);
+}
+
+.document-node-error {
+  background: linear-gradient(135deg, var(--color-gray-800), var(--color-gray-700));
+  border-color: var(--color-error-500);
+}
+
+/* Hover state */
+.document-node:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Status indicator animations */
+.status-indicator-processing {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Progress bar animation */
+.progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-gray-700);
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--color-primary-500);
+  animation: progress 2s ease-in-out infinite;
+}
+
+@keyframes progress {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Document type icons */
+.document-icon {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+}
+
+.document-icon--product-vision {
+  color: var(--color-primary-400);
+}
+
+.document-icon--functional-requirements {
+  color: var(--color-green-400);
+}
+
+.document-icon--system-architecture {
+  color: var(--color-purple-400);
+}
+
+.document-icon--data-flow {
+  color: var(--color-yellow-400);
+}
+
+.document-icon--design-system {
+  color: var(--color-pink-400);
+}
+
+.document-icon--database-schema {
+  color: var(--color-orange-400);
+}
+
+/* Preview content */
+.document-preview {
+  max-height: 120px;
+  overflow: hidden;
+  position: relative;
+}
+
+.document-preview::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--color-gray-800)
+  );
+  pointer-events: none;
+}
+
+/* Action buttons */
+.document-action-button {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.document-action-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.document-action-button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.document-action-button--primary {
+  background: var(--color-primary-600);
+  color: white;
+}
+
+.document-action-button--primary:hover {
+  background: var(--color-primary-700);
+}
+
+.document-action-button--secondary {
+  background: var(--color-gray-700);
+  color: var(--color-gray-300);
+}
+
+.document-action-button--secondary:hover {
+  background: var(--color-gray-600);
+  color: white;
+}
+
+/* React Flow handle overrides for document nodes */
+.react-flow__node-documentNode .react-flow__handle {
+  width: 12px;
+  height: 12px;
+  background: var(--color-gray-600);
+  border: 2px solid var(--color-gray-900);
+  transition: all 150ms;
+}
+
+.react-flow__node-documentNode .react-flow__handle:hover {
+  background: var(--color-primary-500);
+  transform: scale(1.2);
+}
+
+.react-flow__node-documentNode.selected .react-flow__handle {
+  background: var(--color-primary-500);
+}
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/DocumentNode/DocumentNode.tsx
+```tsx
+import React, { useState, useEffect } from 'react';
+import { Handle, Position } from '@xyflow/react';
+import { DocumentMetadata } from '../../utils/documentFormatters';
+import { DocumentPreview } from './DocumentPreview';
+
+interface DocumentNodeProps {
+  data: {
+    metadata: DocumentMetadata;
+    content?: string;
+    status: 'pending' | 'processing' | 'complete' | 'error';
+    error?: string;
+    onView?: () => void;
+    onRegenerate?: () => void;
+  };
+  selected?: boolean;
+}
+
+export const DocumentNode: React.FC<DocumentNodeProps> = ({ data, selected }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const { metadata, content, status, error, onView, onRegenerate } = data;
+
+  // Get icon based on document type
+  const getDocumentIcon = () => {
+    switch (metadata.type) {
+      case 'product-vision':
+        return (
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        );
+      case 'functional-requirements':
+        return (
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+          </svg>
+        );
+      case 'system-architecture':
+        return (
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+          </svg>
+        );
+      case 'data-flow':
+        return (
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        );
+      case 'design-system':
+        return (
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+          </svg>
+        );
+      case 'database-schema':
+        return (
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+          </svg>
+        );
+      default:
+        return (
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+        );
+    }
+  };
+
+  // Get status color and animation
+  const getStatusStyles = () => {
+    switch (status) {
+      case 'pending':
+        return 'border-gray-600 bg-gray-800';
+      case 'processing':
+        return 'border-blue-500 bg-gray-800 animate-pulse';
+      case 'complete':
+        return 'border-green-500 bg-gray-800';
+      case 'error':
+        return 'border-red-500 bg-gray-800';
+      default:
+        return 'border-gray-600 bg-gray-800';
+    }
+  };
+
+  const getStatusIcon = () => {
+    switch (status) {
+      case 'pending':
+        return (
+          <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        );
+      case 'processing':
+        return (
+          <svg className="w-4 h-4 text-blue-500 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+        );
+      case 'complete':
+        return (
+          <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
+        );
+      case 'error':
+        return (
+          <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        );
+    }
+  };
 
   return (
-    <div className={cn('w-full space-y-4', className)}>
-      <div className="flex items-center justify-between w-full">
-        <div className="space-y-1">
-          <span className="text-sm font-medium text-gray-400">
-            Step {currentStep} of {totalSteps}
-          </span>
-          <span className="text-2xl font-semibold text-white">
-            {Math.round(progressPercentage)}%
-          </span>
+    <>
+      <Handle
+        type="target"
+        position={Position.Left}
+        className="w-3 h-3 bg-gray-600 border-2 border-gray-900"
+      />
+      
+      <div
+        className={`
+          relative min-w-[280px] rounded-lg border-2 transition-all duration-300
+          ${getStatusStyles()}
+          ${selected ? 'ring-2 ring-blue-500 ring-offset-2 ring-offset-gray-900' : ''}
+          ${isHovered ? 'transform scale-105 shadow-xl' : 'shadow-lg'}
+        `}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {/* Header */}
+        <div className="px-4 py-3 border-b border-gray-700">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="text-gray-400">
+                {getDocumentIcon()}
+              </div>
+              <h3 className="text-sm font-medium text-white">
+                {metadata.title}
+              </h3>
+            </div>
+            <div className="flex items-center gap-2">
+              {getStatusIcon()}
+            </div>
+          </div>
         </div>
-        
-        {showPersonas && personas.length > 0 && (
-          <PersonaCircles personas={personas} />
+
+        {/* Content */}
+        <div className="p-4">
+          {status === 'processing' && (
+            <div className="space-y-2">
+              <div className="h-2 bg-gray-700 rounded animate-pulse"></div>
+              <div className="h-2 bg-gray-700 rounded animate-pulse w-3/4"></div>
+              <div className="h-2 bg-gray-700 rounded animate-pulse w-1/2"></div>
+            </div>
+          )}
+
+          {status === 'complete' && content && (
+            <DocumentPreview content={content} metadata={metadata} />
+          )}
+
+          {status === 'error' && (
+            <div className="space-y-2">
+              <p className="text-sm text-red-400">Generation failed</p>
+              {error && <p className="text-xs text-gray-500">{error}</p>}
+            </div>
+          )}
+
+          {status === 'pending' && (
+            <p className="text-sm text-gray-500">Waiting to generate...</p>
+          )}
+        </div>
+
+        {/* Actions */}
+        {(status === 'complete' || status === 'error') && (
+          <div className="flex gap-2 px-4 pb-3">
+            {status === 'complete' && onView && (
+              <button
+                onClick={onView}
+                className="flex-1 px-3 py-1 text-xs bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors duration-150"
+              >
+                View
+              </button>
+            )}
+            {onRegenerate && (
+              <button
+                onClick={onRegenerate}
+                className="flex-1 px-3 py-1 text-xs bg-gray-700 hover:bg-gray-600 text-gray-300 rounded transition-colors duration-150"
+              >
+                Regenerate
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* Progress indicator for processing state */}
+        {status === 'processing' && (
+          <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-700 rounded-b-lg overflow-hidden">
+            <div className="h-full bg-blue-500 animate-progress"></div>
+          </div>
         )}
       </div>
-      
-      <div className="relative h-2 bg-gray-700 rounded-full overflow-hidden w-full">
-        <div 
-          className="absolute inset-y-0 left-0 bg-primary-600 rounded-full transition-all duration-500 ease-out"
-          style={{ width: `${progressPercentage}%` }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/20 animate-pulse" />
-        </div>
-      </div>
-      
-      <div className="w-full">
-        <ProgressSteps 
-          currentStep={currentStep}
-          totalSteps={totalSteps}
-        />
+
+      <Handle
+        type="source"
+        position={Position.Right}
+        className="w-3 h-3 bg-gray-600 border-2 border-gray-900"
+      />
+
+      <style jsx>{`
+        @keyframes progress {
+          0% {
+            width: 0%;
+          }
+          100% {
+            width: 100%;
+          }
+        }
+        
+        .animate-progress {
+          animation: progress 2s ease-in-out infinite;
+        }
+      `}</style>
+    </>
+  );
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/DocumentNode/DocumentPreview.tsx
+```tsx
+import React from 'react';
+import { DocumentMetadata } from '../../utils/documentFormatters';
+
+interface DocumentPreviewProps {
+  content: string;
+  metadata: DocumentMetadata;
+  maxLines?: number;
+}
+
+export const DocumentPreview: React.FC<DocumentPreviewProps> = ({ 
+  content, 
+  metadata,
+  maxLines = 3 
+}) => {
+  // Extract preview text from markdown content
+  const getPreviewText = () => {
+    // Remove markdown formatting for preview
+    let preview = content
+      .replace(/#{1,6}\s+/g, '') // Remove headers
+      .replace(/\*\*(.+?)\*\*/g, '$1') // Remove bold
+      .replace(/\*(.+?)\*/g, '$1') // Remove italic
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Remove links
+      .replace(/`([^`]+)`/g, '$1') // Remove inline code
+      .replace(/```[\s\S]*?```/g, '') // Remove code blocks
+      .replace(/^\s*[-*]\s+/gm, '') // Remove list markers
+      .replace(/^\s*\d+\.\s+/gm, '') // Remove numbered list markers
+      .replace(/\n{2,}/g, ' ') // Replace multiple newlines with space
+      .trim();
+
+    // Limit to first few sentences or characters
+    const sentences = preview.split(/[.!?]\s+/);
+    const limitedSentences = sentences.slice(0, maxLines).join('. ');
+    
+    if (limitedSentences.length > 200) {
+      return limitedSentences.substring(0, 197) + '...';
+    }
+    
+    return limitedSentences + (sentences.length > maxLines ? '...' : '');
+  };
+
+  return (
+    <div className="space-y-2">
+      <h4 className="text-sm font-medium text-gray-300">{metadata.title}</h4>
+      <p className="text-xs text-gray-500 leading-relaxed">
+        {getPreviewText()}
+      </p>
+      <div className="flex items-center gap-4 text-xs text-gray-600">
+        <span>v{metadata.version}</span>
+        <span>•</span>
+        <span>{metadata.updatedAt.toLocaleDateString()}</span>
       </div>
     </div>
   );
-}; 
+};
 ```
 
-File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/layout/ProgressBar/ProgressSteps.tsx
-```tsx
-import React from 'react';
-import { Check } from 'lucide-react';
-import { cn } from '@/utils/cn';
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/DocumentNode/index.ts
+```ts
+export { DocumentNode } from './DocumentNode';
+export { DocumentPreview } from './DocumentPreview';
+```
 
-interface ProgressStepsProps {
-  currentStep: number;
-  totalSteps: number;
-  stepLabels?: string[];
-  className?: string;
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/DocumentViewer/CodeBlock.tsx
+```tsx
+import React, { useState } from 'react';
+import { highlightCode, getTokenClass } from '../../utils/syntaxHighlighting';
+
+interface CodeBlockProps {
+  code: string;
+  language?: string;
+  showLineNumbers?: boolean;
 }
 
-export const ProgressSteps: React.FC<ProgressStepsProps> = ({
-  currentStep,
-  totalSteps,
-  stepLabels = [],
-  className = '',
+export const CodeBlock: React.FC<CodeBlockProps> = ({ 
+  code, 
+  language = 'text',
+  showLineNumbers = true 
 }) => {
-  console.log('[ProgressSteps] Rendering with currentStep:', currentStep, 'totalSteps:', totalSteps);
-  const steps = Array.from({ length: totalSteps }, (_, i) => i + 1);
-  
-  console.log('[ProgressSteps] Steps array:', steps);
-  console.log('[ProgressSteps] Step analysis:', steps.map(step => ({
-    step,
-    isCompleted: step < currentStep,
-    isCurrent: step === currentStep
-  })));
+  const [copied, setCopied] = useState(false);
+
+  const lines = code.split('\n');
+  const tokens = highlightCode(code, language);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      console.error('Failed to copy code:', error);
+    }
+  };
 
   return (
-    <div className={cn('relative w-full', className)}>
-      {/* Connecting lines background */}
-      <div className="absolute top-4 left-0 right-0 h-0.5 bg-gray-700" />
-      
-      {/* Progress overlay on connecting lines */}
-      <div 
-        className="absolute top-4 left-0 h-0.5 bg-accent-500 transition-all duration-slow"
-        style={{ 
-          width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%` 
-        }}
-      />
-      
-      {/* Steps grid */}
-      <div 
-        className="grid w-full"
-        style={{ 
-          gridTemplateColumns: `repeat(${totalSteps}, 1fr)`,
-        }}
-      >
-        {steps.map((step) => {
-          const isCompleted = step < currentStep;
-          const isCurrent = step === currentStep;
-          const label = stepLabels[step - 1] || `Step ${step}`;
-
-          return (
-            <div key={step} className="flex flex-col items-center gap-2 relative z-10">
-              <div
-                className={cn(
-                  'w-8 h-8 rounded-full flex items-center justify-center transition-all duration-base',
-                  'ring-2 ring-offset-2 ring-offset-gray-900',
-                  isCompleted && 'bg-accent-500 ring-accent-500',
-                  isCurrent && 'bg-gray-700 ring-primary-500 animate-pulse-glow',
-                  !isCompleted && !isCurrent && 'bg-gray-700 ring-gray-600'
-                )}
-              >
-                {isCompleted ? (
-                  <Check className="w-4 h-4 text-white" />
-                ) : (
-                  <span className={cn(
-                    'text-sm font-medium',
-                    isCurrent ? 'text-white' : 'text-gray-400'
-                  )}>
-                    {step}
-                  </span>
-                )}
-              </div>
-              <span className={cn(
-                'text-xs font-medium text-center',
-                (isCompleted || isCurrent) ? 'text-gray-300' : 'text-gray-500'
-              )}>
-                {label}
-              </span>
-            </div>
-          );
-        })}
+    <div className="relative group bg-gray-800 rounded-lg overflow-hidden">
+      {/* Header */}
+      <div className="flex items-center justify-between px-4 py-2 bg-gray-700 border-b border-gray-600">
+        <span className="text-xs font-mono text-gray-400">{language}</span>
+        <button
+          onClick={handleCopy}
+          className="flex items-center gap-2 px-2 py-1 text-xs text-gray-400 hover:text-white transition-colors duration-150"
+        >
+          {copied ? (
+            <>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              Copied!
+            </>
+          ) : (
+            <>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+              Copy
+            </>
+          )}
+        </button>
       </div>
+
+      {/* Code content */}
+      <div className="relative overflow-x-auto">
+        <table className="w-full">
+          <tbody>
+            {lines.map((line, lineIndex) => (
+              <tr key={lineIndex} className="hover:bg-gray-700/30">
+                {showLineNumbers && (
+                  <td className="px-4 py-0 text-right text-gray-500 select-none text-sm font-mono">
+                    {lineIndex + 1}
+                  </td>
+                )}
+                <td className="px-4 py-0 w-full">
+                  <pre className="font-mono text-sm">
+                    <code>
+                      {renderLine(line, lineIndex, tokens)}
+                    </code>
+                  </pre>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+function renderLine(line: string, lineIndex: number, tokens: ReturnType<typeof highlightCode>) {
+  // This is a simplified version - in production, properly map tokens to lines
+  let currentPosition = 0;
+  const lineTokens: JSX.Element[] = [];
+
+  tokens.forEach((token, tokenIndex) => {
+    const tokenLines = token.value.split('\n');
+    tokenLines.forEach((tokenLine, tokenLineIndex) => {
+      if (tokenLineIndex > 0) {
+        currentPosition++;
+      }
+      if (currentPosition === lineIndex && tokenLine) {
+        lineTokens.push(
+          <span key={`${tokenIndex}-${tokenLineIndex}`} className={getTokenClass(token.type)}>
+            {tokenLine}
+          </span>
+        );
+      }
+    });
+  });
+
+  return lineTokens.length > 0 ? lineTokens : <span className="text-gray-300">{line || ' '}</span>;
+}
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/DocumentViewer/DocumentToolbar.tsx
+```tsx
+import React from 'react';
+import { DocumentMetadata } from '../../utils/documentFormatters';
+
+interface DocumentToolbarProps {
+  metadata: DocumentMetadata;
+  onExport: (format: 'markdown' | 'pdf' | 'html') => void;
+  onClose: () => void;
+  onToggleToc: () => void;
+  showToc: boolean;
+}
+
+export const DocumentToolbar: React.FC<DocumentToolbarProps> = ({
+  metadata,
+  onExport,
+  onClose,
+  onToggleToc,
+  showToc,
+}) => {
+  return (
+    <div className="h-16 bg-gray-800 border-b border-gray-700 flex items-center justify-between px-6">
+      <div className="flex items-center gap-4">
+        <button
+          onClick={onToggleToc}
+          className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-md transition-colors duration-150"
+          title={showToc ? 'Hide table of contents' : 'Show table of contents'}
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
+        <div>
+          <h1 className="text-lg font-semibold text-white">{metadata.title}</h1>
+          <p className="text-xs text-gray-400">
+            Version {metadata.version} • Updated {metadata.updatedAt.toLocaleDateString()}
+          </p>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-2">
+        {/* Export dropdown */}
+        <div className="relative group">
+          <button className="flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 text-gray-300 rounded-md transition-colors duration-150">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Export
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          
+          <div className="absolute right-0 mt-1 w-48 bg-gray-700 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-10">
+            <button
+              onClick={() => onExport('markdown')}
+              className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 hover:text-white transition-colors duration-150"
+            >
+              Export as Markdown
+            </button>
+            <button
+              onClick={() => onExport('html')}
+              className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 hover:text-white transition-colors duration-150"
+            >
+              Export as HTML
+            </button>
+            <button
+              onClick={() => onExport('pdf')}
+              className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 hover:text-white transition-colors duration-150"
+            >
+              Export as PDF
+            </button>
+          </div>
+        </div>
+
+        {/* Print button */}
+        <button
+          onClick={() => window.print()}
+          className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-md transition-colors duration-150"
+          title="Print document"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+          </svg>
+        </button>
+
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-md transition-colors duration-150"
+          title="Close document viewer"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/DocumentViewer/DocumentViewer.css
+```css
+/* DocumentViewer specific styles */
+
+/* Smooth animations for modal appearance */
+.document-viewer-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.document-viewer-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.document-viewer-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.document-viewer-exit-active {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Markdown content styling */
+.markdown-content {
+  color: var(--color-text-secondary);
+  line-height: 1.75;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  color: var(--color-text-primary);
+  font-weight: 600;
+  scroll-margin-top: 5rem;
+}
+
+.markdown-content h1 {
+  font-size: 2.25rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.markdown-content h2 {
+  font-size: 1.875rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.markdown-content h3 {
+  font-size: 1.5rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.markdown-content p {
+  margin-bottom: 1rem;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.markdown-content li {
+  margin-bottom: 0.25rem;
+}
+
+.markdown-content blockquote {
+  border-left: 4px solid var(--color-border);
+  padding-left: 1rem;
+  font-style: italic;
+  color: var(--color-text-secondary);
+  margin: 1rem 0;
+}
+
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.markdown-content th,
+.markdown-content td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.markdown-content th {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+}
+
+.markdown-content code {
+  background: var(--color-surface);
+  color: #60a5fa;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+  font-family: var(--font-mono);
+}
+
+.markdown-content pre {
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+.markdown-content pre code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: 0.875rem;
+}
+
+/* Table of contents */
+.toc-item {
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toc-item:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text-primary);
+}
+
+.toc-item.active {
+  background: var(--color-surface-hover);
+  color: var(--color-text-primary);
+  border-left: 2px solid var(--color-accent-500);
+}
+
+/* Scrollbar styling for content area */
+.document-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.document-content::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+
+.document-content::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+.document-content::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Export dropdown */
+.export-dropdown {
+  transform-origin: top right;
+  animation: dropdownOpen 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes dropdownOpen {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Code block enhancements */
+.code-block-wrapper {
+  position: relative;
+  margin: 1rem 0;
+}
+
+.code-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background: var(--color-surface-hover);
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.code-block-language {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.code-block-copy-button {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 0.25rem;
+  transition: all 150ms;
+  cursor: pointer;
+}
+
+.code-block-copy-button:hover {
+  color: var(--color-text-primary);
+  border-color: var(--color-text-secondary);
+}
+
+.code-block-copy-button.copied {
+  color: #10b981;
+  border-color: #10b981;
+}
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/DocumentViewer/DocumentViewer.tsx
+```tsx
+import React, { useState, useEffect } from 'react';
+import { DocumentToolbar } from './DocumentToolbar';
+import { TableOfContents } from './TableOfContents';
+import { MarkdownRenderer } from './MarkdownRenderer';
+import { extractTableOfContents, DocumentMetadata } from '../../utils/documentFormatters';
+import { useDocumentExport } from '../../hooks/useDocumentExport';
+
+interface DocumentViewerProps {
+  content: string;
+  metadata: DocumentMetadata;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export const DocumentViewer: React.FC<DocumentViewerProps> = ({
+  content,
+  metadata,
+  isOpen,
+  onClose,
+}) => {
+  const [showToc, setShowToc] = useState(true);
+  const [activeHeadingId, setActiveHeadingId] = useState<string>('');
+  const [tableOfContents, setTableOfContents] = useState<ReturnType<typeof extractTableOfContents>>([]);
+  
+  const { exportDocument } = useDocumentExport();
+
+  useEffect(() => {
+    if (content) {
+      const toc = extractTableOfContents(content);
+      setTableOfContents(toc);
+    }
+  }, [content]);
+
+  const handleExport = async (format: 'markdown' | 'pdf' | 'html') => {
+    await exportDocument({ format, content, metadata });
+  };
+
+  const handleTocItemClick = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 bg-gray-900 flex flex-col">
+      {/* Toolbar */}
+      <DocumentToolbar
+        metadata={metadata}
+        onExport={handleExport}
+        onClose={onClose}
+        onToggleToc={() => setShowToc(!showToc)}
+        showToc={showToc}
+      />
+
+      {/* Content area */}
+      <div className="flex-1 flex overflow-hidden">
+        {/* Table of Contents */}
+        <div
+          className={`transition-all duration-300 ${
+            showToc ? 'w-64' : 'w-0'
+          } overflow-hidden`}
+        >
+          {showToc && (
+            <TableOfContents
+              items={tableOfContents}
+              activeId={activeHeadingId}
+              onItemClick={handleTocItemClick}
+            />
+          )}
+        </div>
+
+        {/* Document content */}
+        <div className="flex-1 overflow-y-auto bg-gray-900">
+          <div className="max-w-4xl mx-auto px-8 py-12">
+            <MarkdownRenderer
+              content={content}
+              onHeadingInView={setActiveHeadingId}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Print styles */}
+      <style jsx global>{`
+        @media print {
+          .fixed {
+            position: static;
+          }
+          
+          nav, button, .print\\:hidden {
+            display: none !important;
+          }
+          
+          .bg-gray-900 {
+            background: white !important;
+          }
+          
+          .text-white {
+            color: black !important;
+          }
+          
+          .text-gray-300, .text-gray-400 {
+            color: #4b5563 !important;
+          }
+          
+          code {
+            background: #f3f4f6 !important;
+            color: #1f2937 !important;
+          }
+          
+          .bg-gray-800 {
+            background: #f3f4f6 !important;
+          }
+        }
+      `}</style>
+    </div>
+  );
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/DocumentViewer/index.ts
+```ts
+export { DocumentViewer } from './DocumentViewer';
+export { MarkdownRenderer } from './MarkdownRenderer';
+export { CodeBlock } from './CodeBlock';
+export { TableOfContents } from './TableOfContents';
+export { DocumentToolbar } from './DocumentToolbar';
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/DocumentViewer/MarkdownRenderer.tsx
+```tsx
+import React, { useEffect, useRef } from 'react';
+import { CodeBlock } from './CodeBlock';
+
+interface MarkdownRendererProps {
+  content: string;
+  onHeadingInView?: (id: string) => void;
+}
+
+export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ 
+  content,
+  onHeadingInView 
+}) => {
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!onHeadingInView || !contentRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            if (id) onHeadingInView(id);
+          }
+        });
+      },
+      {
+        rootMargin: '-20% 0px -70% 0px',
+      }
+    );
+
+    const headings = contentRef.current.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    headings.forEach((heading) => observer.observe(heading));
+
+    return () => observer.disconnect();
+  }, [content, onHeadingInView]);
+
+  const renderMarkdown = () => {
+    // Split content into blocks
+    const blocks = content.split(/\n\n+/);
+    let headingCounter = 0;
+
+    return blocks.map((block, index) => {
+      // Code blocks
+      if (block.startsWith('```')) {
+        const match = block.match(/^```(\w+)?\n([\s\S]*?)\n```$/);
+        if (match) {
+          const [, language, code] = match;
+          return <CodeBlock key={index} code={code} language={language} />;
+        }
+      }
+
+      // Headings
+      const headingMatch = block.match(/^(#{1,6})\s+(.+)$/);
+      if (headingMatch) {
+        const level = headingMatch[1].length;
+        const text = headingMatch[2];
+        const id = `heading-${++headingCounter}`;
+        const HeadingTag = `h${level}` as keyof JSX.IntrinsicElements;
+        
+        const headingClasses = {
+          1: 'text-3xl font-bold text-white mb-4 mt-8',
+          2: 'text-2xl font-semibold text-white mb-3 mt-6',
+          3: 'text-xl font-semibold text-white mb-2 mt-4',
+          4: 'text-lg font-medium text-white mb-2 mt-3',
+          5: 'text-base font-medium text-white mb-1 mt-2',
+          6: 'text-sm font-medium text-gray-300 mb-1 mt-2',
+        };
+
+        return (
+          <HeadingTag 
+            key={index} 
+            id={id}
+            className={headingClasses[level as keyof typeof headingClasses]}
+          >
+            {text}
+          </HeadingTag>
+        );
+      }
+
+      // Lists
+      if (block.match(/^[-*]\s+/m)) {
+        const items = block.split('\n').filter(line => line.trim());
+        return (
+          <ul key={index} className="list-disc list-inside space-y-1 text-gray-300 mb-4">
+            {items.map((item, i) => (
+              <li key={i}>{item.replace(/^[-*]\s+/, '')}</li>
+            ))}
+          </ul>
+        );
+      }
+
+      // Numbered lists
+      if (block.match(/^\d+\.\s+/m)) {
+        const items = block.split('\n').filter(line => line.trim());
+        return (
+          <ol key={index} className="list-decimal list-inside space-y-1 text-gray-300 mb-4">
+            {items.map((item, i) => (
+              <li key={i}>{item.replace(/^\d+\.\s+/, '')}</li>
+            ))}
+          </ol>
+        );
+      }
+
+      // Blockquotes
+      if (block.startsWith('>')) {
+        const text = block.split('\n').map(line => line.replace(/^>\s*/, '')).join(' ');
+        return (
+          <blockquote key={index} className="border-l-4 border-gray-600 pl-4 italic text-gray-400 mb-4">
+            {text}
+          </blockquote>
+        );
+      }
+
+      // Tables (simple support)
+      if (block.includes('|') && block.split('\n').length > 2) {
+        const lines = block.split('\n').filter(line => line.trim());
+        const headers = lines[0].split('|').map(h => h.trim()).filter(h => h);
+        const rows = lines.slice(2).map(line => 
+          line.split('|').map(cell => cell.trim()).filter(cell => cell)
+        );
+
+        return (
+          <div key={index} className="overflow-x-auto mb-4">
+            <table className="min-w-full divide-y divide-gray-700">
+              <thead>
+                <tr>
+                  {headers.map((header, i) => (
+                    <th key={i} className="px-4 py-2 text-left text-sm font-medium text-gray-300 uppercase tracking-wider">
+                      {header}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-700">
+                {rows.map((row, rowIndex) => (
+                  <tr key={rowIndex}>
+                    {row.map((cell, cellIndex) => (
+                      <td key={cellIndex} className="px-4 py-2 text-sm text-gray-400">
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      }
+
+      // Regular paragraphs
+      return (
+        <p key={index} className="text-gray-300 mb-4 leading-relaxed">
+          {renderInlineElements(block)}
+        </p>
+      );
+    });
+  };
+
+  const renderInlineElements = (text: string) => {
+    // Bold
+    text = text.replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-white">$1</strong>');
+    
+    // Italic
+    text = text.replace(/\*(.+?)\*/g, '<em class="italic">$1</em>');
+    
+    // Inline code
+    text = text.replace(/`([^`]+)`/g, '<code class="px-1 py-0.5 bg-gray-700 text-blue-400 rounded text-sm font-mono">$1</code>');
+    
+    // Links
+    text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-blue-400 hover:text-blue-300 underline">$1</a>');
+
+    return <span dangerouslySetInnerHTML={{ __html: text }} />;
+  };
+
+  return (
+    <div ref={contentRef} className="prose prose-invert max-w-none">
+      {renderMarkdown()}
+    </div>
+  );
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/DocumentViewer/TableOfContents.tsx
+```tsx
+import React from 'react';
+import { TableOfContentsItem } from '../../utils/documentFormatters';
+
+interface TableOfContentsProps {
+  items: TableOfContentsItem[];
+  activeId?: string;
+  onItemClick: (id: string) => void;
+}
+
+export const TableOfContents: React.FC<TableOfContentsProps> = ({ 
+  items, 
+  activeId,
+  onItemClick 
+}) => {
+  const renderItem = (item: TableOfContentsItem, depth: number = 0) => {
+    const isActive = item.id === activeId;
+    const paddingLeft = 16 + depth * 16;
+
+    return (
+      <div key={item.id}>
+        <button
+          onClick={() => onItemClick(item.id)}
+          className={`
+            w-full text-left px-4 py-2 text-sm transition-all duration-150
+            hover:bg-gray-700 hover:text-white
+            ${isActive ? 'bg-gray-700 text-white border-l-2 border-blue-500' : 'text-gray-400'}
+          `}
+          style={{ paddingLeft: `${paddingLeft}px` }}
+        >
+          {item.title}
+        </button>
+        {item.children.length > 0 && (
+          <div>
+            {item.children.map((child) => renderItem(child, depth + 1))}
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  return (
+    <nav className="w-64 bg-gray-800 border-r border-gray-700 overflow-y-auto">
+      <div className="p-4 border-b border-gray-700">
+        <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider">
+          Table of Contents
+        </h3>
+      </div>
+      <div className="py-2">
+        {items.length > 0 ? (
+          items.map((item) => renderItem(item))
+        ) : (
+          <p className="px-4 py-2 text-sm text-gray-500">No headings found</p>
+        )}
+      </div>
+    </nav>
+  );
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/ExportModal/ExportModal.css
+```css
+/* Export Modal Styles - Following Design System */
+
+/* Modal Container */
+.export-modal {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 80vh;
+  width: 800px;
+  max-width: 90vw;
+}
+
+.export-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg) var(--space-xl);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.export-modal-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-xl);
+}
+
+.export-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg) var(--space-xl);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-gray-800);
+}
+
+.footer-left,
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+/* Export Sections */
+.export-section {
+  margin-bottom: var(--space-xl);
+}
+
+.export-section:last-child {
+  margin-bottom: 0;
+}
+
+.export-section h3 {
+  margin-bottom: var(--space-md);
+}
+
+/* Format Selector */
+.format-selector {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+.format-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--color-gray-800);
+  border: 2px solid transparent;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-default);
+  position: relative;
+}
+
+.format-option:hover {
+  background: var(--color-gray-700);
+  border-color: var(--color-gray-600);
+}
+
+.format-option--selected {
+  background: var(--color-gray-700);
+  border-color: var(--color-primary-500);
+}
+
+.format-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-gray-900);
+  border-radius: var(--radius-md);
+  color: var(--color-primary-400);
+}
+
+.format-info {
+  flex: 1;
+}
+
+.format-name {
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-xs) 0;
+}
+
+.format-description {
+  margin: 0;
+}
+
+.format-check {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+}
+
+/* Template Selector */
+.template-selector {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.template-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--color-gray-800);
+  border: 1px solid var(--color-gray-700);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-default);
+}
+
+.template-option:hover {
+  background: var(--color-gray-700);
+  border-color: var(--color-gray-600);
+}
+
+.template-option--selected {
+  background: var(--color-gray-700);
+  border-color: var(--color-primary-500);
+}
+
+.template-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gray-400);
+}
+
+.template-content {
+  flex: 1;
+}
+
+.template-name {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-xs) 0;
+}
+
+.template-description {
+  margin: 0;
+}
+
+/* Section List */
+.section-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.section-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-gray-800);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-default);
+}
+
+.section-item:hover {
+  background: var(--color-gray-700);
+}
+
+.section-name {
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+}
+
+/* Branding Options */
+.branding-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.color-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.color-input {
+  width: 48px;
+  height: 48px;
+  border: 2px solid var(--color-gray-700);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  background: transparent;
+}
+
+.color-label {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+/* Export History */
+.export-history {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-gray-800);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+}
+
+.history-format {
+  color: var(--color-primary-400);
+}
+
+.history-date {
+  color: var(--color-text-secondary);
+}
+
+.history-template {
+  margin-left: auto;
+  color: var(--color-text-secondary);
+  font-size: var(--text-xs);
+}
+
+/* Export Preview */
+.export-preview {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  height: 300px;
+  color: var(--color-text-secondary);
+}
+
+.preview-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-gray-700);
+  margin-bottom: var(--space-md);
+}
+
+.preview-title {
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.preview-format {
+  margin-left: auto;
+}
+
+.preview-content {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--color-gray-900);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+}
+
+.preview-code {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-gray-300);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.pdf-preview {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #525659;
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+}
+
+.pdf-page {
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+}
+
+.pdf-header {
+  padding: var(--space-xl);
+  border-bottom: 3px solid;
+  text-align: center;
+}
+
+.pdf-header h1 {
+  color: #1a1a1a;
+  font-size: var(--text-2xl);
+  margin: 0;
+}
+
+.pdf-logo {
+  height: 48px;
+  margin-bottom: var(--space-md);
+}
+
+.pdf-body {
+  padding: var(--space-xl);
+  color: #1a1a1a;
+}
+
+.preview-info {
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-gray-700);
+  margin-top: var(--space-md);
+}
+
+/* Share Dialog Styles */
+.share-dialog {
+  width: 600px;
+  max-width: 90vw;
+}
+
+.share-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg) var(--space-xl);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.share-dialog-content {
+  padding: var(--space-xl);
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.share-dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: var(--space-lg) var(--space-xl);
+  border-top: 1px solid var(--color-border);
+}
+
+.share-section {
+  margin-bottom: var(--space-xl);
+}
+
+.share-section:last-child {
+  margin-bottom: 0;
+}
+
+/* Permission Options */
+.permission-options {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.permission-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--color-gray-800);
+  border: 2px solid transparent;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-default);
+}
+
+.permission-option:hover {
+  background: var(--color-gray-700);
+  border-color: var(--color-gray-600);
+}
+
+.permission-option--selected {
+  background: var(--color-gray-700);
+  border-color: var(--color-primary-500);
+}
+
+.permission-label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-primary);
+}
+
+.permission-desc {
+  text-align: center;
+}
+
+/* Expiration Options */
+.expiration-options {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--color-gray-800);
+  border-radius: var(--radius-md);
+}
+
+.expiration-select {
+  flex: 1;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-gray-700);
+  border: 1px solid var(--color-gray-600);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-size: var(--text-sm);
+  cursor: pointer;
+}
+
+.generate-button {
+  width: 100%;
+}
+
+/* Share Link Generator */
+.share-link-generator {
+  background: var(--color-gray-800);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+}
+
+.link-section h3 {
+  margin-bottom: var(--space-md);
+}
+
+.link-container {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.link-input-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0 var(--space-md);
+  background: var(--color-gray-900);
+  border: 1px solid var(--color-gray-700);
+  border-radius: var(--radius-md);
+}
+
+.link-icon {
+  color: var(--color-gray-500);
+}
+
+.link-input {
+  flex: 1;
+  padding: var(--space-sm) 0;
+  background: transparent;
+  border: none;
+  color: var(--color-text-primary);
+  font-size: var(--text-sm);
+  font-family: var(--font-mono);
+}
+
+.link-input:focus {
+  outline: none;
+}
+
+.copy-button {
+  min-width: 100px;
+}
+
+.copy-button.copied {
+  background: var(--color-success-500);
+  border-color: var(--color-success-500);
+  color: white;
+}
+
+.link-info {
+  display: flex;
+  gap: var(--space-lg);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-gray-700);
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.info-label {
+  color: var(--color-text-secondary);
+}
+
+.info-value {
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+}
+
+/* QR Code Section */
+.qr-section {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-xl);
+  background: var(--color-gray-800);
+  border-radius: var(--radius-lg);
+}
+
+.qr-code {
+  background: white;
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+}
+
+.qr-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  color: #1a1a1a;
+}
+
+/* Access History */
+.access-history {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.history-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-gray-800);
+  border-radius: var(--radius-md);
+}
+
+.history-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.history-user {
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+}
+
+.history-permission {
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--color-gray-700);
+  border-radius: var(--radius-full);
+}
+
+.history-time {
+  color: var(--color-text-secondary);
+}
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/ExportModal/ExportModal.tsx
+```tsx
+import React, { useState, useCallback } from 'react';
+import { X, Download, Share2, FileText, Code, FileImage, Archive } from 'lucide-react';
+import { Modal } from '../common/Modal';
+import { Button } from '../common/Button';
+import { FormatSelector } from './FormatSelector';
+import { TemplateSelector } from './TemplateSelector';
+import { ExportPreview } from './ExportPreview';
+import { useExport } from '../../hooks/useExport';
+import type { ExportFormat, ExportOptions, ExportSection } from '../../types/export.types';
+
+interface ExportModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  projectId: string;
+  projectName: string;
+}
+
+const formatIcons: Record<ExportFormat, React.ReactNode> = {
+  markdown: <FileText className="icon" />,
+  json: <Code className="icon" />,
+  pdf: <FileImage className="icon" />,
+  zip: <Archive className="icon" />
+};
+
+const defaultSections: ExportSection[] = [
+  { id: 'problem', name: 'Problem Statement', included: true },
+  { id: 'personas', name: 'User Personas', included: true },
+  { id: 'painPoints', name: 'Pain Points', included: true },
+  { id: 'solutions', name: 'Solutions', included: true },
+  { id: 'userStories', name: 'User Stories', included: true },
+  { id: 'productVision', name: 'Product Vision', included: true },
+  { id: 'requirements', name: 'Functional Requirements', included: true },
+  { id: 'architecture', name: 'System Architecture', included: true },
+  { id: 'dataFlow', name: 'Data Flow', included: true },
+  { id: 'database', name: 'Database Schema', included: true },
+  { id: 'designSystem', name: 'Design System', included: true }
+];
+
+export const ExportModal: React.FC<ExportModalProps> = ({
+  isOpen,
+  onClose,
+  projectId,
+  projectName
+}) => {
+  const [selectedFormat, setSelectedFormat] = useState<ExportFormat>('markdown');
+  const [selectedTemplate, setSelectedTemplate] = useState<string>('default');
+  const [sections, setSections] = useState<ExportSection[]>(defaultSections);
+  const [customBranding, setCustomBranding] = useState({
+    companyName: '',
+    logoUrl: '',
+    primaryColor: '#2563EB'
+  });
+  const [isPreviewMode, setIsPreviewMode] = useState(false);
+
+  const { exportProject, isExporting, exportHistory } = useExport();
+
+  const handleSectionToggle = useCallback((sectionId: string) => {
+    setSections(prev => prev.map(section =>
+      section.id === sectionId 
+        ? { ...section, included: !section.included }
+        : section
+    ));
+  }, []);
+
+  const handleExport = useCallback(async () => {
+    const options: ExportOptions = {
+      format: selectedFormat,
+      template: selectedTemplate,
+      sections: sections.filter(s => s.included).map(s => s.id),
+      customBranding: customBranding.companyName ? customBranding : undefined
+    };
+
+    await exportProject(projectId, projectName, options);
+  }, [selectedFormat, selectedTemplate, sections, customBranding, projectId, projectName, exportProject]);
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <div className="export-modal">
+        <div className="export-modal-header">
+          <h2 className="heading-2">Export Project</h2>
+          <button onClick={onClose} className="btn-icon btn-icon--small">
+            <X className="icon" />
+          </button>
+        </div>
+
+        <div className="export-modal-content">
+          {!isPreviewMode ? (
+            <>
+              <div className="export-section">
+                <h3 className="heading-3">Export Format</h3>
+                <FormatSelector
+                  selectedFormat={selectedFormat}
+                  onFormatChange={setSelectedFormat}
+                  formatIcons={formatIcons}
+                />
+              </div>
+
+              <div className="export-section">
+                <h3 className="heading-3">Template</h3>
+                <TemplateSelector
+                  selectedTemplate={selectedTemplate}
+                  onTemplateChange={setSelectedTemplate}
+                  format={selectedFormat}
+                />
+              </div>
+
+              <div className="export-section">
+                <h3 className="heading-3">Include Sections</h3>
+                <div className="section-list">
+                  {sections.map(section => (
+                    <label key={section.id} className="section-item">
+                      <input
+                        type="checkbox"
+                        checked={section.included}
+                        onChange={() => handleSectionToggle(section.id)}
+                        className="checkbox"
+                      />
+                      <span className="section-name">{section.name}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {selectedFormat !== 'json' && (
+                <div className="export-section">
+                  <h3 className="heading-3">Custom Branding</h3>
+                  <div className="branding-options">
+                    <input
+                      type="text"
+                      placeholder="Company Name"
+                      value={customBranding.companyName}
+                      onChange={(e) => setCustomBranding(prev => ({ ...prev, companyName: e.target.value }))}
+                      className="input"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Logo URL"
+                      value={customBranding.logoUrl}
+                      onChange={(e) => setCustomBranding(prev => ({ ...prev, logoUrl: e.target.value }))}
+                      className="input"
+                    />
+                    <div className="color-input-wrapper">
+                      <input
+                        type="color"
+                        value={customBranding.primaryColor}
+                        onChange={(e) => setCustomBranding(prev => ({ ...prev, primaryColor: e.target.value }))}
+                        className="color-input"
+                      />
+                      <span className="color-label">Primary Color</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {exportHistory.length > 0 && (
+                <div className="export-section">
+                  <h3 className="heading-3">Export History</h3>
+                  <div className="export-history">
+                    {exportHistory.slice(0, 5).map((entry, index) => (
+                      <div key={index} className="history-item">
+                        <span className="history-format">{formatIcons[entry.format]}</span>
+                        <span className="history-date">{new Date(entry.timestamp).toLocaleDateString()}</span>
+                        <span className="history-template">{entry.template}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
+          ) : (
+            <ExportPreview
+              format={selectedFormat}
+              template={selectedTemplate}
+              sections={sections.filter(s => s.included)}
+              customBranding={customBranding}
+              projectId={projectId}
+            />
+          )}
+        </div>
+
+        <div className="export-modal-footer">
+          <div className="footer-left">
+            <Button
+              variant="secondary"
+              onClick={() => setIsPreviewMode(!isPreviewMode)}
+            >
+              {isPreviewMode ? 'Back to Options' : 'Preview'}
+            </Button>
+          </div>
+          <div className="footer-right">
+            <Button variant="secondary" onClick={onClose}>
+              Cancel
+            </Button>
+            <Button
+              variant="primary"
+              onClick={handleExport}
+              disabled={isExporting}
+              icon={<Download className="icon-sm" />}
+            >
+              {isExporting ? 'Exporting...' : 'Export'}
+            </Button>
+            <Button
+              variant="primary"
+              onClick={() => {/* Open share dialog */}}
+              icon={<Share2 className="icon-sm" />}
+            >
+              Share
+            </Button>
+          </div>
+        </div>
+      </div>
+    </Modal>
+  );
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/ExportModal/ExportPreview.tsx
+```tsx
+import React, { useEffect, useState } from 'react';
+import { FileText, Loader } from 'lucide-react';
+import type { ExportFormat, ExportSection } from '../../types/export.types';
+
+interface ExportPreviewProps {
+  format: ExportFormat;
+  template: string;
+  sections: ExportSection[];
+  customBranding: {
+    companyName: string;
+    logoUrl: string;
+    primaryColor: string;
+  };
+  projectId: string;
+}
+
+export const ExportPreview: React.FC<ExportPreviewProps> = ({
+  format,
+  template,
+  sections,
+  customBranding,
+  projectId
+}) => {
+  const [previewContent, setPreviewContent] = useState<string>('');
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate preview generation
+    const generatePreview = async () => {
+      setIsLoading(true);
+      
+      // In a real implementation, this would call the export generators
+      // For now, we'll create a simple preview
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      let preview = '';
+      
+      if (format === 'markdown') {
+        preview = `# ${customBranding.companyName || 'Project'} Documentation\n\n`;
+        preview += `## Table of Contents\n\n`;
+        sections.forEach((section, index) => {
+          preview += `${index + 1}. [${section.name}](#${section.id})\n`;
+        });
+        preview += `\n---\n\n`;
+        
+        sections.forEach(section => {
+          preview += `## ${section.name}\n\n`;
+          preview += `*Content for ${section.name} will be generated here...*\n\n`;
+        });
+      } else if (format === 'json') {
+        const jsonPreview = {
+          project: {
+            id: projectId,
+            exportDate: new Date().toISOString(),
+            template: template,
+            sections: sections.map(s => ({
+              id: s.id,
+              name: s.name,
+              content: `Content for ${s.name}`
+            }))
+          }
+        };
+        preview = JSON.stringify(jsonPreview, null, 2);
+      } else if (format === 'pdf') {
+        preview = 'PDF preview will be displayed here with proper formatting and layout.';
+      } else if (format === 'zip') {
+        preview = `ZIP Bundle Contents:\n\n`;
+        preview += `- README.md\n`;
+        sections.forEach(section => {
+          preview += `- ${section.id}.md\n`;
+        });
+        preview += `- assets/\n`;
+        preview += `  - diagrams/\n`;
+        preview += `  - images/\n`;
+      }
+      
+      setPreviewContent(preview);
+      setIsLoading(false);
+    };
+
+    generatePreview();
+  }, [format, template, sections, customBranding, projectId]);
+
+  if (isLoading) {
+    return (
+      <div className="preview-loading">
+        <Loader className="icon animate-spin" />
+        <p className="body-sm">Generating preview...</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="export-preview">
+      <div className="preview-header">
+        <FileText className="icon" />
+        <h4 className="preview-title">Export Preview</h4>
+        <span className="preview-format badge badge-info">{format.toUpperCase()}</span>
+      </div>
+      
+      <div className="preview-content">
+        {format === 'pdf' ? (
+          <div className="pdf-preview">
+            <div className="pdf-page">
+              <div className="pdf-header" style={{ borderColor: customBranding.primaryColor }}>
+                {customBranding.logoUrl && (
+                  <img src={customBranding.logoUrl} alt="Logo" className="pdf-logo" />
+                )}
+                <h1>{customBranding.companyName || 'Project Documentation'}</h1>
+              </div>
+              <div className="pdf-body">
+                <p>PDF content preview with professional layout...</p>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <pre className="preview-code">
+            <code>{previewContent}</code>
+          </pre>
+        )}
+      </div>
+      
+      <div className="preview-info">
+        <p className="body-sm">
+          {sections.length} sections included • {template} template
+        </p>
+      </div>
+    </div>
+  );
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/ExportModal/FormatSelector.tsx
+```tsx
+import React from 'react';
+import type { ExportFormat } from '../../types/export.types';
+
+interface FormatSelectorProps {
+  selectedFormat: ExportFormat;
+  onFormatChange: (format: ExportFormat) => void;
+  formatIcons: Record<ExportFormat, React.ReactNode>;
+}
+
+const formats: Array<{
+  id: ExportFormat;
+  name: string;
+  description: string;
+}> = [
+  {
+    id: 'markdown',
+    name: 'Markdown',
+    description: 'Clean, readable format with table of contents'
+  },
+  {
+    id: 'json',
+    name: 'JSON',
+    description: 'Structured data for re-import or API integration'
+  },
+  {
+    id: 'pdf',
+    name: 'PDF',
+    description: 'Professional layout with diagrams and branding'
+  },
+  {
+    id: 'zip',
+    name: 'ZIP Bundle',
+    description: 'All documents and assets in one package'
+  }
+];
+
+export const FormatSelector: React.FC<FormatSelectorProps> = ({
+  selectedFormat,
+  onFormatChange,
+  formatIcons
+}) => {
+  return (
+    <div className="format-selector">
+      {formats.map(format => (
+        <button
+          key={format.id}
+          className={`format-option ${selectedFormat === format.id ? 'format-option--selected' : ''}`}
+          onClick={() => onFormatChange(format.id)}
+        >
+          <div className="format-icon">
+            {formatIcons[format.id]}
+          </div>
+          <div className="format-info">
+            <h4 className="format-name">{format.name}</h4>
+            <p className="format-description body-sm">{format.description}</p>
+          </div>
+          {selectedFormat === format.id && (
+            <div className="format-check">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="10" fill="var(--color-accent-500)" />
+                <path d="M14.5 7L8.5 13L5.5 10" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+          )}
+        </button>
+      ))}
+    </div>
+  );
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/ExportModal/index.ts
+```ts
+export { ExportModal } from './ExportModal';
+export { FormatSelector } from './FormatSelector';
+export { TemplateSelector } from './TemplateSelector';
+export { ExportPreview } from './ExportPreview';
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/ExportModal/TemplateSelector.tsx
+```tsx
+import React from 'react';
+import { Layout, FileText, Briefcase, Zap } from 'lucide-react';
+import type { ExportFormat } from '../../types/export.types';
+
+interface TemplateSelectorProps {
+  selectedTemplate: string;
+  onTemplateChange: (template: string) => void;
+  format: ExportFormat;
+}
+
+interface Template {
+  id: string;
+  name: string;
+  description: string;
+  icon: React.ReactNode;
+  formats: ExportFormat[];
+}
+
+const templates: Template[] = [
+  {
+    id: 'default',
+    name: 'Default',
+    description: 'Standard layout with all sections',
+    icon: <Layout className="icon" />,
+    formats: ['markdown', 'json', 'pdf', 'zip']
+  },
+  {
+    id: 'minimal',
+    name: 'Minimal',
+    description: 'Clean and concise, key information only',
+    icon: <FileText className="icon" />,
+    formats: ['markdown', 'pdf']
+  },
+  {
+    id: 'professional',
+    name: 'Professional',
+    description: 'Executive-ready with branding and polish',
+    icon: <Briefcase className="icon" />,
+    formats: ['pdf', 'markdown']
+  },
+  {
+    id: 'developer',
+    name: 'Developer',
+    description: 'Technical focus with code snippets and diagrams',
+    icon: <Zap className="icon" />,
+    formats: ['markdown', 'json', 'zip']
+  }
+];
+
+export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
+  selectedTemplate,
+  onTemplateChange,
+  format
+}) => {
+  const availableTemplates = templates.filter(template => 
+    template.formats.includes(format)
+  );
+
+  return (
+    <div className="template-selector">
+      {availableTemplates.map(template => (
+        <button
+          key={template.id}
+          className={`template-option ${selectedTemplate === template.id ? 'template-option--selected' : ''}`}
+          onClick={() => onTemplateChange(template.id)}
+        >
+          <div className="template-icon">
+            {template.icon}
+          </div>
+          <div className="template-content">
+            <h4 className="template-name">{template.name}</h4>
+            <p className="template-description body-sm">{template.description}</p>
+          </div>
+        </button>
+      ))}
     </div>
   );
 };
@@ -3316,16 +8740,26 @@ File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/layout/Sid
 ```tsx
 import React, { useState, useEffect } from 'react';
 import { Sidebar } from './Sidebar';
+import { Terminal } from '../Terminal';
 import { useAuth } from '@/hooks/useAuth';
 import { useWorkflowStore } from '@/stores/workflowStore';
+import useProjectStore from '@/stores/projectStore';
 import { supabase } from '@/services/supabase/client';
+import { WorkspaceStorage } from '@/utils/workspaceStorage';
+import { TauriFileSystem } from '@/services/tauri/fileSystem';
 import type { Workspace, Project } from './types';
+import './Sidebar.css';
 
 export const ConnectedSidebar: React.FC = () => {
   const { user } = useAuth();
-  const { projectId } = useWorkflowStore();
+  const workflowStore = useWorkflowStore();
+  const { projectId } = workflowStore;
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeWorkspaceId, setActiveWorkspaceId] = useState<string | undefined>();
+  const [workspaceDirectories, setWorkspaceDirectories] = useState<Record<string, string>>({});
+  const [terminalVisible, setTerminalVisible] = useState(false);
+  const [terminalWorkingDir, setTerminalWorkingDir] = useState<string>('/');
 
   useEffect(() => {
     const fetchWorkspaces = async () => {
@@ -3359,15 +8793,26 @@ export const ConnectedSidebar: React.FC = () => {
           id: ws.id,
           name: ws.name,
           updatedAt: ws.updated_at,
-          projects: ws.projects.map((p: any) => ({
-            id: p.id,
-            name: p.name,
-            status: p.status,
-            updatedAt: new Date(p.updated_at)
-          }))
+          projects: [] // Projects will be loaded from projectStore
         }));
 
         setWorkspaces(formattedWorkspaces);
+        
+        // Set the first workspace as active if none is selected
+        if (formattedWorkspaces.length > 0 && !activeWorkspaceId) {
+          const firstWorkspaceId = formattedWorkspaces[0].id;
+          setActiveWorkspaceId(firstWorkspaceId);
+          
+          // Load directory for the first workspace
+          const savedDir = await WorkspaceStorage.getWorkspaceDirectory(firstWorkspaceId);
+          if (savedDir) {
+            setWorkspaceDirectories({ [firstWorkspaceId]: savedDir });
+          }
+          
+          // Load projects for the first workspace
+          const projectStore = useProjectStore.getState();
+          await projectStore.loadProjects(firstWorkspaceId);
+        }
       } catch (error) {
         console.error('[ConnectedSidebar] Error fetching workspaces:', error);
       } finally {
@@ -3377,6 +8822,17 @@ export const ConnectedSidebar: React.FC = () => {
 
     fetchWorkspaces();
   }, [user]);
+
+  // Subscribe to project store updates
+  const projects = useProjectStore(state => state.projects);
+  
+  // Update workspaces with projects from the store
+  const workspacesWithProjects = workspaces.map(workspace => ({
+    ...workspace,
+    projects: workspace.id === activeWorkspaceId 
+      ? projects.filter(p => p.workspace_id === workspace.id)
+      : workspace.projects
+  }));
 
   const handleWorkspaceCreate = async () => {
     if (!user) return;
@@ -3422,11 +8878,124 @@ export const ConnectedSidebar: React.FC = () => {
     console.log('[ConnectedSidebar] Settings clicked');
   };
 
+  const handleDirectorySelect = (workspaceId: string, directory: string) => {
+    console.log('[ConnectedSidebar] Directory selected:', { workspaceId, directory });
+    
+    // Store the directory selection in local state
+    setWorkspaceDirectories(prev => ({
+      ...prev,
+      [workspaceId]: directory
+    }));
+    
+    // In a real implementation, you would:
+    // 1. Save this to local storage or user preferences
+    // 2. Use this directory to save/load workspace data
+    localStorage.setItem(`workspace_dir_${workspaceId}`, directory);
+  };
+
+  const handleOpenTerminal = async (workspaceId: string) => {
+    const directory = workspaceDirectories[workspaceId];
+    console.log('[ConnectedSidebar] Opening embedded terminal for workspace:', workspaceId, 'at:', directory);
+    
+    if (!directory) {
+      alert('Please select a repository directory first');
+      return;
+    }
+    
+    // Toggle terminal visibility and set working directory
+    if (terminalVisible && terminalWorkingDir === directory) {
+      // If terminal is already open for this directory, close it
+      setTerminalVisible(false);
+    } else {
+      // Open terminal with new directory
+      setTerminalWorkingDir(directory);
+      setTerminalVisible(true);
+    }
+  };
+
+  const handleWorkspaceSelect = async (workspaceId: string) => {
+    setActiveWorkspaceId(workspaceId);
+    
+    // Load saved directory for this workspace
+    const savedDir = await WorkspaceStorage.getWorkspaceDirectory(workspaceId);
+    if (savedDir) {
+      setWorkspaceDirectories(prev => ({
+        ...prev,
+        [workspaceId]: savedDir
+      }));
+    }
+    
+    // Load projects for this workspace
+    const projectStore = useProjectStore.getState();
+    await projectStore.loadProjects(workspaceId);
+  };
+
+  const handleSaveWorkspace = async (workspaceId: string) => {
+    const directory = workspaceDirectories[workspaceId];
+    if (!directory) {
+      alert('Please select a directory first');
+      return;
+    }
+
+    try {
+      // Get current workflow state
+      const workflowState = {
+        currentStep: workflowStore.currentStep,
+        projectId: workflowStore.projectId,
+        coreProblem: workflowStore.coreProblem,
+        personas: workflowStore.personas,
+        painPoints: workflowStore.painPoints,
+        solutions: workflowStore.solutions,
+        userStories: workflowStore.userStories,
+        lockedItems: workflowStore.lockedItems,
+      };
+      
+      await WorkspaceStorage.saveWorkspace(
+        { workspaceId, directory },
+        workflowState
+      );
+      
+      console.log('[ConnectedSidebar] Workspace saved successfully');
+      // You could show a success toast here
+    } catch (error) {
+      console.error('[ConnectedSidebar] Error saving workspace:', error);
+      alert('Failed to save workspace');
+    }
+  };
+
+  const handleExportWorkspace = async (workspaceId: string) => {
+    try {
+      const workflowState = {
+        currentStep: workflowStore.currentStep,
+        projectId: workflowStore.projectId,
+        coreProblem: workflowStore.coreProblem,
+        personas: workflowStore.personas,
+        painPoints: workflowStore.painPoints,
+        solutions: workflowStore.solutions,
+        userStories: workflowStore.userStories,
+        lockedItems: workflowStore.lockedItems,
+      };
+      const workspace = workspaces.find(w => w.id === workspaceId);
+      const filename = `${workspace?.name || 'workspace'}-${new Date().toISOString().split('T')[0]}.json`;
+      
+      await WorkspaceStorage.exportWorkspace(
+        workspaceId,
+        workflowState,
+        filename
+      );
+      
+      console.log('[ConnectedSidebar] Workspace exported successfully');
+    } catch (error) {
+      console.error('[ConnectedSidebar] Error exporting workspace:', error);
+      alert('Failed to export workspace');
+    }
+  };
+
   if (loading) {
     return (
       <aside className="sidebar">
         <div className="sidebar-header">
-          <h2 className="heading-3">Workspaces</h2>
+          <h2 className="heading-3">GoldiDocs</h2>
         </div>
         <div className="sidebar-content">
           <div className="p-4 text-gray-400">Loading...</div>
@@ -3436,13 +9005,481 @@ export const ConnectedSidebar: React.FC = () => {
   }
 
   return (
-    <Sidebar
-      workspaces={workspaces}
-      activeProjectId={projectId || undefined}
-      onWorkspaceCreate={handleWorkspaceCreate}
-      onProjectSelect={handleProjectSelect}
-      onSettings={handleSettings}
-    />
+    <>
+      <div className={`sidebar-wrapper ${terminalVisible ? 'terminal-open' : ''}`}>
+        <Sidebar
+          workspaces={workspacesWithProjects}
+          activeWorkspaceId={activeWorkspaceId}
+          activeProjectId={projectId || undefined}
+          onWorkspaceSelect={handleWorkspaceSelect}
+          onWorkspaceCreate={handleWorkspaceCreate}
+          onProjectSelect={handleProjectSelect}
+          onSettings={handleSettings}
+          onDirectorySelect={handleDirectorySelect}
+          onOpenTerminal={handleOpenTerminal}
+          onSaveWorkspace={handleSaveWorkspace}
+          onExportWorkspace={handleExportWorkspace}
+          workspaceDirectory={workspaceDirectories}
+        />
+        <Terminal 
+          workingDirectory={terminalWorkingDir}
+          isVisible={terminalVisible}
+          onClose={() => setTerminalVisible(false)}
+        />
+      </div>
+    </>
+  );
+}; 
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/layout/Sidebar/DocumentPreviewModal.tsx
+```tsx
+import React, { useEffect, useState } from 'react';
+import { X, FileText, RefreshCw, Eye, Loader2 } from 'lucide-react';
+import { Modal } from '@/components/common/Modal';
+import { Button } from '@/components/common/Button';
+import { cn } from '@/utils/cn';
+import type { DocumentStatusInfo } from './types';
+import { DOCUMENT_NAMES } from './types';
+import { goldiDocsAPI } from '@/services/api/goldidocs';
+
+interface DocumentPreviewModalProps {
+  document: DocumentStatusInfo;
+  projectId: string;
+  onClose: () => void;
+}
+
+export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
+  document,
+  projectId,
+  onClose,
+}) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [content, setContent] = useState<any>(null);
+
+  useEffect(() => {
+    if (document.status === 'complete') {
+      loadDocumentContent();
+    }
+  }, [document, projectId]);
+
+  const loadDocumentContent = async () => {
+    setIsLoading(true);
+    try {
+      const data = await goldiDocsAPI.getDocumentContent(projectId, document.type);
+      setContent(data);
+    } catch (error) {
+      console.error('Failed to load document content:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const getStatusBadge = () => {
+    const statusConfig = {
+      complete: { text: 'Complete', className: 'bg-green-900/50 text-green-400' },
+      processing: { text: 'Processing', className: 'bg-blue-900/50 text-blue-400' },
+      pending: { text: 'Not Started', className: 'bg-gray-900/50 text-gray-400' },
+      error: { text: 'Error', className: 'bg-red-900/50 text-red-400' },
+      drift: { text: 'Needs Update', className: 'bg-orange-900/50 text-orange-400' },
+    };
+
+    const config = statusConfig[document.status] || statusConfig.pending;
+
+    return (
+      <span className={cn('px-2 py-1 rounded-md text-xs font-medium', config.className)}>
+        {config.text}
+      </span>
+    );
+  };
+
+  const renderDocumentPreview = () => {
+    if (isLoading) {
+      return (
+        <div className="flex items-center justify-center py-8">
+          <Loader2 className="w-6 h-6 animate-spin text-gray-400" />
+        </div>
+      );
+    }
+
+    if (document.status === 'complete' && content) {
+      // Render actual content based on document type
+      switch (document.type) {
+        case 'PV':
+          return (
+            <div className="space-y-4">
+              <div>
+                <h4 className="text-sm font-medium text-gray-300 mb-1">Product Name</h4>
+                <p className="text-gray-400">{content.product_name}</p>
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-300 mb-1">Elevator Pitch</h4>
+                <p className="text-gray-400">{content.elevator_pitch}</p>
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-300 mb-1">Vision Statement</h4>
+                <p className="text-gray-400">{content.vision_statement}</p>
+              </div>
+            </div>
+          );
+        case 'FR':
+          return (
+            <div className="space-y-4">
+              <h4 className="text-sm font-medium text-gray-300 mb-2">Features</h4>
+              {content.features?.map((feature: any, index: number) => (
+                <div key={index} className="border border-gray-700 rounded-lg p-3">
+                  <div className="flex items-center justify-between">
+                    <h5 className="font-medium text-gray-200">{feature.name}</h5>
+                    <span className={cn(
+                      'text-xs px-2 py-1 rounded',
+                      feature.priority === 'Must Have' ? 'bg-red-900/50 text-red-400' :
+                      feature.priority === 'Should Have' ? 'bg-yellow-900/50 text-yellow-400' :
+                      'bg-gray-900/50 text-gray-400'
+                    )}>
+                      {feature.priority}
+                    </span>
+                  </div>
+                  <p className="text-sm text-gray-400 mt-1">{feature.description}</p>
+                </div>
+              ))}
+            </div>
+          );
+        case 'SA':
+          return (
+            <div className="space-y-4">
+              <div>
+                <h4 className="text-sm font-medium text-gray-300 mb-1">Architecture Pattern</h4>
+                <p className="text-gray-400">{content.architecture_pattern}</p>
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-300 mb-1">Justification</h4>
+                <p className="text-gray-400">{content.pattern_justification}</p>
+              </div>
+              <div>
+                <h4 className="text-sm font-medium text-gray-300 mb-2">Tech Stack</h4>
+                <div className="grid grid-cols-2 gap-2 text-sm">
+                  <div>
+                    <span className="text-gray-500">Frontend:</span>
+                    <span className="ml-2 text-gray-400">{content.tech_stack?.frontend?.framework}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-500">Backend:</span>
+                    <span className="ml-2 text-gray-400">{content.tech_stack?.backend?.framework}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        default:
+          return (
+            <div className="text-gray-400">
+              Document preview for {DOCUMENT_NAMES[document.type]} is not yet implemented.
+            </div>
+          );
+      }
+    }
+
+    // Default preview for pending/processing documents
+    return getDefaultPreview();
+  };
+
+  const getDefaultPreview = () => {
+    const previews = {
+      PV: (
+        <>
+          <h4 className="text-sm font-medium text-gray-300 mb-2">What will be generated:</h4>
+          <p className="text-gray-400 mb-4">
+            Based on your problem statement, personas, pain points, and solutions.
+          </p>
+          <ul className="list-disc list-inside text-sm text-gray-400 space-y-1">
+            <li>Executive Summary</li>
+            <li>Problem Statement</li>
+            <li>Target Personas</li>
+            <li>Proposed Solutions</li>
+            <li>Key Features</li>
+            <li>Success Metrics</li>
+          </ul>
+        </>
+      ),
+      FR: (
+        <>
+          <h4 className="text-sm font-medium text-gray-300 mb-2">What will be generated:</h4>
+          <p className="text-gray-400 mb-4">
+            Detailed functional requirements based on your product vision.
+          </p>
+          <ul className="list-disc list-inside text-sm text-gray-400 space-y-1">
+            <li>User Stories</li>
+            <li>Acceptance Criteria</li>
+            <li>System Requirements</li>
+            <li>Data Validations</li>
+            <li>User Roles & Permissions</li>
+            <li>Integration Points</li>
+          </ul>
+        </>
+      ),
+      SA: (
+        <>
+          <h4 className="text-sm font-medium text-gray-300 mb-2">What will be generated:</h4>
+          <p className="text-gray-400 mb-4">
+            Technical architecture design for your system.
+          </p>
+          <ul className="list-disc list-inside text-sm text-gray-400 space-y-1">
+            <li>System Components</li>
+            <li>Technology Stack</li>
+            <li>Infrastructure Design</li>
+            <li>Security Measures</li>
+            <li>Scalability Approach</li>
+            <li>Deployment Strategy</li>
+          </ul>
+        </>
+      ),
+      DF: (
+        <>
+          <h4 className="text-sm font-medium text-gray-300 mb-2">What will be generated:</h4>
+          <p className="text-gray-400 mb-4">
+            Visual representation of data flow through your system.
+          </p>
+          <ul className="list-disc list-inside text-sm text-gray-400 space-y-1">
+            <li>External Entities</li>
+            <li>Data Processes</li>
+            <li>Data Stores</li>
+            <li>Data Flows</li>
+            <li>Context Diagrams</li>
+            <li>Process Decomposition</li>
+          </ul>
+        </>
+      ),
+      ER: (
+        <>
+          <h4 className="text-sm font-medium text-gray-300 mb-2">What will be generated:</h4>
+          <p className="text-gray-400 mb-4">
+            Database schema and entity relationships.
+          </p>
+          <ul className="list-disc list-inside text-sm text-gray-400 space-y-1">
+            <li>Entity Definitions</li>
+            <li>Relationships</li>
+            <li>Attributes & Data Types</li>
+            <li>Primary & Foreign Keys</li>
+            <li>Business Rules</li>
+            <li>Data Classifications</li>
+          </ul>
+        </>
+      ),
+      DS: (
+        <>
+          <h4 className="text-sm font-medium text-gray-300 mb-2">What will be generated:</h4>
+          <p className="text-gray-400 mb-4">
+            Comprehensive design system for consistent UI/UX.
+          </p>
+          <ul className="list-disc list-inside text-sm text-gray-400 space-y-1">
+            <li>Color Palette</li>
+            <li>Typography System</li>
+            <li>Component Library</li>
+            <li>Layout Grid</li>
+            <li>UI Patterns</li>
+            <li>Accessibility Guidelines</li>
+          </ul>
+        </>
+      ),
+    };
+
+    return (
+      <div className="bg-gray-800/50 rounded-lg p-4">
+        {previews[document.type]}
+      </div>
+    );
+  };
+
+  const handleRegenerate = async () => {
+    try {
+      await goldiDocsAPI.generateDocument(projectId, document.type);
+      onClose();
+    } catch (error) {
+      console.error('Failed to generate document:', error);
+    }
+  };
+
+  return (
+    <Modal
+      isOpen={true}
+      onClose={onClose}
+      title={DOCUMENT_NAMES[document.type]}
+      size="lg"
+    >
+      <div className="space-y-4">
+        {/* Status Badge */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <FileText className="w-4 h-4 text-gray-400" />
+            <span className="text-sm text-gray-400">Status:</span>
+            {getStatusBadge()}
+          </div>
+          {document.generatedAt && (
+            <span className="text-xs text-gray-500">
+              Generated {new Date(document.generatedAt).toLocaleString()}
+            </span>
+          )}
+        </div>
+
+        {/* Document Preview */}
+        <div className="min-h-[200px]">
+          {renderDocumentPreview()}
+        </div>
+
+        {/* Error Message */}
+        {document.status === 'error' && document.error && (
+          <div className="bg-red-900/20 border border-red-800 rounded-lg p-3">
+            <p className="text-sm text-red-400">{document.error}</p>
+          </div>
+        )}
+
+        {/* Action Buttons */}
+        <div className="flex justify-end gap-2 pt-4 border-t border-gray-700">
+          {document.status === 'complete' && (
+            <Button
+              variant="secondary"
+              size="sm"
+              icon={Eye}
+            >
+              View Full Document
+            </Button>
+          )}
+          {(document.status === 'pending' || document.status === 'error') && (
+            <Button
+              variant="primary"
+              size="sm"
+              icon={RefreshCw}
+              onClick={handleRegenerate}
+            >
+              Generate
+            </Button>
+          )}
+          {document.status === 'drift' && (
+            <Button
+              variant="secondary"
+              size="sm"
+              icon={RefreshCw}
+              onClick={handleRegenerate}
+            >
+              Regenerate
+            </Button>
+          )}
+        </div>
+      </div>
+    </Modal>
+  );
+}; 
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/layout/Sidebar/GoldiDocsProgress.tsx
+```tsx
+import React, { useState } from 'react';
+import { FileText, Loader2, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
+import { cn } from '@/utils/cn';
+import type { GoldiDocsStatus, DocumentStatusInfo, DocumentType } from './types';
+import { DocumentPreviewModal } from './DocumentPreviewModal';
+
+interface GoldiDocsProgressProps {
+  projectId: string;
+  status: GoldiDocsStatus;
+  className?: string;
+}
+
+export const GoldiDocsProgress: React.FC<GoldiDocsProgressProps> = ({
+  projectId,
+  status,
+  className,
+}) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [selectedDocument, setSelectedDocument] = useState<DocumentStatusInfo | null>(null);
+
+  const getStatusIcon = (docStatus: DocumentStatusInfo['status']) => {
+    switch (docStatus) {
+      case 'complete':
+        return <CheckCircle className="w-3 h-3" />;
+      case 'processing':
+        return <Loader2 className="w-3 h-3 animate-spin" />;
+      case 'error':
+        return <XCircle className="w-3 h-3" />;
+      case 'drift':
+        return <AlertCircle className="w-3 h-3" />;
+      default:
+        return <div className="w-2 h-2 rounded-full bg-gray-600" />;
+    }
+  };
+
+  const getStatusColor = (docStatus: DocumentStatusInfo['status']) => {
+    switch (docStatus) {
+      case 'complete':
+        return 'goldidoc-slot--complete';
+      case 'processing':
+        return 'goldidoc-slot--processing';
+      case 'error':
+        return 'goldidoc-slot--error';
+      case 'drift':
+        return 'goldidoc-slot--drift';
+      default:
+        return '';
+    }
+  };
+
+  const progressPercentage = (status.completedCount / status.totalCount) * 100;
+
+  return (
+    <>
+      <div 
+        className={cn('goldidocs-progress', className)}
+        onMouseEnter={() => setIsExpanded(true)}
+        onMouseLeave={() => setIsExpanded(false)}
+      >
+        <div className="goldidocs-header">
+          <div className="flex items-center gap-2">
+            <FileText className="w-3 h-3" />
+            <span>GoldiDocs ({status.completedCount}/{status.totalCount})</span>
+          </div>
+          {!isExpanded && (
+            <div className="goldidocs-progress-bar">
+              <div 
+                className="goldidocs-progress-fill" 
+                style={{ width: `${progressPercentage}%` }}
+              />
+            </div>
+          )}
+        </div>
+
+        {isExpanded && (
+          <div className="goldidocs-slots">
+            {status.documents.map((doc) => (
+              <button
+                key={doc.type}
+                onClick={() => setSelectedDocument(doc)}
+                className={cn(
+                  'goldidoc-slot',
+                  getStatusColor(doc.status)
+                )}
+                title={doc.type}
+              >
+                {getStatusIcon(doc.status)}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {isExpanded && (
+          <div className="goldidocs-hint">
+            Click any document to preview
+          </div>
+        )}
+      </div>
+
+      {selectedDocument && (
+        <DocumentPreviewModal
+          document={selectedDocument}
+          projectId={projectId}
+          onClose={() => setSelectedDocument(null)}
+        />
+      )}
+    </>
   );
 }; 
 ```
@@ -3450,11 +9487,185 @@ export const ConnectedSidebar: React.FC = () => {
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/layout/Sidebar/index.ts
 ```ts
 // Export components
-export { Sidebar } from './Sidebar';
-export { WorkspaceItem } from './WorkspaceItem';
+export * from './Sidebar';
+export * from './ConnectedSidebar';
+export * from './WorkspaceItem';
 
 // Export types
-export type { Workspace, Project, SidebarProps } from './types';
+export * from './types';
+
+// Export GoldiDocs components
+export * from './GoldiDocsProgress';
+export * from './DocumentPreviewModal';
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/layout/Sidebar/Sidebar.css
+```css
+.sidebar-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-wrapper.terminal-open .sidebar {
+  /* Ensure sidebar content doesn't overlap with terminal */
+  height: calc(100% - 300px);
+}
+
+/* Ensure the sidebar itself is properly positioned */
+.sidebar {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Smooth transition when terminal opens/closes */
+.sidebar-wrapper .sidebar {
+  transition: height 0.3s ease;
+}
+
+/* GoldiDocs Progress Styles */
+.goldidocs-progress {
+  padding: 8px 12px;
+  border-top: 1px solid #374151;
+  background: rgba(31, 41, 55, 0.5);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.goldidocs-progress:hover {
+  background: rgba(31, 41, 55, 0.8);
+}
+
+.goldidocs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: #9CA3AF;
+}
+
+.goldidocs-progress-bar {
+  flex: 1;
+  height: 4px;
+  background: #1F2937;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-left: 12px;
+}
+
+.goldidocs-progress-fill {
+  height: 100%;
+  background: #10B981;
+  transition: width 0.3s ease;
+}
+
+.goldidocs-slots {
+  display: flex;
+  gap: 4px;
+  height: 24px;
+}
+
+.goldidoc-slot {
+  flex: 1;
+  background: #1F2937;
+  border: 1px solid #374151;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 150ms ease;
+  color: #6B7280;
+}
+
+.goldidoc-slot:hover {
+  background: #374151;
+  border-color: #4B5563;
+  transform: translateY(-1px);
+}
+
+.goldidoc-slot--complete {
+  background: #065F46;
+  border-color: #10B981;
+  color: #10B981;
+}
+
+.goldidoc-slot--processing {
+  background: #1E3A8A;
+  border-color: #3B82F6;
+  color: #3B82F6;
+  animation: pulse 2s infinite;
+}
+
+.goldidoc-slot--error {
+  background: #7F1D1D;
+  border-color: #EF4444;
+  color: #EF4444;
+}
+
+.goldidoc-slot--drift {
+  background: #7C2D12;
+  border-color: #F59E0B;
+  color: #F59E0B;
+}
+
+.goldidocs-hint {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #6B7280;
+  text-align: center;
+}
+
+/* Project item wrapper to contain both button and progress */
+.project-item-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-item {
+  width: 100%;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: #9CA3AF;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.project-item:hover {
+  background: rgba(55, 65, 81, 0.3);
+  color: white;
+}
+
+.project-item--active {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3B82F6;
+}
+
+/* Pulse animation for processing documents */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+} 
 ```
 
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/layout/Sidebar/Sidebar.tsx
@@ -3462,6 +9673,7 @@ File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/layout/Sid
 import React, { useState } from 'react';
 import { Plus, Settings } from 'lucide-react';
 import { WorkspaceItem } from './WorkspaceItem';
+import { FileDirectoryPicker } from '@/components/sidebar/FileDirectoryPicker';
 import type { SidebarProps } from './types';
 import { cn } from '@/utils/cn';
 
@@ -3474,6 +9686,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onProjectSelect,
   onNewProject,
   onSettings,
+  onDirectorySelect,
+  onOpenTerminal,
+  onSaveWorkspace,
+  onExportWorkspace,
+  workspaceDirectory,
   className = '',
 }) => {
   const [expandedWorkspaces, setExpandedWorkspaces] = useState<Set<string>>(new Set());
@@ -3511,6 +9728,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Workspace List */}
       <div className="sidebar-content">
+        {/* File Directory Picker for active workspace */}
+        {activeWorkspaceId && (
+          <div className="px-4 pb-4 border-b border-obsidian-700">
+            <FileDirectoryPicker
+              workspaceId={activeWorkspaceId}
+              currentDirectory={workspaceDirectory?.[activeWorkspaceId]}
+              onDirectorySelect={(dir) => onDirectorySelect?.(activeWorkspaceId, dir)}
+              onOpenTerminal={() => onOpenTerminal?.(activeWorkspaceId)}
+              onSaveWorkspace={() => onSaveWorkspace?.(activeWorkspaceId)}
+              onExportWorkspace={() => onExportWorkspace?.(activeWorkspaceId)}
+            />
+          </div>
+        )}
+        
         {workspaces.map((workspace) => (
           <WorkspaceItem
             key={workspace.id}
@@ -3547,22 +9778,24 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/layout/Sidebar/types.ts
 ```ts
+import type { Project as DBProject } from '@/types/database.types';
+
 export interface Workspace {
   id: string;
   name: string;
-  projects: Project[];
+  projects: ProjectWithGoldiDocs[];
   icon?: string;
   description?: string;
   updatedAt?: string;
   problemCount?: number;
 }
 
-export interface Project {
-  id: string;
-  name: string;
-  status: 'draft' | 'in-progress' | 'completed';
-  updatedAt: Date;
+export interface ProjectWithGoldiDocs extends DBProject {
+  goldiDocs?: GoldiDocsStatus;
 }
+
+// Legacy Project interface for backwards compatibility  
+export interface Project extends ProjectWithGoldiDocs {}
 
 export interface SidebarProps {
   workspaces: Workspace[];
@@ -3573,8 +9806,40 @@ export interface SidebarProps {
   onProjectSelect?: (projectId: string) => void;
   onNewProject?: () => void;
   onSettings?: () => void;
+  onDirectorySelect?: (workspaceId: string, directory: string) => void;
+  onOpenTerminal?: (workspaceId: string) => void;
+  onSaveWorkspace?: (workspaceId: string) => void;
+  onExportWorkspace?: (workspaceId: string) => void;
+  workspaceDirectory?: Record<string, string>;
   className?: string;
 }
+
+// GoldiDocs Types
+export type DocumentType = 'PV' | 'FR' | 'SA' | 'DF' | 'ER' | 'DS';
+export type DocumentStatus = 'complete' | 'processing' | 'pending' | 'error' | 'drift';
+
+export interface DocumentStatusInfo {
+  type: DocumentType;
+  status: DocumentStatus;
+  generatedAt?: Date;
+  error?: string;
+  progress?: number;
+}
+
+export interface GoldiDocsStatus {
+  documents: DocumentStatusInfo[];
+  totalCount: number;
+  completedCount: number;
+}
+
+export const DOCUMENT_NAMES: Record<DocumentType, string> = {
+  PV: 'Product Vision',
+  FR: 'Functional Requirements',
+  SA: 'System Architecture',
+  DF: 'Data Flow Diagram',
+  ER: 'Entity Relationship Diagram',
+  DS: 'Design System',
+};
 ```
 
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/layout/Sidebar/WorkspaceItem.tsx
@@ -3582,7 +9847,8 @@ File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/layout/Sid
 import React from 'react';
 import { ChevronRight, Folder, File } from 'lucide-react';
 import { cn } from '@/utils/cn';
-import type { Workspace, Project } from './types';
+import type { Workspace, ProjectWithGoldiDocs } from './types';
+import { GoldiDocsProgress } from './GoldiDocsProgress';
 
 export interface WorkspaceItemProps {
   workspace: Workspace;
@@ -3660,7 +9926,7 @@ export const WorkspaceItem: React.FC<WorkspaceItemProps> = ({
 
 // Project Item Sub-component
 interface ProjectItemProps {
-  project: Project;
+  project: ProjectWithGoldiDocs;
   isActive: boolean;
   onSelect: () => void;
   statusColor: string;
@@ -3673,30 +9939,4084 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
   statusColor,
 }) => {
   return (
-    <button
-      onClick={onSelect}
-      className={cn(
-        'project-item',
-        isActive && 'project-item--active'
+    <div className="project-item-wrapper">
+      <button
+        onClick={onSelect}
+        className={cn(
+          'project-item',
+          isActive && 'project-item--active'
+        )}
+      >
+        <File className="icon icon-sm" />
+        <span className="project-name">
+          {project.name}
+        </span>
+        <div
+          className={cn('status-dot', statusColor)}
+          title={project.status}
+        />
+      </button>
+      
+      {project.goldiDocs && (
+        <GoldiDocsProgress
+          projectId={project.id}
+          status={project.goldiDocs}
+        />
       )}
-    >
-      <File className="icon icon-sm" />
-      <span className="project-name">
-        {project.name}
-      </span>
-      <div
-        className={cn('status-dot', statusColor)}
-        title={project.status}
-      />
-    </button>
+    </div>
   );
 };
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/layout/Terminal/index.ts
+```ts
+export { Terminal } from './Terminal'; 
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/layout/Terminal/Terminal.css
+```css
+.terminal-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 300px;
+  background-color: #1a1a1a;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  transition: height 0.3s ease;
+  z-index: 10;
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background-color: #242424;
+  border-bottom: 1px solid var(--color-border);
+  min-height: 36px;
+}
+
+.terminal-title {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  user-select: none;
+}
+
+.terminal-close {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.terminal-close:hover {
+  background-color: var(--color-hover);
+  color: var(--color-text);
+}
+
+.terminal-content {
+  flex: 1;
+  padding: 8px;
+  overflow: hidden;
+}
+
+/* Adjust sidebar content when terminal is open */
+.sidebar.terminal-open .sidebar-content {
+  padding-bottom: 300px;
+}
+
+/* Terminal resize handle */
+.terminal-resize-handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  cursor: ns-resize;
+  background: transparent;
+}
+
+.terminal-resize-handle:hover {
+  background: var(--color-primary);
+  opacity: 0.3;
+}
+
+/* Override xterm styles for better integration */
+.terminal-content .xterm {
+  height: 100%;
+}
+
+.terminal-content .xterm-viewport {
+  background-color: transparent !important;
+}
+
+.terminal-content .xterm-screen {
+  margin: 0;
+} 
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/layout/Terminal/Terminal.tsx
+```tsx
+import React, { useEffect, useRef, useState } from 'react';
+import { Terminal as XTerm } from '@xterm/xterm';
+import { FitAddon } from '@xterm/addon-fit';
+import { WebLinksAddon } from '@xterm/addon-web-links';
+import { invoke } from '@tauri-apps/api/core';
+import '@xterm/xterm/css/xterm.css';
+import './Terminal.css';
+
+interface TerminalProps {
+  workingDirectory?: string;
+  isVisible: boolean;
+  onClose: () => void;
+}
+
+export const Terminal: React.FC<TerminalProps> = ({ 
+  workingDirectory = '/', 
+  isVisible,
+  onClose 
+}) => {
+  const terminalRef = useRef<HTMLDivElement>(null);
+  const xtermRef = useRef<XTerm | null>(null);
+  const fitAddonRef = useRef<FitAddon | null>(null);
+  const [isReady, setIsReady] = useState(false);
+  const [sessionId, setSessionId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!terminalRef.current || !isVisible) return;
+
+    // Initialize terminal
+    const term = new XTerm({
+      theme: {
+        background: '#1a1a1a',
+        foreground: '#e4e4e4',
+        cursor: '#e4e4e4',
+        black: '#000000',
+        red: '#e06c75',
+        green: '#98c379',
+        yellow: '#d19a66',
+        blue: '#61afef',
+        magenta: '#c678dd',
+        cyan: '#56b6c2',
+        white: '#abb2bf',
+        brightBlack: '#5c6370',
+        brightRed: '#e06c75',
+        brightGreen: '#98c379',
+        brightYellow: '#d19a66',
+        brightBlue: '#61afef',
+        brightMagenta: '#c678dd',
+        brightCyan: '#56b6c2',
+        brightWhite: '#ffffff',
+      },
+      fontFamily: 'JetBrains Mono, Monaco, monospace',
+      fontSize: 13,
+      lineHeight: 1.2,
+      cursorBlink: true,
+      convertEol: true,
+    });
+
+    // Add addons
+    const fitAddon = new FitAddon();
+    const webLinksAddon = new WebLinksAddon();
+    
+    term.loadAddon(fitAddon);
+    term.loadAddon(webLinksAddon);
+    
+    // Open terminal in container
+    term.open(terminalRef.current);
+    fitAddon.fit();
+
+    xtermRef.current = term;
+    fitAddonRef.current = fitAddon;
+
+    // Handle resize
+    const resizeObserver = new ResizeObserver(() => {
+      fitAddon.fit();
+    });
+    resizeObserver.observe(terminalRef.current);
+
+    // Initialize terminal session
+    let cleanupFn: (() => void) | undefined;
+    initializeTerminal(term, workingDirectory).then(cleanup => {
+      cleanupFn = cleanup;
+    });
+    setIsReady(true);
+
+    return () => {
+      resizeObserver.disconnect();
+      if (cleanupFn) cleanupFn();
+      term.dispose();
+    };
+  }, [isVisible, workingDirectory]);
+
+  const initializeTerminal = async (term: XTerm, cwd: string): Promise<(() => void) | undefined> => {
+    // Check if we're in Tauri
+    if (window.__TAURI__) {
+      try {
+        // Start PTY session in Tauri backend
+        const sessionId = await invoke<string>('start_terminal_session', { cwd });
+        setSessionId(sessionId);
+
+        // Set up message handlers
+        const unlisten = await window.__TAURI__.event.listen('terminal-output', (event: any) => {
+          term.write(event.payload);
+        });
+
+        const unlistenClosed = await window.__TAURI__.event.listen('terminal-closed', (event: any) => {
+          if (event.payload === sessionId) {
+            term.writeln('\r\n[Terminal session closed]');
+          }
+        });
+
+        const unlistenError = await window.__TAURI__.event.listen('terminal-error', (event: any) => {
+          term.writeln(`\r\n[Error: ${event.payload}]`);
+        });
+
+        // Handle input
+        const onDataDispose = term.onData((data) => {
+          invoke('write_to_terminal', { sessionId, data });
+        });
+
+        // Clean up on unmount
+        return () => {
+          unlisten();
+          unlistenClosed();
+          unlistenError();
+          onDataDispose.dispose();
+          invoke('close_terminal_session', { sessionId });
+          setSessionId(null);
+        };
+      } catch (error) {
+        console.error('Failed to initialize Tauri terminal:', error);
+        // Fall back to simulated terminal
+        initializeSimulatedTerminal(term, cwd);
+      }
+    } else {
+      // Browser environment - use simulated terminal
+      initializeSimulatedTerminal(term, cwd);
+    }
+  };
+
+  const initializeSimulatedTerminal = (term: XTerm, cwd: string) => {
+    // Welcome message
+    term.writeln('\x1b[1;32mGauntlet Terminal (Simulated)\x1b[0m');
+    term.writeln(`Working directory: ${cwd}`);
+    term.writeln('Note: This is a simulated terminal. Use the desktop app for full functionality.');
+    term.writeln('');
+    term.write('$ ');
+
+    let currentLine = '';
+    
+    term.onData((data) => {
+      switch (data) {
+        case '\r': // Enter
+          term.writeln('');
+          handleSimulatedCommand(term, currentLine.trim(), cwd);
+          currentLine = '';
+          term.write('$ ');
+          break;
+        case '\u007F': // Backspace
+          if (currentLine.length > 0) {
+            currentLine = currentLine.slice(0, -1);
+            term.write('\b \b');
+          }
+          break;
+        case '\u0003': // Ctrl+C
+          term.writeln('^C');
+          currentLine = '';
+          term.write('$ ');
+          break;
+        default:
+          if (data >= ' ') {
+            currentLine += data;
+            term.write(data);
+          }
+      }
+    });
+  };
+
+  const handleSimulatedCommand = (term: XTerm, command: string, cwd: string) => {
+    if (!command) return;
+
+    // Simulate some basic commands
+    switch (command) {
+      case 'help':
+        term.writeln('Available commands:');
+        term.writeln('  help     - Show this help message');
+        term.writeln('  clear    - Clear the terminal');
+        term.writeln('  pwd      - Print working directory');
+        term.writeln('  echo     - Echo text');
+        term.writeln('  date     - Show current date');
+        term.writeln('');
+        term.writeln('For full terminal functionality, please use the desktop app.');
+        break;
+      
+      case 'clear':
+        term.clear();
+        break;
+      
+      case 'pwd':
+        term.writeln(cwd);
+        break;
+      
+      case 'date':
+        term.writeln(new Date().toString());
+        break;
+      
+      default:
+        if (command.startsWith('echo ')) {
+          term.writeln(command.substring(5));
+        } else {
+          term.writeln(`Command not found: ${command}`);
+          term.writeln('Type "help" for available commands.');
+        }
+    }
+  };
+
+  if (!isVisible) return null;
+
+  return (
+    <div className="terminal-container">
+      <div className="terminal-header">
+        <span className="terminal-title">Terminal</span>
+        <button className="terminal-close" onClick={onClose}>×</button>
+      </div>
+      <div ref={terminalRef} className="terminal-content" />
+    </div>
+  );
+}; 
 ```
 
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/layout/index.ts
 ```ts
 export * from './Sidebar';
-export * from './ProgressBar'; 
+export * from './Terminal'; 
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/LockSystem/BulkLockControls.tsx
+```tsx
+import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Lock, Unlock, Shield } from 'lucide-react';
+import { useLockManagement } from '../../hooks/useLockManagement';
+import { useCanvasStore } from '../../stores/canvasStore';
+
+interface BulkLockControlsProps {
+  visible: boolean;
+  selectedNodes: string[];
+  nodeType?: string;
+}
+
+const BulkLockControls: React.FC<BulkLockControlsProps> = ({
+  visible,
+  selectedNodes,
+  nodeType = 'mixed',
+}) => {
+  const { bulkLock, bulkUnlock, isLocked, getLockedCount } = useLockManagement();
+  const clearSelection = useCanvasStore((state) => state.clearSelection);
+  
+  const lockedCount = selectedNodes.filter(nodeId => isLocked(nodeId)).length;
+  const unlockedCount = selectedNodes.length - lockedCount;
+  const totalLocked = getLockedCount();
+  
+  const handleLockAll = async () => {
+    if (unlockedCount > 0) {
+      const nodesToLock = selectedNodes.filter(nodeId => !isLocked(nodeId));
+      await bulkLock(nodesToLock, nodeType);
+    }
+  };
+  
+  const handleUnlockAll = async () => {
+    if (lockedCount > 0) {
+      const nodesToUnlock = selectedNodes.filter(nodeId => isLocked(nodeId));
+      await bulkUnlock(nodesToUnlock);
+    }
+  };
+  
+  const handleToggleAll = async () => {
+    if (lockedCount === selectedNodes.length) {
+      // All locked, unlock all
+      await bulkUnlock(selectedNodes);
+    } else {
+      // Some or none locked, lock all
+      const nodesToLock = selectedNodes.filter(nodeId => !isLocked(nodeId));
+      if (nodesToLock.length > 0) {
+        await bulkLock(nodesToLock, nodeType);
+      }
+    }
+  };
+  
+  return (
+    <AnimatePresence>
+      {visible && selectedNodes.length > 1 && (
+        <motion.div
+          className="bulk-lock-controls"
+          initial={{ opacity: 0, y: 20, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 20, scale: 0.9 }}
+          transition={{ duration: 0.2, type: 'spring', stiffness: 300 }}
+        >
+          <div className="bulk-lock-info">
+            <Shield size={16} className="bulk-lock-icon" />
+            <span className="bulk-lock-count">
+              {selectedNodes.length} selected
+            </span>
+            {lockedCount > 0 && (
+              <span className="bulk-lock-locked">
+                ({lockedCount} locked)
+              </span>
+            )}
+          </div>
+          
+          <div className="bulk-lock-actions">
+            {unlockedCount > 0 && (
+              <motion.button
+                className="bulk-lock-button"
+                onClick={handleLockAll}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Lock size={14} />
+                <span>Lock All</span>
+              </motion.button>
+            )}
+            
+            {lockedCount > 0 && (
+              <motion.button
+                className="bulk-lock-button bulk-lock-button--unlock"
+                onClick={handleUnlockAll}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Unlock size={14} />
+                <span>Unlock All</span>
+              </motion.button>
+            )}
+            
+            <motion.button
+              className="bulk-lock-button bulk-lock-button--toggle"
+              onClick={handleToggleAll}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {lockedCount === selectedNodes.length ? (
+                <>
+                  <Unlock size={14} />
+                  <span>Unlock</span>
+                </>
+              ) : (
+                <>
+                  <Lock size={14} />
+                  <span>Lock</span>
+                </>
+              )}
+            </motion.button>
+          </div>
+          
+          <div className="bulk-lock-total">
+            Total locked: {totalLocked}
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+export default BulkLockControls;
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/LockSystem/index.ts
+```ts
+export { default as LockIndicator } from './LockIndicator';
+export { default as LockButton } from './LockButton';
+export { default as LockTooltip } from './LockTooltip';
+export { default as BulkLockControls } from './BulkLockControls';
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/LockSystem/LockButton.tsx
+```tsx
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Lock, Unlock } from 'lucide-react';
+import { useLockManagement } from '../../hooks/useLockManagement';
+
+interface LockButtonProps {
+  nodeId: string;
+  nodeType: string;
+  size?: 'small' | 'medium' | 'large';
+  className?: string;
+  onLockChange?: (isLocked: boolean) => void;
+}
+
+const sizeMap = {
+  small: { button: 24, icon: 14 },
+  medium: { button: 32, icon: 16 },
+  large: { button: 40, icon: 20 },
+};
+
+const LockButton: React.FC<LockButtonProps> = ({
+  nodeId,
+  nodeType,
+  size = 'medium',
+  className = '',
+  onLockChange,
+}) => {
+  const { isLocked, toggleLock } = useLockManagement();
+  const locked = isLocked(nodeId);
+  const { button: buttonSize, icon: iconSize } = sizeMap[size];
+  
+  const handleClick = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    await toggleLock(nodeId, nodeType);
+    onLockChange?.(!locked);
+  };
+  
+  return (
+    <motion.button
+      className={`lock-button ${locked ? 'lock-button--locked' : ''} ${className}`}
+      onClick={handleClick}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+      initial={false}
+      animate={{
+        backgroundColor: locked ? 'rgba(245, 158, 11, 0.2)' : 'rgba(0, 0, 0, 0.2)',
+        borderColor: locked ? 'var(--color-accent-500)' : 'transparent',
+      }}
+      transition={{ duration: 0.2 }}
+      style={{
+        width: buttonSize,
+        height: buttonSize,
+      }}
+      aria-label={locked ? 'Unlock item' : 'Lock item'}
+    >
+      <motion.div
+        animate={{ rotate: locked ? 0 : -45 }}
+        transition={{ duration: 0.3, type: 'spring', stiffness: 200 }}
+      >
+        {locked ? (
+          <Lock size={iconSize} className="lock-icon lock-icon--locked" />
+        ) : (
+          <Unlock size={iconSize} className="lock-icon" />
+        )}
+      </motion.div>
+    </motion.button>
+  );
+};
+
+export default LockButton;
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/LockSystem/LockIndicator.tsx
+```tsx
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Lock, Unlock } from 'lucide-react';
+import { useLockStore } from '../../stores/lockStore';
+
+interface LockIndicatorProps {
+  nodeId: string;
+  size?: 'small' | 'medium' | 'large';
+  showTooltip?: boolean;
+}
+
+const sizeMap = {
+  small: { icon: 14, container: 20 },
+  medium: { icon: 16, container: 24 },
+  large: { icon: 20, container: 32 },
+};
+
+const LockIndicator: React.FC<LockIndicatorProps> = ({
+  nodeId,
+  size = 'medium',
+  showTooltip = true,
+}) => {
+  const isLocked = useLockStore((state) => state.isLocked(nodeId));
+  const lockInfo = useLockStore((state) => state.lockedItems.get(nodeId));
+  
+  if (!isLocked) return null;
+  
+  const { icon: iconSize, container: containerSize } = sizeMap[size];
+  
+  return (
+    <motion.div
+      className="lock-indicator"
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      exit={{ scale: 0, opacity: 0 }}
+      transition={{ duration: 0.2, type: 'spring', stiffness: 500 }}
+      style={{
+        width: containerSize,
+        height: containerSize,
+      }}
+    >
+      <Lock
+        size={iconSize}
+        className="lock-indicator-icon"
+        style={{ color: 'var(--color-accent-500)' }}
+      />
+      
+      {showTooltip && lockInfo && (
+        <div className="lock-tooltip">
+          <p>Locked by you</p>
+          <span className="lock-tooltip-time">
+            {new Date(lockInfo.lockedAt).toLocaleString()}
+          </span>
+        </div>
+      )}
+    </motion.div>
+  );
+};
+
+export default LockIndicator;
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/LockSystem/LockTooltip.tsx
+```tsx
+import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Lock, Clock, User } from 'lucide-react';
+import { useLockStore } from '../../stores/lockStore';
+import { formatDistanceToNow } from 'date-fns';
+
+interface LockTooltipProps {
+  nodeId: string;
+  visible: boolean;
+  position?: 'top' | 'bottom' | 'left' | 'right';
+}
+
+const LockTooltip: React.FC<LockTooltipProps> = ({
+  nodeId,
+  visible,
+  position = 'top',
+}) => {
+  const lockInfo = useLockStore((state) => state.lockedItems.get(nodeId));
+  
+  if (!lockInfo || !visible) return null;
+  
+  const positionClasses = {
+    top: 'lock-tooltip--top',
+    bottom: 'lock-tooltip--bottom',
+    left: 'lock-tooltip--left',
+    right: 'lock-tooltip--right',
+  };
+  
+  const remainingTime = lockInfo.expiresAt
+    ? formatDistanceToNow(new Date(lockInfo.expiresAt), { addSuffix: true })
+    : null;
+  
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.div
+          className={`lock-tooltip-container ${positionClasses[position]}`}
+          initial={{ opacity: 0, scale: 0.8, y: position === 'top' ? 10 : -10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.8, y: position === 'top' ? 10 : -10 }}
+          transition={{ duration: 0.2 }}
+        >
+          <div className="lock-tooltip-content">
+            <div className="lock-tooltip-header">
+              <Lock size={14} className="lock-tooltip-icon" />
+              <span>Locked</span>
+            </div>
+            
+            <div className="lock-tooltip-info">
+              <div className="lock-tooltip-row">
+                <User size={12} />
+                <span>Locked by you</span>
+              </div>
+              
+              <div className="lock-tooltip-row">
+                <Clock size={12} />
+                <span>
+                  {formatDistanceToNow(new Date(lockInfo.lockedAt), { addSuffix: true })}
+                </span>
+              </div>
+              
+              {remainingTime && (
+                <div className="lock-tooltip-expiry">
+                  Expires {remainingTime}
+                </div>
+              )}
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+export default LockTooltip;
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/PerformanceMonitor/FPSCounter.tsx
+```tsx
+import React, { useRef, useEffect } from 'react';
+import { Activity } from 'lucide-react';
+import { cn } from '@/utils/cn';
+
+interface FPSCounterProps {
+  fps: {
+    current: number;
+    average: number;
+    min: number;
+    max: number;
+    history: number[];
+  };
+  targetFPS?: number;
+  showGraph?: boolean;
+  className?: string;
+}
+
+export const FPSCounter: React.FC<FPSCounterProps> = ({
+  fps,
+  targetFPS = 60,
+  showGraph = true,
+  className = '',
+}) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  // Determine color based on FPS
+  const getFPSColor = (value: number) => {
+    if (value >= targetFPS * 0.9) return '#10B981'; // Green
+    if (value >= targetFPS * 0.6) return '#F59E0B'; // Yellow
+    return '#EF4444'; // Red
+  };
+
+  // Draw FPS graph
+  useEffect(() => {
+    if (!showGraph || !canvasRef.current || fps.history.length === 0) return;
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Set up dimensions
+    const padding = 4;
+    const width = canvas.width - padding * 2;
+    const height = canvas.height - padding * 2;
+    const stepX = width / (fps.history.length - 1);
+    
+    // Draw background grid
+    ctx.strokeStyle = '#374151';
+    ctx.lineWidth = 0.5;
+    ctx.setLineDash([2, 2]);
+    
+    // Horizontal lines
+    for (let i = 0; i <= 4; i++) {
+      const y = padding + (height / 4) * i;
+      ctx.beginPath();
+      ctx.moveTo(padding, y);
+      ctx.lineTo(canvas.width - padding, y);
+      ctx.stroke();
+    }
+    
+    ctx.setLineDash([]);
+
+    // Draw target line
+    ctx.strokeStyle = '#4B5563';
+    ctx.lineWidth = 1;
+    const targetY = padding + height - (targetFPS / 120) * height;
+    ctx.beginPath();
+    ctx.moveTo(padding, targetY);
+    ctx.lineTo(canvas.width - padding, targetY);
+    ctx.stroke();
+
+    // Draw FPS line
+    ctx.strokeStyle = getFPSColor(fps.current);
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    
+    fps.history.forEach((value, index) => {
+      const x = padding + index * stepX;
+      const y = padding + height - (value / 120) * height;
+      
+      if (index === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    });
+    
+    ctx.stroke();
+
+    // Draw current value dot
+    if (fps.history.length > 0) {
+      const lastX = padding + (fps.history.length - 1) * stepX;
+      const lastY = padding + height - (fps.history[fps.history.length - 1] / 120) * height;
+      
+      ctx.fillStyle = getFPSColor(fps.current);
+      ctx.beginPath();
+      ctx.arc(lastX, lastY, 3, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }, [fps, targetFPS, showGraph]);
+
+  return (
+    <div className={cn('bg-gray-800 rounded-lg p-3', className)}>
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center gap-2">
+          <Activity className="w-4 h-4 text-gray-400" />
+          <span className="text-xs font-medium text-gray-400">FPS</span>
+        </div>
+        <div className={cn(
+          'text-lg font-mono font-bold',
+          fps.current >= targetFPS * 0.9 ? 'text-green-500' :
+          fps.current >= targetFPS * 0.6 ? 'text-yellow-500' :
+          'text-red-500'
+        )}>
+          {Math.round(fps.current)}
+        </div>
+      </div>
+
+      {showGraph && (
+        <canvas
+          ref={canvasRef}
+          width={180}
+          height={60}
+          className="w-full h-[60px] mb-2"
+        />
+      )}
+
+      <div className="grid grid-cols-3 gap-2 text-xs">
+        <div>
+          <div className="text-gray-500">Avg</div>
+          <div className="font-mono text-gray-300">{Math.round(fps.average)}</div>
+        </div>
+        <div>
+          <div className="text-gray-500">Min</div>
+          <div className="font-mono text-gray-300">{Math.round(fps.min)}</div>
+        </div>
+        <div>
+          <div className="text-gray-500">Max</div>
+          <div className="font-mono text-gray-300">{Math.round(fps.max)}</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/PerformanceMonitor/index.ts
+```ts
+export { PerformanceOverlay } from './PerformanceOverlay';
+export { FPSCounter } from './FPSCounter';
+export { MemoryGraph } from './MemoryGraph';
+export { RenderMetrics } from './RenderMetrics';
+export { NetworkMonitor } from './NetworkMonitor';
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/PerformanceMonitor/MemoryGraph.tsx
+```tsx
+import React, { useRef, useEffect } from 'react';
+import { HardDrive, AlertTriangle } from 'lucide-react';
+import { cn } from '@/utils/cn';
+
+interface MemoryGraphProps {
+  memory: {
+    usedJSHeapSize: number;
+    totalJSHeapSize: number;
+    jsHeapSizeLimit: number;
+    percentUsed: number;
+    history: number[];
+  };
+  leakDetection?: {
+    isLeaking: boolean;
+    growthRate: number;
+    confidence: number;
+  };
+  showGraph?: boolean;
+  className?: string;
+}
+
+export const MemoryGraph: React.FC<MemoryGraphProps> = ({
+  memory,
+  leakDetection,
+  showGraph = true,
+  className = '',
+}) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  // Format bytes to human readable
+  const formatBytes = (bytes: number) => {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+  };
+
+  // Get memory color based on usage
+  const getMemoryColor = (percent: number) => {
+    if (percent < 50) return '#10B981'; // Green
+    if (percent < 75) return '#F59E0B'; // Yellow
+    return '#EF4444'; // Red
+  };
+
+  // Draw memory graph
+  useEffect(() => {
+    if (!showGraph || !canvasRef.current || memory.history.length === 0) return;
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Set up dimensions
+    const padding = 4;
+    const width = canvas.width - padding * 2;
+    const height = canvas.height - padding * 2;
+    const stepX = width / Math.max(1, memory.history.length - 1);
+
+    // Draw background gradient
+    const gradient = ctx.createLinearGradient(0, padding, 0, canvas.height - padding);
+    gradient.addColorStop(0, 'rgba(239, 68, 68, 0.1)'); // Red at top
+    gradient.addColorStop(0.25, 'rgba(245, 158, 11, 0.1)'); // Yellow
+    gradient.addColorStop(0.5, 'rgba(16, 185, 129, 0.1)'); // Green
+    gradient.addColorStop(1, 'rgba(16, 185, 129, 0)');
+    
+    ctx.fillStyle = gradient;
+    ctx.fillRect(padding, padding, width, height);
+
+    // Draw threshold lines
+    ctx.strokeStyle = '#374151';
+    ctx.lineWidth = 0.5;
+    ctx.setLineDash([2, 2]);
+    
+    // 75% line
+    const line75Y = padding + height * 0.25;
+    ctx.beginPath();
+    ctx.moveTo(padding, line75Y);
+    ctx.lineTo(canvas.width - padding, line75Y);
+    ctx.stroke();
+    
+    // 50% line
+    const line50Y = padding + height * 0.5;
+    ctx.beginPath();
+    ctx.moveTo(padding, line50Y);
+    ctx.lineTo(canvas.width - padding, line50Y);
+    ctx.stroke();
+    
+    ctx.setLineDash([]);
+
+    // Draw memory usage line
+    ctx.beginPath();
+    ctx.strokeStyle = getMemoryColor(memory.percentUsed);
+    ctx.lineWidth = 2;
+    
+    memory.history.forEach((percent, index) => {
+      const x = padding + index * stepX;
+      const y = padding + height - (percent / 100) * height;
+      
+      if (index === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    });
+    
+    ctx.stroke();
+
+    // Fill area under line
+    ctx.lineTo(padding + (memory.history.length - 1) * stepX, canvas.height - padding);
+    ctx.lineTo(padding, canvas.height - padding);
+    ctx.closePath();
+    
+    const areaGradient = ctx.createLinearGradient(0, padding, 0, canvas.height - padding);
+    const currentColor = getMemoryColor(memory.percentUsed);
+    areaGradient.addColorStop(0, currentColor + '40');
+    areaGradient.addColorStop(1, currentColor + '10');
+    ctx.fillStyle = areaGradient;
+    ctx.fill();
+
+    // Draw current value dot
+    if (memory.history.length > 0) {
+      const lastX = padding + (memory.history.length - 1) * stepX;
+      const lastY = padding + height - (memory.history[memory.history.length - 1] / 100) * height;
+      
+      ctx.fillStyle = getMemoryColor(memory.percentUsed);
+      ctx.beginPath();
+      ctx.arc(lastX, lastY, 3, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }, [memory, showGraph]);
+
+  return (
+    <div className={cn('bg-gray-800 rounded-lg p-3', className)}>
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center gap-2">
+          <HardDrive className="w-4 h-4 text-gray-400" />
+          <span className="text-xs font-medium text-gray-400">Memory</span>
+          {leakDetection?.isLeaking && (
+            <div className="flex items-center gap-1 px-2 py-0.5 bg-red-900/30 rounded">
+              <AlertTriangle className="w-3 h-3 text-red-400" />
+              <span className="text-xs text-red-400">Leak</span>
+            </div>
+          )}
+        </div>
+        <div className={cn(
+          'text-sm font-mono font-bold',
+          memory.percentUsed < 50 ? 'text-green-500' :
+          memory.percentUsed < 75 ? 'text-yellow-500' :
+          'text-red-500'
+        )}>
+          {memory.percentUsed.toFixed(1)}%
+        </div>
+      </div>
+
+      {showGraph && (
+        <canvas
+          ref={canvasRef}
+          width={180}
+          height={60}
+          className="w-full h-[60px] mb-2"
+        />
+      )}
+
+      <div className="space-y-1">
+        <div className="flex justify-between text-xs">
+          <span className="text-gray-500">Used</span>
+          <span className="font-mono text-gray-300">{formatBytes(memory.usedJSHeapSize)}</span>
+        </div>
+        <div className="flex justify-between text-xs">
+          <span className="text-gray-500">Total</span>
+          <span className="font-mono text-gray-300">{formatBytes(memory.totalJSHeapSize)}</span>
+        </div>
+        <div className="flex justify-between text-xs">
+          <span className="text-gray-500">Limit</span>
+          <span className="font-mono text-gray-300">{formatBytes(memory.jsHeapSizeLimit)}</span>
+        </div>
+        {leakDetection && leakDetection.isLeaking && (
+          <div className="flex justify-between text-xs pt-1 border-t border-gray-700">
+            <span className="text-red-400">Growth</span>
+            <span className="font-mono text-red-400">
+              +{leakDetection.growthRate.toFixed(1)} MB/min
+            </span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/PerformanceMonitor/NetworkMonitor.tsx
+```tsx
+import React from 'react';
+import { Globe, AlertCircle, CheckCircle, XCircle } from 'lucide-react';
+import { cn } from '@/utils/cn';
+
+interface NetworkRequest {
+  id: string;
+  url: string;
+  method: string;
+  startTime: number;
+  endTime?: number;
+  status?: number;
+  size?: number;
+}
+
+interface NetworkMonitorProps {
+  network: {
+    activeRequests: number;
+    completedRequests: number;
+    failedRequests: number;
+    averageLatency: number;
+    requestQueue: NetworkRequest[];
+  };
+  showRequests?: boolean;
+  className?: string;
+}
+
+export const NetworkMonitor: React.FC<NetworkMonitorProps> = ({
+  network,
+  showRequests = true,
+  className = '',
+}) => {
+  const getStatusColor = (status?: number) => {
+    if (!status) return 'text-gray-400';
+    if (status >= 200 && status < 300) return 'text-green-400';
+    if (status >= 300 && status < 400) return 'text-yellow-400';
+    return 'text-red-400';
+  };
+
+  const getStatusIcon = (status?: number) => {
+    if (!status) return <AlertCircle className="w-3 h-3" />;
+    if (status >= 200 && status < 300) return <CheckCircle className="w-3 h-3" />;
+    return <XCircle className="w-3 h-3" />;
+  };
+
+  const formatDuration = (request: NetworkRequest) => {
+    if (!request.endTime) return '...';
+    const duration = request.endTime - request.startTime;
+    return `${Math.round(duration)}ms`;
+  };
+
+  const formatUrl = (url: string) => {
+    try {
+      const urlObj = new URL(url);
+      return urlObj.pathname + urlObj.search;
+    } catch {
+      return url.slice(0, 50) + (url.length > 50 ? '...' : '');
+    }
+  };
+
+  const totalRequests = network.completedRequests + network.failedRequests;
+  const successRate = totalRequests > 0 
+    ? ((network.completedRequests / totalRequests) * 100).toFixed(1)
+    : '100.0';
+
+  return (
+    <div className={cn('bg-gray-800 rounded-lg p-3', className)}>
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center gap-2">
+          <Globe className="w-4 h-4 text-gray-400" />
+          <span className="text-xs font-medium text-gray-400">Network</span>
+          {network.activeRequests > 0 && (
+            <div className="flex items-center gap-1 px-2 py-0.5 bg-blue-900/30 rounded">
+              <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
+              <span className="text-xs text-blue-400">{network.activeRequests} active</span>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-2 mb-3 text-xs">
+        <div className="bg-gray-900 rounded p-2">
+          <div className="text-gray-500">Success Rate</div>
+          <div className={cn(
+            'font-mono',
+            Number(successRate) >= 95 ? 'text-green-400' :
+            Number(successRate) >= 80 ? 'text-yellow-400' :
+            'text-red-400'
+          )}>
+            {successRate}%
+          </div>
+        </div>
+        <div className="bg-gray-900 rounded p-2">
+          <div className="text-gray-500">Avg Latency</div>
+          <div className={cn(
+            'font-mono',
+            network.averageLatency < 200 ? 'text-green-400' :
+            network.averageLatency < 500 ? 'text-yellow-400' :
+            'text-red-400'
+          )}>
+            {Math.round(network.averageLatency)}ms
+          </div>
+        </div>
+      </div>
+
+      <div className="flex justify-between text-xs mb-2">
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-1">
+            <CheckCircle className="w-3 h-3 text-green-400" />
+            <span className="text-gray-400">{network.completedRequests}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <XCircle className="w-3 h-3 text-red-400" />
+            <span className="text-gray-400">{network.failedRequests}</span>
+          </div>
+        </div>
+        <div className="text-gray-500">
+          Total: {totalRequests}
+        </div>
+      </div>
+
+      {showRequests && network.requestQueue.length > 0 && (
+        <div className="border-t border-gray-700 pt-2">
+          <div className="text-xs text-gray-400 mb-1">Recent Requests</div>
+          <div className="space-y-1 max-h-[120px] overflow-y-auto">
+            {network.requestQueue.map((request) => (
+              <div
+                key={request.id}
+                className="flex items-center gap-2 text-xs bg-gray-900 rounded p-1.5"
+              >
+                <div className={getStatusColor(request.status)}>
+                  {getStatusIcon(request.status)}
+                </div>
+                <span className="text-gray-500 font-mono">
+                  {request.method}
+                </span>
+                <span className="text-gray-400 truncate flex-1" title={request.url}>
+                  {formatUrl(request.url)}
+                </span>
+                <span className={cn(
+                  'font-mono',
+                  !request.endTime ? 'text-blue-400' :
+                  request.endTime - request.startTime < 200 ? 'text-green-400' :
+                  request.endTime - request.startTime < 500 ? 'text-yellow-400' :
+                  'text-red-400'
+                )}>
+                  {formatDuration(request)}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/PerformanceMonitor/PerformanceOverlay.tsx
+```tsx
+import React, { useState, useEffect, useCallback } from 'react';
+import { 
+  X, 
+  ChevronDown, 
+  ChevronUp, 
+  Download, 
+  Trash2, 
+  Play, 
+  Pause,
+  Minimize2,
+  Maximize2,
+  Activity
+} from 'lucide-react';
+import { cn } from '@/utils/cn';
+import { FPSCounter } from './FPSCounter';
+import { MemoryGraph } from './MemoryGraph';
+import { RenderMetrics } from './RenderMetrics';
+import { NetworkMonitor } from './NetworkMonitor';
+import { usePerformanceMetrics } from '@/hooks/usePerformanceMetrics';
+import { useFPSMonitor } from '@/hooks/useFPSMonitor';
+import { useMemoryTracking } from '@/hooks/useMemoryTracking';
+
+interface PerformanceOverlayProps {
+  isOpen: boolean;
+  onClose: () => void;
+  className?: string;
+}
+
+export const PerformanceOverlay: React.FC<PerformanceOverlayProps> = ({
+  isOpen,
+  onClose,
+  className = '',
+}) => {
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [expandedSections, setExpandedSections] = useState({
+    fps: true,
+    memory: true,
+    render: true,
+    network: false,
+  });
+
+  const {
+    metrics,
+    events,
+    isRecording,
+    session,
+    updateCanvasMetrics,
+    updateAnimationMetrics,
+    startRecording,
+    stopRecording,
+    exportSession,
+    clearMetrics,
+  } = usePerformanceMetrics(isOpen);
+
+  const { getFPS } = useFPSMonitor(isOpen, {
+    onFPSDrop: (fps) => {
+      console.warn(`FPS dropped to ${fps}`);
+    },
+  });
+
+  const { 
+    currentMemory,
+    leakDetection,
+    stats,
+    isAvailable: isMemoryAvailable,
+    forceGC,
+  } = useMemoryTracking(isOpen, {
+    onMemoryLeak: (detection) => {
+      console.warn('Memory leak detected:', detection);
+    },
+    onMemoryWarning: (percent) => {
+      console.warn(`Memory usage at ${percent.toFixed(1)}%`);
+    },
+  });
+
+  // Update canvas metrics from external source
+  const handleCanvasUpdate = useCallback((data: {
+    nodeCount: number;
+    edgeCount: number;
+    viewportNodes: number;
+  }) => {
+    updateCanvasMetrics({
+      ...data,
+      culledNodes: data.nodeCount - data.viewportNodes,
+    });
+  }, [updateCanvasMetrics]);
+
+  // Toggle section expansion
+  const toggleSection = (section: keyof typeof expandedSections) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section],
+    }));
+  };
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isOpen) return;
+
+      // Minimize/maximize with M
+      if (e.key === 'm' && !e.metaKey && !e.ctrlKey) {
+        setIsMinimized(prev => !prev);
+      }
+
+      // Clear metrics with C
+      if (e.key === 'c' && !e.metaKey && !e.ctrlKey) {
+        clearMetrics();
+      }
+
+      // Toggle recording with R
+      if (e.key === 'r' && !e.metaKey && !e.ctrlKey) {
+        if (isRecording) {
+          stopRecording();
+        } else {
+          startRecording();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, isRecording, clearMetrics, startRecording, stopRecording]);
+
+  if (!isOpen) return null;
+
+  // Expose update function to global scope for easy integration
+  useEffect(() => {
+    if (isOpen) {
+      (window as any).__updatePerformanceMetrics = {
+        canvas: handleCanvasUpdate,
+        animations: updateAnimationMetrics,
+      };
+    }
+    return () => {
+      delete (window as any).__updatePerformanceMetrics;
+    };
+  }, [isOpen, handleCanvasUpdate, updateAnimationMetrics]);
+
+  return (
+    <div
+      className={cn(
+        'fixed top-4 right-4 z-50 bg-gray-900 border border-gray-700 rounded-lg shadow-2xl',
+        'transition-all duration-300',
+        isMinimized ? 'w-[200px]' : 'w-[400px]',
+        className
+      )}
+    >
+      {/* Header */}
+      <div className="flex items-center justify-between p-3 border-b border-gray-700">
+        <div className="flex items-center gap-2">
+          <Activity className="w-4 h-4 text-blue-400" />
+          <span className="text-sm font-medium text-white">Performance Monitor</span>
+          {isRecording && (
+            <div className="flex items-center gap-1 px-2 py-0.5 bg-red-900/30 rounded">
+              <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+              <span className="text-xs text-red-400">REC</span>
+            </div>
+          )}
+        </div>
+        <div className="flex items-center gap-1">
+          <button
+            onClick={() => setIsMinimized(!isMinimized)}
+            className="p-1 hover:bg-gray-800 rounded transition-colors"
+            title={isMinimized ? "Expand" : "Minimize"}
+          >
+            {isMinimized ? (
+              <Maximize2 className="w-4 h-4 text-gray-400" />
+            ) : (
+              <Minimize2 className="w-4 h-4 text-gray-400" />
+            )}
+          </button>
+          <button
+            onClick={onClose}
+            className="p-1 hover:bg-gray-800 rounded transition-colors"
+            title="Close (Cmd+Shift+P)"
+          >
+            <X className="w-4 h-4 text-gray-400" />
+          </button>
+        </div>
+      </div>
+
+      {/* Minimized View */}
+      {isMinimized && (
+        <div className="p-3 space-y-2">
+          <div className="flex justify-between items-center">
+            <span className="text-xs text-gray-400">FPS</span>
+            <span className={cn(
+              'text-lg font-mono font-bold',
+              metrics.fps.current >= 50 ? 'text-green-500' :
+              metrics.fps.current >= 30 ? 'text-yellow-500' :
+              'text-red-500'
+            )}>
+              {Math.round(metrics.fps.current)}
+            </span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span className="text-xs text-gray-400">Memory</span>
+            <span className={cn(
+              'text-sm font-mono',
+              metrics.memory.percentUsed < 50 ? 'text-green-500' :
+              metrics.memory.percentUsed < 75 ? 'text-yellow-500' :
+              'text-red-500'
+            )}>
+              {metrics.memory.percentUsed.toFixed(1)}%
+            </span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span className="text-xs text-gray-400">Nodes</span>
+            <span className="text-sm font-mono text-gray-300">
+              {metrics.canvas.viewportNodes}/{metrics.canvas.nodeCount}
+            </span>
+          </div>
+        </div>
+      )}
+
+      {/* Full View */}
+      {!isMinimized && (
+        <>
+          {/* Controls */}
+          <div className="flex items-center justify-between p-3 border-b border-gray-700">
+            <div className="flex items-center gap-2">
+              <button
+                onClick={isRecording ? stopRecording : startRecording}
+                className={cn(
+                  'flex items-center gap-1 px-2 py-1 rounded text-xs transition-colors',
+                  isRecording 
+                    ? 'bg-red-900/30 hover:bg-red-900/50 text-red-400'
+                    : 'bg-gray-800 hover:bg-gray-700 text-gray-300'
+                )}
+              >
+                {isRecording ? (
+                  <>
+                    <Pause className="w-3 h-3" />
+                    Stop
+                  </>
+                ) : (
+                  <>
+                    <Play className="w-3 h-3" />
+                    Record
+                  </>
+                )}
+              </button>
+              {session && !isRecording && (
+                <button
+                  onClick={exportSession}
+                  className="flex items-center gap-1 px-2 py-1 bg-gray-800 hover:bg-gray-700 rounded text-xs text-gray-300 transition-colors"
+                >
+                  <Download className="w-3 h-3" />
+                  Export
+                </button>
+              )}
+              <button
+                onClick={clearMetrics}
+                className="flex items-center gap-1 px-2 py-1 bg-gray-800 hover:bg-gray-700 rounded text-xs text-gray-300 transition-colors"
+                title="Clear metrics (C)"
+              >
+                <Trash2 className="w-3 h-3" />
+                Clear
+              </button>
+            </div>
+            {isMemoryAvailable && (
+              <button
+                onClick={forceGC}
+                className="px-2 py-1 bg-gray-800 hover:bg-gray-700 rounded text-xs text-gray-300 transition-colors"
+                title="Force garbage collection (requires --expose-gc flag)"
+              >
+                Force GC
+              </button>
+            )}
+          </div>
+
+          {/* Metrics Sections */}
+          <div className="max-h-[600px] overflow-y-auto">
+            {/* FPS Section */}
+            <div className="border-b border-gray-700">
+              <button
+                onClick={() => toggleSection('fps')}
+                className="w-full flex items-center justify-between p-3 hover:bg-gray-800/50 transition-colors"
+              >
+                <span className="text-sm font-medium text-gray-300">Frame Rate</span>
+                {expandedSections.fps ? (
+                  <ChevronUp className="w-4 h-4 text-gray-400" />
+                ) : (
+                  <ChevronDown className="w-4 h-4 text-gray-400" />
+                )}
+              </button>
+              {expandedSections.fps && (
+                <div className="px-3 pb-3">
+                  <FPSCounter fps={metrics.fps} />
+                </div>
+              )}
+            </div>
+
+            {/* Memory Section */}
+            <div className="border-b border-gray-700">
+              <button
+                onClick={() => toggleSection('memory')}
+                className="w-full flex items-center justify-between p-3 hover:bg-gray-800/50 transition-colors"
+              >
+                <span className="text-sm font-medium text-gray-300">Memory Usage</span>
+                {expandedSections.memory ? (
+                  <ChevronUp className="w-4 h-4 text-gray-400" />
+                ) : (
+                  <ChevronDown className="w-4 h-4 text-gray-400" />
+                )}
+              </button>
+              {expandedSections.memory && (
+                <div className="px-3 pb-3">
+                  <MemoryGraph 
+                    memory={metrics.memory}
+                    leakDetection={leakDetection}
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* Render Metrics Section */}
+            <div className="border-b border-gray-700">
+              <button
+                onClick={() => toggleSection('render')}
+                className="w-full flex items-center justify-between p-3 hover:bg-gray-800/50 transition-colors"
+              >
+                <span className="text-sm font-medium text-gray-300">Render Performance</span>
+                {expandedSections.render ? (
+                  <ChevronUp className="w-4 h-4 text-gray-400" />
+                ) : (
+                  <ChevronDown className="w-4 h-4 text-gray-400" />
+                )}
+              </button>
+              {expandedSections.render && (
+                <div className="px-3 pb-3">
+                  <RenderMetrics
+                    react={metrics.react}
+                    canvas={metrics.canvas}
+                    animations={metrics.animations}
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* Network Section */}
+            <div className="border-b border-gray-700">
+              <button
+                onClick={() => toggleSection('network')}
+                className="w-full flex items-center justify-between p-3 hover:bg-gray-800/50 transition-colors"
+              >
+                <span className="text-sm font-medium text-gray-300">Network Activity</span>
+                {expandedSections.network ? (
+                  <ChevronUp className="w-4 h-4 text-gray-400" />
+                ) : (
+                  <ChevronDown className="w-4 h-4 text-gray-400" />
+                )}
+              </button>
+              {expandedSections.network && (
+                <div className="px-3 pb-3">
+                  <NetworkMonitor network={metrics.network} />
+                </div>
+              )}
+            </div>
+
+            {/* Performance Events */}
+            {events.length > 0 && (
+              <div className="p-3">
+                <div className="text-sm font-medium text-gray-300 mb-2">Performance Events</div>
+                <div className="space-y-1 max-h-[100px] overflow-y-auto">
+                  {events.slice(-5).reverse().map((event, index) => (
+                    <div
+                      key={`${event.timestamp}-${index}`}
+                      className={cn(
+                        'text-xs p-2 rounded',
+                        event.severity === 'high' ? 'bg-red-900/30 text-red-400' :
+                        event.severity === 'medium' ? 'bg-yellow-900/30 text-yellow-400' :
+                        'bg-blue-900/30 text-blue-400'
+                      )}
+                    >
+                      <div className="flex justify-between">
+                        <span>{event.details}</span>
+                        <span className="text-gray-500">
+                          {new Date(event.timestamp).toLocaleTimeString()}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Footer */}
+          <div className="p-2 border-t border-gray-700 text-xs text-gray-500 text-center">
+            Press <kbd className="px-1 py-0.5 bg-gray-800 rounded">Cmd+Shift+P</kbd> to toggle
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/PerformanceMonitor/RenderMetrics.tsx
+```tsx
+import React from 'react';
+import { Layers, Zap, Clock, RefreshCw } from 'lucide-react';
+import { cn } from '@/utils/cn';
+
+interface RenderMetricsProps {
+  react: {
+    renderCount: number;
+    renderDuration: number;
+    componentCount: number;
+    updateFrequency: number;
+  };
+  canvas: {
+    nodeCount: number;
+    edgeCount: number;
+    viewportNodes: number;
+    culledNodes: number;
+  };
+  animations: {
+    activeAnimations: number;
+    frameTime: number;
+    droppedFrames: number;
+  };
+  className?: string;
+}
+
+export const RenderMetrics: React.FC<RenderMetricsProps> = ({
+  react,
+  canvas,
+  animations,
+  className = '',
+}) => {
+  const getPerformanceColor = (value: number, threshold: number, inverse = false) => {
+    if (inverse) {
+      return value > threshold ? 'text-red-400' : 'text-green-400';
+    }
+    return value < threshold ? 'text-green-400' : 'text-red-400';
+  };
+
+  const cullingEfficiency = canvas.nodeCount > 0 
+    ? ((canvas.culledNodes / canvas.nodeCount) * 100).toFixed(1)
+    : '0.0';
+
+  return (
+    <div className={cn('bg-gray-800 rounded-lg p-3 space-y-3', className)}>
+      {/* React Metrics */}
+      <div>
+        <div className="flex items-center gap-2 mb-2">
+          <Layers className="w-4 h-4 text-gray-400" />
+          <span className="text-xs font-medium text-gray-400">React Performance</span>
+        </div>
+        <div className="grid grid-cols-2 gap-2 text-xs">
+          <div className="bg-gray-900 rounded p-2">
+            <div className="text-gray-500">Renders</div>
+            <div className="font-mono text-gray-300">{react.renderCount}</div>
+          </div>
+          <div className="bg-gray-900 rounded p-2">
+            <div className="text-gray-500">Avg Duration</div>
+            <div className={cn(
+              'font-mono',
+              getPerformanceColor(react.renderDuration, 16, true)
+            )}>
+              {react.renderDuration.toFixed(1)}ms
+            </div>
+          </div>
+          <div className="bg-gray-900 rounded p-2">
+            <div className="text-gray-500">Components</div>
+            <div className="font-mono text-gray-300">{react.componentCount}</div>
+          </div>
+          <div className="bg-gray-900 rounded p-2">
+            <div className="text-gray-500">Update Rate</div>
+            <div className="font-mono text-gray-300">
+              {react.updateFrequency.toFixed(1)}/s
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Canvas Metrics */}
+      <div>
+        <div className="flex items-center gap-2 mb-2">
+          <RefreshCw className="w-4 h-4 text-gray-400" />
+          <span className="text-xs font-medium text-gray-400">Canvas Performance</span>
+        </div>
+        <div className="grid grid-cols-2 gap-2 text-xs">
+          <div className="bg-gray-900 rounded p-2">
+            <div className="text-gray-500">Nodes</div>
+            <div className="font-mono text-gray-300">{canvas.nodeCount}</div>
+          </div>
+          <div className="bg-gray-900 rounded p-2">
+            <div className="text-gray-500">Edges</div>
+            <div className="font-mono text-gray-300">{canvas.edgeCount}</div>
+          </div>
+          <div className="bg-gray-900 rounded p-2">
+            <div className="text-gray-500">Visible</div>
+            <div className={cn(
+              'font-mono',
+              canvas.viewportNodes < 50 ? 'text-green-400' : 
+              canvas.viewportNodes < 100 ? 'text-yellow-400' : 
+              'text-red-400'
+            )}>
+              {canvas.viewportNodes}
+            </div>
+          </div>
+          <div className="bg-gray-900 rounded p-2">
+            <div className="text-gray-500">Culled</div>
+            <div className="font-mono text-gray-300">
+              {canvas.culledNodes} ({cullingEfficiency}%)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Animation Metrics */}
+      <div>
+        <div className="flex items-center gap-2 mb-2">
+          <Zap className="w-4 h-4 text-gray-400" />
+          <span className="text-xs font-medium text-gray-400">Animation Performance</span>
+        </div>
+        <div className="grid grid-cols-2 gap-2 text-xs">
+          <div className="bg-gray-900 rounded p-2">
+            <div className="text-gray-500">Active</div>
+            <div className="font-mono text-gray-300">{animations.activeAnimations}</div>
+          </div>
+          <div className="bg-gray-900 rounded p-2">
+            <div className="text-gray-500">Frame Time</div>
+            <div className={cn(
+              'font-mono',
+              getPerformanceColor(animations.frameTime, 16.67, true)
+            )}>
+              {animations.frameTime.toFixed(1)}ms
+            </div>
+          </div>
+          <div className="bg-gray-900 rounded p-2 col-span-2">
+            <div className="text-gray-500">Dropped Frames</div>
+            <div className={cn(
+              'font-mono',
+              animations.droppedFrames === 0 ? 'text-green-400' :
+              animations.droppedFrames < 10 ? 'text-yellow-400' :
+              'text-red-400'
+            )}>
+              {animations.droppedFrames}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Performance Tips */}
+      {(react.renderDuration > 16 || canvas.viewportNodes > 100 || animations.droppedFrames > 10) && (
+        <div className="border-t border-gray-700 pt-2">
+          <div className="flex items-center gap-2 mb-1">
+            <Clock className="w-3 h-3 text-yellow-400" />
+            <span className="text-xs text-yellow-400">Performance Tips</span>
+          </div>
+          <ul className="text-xs text-gray-400 space-y-0.5">
+            {react.renderDuration > 16 && (
+              <li>• Consider memoizing expensive components</li>
+            )}
+            {canvas.viewportNodes > 100 && (
+              <li>• Too many visible nodes, zoom in or filter</li>
+            )}
+            {animations.droppedFrames > 10 && (
+              <li>• Reduce concurrent animations</li>
+            )}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/ProjectContextMenu/index.ts
+```ts
+export { ProjectContextMenu } from './ProjectContextMenu';
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/ProjectContextMenu/ProjectContextMenu.tsx
+```tsx
+import React, { useEffect, useRef } from 'react';
+import { 
+  Copy, 
+  Trash2, 
+  Download, 
+  Archive, 
+  Share2, 
+  ExternalLink,
+  Folder,
+  Tag,
+  Clock,
+  RefreshCw
+} from 'lucide-react';
+import { cn } from '@/utils/cn';
+
+interface ProjectContextMenuProps {
+  projectId: string;
+  position: { x: number; y: number };
+  onAction: (projectId: string, action: string) => void;
+  onClose: () => void;
+  projectStatus?: 'draft' | 'in-progress' | 'completed' | 'archived';
+}
+
+export const ProjectContextMenu: React.FC<ProjectContextMenuProps> = ({
+  projectId,
+  position,
+  onAction,
+  onClose,
+  projectStatus = 'draft',
+}) => {
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // Close on click outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        onClose();
+      }
+    };
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [onClose]);
+
+  // Adjust position to keep menu in viewport
+  useEffect(() => {
+    if (menuRef.current) {
+      const rect = menuRef.current.getBoundingClientRect();
+      const { innerWidth, innerHeight } = window;
+
+      let adjustedX = position.x;
+      let adjustedY = position.y;
+
+      if (rect.right > innerWidth) {
+        adjustedX = innerWidth - rect.width - 10;
+      }
+
+      if (rect.bottom > innerHeight) {
+        adjustedY = innerHeight - rect.height - 10;
+      }
+
+      menuRef.current.style.left = `${adjustedX}px`;
+      menuRef.current.style.top = `${adjustedY}px`;
+    }
+  }, [position]);
+
+  const handleAction = (action: string) => {
+    onAction(projectId, action);
+    onClose();
+  };
+
+  return (
+    <div
+      ref={menuRef}
+      className="fixed z-50 bg-gray-800 border border-gray-700 rounded-lg shadow-2xl py-1 min-w-[200px]"
+      style={{ left: position.x, top: position.y }}
+    >
+      <button
+        onClick={() => handleAction('open')}
+        className="w-full px-3 py-2 text-left text-sm hover:bg-gray-700 flex items-center gap-3"
+      >
+        <ExternalLink className="icon-sm" />
+        Open in Canvas
+      </button>
+
+      <button
+        onClick={() => handleAction('open-new-window')}
+        className="w-full px-3 py-2 text-left text-sm hover:bg-gray-700 flex items-center gap-3"
+      >
+        <ExternalLink className="icon-sm" />
+        Open in New Window
+      </button>
+
+      <div className="border-t border-gray-700 my-1" />
+
+      <button
+        onClick={() => handleAction('duplicate')}
+        className="w-full px-3 py-2 text-left text-sm hover:bg-gray-700 flex items-center gap-3"
+      >
+        <Copy className="icon-sm" />
+        Duplicate Project
+      </button>
+
+      <button
+        onClick={() => handleAction('export')}
+        className="w-full px-3 py-2 text-left text-sm hover:bg-gray-700 flex items-center gap-3"
+      >
+        <Download className="icon-sm" />
+        Export...
+      </button>
+
+      <button
+        onClick={() => handleAction('share')}
+        className="w-full px-3 py-2 text-left text-sm hover:bg-gray-700 flex items-center gap-3"
+      >
+        <Share2 className="icon-sm" />
+        Share...
+      </button>
+
+      <div className="border-t border-gray-700 my-1" />
+
+      <button
+        onClick={() => handleAction('show-in-folder')}
+        className="w-full px-3 py-2 text-left text-sm hover:bg-gray-700 flex items-center gap-3"
+      >
+        <Folder className="icon-sm" />
+        Show in Folder
+      </button>
+
+      <button
+        onClick={() => handleAction('add-tags')}
+        className="w-full px-3 py-2 text-left text-sm hover:bg-gray-700 flex items-center gap-3"
+      >
+        <Tag className="icon-sm" />
+        Add Tags...
+      </button>
+
+      <div className="border-t border-gray-700 my-1" />
+
+      <button
+        onClick={() => handleAction('regenerate')}
+        className="w-full px-3 py-2 text-left text-sm hover:bg-gray-700 flex items-center gap-3"
+      >
+        <RefreshCw className="icon-sm" />
+        Regenerate All Content
+      </button>
+
+      <button
+        onClick={() => handleAction('view-history')}
+        className="w-full px-3 py-2 text-left text-sm hover:bg-gray-700 flex items-center gap-3"
+      >
+        <Clock className="icon-sm" />
+        View History
+      </button>
+
+      <div className="border-t border-gray-700 my-1" />
+
+      <button
+        onClick={() => handleAction('archive')}
+        className="w-full px-3 py-2 text-left text-sm hover:bg-gray-700 flex items-center gap-3"
+      >
+        <Archive className="icon-sm" />
+        {projectStatus === 'archived' ? 'Unarchive' : 'Archive'}
+      </button>
+
+      <button
+        onClick={() => handleAction('delete')}
+        className="w-full px-3 py-2 text-left text-sm hover:bg-gray-700 text-red-400 hover:text-red-300 flex items-center gap-3"
+      >
+        <Trash2 className="icon-sm" />
+        Delete Project
+      </button>
+    </div>
+  );
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/RefreshControl/index.ts
+```ts
+export { default as RefreshButton } from './RefreshButton';
+export { default as RefreshModal } from './RefreshModal';
+export { default as RefreshProgress } from './RefreshProgress';
+export { default as RegenerationOptions } from './RegenerationOptions';
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/RefreshControl/RefreshButton.tsx
+```tsx
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { RefreshCw, Lock } from 'lucide-react';
+import { useLockManagement } from '../../hooks/useLockManagement';
+import RefreshModal from './RefreshModal';
+
+interface RefreshButtonProps {
+  position?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left';
+  className?: string;
+}
+
+const positionClasses = {
+  'bottom-right': 'bottom-4 right-4',
+  'bottom-left': 'bottom-4 left-4',
+  'top-right': 'top-4 right-4',
+  'top-left': 'top-4 left-4',
+};
+
+const RefreshButton: React.FC<RefreshButtonProps> = ({
+  position = 'bottom-right',
+  className = '',
+}) => {
+  const [showModal, setShowModal] = useState(false);
+  const { getLockedCount } = useLockManagement();
+  const lockedCount = getLockedCount();
+  
+  return (
+    <>
+      <motion.button
+        className={`refresh-button fixed ${positionClasses[position]} ${className}`}
+        onClick={() => setShowModal(true)}
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 0.5, type: 'spring', stiffness: 200 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <div className="refresh-button-content">
+          <RefreshCw size={24} className="refresh-button-icon" />
+          {lockedCount > 0 && (
+            <motion.div
+              className="refresh-button-badge"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: 'spring', stiffness: 500 }}
+            >
+              <Lock size={12} />
+              <span>{lockedCount}</span>
+            </motion.div>
+          )}
+        </div>
+        
+        <motion.div
+          className="refresh-button-tooltip"
+          initial={{ opacity: 0, y: 10 }}
+          whileHover={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          Refresh Unlocked Items
+          {lockedCount > 0 && <span> ({lockedCount} locked)</span>}
+        </motion.div>
+      </motion.button>
+      
+      <RefreshModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+      />
+    </>
+  );
+};
+
+export default RefreshButton;
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/RefreshControl/RefreshModal.tsx
+```tsx
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, RefreshCw, Lock, AlertCircle } from 'lucide-react';
+import { Modal } from '../common';
+import RefreshProgress from './RefreshProgress';
+import RegenerationOptions from './RegenerationOptions';
+import { useRefreshWorkflow } from '../../hooks/useRefreshWorkflow';
+import { useLockManagement } from '../../hooks/useLockManagement';
+
+interface RefreshModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const RefreshModal: React.FC<RefreshModalProps> = ({ isOpen, onClose }) => {
+  const [selectedOptions, setSelectedOptions] = useState({
+    personas: true,
+    painPoints: true,
+    solutions: true,
+    userStories: false,
+    documents: false,
+  });
+  
+  const { isRefreshing, progress, refreshItems } = useRefreshWorkflow();
+  const { getLockedItemsByType } = useLockManagement();
+  
+  const handleRefresh = async () => {
+    await refreshItems(selectedOptions);
+  };
+  
+  const lockedCounts = {
+    personas: getLockedItemsByType('persona').length,
+    painPoints: getLockedItemsByType('pain_point').length,
+    solutions: getLockedItemsByType('solution').length,
+    userStories: getLockedItemsByType('user_story').length,
+    documents: getLockedItemsByType('document').length,
+  };
+  
+  const totalLocked = Object.values(lockedCounts).reduce((sum, count) => sum + count, 0);
+  
+  return (
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <div className="refresh-modal">
+        <div className="refresh-modal-header">
+          <div className="refresh-modal-title">
+            <RefreshCw size={20} className="refresh-modal-icon" />
+            <h2>Refresh Workflow Items</h2>
+          </div>
+          <button
+            className="btn-icon btn-icon--small"
+            onClick={onClose}
+            disabled={isRefreshing}
+          >
+            <X size={16} />
+          </button>
+        </div>
+        
+        {totalLocked > 0 && (
+          <div className="refresh-modal-info">
+            <Lock size={16} />
+            <span>{totalLocked} items are locked and will be preserved</span>
+          </div>
+        )}
+        
+        <div className="refresh-modal-content">
+          {!isRefreshing ? (
+            <>
+              <p className="refresh-modal-description">
+                Select which items to regenerate. Locked items will remain unchanged.
+              </p>
+              
+              <RegenerationOptions
+                options={selectedOptions}
+                onChange={setSelectedOptions}
+                lockedCounts={lockedCounts}
+                disabled={false}
+              />
+              
+              <div className="refresh-modal-warning">
+                <AlertCircle size={16} />
+                <span>
+                  This will replace all unlocked items in the selected categories.
+                  This action cannot be undone.
+                </span>
+              </div>
+            </>
+          ) : (
+            <RefreshProgress progress={progress} />
+          )}
+        </div>
+        
+        <div className="refresh-modal-footer">
+          <button
+            className="btn btn-secondary"
+            onClick={onClose}
+            disabled={isRefreshing}
+          >
+            Cancel
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={handleRefresh}
+            disabled={isRefreshing || !Object.values(selectedOptions).some(v => v)}
+          >
+            {isRefreshing ? (
+              <>
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                >
+                  <RefreshCw size={16} />
+                </motion.div>
+                <span>Refreshing...</span>
+              </>
+            ) : (
+              <>
+                <RefreshCw size={16} />
+                <span>Start Refresh</span>
+              </>
+            )}
+          </button>
+        </div>
+        
+        {progress.errors.length > 0 && (
+          <div className="refresh-modal-errors">
+            {progress.errors.map((error, index) => (
+              <div key={index} className="refresh-error">
+                <AlertCircle size={14} />
+                <span>{error}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </Modal>
+  );
+};
+
+export default RefreshModal;
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/RefreshControl/RefreshProgress.tsx
+```tsx
+import React from 'react';
+import { motion } from 'framer-motion';
+import { CheckCircle, Circle, Loader } from 'lucide-react';
+
+interface RefreshProgressProps {
+  progress: {
+    total: number;
+    completed: number;
+    currentStep: string;
+    errors: string[];
+  };
+}
+
+const RefreshProgress: React.FC<RefreshProgressProps> = ({ progress }) => {
+  const percentage = progress.total > 0 ? (progress.completed / progress.total) * 100 : 0;
+  
+  return (
+    <div className="refresh-progress">
+      <div className="refresh-progress-header">
+        <h3>Refreshing Items</h3>
+        <span className="refresh-progress-count">
+          {progress.completed} / {progress.total}
+        </span>
+      </div>
+      
+      <div className="refresh-progress-bar">
+        <motion.div
+          className="refresh-progress-fill"
+          initial={{ width: 0 }}
+          animate={{ width: `${percentage}%` }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
+        />
+      </div>
+      
+      <div className="refresh-progress-status">
+        <motion.div
+          key={progress.currentStep}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 10 }}
+          transition={{ duration: 0.2 }}
+          className="refresh-progress-step"
+        >
+          {progress.completed < progress.total ? (
+            <Loader size={16} className="animate-spin" />
+          ) : (
+            <CheckCircle size={16} className="text-green-500" />
+          )}
+          <span>{progress.currentStep}</span>
+        </motion.div>
+      </div>
+      
+      <div className="refresh-progress-steps">
+        {Array.from({ length: progress.total }, (_, i) => (
+          <motion.div
+            key={i}
+            className="refresh-progress-step-indicator"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: i * 0.1 }}
+          >
+            {i < progress.completed ? (
+              <CheckCircle size={20} className="text-green-500" />
+            ) : i === progress.completed ? (
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+              >
+                <Loader size={20} className="text-blue-500" />
+              </motion.div>
+            ) : (
+              <Circle size={20} className="text-gray-600" />
+            )}
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default RefreshProgress;
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/RefreshControl/RegenerationOptions.tsx
+```tsx
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Users, Zap, Lightbulb, FileText, File, Lock } from 'lucide-react';
+
+interface RegenerationOptionsProps {
+  options: {
+    personas: boolean;
+    painPoints: boolean;
+    solutions: boolean;
+    userStories: boolean;
+    documents: boolean;
+  };
+  onChange: (options: any) => void;
+  lockedCounts: {
+    personas: number;
+    painPoints: number;
+    solutions: number;
+    userStories: number;
+    documents: number;
+  };
+  disabled?: boolean;
+}
+
+const optionConfig = [
+  {
+    key: 'personas',
+    label: 'Personas',
+    icon: Users,
+    description: 'Regenerate user personas',
+    color: 'var(--color-node-persona)',
+  },
+  {
+    key: 'painPoints',
+    label: 'Pain Points',
+    icon: Zap,
+    description: 'Regenerate pain points',
+    color: 'var(--color-node-pain)',
+  },
+  {
+    key: 'solutions',
+    label: 'Solutions',
+    icon: Lightbulb,
+    description: 'Regenerate solution ideas',
+    color: 'var(--color-node-solution)',
+  },
+  {
+    key: 'userStories',
+    label: 'User Stories',
+    icon: FileText,
+    description: 'Regenerate user stories',
+    color: '#8B5CF6',
+  },
+  {
+    key: 'documents',
+    label: 'Documents',
+    icon: File,
+    description: 'Regenerate all documents',
+    color: '#6B7280',
+  },
+];
+
+const RegenerationOptions: React.FC<RegenerationOptionsProps> = ({
+  options,
+  onChange,
+  lockedCounts,
+  disabled = false,
+}) => {
+  const handleToggle = (key: string) => {
+    if (!disabled) {
+      onChange({ ...options, [key]: !options[key as keyof typeof options] });
+    }
+  };
+  
+  return (
+    <div className="regeneration-options">
+      {optionConfig.map((config, index) => {
+        const Icon = config.icon;
+        const isChecked = options[config.key as keyof typeof options];
+        const lockedCount = lockedCounts[config.key as keyof typeof lockedCounts];
+        
+        return (
+          <motion.div
+            key={config.key}
+            className={`regeneration-option ${isChecked ? 'regeneration-option--selected' : ''}`}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: index * 0.05 }}
+            onClick={() => handleToggle(config.key)}
+          >
+            <label className="regeneration-option-label">
+              <input
+                type="checkbox"
+                checked={isChecked}
+                onChange={() => handleToggle(config.key)}
+                disabled={disabled}
+                className="regeneration-option-checkbox"
+              />
+              
+              <div className="regeneration-option-content">
+                <div className="regeneration-option-header">
+                  <div
+                    className="regeneration-option-icon"
+                    style={{ backgroundColor: `${config.color}20`, color: config.color }}
+                  >
+                    <Icon size={20} />
+                  </div>
+                  <div className="regeneration-option-text">
+                    <h4>{config.label}</h4>
+                    <p>{config.description}</p>
+                  </div>
+                </div>
+                
+                {lockedCount > 0 && (
+                  <div className="regeneration-option-locked">
+                    <Lock size={12} />
+                    <span>{lockedCount} locked</span>
+                  </div>
+                )}
+              </div>
+              
+              <motion.div
+                className="regeneration-option-check"
+                initial={false}
+                animate={{
+                  scale: isChecked ? 1 : 0,
+                  opacity: isChecked ? 1 : 0,
+                }}
+                transition={{ type: 'spring', stiffness: 500 }}
+              >
+                ✓
+              </motion.div>
+            </label>
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default RegenerationOptions;
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/ShareDialog/index.ts
+```ts
+export { ShareDialog } from './ShareDialog';
+export { ShareLinkGenerator } from './ShareLinkGenerator';
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/ShareDialog/ShareDialog.tsx
+```tsx
+import React, { useState, useCallback } from 'react';
+import { X, Copy, Check, Clock, Eye, Edit2, MessageSquare, QrCode } from 'lucide-react';
+import { Modal } from '../common/Modal';
+import { Button } from '../common/Button';
+import { ShareLinkGenerator } from './ShareLinkGenerator';
+import { useShareLink } from '../../hooks/useShareLink';
+import type { SharePermission } from '../../types/export.types';
+
+interface ShareDialogProps {
+  isOpen: boolean;
+  onClose: () => void;
+  projectId: string;
+  projectName: string;
+}
+
+export const ShareDialog: React.FC<ShareDialogProps> = ({
+  isOpen,
+  onClose,
+  projectId,
+  projectName
+}) => {
+  const [permission, setPermission] = useState<SharePermission>('view');
+  const [expiresIn, setExpiresIn] = useState<number>(7); // days
+  const [showQR, setShowQR] = useState(false);
+  const [copied, setCopied] = useState(false);
+  
+  const { generateShareLink, shareLink, isGenerating, accessHistory } = useShareLink();
+
+  const handleGenerateLink = useCallback(async () => {
+    await generateShareLink(projectId, {
+      permission,
+      expiresIn: expiresIn * 24 * 60 * 60 * 1000 // Convert days to milliseconds
+    });
+  }, [projectId, permission, expiresIn, generateShareLink]);
+
+  const handleCopyLink = useCallback(() => {
+    if (shareLink) {
+      navigator.clipboard.writeText(shareLink.url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  }, [shareLink]);
+
+  const permissionIcons = {
+    view: <Eye className="icon-sm" />,
+    comment: <MessageSquare className="icon-sm" />,
+    edit: <Edit2 className="icon-sm" />
+  };
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <div className="share-dialog">
+        <div className="share-dialog-header">
+          <h2 className="heading-2">Share Project</h2>
+          <button onClick={onClose} className="btn-icon btn-icon--small">
+            <X className="icon" />
+          </button>
+        </div>
+
+        <div className="share-dialog-content">
+          <div className="share-section">
+            <h3 className="heading-3">Permission Level</h3>
+            <div className="permission-options">
+              {(['view', 'comment', 'edit'] as SharePermission[]).map(perm => (
+                <button
+                  key={perm}
+                  className={`permission-option ${permission === perm ? 'permission-option--selected' : ''}`}
+                  onClick={() => setPermission(perm)}
+                >
+                  {permissionIcons[perm]}
+                  <span className="permission-label">{perm.charAt(0).toUpperCase() + perm.slice(1)}</span>
+                  <span className="permission-desc body-sm">
+                    {perm === 'view' && 'Read-only access'}
+                    {perm === 'comment' && 'Can add comments'}
+                    {perm === 'edit' && 'Full edit access'}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="share-section">
+            <h3 className="heading-3">Expiration</h3>
+            <div className="expiration-options">
+              <Clock className="icon-sm" />
+              <select
+                value={expiresIn}
+                onChange={(e) => setExpiresIn(Number(e.target.value))}
+                className="expiration-select"
+              >
+                <option value={1}>1 day</option>
+                <option value={7}>7 days</option>
+                <option value={30}>30 days</option>
+                <option value={90}>90 days</option>
+                <option value={0}>Never</option>
+              </select>
+            </div>
+          </div>
+
+          {!shareLink && (
+            <div className="share-section">
+              <Button
+                variant="primary"
+                onClick={handleGenerateLink}
+                disabled={isGenerating}
+                className="generate-button"
+              >
+                {isGenerating ? 'Generating...' : 'Generate Share Link'}
+              </Button>
+            </div>
+          )}
+
+          {shareLink && (
+            <>
+              <ShareLinkGenerator
+                shareLink={shareLink}
+                onCopy={handleCopyLink}
+                copied={copied}
+              />
+
+              <div className="share-section">
+                <Button
+                  variant="secondary"
+                  onClick={() => setShowQR(!showQR)}
+                  icon={<QrCode className="icon-sm" />}
+                >
+                  {showQR ? 'Hide' : 'Show'} QR Code
+                </Button>
+              </div>
+
+              {showQR && (
+                <div className="qr-section">
+                  <div className="qr-code">
+                    {/* QR code would be generated here */}
+                    <div className="qr-placeholder">
+                      <QrCode size={120} />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+
+          {accessHistory.length > 0 && (
+            <div className="share-section">
+              <h3 className="heading-3">Access History</h3>
+              <div className="access-history">
+                {accessHistory.slice(0, 5).map((entry, index) => (
+                  <div key={index} className="history-entry">
+                    <div className="history-info">
+                      <span className="history-user">{entry.userEmail || 'Anonymous'}</span>
+                      <span className="history-permission body-sm">{entry.permission}</span>
+                    </div>
+                    <span className="history-time body-sm">
+                      {new Date(entry.accessedAt).toLocaleDateString()}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="share-dialog-footer">
+          <Button variant="secondary" onClick={onClose}>
+            Close
+          </Button>
+        </div>
+      </div>
+    </Modal>
+  );
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/ShareDialog/ShareLinkGenerator.tsx
+```tsx
+import React from 'react';
+import { Copy, Check, Link } from 'lucide-react';
+import { Button } from '../common/Button';
+import type { ShareLink } from '../../types/export.types';
+
+interface ShareLinkGeneratorProps {
+  shareLink: ShareLink;
+  onCopy: () => void;
+  copied: boolean;
+}
+
+export const ShareLinkGenerator: React.FC<ShareLinkGeneratorProps> = ({
+  shareLink,
+  onCopy,
+  copied
+}) => {
+  return (
+    <div className="share-link-generator">
+      <div className="link-section">
+        <h3 className="heading-3">Share Link</h3>
+        <div className="link-container">
+          <div className="link-input-wrapper">
+            <Link className="icon-sm link-icon" />
+            <input
+              type="text"
+              value={shareLink.url}
+              readOnly
+              className="link-input"
+              onClick={(e) => e.currentTarget.select()}
+            />
+          </div>
+          <Button
+            variant="secondary"
+            onClick={onCopy}
+            icon={copied ? <Check className="icon-sm" /> : <Copy className="icon-sm" />}
+            className={copied ? 'copy-button copied' : 'copy-button'}
+          >
+            {copied ? 'Copied!' : 'Copy'}
+          </Button>
+        </div>
+      </div>
+
+      <div className="link-info">
+        <div className="info-item">
+          <span className="info-label body-sm">Permission:</span>
+          <span className="info-value">{shareLink.permission}</span>
+        </div>
+        {shareLink.expiresAt && (
+          <div className="info-item">
+            <span className="info-label body-sm">Expires:</span>
+            <span className="info-value">
+              {new Date(shareLink.expiresAt).toLocaleDateString()}
+            </span>
+          </div>
+        )}
+        <div className="info-item">
+          <span className="info-label body-sm">Created:</span>
+          <span className="info-value">
+            {new Date(shareLink.createdAt).toLocaleDateString()}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/sidebar/FileDirectoryPicker.tsx
+```tsx
+import React, { useState, useRef } from 'react';
+import { Folder, FolderOpen, Terminal, Save, Download } from 'lucide-react';
+import { cn } from '@/utils/cn';
+import { WorkspaceStorage } from '@/utils/workspaceStorage';
+
+interface FileDirectoryPickerProps {
+  workspaceId: string;
+  currentDirectory?: string;
+  onDirectorySelect: (directory: string) => void;
+  onOpenTerminal?: () => void;
+  onSaveWorkspace?: () => void;
+  onExportWorkspace?: () => void;
+  className?: string;
+}
+
+export const FileDirectoryPicker: React.FC<FileDirectoryPickerProps> = ({
+  workspaceId,
+  currentDirectory,
+  onDirectorySelect,
+  onOpenTerminal,
+  onSaveWorkspace,
+  onExportWorkspace,
+  className
+}) => {
+  const [isSelecting, setIsSelecting] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleDirectoryClick = async () => {
+    // Try to use File System Access API first (Chrome/Edge)
+    if (WorkspaceStorage.isFileSystemAccessSupported()) {
+      const dirHandle = await WorkspaceStorage.selectDirectory();
+      if (dirHandle) {
+        onDirectorySelect(dirHandle.name);
+        // Store the handle for later use
+        // In a real app, you'd store this in a more persistent way
+        (window as any)[`dirHandle_${workspaceId}`] = dirHandle;
+        return;
+      }
+    }
+    
+    // Fallback to file input
+    fileInputRef.current?.click();
+  };
+
+  const handleDirectoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      // Get the directory path from the first file
+      const file = files[0];
+      const path = file.webkitRelativePath || file.name;
+      const directory = path.split('/')[0] || path;
+      
+      // In a real implementation, you'd get the full path
+      // For now, we'll use the directory name
+      onDirectorySelect(directory);
+      setIsSelecting(false);
+    }
+  };
+
+  const handleTerminalClick = () => {
+    if (onOpenTerminal) {
+      onOpenTerminal();
+    } else {
+      // Fallback: Try to open terminal using system command
+      // This would need to be implemented with proper electron/tauri APIs
+      console.log('Opening terminal at:', currentDirectory || 'default location');
+    }
+  };
+
+  return (
+    <div className={cn('space-y-3', className)}>
+      {/* Directory Selection */}
+      <div className="space-y-2">
+        <h4 className="text-xs font-medium text-slate-400 uppercase tracking-wide">Repository Location</h4>
+        
+        <button
+          onClick={handleDirectoryClick}
+          className={cn(
+            'w-full flex items-center gap-2 p-3',
+            'bg-obsidian-800 hover:bg-obsidian-700',
+            'border border-obsidian-700 hover:border-obsidian-600',
+            'rounded-lg transition-all duration-200',
+            'text-left text-sm',
+            isSelecting && 'ring-2 ring-gold-500 ring-offset-2 ring-offset-obsidian-900'
+          )}
+        >
+          <div className="flex-shrink-0">
+            {currentDirectory ? (
+              <FolderOpen className="w-4 h-4 text-gold-500" />
+            ) : (
+              <Folder className="w-4 h-4 text-slate-400" />
+            )}
+          </div>
+          
+          <div className="flex-1 min-w-0">
+            {currentDirectory ? (
+              <div>
+                <div className="font-medium text-obsidian-50 truncate">
+                  {currentDirectory.split(/[\/\\]/).pop() || currentDirectory}
+                </div>
+                <div className="text-xs text-slate-400 truncate" title={currentDirectory}>
+                  {currentDirectory}
+                </div>
+              </div>
+            ) : (
+              <div className="text-slate-400">
+                Click to select repository folder
+              </div>
+            )}
+          </div>
+        </button>
+
+        {/* Hidden file input for directory selection */}
+        <input
+          ref={fileInputRef}
+          type="file"
+          webkitdirectory=""
+          directory=""
+          multiple
+          onChange={handleDirectoryChange}
+          className="hidden"
+          accept=""
+        />
+      </div>
+
+      {/* Terminal Access */}
+      <button
+        onClick={handleTerminalClick}
+        className={cn(
+          'w-full flex items-center gap-2 p-3',
+          'bg-obsidian-800 hover:bg-obsidian-700',
+          'border border-obsidian-700 hover:border-obsidian-600',
+          'rounded-lg transition-all duration-200',
+          'text-left text-sm',
+          'group'
+        )}
+      >
+        <Terminal className="w-4 h-4 text-slate-400 group-hover:text-gold-500 transition-colors" />
+        <span className="text-obsidian-50">Open Terminal</span>
+        {currentDirectory && (
+          <span className="text-xs text-slate-400 ml-auto">
+            in workspace
+          </span>
+        )}
+      </button>
+      
+      {/* Additional Actions */}
+      <div className="flex gap-2 mt-2">
+        <button
+          onClick={onSaveWorkspace}
+          className={cn(
+            'flex-1 flex items-center justify-center gap-2 p-2',
+            'bg-obsidian-800 hover:bg-obsidian-700',
+            'border border-obsidian-700 hover:border-obsidian-600',
+            'rounded-lg transition-all duration-200',
+            'text-sm group',
+            !currentDirectory && 'opacity-50 cursor-not-allowed'
+          )}
+          disabled={!currentDirectory}
+          title="Save workspace to selected directory"
+        >
+          <Save className="w-3.5 h-3.5 text-slate-400 group-hover:text-gold-500 transition-colors" />
+          <span className="text-obsidian-50">Save</span>
+        </button>
+        
+        <button
+          onClick={onExportWorkspace}
+          className={cn(
+            'flex-1 flex items-center justify-center gap-2 p-2',
+            'bg-obsidian-800 hover:bg-obsidian-700',
+            'border border-obsidian-700 hover:border-obsidian-600',
+            'rounded-lg transition-all duration-200',
+            'text-sm group'
+          )}
+          title="Export workspace as file"
+        >
+          <Download className="w-3.5 h-3.5 text-slate-400 group-hover:text-gold-500 transition-colors" />
+          <span className="text-obsidian-50">Export</span>
+        </button>
+      </div>
+    </div>
+  );
+};
+
+// Extend the HTMLInputElement interface to include webkitdirectory
+declare module 'react' {
+  interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
+    webkitdirectory?: string;
+    directory?: string;
+  }
+}
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/VersionDiff/DiffViewer.tsx
+```tsx
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Plus, Minus, Edit3 } from 'lucide-react';
+
+interface DiffViewerProps {
+  baseData: any;
+  targetData: any;
+  type: 'nodes' | 'edges' | 'metadata';
+}
+
+interface DiffItem {
+  type: 'added' | 'removed' | 'modified' | 'unchanged';
+  id: string;
+  label: string;
+  details?: string;
+  changes?: string[];
+}
+
+const DiffViewer: React.FC<DiffViewerProps> = ({ baseData, targetData, type }) => {
+  const computeDiff = (): DiffItem[] => {
+    const diffs: DiffItem[] = [];
+    
+    if (type === 'nodes' || type === 'edges') {
+      const baseMap = new Map(
+        (baseData || []).map((item: any) => [item.id, item])
+      );
+      const targetMap = new Map(
+        (targetData || []).map((item: any) => [item.id, item])
+      );
+      
+      // Find removed items
+      baseMap.forEach((item, id) => {
+        if (!targetMap.has(id)) {
+          diffs.push({
+            type: 'removed',
+            id,
+            label: item.data?.label || item.id,
+            details: type === 'nodes' ? item.type : `${item.source} → ${item.target}`,
+          });
+        }
+      });
+      
+      // Find added and modified items
+      targetMap.forEach((item, id) => {
+        const baseItem = baseMap.get(id);
+        if (!baseItem) {
+          diffs.push({
+            type: 'added',
+            id,
+            label: item.data?.label || item.id,
+            details: type === 'nodes' ? item.type : `${item.source} → ${item.target}`,
+          });
+        } else {
+          // Check for modifications
+          const changes = detectChanges(baseItem, item);
+          if (changes.length > 0) {
+            diffs.push({
+              type: 'modified',
+              id,
+              label: item.data?.label || item.id,
+              details: type === 'nodes' ? item.type : `${item.source} → ${item.target}`,
+              changes,
+            });
+          }
+        }
+      });
+    } else {
+      // Metadata comparison
+      const changes = detectChanges(baseData, targetData);
+      if (changes.length > 0) {
+        diffs.push({
+          type: 'modified',
+          id: 'metadata',
+          label: 'Event Metadata',
+          changes,
+        });
+      }
+    }
+    
+    return diffs.sort((a, b) => {
+      const order = { removed: 0, modified: 1, added: 2, unchanged: 3 };
+      return order[a.type] - order[b.type];
+    });
+  };
+  
+  const detectChanges = (obj1: any, obj2: any): string[] => {
+    const changes: string[] = [];
+    
+    // Simple deep comparison for demonstration
+    const keys = new Set([...Object.keys(obj1 || {}), ...Object.keys(obj2 || {})]);
+    
+    keys.forEach(key => {
+      if (JSON.stringify(obj1?.[key]) !== JSON.stringify(obj2?.[key])) {
+        if (key === 'position' && obj1?.position && obj2?.position) {
+          const dx = Math.round(obj2.position.x - obj1.position.x);
+          const dy = Math.round(obj2.position.y - obj1.position.y);
+          if (dx !== 0 || dy !== 0) {
+            changes.push(`Position moved (${dx}, ${dy})`);
+          }
+        } else if (key === 'data' && obj1?.data && obj2?.data) {
+          // Compare nested data
+          const dataChanges = detectChanges(obj1.data, obj2.data);
+          dataChanges.forEach(change => changes.push(`data.${change}`));
+        } else {
+          changes.push(`${key}: ${obj1?.[key]} → ${obj2?.[key]}`);
+        }
+      }
+    });
+    
+    return changes;
+  };
+  
+  const diffs = computeDiff();
+  
+  const getDiffIcon = (diffType: DiffItem['type']) => {
+    switch (diffType) {
+      case 'added':
+        return <Plus className="diff-icon diff-icon--added" />;
+      case 'removed':
+        return <Minus className="diff-icon diff-icon--removed" />;
+      case 'modified':
+        return <Edit3 className="diff-icon diff-icon--modified" />;
+      default:
+        return null;
+    }
+  };
+  
+  return (
+    <motion.div
+      className="diff-viewer"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+    >
+      {diffs.length === 0 ? (
+        <div className="diff-empty">
+          <p>No changes detected between versions</p>
+        </div>
+      ) : (
+        <div className="diff-list">
+          {diffs.map((diff, index) => (
+            <motion.div
+              key={diff.id}
+              className={`diff-item diff-item--${diff.type}`}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.05 }}
+            >
+              <div className="diff-item-header">
+                {getDiffIcon(diff.type)}
+                <span className="diff-item-label">{diff.label}</span>
+                {diff.details && (
+                  <span className="diff-item-details">{diff.details}</span>
+                )}
+              </div>
+              {diff.changes && diff.changes.length > 0 && (
+                <div className="diff-item-changes">
+                  {diff.changes.map((change, i) => (
+                    <div key={i} className="diff-change">
+                      {change}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </motion.div>
+          ))}
+        </div>
+      )}
+    </motion.div>
+  );
+};
+
+export default DiffViewer;
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/VersionDiff/index.ts
+```ts
+export { default as VersionDiff } from './VersionDiff';
+export { default as DiffViewer } from './DiffViewer';
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/VersionDiff/VersionDiff.tsx
+```tsx
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import DiffViewer from './DiffViewer';
+import { useVersionStore, VersionEvent } from '../../stores/versionStore';
+import { X, GitBranch, ArrowRight } from 'lucide-react';
+
+interface VersionDiffProps {
+  baseEventId: string;
+  targetEventId: string;
+  onClose: () => void;
+}
+
+const VersionDiff: React.FC<VersionDiffProps> = ({
+  baseEventId,
+  targetEventId,
+  onClose,
+}) => {
+  const [activeTab, setActiveTab] = useState<'nodes' | 'edges' | 'metadata'>('nodes');
+  
+  const baseEvent = useVersionStore((state) => state.getEventById(baseEventId));
+  const targetEvent = useVersionStore((state) => state.getEventById(targetEventId));
+  
+  if (!baseEvent || !targetEvent) {
+    return null;
+  }
+  
+  const getTimestamp = (event: VersionEvent) => {
+    return new Date(event.timestamp).toLocaleString();
+  };
+  
+  return (
+    <motion.div
+      className="version-diff-overlay"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      onClick={onClose}
+    >
+      <motion.div
+        className="version-diff-panel"
+        initial={{ x: '100%' }}
+        animate={{ x: 0 }}
+        exit={{ x: '100%' }}
+        transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="version-diff-header">
+          <div className="version-diff-title">
+            <GitBranch className="icon" />
+            <h3>Version Comparison</h3>
+          </div>
+          <button
+            className="btn-icon btn-icon--small"
+            onClick={onClose}
+            aria-label="Close diff viewer"
+          >
+            <X className="icon-sm" />
+          </button>
+        </div>
+        
+        <div className="version-diff-info">
+          <div className="version-info">
+            <span className="version-label">From:</span>
+            <span className="version-time">{getTimestamp(baseEvent)}</span>
+            <span className="version-description">{baseEvent.eventData.metadata.description}</span>
+          </div>
+          <ArrowRight className="icon-sm" />
+          <div className="version-info">
+            <span className="version-label">To:</span>
+            <span className="version-time">{getTimestamp(targetEvent)}</span>
+            <span className="version-description">{targetEvent.eventData.metadata.description}</span>
+          </div>
+        </div>
+        
+        <div className="version-diff-tabs">
+          <button
+            className={`version-diff-tab ${activeTab === 'nodes' ? 'version-diff-tab--active' : ''}`}
+            onClick={() => setActiveTab('nodes')}
+          >
+            Nodes
+          </button>
+          <button
+            className={`version-diff-tab ${activeTab === 'edges' ? 'version-diff-tab--active' : ''}`}
+            onClick={() => setActiveTab('edges')}
+          >
+            Connections
+          </button>
+          <button
+            className={`version-diff-tab ${activeTab === 'metadata' ? 'version-diff-tab--active' : ''}`}
+            onClick={() => setActiveTab('metadata')}
+          >
+            Metadata
+          </button>
+        </div>
+        
+        <div className="version-diff-content">
+          <AnimatePresence mode="wait">
+            {activeTab === 'nodes' && (
+              <DiffViewer
+                key="nodes"
+                baseData={baseEvent.eventData.afterState?.nodes || []}
+                targetData={targetEvent.eventData.afterState?.nodes || []}
+                type="nodes"
+              />
+            )}
+            {activeTab === 'edges' && (
+              <DiffViewer
+                key="edges"
+                baseData={baseEvent.eventData.afterState?.edges || []}
+                targetData={targetEvent.eventData.afterState?.edges || []}
+                type="edges"
+              />
+            )}
+            {activeTab === 'metadata' && (
+              <DiffViewer
+                key="metadata"
+                baseData={baseEvent.eventData.metadata}
+                targetData={targetEvent.eventData.metadata}
+                type="metadata"
+              />
+            )}
+          </AnimatePresence>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+export default VersionDiff;
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/VersionTimeline/EventPreview.tsx
+```tsx
+import React from 'react';
+import { motion } from 'framer-motion';
+import { useVersionStore } from '../../stores/versionStore';
+
+interface EventPreviewProps {
+  eventId: string;
+  position?: 'above' | 'below';
+}
+
+const EventPreview: React.FC<EventPreviewProps> = ({ eventId, position = 'above' }) => {
+  const event = useVersionStore((state) => state.getEventById(eventId));
+  
+  if (!event) return null;
+  
+  const { eventType, eventData, timestamp } = event;
+  const metadata = eventData.metadata;
+  
+  const getPreviewContent = () => {
+    switch (eventType) {
+      case 'node_added':
+        return (
+          <>
+            <h4>Added {metadata.nodeType}</h4>
+            <p>{metadata.description}</p>
+          </>
+        );
+        
+      case 'node_updated':
+        return (
+          <>
+            <h4>Updated {metadata.nodeType}</h4>
+            <p>{metadata.description}</p>
+            {eventData.changesDiff && (
+              <div className="preview-changes">
+                <span>Changes: {Object.keys(eventData.changesDiff).join(', ')}</span>
+              </div>
+            )}
+          </>
+        );
+        
+      case 'node_deleted':
+        return (
+          <>
+            <h4>Deleted {metadata.nodeType}</h4>
+            <p>{metadata.description}</p>
+          </>
+        );
+        
+      case 'validation':
+        return (
+          <>
+            <h4>Validation {eventData.afterState?.success ? 'Passed' : 'Failed'}</h4>
+            <p>{metadata.description}</p>
+          </>
+        );
+        
+      case 'generation':
+        return (
+          <>
+            <h4>Generated Content</h4>
+            <p>{metadata.description}</p>
+            {eventData.afterState?.count && (
+              <span className="preview-count">{eventData.afterState.count} items</span>
+            )}
+          </>
+        );
+        
+      case 'lock_toggled':
+        return (
+          <>
+            <h4>Lock Toggled</h4>
+            <p>{metadata.description}</p>
+            <span className="preview-state">
+              {eventData.afterState?.isLocked ? 'Locked' : 'Unlocked'}
+            </span>
+          </>
+        );
+        
+      default:
+        return (
+          <>
+            <h4>{eventType}</h4>
+            <p>{metadata.description}</p>
+          </>
+        );
+    }
+  };
+  
+  return (
+    <motion.div
+      className={`event-preview event-preview--${position}`}
+      initial={{ opacity: 0, y: position === 'above' ? 10 : -10, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: position === 'above' ? 10 : -10, scale: 0.95 }}
+      transition={{ duration: 0.2, ease: 'easeOut' }}
+    >
+      <div className="event-preview-content">
+        {getPreviewContent()}
+      </div>
+      <div className="event-preview-footer">
+        <span className="event-preview-time">
+          {new Date(timestamp).toLocaleString()}
+        </span>
+        <span className="event-preview-trigger">
+          {metadata.triggeredBy.replace('_', ' ')}
+        </span>
+      </div>
+    </motion.div>
+  );
+};
+
+export default EventPreview;
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/VersionTimeline/index.ts
+```ts
+export { default as VersionTimeline } from './VersionTimeline';
+export { default as TimelineEvent } from './TimelineEvent';
+export { default as EventPreview } from './EventPreview';
+export { default as TimelineControls } from './TimelineControls';
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/VersionTimeline/TimelineControls.tsx
+```tsx
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  ChevronLeft, 
+  ChevronRight, 
+  ChevronUp, 
+  ChevronDown,
+  Filter,
+  X,
+  RotateCcw
+} from 'lucide-react';
+
+interface TimelineControlsProps {
+  onNavigatePrevious: () => void;
+  onNavigateNext: () => void;
+  onToggleCollapse?: () => void;
+  onFilterChange: (filter: string[]) => void;
+  canNavigatePrevious: boolean;
+  canNavigateNext: boolean;
+  isCollapsed: boolean;
+  currentFilter: string[];
+  isPreviewMode: boolean;
+  onExitPreview: () => void;
+}
+
+const eventTypes = [
+  { value: 'node_added', label: 'Nodes Added', color: 'var(--color-success-500)' },
+  { value: 'node_updated', label: 'Nodes Updated', color: 'var(--color-primary-500)' },
+  { value: 'node_deleted', label: 'Nodes Deleted', color: 'var(--color-error-500)' },
+  { value: 'validation', label: 'Validations', color: 'var(--color-accent-500)' },
+  { value: 'generation', label: 'Generations', color: 'var(--color-node-solution)' },
+];
+
+const TimelineControls: React.FC<TimelineControlsProps> = ({
+  onNavigatePrevious,
+  onNavigateNext,
+  onToggleCollapse,
+  onFilterChange,
+  canNavigatePrevious,
+  canNavigateNext,
+  isCollapsed,
+  currentFilter,
+  isPreviewMode,
+  onExitPreview,
+}) => {
+  const [showFilters, setShowFilters] = useState(false);
+  
+  const toggleFilter = (eventType: string) => {
+    if (currentFilter.includes(eventType)) {
+      onFilterChange(currentFilter.filter(f => f !== eventType));
+    } else {
+      onFilterChange([...currentFilter, eventType]);
+    }
+  };
+  
+  return (
+    <div className="timeline-controls">
+      <div className="timeline-controls-left">
+        <button
+          className="btn-icon btn-icon--small"
+          onClick={onNavigatePrevious}
+          disabled={!canNavigatePrevious}
+          aria-label="Previous event"
+        >
+          <ChevronLeft className="icon-sm" />
+        </button>
+        
+        <button
+          className="btn-icon btn-icon--small"
+          onClick={onNavigateNext}
+          disabled={!canNavigateNext}
+          aria-label="Next event"
+        >
+          <ChevronRight className="icon-sm" />
+        </button>
+        
+        <div className="timeline-controls-separator" />
+        
+        <motion.button
+          className={`btn-icon btn-icon--small ${showFilters ? 'btn-icon--active' : ''}`}
+          onClick={() => setShowFilters(!showFilters)}
+          aria-label="Filter events"
+          whileTap={{ scale: 0.95 }}
+        >
+          <Filter className="icon-sm" />
+        </motion.button>
+        
+        <AnimatePresence>
+          {showFilters && (
+            <motion.div
+              className="timeline-filters"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.2 }}
+            >
+              {eventTypes.map(type => (
+                <label
+                  key={type.value}
+                  className={`timeline-filter ${
+                    currentFilter.length === 0 || currentFilter.includes(type.value) 
+                      ? 'timeline-filter--active' 
+                      : ''
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={currentFilter.length === 0 || currentFilter.includes(type.value)}
+                    onChange={() => toggleFilter(type.value)}
+                  />
+                  <span 
+                    className="timeline-filter-dot" 
+                    style={{ backgroundColor: type.color }}
+                  />
+                  <span className="timeline-filter-label">{type.label}</span>
+                </label>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+      
+      <div className="timeline-controls-center">
+        {isPreviewMode && (
+          <motion.div
+            className="preview-mode-indicator"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.2 }}
+          >
+            <RotateCcw className="icon-sm" />
+            <span>Preview Mode</span>
+            <button
+              className="preview-exit-btn"
+              onClick={onExitPreview}
+              aria-label="Exit preview"
+            >
+              <X className="icon-sm" />
+            </button>
+          </motion.div>
+        )}
+      </div>
+      
+      <div className="timeline-controls-right">
+        {onToggleCollapse && (
+          <button
+            className="btn-icon btn-icon--small"
+            onClick={onToggleCollapse}
+            aria-label={isCollapsed ? 'Expand timeline' : 'Collapse timeline'}
+          >
+            {isCollapsed ? <ChevronUp className="icon-sm" /> : <ChevronDown className="icon-sm" />}
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default TimelineControls;
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/VersionTimeline/TimelineEvent.tsx
+```tsx
+import React from 'react';
+import { motion } from 'framer-motion';
+import { VersionEvent } from '../../stores/versionStore';
+import { 
+  Plus, 
+  Edit3, 
+  Trash2, 
+  CheckCircle, 
+  Zap, 
+  Link,
+  Unlock,
+  RefreshCw
+} from 'lucide-react';
+
+interface TimelineEventProps {
+  event: VersionEvent;
+  index: number;
+  isActive: boolean;
+  isPreviewing: boolean;
+  onHover: (eventId: string | null) => void;
+  onClick: () => void;
+  onDoubleClick: () => void;
+}
+
+const eventIcons: Record<string, React.ReactNode> = {
+  node_added: <Plus className="timeline-event-icon" />,
+  node_updated: <Edit3 className="timeline-event-icon" />,
+  node_deleted: <Trash2 className="timeline-event-icon" />,
+  validation: <CheckCircle className="timeline-event-icon" />,
+  generation: <Zap className="timeline-event-icon" />,
+  edge_added: <Link className="timeline-event-icon" />,
+  edge_removed: <Link className="timeline-event-icon" style={{ opacity: 0.5 }} />,
+  lock_toggled: <Unlock className="timeline-event-icon" />,
+  refresh: <RefreshCw className="timeline-event-icon" />,
+};
+
+const TimelineEvent: React.FC<TimelineEventProps> = ({
+  event,
+  index,
+  isActive,
+  isPreviewing,
+  onHover,
+  onClick,
+  onDoubleClick,
+}) => {
+  const timestamp = new Date(event.timestamp);
+  const timeString = timestamp.toLocaleTimeString([], { 
+    hour: '2-digit', 
+    minute: '2-digit' 
+  });
+  
+  const getEventLabel = () => {
+    const { eventType, eventData } = event;
+    const metadata = eventData.metadata;
+    
+    switch (eventType) {
+      case 'node_added':
+      case 'node_updated':
+      case 'node_deleted':
+        return metadata.nodeType || 'Node';
+      case 'validation':
+        return `${metadata.nodeType} validated`;
+      case 'generation':
+        return metadata.description || 'Generated';
+      case 'edge_added':
+      case 'edge_removed':
+        return 'Connection';
+      case 'lock_toggled':
+        return 'Lock toggled';
+      case 'refresh':
+        return 'Refreshed';
+      default:
+        return eventType;
+    }
+  };
+  
+  return (
+    <motion.div
+      className={`timeline-event timeline-event--${event.eventType} ${
+        isActive ? 'timeline-event--active' : ''
+      } ${isPreviewing ? 'timeline-event--previewing' : ''}`}
+      data-event-index={index}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.05, duration: 0.3 }}
+      onMouseEnter={() => onHover(event.id)}
+      onMouseLeave={() => onHover(null)}
+      onClick={onClick}
+      onDoubleClick={onDoubleClick}
+    >
+      <motion.div
+        className="timeline-event-marker"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        {eventIcons[event.eventType] || <Edit3 className="timeline-event-icon" />}
+      </motion.div>
+      
+      <div className="timeline-event-details">
+        <div className="timeline-event-label">{getEventLabel()}</div>
+        <div className="timeline-event-time">{timeString}</div>
+      </div>
+      
+      {/* Batch indicator for generation events */}
+      {event.eventType === 'generation' && event.eventData.afterState?.count > 1 && (
+        <div className="timeline-event-batch">
+          {event.eventData.afterState.count}
+        </div>
+      )}
+    </motion.div>
+  );
+};
+
+export default TimelineEvent;
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/VersionTimeline/VersionTimeline.css
+```css
+/* Version Timeline Styles - Following Design System */
+
+.version-timeline {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--duration-base) var(--ease-default);
+}
+
+.version-timeline--collapsed {
+  height: 40px;
+}
+
+/* Timeline Content */
+.timeline-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-md);
+  overflow: hidden;
+}
+
+/* Scrubber */
+.timeline-scrubber {
+  position: relative;
+  height: 4px;
+  background: var(--color-gray-700);
+  border-radius: var(--radius-base);
+  margin-bottom: var(--space-lg);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.timeline-track {
+  position: absolute;
+  inset: 0;
+  background: var(--color-gray-700);
+}
+
+.timeline-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: var(--color-primary-600);
+  border-radius: var(--radius-base);
+  transition: width var(--duration-base) var(--ease-default);
+}
+
+/* Events Container */
+.timeline-events-container {
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding-bottom: var(--space-sm);
+}
+
+.timeline-events-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.timeline-events-container::-webkit-scrollbar-track {
+  background: var(--color-gray-800);
+  border-radius: var(--radius-base);
+}
+
+.timeline-events-container::-webkit-scrollbar-thumb {
+  background: var(--color-gray-600);
+  border-radius: var(--radius-base);
+}
+
+.timeline-events {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+  min-width: min-content;
+  padding: 0 var(--space-xl);
+}
+
+/* Event Marker */
+.timeline-event {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-default);
+}
+
+.timeline-event-marker {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  background: var(--color-gray-700);
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--duration-base) var(--ease-default);
+  position: relative;
+}
+
+.timeline-event--active .timeline-event-marker {
+  background: var(--color-primary-600);
+  border-color: var(--color-primary-500);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+.timeline-event--previewing .timeline-event-marker {
+  background: var(--color-accent-600);
+  border-color: var(--color-accent-500);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+}
+
+.timeline-event:hover .timeline-event-marker {
+  transform: scale(1.1);
+  border-color: var(--color-gray-500);
+}
+
+/* Event Icons */
+.timeline-event-icon {
+  width: 20px;
+  height: 20px;
+  color: white;
+}
+
+.timeline-event--node_added .timeline-event-icon { color: var(--color-success-500); }
+.timeline-event--node_updated .timeline-event-icon { color: var(--color-primary-500); }
+.timeline-event--node_deleted .timeline-event-icon { color: var(--color-error-500); }
+.timeline-event--validation .timeline-event-icon { color: var(--color-accent-500); }
+.timeline-event--generation .timeline-event-icon { color: var(--color-node-solution); }
+
+/* Event Label */
+.timeline-event-label {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.timeline-event-time {
+  font-size: var(--text-xs);
+  color: var(--color-gray-500);
+}
+
+/* Connecting Lines */
+.timeline-event::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -20px;
+  width: 40px;
+  height: 1px;
+  background: var(--color-gray-600);
+  transform: translateY(-50%);
+}
+
+.timeline-event:first-child::before {
+  display: none;
+}
+
+/* Restore Confirmation */
+.restore-confirmation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-xl);
+  z-index: 50;
+}
+
+.restore-confirmation p {
+  margin-bottom: var(--space-md);
+  color: var(--color-text-primary);
+}
+
+.restore-actions {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: flex-end;
+}
+
+/* Animation keyframes */
+@keyframes timeline-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.timeline-event--active .timeline-event-marker {
+  animation: timeline-pulse 2s ease-in-out infinite;
+}
+
+/* Preview Mode Overlay */
+.version-timeline--preview-mode::before {
+  content: 'Preview Mode';
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-md);
+  background: var(--color-accent-600);
+  color: white;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  z-index: 10;
+}
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/VersionTimeline/VersionTimeline.tsx
+```tsx
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useVersionHistory } from '../../hooks/useVersionHistory';
+import TimelineEvent from './TimelineEvent';
+import TimelineControls from './TimelineControls';
+import EventPreview from './EventPreview';
+import { VersionEvent } from '../../stores/versionStore';
+import './VersionTimeline.css';
+
+interface VersionTimelineProps {
+  isCollapsed?: boolean;
+  onToggleCollapse?: () => void;
+}
+
+const VersionTimeline: React.FC<VersionTimelineProps> = ({
+  isCollapsed = false,
+  onToggleCollapse,
+}) => {
+  const {
+    events,
+    currentEventIndex,
+    isPreviewMode,
+    previewEventId,
+    navigatePrevious,
+    navigateNext,
+    previewEvent,
+    exitPreview,
+    restoreToEvent,
+    getFilteredEvents,
+    canNavigatePrevious,
+    canNavigateNext,
+  } = useVersionHistory();
+  
+  const [eventFilter, setEventFilter] = useState<string[]>([]);
+  const [hoveredEventId, setHoveredEventId] = useState<string | null>(null);
+  const [showConfirmRestore, setShowConfirmRestore] = useState<string | null>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  
+  // Auto-scroll to current event
+  useEffect(() => {
+    if (scrollContainerRef.current && currentEventIndex >= 0) {
+      const container = scrollContainerRef.current;
+      const eventElement = container.querySelector(`[data-event-index="${currentEventIndex}"]`);
+      
+      if (eventElement) {
+        const containerRect = container.getBoundingClientRect();
+        const elementRect = eventElement.getBoundingClientRect();
+        const scrollLeft = elementRect.left - containerRect.left - containerRect.width / 2 + elementRect.width / 2;
+        
+        container.scrollTo({
+          left: container.scrollLeft + scrollLeft,
+          behavior: 'smooth',
+        });
+      }
+    }
+  }, [currentEventIndex]);
+  
+  const filteredEvents = getFilteredEvents(eventFilter);
+  
+  const handleEventClick = (event: VersionEvent) => {
+    if (isPreviewMode && previewEventId === event.id) {
+      exitPreview();
+    } else {
+      previewEvent(event.id);
+    }
+  };
+  
+  const handleEventDoubleClick = (event: VersionEvent) => {
+    setShowConfirmRestore(event.id);
+  };
+  
+  const confirmRestore = (eventId: string) => {
+    restoreToEvent(eventId);
+    setShowConfirmRestore(null);
+    exitPreview();
+  };
+  
+  const handleScrub = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!timelineRef.current) return;
+    
+    const rect = timelineRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const percentage = x / rect.width;
+    const targetIndex = Math.floor(percentage * events.length);
+    
+    if (targetIndex >= 0 && targetIndex < events.length) {
+      previewEvent(events[targetIndex].id);
+    }
+  };
+  
+  return (
+    <motion.div
+      className={`version-timeline ${isCollapsed ? 'version-timeline--collapsed' : ''}`}
+      initial={{ height: 0, opacity: 0 }}
+      animate={{ 
+        height: isCollapsed ? 40 : 180, 
+        opacity: 1 
+      }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
+    >
+      <TimelineControls
+        onNavigatePrevious={navigatePrevious}
+        onNavigateNext={navigateNext}
+        onToggleCollapse={onToggleCollapse}
+        onFilterChange={setEventFilter}
+        canNavigatePrevious={canNavigatePrevious}
+        canNavigateNext={canNavigateNext}
+        isCollapsed={isCollapsed}
+        currentFilter={eventFilter}
+        isPreviewMode={isPreviewMode}
+        onExitPreview={exitPreview}
+      />
+      
+      <AnimatePresence>
+        {!isCollapsed && (
+          <motion.div
+            className="timeline-content"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            {/* Scrubber */}
+            <div
+              ref={timelineRef}
+              className="timeline-scrubber"
+              onMouseMove={handleScrub}
+              onMouseLeave={() => setHoveredEventId(null)}
+            >
+              <div className="timeline-track" />
+              {events.length > 0 && (
+                <motion.div
+                  className="timeline-progress"
+                  style={{
+                    width: `${((currentEventIndex + 1) / events.length) * 100}%`,
+                  }}
+                  layout
+                  transition={{ duration: 0.3 }}
+                />
+              )}
+            </div>
+            
+            {/* Events */}
+            <div ref={scrollContainerRef} className="timeline-events-container">
+              <div className="timeline-events">
+                {filteredEvents.map((event, index) => {
+                  const actualIndex = events.indexOf(event);
+                  const isActive = actualIndex === currentEventIndex;
+                  const isPreviewing = isPreviewMode && previewEventId === event.id;
+                  
+                  return (
+                    <TimelineEvent
+                      key={event.id}
+                      event={event}
+                      index={actualIndex}
+                      isActive={isActive}
+                      isPreviewing={isPreviewing}
+                      onHover={setHoveredEventId}
+                      onClick={() => handleEventClick(event)}
+                      onDoubleClick={() => handleEventDoubleClick(event)}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+            
+            {/* Event Preview */}
+            <AnimatePresence>
+              {hoveredEventId && (
+                <EventPreview
+                  eventId={hoveredEventId}
+                  position="above"
+                />
+              )}
+            </AnimatePresence>
+            
+            {/* Restore Confirmation */}
+            <AnimatePresence>
+              {showConfirmRestore && (
+                <motion.div
+                  className="restore-confirmation"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <p>Restore to this version?</p>
+                  <div className="restore-actions">
+                    <button
+                      className="btn btn-secondary"
+                      onClick={() => setShowConfirmRestore(null)}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => confirmRestore(showConfirmRestore)}
+                    >
+                      Restore
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
+export default VersionTimeline;
 ```
 
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/components/workflow/index.ts
@@ -3851,15 +14171,164 @@ import React, { useEffect, useState } from 'react';
 import { Canvas } from '@/components/canvas';
 import { useWorkflowStore } from '@/stores/workflowStore';
 import { useCanvasStore } from '@/stores/canvasStore';
-import { Node, Edge } from '@xyflow/react';
+import { useCanvasNavigation } from '@/hooks/useCanvasNavigation';
+import { Node, Edge, useReactFlow } from '@xyflow/react';
+import { ForceLayoutCanvas } from '@/components/canvas/ForceLayoutCanvas';
 
 export function WorkflowCanvas() {
-  const { currentStep, coreProblem, personas, isGeneratingPersonas } = useWorkflowStore();
+  console.log('[WorkflowCanvas] Component rendering...');
+  
+  const { currentStep, coreProblem, personas, painPoints, solutions, isGeneratingPersonas, lockedItems, focusedPainPointId, focusOnPainPoint, clearPainPointFocus } = useWorkflowStore();
   const { addNodes, addEdges, updateEdge, zoomTo, resetCanvas, nodes, edges } = useCanvasStore();
+  const { goToStep1 } = useCanvasNavigation();
   const [canvasInitialized, setCanvasInitialized] = useState(false);
   const [lastNodeCount, setLastNodeCount] = useState(0);
   const [lastEdgeCount, setLastEdgeCount] = useState(0);
   const [painPointsAdded, setPainPointsAdded] = useState(false);
+  const [solutionsAdded, setSolutionsAdded] = useState(false);
+  const [previousStep, setPreviousStep] = useState<string | null>(null);
+  const [focusGroupActive, setFocusGroupActive] = useState(false);
+
+  // Constants for node positioning
+  const problemNodeX = -400; // Left side of canvas for problem node
+  const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1920; // Default to 1920 for SSR
+  const viewportHeight = typeof window !== 'undefined' ? window.innerHeight : 1080; // Default to 1080 for SSR
+  const personaBaseX = viewportWidth * 0.15; // Shift personas left to 15% of view width (reduced from 0.2)
+  
+  // Calculate vertical centering for personas (5 nodes with 150 spacing)
+  // React Flow positions nodes by their top-left corner, not center
+  // PersonaNode height is approximately 160px, CoreProblemNode height is approximately 180px
+  // To align centers: CoreProblem center is at y=0 + 90px = 90px
+  // Middle PersonaNode should have its center at 90px, so top at 90 - 80 = 10px
+  const personaSpacing = 150;
+  const middleNodeTopY = 10; // Top of middle node to align centers
+  const personaStartY = middleNodeTopY - (2 * personaSpacing); // Start 2 nodes above middle
+
+  // Function to initialize problem input nodes
+  const initializeProblemInputNodes = () => {
+    console.log('[WorkflowCanvas] Initializing problem input nodes...');
+    
+    // Use the component-level viewportWidth and personaBaseX
+    const currentPersonaBaseX = personaBaseX;
+    
+    // Add core problem node
+    const problemNode: Node = {
+      id: 'problem-input',
+      type: 'coreProblem',
+      position: { x: problemNodeX, y: 0 },
+      data: {
+        id: 'problem-input',
+        problem: '',
+        status: 'empty',
+        isDemo: false
+      },
+      draggable: false, // CoreProblemNode should never be draggable
+      width: 450, // Fixed width between min and max
+      height: 180, // Fixed height
+    };
+
+    // Create label node for personas column
+    const personasLabelNode: Node = {
+      id: 'personas-label',
+      type: 'label',
+      position: { x: personaBaseX, y: personaStartY - 80 }, // Aligned with personas X position and above the top persona
+      data: {
+        text: 'Personas',
+        showRefresh: true,
+        onRefresh: async () => {
+          console.log('[WorkflowCanvas] Refresh personas clicked');
+          const workflowStore = useWorkflowStore.getState();
+          await workflowStore.regeneratePersonas();
+        }
+      },
+      draggable: false,
+      selectable: false,
+      zIndex: 100, // Higher z-index to ensure it's above other nodes
+    };
+
+    // Create skeleton persona nodes
+    const personaNodes: Node[] = [];
+    for (let i = 1; i <= 5; i++) {
+      personaNodes.push({
+        id: `persona-${i}`,
+        type: 'persona',
+        position: {
+          x: currentPersonaBaseX,
+          y: personaStartY + ((i - 1) * personaSpacing)
+        },
+        data: {
+          id: `persona-${i}`,
+          name: '',
+          industry: '',
+          role: '',
+          painDegree: 0,
+          description: '',
+          isLocked: false,
+          isExpanded: false,
+          isSkeleton: true, // Start in skeleton state
+          isRefreshing: false,
+          onToggleLock: () => {
+            console.log(`Toggle lock for persona ${i}`);
+          },
+          onToggleExpand: () => {
+            const canvasStore = useCanvasStore.getState();
+            const currentNode = canvasStore.getNodeById(`persona-${i}`);
+            if (currentNode) {
+              const isCurrentlyExpanded = (currentNode.data as any).isExpanded || false;
+              const heightDiff = isCurrentlyExpanded ? -160 : 160;
+              
+              // Update node data
+              canvasStore.updateNode(`persona-${i}`, {
+                data: {
+                  ...currentNode.data,
+                  isExpanded: !isCurrentlyExpanded
+                }
+              });
+              
+              // Handle node expansion and shift other nodes
+              canvasStore.handleNodeExpansion(`persona-${i}`, heightDiff);
+            }
+          }
+        },
+        draggable: true,
+      });
+    }
+
+    // Create edges from problem to personas
+    const personaEdges: Edge[] = [];
+    for (let i = 1; i <= 5; i++) {
+      personaEdges.push({
+        id: `problem-to-persona-${i}`,
+        source: 'problem-input',
+        target: `persona-${i}`,
+        type: 'default',
+        style: { 
+          stroke: '#6B7280', 
+          strokeWidth: 2,
+          opacity: 0.7 
+        },
+        animated: false, // Will be animated when personas are generated
+      });
+    }
+
+    console.log('[WorkflowCanvas] Adding initial nodes:', {
+      problemNode: 1,
+      labelNodes: 1,
+      personaNodes: personaNodes.length,
+      edges: personaEdges.length
+    });
+
+    addNodes([problemNode, personasLabelNode, ...personaNodes]);
+    addEdges(personaEdges);
+  };
+
+  console.log('[WorkflowCanvas] Initial state:', {
+    currentStep,
+    coreProblem,
+    canvasInitialized,
+    nodeCount: nodes.length,
+    edgeCount: edges.length
+  });
 
   // Debug canvas state changes
   useEffect(() => {
@@ -3883,130 +14352,62 @@ export function WorkflowCanvas() {
 
   // Initialize the canvas with the problem input node
   useEffect(() => {
-    console.log('[WorkflowCanvas] Initialization effect triggered:', {
-      currentStep,
-      canvasInitialized,
-      nodeCount: nodes.length
-    });
-    
-    // Don't re-initialize if we already have nodes (prevent clearing)
-    if (nodes.length > 0 && canvasInitialized) {
-      console.log('[WorkflowCanvas] Canvas already has nodes, skipping initialization');
-      return;
+    if (!canvasInitialized) {
+      console.log('[WorkflowCanvas] Initializing canvas for workflow...');
+      // Clear any existing state before initializing
+      resetCanvas();
+      setCanvasInitialized(true);
     }
+  }, []); // Remove canvasInitialized from dependencies to prevent re-initialization
+
+  // Handle step transitions and reset from focus group mode
+  useEffect(() => {
+    if (!canvasInitialized) return;
+
+    console.log('[WorkflowCanvas] Current step updated:', currentStep, 'Previous step:', previousStep);
     
-    if (currentStep === 'problem_input' && !canvasInitialized) {
-      console.log('[WorkflowCanvas] Setting up problem input node...');
-      
-      // Clear canvas first
+    // If leaving focus group mode, reset the canvas and rebuild for the new step
+    if (previousStep === 'focus_group' && currentStep !== 'focus_group' && focusGroupActive) {
+      console.log('[WorkflowCanvas] Leaving focus group mode - resetting canvas');
+      setFocusGroupActive(false);
+      setPainPointsAdded(false);
+      setSolutionsAdded(false);
+      setCanvasInitialized(false);
       resetCanvas();
       
-      // Create the interactive problem input node positioned in the left column
-      const problemInputNode: Node = {
-        id: 'problem-input',
-        type: 'problem',
-        position: { x: -250, y: 0 }, // Left column center
-        data: { 
-          id: 'problem-input',
-          problem: coreProblem?.description || '',
-          status: coreProblem?.is_validated ? 'valid' : 'editing',
-          isDemo: false
-        },
-        draggable: false, // CoreProblemNode should never be draggable
-      };
-
-      // Create column label nodes
-      const coreProblemLabelNode: Node = {
-        id: 'core-problem-label',
-        type: 'label',
-        position: { x: -250, y: -120 }, // Centered above CoreProblemNode (x: -250)
-        data: { 
-          text: 'Core Problem',
-          showRefresh: false
-        },
-        draggable: false,
-        selectable: false,
-      };
-
-      const personasLabelNode: Node = {
-        id: 'personas-label',
-        type: 'label', 
-        position: { x: 600, y: -420 }, // Centered above PersonaNodes column (x: 600)
-        data: {
-          text: 'Personas',
-          showRefresh: true,
-          onRefresh: () => {
-            console.log('[WorkflowCanvas] Refreshing personas...');
-            const workflowStore = useWorkflowStore.getState();
-            if (workflowStore.coreProblem) {
-              workflowStore.generatePersonas();
-            }
-          }
-        },
-        draggable: false,
-        selectable: false,
-      };
-
-      // Create 5 PersonaNodes in skeleton state initially - positioned to barely peek from right edge
-      const personaNodes: Node[] = Array.from({ length: 5 }, (_, index) => ({
-        id: `persona-${index + 1}`,
-        type: 'persona',
-        position: { 
-          x: 600, // Far right column - personas will barely peek into view
-          y: -300 + (index * 150) // Vertical spacing of 150px between nodes
-        },
-        data: {
-          id: `persona-${index + 1}`,
-          name: '',
-          industry: '',
-          role: '',
-          painDegree: 0,
-          description: '',
-          isLocked: false,
-          isExpanded: false,
-          isSkeleton: !coreProblem?.description, // Skeleton state when no problem
-          onToggleLock: () => {
-            // TODO: Implement persona locking
-            console.log(`Toggle lock for persona ${index + 1}`);
-          }
-        },
-        draggable: true,
-      }));
-      
-      // Create edges connecting the problem node to each persona node
-      // Initially solid (not animated) until persona generation starts
-      const edges: Edge[] = personaNodes.map((personaNode, index) => ({
-        id: `problem-to-persona-${index + 1}`,
-        source: 'problem-input',
-        target: personaNode.id,
-        type: 'default',
-        style: { 
-          stroke: '#6B7280', 
-          strokeWidth: 2,
-          opacity: 0.7 
-        },
-        animated: false, // Start with solid edges
-      }));
-      
-      console.log('[WorkflowCanvas] Adding initial nodes:', {
-        labels: 2,
-        problemNode: 1,
-        personaNodes: personaNodes.length,
-        edges: edges.length
-      });
-      
-      addNodes([coreProblemLabelNode, personasLabelNode, problemInputNode, ...personaNodes]);
-      addEdges(edges);
-      
-      setCanvasInitialized(true);
-      
-      // Center the view on the problem node with appropriate zoom to show persona column edge
+      // Re-initialize after a short delay
       setTimeout(() => {
-        console.log('[WorkflowCanvas] Centering view on problem node...');
-        zoomTo(0.6); // Further reduced zoom to show more of the canvas width
+        setCanvasInitialized(true);
+      }, 50);
+    }
+    
+    // Handle step-specific node initialization
+    if (currentStep === 'problem_input' && nodes.length === 0 && !focusGroupActive) {
+      // Only initialize if nodes haven't been added yet
+      initializeProblemInputNodes();
+    }
+    
+    if (currentStep === 'problem_input' && coreProblem && nodes.length > 0 && !focusGroupActive) {
+      // Center view on problem node after problem is validated
+      setTimeout(() => {
+        console.log('[WorkflowCanvas] Centering view on problem node for Step 1...');
+        // Zoom to show just the problem node nicely centered
+        const canvasStore = useCanvasStore.getState();
+        canvasStore.setViewport({
+          x: -problemNodeX + (window.innerWidth / 2) - 200, // Center on problem node (accounting for node width)
+          y: (window.innerHeight / 2) - 100, // Center vertically
+          zoom: 1.2 // More zoomed in for better focus
+        });
       }, 100);
     }
-  }, [currentStep, canvasInitialized, addNodes, zoomTo, resetCanvas, coreProblem, nodes.length]);
+    
+    // Update previous step
+    setPreviousStep(currentStep);
+  }, [currentStep, canvasInitialized, addNodes, zoomTo, resetCanvas, coreProblem, previousStep, focusGroupActive]); // Remove nodes.length dependency
+
+  // NOTE: Navigation is now handled by ProgressSteps component in App.tsx
+  // This effect previously had competing navigation logic that interfered with ProgressSteps
+  // Removed to allow smooth single-click navigation from ProgressSteps
 
   // Update the problem node when core problem changes
   useEffect(() => {
@@ -4023,6 +14424,8 @@ export function WorkflowCanvas() {
           isDemo: false
         },
         draggable: false, // CoreProblemNode should never be draggable
+        width: 450, // Maintain fixed width
+        height: 180, // Maintain fixed height
       });
 
       // Update persona nodes to remove skeleton state (they'll be populated by the personas effect)
@@ -4039,8 +14442,26 @@ export function WorkflowCanvas() {
             isLocked: false,
             isExpanded: false,
             isSkeleton: false, // Remove skeleton state
+            isRefreshing: false, // Remove refreshing state
             onToggleLock: () => {
               console.log(`Toggle lock for persona ${i}`);
+            },
+            onToggleExpand: () => {
+              const canvasStore = useCanvasStore.getState();
+              const currentNode = canvasStore.getNodeById(nodeId);
+              if (currentNode) {
+                const isCurrentlyExpanded = (currentNode.data as any).isExpanded || false;
+                const heightDiff = isCurrentlyExpanded ? -160 : 160;
+                
+                canvasStore.updateNode(nodeId, {
+                  data: {
+                    ...currentNode.data,
+                    isExpanded: !isCurrentlyExpanded
+                  }
+                });
+                
+                canvasStore.handleNodeExpansion(nodeId, heightDiff);
+              }
             }
           }
         });
@@ -4048,16 +14469,171 @@ export function WorkflowCanvas() {
     }
   }, [coreProblem, canvasInitialized]);
 
+  // Update persona nodes' refreshing state when generation status changes
+  useEffect(() => {
+    if (canvasInitialized && nodes.some(n => n.type === 'persona')) {
+      console.log('[WorkflowCanvas] Updating persona nodes refreshing state:', isGeneratingPersonas);
+      const canvasStore = useCanvasStore.getState();
+      
+      // Update all persona nodes with refreshing state
+      for (let i = 1; i <= 5; i++) {
+        const nodeId = `persona-${i}`;
+        const currentNode = canvasStore.getNodeById(nodeId);
+        if (currentNode) {
+          canvasStore.updateNode(nodeId, {
+            data: {
+              ...currentNode.data,
+              isRefreshing: isGeneratingPersonas
+            }
+          });
+        }
+      }
+    }
+  }, [isGeneratingPersonas, canvasInitialized]); // Remove nodes dependency to prevent infinite loop
+
+  // Handle step transitions - add pain point skeletons when reaching persona discovery
+  useEffect(() => {
+    console.log('[WorkflowCanvas] Step transition effect triggered:', {
+      currentStep,
+      canvasInitialized,
+      painPointsAdded,
+      coreProblemValidated: coreProblem?.is_validated
+    });
+
+    // Add pain point skeletons immediately when reaching persona discovery step
+    if (currentStep === 'persona_discovery' && canvasInitialized && !painPointsAdded && coreProblem?.is_validated && !focusGroupActive) {
+      console.log('[WorkflowCanvas] Reached persona discovery step - adding pain point skeleton nodes');
+      
+      const canvasStore = useCanvasStore.getState();
+      
+      // Calculate positions for pain points in two columns (right third of screen)
+      const viewportWidth = window.innerWidth;
+      const painPointBaseX = viewportWidth * 0.45; // Moved right from 38.33% to 45% for more spacing from personas
+      const painPointColumn1X = painPointBaseX - 170; // Reduced from 220 to bring columns closer together
+      const painPointColumn2X = painPointBaseX + 170; // Reduced from 220 to bring columns closer together
+      
+      // Calculate vertical centering for pain points (tallest column has 4 nodes)
+      const painPointSpacing = 240; // Further increased vertical spacing to prevent overlap
+      // Align pain points with personas - start slightly higher than personas
+      const painPointStartY = personaStartY - 60; // Start 60px above first persona for visual balance
+      
+      console.log('[WorkflowCanvas] Pain point positioning calculations:', {
+        viewportWidth,
+        painPointBaseX,
+        painPointColumn1X,
+        painPointColumn2X,
+        columnSpacing: painPointColumn2X - painPointColumn1X,
+        painPointStartY,
+        painPointSpacing
+      });
+
+      // Add Pain Points column label (centered between the two columns)
+      const painPointsLabelNode: Node = {
+        id: 'pain-points-label',
+        type: 'label',
+        position: { x: painPointBaseX, y: painPointStartY - 120 }, // Centered above both columns
+        data: {
+          text: 'Pain Points',
+          showRefresh: false
+        },
+        draggable: false,
+        selectable: false,
+      };
+
+      // Create pain point skeleton nodes - 7 total, arranged in two columns
+      const painPointNodes: Node[] = [];
+
+      // Create 7 pain points total, positioned in two columns (3 left, 4 right)
+      for (let painIndex = 0; painIndex < 7; painIndex++) {
+        const painPointId = `pain-point-${painIndex + 1}`;
+        
+        // Determine column and position within column
+        const isFirstColumn = painIndex < 3;
+        const columnX = isFirstColumn ? painPointColumn1X : painPointColumn2X;
+        const columnIndex = isFirstColumn ? painIndex : painIndex - 3;
+        const positionY = painPointStartY + (columnIndex * painPointSpacing);
+        
+        console.log(`[WorkflowCanvas] Creating ${painPointId} at position:`, {
+          painIndex,
+          isFirstColumn,
+          columnX,
+          columnIndex,
+          positionY,
+          column: isFirstColumn ? 'left' : 'right'
+        });
+        
+        painPointNodes.push({
+          id: painPointId,
+          type: 'painPoint',
+          position: {
+            x: columnX, // Column-specific X position
+            y: positionY // Y position based on index within column
+          },
+          data: {
+            id: painPointId,
+            description: '',
+            severity: 'medium' as const,
+            impactArea: '',
+            isLocked: false,
+            isSkeleton: true, // Show skeleton state
+            isRefreshing: false, // Initially not refreshing
+            onToggleLock: () => {
+              console.log(`Toggle lock for pain point ${painIndex + 1}`);
+            },
+            onFocus: () => {
+              console.log(`Focus on pain point ${painIndex + 1}`);
+            }
+          },
+          draggable: true,
+        });
+      }
+
+      // Add edges from each persona to pain points (initially not animated)
+      const painPointEdges: Edge[] = [];
+      for (let personaIndex = 1; personaIndex <= 5; personaIndex++) {
+        for (let painIndex = 1; painIndex <= 7; painIndex++) {
+          painPointEdges.push({
+            id: `persona-${personaIndex}-to-pain-${painIndex}`,
+            source: `persona-${personaIndex}`,
+            target: `pain-point-${painIndex}`,
+            type: 'default',
+            style: { 
+              stroke: '#6B7280', 
+              strokeWidth: 1,
+              opacity: 0.3 
+            },
+            animated: false, // Start with solid edges
+          });
+        }
+      }
+
+      console.log('[WorkflowCanvas] Adding pain point nodes and edges:', {
+        painPointNodes: painPointNodes.length,
+        painPointEdges: painPointEdges.length,
+        labelNodes: 1
+      });
+
+      addNodes([painPointsLabelNode, ...painPointNodes]);
+      addEdges(painPointEdges);
+      
+      setPainPointsAdded(true);
+      
+      console.log('[WorkflowCanvas] Pain point skeleton nodes added successfully');
+    }
+  }, [currentStep, canvasInitialized, painPointsAdded, coreProblem, addNodes, addEdges, setPainPointsAdded, focusGroupActive]);
+
   // Handle persona generation state - animate edges and add pain points
   useEffect(() => {
     console.log('[WorkflowCanvas] Persona generation state changed:', {
       isGeneratingPersonas,
       painPointsAdded,
-      canvasInitialized
+      canvasInitialized,
+      coreProblemValidated: coreProblem?.is_validated
     });
 
-    if (isGeneratingPersonas && canvasInitialized && !painPointsAdded) {
-      console.log('[WorkflowCanvas] Persona generation started - animating edges and adding pain points');
+    // Only animate edges when persona generation starts (pain points already added by step transition)
+    if (isGeneratingPersonas && canvasInitialized && painPointsAdded && coreProblem?.is_validated) {
+      console.log('[WorkflowCanvas] Persona generation started - animating edges');
       
       const canvasStore = useCanvasStore.getState();
       
@@ -4068,92 +14644,30 @@ export function WorkflowCanvas() {
         });
       }
 
-      // Add Pain Points column label
-      const painPointsLabelNode: Node = {
-        id: 'pain-points-label',
-        type: 'label',
-        position: { x: 1450, y: -420 }, // Right of personas column
-        data: {
-          text: 'Pain Points',
-          showRefresh: false
-        },
-        draggable: false,
-        selectable: false,
-      };
-
-      // Create pain point skeleton nodes - only 3 total, card-sized like personas
-      const painPointNodes: Node[] = [];
-      const painPointEdges: Edge[] = [];
-
-      // Create 3 pain points total, positioned vertically
-      for (let painIndex = 0; painIndex < 3; painIndex++) {
-        const painPointId = `pain-point-${painIndex + 1}`;
-        
-        painPointNodes.push({
-          id: painPointId,
-          type: 'pain',
-          position: {
-            x: 1450, // Pain points column
-            y: -300 + (painIndex * 150) // Same vertical spacing as personas (150px)
-          },
-          data: {
-            id: painPointId,
-            description: '',
-            severity: 'medium' as const,
-            impactArea: '',
-            isLocked: false,
-            isSkeleton: true, // Start in skeleton state
-            onToggleLock: () => {
-              console.log(`Toggle lock for pain point ${painPointId}`);
+      // Animate persona-to-pain-point edges
+      for (let personaIndex = 1; personaIndex <= 5; personaIndex++) {
+        for (let painIndex = 1; painIndex <= 7; painIndex++) {
+          canvasStore.updateEdge(`persona-${personaIndex}-to-pain-${painIndex}`, {
+            animated: true,
+            style: { 
+              stroke: '#F59E0B', 
+              strokeWidth: 2,
+              opacity: 0.6 
             }
-          },
-          draggable: true,
-        });
-
-        // Create animated edges from each persona to each pain point
-        // This creates a many-to-many relationship visualization
-        for (let personaIndex = 0; personaIndex < 5; personaIndex++) {
-          const personaNodeId = `persona-${personaIndex + 1}`;
-          
-          painPointEdges.push({
-            id: `persona-${personaIndex + 1}-to-pain-${painIndex + 1}`,
-            source: personaNodeId,
-            target: painPointId,
-            type: 'default',
-            style: {
-              stroke: '#F97316', // Orange color for pain point connections
-              strokeWidth: 1.5, // Thinner for many connections
-              opacity: 0.3 // Lower opacity since there are many edges
-            },
-            animated: true, // Animated edges for pain points
           });
         }
       }
 
-      // Add all pain point nodes and edges
-      console.log('[WorkflowCanvas] Adding pain point skeleton nodes:', {
-        labelNode: 1,
-        nodeCount: painPointNodes.length,
-        edgeCount: painPointEdges.length
-      });
-      
-      addNodes([painPointsLabelNode, ...painPointNodes]);
-      addEdges(painPointEdges);
-      
-      setPainPointsAdded(true);
-      
-      // Adjust zoom to show all three columns
-      setTimeout(() => {
-        zoomTo(0.4); // Zoom out more to show all three columns
-      }, 100);
+      console.log('[WorkflowCanvas] Edge animations started for persona generation');
     }
-  }, [isGeneratingPersonas, canvasInitialized, painPointsAdded, addNodes, addEdges, updateEdge, zoomTo]);
+  }, [isGeneratingPersonas, canvasInitialized, painPointsAdded, coreProblem, updateEdge]);
 
   // Update PersonaNodes when personas are available
   useEffect(() => {
     console.log('[WorkflowCanvas] Personas effect triggered:', {
       personaCount: personas.length,
-      canvasInitialized
+      canvasInitialized,
+      isGeneratingPersonas
     });
     
     if (personas.length > 0 && canvasInitialized) {
@@ -4161,47 +14675,891 @@ export function WorkflowCanvas() {
       
       const canvasStore = useCanvasStore.getState();
       
+      // Find persona with highest pain_degree
+      let highestPainPersona: any = null;
+      let highestPainDegree = 0;
+      let highestPainIndex = -1;
+      
       // Update the first 5 persona nodes with actual data
       personas.slice(0, 5).forEach((persona, index) => {
         const nodeId = `persona-${index + 1}`;
-        console.log('[WorkflowCanvas] Updating persona node:', nodeId, persona.name);
+        console.log('[WorkflowCanvas] Updating persona node:', nodeId, 'with data:', {
+          name: persona.name,
+          industry: persona.demographics?.industry,
+          role: persona.demographics?.role,
+          description: persona.description
+        });
+        
+        // Get the current node to preserve existing properties
+        const currentNode = canvasStore.getNodeById(nodeId);
+        console.log('[WorkflowCanvas] Current node before update:', currentNode);
+        
+        // Get locked state from current store state
+        const currentLockedItems = useWorkflowStore.getState().lockedItems;
+        
+        const updatedData = {
+          id: nodeId,
+          name: persona.name,
+          industry: persona.demographics?.industry || 'Unknown',
+          role: persona.demographics?.role || 'Unknown',
+          painDegree: (persona as any).pain_degree || (persona as any).painDegree || Math.floor(Math.random() * 5) + 1,
+          description: persona.description,
+          isLocked: currentLockedItems.personas.has(persona.id),
+          isExpanded: currentNode?.data?.isExpanded || false, // Preserve expanded state
+          isSkeleton: false, // Ensure skeleton state is off
+          isRefreshing: isGeneratingPersonas, // Set based on current generation state
+          onToggleLock: () => {
+            const workflowStore = useWorkflowStore.getState();
+            workflowStore.togglePersonaLock(persona.id);
+          },
+          onToggleExpand: () => {
+            const canvasStore = useCanvasStore.getState();
+            const currentNode = canvasStore.getNodeById(nodeId);
+            if (currentNode) {
+              const isCurrentlyExpanded = (currentNode.data as any).isExpanded || false;
+              const heightDiff = isCurrentlyExpanded ? -160 : 160;
+              
+              canvasStore.updateNode(nodeId, {
+                data: {
+                  ...currentNode.data,
+                  isExpanded: !isCurrentlyExpanded
+                }
+              });
+              
+              canvasStore.handleNodeExpansion(nodeId, heightDiff);
+            }
+          }
+        };
+        
+        console.log('[WorkflowCanvas] About to update with data:', updatedData);
         
         canvasStore.updateNode(nodeId, {
+          data: updatedData
+        });
+        
+        // Verify the update worked
+        const updatedNode = canvasStore.getNodeById(nodeId);
+        console.log('[WorkflowCanvas] Node after update:', updatedNode);
+        
+        // Check if this persona has the highest pain degree
+        const painDegree = (persona as any).pain_degree || (persona as any).painDegree || updatedData.painDegree;
+        if (painDegree > highestPainDegree) {
+          highestPainDegree = painDegree;
+          highestPainPersona = persona;
+          highestPainIndex = index;
+        }
+      });
+      
+      // If personas are generated (no longer generating), update edges and create pain point connections
+      if (!isGeneratingPersonas) {
+        console.log('[WorkflowCanvas] Persona generation complete - updating edges and creating pain point connections');
+        
+        // Make all problem-to-persona edges solid and grey by default
+        for (let i = 1; i <= 5; i++) {
+          const edgeId = `problem-to-persona-${i}`;
+          canvasStore.updateEdge(edgeId, {
+            animated: false,
+            style: {
+              stroke: '#6B7280', // Default grey
+              strokeWidth: 2,
+              opacity: 0.7
+            }
+          });
+        }
+        
+        // Color the edge to the highest pain persona gold
+        if (highestPainIndex >= 0) {
+          console.log('[WorkflowCanvas] Highlighting edge to highest pain persona:', highestPainPersona.name, 'with pain degree:', highestPainDegree);
+          const goldEdgeId = `problem-to-persona-${highestPainIndex + 1}`;
+          canvasStore.updateEdge(goldEdgeId, {
+            animated: false,
+            style: {
+              stroke: '#FFD700', // Gold color
+              strokeWidth: 3, // Slightly thicker
+              opacity: 1 // Full opacity
+            }
+          });
+        }
+
+        // Now update the persona-to-pain-point edges to animated state
+        if (painPointsAdded) {
+          console.log('[WorkflowCanvas] Updating persona-to-pain-point edges to animated state');
+          
+          // Update existing edges to animated state (they were already created in step transition)
+          for (let personaIndex = 1; personaIndex <= 5; personaIndex++) {
+            for (let painIndex = 1; painIndex <= 7; painIndex++) {
+              const edgeId = `persona-${personaIndex}-to-pain-${painIndex}`;
+              canvasStore.updateEdge(edgeId, {
+                animated: true,
+                style: {
+                  stroke: '#F97316', // Orange color for pain point connections
+                  strokeWidth: 1.5, // Thinner for many connections
+                  opacity: 0.5 // Slightly higher opacity when animated
+                }
+              });
+            }
+          }
+          
+          console.log('[WorkflowCanvas] Updated persona-to-pain-point edges to animated state');
+        }
+      }
+    }
+  }, [personas, canvasInitialized, isGeneratingPersonas, painPointsAdded, addEdges]); // Remove lockedItems dependency
+
+  // Update PainPointNodes when pain points are available
+  useEffect(() => {
+    console.log('[WorkflowCanvas] Pain points effect triggered:', {
+      painPointCount: painPoints.length,
+      canvasInitialized
+    });
+    
+    if (painPoints.length > 0 && canvasInitialized) {
+      console.log('[WorkflowCanvas] Updating pain point nodes with data:', painPoints.length);
+      
+      const canvasStore = useCanvasStore.getState();
+      
+      // Update the first 7 pain point nodes with actual data
+      painPoints.slice(0, 7).forEach((painPoint, index) => {
+        const nodeId = `pain-point-${index + 1}`;
+                 console.log('[WorkflowCanvas] Updating pain point node:', nodeId, 'with data:', {
+           id: painPoint.id,
+           title: painPoint.title,
+           description: painPoint.description,
+           severity: painPoint.severity,
+           impact: painPoint.impact,
+           isLocked: painPoint.is_locked
+         });
+        
+        // Get the current node to preserve existing properties
+        const currentNode = canvasStore.getNodeById(nodeId);
+        console.log('[WorkflowCanvas] Current pain point node before update:', currentNode);
+        
+                 const updatedData = {
+           id: nodeId,
+           title: painPoint.title,
+           description: painPoint.description,
+           severity: painPoint.severity === 1 ? 'low' : 
+                    painPoint.severity === 2 ? 'medium' :
+                    painPoint.severity === 3 ? 'high' :
+                    painPoint.severity === 4 ? 'high' : 'critical',
+           impactArea: painPoint.impact,
+           isLocked: painPoint.is_locked || false,
+           isSkeleton: false, // Ensure skeleton state is off
+           isRefreshing: false, // Remove refreshing state
+           onToggleLock: () => {
+             const workflowStore = useWorkflowStore.getState();
+             workflowStore.togglePainPointLock(painPoint.id);
+           },
+           onFocus: () => {
+             console.log(`Focus on pain point ${painPoint.id}`);
+             focusOnPainPoint(painPoint.id);
+           }
+         };
+        
+        console.log('[WorkflowCanvas] About to update pain point with data:', updatedData);
+        
+        canvasStore.updateNode(nodeId, {
+          data: updatedData
+        });
+        
+        // Verify the update worked
+        const updatedNode = canvasStore.getNodeById(nodeId);
+        console.log('[WorkflowCanvas] Pain point node after update:', updatedNode);
+      });
+    }
+  }, [painPoints, canvasInitialized]);
+
+  // Handle solution generation when moving to solution_generation step
+  useEffect(() => {
+    console.log('[WorkflowCanvas] Solution generation step check:', {
+      currentStep,
+      solutionsAdded,
+      canvasInitialized,
+      painPointsLength: painPoints.length
+    });
+
+    if (currentStep === 'solution_generation' && canvasInitialized && !solutionsAdded && painPoints.length > 0 && !focusGroupActive) {
+      console.log('[WorkflowCanvas] Moving to solution generation step - adding solution nodes');
+      
+      const canvasStore = useCanvasStore.getState();
+      
+      // Calculate positions for solutions in two columns (right of pain points)
+      const viewportWidth = window.innerWidth;
+      const solutionBaseX = viewportWidth * 0.75; // Moved right from 71.67% to 75% to maintain spacing with shifted pain points
+      const solutionColumn1X = solutionBaseX - 110; // First column - moved right to split the difference with second column
+      const solutionColumn2X = solutionBaseX + 220; // Second column  
+      const solutionSpacing = 200; // Slightly more spacing for solution nodes
+      
+      // Calculate vertical centering for solutions (8 nodes, 4 per column)
+      const solutionTallestHeight = 3 * solutionSpacing; // 3 gaps between 4 nodes
+      const solutionStartY = -(solutionTallestHeight / 2); // Center vertically
+
+      console.log('[WorkflowCanvas] Solution positioning calculations:', {
+        viewportWidth,
+        solutionBaseX,
+        solutionColumn1X,
+        solutionColumn2X,
+        columnSpacing: solutionColumn2X - solutionColumn1X,
+        solutionStartY,
+        solutionSpacing
+      });
+
+      // Add Solutions column label (centered between the two columns)
+      const solutionsLabelNode: Node = {
+        id: 'solutions-label',
+        type: 'label',
+        position: { x: solutionBaseX, y: solutionStartY - 120 }, // Centered above both columns
+        data: {
+          text: 'Solutions',
+          showRefresh: false
+        },
+        draggable: false,
+        selectable: false,
+      };
+
+      // Create solution skeleton nodes - 8 total, arranged in two columns (4 in each)
+      const solutionNodes: Node[] = [];
+      const solutionEdges: Edge[] = [];
+
+      // Create 8 solutions total, positioned in two columns (4 in each)
+      for (let solutionIndex = 0; solutionIndex < 8; solutionIndex++) {
+        const solutionId = `solution-${solutionIndex + 1}`;
+        
+        // Determine column and position within column
+        const isFirstColumn = solutionIndex < 4;
+        const columnX = isFirstColumn ? solutionColumn1X : solutionColumn2X;
+        const columnIndex = isFirstColumn ? solutionIndex : solutionIndex - 4;
+        const positionY = solutionStartY + (columnIndex * solutionSpacing);
+        
+        console.log(`[WorkflowCanvas] Creating ${solutionId} at position:`, {
+          solutionIndex,
+          isFirstColumn,
+          columnX,
+          columnIndex,
+          positionY,
+          column: isFirstColumn ? 'left' : 'right'
+        });
+        
+        solutionNodes.push({
+          id: solutionId,
+          type: 'solution',
+          position: {
+            x: columnX,
+            y: positionY
+          },
+          data: {
+            id: solutionId,
+            title: '',
+            description: '',
+            solutionType: 'feature' as const,
+            complexity: 'medium' as const,
+            isLocked: false,
+            isSelected: false,
+            isSkeleton: true, // Start in skeleton state
+            isRefreshing: false, // Initially not refreshing
+            onToggleLock: () => {
+              console.log(`Toggle lock for solution ${solutionId}`);
+            },
+            onToggleSelect: () => {
+              console.log(`Toggle selection for solution ${solutionId}`);
+            }
+          },
+          draggable: true,
+        });
+
+        // Create edges from each persona to each solution for focus group mode
+        for (let personaIndex = 0; personaIndex < 5; personaIndex++) {
+          const personaId = `persona-${personaIndex + 1}`;
+          
+          solutionEdges.push({
+            id: `persona-${personaIndex + 1}-to-solution-${solutionIndex + 1}`,
+            source: personaId,
+            target: solutionId,
+            type: 'default',
+            style: {
+              stroke: '#FFD700', // Gold color for solution connections
+              strokeWidth: 1.5,
+              opacity: 0.2 // Very low opacity since there are many edges
+            },
+            animated: true, // Animated edges for solutions
+          });
+        }
+      }
+
+      // Add all solution nodes and edges
+      console.log('[WorkflowCanvas] Adding solution skeleton nodes:', {
+        labelNode: 1,
+        nodeCount: solutionNodes.length,
+        edgeCount: solutionEdges.length
+      });
+      
+      addNodes([solutionsLabelNode, ...solutionNodes]);
+      addEdges(solutionEdges);
+      
+      setSolutionsAdded(true);
+    }
+  }, [currentStep, canvasInitialized, solutionsAdded, painPoints.length, addNodes, addEdges, focusGroupActive]);
+
+  // Update solution nodes when solutions are available from the edge function
+  useEffect(() => {
+    console.log('[WorkflowCanvas] Solutions update effect triggered:', {
+      solutionsLength: solutions.length,
+      canvasInitialized,
+      solutionsAdded
+    });
+    
+    if (solutions.length > 0 && canvasInitialized && solutionsAdded) {
+      console.log('[WorkflowCanvas] Updating solution nodes with data:', solutions.length);
+      
+      const canvasStore = useCanvasStore.getState();
+      
+      // Update the first 8 solution nodes with actual data
+      solutions.slice(0, 8).forEach((solution, index) => {
+        const nodeId = `solution-${index + 1}`;
+        console.log('[WorkflowCanvas] Updating solution node:', nodeId, 'with data:', {
+          title: solution.title,
+          description: solution.description,
+          complexity: solution.feasibility_score
+        });
+        
+        // Get the current node to preserve existing properties
+        const currentNode = canvasStore.getNodeById(nodeId);
+        console.log('[WorkflowCanvas] Current solution node before update:', currentNode);
+        
+        if (currentNode) {
+          // Get locked state from current store state
+          const currentLockedItems = useWorkflowStore.getState().lockedItems;
+          
+          const updatedData = {
+            ...currentNode.data,
+            id: nodeId,
+            title: solution.title,
+            description: solution.description,
+            solutionType: solution.solution_type as 'feature' | 'integration' | 'automation' | 'analytics',
+            complexity: solution.complexity as 'low' | 'medium' | 'high',
+            isLocked: currentLockedItems.solutions.has(solution.id),
+            isSelected: false,
+            isSkeleton: false, // Remove skeleton state
+            isRefreshing: false,
+            onToggleLock: () => {
+              const workflowStore = useWorkflowStore.getState();
+              workflowStore.toggleSolutionLock(solution.id);
+            },
+            onToggleSelect: () => {
+              const workflowStore = useWorkflowStore.getState();
+              workflowStore.toggleSolutionSelection(solution.id);
+            }
+          };
+          
+          canvasStore.updateNode(nodeId, {
+            data: updatedData
+          });
+          
+          console.log('[WorkflowCanvas] Solution node updated:', nodeId);
+        }
+      });
+      
+      // If we have more than 8 solutions, log a warning
+      if (solutions.length > 8) {
+        console.warn('[WorkflowCanvas] More than 8 solutions available, only showing first 8');
+      }
+    }
+  }, [solutions, canvasInitialized, solutionsAdded]);
+
+  // Handle focus group mode - create special layout with solutions in a row and personas around center
+  useEffect(() => {
+    console.log('[WorkflowCanvas] Focus group mode check:', {
+      currentStep,
+      canvasInitialized,
+      personasLength: personas.length,
+      solutionsLength: solutions.length
+    });
+
+    if (currentStep === 'focus_group' && canvasInitialized && personas.length > 0 && solutions.length > 0) {
+      console.log('[WorkflowCanvas] Entering focus group mode - creating special layout');
+      
+      // Set focus group active flag
+      setFocusGroupActive(true);
+      
+      // Clear canvas for focus group view
+      resetCanvas();
+      
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      
+      // Position solutions in a row beneath the progress steps (top of view)
+      const solutionRowY = -300; // Near top of canvas
+      const solutionRowStartX = -(viewportWidth * 0.3); // Start left of center
+      const solutionSpacing = 380; // Space between solution cards
+      
+      // Create solution row nodes (first 4 solutions)
+      const solutionRowNodes: Node[] = [];
+      solutions.slice(0, 4).forEach((solution, index) => {
+        solutionRowNodes.push({
+          id: `solution-row-${index + 1}`,
+          type: 'solution',
+          position: {
+            x: solutionRowStartX + (index * solutionSpacing),
+            y: solutionRowY
+          },
+          data: {
+            id: `solution-row-${index + 1}`,
+            title: solution.title,
+            description: solution.description,
+            solutionType: solution.solution_type as 'feature' | 'integration' | 'automation' | 'analytics',
+            complexity: solution.complexity as 'low' | 'medium' | 'high',
+            isLocked: lockedItems.solutions.has(solution.id),
+            isSelected: false,
+            isSkeleton: false,
+            isRefreshing: false,
+            onToggleLock: () => {
+              const workflowStore = useWorkflowStore.getState();
+              workflowStore.toggleSolutionLock(solution.id);
+            },
+            onToggleSelect: () => {
+              const workflowStore = useWorkflowStore.getState();
+              workflowStore.toggleSolutionSelection(solution.id);
+            }
+          },
+          draggable: false, // Fixed position for focus group
+        });
+      });
+      
+      // Position the central solution (best solution or first one)
+      const centralSolution = solutions[0]; // Use first solution as central
+      const centralX = 0;
+      const centralY = 100;
+      
+      const centralSolutionNode: Node = {
+        id: 'central-solution',
+        type: 'solution',
+        position: { x: centralX - 190, y: centralY }, // Center accounting for node width
+        data: {
+          id: 'central-solution',
+          title: centralSolution.title,
+          description: centralSolution.description,
+          solutionType: centralSolution.solution_type as 'feature' | 'integration' | 'automation' | 'analytics',
+          complexity: centralSolution.complexity as 'low' | 'medium' | 'high',
+          isLocked: lockedItems.solutions.has(centralSolution.id),
+          isSelected: true, // Highlight central solution
+          isSkeleton: false,
+          isRefreshing: false,
+          onToggleLock: () => {
+            const workflowStore = useWorkflowStore.getState();
+            workflowStore.toggleSolutionLock(centralSolution.id);
+          },
+          onToggleSelect: () => {
+            const workflowStore = useWorkflowStore.getState();
+            workflowStore.toggleSolutionSelection(centralSolution.id);
+          }
+        },
+        draggable: false,
+      };
+      
+      // Position personas in a circle around the central solution
+      const radius = 400; // Distance from center
+      const personaNodes: Node[] = [];
+      const personaEdges: Edge[] = [];
+      
+      // Position 5 personas: 2 left, 1 bottom, 2 right
+      const personaPositions = [
+        { x: centralX - radius - 100, y: centralY - 100 }, // Left top
+        { x: centralX - radius - 100, y: centralY + 100 }, // Left bottom
+        { x: centralX, y: centralY + radius - 50 }, // Bottom center
+        { x: centralX + radius - 100, y: centralY + 100 }, // Right bottom
+        { x: centralX + radius - 100, y: centralY - 100 }, // Right top
+      ];
+      
+      personas.slice(0, 5).forEach((persona, index) => {
+        const position = personaPositions[index];
+        const nodeId = `focus-persona-${index + 1}`;
+        
+        personaNodes.push({
+          id: nodeId,
+          type: 'persona',
+          position: position,
           data: {
             id: nodeId,
             name: persona.name,
             industry: persona.demographics?.industry || 'Unknown',
             role: persona.demographics?.role || 'Unknown',
-            painDegree: Math.floor(Math.random() * 5) + 1, // Random pain level 1-5, could be from API
+            painDegree: (persona as any).pain_degree || (persona as any).painDegree || 3,
             description: persona.description,
-            isLocked: persona.is_locked,
+            isLocked: lockedItems.personas.has(persona.id),
             isExpanded: false,
-            isSkeleton: false, // Ensure skeleton state is off
+            isSkeleton: false,
+            isRefreshing: false,
             onToggleLock: () => {
               const workflowStore = useWorkflowStore.getState();
               workflowStore.togglePersonaLock(persona.id);
             }
-          }
+          },
+          draggable: false, // Fixed position for focus group
+        });
+        
+        // Create edge from persona to central solution
+        personaEdges.push({
+          id: `${nodeId}-to-central`,
+          source: nodeId,
+          target: 'central-solution',
+          type: 'focusGroup',
+          data: {
+            quote: getPersonaQuote(persona, centralSolution),
+            personaName: persona.name,
+            personaId: persona.id,
+            solutionId: centralSolution.id,
+            isHighlighted: index === 0 // Highlight first persona's connection
+          },
+          style: {
+            stroke: '#FFD700',
+            strokeWidth: 2,
+            opacity: 0.8
+          },
+          animated: true,
         });
       });
-    }
-  }, [personas, canvasInitialized]);
-
-  // Handle step changes and canvas adjustments
-  useEffect(() => {
-    console.log('[WorkflowCanvas] Step change detected:', currentStep, 'canvasInitialized:', canvasInitialized);
-    
-    if (currentStep !== 'problem_input' && canvasInitialized) {
-      console.log('[WorkflowCanvas] Moving past problem input, updating canvas...');
-      console.log('[WorkflowCanvas] Current step:', currentStep);
       
-      if (currentStep === 'persona_discovery') {
-        console.log('[WorkflowCanvas] Entering persona discovery, adjusting canvas view...');
-        // Adjust the canvas view to show both problem and persona columns
-        zoomTo(0.5); // Even more zoomed out to show full layout
-      }
+      // Add label for Focus Group view
+      const focusGroupLabel: Node = {
+        id: 'focus-group-label',
+        type: 'label',
+        position: { x: 0, y: -450 },
+        data: {
+          text: 'Focus Group: Persona Feedback',
+          showRefresh: false
+        },
+        draggable: false,
+        selectable: false,
+      };
+      
+      // Add all nodes and edges
+      console.log('[WorkflowCanvas] Adding focus group nodes:', {
+        solutionRow: solutionRowNodes.length,
+        centralSolution: 1,
+        personas: personaNodes.length,
+        edges: personaEdges.length
+      });
+      
+      addNodes([focusGroupLabel, ...solutionRowNodes, centralSolutionNode, ...personaNodes]);
+      addEdges(personaEdges);
+      
+      // Center the view
+      setTimeout(() => {
+        const canvasStore = useCanvasStore.getState();
+        canvasStore.setViewport({
+          x: viewportWidth / 2,
+          y: viewportHeight / 2 - 100,
+          zoom: 0.8
+        });
+      }, 100);
     }
-  }, [currentStep, canvasInitialized, zoomTo]);
+  }, [currentStep, canvasInitialized, personas, solutions, resetCanvas, addNodes, addEdges, lockedItems]);
+  
+  // Helper function to generate persona quotes
+  const getPersonaQuote = (persona: any, solution: any) => {
+    const quotes = [
+      `As a ${persona.demographics?.role}, this would solve my biggest challenge`,
+      `This ${solution.solution_type} would save our team hours every week`,
+      `Finally, a solution that understands the ${persona.demographics?.industry} industry`,
+      `I've been waiting for something like this in my role`,
+      `My team would adopt this immediately`
+    ];
+    
+    // Use persona index to select a consistent quote
+    const index = personas.findIndex(p => p.id === persona.id);
+    return quotes[index % quotes.length];
+  };
+
+  // Handle pain point focus mode - show focused view with persona, pain point, and solutions
+  useEffect(() => {
+    console.log('[WorkflowCanvas] Pain point focus mode check:', {
+      focusedPainPointId,
+      canvasInitialized,
+      painPointsLength: painPoints.length,
+      solutionsLength: solutions.length
+    });
+
+    if (focusedPainPointId && canvasInitialized && painPoints.length > 0) {
+      console.log('[WorkflowCanvas] Entering pain point focus mode');
+      
+      const canvasStore = useCanvasStore.getState();
+      
+      // Find the focused pain point
+      const focusedPainPoint = painPoints.find(p => p.id === focusedPainPointId);
+      if (!focusedPainPoint) {
+        console.error('[WorkflowCanvas] Focused pain point not found:', focusedPainPointId);
+        return;
+      }
+
+      // Find the associated persona
+      const associatedPersona = personas.find(p => p.id === focusedPainPoint.persona_id);
+      if (!associatedPersona) {
+        console.error('[WorkflowCanvas] Associated persona not found:', focusedPainPoint.persona_id);
+        return;
+      }
+
+      console.log('[WorkflowCanvas] Creating focused view for:', {
+        painPoint: focusedPainPoint.title,
+        persona: associatedPersona.name
+      });
+
+      // Clear the canvas for focused view
+      resetCanvas();
+
+      // Calculate positions for focused view
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      
+      // Center the persona node
+      const personaX = -200;
+      const personaY = -100;
+      
+      // Position pain point below persona
+      const painPointX = personaX;
+      const painPointY = personaY + 200;
+      
+      // Position solutions to the right of pain point
+      const solutionBaseX = personaX + 400;
+      const solutionStartY = painPointY - 100;
+      const solutionSpacing = 120;
+
+      // Create focused persona node
+      const focusedPersonaNode: Node = {
+        id: 'focused-persona',
+        type: 'persona',
+        position: { x: personaX, y: personaY },
+        data: {
+          id: 'focused-persona',
+          name: associatedPersona.name,
+          industry: associatedPersona.demographics?.industry || 'Unknown',
+          role: associatedPersona.demographics?.role || 'Unknown',
+          painDegree: (associatedPersona as any).pain_degree || (associatedPersona as any).painDegree || 3,
+          description: associatedPersona.description,
+          isLocked: lockedItems.personas.has(associatedPersona.id),
+          isExpanded: true, // Expand in focused view
+          isSkeleton: false,
+          isRefreshing: false,
+          onToggleLock: () => {
+            const workflowStore = useWorkflowStore.getState();
+            workflowStore.togglePersonaLock(associatedPersona.id);
+          }
+        },
+        draggable: false, // Fixed position in focused view
+      };
+
+      // Create focused pain point node
+      const focusedPainPointNode: Node = {
+        id: 'focused-pain-point',
+        type: 'painPoint',
+        position: { x: painPointX, y: painPointY },
+        data: {
+          id: 'focused-pain-point',
+          description: focusedPainPoint.description,
+          severity: focusedPainPoint.severity === 1 ? 'low' : 
+                   focusedPainPoint.severity === 2 ? 'medium' :
+                   focusedPainPoint.severity === 3 ? 'high' :
+                   focusedPainPoint.severity === 4 ? 'high' : 'critical',
+          impactArea: focusedPainPoint.impact,
+          isLocked: lockedItems.painPoints.has(focusedPainPoint.id),
+          isSkeleton: false,
+          isRefreshing: false,
+          onToggleLock: () => {
+            const workflowStore = useWorkflowStore.getState();
+            workflowStore.togglePainPointLock(focusedPainPoint.id);
+          },
+          onFocus: () => {
+            // Already focused, could implement unfocus or ignore
+            console.log('[WorkflowCanvas] Already focused on this pain point');
+          }
+        },
+        draggable: false, // Fixed position in focused view
+      };
+
+      // Create solution nodes (show up to 5 solutions)
+      const solutionNodes: Node[] = [];
+      const solutionEdges: Edge[] = [];
+
+      // Get solutions related to this pain point (from solutionMappings)
+      const relatedSolutions = solutions.filter(solution => {
+        // Check if this solution addresses the focused pain point
+        return painPoints.some(pp => pp.id === focusedPainPointId); // For now, show all solutions
+      }).slice(0, 5);
+
+      if (relatedSolutions.length === 0) {
+        // Show placeholder solutions if no specific solutions found
+        for (let i = 0; i < 3; i++) {
+          const solutionId = `focused-solution-${i + 1}`;
+          solutionNodes.push({
+            id: solutionId,
+            type: 'solution',
+            position: {
+              x: solutionBaseX,
+              y: solutionStartY + (i * solutionSpacing)
+            },
+            data: {
+              id: solutionId,
+              title: 'Solution coming soon...',
+              description: 'Solutions will be generated based on this pain point',
+              solutionType: 'feature' as const,
+              complexity: 'medium' as const,
+              isLocked: false,
+              isSelected: false,
+              isSkeleton: true,
+              isRefreshing: false,
+              onToggleLock: () => console.log(`Toggle lock for ${solutionId}`),
+              onToggleSelect: () => console.log(`Toggle selection for ${solutionId}`)
+            },
+            draggable: false,
+          });
+        }
+      } else {
+        // Show actual solutions
+        relatedSolutions.forEach((solution, index) => {
+          const solutionId = `focused-solution-${solution.id}`;
+          solutionNodes.push({
+            id: solutionId,
+            type: 'solution',
+            position: {
+              x: solutionBaseX,
+              y: solutionStartY + (index * solutionSpacing)
+            },
+            data: {
+              id: solutionId,
+              title: solution.title,
+              description: solution.description,
+              solutionType: 'feature' as const,
+              complexity: solution.feasibility_score <= 3 ? 'low' : 
+                         solution.feasibility_score <= 6 ? 'medium' : 'high',
+              isLocked: lockedItems.solutions.has(solution.id),
+              isSelected: false,
+              isSkeleton: false,
+              isRefreshing: false,
+              onToggleLock: () => {
+                const workflowStore = useWorkflowStore.getState();
+                workflowStore.toggleSolutionLock(solution.id);
+              },
+              onToggleSelect: () => {
+                const workflowStore = useWorkflowStore.getState();
+                workflowStore.toggleSolutionSelection(solution.id);
+              }
+            },
+            draggable: false,
+          });
+          
+          // Create edge from pain point to solution
+          solutionEdges.push({
+            id: `pain-to-solution-${solution.id}`,
+            source: 'focused-pain-point',
+            target: solutionId,
+            type: 'default',
+            style: {
+              stroke: '#10B981', // Green color for solution connections
+              strokeWidth: 2,
+              opacity: 0.8
+            },
+            animated: true,
+          });
+        });
+      }
+
+      // Create edge from persona to pain point
+      const personaToPainEdge: Edge = {
+        id: 'persona-to-pain-focused',
+        source: 'focused-persona',
+        target: 'focused-pain-point',
+        type: 'default',
+        style: {
+          stroke: '#F97316', // Orange color
+          strokeWidth: 3,
+          opacity: 1
+        },
+        animated: false,
+      };
+
+      // Add back button (as a label node)
+      const backButtonNode: Node = {
+        id: 'back-button',
+        type: 'label',
+        position: { x: personaX - 100, y: personaY - 150 },
+        data: {
+          text: '← Back to Overview',
+          showRefresh: false,
+          onClick: () => {
+            console.log('[WorkflowCanvas] Back button clicked');
+            clearPainPointFocus();
+          }
+        },
+        draggable: false,
+        selectable: true,
+      };
+
+      // Add title for focused view
+      const titleNode: Node = {
+        id: 'focused-title',
+        type: 'label',
+        position: { x: personaX + 50, y: personaY - 150 },
+        data: {
+          text: `Focus: ${focusedPainPoint.title}`,
+          showRefresh: false
+        },
+        draggable: false,
+        selectable: false,
+      };
+
+      console.log('[WorkflowCanvas] Adding focused view nodes:', {
+        personas: 1,
+        painPoints: 1,
+        solutions: solutionNodes.length,
+        edges: solutionEdges.length + 1,
+        labels: 2
+      });
+
+      // Add all nodes and edges for focused view
+      addNodes([
+        backButtonNode,
+        titleNode,
+        focusedPersonaNode,
+        focusedPainPointNode,
+        ...solutionNodes
+      ]);
+      
+      addEdges([personaToPainEdge, ...solutionEdges]);
+
+      // Center the view on the focused content
+      setTimeout(() => {
+        canvasStore.setViewport({
+          x: -personaX + (viewportWidth / 2) - 200,
+          y: -personaY + (viewportHeight / 2) - 50,
+          zoom: 1.0
+        });
+      }, 100);
+    }
+     }, [focusedPainPointId, canvasInitialized, painPoints, personas, solutions, lockedItems, resetCanvas, addNodes, addEdges, clearPainPointFocus]);
+
+  // Handle clearing pain point focus - restore main view
+  useEffect(() => {
+    console.log('[WorkflowCanvas] Pain point focus clear check:', {
+      focusedPainPointId,
+      canvasInitialized,
+      currentStep
+    });
+
+    // If focus is cleared and we have initialized canvas, restore the main view
+    if (!focusedPainPointId && canvasInitialized && currentStep !== 'problem_input') {
+      console.log('[WorkflowCanvas] Restoring main view after focus clear');
+      
+      // Trigger a re-initialization to restore the main view
+      // We do this by temporarily clearing canvasInitialized and letting the main effects rebuild
+      setCanvasInitialized(false);
+      
+      // Force a small delay then re-initialize
+      setTimeout(() => {
+        setCanvasInitialized(true);
+      }, 50);
+    }
+  }, [focusedPainPointId, canvasInitialized, currentStep]);
+  
+    // NOTE: Removed competing step change navigation - now handled by ProgressSteps in App.tsx
 
   return (
     <div className="relative w-full h-full">
@@ -4224,6 +15582,320 @@ export function WorkflowCanvas() {
     </div>
   );
 }
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/data/demoFlowData.json
+```json
+{
+  "problem": {
+    "id": "demo-problem",
+    "statement": "Sales team can't track customer interactions effectively",
+    "description": "Our sales reps are losing deals because they miss follow-ups and don't have visibility into customer engagement history"
+  },
+  "personas": [
+    {
+      "id": "demo-persona-1",
+      "name": "Sarah Chen",
+      "role": "Sales Manager",
+      "painDegree": 9,
+      "description": "Manages a team of 15 sales reps and struggles to get visibility into pipeline health"
+    },
+    {
+      "id": "demo-persona-2",
+      "name": "Mike Rodriguez",
+      "role": "Enterprise Sales Rep",
+      "painDegree": 8,
+      "description": "Handles complex deals with multiple stakeholders and long sales cycles"
+    },
+    {
+      "id": "demo-persona-3",
+      "name": "Lisa Park",
+      "role": "Sales Director",
+      "painDegree": 7,
+      "description": "Needs accurate forecasting and real-time insights into team performance"
+    },
+    {
+      "id": "demo-persona-4",
+      "name": "James Wilson",
+      "role": "SDR Team Lead",
+      "painDegree": 6,
+      "description": "Coordinates outbound prospecting efforts and handoffs to AEs"
+    },
+    {
+      "id": "demo-persona-5",
+      "name": "Emma Thompson",
+      "role": "RevOps Manager",
+      "painDegree": 8,
+      "description": "Responsible for sales process optimization and tool adoption"
+    }
+  ],
+  "painPoints": [
+    {
+      "id": "demo-pain-1",
+      "title": "Manual data entry wastes 2+ hours daily",
+      "severity": 9,
+      "personas": ["demo-persona-1", "demo-persona-2"]
+    },
+    {
+      "id": "demo-pain-2",
+      "title": "No mobile access for field sales",
+      "severity": 8,
+      "personas": ["demo-persona-2", "demo-persona-4"]
+    },
+    {
+      "id": "demo-pain-3",
+      "title": "Poor visibility into team activities",
+      "severity": 9,
+      "personas": ["demo-persona-1", "demo-persona-3"]
+    },
+    {
+      "id": "demo-pain-4",
+      "title": "Missed follow-ups cost deals",
+      "severity": 10,
+      "personas": ["demo-persona-2", "demo-persona-4"]
+    },
+    {
+      "id": "demo-pain-5",
+      "title": "Inaccurate sales forecasting",
+      "severity": 8,
+      "personas": ["demo-persona-3", "demo-persona-5"]
+    },
+    {
+      "id": "demo-pain-6",
+      "title": "Disconnected tools and data silos",
+      "severity": 9,
+      "personas": ["demo-persona-5", "demo-persona-1"]
+    },
+    {
+      "id": "demo-pain-7",
+      "title": "No automation for repetitive tasks",
+      "severity": 7,
+      "personas": ["demo-persona-2", "demo-persona-4", "demo-persona-5"]
+    }
+  ],
+  "solutions": [
+    {
+      "id": "demo-solution-1",
+      "title": "Unified Activity Dashboard",
+      "description": "Real-time view of all customer interactions across channels",
+      "votes": { "total": 12, "byPersona": { "demo-persona-1": 3, "demo-persona-2": 2, "demo-persona-3": 3, "demo-persona-4": 2, "demo-persona-5": 2 } }
+    },
+    {
+      "id": "demo-solution-2",
+      "title": "AI-Powered Follow-up Engine",
+      "description": "Automated reminders and suggested next actions based on deal context",
+      "votes": { "total": 10, "byPersona": { "demo-persona-1": 2, "demo-persona-2": 3, "demo-persona-3": 1, "demo-persona-4": 3, "demo-persona-5": 1 } }
+    },
+    {
+      "id": "demo-solution-3",
+      "title": "Mobile-First Design",
+      "description": "Full CRM functionality on iOS and Android with offline sync",
+      "votes": { "total": 8, "byPersona": { "demo-persona-1": 1, "demo-persona-2": 3, "demo-persona-3": 1, "demo-persona-4": 2, "demo-persona-5": 1 } }
+    },
+    {
+      "id": "demo-solution-4",
+      "title": "Intelligent Data Capture",
+      "description": "Auto-log emails, calls, and meetings with AI summarization",
+      "votes": { "total": 11, "byPersona": { "demo-persona-1": 2, "demo-persona-2": 3, "demo-persona-3": 2, "demo-persona-4": 2, "demo-persona-5": 2 } }
+    },
+    {
+      "id": "demo-solution-5",
+      "title": "Advanced Analytics Suite",
+      "description": "Predictive forecasting and performance insights with ML models",
+      "votes": { "total": 9, "byPersona": { "demo-persona-1": 2, "demo-persona-2": 1, "demo-persona-3": 3, "demo-persona-4": 1, "demo-persona-5": 2 } }
+    },
+    {
+      "id": "demo-solution-6",
+      "title": "Workflow Automation Builder",
+      "description": "No-code automation for sales processes and integrations",
+      "votes": { "total": 7, "byPersona": { "demo-persona-1": 1, "demo-persona-2": 1, "demo-persona-3": 1, "demo-persona-4": 1, "demo-persona-5": 3 } }
+    }
+  ],
+  "userStories": [
+    {
+      "id": "demo-story-1",
+      "title": "As a Sales Manager, I want to see my team's daily activities at a glance",
+      "acceptanceCriteria": ["Real-time activity feed", "Filter by rep and activity type", "Mobile responsive design"]
+    },
+    {
+      "id": "demo-story-2",
+      "title": "As a Sales Rep, I want automatic follow-up reminders based on deal stage",
+      "acceptanceCriteria": ["Smart notification timing", "Context-aware suggestions", "Snooze and reschedule options"]
+    },
+    {
+      "id": "demo-story-3",
+      "title": "As a Sales Director, I want accurate pipeline forecasts with confidence scores",
+      "acceptanceCriteria": ["ML-based predictions", "Historical accuracy tracking", "Scenario planning tools"]
+    },
+    {
+      "id": "demo-story-4",
+      "title": "As an SDR, I want to log activities without leaving my workflow",
+      "acceptanceCriteria": ["One-click logging", "Email and calendar sync", "Bulk activity updates"]
+    },
+    {
+      "id": "demo-story-5",
+      "title": "As a RevOps Manager, I want to build custom automations without coding",
+      "acceptanceCriteria": ["Visual workflow builder", "Pre-built templates", "Integration marketplace"]
+    },
+    {
+      "id": "demo-story-6",
+      "title": "As a Field Sales Rep, I want full CRM access on my mobile device",
+      "acceptanceCriteria": ["Offline mode", "Voice-to-text notes", "Location-based check-ins"]
+    }
+  ],
+  "documents": [
+    {
+      "id": "demo-doc-1",
+      "type": "product-vision",
+      "title": "Product Vision",
+      "preview": "Transform how sales teams work with an intelligent CRM that anticipates needs and automates routine tasks..."
+    },
+    {
+      "id": "demo-doc-2",
+      "type": "functional-requirements",
+      "title": "Functional Requirements",
+      "preview": "Comprehensive specification of features including user management, contact tracking, pipeline visualization..."
+    },
+    {
+      "id": "demo-doc-3",
+      "type": "system-architecture",
+      "title": "System Architecture",
+      "preview": "Microservices architecture with React frontend, Node.js backend, PostgreSQL database, and Redis caching..."
+    },
+    {
+      "id": "demo-doc-4",
+      "type": "data-flow",
+      "title": "Data Flow Diagram",
+      "preview": "Real-time data synchronization across web, mobile, and third-party integrations with event-driven architecture..."
+    },
+    {
+      "id": "demo-doc-5",
+      "type": "design-system",
+      "title": "Design System",
+      "preview": "Modern, accessible component library with dark mode support and comprehensive design tokens..."
+    }
+  ]
+}
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/useAnimationLoop.ts
+```ts
+import { useEffect, useRef, useCallback } from 'react';
+
+interface AnimationLoopOptions {
+  duration: number;
+  onUpdate?: (progress: number) => void;
+  onComplete?: () => void;
+  easing?: (t: number) => number;
+  autoStart?: boolean;
+  loop?: boolean;
+}
+
+export function useAnimationLoop(options: AnimationLoopOptions) {
+  const {
+    duration,
+    onUpdate,
+    onComplete,
+    easing = (t) => t, // Linear by default
+    autoStart = true,
+    loop = false,
+  } = options;
+  
+  const startTimeRef = useRef<number | null>(null);
+  const animationFrameRef = useRef<number | null>(null);
+  const isRunningRef = useRef(false);
+  
+  const animate = useCallback((timestamp: number) => {
+    if (!startTimeRef.current) {
+      startTimeRef.current = timestamp;
+    }
+    
+    const elapsed = timestamp - startTimeRef.current;
+    const progress = Math.min(elapsed / duration, 1);
+    const easedProgress = easing(progress);
+    
+    onUpdate?.(easedProgress);
+    
+    if (progress < 1) {
+      animationFrameRef.current = requestAnimationFrame(animate);
+    } else {
+      onComplete?.();
+      
+      if (loop) {
+        startTimeRef.current = null;
+        animationFrameRef.current = requestAnimationFrame(animate);
+      } else {
+        isRunningRef.current = false;
+      }
+    }
+  }, [duration, onUpdate, onComplete, easing, loop]);
+  
+  const start = useCallback(() => {
+    if (isRunningRef.current) return;
+    
+    isRunningRef.current = true;
+    startTimeRef.current = null;
+    animationFrameRef.current = requestAnimationFrame(animate);
+  }, [animate]);
+  
+  const stop = useCallback(() => {
+    isRunningRef.current = false;
+    startTimeRef.current = null;
+    
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = null;
+    }
+  }, []);
+  
+  const restart = useCallback(() => {
+    stop();
+    start();
+  }, [start, stop]);
+  
+  useEffect(() => {
+    if (autoStart) {
+      start();
+    }
+    
+    return () => {
+      stop();
+    };
+  }, [autoStart, start, stop]);
+  
+  return {
+    start,
+    stop,
+    restart,
+    isRunning: isRunningRef.current,
+  };
+}
+
+// Easing functions
+export const easings = {
+  linear: (t: number) => t,
+  easeIn: (t: number) => t * t,
+  easeOut: (t: number) => t * (2 - t),
+  easeInOut: (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t,
+  easeInCubic: (t: number) => t * t * t,
+  easeOutCubic: (t: number) => (--t) * t * t + 1,
+  easeInOutCubic: (t: number) => t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1,
+  elasticOut: (t: number) => {
+    const p = 0.3;
+    return Math.pow(2, -10 * t) * Math.sin((t - p / 4) * (2 * Math.PI) / p) + 1;
+  },
+  bounceOut: (t: number) => {
+    if (t < 1 / 2.75) {
+      return 7.5625 * t * t;
+    } else if (t < 2 / 2.75) {
+      return 7.5625 * (t -= 1.5 / 2.75) * t + 0.75;
+    } else if (t < 2.5 / 2.75) {
+      return 7.5625 * (t -= 2.25 / 2.75) * t + 0.9375;
+    } else {
+      return 7.5625 * (t -= 2.625 / 2.75) * t + 0.984375;
+    }
+  },
+};
 ```
 
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/useAuth.ts
@@ -4363,6 +16035,1796 @@ export function useAuth() {
 } 
 ```
 
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/useBulkOperations.ts
+```ts
+import { useCallback, useEffect, useState } from 'react';
+import { useCanvasStore } from '../stores/canvasStore';
+import { useLockManagement } from './useLockManagement';
+import { Node } from 'reactflow';
+
+export const useBulkOperations = () => {
+  const [selectedNodes, setSelectedNodes] = useState<string[]>([]);
+  const [isSelecting, setIsSelecting] = useState(false);
+  const [selectionBox, setSelectionBox] = useState<{
+    startX: number;
+    startY: number;
+    endX: number;
+    endY: number;
+  } | null>(null);
+  
+  const nodes = useCanvasStore((state) => state.nodes);
+  const { bulkLock, bulkUnlock, isLocked } = useLockManagement();
+  
+  // Handle shift+click for multi-select
+  const handleNodeClick = useCallback((nodeId: string, event: React.MouseEvent) => {
+    if (event.shiftKey) {
+      setSelectedNodes(prev => {
+        if (prev.includes(nodeId)) {
+          return prev.filter(id => id !== nodeId);
+        } else {
+          return [...prev, nodeId];
+        }
+      });
+    } else if (event.metaKey || event.ctrlKey) {
+      // Add to selection with cmd/ctrl
+      setSelectedNodes(prev => [...prev, nodeId]);
+    } else {
+      // Single select
+      setSelectedNodes([nodeId]);
+    }
+  }, []);
+  
+  // Clear selection on escape
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setSelectedNodes([]);
+        setIsSelecting(false);
+        setSelectionBox(null);
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+  
+  // Box selection
+  const startBoxSelection = useCallback((event: React.MouseEvent) => {
+    if (event.shiftKey) {
+      const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
+      setIsSelecting(true);
+      setSelectionBox({
+        startX: event.clientX - rect.left,
+        startY: event.clientY - rect.top,
+        endX: event.clientX - rect.left,
+        endY: event.clientY - rect.top,
+      });
+    }
+  }, []);
+  
+  const updateBoxSelection = useCallback((event: React.MouseEvent) => {
+    if (isSelecting && selectionBox) {
+      const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
+      setSelectionBox({
+        ...selectionBox,
+        endX: event.clientX - rect.left,
+        endY: event.clientY - rect.top,
+      });
+    }
+  }, [isSelecting, selectionBox]);
+  
+  const endBoxSelection = useCallback(() => {
+    if (isSelecting && selectionBox) {
+      // Calculate which nodes are in the selection box
+      const minX = Math.min(selectionBox.startX, selectionBox.endX);
+      const maxX = Math.max(selectionBox.startX, selectionBox.endX);
+      const minY = Math.min(selectionBox.startY, selectionBox.endY);
+      const maxY = Math.max(selectionBox.startY, selectionBox.endY);
+      
+      const nodesInBox = nodes.filter((node: Node) => {
+        const nodeX = node.position.x;
+        const nodeY = node.position.y;
+        const nodeWidth = node.width || 200;
+        const nodeHeight = node.height || 100;
+        
+        return (
+          nodeX + nodeWidth >= minX &&
+          nodeX <= maxX &&
+          nodeY + nodeHeight >= minY &&
+          nodeY <= maxY
+        );
+      }).map(node => node.id);
+      
+      setSelectedNodes(nodesInBox);
+      setIsSelecting(false);
+      setSelectionBox(null);
+    }
+  }, [isSelecting, selectionBox, nodes]);
+  
+  // Bulk lock operations
+  const lockSelected = useCallback(async () => {
+    const unlocked = selectedNodes.filter(id => !isLocked(id));
+    if (unlocked.length > 0) {
+      // Determine node type from first node
+      const firstNode = nodes.find((n: Node) => n.id === unlocked[0]);
+      const nodeType = firstNode?.type || 'unknown';
+      await bulkLock(unlocked, nodeType);
+    }
+  }, [selectedNodes, nodes, isLocked, bulkLock]);
+  
+  const unlockSelected = useCallback(async () => {
+    const locked = selectedNodes.filter(id => isLocked(id));
+    if (locked.length > 0) {
+      await bulkUnlock(locked);
+    }
+  }, [selectedNodes, isLocked, bulkUnlock]);
+  
+  const toggleLockSelected = useCallback(async () => {
+    const locked = selectedNodes.filter(id => isLocked(id));
+    const unlocked = selectedNodes.filter(id => !isLocked(id));
+    
+    if (locked.length > 0) {
+      await bulkUnlock(locked);
+    }
+    
+    if (unlocked.length > 0) {
+      const firstNode = nodes.find((n: Node) => n.id === unlocked[0]);
+      const nodeType = firstNode?.type || 'unknown';
+      await bulkLock(unlocked, nodeType);
+    }
+  }, [selectedNodes, nodes, isLocked, bulkLock, bulkUnlock]);
+  
+  // Select all nodes of a type
+  const selectAllOfType = useCallback((nodeType: string) => {
+    const nodesOfType = nodes.filter((n: Node) => n.type === nodeType).map(n => n.id);
+    setSelectedNodes(nodesOfType);
+  }, [nodes]);
+  
+  // Clear selection
+  const clearSelection = useCallback(() => {
+    setSelectedNodes([]);
+  }, []);
+  
+  return {
+    selectedNodes,
+    isSelecting,
+    selectionBox,
+    handleNodeClick,
+    startBoxSelection,
+    updateBoxSelection,
+    endBoxSelection,
+    lockSelected,
+    unlockSelected,
+    toggleLockSelected,
+    selectAllOfType,
+    clearSelection,
+    lockedCount: selectedNodes.filter(id => isLocked(id)).length,
+    unlockedCount: selectedNodes.filter(id => !isLocked(id)).length,
+  };
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/useCanvasNavigation.ts
+```ts
+import { useCallback, useRef } from 'react';
+import { useReactFlow, Node } from '@xyflow/react';
+import { useCanvasStore } from '@/stores/canvasStore';
+
+interface ViewportDimensions {
+  width: number;
+  height: number;
+}
+
+interface NodeCenteringOptions {
+  padding?: number;
+  zoom?: number;
+  duration?: number;
+  includeSidebar?: boolean;
+}
+
+export const useCanvasNavigation = () => {
+  const { 
+    getViewport, 
+    setViewport, 
+    getNode, 
+    getNodes,
+    fitView 
+  } = useReactFlow();
+  
+  const { updateNode } = useCanvasStore();
+  
+  const viewportRef = useRef<ViewportDimensions>({ width: 0, height: 0 });
+
+  // Get current viewport dimensions accounting for sidebar
+  const getEffectiveViewport = useCallback((includeSidebar = false): ViewportDimensions => {
+    const container = document.querySelector('.react-flow__renderer');
+    if (!container) return { width: 1200, height: 800 }; // fallback
+    
+    const rect = container.getBoundingClientRect();
+    const sidebarWidth = includeSidebar ? 0 : 256; // Your sidebar width
+    
+    return {
+      width: rect.width - sidebarWidth,
+      height: rect.height
+    };
+  }, []);
+
+  // Center on a specific node with dynamic positioning
+  const centerOnNode = useCallback((
+    nodeId: string, 
+    options: NodeCenteringOptions = {}
+  ) => {
+    const {
+      padding = 100,
+      zoom = 1.2,
+      duration = 800,
+      includeSidebar = false
+    } = options;
+
+    const node = getNode(nodeId);
+    if (!node) return;
+
+    const viewport = getEffectiveViewport(includeSidebar);
+    const sidebarOffset = includeSidebar ? 0 : 256;
+
+    // Calculate the center position accounting for node dimensions
+    const nodeWidth = node.measured?.width || node.width || 320;
+    const nodeHeight = node.measured?.height || node.height || 120;
+    
+    // Calculate viewport center, accounting for sidebar
+    const viewportCenterX = (viewport.width / 2) + (sidebarOffset / 2);
+    const viewportCenterY = viewport.height / 2;
+
+    // Calculate where the node center is in flow coordinates
+    const nodeCenterX = node.position.x + (nodeWidth / 2);
+    const nodeCenterY = node.position.y + (nodeHeight / 2);
+
+    // Calculate the viewport translation needed using proper React Flow mathematics
+    // The viewport x and y represent canvas translation where negative values 
+    // move the canvas left/up (making nodes appear right/down)
+    const flowX = viewportCenterX - (nodeCenterX * zoom);
+    const flowY = viewportCenterY - (nodeCenterY * zoom);
+
+    console.log('[useCanvasNavigation] Centering calculation:', {
+      nodeId,
+      nodePosition: node.position,
+      nodeDimensions: { width: nodeWidth, height: nodeHeight },
+      nodeCenterX,
+      nodeCenterY,
+      viewportCenterX,
+      viewportCenterY,
+      sidebarOffset,
+      calculatedViewport: { x: flowX, y: flowY, zoom }
+    });
+
+    // Animate to the new viewport
+    setViewport(
+      {
+        x: flowX,
+        y: flowY,
+        zoom: zoom
+      },
+      { duration }
+    );
+  }, [getNode, getEffectiveViewport, setViewport]);
+
+  // Step 1 positioning that matches the initial canvas setup exactly
+  const goToStep1 = useCallback(() => {
+    console.log('[useCanvasNavigation] goToStep1 called');
+    
+    const allNodes = getNodes();
+    console.log('[useCanvasNavigation] All available nodes:', allNodes.map(n => ({ id: n.id, type: n.type })));
+    
+    const coreNode = getNode('problem-input');
+    if (!coreNode) {
+      console.warn('[useCanvasNavigation] Core node "problem-input" not found! Trying alternative IDs...');
+      
+      // Try alternative node IDs
+      const alternativeNode = allNodes.find(node => 
+        node.id.includes('problem') || 
+        node.type === 'problem' ||
+        node.id.includes('core')
+      );
+      
+      if (alternativeNode) {
+        console.log('[useCanvasNavigation] Found alternative core node:', alternativeNode.id);
+        centerOnNode(alternativeNode.id, { padding: 100, zoom: 1.2, duration: 1000 });
+      } else {
+        console.error('[useCanvasNavigation] No core problem node found at all!');
+      }
+      return;
+    }
+    
+    console.log('[useCanvasNavigation] Core node found:', coreNode.id, 'at position:', coreNode.position);
+    
+    // Use the exact same logic as the initial canvas setup in WorkflowCanvas.tsx
+    // The problem node is positioned at -viewportWidth/3, so we reverse that calculation
+    const problemNodeX = coreNode.position.x;
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    
+    // Match the initial setup exactly:
+    // x: -problemNodeX + (window.innerWidth / 2) - 200
+    // y: (window.innerHeight / 2) - 100  
+    // zoom: 1.2
+    const targetViewport = {
+      x: -problemNodeX + (viewportWidth / 2) - 200,
+      y: (viewportHeight / 2) - 100,
+      zoom: 1.2
+    };
+    
+    console.log('[useCanvasNavigation] Step 1 calculation (matching initial setup):', {
+      problemNodeX,
+      viewportWidth,
+      viewportHeight,
+      targetViewport
+    });
+
+    // Animate to the calculated viewport
+    setViewport(targetViewport, { duration: 1000 });
+  }, [getNode, getNodes, setViewport]);
+
+  // Step 2 positioning (for both Personas and Pain Points steps)
+  const goToStep2 = useCallback(() => {
+    console.log('[useCanvasNavigation] goToStep2 called - positioning for both personas and pain points');
+    
+    const allNodes = getNodes();
+    const viewport = getEffectiveViewport();
+    const coreNode = getNode('problem-input');
+    const personaNodes = allNodes.filter(node => node.type === 'persona' && !node.id.includes('focused'));
+    const painPointNodes = allNodes.filter(node => node.type === 'painPoint');
+    
+    if (!coreNode) {
+      console.warn('[useCanvasNavigation] Core node not found for Step 2');
+      return;
+    }
+
+    console.log('[useCanvasNavigation] Step 2 nodes found:', {
+      coreNode: coreNode.id,
+      personaCount: personaNodes.length,
+      painPointCount: painPointNodes.length
+    });
+
+    // Reset any manually moved pain points to their original positions
+    if (painPointNodes.length > 0) {
+      const viewportWidth = window.innerWidth;
+      const painPointBaseX = viewportWidth * 0.45; // Updated to match WorkflowCanvas positioning
+      const painPointColumn1X = painPointBaseX - 170;
+      const painPointColumn2X = painPointBaseX + 170;
+      const painPointSpacing = 240;
+      const painPointTallestHeight = 3 * painPointSpacing;
+      const painPointStartY = -(painPointTallestHeight / 2); // Center vertically
+
+      painPointNodes.forEach((node, index) => {
+        const isFirstColumn = index < 3;
+        const columnX = isFirstColumn ? painPointColumn1X : painPointColumn2X;
+        const columnIndex = isFirstColumn ? index : index - 3;
+        const positionY = painPointStartY + (columnIndex * painPointSpacing);
+        
+        updateNode(node.id, {
+          position: {
+            x: columnX,
+            y: positionY
+          }
+        });
+      });
+    }
+
+    // Shift the view more to the left to show more of the canvas
+    const coreNodeX = coreNode.position.x;
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    
+    // Account for sidebar
+    const sidebarOffset = 256;
+    const availableWidth = viewportWidth - sidebarOffset;
+    
+    // Position CoreProblemNode on the left side of the visible area (not centered)
+    // This shifts everything to the left, making more room for personas and pain points
+    const leftPadding = 100; // Small padding from left edge
+    const targetX = sidebarOffset + leftPadding - coreNodeX;
+    const targetY = (viewportHeight / 2) - 100;
+    
+    // Use a wider zoom to show more content
+    const optimalZoom = 0.7; // Fixed zoom that shows a good amount of content
+
+    console.log('[useCanvasNavigation] Step 2 calculation (shifted left):', {
+      coreNodeX,
+      sidebarOffset,
+      availableWidth,
+      leftPadding,
+      targetX,
+      targetY,
+      optimalZoom
+    });
+
+    // Animate to the calculated viewport
+    setViewport(
+      {
+        x: targetX,
+        y: targetY,
+        zoom: optimalZoom
+      },
+      { duration: 1000 }
+    );
+  }, [getNode, getNodes, getEffectiveViewport, setViewport, updateNode]);
+
+  // Progressive reveal for multi-step workflows
+  const goToStep = useCallback((stepNumber: number) => {
+    const stepConfigs = {
+      1: { 
+        nodeIds: ['problem-input'],
+        zoom: 1.2,
+        focus: 'problem-input'
+      },
+      2: { 
+        nodeIds: ['problem-input', 'persona-1', 'persona-2', 'persona-3', 'persona-4', 'persona-5'],
+        zoom: 0.9,
+        focus: null // Let fitView handle centering
+      },
+      3: {
+        nodeIds: ['problem-input', 'persona-1', 'persona-2', 'persona-3', 'persona-4', 'persona-5', 
+                  'pain-point-1', 'pain-point-2', 'pain-point-3', 'pain-point-4', 'pain-point-5', 
+                  'pain-point-6', 'pain-point-7'],
+        zoom: 0.7,
+        focus: null // Let fitView handle centering
+      },
+      4: {
+        nodeIds: ['problem-input', 'persona-1', 'persona-2', 'persona-3', 'persona-4', 'persona-5',
+                  'pain-point-1', 'pain-point-2', 'pain-point-3', 'pain-point-4', 'pain-point-5',
+                  'pain-point-6', 'pain-point-7',
+                  'solution-1', 'solution-2', 'solution-3', 'solution-4', 'solution-5',
+                  'solution-6', 'solution-7', 'solution-8'],
+        zoom: 0.5,
+        focus: null // Let fitView handle centering
+      }
+    };
+
+    const config = stepConfigs[stepNumber as keyof typeof stepConfigs];
+    if (!config) return;
+
+    if (stepNumber === 1) {
+      goToStep1();
+      return;
+    }
+
+    // For multi-node steps, fit view to include all relevant nodes
+    const relevantNodes = getNodes().filter(node => 
+      config.nodeIds.includes(node.id)
+    );
+
+    if (relevantNodes.length === 0) return;
+
+    // Calculate bounding box of relevant nodes
+    const bounds = relevantNodes.reduce((acc, node) => {
+      const nodeWidth = node.measured?.width || node.width || 300;
+      const nodeHeight = node.measured?.height || node.height || 150;
+      
+      return {
+        minX: Math.min(acc.minX, node.position.x),
+        minY: Math.min(acc.minY, node.position.y),
+        maxX: Math.max(acc.maxX, node.position.x + nodeWidth),
+        maxY: Math.max(acc.maxY, node.position.y + nodeHeight)
+      };
+    }, {
+      minX: Infinity,
+      minY: Infinity,
+      maxX: -Infinity,
+      maxY: -Infinity
+    });
+
+    const viewport = getEffectiveViewport(false);
+    const padding = Math.max(100, viewport.width * 0.1);
+
+    // Use React Flow's fitView with calculated bounds
+    fitView({
+      nodes: relevantNodes,
+      padding,
+      duration: 1200, // Slightly longer for smoother transition
+      maxZoom: config.zoom,
+      minZoom: config.zoom * 0.8 // Prevent over-zooming out
+    });
+  }, [goToStep1, getNodes, getEffectiveViewport, fitView]);
+
+  // Responsive canvas setup that adapts to window resize
+  const setupResponsiveCanvas = useCallback(() => {
+    const updateViewport = () => {
+      const newViewport = getEffectiveViewport(false);
+      viewportRef.current = newViewport;
+    };
+
+    updateViewport();
+    window.addEventListener('resize', updateViewport);
+    
+    return () => window.removeEventListener('resize', updateViewport);
+  }, [getEffectiveViewport]);
+
+  // Get optimal positioning for new nodes based on current viewport
+  const getOptimalNodePosition = useCallback((
+    nodeType: 'persona' | 'painPoint' | 'solution',
+    index: number = 0
+  ) => {
+    const viewport = getEffectiveViewport(false);
+    const currentViewport = getViewport();
+
+    // Calculate visible area center in flow coordinates
+    const visibleCenterX = (-currentViewport.x + viewport.width / 2) / currentViewport.zoom;
+    const visibleCenterY = (-currentViewport.y + viewport.height / 2) / currentViewport.zoom;
+
+    // Position strategies for different node types
+    const strategies = {
+      persona: {
+        x: visibleCenterX + 400 + (index * 50), // Stagger to the right
+        y: visibleCenterY - 200 + (index * 180)  // Vertical distribution
+      },
+      painPoint: {
+        x: visibleCenterX + 800 + (index * 30),
+        y: visibleCenterY - 150 + (index * 160)
+      },
+      solution: {
+        x: visibleCenterX + 1200 + (index * 40),
+        y: visibleCenterY - 100 + (index * 140)
+      }
+    };
+
+    return strategies[nodeType];
+  }, [getEffectiveViewport, getViewport]);
+
+  return {
+    centerOnNode,
+    goToStep1,
+    goToStep2,
+    goToStep,
+    setupResponsiveCanvas,
+    getOptimalNodePosition,
+    getEffectiveViewport
+  };
+}; 
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/useDemoAnimation.ts
+```ts
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { Node, Edge, useReactFlow } from 'reactflow';
+import { AnimationSequence } from '../components/DemoCanvas/AnimationSequence';
+
+export interface DemoAnimationState {
+  isPlaying: boolean;
+  isPaused: boolean;
+  currentPhase: string;
+  progress: number;
+  loopCount: number;
+}
+
+export function useDemoAnimation() {
+  const { setNodes, setEdges, fitView } = useReactFlow();
+  const [animationState, setAnimationState] = useState<DemoAnimationState>({
+    isPlaying: false,
+    isPaused: false,
+    currentPhase: 'idle',
+    progress: 0,
+    loopCount: 0,
+  });
+  
+  const sequenceRef = useRef<AnimationSequence | null>(null);
+  const nodesRef = useRef<Node[]>([]);
+  const edgesRef = useRef<Edge[]>([]);
+  
+  // Store nodes and edges for reset
+  const storeState = useCallback((nodes: Node[], edges: Edge[]) => {
+    nodesRef.current = nodes;
+    edgesRef.current = edges;
+  }, []);
+  
+  // Reset canvas to initial state
+  const resetCanvas = useCallback(() => {
+    setNodes([]);
+    setEdges([]);
+    setAnimationState(prev => ({
+      ...prev,
+      currentPhase: 'idle',
+      progress: 0,
+    }));
+  }, [setNodes, setEdges]);
+  
+  // Smooth camera pan
+  const panToNodes = useCallback((nodeIds: string[], duration: number = 800) => {
+    setTimeout(() => {
+      const nodes = nodesRef.current.filter(n => nodeIds.includes(n.id));
+      if (nodes.length > 0) {
+        fitView({
+          nodes,
+          padding: 0.2,
+          duration,
+        });
+      }
+    }, 100);
+  }, [fitView]);
+  
+  // Add breathing animation to nodes
+  const addBreathingAnimation = useCallback((nodeIds: string[]) => {
+    setNodes(nodes => 
+      nodes.map(node => {
+        if (nodeIds.includes(node.id)) {
+          return {
+            ...node,
+            data: {
+              ...node.data,
+              isBreathing: true,
+            },
+          };
+        }
+        return node;
+      })
+    );
+  }, [setNodes]);
+  
+  // Add particle effect to edge
+  const addEdgeParticles = useCallback((edgeId: string) => {
+    setEdges(edges => 
+      edges.map(edge => {
+        if (edge.id === edgeId) {
+          return {
+            ...edge,
+            animated: true,
+            style: {
+              ...edge.style,
+              strokeDasharray: '5 5',
+            },
+          };
+        }
+        return edge;
+      })
+    );
+  }, [setEdges]);
+  
+  // Control methods
+  const play = useCallback(() => {
+    if (!sequenceRef.current) {
+      sequenceRef.current = new AnimationSequence();
+    }
+    
+    sequenceRef.current.start();
+    setAnimationState(prev => ({
+      ...prev,
+      isPlaying: true,
+      isPaused: false,
+    }));
+  }, []);
+  
+  const pause = useCallback(() => {
+    sequenceRef.current?.pause();
+    setAnimationState(prev => ({
+      ...prev,
+      isPaused: true,
+    }));
+  }, []);
+  
+  const resume = useCallback(() => {
+    sequenceRef.current?.resume();
+    setAnimationState(prev => ({
+      ...prev,
+      isPaused: false,
+    }));
+  }, []);
+  
+  const stop = useCallback(() => {
+    sequenceRef.current?.stop();
+    resetCanvas();
+    setAnimationState({
+      isPlaying: false,
+      isPaused: false,
+      currentPhase: 'idle',
+      progress: 0,
+      loopCount: 0,
+    });
+  }, [resetCanvas]);
+  
+  // Update animation state
+  useEffect(() => {
+    if (!animationState.isPlaying) return;
+    
+    const updateInterval = setInterval(() => {
+      if (sequenceRef.current) {
+        const progress = sequenceRef.current.getProgress();
+        const phase = sequenceRef.current.getCurrentPhase();
+        
+        setAnimationState(prev => ({
+          ...prev,
+          currentPhase: phase,
+          progress,
+        }));
+      }
+    }, 100);
+    
+    return () => clearInterval(updateInterval);
+  }, [animationState.isPlaying]);
+  
+  return {
+    animationState,
+    play,
+    pause,
+    resume,
+    stop,
+    panToNodes,
+    addBreathingAnimation,
+    addEdgeParticles,
+    storeState,
+  };
+}
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/useDocumentExport.ts
+```ts
+import { useCallback } from 'react';
+import { 
+  DocumentMetadata, 
+  formatMarkdownForExport, 
+  generatePdfHtml, 
+  getDocumentFilename 
+} from '../utils/documentFormatters';
+
+export interface ExportOptions {
+  format: 'markdown' | 'pdf' | 'html';
+  content: string;
+  metadata: DocumentMetadata;
+}
+
+export function useDocumentExport() {
+  const exportDocument = useCallback(async (options: ExportOptions) => {
+    const { format, content, metadata } = options;
+    const filename = getDocumentFilename(metadata);
+
+    switch (format) {
+      case 'markdown':
+        await exportAsMarkdown(content, metadata, filename);
+        break;
+      case 'pdf':
+        await exportAsPdf(content, metadata, filename);
+        break;
+      case 'html':
+        await exportAsHtml(content, metadata, filename);
+        break;
+    }
+  }, []);
+
+  const exportAllDocuments = useCallback(async (
+    documents: Array<{ content: string; metadata: DocumentMetadata }>,
+    format: 'markdown' | 'pdf' | 'html'
+  ) => {
+    // Create a zip file with all documents
+    // In production, use a proper zip library
+    for (const doc of documents) {
+      await exportDocument({ format, content: doc.content, metadata: doc.metadata });
+    }
+  }, [exportDocument]);
+
+  const copyToClipboard = useCallback(async (content: string) => {
+    try {
+      await navigator.clipboard.writeText(content);
+      return true;
+    } catch (error) {
+      console.error('Failed to copy to clipboard:', error);
+      return false;
+    }
+  }, []);
+
+  return {
+    exportDocument,
+    exportAllDocuments,
+    copyToClipboard,
+  };
+}
+
+async function exportAsMarkdown(content: string, metadata: DocumentMetadata, filename: string) {
+  const formattedContent = formatMarkdownForExport(content, metadata);
+  const blob = new Blob([formattedContent], { type: 'text/markdown' });
+  downloadFile(blob, filename.replace(/\.[^.]+$/, '.md'));
+}
+
+async function exportAsPdf(content: string, metadata: DocumentMetadata, filename: string) {
+  const html = generatePdfHtml(content, metadata);
+  
+  // In production, use a proper PDF generation service
+  // For now, we'll open the HTML in a new window for printing
+  const printWindow = window.open('', '_blank');
+  if (printWindow) {
+    printWindow.document.write(html);
+    printWindow.document.close();
+    printWindow.print();
+  }
+}
+
+async function exportAsHtml(content: string, metadata: DocumentMetadata, filename: string) {
+  const html = generatePdfHtml(content, metadata);
+  const blob = new Blob([html], { type: 'text/html' });
+  downloadFile(blob, filename.replace(/\.[^.]+$/, '.html'));
+}
+
+function downloadFile(blob: Blob, filename: string) {
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/useDocumentGeneration.ts
+```ts
+import { useState, useCallback } from 'react';
+import { useCanvasStore } from '../stores/canvasStore';
+import { useProjectStore } from '../stores/projectStore';
+import { DocumentMetadata } from '../utils/documentFormatters';
+
+export type DocumentType = DocumentMetadata['type'];
+
+export interface DocumentGenerationOptions {
+  type: DocumentType;
+  projectId: string;
+  regenerate?: boolean;
+}
+
+export interface DocumentGenerationResult {
+  content: string;
+  metadata: DocumentMetadata;
+  error?: string;
+}
+
+export function useDocumentGeneration() {
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [progress, setProgress] = useState<Record<DocumentType, 'pending' | 'generating' | 'complete' | 'error'>>({
+    'product-vision': 'pending',
+    'functional-requirements': 'pending',
+    'system-architecture': 'pending',
+    'data-flow': 'pending',
+    'design-system': 'pending',
+    'database-schema': 'pending',
+  });
+
+  const canvasNodes = useCanvasStore((state) => state.nodes);
+  const currentProject = useProjectStore((state) => state.currentProject);
+
+  const generateDocument = useCallback(async (options: DocumentGenerationOptions): Promise<DocumentGenerationResult | null> => {
+    const { type, projectId, regenerate = false } = options;
+
+    setIsGenerating(true);
+    setProgress((prev) => ({ ...prev, [type]: 'generating' }));
+
+    try {
+      // Simulate API call to generate document
+      // In production, this would call the actual Supabase Edge Function
+      await new Promise((resolve) => setTimeout(resolve, 2000 + Math.random() * 3000));
+
+      // Mock document content based on type
+      const mockContent = getMockDocumentContent(type);
+      
+      const metadata: DocumentMetadata = {
+        title: getDocumentTitle(type),
+        type,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        version: '1.0.0',
+      };
+
+      setProgress((prev) => ({ ...prev, [type]: 'complete' }));
+
+      return {
+        content: mockContent,
+        metadata,
+      };
+    } catch (error) {
+      setProgress((prev) => ({ ...prev, [type]: 'error' }));
+      return {
+        content: '',
+        metadata: {
+          title: getDocumentTitle(type),
+          type,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          version: '1.0.0',
+        },
+        error: error instanceof Error ? error.message : 'Unknown error occurred',
+      };
+    } finally {
+      setIsGenerating(false);
+    }
+  }, []);
+
+  const generateAllDocuments = useCallback(async (projectId: string) => {
+    const documentTypes: DocumentType[] = [
+      'product-vision',
+      'functional-requirements',
+      'system-architecture',
+      'data-flow',
+      'design-system',
+      'database-schema',
+    ];
+
+    const results: Record<DocumentType, DocumentGenerationResult | null> = {} as any;
+
+    // Generate product vision first (no dependencies)
+    results['product-vision'] = await generateDocument({ type: 'product-vision', projectId });
+
+    // Generate functional requirements (depends on product vision)
+    if (results['product-vision'] && !results['product-vision'].error) {
+      results['functional-requirements'] = await generateDocument({ type: 'functional-requirements', projectId });
+    }
+
+    // Generate system architecture and design system in parallel (depend on functional requirements)
+    if (results['functional-requirements'] && !results['functional-requirements'].error) {
+      const [architecture, designSystem] = await Promise.all([
+        generateDocument({ type: 'system-architecture', projectId }),
+        generateDocument({ type: 'design-system', projectId }),
+      ]);
+      results['system-architecture'] = architecture;
+      results['design-system'] = designSystem;
+    }
+
+    // Generate data flow and database schema (depend on system architecture)
+    if (results['system-architecture'] && !results['system-architecture'].error) {
+      const [dataFlow, dbSchema] = await Promise.all([
+        generateDocument({ type: 'data-flow', projectId }),
+        generateDocument({ type: 'database-schema', projectId }),
+      ]);
+      results['data-flow'] = dataFlow;
+      results['database-schema'] = dbSchema;
+    }
+
+    return results;
+  }, [generateDocument]);
+
+  return {
+    generateDocument,
+    generateAllDocuments,
+    isGenerating,
+    progress,
+  };
+}
+
+function getDocumentTitle(type: DocumentType): string {
+  const titles: Record<DocumentType, string> = {
+    'product-vision': 'Product Vision Document',
+    'functional-requirements': 'Functional Requirements',
+    'system-architecture': 'System Architecture',
+    'data-flow': 'Data Flow Diagram',
+    'design-system': 'Design System',
+    'database-schema': 'Database Schema',
+  };
+  return titles[type];
+}
+
+function getMockDocumentContent(type: DocumentType): string {
+  const contents: Record<DocumentType, string> = {
+    'product-vision': `# Product Vision Document
+
+## Executive Summary
+
+This document outlines the vision for our next-generation CRM system designed specifically for modern sales teams.
+
+## Core Value Proposition
+
+**For**: Sales teams struggling with data entry and follow-ups
+**Our product**: Provides an intelligent CRM that automates routine tasks
+**Unlike**: Traditional CRMs that require manual data entry
+**Our solution**: Uses AI to capture interactions and suggest next actions
+
+## Key Features
+
+### 1. Unified Dashboard
+- Real-time activity tracking
+- Customizable widgets
+- Mobile-responsive design
+
+### 2. Intelligent Data Capture
+- Automatic email and call logging
+- Meeting notes transcription
+- Contact enrichment
+
+### 3. Smart Follow-ups
+- AI-powered next action suggestions
+- Automated reminder system
+- Personalized outreach templates
+
+## Success Metrics
+- 50% reduction in manual data entry
+- 30% increase in follow-up completion rate
+- 25% improvement in deal velocity`,
+
+    'functional-requirements': `# Functional Requirements
+
+## 1. User Management
+
+### 1.1 Authentication
+- Email/password login
+- SSO integration (Google, Microsoft)
+- Two-factor authentication
+- Password reset functionality
+
+### 1.2 User Roles
+- Admin: Full system access
+- Manager: Team oversight and reporting
+- Sales Rep: Individual pipeline management
+- Read-only: View access for stakeholders
+
+## 2. Contact Management
+
+### 2.1 Contact Records
+- Basic information (name, email, phone)
+- Company association
+- Interaction history
+- Custom fields support
+
+### 2.2 Company Records
+- Company details and hierarchy
+- Associated contacts
+- Deal history
+- Revenue tracking
+
+## 3. Pipeline Management
+
+### 3.1 Deal Stages
+- Customizable pipeline stages
+- Drag-and-drop interface
+- Stage probability settings
+- Automated stage transitions
+
+### 3.2 Deal Tracking
+- Deal value and products
+- Close date forecasting
+- Activity requirements per stage
+- Win/loss analysis`,
+
+    'system-architecture': `# System Architecture
+
+## Overview
+
+The CRM system follows a modern microservices architecture with a React frontend and Node.js backend services.
+
+## Architecture Layers
+
+### 1. Presentation Layer
+- **Frontend**: React + TypeScript
+- **State Management**: Redux Toolkit
+- **UI Framework**: Material-UI
+- **Real-time**: WebSocket connections
+
+### 2. API Gateway
+- **Technology**: Express.js + GraphQL
+- **Authentication**: JWT tokens
+- **Rate Limiting**: Redis-based
+- **API Documentation**: GraphQL Playground
+
+### 3. Microservices
+- **User Service**: Authentication and authorization
+- **Contact Service**: Contact and company management
+- **Pipeline Service**: Deal and pipeline operations
+- **Analytics Service**: Reporting and insights
+- **Notification Service**: Email and in-app notifications
+
+### 4. Data Layer
+- **Primary Database**: PostgreSQL
+- **Cache**: Redis
+- **Search**: Elasticsearch
+- **File Storage**: AWS S3
+
+## Deployment Architecture
+
+\`\`\`yaml
+production:
+  frontend:
+    - Load Balancer (AWS ALB)
+    - React App (S3 + CloudFront)
+  
+  backend:
+    - API Gateway (ECS Fargate)
+    - Microservices (ECS Fargate)
+    - Database (RDS PostgreSQL)
+    - Cache (ElastiCache Redis)
+\`\`\``,
+
+    'data-flow': `# Data Flow Diagram
+
+## User Authentication Flow
+
+\`\`\`mermaid
+graph TD
+    A[User] -->|Login Request| B[Frontend]
+    B -->|Credentials| C[API Gateway]
+    C -->|Validate| D[Auth Service]
+    D -->|Query| E[User Database]
+    E -->|User Data| D
+    D -->|Generate Token| F[JWT Service]
+    F -->|Token| C
+    C -->|Auth Response| B
+    B -->|Store Token| G[Local Storage]
+\`\`\`
+
+## Contact Creation Flow
+
+\`\`\`mermaid
+graph TD
+    A[Sales Rep] -->|New Contact| B[Frontend Form]
+    B -->|Validate| C[Form Validation]
+    C -->|Submit| D[API Gateway]
+    D -->|Create Contact| E[Contact Service]
+    E -->|Enrich Data| F[Enrichment API]
+    F -->|Enhanced Data| E
+    E -->|Store| G[PostgreSQL]
+    E -->|Index| H[Elasticsearch]
+    E -->|Notify| I[Notification Service]
+    I -->|Email| J[Email Service]
+\`\`\`
+
+## Real-time Activity Sync
+
+\`\`\`mermaid
+graph TD
+    A[User Activity] -->|WebSocket| B[Socket Server]
+    B -->|Publish| C[Redis Pub/Sub]
+    C -->|Subscribe| D[Other Clients]
+    C -->|Log| E[Activity Service]
+    E -->|Store| F[Activity Log DB]
+\`\`\``,
+
+    'design-system': `# Design System
+
+## Color Palette
+
+### Primary Colors
+\`\`\`css
+--color-primary-500: #3B82F6;  /* Main Blue */
+--color-primary-600: #2563EB;  /* Hover Blue */
+--color-primary-700: #1D4ED8;  /* Active Blue */
+\`\`\`
+
+### Semantic Colors
+\`\`\`css
+--color-success: #10B981;
+--color-warning: #F59E0B;
+--color-error: #EF4444;
+--color-info: #3B82F6;
+\`\`\`
+
+## Typography
+
+### Font Stack
+\`\`\`css
+--font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+--font-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+\`\`\`
+
+### Font Sizes
+\`\`\`css
+--text-xs: 0.75rem;    /* 12px */
+--text-sm: 0.875rem;   /* 14px */
+--text-base: 1rem;     /* 16px */
+--text-lg: 1.125rem;   /* 18px */
+--text-xl: 1.25rem;    /* 20px */
+--text-2xl: 1.5rem;    /* 24px */
+\`\`\`
+
+## Components
+
+### Button Component
+\`\`\`tsx
+interface ButtonProps {
+  variant: 'primary' | 'secondary' | 'danger';
+  size: 'sm' | 'md' | 'lg';
+  disabled?: boolean;
+  loading?: boolean;
+}
+
+const Button: React.FC<ButtonProps> = ({ 
+  variant, 
+  size, 
+  children,
+  ...props 
+}) => {
+  return (
+    <button className={cx(
+      'btn',
+      \`btn--\${variant}\`,
+      \`btn--\${size}\`
+    )} {...props}>
+      {children}
+    </button>
+  );
+};
+\`\`\`
+
+### Card Component
+\`\`\`css
+.card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  transition: all 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+\`\`\``,
+
+    'database-schema': `-- Database Schema for CRM System
+
+-- Users table
+CREATE TABLE users (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    role VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Companies table
+CREATE TABLE companies (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    domain VARCHAR(255),
+    industry VARCHAR(100),
+    size VARCHAR(50),
+    revenue DECIMAL(15, 2),
+    created_by UUID REFERENCES users(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Contacts table
+CREATE TABLE contacts (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(255),
+    phone VARCHAR(50),
+    title VARCHAR(100),
+    company_id UUID REFERENCES companies(id),
+    owner_id UUID REFERENCES users(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Deals table
+CREATE TABLE deals (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    value DECIMAL(15, 2),
+    stage VARCHAR(100) NOT NULL,
+    probability INTEGER,
+    expected_close_date DATE,
+    company_id UUID REFERENCES companies(id),
+    contact_id UUID REFERENCES contacts(id),
+    owner_id UUID REFERENCES users(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Activities table
+CREATE TABLE activities (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    type VARCHAR(50) NOT NULL,
+    subject VARCHAR(255),
+    description TEXT,
+    due_date TIMESTAMP,
+    completed BOOLEAN DEFAULT FALSE,
+    deal_id UUID REFERENCES deals(id),
+    contact_id UUID REFERENCES contacts(id),
+    owner_id UUID REFERENCES users(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Indexes for performance
+CREATE INDEX idx_contacts_company ON contacts(company_id);
+CREATE INDEX idx_deals_owner ON deals(owner_id);
+CREATE INDEX idx_activities_due_date ON activities(due_date);
+CREATE INDEX idx_activities_deal ON activities(deal_id);`,
+  };
+
+  return contents[type];
+}
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/useExport.ts
+```ts
+import { useState, useCallback } from 'react';
+import { invoke } from '@tauri-apps/api/core';
+import type { ExportOptions, ExportHistory } from '../types/export.types';
+import { markdownExporter } from '../utils/exportGenerators/markdownExporter';
+import { jsonExporter } from '../utils/exportGenerators/jsonExporter';
+import { pdfExporter } from '../utils/exportGenerators/pdfExporter';
+import { zipExporter } from '../utils/exportGenerators/zipExporter';
+
+export const useExport = () => {
+  const [isExporting, setIsExporting] = useState(false);
+  const [exportHistory, setExportHistory] = useState<ExportHistory[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+  const exportProject = useCallback(async (
+    projectId: string,
+    projectName: string,
+    options: ExportOptions
+  ) => {
+    setIsExporting(true);
+    setError(null);
+
+    try {
+      // Get project data from the backend
+      const projectData = await invoke('get_project_export_data', { projectId });
+      
+      let exportResult;
+      
+      // Use the appropriate exporter based on format
+      switch (options.format) {
+        case 'markdown':
+          exportResult = await markdownExporter(projectData, options);
+          break;
+        case 'json':
+          exportResult = await jsonExporter(projectData, options);
+          break;
+        case 'pdf':
+          exportResult = await pdfExporter(projectData, options);
+          break;
+        case 'zip':
+          exportResult = await zipExporter(projectData, options);
+          break;
+        default:
+          throw new Error(`Unsupported export format: ${options.format}`);
+      }
+
+      // Save the export file
+      const timestamp = new Date().toISOString();
+      const fileName = `${projectName}-${options.format}-${Date.now()}`;
+      
+      await invoke('save_export_file', {
+        fileName,
+        content: exportResult.content,
+        format: options.format
+      });
+
+      // Add to history
+      const historyEntry: ExportHistory = {
+        id: crypto.randomUUID(),
+        projectId,
+        format: options.format,
+        template: options.template,
+        timestamp,
+        fileSize: exportResult.size
+      };
+
+      setExportHistory(prev => [historyEntry, ...prev]);
+      
+      return exportResult;
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Export failed';
+      setError(errorMessage);
+      throw new Error(errorMessage);
+    } finally {
+      setIsExporting(false);
+    }
+  }, []);
+
+  const downloadExport = useCallback(async (historyId: string) => {
+    const entry = exportHistory.find(h => h.id === historyId);
+    if (!entry) {
+      throw new Error('Export not found in history');
+    }
+
+    try {
+      await invoke('download_export', { historyId });
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Download failed';
+      setError(errorMessage);
+      throw new Error(errorMessage);
+    }
+  }, [exportHistory]);
+
+  return {
+    exportProject,
+    downloadExport,
+    isExporting,
+    exportHistory,
+    error
+  };
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/useFPSMonitor.ts
+```ts
+import { useEffect, useRef, useCallback } from 'react';
+
+interface FPSMonitorOptions {
+  targetFPS?: number;
+  sampleSize?: number;
+  onFPSDrop?: (fps: number) => void;
+  onFPSRecover?: (fps: number) => void;
+}
+
+export const useFPSMonitor = (
+  enabled: boolean = false,
+  options: FPSMonitorOptions = {}
+) => {
+  const {
+    targetFPS = 60,
+    sampleSize = 30,
+    onFPSDrop,
+    onFPSRecover,
+  } = options;
+
+  const frameTimesRef = useRef<number[]>([]);
+  const lastFrameTimeRef = useRef<number>(0);
+  const animationFrameRef = useRef<number>();
+  const fpsRef = useRef<number>(targetFPS);
+  const wasDroppedRef = useRef<boolean>(false);
+
+  const calculateFPS = useCallback(() => {
+    const frameTimes = frameTimesRef.current;
+    if (frameTimes.length < 2) return targetFPS;
+
+    // Calculate average frame time
+    let totalDelta = 0;
+    for (let i = 1; i < frameTimes.length; i++) {
+      totalDelta += frameTimes[i] - frameTimes[i - 1];
+    }
+    const averageDelta = totalDelta / (frameTimes.length - 1);
+    
+    // Convert to FPS
+    return 1000 / averageDelta;
+  }, [targetFPS]);
+
+  const measureFrame = useCallback((timestamp: number) => {
+    if (!enabled) return;
+
+    // Initialize on first frame
+    if (lastFrameTimeRef.current === 0) {
+      lastFrameTimeRef.current = timestamp;
+      animationFrameRef.current = requestAnimationFrame(measureFrame);
+      return;
+    }
+
+    // Add timestamp to buffer
+    frameTimesRef.current.push(timestamp);
+    
+    // Keep only recent samples
+    if (frameTimesRef.current.length > sampleSize) {
+      frameTimesRef.current.shift();
+    }
+
+    // Calculate FPS
+    const currentFPS = calculateFPS();
+    fpsRef.current = currentFPS;
+
+    // Detect FPS drops and recoveries
+    const isDropped = currentFPS < targetFPS * 0.8; // 80% of target
+    
+    if (isDropped && !wasDroppedRef.current) {
+      wasDroppedRef.current = true;
+      onFPSDrop?.(currentFPS);
+    } else if (!isDropped && wasDroppedRef.current) {
+      wasDroppedRef.current = false;
+      onFPSRecover?.(currentFPS);
+    }
+
+    lastFrameTimeRef.current = timestamp;
+    animationFrameRef.current = requestAnimationFrame(measureFrame);
+  }, [enabled, sampleSize, calculateFPS, targetFPS, onFPSDrop, onFPSRecover]);
+
+  // Get current FPS
+  const getFPS = useCallback(() => {
+    return Math.round(fpsRef.current);
+  }, []);
+
+  // Get frame time statistics
+  const getFrameStats = useCallback(() => {
+    const frameTimes = frameTimesRef.current;
+    if (frameTimes.length < 2) {
+      return {
+        averageFrameTime: 16.67, // 60 FPS
+        minFrameTime: 16.67,
+        maxFrameTime: 16.67,
+        variance: 0,
+      };
+    }
+
+    const deltas: number[] = [];
+    for (let i = 1; i < frameTimes.length; i++) {
+      deltas.push(frameTimes[i] - frameTimes[i - 1]);
+    }
+
+    const avgDelta = deltas.reduce((a, b) => a + b, 0) / deltas.length;
+    const minDelta = Math.min(...deltas);
+    const maxDelta = Math.max(...deltas);
+    
+    // Calculate variance
+    const variance = deltas.reduce((acc, delta) => {
+      return acc + Math.pow(delta - avgDelta, 2);
+    }, 0) / deltas.length;
+
+    return {
+      averageFrameTime: avgDelta,
+      minFrameTime: minDelta,
+      maxFrameTime: maxDelta,
+      variance: Math.sqrt(variance),
+    };
+  }, []);
+
+  // Reset monitor
+  const reset = useCallback(() => {
+    frameTimesRef.current = [];
+    lastFrameTimeRef.current = 0;
+    fpsRef.current = targetFPS;
+    wasDroppedRef.current = false;
+  }, [targetFPS]);
+
+  // Setup and cleanup
+  useEffect(() => {
+    if (enabled) {
+      reset();
+      animationFrameRef.current = requestAnimationFrame(measureFrame);
+    }
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [enabled, measureFrame, reset]);
+
+  return {
+    getFPS,
+    getFrameStats,
+    reset,
+  };
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/useKeyboardNavigation.ts
+```ts
+import { useEffect, useCallback, useState, useRef } from 'react';
+
+interface UseKeyboardNavigationOptions {
+  items: any[];
+  onSelect: (item: any, index: number) => void;
+  onOpen?: (item: any, index: number) => void;
+  onDelete?: (item: any, index: number) => void;
+  onMultiSelect?: (indices: number[]) => void;
+  isEnabled?: boolean;
+  wrap?: boolean;
+}
+
+export const useKeyboardNavigation = ({
+  items,
+  onSelect,
+  onOpen,
+  onDelete,
+  onMultiSelect,
+  isEnabled = true,
+  wrap = true,
+}: UseKeyboardNavigationOptions) => {
+  const [focusedIndex, setFocusedIndex] = useState(-1);
+  const [selectedIndices, setSelectedIndices] = useState<Set<number>>(new Set());
+  const lastSelectedIndex = useRef<number>(-1);
+
+  // Navigate up
+  const navigateUp = useCallback(() => {
+    setFocusedIndex(prev => {
+      if (prev <= 0) {
+        return wrap ? items.length - 1 : 0;
+      }
+      return prev - 1;
+    });
+  }, [items.length, wrap]);
+
+  // Navigate down
+  const navigateDown = useCallback(() => {
+    setFocusedIndex(prev => {
+      if (prev >= items.length - 1) {
+        return wrap ? 0 : items.length - 1;
+      }
+      return prev + 1;
+    });
+  }, [items.length, wrap]);
+
+  // Select current item
+  const selectCurrent = useCallback(() => {
+    if (focusedIndex >= 0 && focusedIndex < items.length) {
+      onSelect(items[focusedIndex], focusedIndex);
+      lastSelectedIndex.current = focusedIndex;
+    }
+  }, [focusedIndex, items, onSelect]);
+
+  // Open current item
+  const openCurrent = useCallback(() => {
+    if (focusedIndex >= 0 && focusedIndex < items.length && onOpen) {
+      onOpen(items[focusedIndex], focusedIndex);
+    }
+  }, [focusedIndex, items, onOpen]);
+
+  // Toggle selection for multi-select
+  const toggleSelection = useCallback((index: number) => {
+    setSelectedIndices(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(index)) {
+        newSet.delete(index);
+      } else {
+        newSet.add(index);
+      }
+      return newSet;
+    });
+  }, []);
+
+  // Select range (Shift+Click behavior)
+  const selectRange = useCallback((endIndex: number) => {
+    const startIndex = lastSelectedIndex.current;
+    if (startIndex === -1) {
+      toggleSelection(endIndex);
+      return;
+    }
+
+    const start = Math.min(startIndex, endIndex);
+    const end = Math.max(startIndex, endIndex);
+
+    setSelectedIndices(prev => {
+      const newSet = new Set(prev);
+      for (let i = start; i <= end; i++) {
+        newSet.add(i);
+      }
+      return newSet;
+    });
+  }, [toggleSelection]);
+
+  // Select all
+  const selectAll = useCallback(() => {
+    const allIndices = new Set(Array.from({ length: items.length }, (_, i) => i));
+    setSelectedIndices(allIndices);
+    onMultiSelect?.(Array.from(allIndices));
+  }, [items.length, onMultiSelect]);
+
+  // Clear selection
+  const clearSelection = useCallback(() => {
+    setSelectedIndices(new Set());
+    setFocusedIndex(-1);
+    lastSelectedIndex.current = -1;
+  }, []);
+
+  // Delete selected items
+  const deleteSelected = useCallback(() => {
+    if (selectedIndices.size > 0 && onDelete) {
+      const indices = Array.from(selectedIndices).sort((a, b) => b - a);
+      indices.forEach(index => {
+        if (index < items.length) {
+          onDelete(items[index], index);
+        }
+      });
+      clearSelection();
+    } else if (focusedIndex >= 0 && focusedIndex < items.length && onDelete) {
+      onDelete(items[focusedIndex], focusedIndex);
+    }
+  }, [selectedIndices, focusedIndex, items, onDelete, clearSelection]);
+
+  // Keyboard event handler
+  useEffect(() => {
+    if (!isEnabled) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't interfere with input fields
+      if (
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement
+      ) {
+        return;
+      }
+
+      switch (e.key) {
+        case 'ArrowUp':
+          e.preventDefault();
+          navigateUp();
+          break;
+
+        case 'ArrowDown':
+          e.preventDefault();
+          navigateDown();
+          break;
+
+        case 'Enter':
+          e.preventDefault();
+          if (e.metaKey || e.ctrlKey) {
+            openCurrent();
+          } else {
+            selectCurrent();
+          }
+          break;
+
+        case ' ':
+          e.preventDefault();
+          if (focusedIndex >= 0) {
+            toggleSelection(focusedIndex);
+          }
+          break;
+
+        case 'a':
+          if (e.metaKey || e.ctrlKey) {
+            e.preventDefault();
+            selectAll();
+          }
+          break;
+
+        case 'Escape':
+          e.preventDefault();
+          clearSelection();
+          break;
+
+        case 'Delete':
+        case 'Backspace':
+          if (e.metaKey || e.ctrlKey) {
+            e.preventDefault();
+            deleteSelected();
+          }
+          break;
+
+        case 'Tab':
+          e.preventDefault();
+          if (e.shiftKey) {
+            navigateUp();
+          } else {
+            navigateDown();
+          }
+          break;
+      }
+
+      // Shift selection
+      if (e.shiftKey && focusedIndex >= 0) {
+        if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+          selectRange(focusedIndex);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [
+    isEnabled,
+    navigateUp,
+    navigateDown,
+    selectCurrent,
+    openCurrent,
+    toggleSelection,
+    selectAll,
+    clearSelection,
+    deleteSelected,
+    selectRange,
+    focusedIndex,
+  ]);
+
+  // Reset focus when items change
+  useEffect(() => {
+    if (focusedIndex >= items.length) {
+      setFocusedIndex(items.length - 1);
+    }
+  }, [items.length, focusedIndex]);
+
+  return {
+    focusedIndex,
+    setFocusedIndex,
+    selectedIndices: Array.from(selectedIndices),
+    isSelected: (index: number) => selectedIndices.has(index),
+    toggleSelection,
+    selectRange,
+    selectAll,
+    clearSelection,
+    navigateUp,
+    navigateDown,
+  };
+};
+```
+
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/useKeyboardShortcuts.ts
 ```ts
 import { useEffect } from 'react';
@@ -4390,6 +17852,2175 @@ export function useKeyboardShortcuts() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 }
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/useLockManagement.ts
+```ts
+import { useCallback, useEffect } from 'react';
+import { useLockStore } from '../stores/lockStore';
+import { useVersionStore } from '../stores/versionStore';
+import { useAuth } from './useAuth';
+import { supabase } from '../services/supabase/client';
+
+export const useLockManagement = () => {
+  const { user } = useAuth();
+  const {
+    lockedItems,
+    lockItem,
+    unlockItem,
+    toggleLock,
+    bulkLock,
+    bulkUnlock,
+    isLocked,
+    getLockedCount,
+    getLockedItemsByType,
+    clearExpiredLocks,
+    syncWithDatabase,
+  } = useLockStore();
+  
+  const { addEvent } = useVersionStore();
+  
+  // Sync locks with database on mount
+  useEffect(() => {
+    const fetchLocks = async () => {
+      if (!user) return;
+      
+      const { data, error } = await supabase
+        .from('lock_management')
+        .select('*')
+        .eq('locked_by', user.id)
+        .gte('expires_at', new Date().toISOString());
+      
+      if (!error && data) {
+        syncWithDatabase(data.map(lock => ({
+          nodeId: lock.item_id,
+          nodeType: lock.item_type,
+          lockedAt: lock.locked_at,
+          lockedBy: lock.locked_by,
+          expiresAt: lock.expires_at,
+        })));
+      }
+    };
+    
+    fetchLocks();
+    
+    // Clear expired locks periodically
+    const interval = setInterval(() => {
+      clearExpiredLocks();
+    }, 60000); // Check every minute
+    
+    return () => clearInterval(interval);
+  }, [user, syncWithDatabase, clearExpiredLocks]);
+  
+  // Lock item with database sync
+  const lockItemWithSync = useCallback(async (nodeId: string, nodeType: string) => {
+    if (!user) return;
+    
+    // Optimistic update
+    lockItem(nodeId, nodeType, user.id);
+    
+    // Track in version history
+    addEvent({
+      projectId: 'current', // TODO: Get actual project ID
+      eventType: 'lock_toggled',
+      eventData: {
+        afterState: { isLocked: true },
+        metadata: {
+          triggeredBy: 'user_action',
+          nodeId,
+          nodeType,
+          description: `Locked ${nodeType} ${nodeId}`,
+        },
+      },
+    });
+    
+    // Sync with database
+    try {
+      const expiresAt = new Date();
+      expiresAt.setHours(expiresAt.getHours() + 24);
+      
+      await supabase.from('lock_management').insert({
+        item_id: nodeId,
+        item_type: nodeType,
+        locked_by: user.id,
+        locked_at: new Date().toISOString(),
+        expires_at: expiresAt.toISOString(),
+        project_id: 'current', // TODO: Get actual project ID
+      });
+    } catch (error) {
+      console.error('Failed to sync lock to database:', error);
+      // Rollback on error
+      unlockItem(nodeId);
+    }
+  }, [user, lockItem, unlockItem, addEvent]);
+  
+  // Unlock item with database sync
+  const unlockItemWithSync = useCallback(async (nodeId: string) => {
+    if (!user) return;
+    
+    const lockInfo = lockedItems.get(nodeId);
+    if (!lockInfo) return;
+    
+    // Optimistic update
+    unlockItem(nodeId);
+    
+    // Track in version history
+    addEvent({
+      projectId: 'current', // TODO: Get actual project ID
+      eventType: 'lock_toggled',
+      eventData: {
+        afterState: { isLocked: false },
+        metadata: {
+          triggeredBy: 'user_action',
+          nodeId,
+          nodeType: lockInfo.nodeType,
+          description: `Unlocked ${lockInfo.nodeType} ${nodeId}`,
+        },
+      },
+    });
+    
+    // Sync with database
+    try {
+      await supabase
+        .from('lock_management')
+        .delete()
+        .eq('item_id', nodeId)
+        .eq('locked_by', user.id);
+    } catch (error) {
+      console.error('Failed to sync unlock to database:', error);
+      // Rollback on error
+      lockItem(nodeId, lockInfo.nodeType, user.id);
+    }
+  }, [user, lockedItems, lockItem, unlockItem, addEvent]);
+  
+  // Toggle lock with sync
+  const toggleLockWithSync = useCallback(async (nodeId: string, nodeType: string) => {
+    if (isLocked(nodeId)) {
+      await unlockItemWithSync(nodeId);
+    } else {
+      await lockItemWithSync(nodeId, nodeType);
+    }
+  }, [isLocked, lockItemWithSync, unlockItemWithSync]);
+  
+  // Bulk operations
+  const bulkLockWithSync = useCallback(async (nodeIds: string[], nodeType: string) => {
+    if (!user) return;
+    
+    // Optimistic update
+    bulkLock(nodeIds, nodeType, user.id);
+    
+    // Track in version history
+    addEvent({
+      projectId: 'current',
+      eventType: 'lock_toggled',
+      eventData: {
+        afterState: { isLocked: true, count: nodeIds.length },
+        metadata: {
+          triggeredBy: 'bulk_action',
+          description: `Locked ${nodeIds.length} ${nodeType} items`,
+        },
+      },
+    });
+    
+    // Sync with database
+    try {
+      const expiresAt = new Date();
+      expiresAt.setHours(expiresAt.getHours() + 24);
+      
+      const locks = nodeIds.map(nodeId => ({
+        item_id: nodeId,
+        item_type: nodeType,
+        locked_by: user.id,
+        locked_at: new Date().toISOString(),
+        expires_at: expiresAt.toISOString(),
+        project_id: 'current',
+      }));
+      
+      await supabase.from('lock_management').insert(locks);
+    } catch (error) {
+      console.error('Failed to sync bulk lock to database:', error);
+      // Rollback on error
+      bulkUnlock(nodeIds);
+    }
+  }, [user, bulkLock, bulkUnlock, addEvent]);
+  
+  const bulkUnlockWithSync = useCallback(async (nodeIds: string[]) => {
+    if (!user) return;
+    
+    // Get node types for history
+    const nodeTypes = new Set<string>();
+    nodeIds.forEach(nodeId => {
+      const lock = lockedItems.get(nodeId);
+      if (lock) nodeTypes.add(lock.nodeType);
+    });
+    
+    // Optimistic update
+    bulkUnlock(nodeIds);
+    
+    // Track in version history
+    addEvent({
+      projectId: 'current',
+      eventType: 'lock_toggled',
+      eventData: {
+        afterState: { isLocked: false, count: nodeIds.length },
+        metadata: {
+          triggeredBy: 'bulk_action',
+          description: `Unlocked ${nodeIds.length} items`,
+        },
+      },
+    });
+    
+    // Sync with database
+    try {
+      await supabase
+        .from('lock_management')
+        .delete()
+        .in('item_id', nodeIds)
+        .eq('locked_by', user.id);
+    } catch (error) {
+      console.error('Failed to sync bulk unlock to database:', error);
+      // Rollback would be complex here, so we'll just log the error
+    }
+  }, [user, lockedItems, bulkUnlock, addEvent]);
+  
+  return {
+    lockedItems: Array.from(lockedItems.entries()),
+    lockItem: lockItemWithSync,
+    unlockItem: unlockItemWithSync,
+    toggleLock: toggleLockWithSync,
+    bulkLock: bulkLockWithSync,
+    bulkUnlock: bulkUnlockWithSync,
+    isLocked,
+    getLockedCount,
+    getLockedItemsByType,
+    clearExpiredLocks,
+  };
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/useMemoryTracking.ts
+```ts
+import { useState, useEffect, useCallback, useRef } from 'react';
+
+interface MemorySnapshot {
+  timestamp: number;
+  usedJSHeapSize: number;
+  totalJSHeapSize: number;
+  jsHeapSizeLimit: number;
+  percentUsed: number;
+  delta: number;
+}
+
+interface MemoryLeakDetection {
+  isLeaking: boolean;
+  growthRate: number; // MB per minute
+  confidence: number; // 0-1
+  timeDetected?: number;
+}
+
+interface UseMemoryTrackingOptions {
+  sampleInterval?: number; // ms
+  historySize?: number;
+  leakThreshold?: number; // MB per minute
+  onMemoryLeak?: (detection: MemoryLeakDetection) => void;
+  onMemoryWarning?: (percentUsed: number) => void;
+}
+
+export const useMemoryTracking = (
+  enabled: boolean = false,
+  options: UseMemoryTrackingOptions = {}
+) => {
+  const {
+    sampleInterval = 5000, // 5 seconds
+    historySize = 120, // 10 minutes of data at 5s intervals
+    leakThreshold = 10, // 10 MB per minute
+    onMemoryLeak,
+    onMemoryWarning,
+  } = options;
+
+  const [snapshots, setSnapshots] = useState<MemorySnapshot[]>([]);
+  const [currentMemory, setCurrentMemory] = useState<MemorySnapshot | null>(null);
+  const [leakDetection, setLeakDetection] = useState<MemoryLeakDetection>({
+    isLeaking: false,
+    growthRate: 0,
+    confidence: 0,
+  });
+
+  const lastSnapshotRef = useRef<MemorySnapshot | null>(null);
+  const warningTriggeredRef = useRef<Set<number>>(new Set());
+
+  // Check if performance.memory is available
+  const isMemoryAPIAvailable = useCallback(() => {
+    return 'memory' in performance;
+  }, []);
+
+  // Take memory snapshot
+  const takeSnapshot = useCallback((): MemorySnapshot | null => {
+    if (!isMemoryAPIAvailable()) return null;
+
+    const memoryInfo = (performance as any).memory;
+    const timestamp = Date.now();
+    
+    const snapshot: MemorySnapshot = {
+      timestamp,
+      usedJSHeapSize: memoryInfo.usedJSHeapSize,
+      totalJSHeapSize: memoryInfo.totalJSHeapSize,
+      jsHeapSizeLimit: memoryInfo.jsHeapSizeLimit,
+      percentUsed: (memoryInfo.usedJSHeapSize / memoryInfo.jsHeapSizeLimit) * 100,
+      delta: 0,
+    };
+
+    // Calculate delta from last snapshot
+    if (lastSnapshotRef.current) {
+      snapshot.delta = snapshot.usedJSHeapSize - lastSnapshotRef.current.usedJSHeapSize;
+    }
+
+    lastSnapshotRef.current = snapshot;
+    return snapshot;
+  }, [isMemoryAPIAvailable]);
+
+  // Analyze memory trend for leak detection
+  const analyzeMemoryTrend = useCallback((history: MemorySnapshot[]) => {
+    if (history.length < 10) return null; // Need sufficient data
+
+    // Get recent snapshots (last 2 minutes)
+    const recentSnapshots = history.slice(-24); // 24 * 5s = 2 minutes
+    if (recentSnapshots.length < 2) return null;
+
+    // Calculate linear regression
+    const n = recentSnapshots.length;
+    let sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
+    
+    recentSnapshots.forEach((snapshot, i) => {
+      const x = i;
+      const y = snapshot.usedJSHeapSize / (1024 * 1024); // Convert to MB
+      sumX += x;
+      sumY += y;
+      sumXY += x * y;
+      sumX2 += x * x;
+    });
+
+    // Calculate slope (growth rate in MB per sample)
+    const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+    
+    // Convert to MB per minute
+    const growthRatePerMinute = slope * (60000 / sampleInterval);
+    
+    // Calculate R-squared for confidence
+    const meanY = sumY / n;
+    let ssTotal = 0, ssResidual = 0;
+    
+    recentSnapshots.forEach((snapshot, i) => {
+      const y = snapshot.usedJSHeapSize / (1024 * 1024);
+      const yPredicted = (slope * i) + (sumY - slope * sumX) / n;
+      ssTotal += Math.pow(y - meanY, 2);
+      ssResidual += Math.pow(y - yPredicted, 2);
+    });
+    
+    const rSquared = 1 - (ssResidual / ssTotal);
+    const confidence = Math.max(0, Math.min(1, rSquared));
+
+    return {
+      growthRate: growthRatePerMinute,
+      confidence,
+      isLeaking: growthRatePerMinute > leakThreshold && confidence > 0.7,
+    };
+  }, [sampleInterval, leakThreshold]);
+
+  // Check memory warnings
+  const checkMemoryWarnings = useCallback((snapshot: MemorySnapshot) => {
+    const warningThresholds = [50, 75, 90]; // Percentage thresholds
+    
+    warningThresholds.forEach(threshold => {
+      if (snapshot.percentUsed >= threshold && !warningTriggeredRef.current.has(threshold)) {
+        warningTriggeredRef.current.add(threshold);
+        onMemoryWarning?.(snapshot.percentUsed);
+      } else if (snapshot.percentUsed < threshold && warningTriggeredRef.current.has(threshold)) {
+        warningTriggeredRef.current.delete(threshold);
+      }
+    });
+  }, [onMemoryWarning]);
+
+  // Get memory statistics
+  const getMemoryStats = useCallback(() => {
+    if (snapshots.length === 0) return null;
+
+    const usedSizes = snapshots.map(s => s.usedJSHeapSize);
+    const percentages = snapshots.map(s => s.percentUsed);
+
+    return {
+      current: currentMemory,
+      average: {
+        usedSize: usedSizes.reduce((a, b) => a + b, 0) / usedSizes.length,
+        percentUsed: percentages.reduce((a, b) => a + b, 0) / percentages.length,
+      },
+      peak: {
+        usedSize: Math.max(...usedSizes),
+        percentUsed: Math.max(...percentages),
+        timestamp: snapshots[usedSizes.indexOf(Math.max(...usedSizes))].timestamp,
+      },
+      growth: {
+        total: snapshots.length > 1 
+          ? snapshots[snapshots.length - 1].usedJSHeapSize - snapshots[0].usedJSHeapSize
+          : 0,
+        rate: leakDetection.growthRate,
+      },
+    };
+  }, [snapshots, currentMemory, leakDetection]);
+
+  // Force garbage collection (Chrome DevTools only)
+  const forceGC = useCallback(() => {
+    if ('gc' in window) {
+      (window as any).gc();
+      // Take a snapshot after GC
+      setTimeout(() => {
+        const snapshot = takeSnapshot();
+        if (snapshot) {
+          setCurrentMemory(snapshot);
+        }
+      }, 100);
+    } else {
+      console.warn('Garbage collection is not exposed. Run Chrome with --js-flags="--expose-gc"');
+    }
+  }, [takeSnapshot]);
+
+  // Export memory data
+  const exportMemoryData = useCallback(() => {
+    const data = {
+      snapshots,
+      stats: getMemoryStats(),
+      leakDetection,
+      metadata: {
+        sampleInterval,
+        duration: snapshots.length > 0 
+          ? snapshots[snapshots.length - 1].timestamp - snapshots[0].timestamp
+          : 0,
+      },
+    };
+
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `memory-profile-${Date.now()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }, [snapshots, getMemoryStats, leakDetection, sampleInterval]);
+
+  // Clear history
+  const clearHistory = useCallback(() => {
+    setSnapshots([]);
+    lastSnapshotRef.current = null;
+    warningTriggeredRef.current.clear();
+    setLeakDetection({
+      isLeaking: false,
+      growthRate: 0,
+      confidence: 0,
+    });
+  }, []);
+
+  // Main sampling loop
+  useEffect(() => {
+    if (!enabled || !isMemoryAPIAvailable()) return;
+
+    const interval = setInterval(() => {
+      const snapshot = takeSnapshot();
+      if (!snapshot) return;
+
+      setCurrentMemory(snapshot);
+      setSnapshots(prev => {
+        const updated = [...prev, snapshot].slice(-historySize);
+        
+        // Analyze for memory leaks
+        const trend = analyzeMemoryTrend(updated);
+        if (trend) {
+          const detection: MemoryLeakDetection = {
+            ...trend,
+            timeDetected: trend.isLeaking && !leakDetection.isLeaking 
+              ? Date.now() 
+              : leakDetection.timeDetected,
+          };
+          
+          setLeakDetection(detection);
+          
+          if (detection.isLeaking && !leakDetection.isLeaking) {
+            onMemoryLeak?.(detection);
+          }
+        }
+        
+        return updated;
+      });
+
+      // Check warnings
+      checkMemoryWarnings(snapshot);
+    }, sampleInterval);
+
+    return () => clearInterval(interval);
+  }, [
+    enabled,
+    isMemoryAPIAvailable,
+    takeSnapshot,
+    historySize,
+    analyzeMemoryTrend,
+    checkMemoryWarnings,
+    sampleInterval,
+    leakDetection.isLeaking,
+    onMemoryLeak,
+  ]);
+
+  return {
+    currentMemory,
+    snapshots,
+    leakDetection,
+    stats: getMemoryStats(),
+    isAvailable: isMemoryAPIAvailable(),
+    forceGC,
+    exportMemoryData,
+    clearHistory,
+  };
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/usePerformanceMetrics.ts
+```ts
+import { useState, useEffect, useCallback, useRef } from 'react';
+
+export interface PerformanceMetrics {
+  fps: {
+    current: number;
+    average: number;
+    min: number;
+    max: number;
+    history: number[];
+  };
+  memory: {
+    usedJSHeapSize: number;
+    totalJSHeapSize: number;
+    jsHeapSizeLimit: number;
+    percentUsed: number;
+    history: number[];
+  };
+  react: {
+    renderCount: number;
+    renderDuration: number;
+    componentCount: number;
+    updateFrequency: number;
+  };
+  canvas: {
+    nodeCount: number;
+    edgeCount: number;
+    viewportNodes: number;
+    culledNodes: number;
+  };
+  network: {
+    activeRequests: number;
+    completedRequests: number;
+    failedRequests: number;
+    averageLatency: number;
+    requestQueue: NetworkRequest[];
+  };
+  animations: {
+    activeAnimations: number;
+    frameTime: number;
+    droppedFrames: number;
+  };
+}
+
+interface NetworkRequest {
+  id: string;
+  url: string;
+  method: string;
+  startTime: number;
+  endTime?: number;
+  status?: number;
+  size?: number;
+}
+
+interface PerformanceSession {
+  id: string;
+  startTime: number;
+  endTime?: number;
+  metrics: PerformanceMetrics[];
+  events: PerformanceEvent[];
+}
+
+interface PerformanceEvent {
+  timestamp: number;
+  type: 'bottleneck' | 'memory-leak' | 'slow-render' | 'network-spike';
+  severity: 'low' | 'medium' | 'high';
+  details: string;
+}
+
+const HISTORY_SIZE = 60; // Keep last 60 data points
+const SAMPLE_RATE = 1000; // Sample every second
+
+export const usePerformanceMetrics = (enabled: boolean = false) => {
+  const [metrics, setMetrics] = useState<PerformanceMetrics>({
+    fps: {
+      current: 60,
+      average: 60,
+      min: 60,
+      max: 60,
+      history: [],
+    },
+    memory: {
+      usedJSHeapSize: 0,
+      totalJSHeapSize: 0,
+      jsHeapSizeLimit: 0,
+      percentUsed: 0,
+      history: [],
+    },
+    react: {
+      renderCount: 0,
+      renderDuration: 0,
+      componentCount: 0,
+      updateFrequency: 0,
+    },
+    canvas: {
+      nodeCount: 0,
+      edgeCount: 0,
+      viewportNodes: 0,
+      culledNodes: 0,
+    },
+    network: {
+      activeRequests: 0,
+      completedRequests: 0,
+      failedRequests: 0,
+      averageLatency: 0,
+      requestQueue: [],
+    },
+    animations: {
+      activeAnimations: 0,
+      frameTime: 0,
+      droppedFrames: 0,
+    },
+  });
+
+  const [session, setSession] = useState<PerformanceSession | null>(null);
+  const [events, setEvents] = useState<PerformanceEvent[]>([]);
+  const [isRecording, setIsRecording] = useState(false);
+
+  const frameCountRef = useRef(0);
+  const lastFrameTimeRef = useRef(performance.now());
+  const renderCountRef = useRef(0);
+  const networkRequestsRef = useRef<Map<string, NetworkRequest>>(new Map());
+  const animationFrameRef = useRef<number>();
+  const observerRef = useRef<PerformanceObserver>();
+
+  // FPS calculation
+  const calculateFPS = useCallback(() => {
+    const currentTime = performance.now();
+    const deltaTime = currentTime - lastFrameTimeRef.current;
+    
+    if (deltaTime >= 1000) {
+      const fps = Math.round((frameCountRef.current * 1000) / deltaTime);
+      frameCountRef.current = 0;
+      lastFrameTimeRef.current = currentTime;
+      
+      return fps;
+    }
+    
+    frameCountRef.current++;
+    return metrics.fps.current;
+  }, [metrics.fps.current]);
+
+  // Memory monitoring
+  const getMemoryInfo = useCallback(() => {
+    if ('memory' in performance) {
+      const memoryInfo = (performance as any).memory;
+      return {
+        usedJSHeapSize: memoryInfo.usedJSHeapSize,
+        totalJSHeapSize: memoryInfo.totalJSHeapSize,
+        jsHeapSizeLimit: memoryInfo.jsHeapSizeLimit,
+        percentUsed: (memoryInfo.usedJSHeapSize / memoryInfo.jsHeapSizeLimit) * 100,
+      };
+    }
+    return null;
+  }, []);
+
+  // Network monitoring
+  const setupNetworkMonitoring = useCallback(() => {
+    // Intercept fetch
+    const originalFetch = window.fetch;
+    window.fetch = async (...args) => {
+      const requestId = Math.random().toString(36).substr(2, 9);
+      const startTime = performance.now();
+      
+      const request: NetworkRequest = {
+        id: requestId,
+        url: args[0].toString(),
+        method: args[1]?.method || 'GET',
+        startTime,
+      };
+      
+      networkRequestsRef.current.set(requestId, request);
+      
+      try {
+        const response = await originalFetch(...args);
+        const endTime = performance.now();
+        
+        request.endTime = endTime;
+        request.status = response.status;
+        
+        return response;
+      } catch (error) {
+        request.endTime = performance.now();
+        request.status = 0;
+        throw error;
+      }
+    };
+
+    // Cleanup function
+    return () => {
+      window.fetch = originalFetch;
+    };
+  }, []);
+
+  // Performance Observer for React
+  const setupPerformanceObserver = useCallback(() => {
+    if ('PerformanceObserver' in window) {
+      const observer = new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+          if (entry.entryType === 'measure' && entry.name.startsWith('⚛️')) {
+            renderCountRef.current++;
+          }
+        }
+      });
+      
+      observer.observe({ entryTypes: ['measure'] });
+      observerRef.current = observer;
+    }
+  }, []);
+
+  // Detect performance bottlenecks
+  const detectBottlenecks = useCallback(() => {
+    const currentMetrics = metrics;
+    const newEvents: PerformanceEvent[] = [];
+
+    // FPS drop detection
+    if (currentMetrics.fps.current < 30) {
+      newEvents.push({
+        timestamp: Date.now(),
+        type: 'bottleneck',
+        severity: currentMetrics.fps.current < 20 ? 'high' : 'medium',
+        details: `FPS dropped to ${currentMetrics.fps.current}`,
+      });
+    }
+
+    // Memory leak detection
+    if (currentMetrics.memory.percentUsed > 90) {
+      newEvents.push({
+        timestamp: Date.now(),
+        type: 'memory-leak',
+        severity: 'high',
+        details: `Memory usage at ${currentMetrics.memory.percentUsed.toFixed(1)}%`,
+      });
+    }
+
+    // Slow render detection
+    if (currentMetrics.react.renderDuration > 16) {
+      newEvents.push({
+        timestamp: Date.now(),
+        type: 'slow-render',
+        severity: currentMetrics.react.renderDuration > 50 ? 'high' : 'medium',
+        details: `Render took ${currentMetrics.react.renderDuration.toFixed(2)}ms`,
+      });
+    }
+
+    // Network spike detection
+    if (currentMetrics.network.activeRequests > 10) {
+      newEvents.push({
+        timestamp: Date.now(),
+        type: 'network-spike',
+        severity: 'medium',
+        details: `${currentMetrics.network.activeRequests} concurrent requests`,
+      });
+    }
+
+    if (newEvents.length > 0) {
+      setEvents(prev => [...prev, ...newEvents]);
+    }
+  }, [metrics]);
+
+  // Main update loop
+  const updateMetrics = useCallback(() => {
+    if (!enabled) return;
+
+    const fps = calculateFPS();
+    const memoryInfo = getMemoryInfo();
+    
+    // Get network stats
+    const activeRequests = Array.from(networkRequestsRef.current.values())
+      .filter(req => !req.endTime).length;
+    const completedRequests = Array.from(networkRequestsRef.current.values())
+      .filter(req => req.endTime && req.status && req.status >= 200 && req.status < 300).length;
+    const failedRequests = Array.from(networkRequestsRef.current.values())
+      .filter(req => req.endTime && (!req.status || req.status >= 400)).length;
+    
+    // Calculate average latency
+    const completedWithLatency = Array.from(networkRequestsRef.current.values())
+      .filter(req => req.endTime)
+      .map(req => req.endTime! - req.startTime);
+    const averageLatency = completedWithLatency.length > 0
+      ? completedWithLatency.reduce((a, b) => a + b, 0) / completedWithLatency.length
+      : 0;
+
+    setMetrics(prev => ({
+      fps: {
+        current: fps,
+        average: prev.fps.history.length > 0
+          ? (prev.fps.history.reduce((a, b) => a + b, 0) + fps) / (prev.fps.history.length + 1)
+          : fps,
+        min: Math.min(prev.fps.min, fps),
+        max: Math.max(prev.fps.max, fps),
+        history: [...prev.fps.history.slice(-HISTORY_SIZE + 1), fps],
+      },
+      memory: memoryInfo ? {
+        ...memoryInfo,
+        history: [...prev.memory.history.slice(-HISTORY_SIZE + 1), memoryInfo.percentUsed],
+      } : prev.memory,
+      react: {
+        ...prev.react,
+        renderCount: renderCountRef.current,
+        updateFrequency: renderCountRef.current / (performance.now() / 1000),
+      },
+      canvas: prev.canvas, // Updated externally
+      network: {
+        activeRequests,
+        completedRequests,
+        failedRequests,
+        averageLatency,
+        requestQueue: Array.from(networkRequestsRef.current.values()).slice(-10),
+      },
+      animations: prev.animations, // Updated externally
+    }));
+
+    // Detect bottlenecks
+    detectBottlenecks();
+
+    // Continue animation loop
+    animationFrameRef.current = requestAnimationFrame(updateMetrics);
+  }, [enabled, calculateFPS, getMemoryInfo, detectBottlenecks]);
+
+  // Canvas metrics update
+  const updateCanvasMetrics = useCallback((canvasData: Partial<PerformanceMetrics['canvas']>) => {
+    setMetrics(prev => ({
+      ...prev,
+      canvas: {
+        ...prev.canvas,
+        ...canvasData,
+      },
+    }));
+  }, []);
+
+  // Animation metrics update
+  const updateAnimationMetrics = useCallback((animationData: Partial<PerformanceMetrics['animations']>) => {
+    setMetrics(prev => ({
+      ...prev,
+      animations: {
+        ...prev.animations,
+        ...animationData,
+      },
+    }));
+  }, []);
+
+  // Recording controls
+  const startRecording = useCallback(() => {
+    const sessionId = Math.random().toString(36).substr(2, 9);
+    setSession({
+      id: sessionId,
+      startTime: Date.now(),
+      metrics: [],
+      events: [],
+    });
+    setIsRecording(true);
+    setEvents([]);
+  }, []);
+
+  const stopRecording = useCallback(() => {
+    if (session) {
+      setSession(prev => prev ? {
+        ...prev,
+        endTime: Date.now(),
+        events,
+      } : null);
+    }
+    setIsRecording(false);
+  }, [session, events]);
+
+  const exportSession = useCallback(() => {
+    if (session) {
+      const blob = new Blob([JSON.stringify(session, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `performance-session-${session.id}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  }, [session]);
+
+  // Clear metrics
+  const clearMetrics = useCallback(() => {
+    networkRequestsRef.current.clear();
+    renderCountRef.current = 0;
+    setEvents([]);
+    setMetrics(prev => ({
+      ...prev,
+      fps: {
+        current: 60,
+        average: 60,
+        min: 60,
+        max: 60,
+        history: [],
+      },
+      memory: {
+        ...prev.memory,
+        history: [],
+      },
+      network: {
+        activeRequests: 0,
+        completedRequests: 0,
+        failedRequests: 0,
+        averageLatency: 0,
+        requestQueue: [],
+      },
+    }));
+  }, []);
+
+  // Setup and cleanup
+  useEffect(() => {
+    if (enabled) {
+      const cleanupNetwork = setupNetworkMonitoring();
+      setupPerformanceObserver();
+      animationFrameRef.current = requestAnimationFrame(updateMetrics);
+
+      return () => {
+        cleanupNetwork();
+        if (observerRef.current) {
+          observerRef.current.disconnect();
+        }
+        if (animationFrameRef.current) {
+          cancelAnimationFrame(animationFrameRef.current);
+        }
+      };
+    }
+  }, [enabled, setupNetworkMonitoring, setupPerformanceObserver, updateMetrics]);
+
+  // Record metrics periodically when recording
+  useEffect(() => {
+    if (isRecording && session) {
+      const interval = setInterval(() => {
+        setSession(prev => prev ? {
+          ...prev,
+          metrics: [...prev.metrics, metrics],
+        } : null);
+      }, SAMPLE_RATE);
+
+      return () => clearInterval(interval);
+    }
+  }, [isRecording, session, metrics]);
+
+  return {
+    metrics,
+    events,
+    isRecording,
+    session,
+    updateCanvasMetrics,
+    updateAnimationMetrics,
+    startRecording,
+    stopRecording,
+    exportSession,
+    clearMetrics,
+  };
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/useProgressAnimation.ts
+```ts
+import { useEffect, useRef, useCallback } from 'react';
+
+interface UseProgressAnimationOptions {
+  duration?: number;
+  easing?: string;
+  fps?: number;
+}
+
+export const useProgressAnimation = (
+  targetValue: number,
+  options: UseProgressAnimationOptions = {}
+) => {
+  const {
+    duration = 500,
+    easing = 'ease-out',
+    fps = 60
+  } = options;
+
+  const animationRef = useRef<number>();
+  const startTimeRef = useRef<number>();
+  const startValueRef = useRef<number>(0);
+  const currentValueRef = useRef<number>(0);
+
+  // Easing functions
+  const easingFunctions = {
+    'linear': (t: number) => t,
+    'ease-in': (t: number) => t * t,
+    'ease-out': (t: number) => t * (2 - t),
+    'ease-in-out': (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
+  };
+
+  const animate = useCallback((timestamp: number) => {
+    if (!startTimeRef.current) {
+      startTimeRef.current = timestamp;
+    }
+
+    const elapsed = timestamp - startTimeRef.current;
+    const progress = Math.min(elapsed / duration, 1);
+    
+    const easingFunction = easingFunctions[easing as keyof typeof easingFunctions] || easingFunctions['ease-out'];
+    const easedProgress = easingFunction(progress);
+    
+    const currentValue = startValueRef.current + (targetValue - startValueRef.current) * easedProgress;
+    currentValueRef.current = currentValue;
+
+    if (progress < 1) {
+      animationRef.current = requestAnimationFrame(animate);
+    }
+  }, [targetValue, duration, easing]);
+
+  useEffect(() => {
+    startValueRef.current = currentValueRef.current;
+    startTimeRef.current = undefined;
+    
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+    }
+
+    animationRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [targetValue, animate]);
+
+  return currentValueRef.current;
+};
+
+// Hook for smooth step transitions
+export const useStepTransition = (currentStep: number, totalSteps: number) => {
+  const previousStepRef = useRef(currentStep);
+  const transitionRef = useRef<{
+    from: number;
+    to: number;
+    startTime: number;
+  } | null>(null);
+
+  useEffect(() => {
+    if (currentStep !== previousStepRef.current) {
+      transitionRef.current = {
+        from: previousStepRef.current,
+        to: currentStep,
+        startTime: Date.now()
+      };
+      previousStepRef.current = currentStep;
+    }
+  }, [currentStep]);
+
+  const getTransitionState = useCallback(() => {
+    if (!transitionRef.current) return null;
+
+    const elapsed = Date.now() - transitionRef.current.startTime;
+    const duration = 300; // ms
+
+    if (elapsed >= duration) {
+      transitionRef.current = null;
+      return null;
+    }
+
+    const progress = elapsed / duration;
+    return {
+      from: transitionRef.current.from,
+      to: transitionRef.current.to,
+      progress,
+      isTransitioning: true
+    };
+  }, []);
+
+  return {
+    getTransitionState,
+    isTransitioning: transitionRef.current !== null
+  };
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/useProjectSearch.ts
+```ts
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import Fuse from 'fuse.js';
+import type { RecentFlow } from './useRecentFlows';
+
+interface UseProjectSearchOptions {
+  searchKeys?: string[];
+  threshold?: number;
+  includeMatches?: boolean;
+}
+
+export const useProjectSearch = (
+  projects: RecentFlow[],
+  searchTerm: string,
+  options: UseProjectSearchOptions = {}
+) => {
+  const {
+    searchKeys = ['name', 'description', 'tags'],
+    threshold = 0.3,
+    includeMatches = true,
+  } = options;
+
+  // Configure Fuse.js for fuzzy search
+  const fuseOptions = useMemo(() => ({
+    keys: searchKeys,
+    threshold,
+    includeScore: true,
+    includeMatches,
+    findAllMatches: true,
+    minMatchCharLength: 2,
+    // Custom scoring for better relevance
+    getFn: (obj: any, path: string[]) => {
+      const value = path.reduce((obj, key) => obj?.[key], obj);
+      if (Array.isArray(value)) {
+        return value.join(' ');
+      }
+      return value || '';
+    },
+  }), [searchKeys, threshold, includeMatches]);
+
+  const fuse = useMemo(() => {
+    return new Fuse(projects, fuseOptions);
+  }, [projects, fuseOptions]);
+
+  const searchResults = useMemo(() => {
+    if (!searchTerm || searchTerm.trim().length === 0) {
+      return projects;
+    }
+
+    const results = fuse.search(searchTerm.trim());
+    
+    // Extract items and optionally include match metadata
+    return results.map(result => ({
+      ...result.item,
+      _score: result.score,
+      _matches: result.matches,
+    }));
+  }, [fuse, projects, searchTerm]);
+
+  // Advanced search with filters
+  const searchWithFilters = useCallback((
+    term: string,
+    filters?: {
+      status?: RecentFlow['status'][];
+      tags?: string[];
+      dateRange?: { start: Date; end: Date };
+    }
+  ) => {
+    let results = term ? fuse.search(term).map(r => r.item) : projects;
+
+    if (filters) {
+      // Filter by status
+      if (filters.status && filters.status.length > 0) {
+        results = results.filter(project => 
+          filters.status!.includes(project.status)
+        );
+      }
+
+      // Filter by tags
+      if (filters.tags && filters.tags.length > 0) {
+        results = results.filter(project =>
+          filters.tags!.some(tag => project.tags.includes(tag))
+        );
+      }
+
+      // Filter by date range
+      if (filters.dateRange) {
+        results = results.filter(project => {
+          const modifiedAt = new Date(project.modifiedAt);
+          return modifiedAt >= filters.dateRange!.start && 
+                 modifiedAt <= filters.dateRange!.end;
+        });
+      }
+    }
+
+    return results;
+  }, [fuse, projects]);
+
+  // Get search suggestions based on partial input
+  const getSuggestions = useCallback((partialTerm: string, limit = 5) => {
+    if (!partialTerm || partialTerm.length < 2) {
+      return [];
+    }
+
+    const results = fuse.search(partialTerm, { limit });
+    
+    // Extract unique suggested terms from matches
+    const suggestions = new Set<string>();
+    
+    results.forEach(result => {
+      result.matches?.forEach(match => {
+        if (match.value) {
+          // Add the matched portion as a suggestion
+          const matchedText = match.value.substring(
+            match.indices[0][0],
+            match.indices[0][1] + 1
+          );
+          suggestions.add(matchedText);
+        }
+      });
+    });
+
+    return Array.from(suggestions).slice(0, limit);
+  }, [fuse]);
+
+  // Highlight search terms in text
+  const highlightSearchTerm = useCallback((text: string, term: string) => {
+    if (!term || !text) return text;
+
+    const regex = new RegExp(`(${term})`, 'gi');
+    return text.split(regex).map((part, index) => {
+      if (part.toLowerCase() === term.toLowerCase()) {
+        return `<mark key="${index}" class="bg-yellow-500/30 text-yellow-300">${part}</mark>`;
+      }
+      return part;
+    }).join('');
+  }, []);
+
+  return {
+    searchResults,
+    searchWithFilters,
+    getSuggestions,
+    highlightSearchTerm,
+    resultCount: searchResults.length,
+    hasResults: searchResults.length > 0,
+  };
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/useRecentFlows.ts
+```ts
+import { useState, useEffect, useCallback } from 'react';
+import { invoke } from '@tauri-apps/api/core';
+
+export interface RecentFlow {
+  id: string;
+  workspaceId: string;
+  name: string;
+  description?: string;
+  status: 'draft' | 'in-progress' | 'completed' | 'archived';
+  progress: {
+    problem: boolean;
+    personas: boolean;
+    painPoints: boolean;
+    solutions: boolean;
+    specs: boolean;
+  };
+  tags: string[];
+  modifiedAt: Date;
+  createdAt: Date;
+  canvasPreview?: string;
+  lastOpenedAt?: Date;
+}
+
+interface UseRecentFlowsOptions {
+  limit?: number;
+  workspaceId?: string;
+  includeArchived?: boolean;
+}
+
+export const useRecentFlows = (options: UseRecentFlowsOptions = {}) => {
+  const { limit = 10, workspaceId, includeArchived = false } = options;
+  const [flows, setFlows] = useState<RecentFlow[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  const fetchRecentFlows = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      // Fetch from Tauri backend
+      const result = await invoke<RecentFlow[]>('get_recent_flows', {
+        limit,
+        workspaceId,
+        includeArchived,
+      });
+
+      // Convert date strings to Date objects
+      const processedFlows = result.map(flow => ({
+        ...flow,
+        modifiedAt: new Date(flow.modifiedAt),
+        createdAt: new Date(flow.createdAt),
+        lastOpenedAt: flow.lastOpenedAt ? new Date(flow.lastOpenedAt) : undefined,
+      }));
+
+      setFlows(processedFlows);
+    } catch (err) {
+      setError(err as Error);
+      console.error('Failed to fetch recent flows:', err);
+    } finally {
+      setLoading(false);
+    }
+  }, [limit, workspaceId, includeArchived]);
+
+  useEffect(() => {
+    fetchRecentFlows();
+  }, [fetchRecentFlows]);
+
+  const updateFlowStatus = useCallback(async (flowId: string, status: RecentFlow['status']) => {
+    try {
+      await invoke('update_flow_status', { flowId, status });
+      
+      // Update local state optimistically
+      setFlows(prev => prev.map(flow => 
+        flow.id === flowId ? { ...flow, status } : flow
+      ));
+    } catch (err) {
+      console.error('Failed to update flow status:', err);
+      throw err;
+    }
+  }, []);
+
+  const markAsOpened = useCallback(async (flowId: string) => {
+    try {
+      await invoke('mark_flow_opened', { flowId });
+      
+      // Update local state
+      setFlows(prev => prev.map(flow => 
+        flow.id === flowId ? { ...flow, lastOpenedAt: new Date() } : flow
+      ));
+    } catch (err) {
+      console.error('Failed to mark flow as opened:', err);
+    }
+  }, []);
+
+  const deleteFlow = useCallback(async (flowId: string) => {
+    try {
+      await invoke('delete_flow', { flowId });
+      
+      // Remove from local state
+      setFlows(prev => prev.filter(flow => flow.id !== flowId));
+    } catch (err) {
+      console.error('Failed to delete flow:', err);
+      throw err;
+    }
+  }, []);
+
+  const duplicateFlow = useCallback(async (flowId: string): Promise<string> => {
+    try {
+      const newFlowId = await invoke<string>('duplicate_flow', { flowId });
+      
+      // Refresh the list to include the new flow
+      await fetchRecentFlows();
+      
+      return newFlowId;
+    } catch (err) {
+      console.error('Failed to duplicate flow:', err);
+      throw err;
+    }
+  }, [fetchRecentFlows]);
+
+  return {
+    flows,
+    loading,
+    error,
+    refetch: fetchRecentFlows,
+    updateFlowStatus,
+    markAsOpened,
+    deleteFlow,
+    duplicateFlow,
+  };
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/useRefreshWorkflow.ts
+```ts
+import { useState, useCallback } from 'react';
+import { useLockManagement } from './useLockManagement';
+import { useVersionStore } from '../stores/versionStore';
+import { useWorkflowStore } from '../stores/workflowStore';
+import { supabase } from '../services/supabase/client';
+
+interface RefreshOptions {
+  personas?: boolean;
+  painPoints?: boolean;
+  solutions?: boolean;
+  userStories?: boolean;
+  documents?: boolean;
+}
+
+interface RefreshProgress {
+  total: number;
+  completed: number;
+  currentStep: string;
+  errors: string[];
+}
+
+export const useRefreshWorkflow = () => {
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [progress, setProgress] = useState<RefreshProgress>({
+    total: 0,
+    completed: 0,
+    currentStep: '',
+    errors: [],
+  });
+  
+  const { getLockedItemsByType } = useLockManagement();
+  const { addEvent } = useVersionStore();
+  const { currentProjectId } = useWorkflowStore();
+  
+  const refreshItems = useCallback(async (options: RefreshOptions) => {
+    if (!currentProjectId) return;
+    
+    setIsRefreshing(true);
+    const steps: Array<{ name: string; type: string; refresh: boolean }> = [];
+    
+    // Build refresh steps based on options
+    if (options.personas) steps.push({ name: 'Personas', type: 'persona', refresh: true });
+    if (options.painPoints) steps.push({ name: 'Pain Points', type: 'pain_point', refresh: true });
+    if (options.solutions) steps.push({ name: 'Solutions', type: 'solution', refresh: true });
+    if (options.userStories) steps.push({ name: 'User Stories', type: 'user_story', refresh: true });
+    if (options.documents) steps.push({ name: 'Documents', type: 'document', refresh: true });
+    
+    setProgress({
+      total: steps.length,
+      completed: 0,
+      currentStep: '',
+      errors: [],
+    });
+    
+    for (let i = 0; i < steps.length; i++) {
+      const step = steps[i];
+      
+      setProgress(prev => ({
+        ...prev,
+        currentStep: `Refreshing ${step.name}...`,
+      }));
+      
+      try {
+        // Get locked items of this type
+        const lockedIds = getLockedItemsByType(step.type);
+        
+        // Call appropriate edge function based on type
+        let result;
+        switch (step.type) {
+          case 'persona':
+            result = await refreshPersonas(currentProjectId, lockedIds);
+            break;
+          case 'pain_point':
+            result = await refreshPainPoints(currentProjectId, lockedIds);
+            break;
+          case 'solution':
+            result = await refreshSolutions(currentProjectId, lockedIds);
+            break;
+          case 'user_story':
+            result = await refreshUserStories(currentProjectId, lockedIds);
+            break;
+          case 'document':
+            result = await refreshDocuments(currentProjectId, lockedIds);
+            break;
+        }
+        
+        // Track refresh in version history
+        addEvent({
+          projectId: currentProjectId,
+          eventType: 'refresh',
+          eventData: {
+            afterState: { 
+              type: step.type, 
+              refreshed: result?.count || 0,
+              locked: lockedIds.length,
+            },
+            metadata: {
+              triggeredBy: 'user_refresh',
+              description: `Refreshed ${step.name} (${lockedIds.length} locked)`,
+              lockedItems: lockedIds,
+            },
+          },
+        });
+        
+        setProgress(prev => ({
+          ...prev,
+          completed: i + 1,
+        }));
+      } catch (error) {
+        console.error(`Error refreshing ${step.name}:`, error);
+        setProgress(prev => ({
+          ...prev,
+          errors: [...prev.errors, `Failed to refresh ${step.name}`],
+          completed: i + 1,
+        }));
+      }
+    }
+    
+    setIsRefreshing(false);
+    setProgress(prev => ({
+      ...prev,
+      currentStep: 'Refresh complete',
+    }));
+    
+    // Clear progress after a delay
+    setTimeout(() => {
+      setProgress({
+        total: 0,
+        completed: 0,
+        currentStep: '',
+        errors: [],
+      });
+    }, 3000);
+  }, [currentProjectId, getLockedItemsByType, addEvent]);
+  
+  // Edge function calls
+  const refreshPersonas = async (projectId: string, lockedIds: string[]) => {
+    const { data, error } = await supabase.functions.invoke('generate-personas', {
+      body: { projectId, lockedIds, refresh: true },
+    });
+    
+    if (error) throw error;
+    return data;
+  };
+  
+  const refreshPainPoints = async (projectId: string, lockedIds: string[]) => {
+    const { data, error } = await supabase.functions.invoke('generate-pain-points', {
+      body: { projectId, lockedIds, refresh: true },
+    });
+    
+    if (error) throw error;
+    return data;
+  };
+  
+  const refreshSolutions = async (projectId: string, lockedIds: string[]) => {
+    const { data, error } = await supabase.functions.invoke('generate-solutions', {
+      body: { projectId, lockedIds, refresh: true },
+    });
+    
+    if (error) throw error;
+    return data;
+  };
+  
+  const refreshUserStories = async (projectId: string, lockedIds: string[]) => {
+    const { data, error } = await supabase.functions.invoke('generate-user-stories', {
+      body: { projectId, lockedIds, refresh: true },
+    });
+    
+    if (error) throw error;
+    return data;
+  };
+  
+  const refreshDocuments = async (projectId: string, lockedIds: string[]) => {
+    const { data, error } = await supabase.functions.invoke('generate-documents', {
+      body: { projectId, lockedIds, refresh: true },
+    });
+    
+    if (error) throw error;
+    return data;
+  };
+  
+  return {
+    isRefreshing,
+    progress,
+    refreshItems,
+  };
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/useShareLink.ts
+```ts
+import { useState, useCallback } from 'react';
+import { invoke } from '@tauri-apps/api/core';
+import type { ShareLink, ShareOptions, AccessHistory } from '../types/export.types';
+import { generateShareToken } from '../utils/shareTokenGenerator';
+
+export const useShareLink = () => {
+  const [shareLink, setShareLink] = useState<ShareLink | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [accessHistory, setAccessHistory] = useState<AccessHistory[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+  const generateShareLink = useCallback(async (
+    projectId: string,
+    options: ShareOptions
+  ) => {
+    setIsGenerating(true);
+    setError(null);
+
+    try {
+      // Generate a secure token
+      const token = generateShareToken();
+      
+      // Create the share link in the backend
+      const link = await invoke<ShareLink>('create_share_link', {
+        projectId,
+        token,
+        permission: options.permission,
+        expiresIn: options.expiresIn
+      });
+
+      // Generate the full URL
+      const baseUrl = window.location.origin;
+      const fullLink: ShareLink = {
+        ...link,
+        url: `${baseUrl}/share/${token}`
+      };
+
+      setShareLink(fullLink);
+      return fullLink;
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to generate share link';
+      setError(errorMessage);
+      throw new Error(errorMessage);
+    } finally {
+      setIsGenerating(false);
+    }
+  }, []);
+
+  const revokeShareLink = useCallback(async (linkId: string) => {
+    try {
+      await invoke('revoke_share_link', { linkId });
+      if (shareLink?.id === linkId) {
+        setShareLink(null);
+      }
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to revoke share link';
+      setError(errorMessage);
+      throw new Error(errorMessage);
+    }
+  }, [shareLink]);
+
+  const loadAccessHistory = useCallback(async (projectId: string) => {
+    try {
+      const history = await invoke<AccessHistory[]>('get_share_access_history', {
+        projectId
+      });
+      setAccessHistory(history);
+      return history;
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to load access history';
+      setError(errorMessage);
+      throw new Error(errorMessage);
+    }
+  }, []);
+
+  const trackAccess = useCallback(async (token: string, userEmail?: string) => {
+    try {
+      const access = await invoke<AccessHistory>('track_share_access', {
+        token,
+        userEmail,
+        ipAddress: 'auto' // Backend will determine IP
+      });
+      
+      setAccessHistory(prev => [access, ...prev]);
+      return access;
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to track access';
+      setError(errorMessage);
+      throw new Error(errorMessage);
+    }
+  }, []);
+
+  return {
+    shareLink,
+    generateShareLink,
+    revokeShareLink,
+    loadAccessHistory,
+    trackAccess,
+    isGenerating,
+    accessHistory,
+    error
+  };
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/useStateReconstruction.ts
+```ts
+import { useMemo } from 'react';
+import { useVersionStore, VersionEvent } from '../stores/versionStore';
+import { Node, Edge } from 'reactflow';
+
+interface ReconstructedState {
+  nodes: Node[];
+  edges: Edge[];
+  lockedItems: Set<string>;
+  metadata: {
+    lastUpdated: string;
+    eventCount: number;
+  };
+}
+
+export const useStateReconstruction = (targetEventId?: string) => {
+  const { events, currentEventIndex, previewEventId, isPreviewMode } = useVersionStore();
+  
+  const reconstructedState = useMemo(() => {
+    // Determine which event to reconstruct to
+    let targetIndex: number;
+    
+    if (targetEventId) {
+      // Reconstruct to specific event
+      targetIndex = events.findIndex(e => e.id === targetEventId);
+    } else if (isPreviewMode && previewEventId) {
+      // Preview mode
+      targetIndex = events.findIndex(e => e.id === previewEventId);
+    } else {
+      // Current state
+      targetIndex = currentEventIndex;
+    }
+    
+    if (targetIndex === -1) {
+      return null;
+    }
+    
+    // Start with empty state
+    const state: ReconstructedState = {
+      nodes: [],
+      edges: [],
+      lockedItems: new Set(),
+      metadata: {
+        lastUpdated: new Date().toISOString(),
+        eventCount: targetIndex + 1,
+      },
+    };
+    
+    // Replay events up to target
+    for (let i = 0; i <= targetIndex; i++) {
+      const event = events[i];
+      applyEventToState(state, event);
+    }
+    
+    return state;
+  }, [events, currentEventIndex, previewEventId, isPreviewMode, targetEventId]);
+  
+  return reconstructedState;
+};
+
+function applyEventToState(state: ReconstructedState, event: VersionEvent): void {
+  const { eventType, eventData } = event;
+  
+  switch (eventType) {
+    case 'node_added':
+      if (eventData.afterState) {
+        state.nodes.push(eventData.afterState);
+      }
+      break;
+      
+    case 'node_updated':
+      if (eventData.afterState) {
+        const index = state.nodes.findIndex(n => n.id === eventData.afterState.id);
+        if (index !== -1) {
+          state.nodes[index] = eventData.afterState;
+        }
+      }
+      break;
+      
+    case 'node_deleted':
+      if (eventData.changesDiff?.nodeId) {
+        state.nodes = state.nodes.filter(n => n.id !== eventData.changesDiff.nodeId);
+        // Also remove connected edges
+        state.edges = state.edges.filter(
+          e => e.source !== eventData.changesDiff.nodeId && e.target !== eventData.changesDiff.nodeId
+        );
+      }
+      break;
+      
+    case 'edge_added':
+      if (eventData.afterState) {
+        state.edges.push(eventData.afterState);
+      }
+      break;
+      
+    case 'edge_removed':
+      if (eventData.beforeState) {
+        state.edges = state.edges.filter(
+          e => !(e.source === eventData.beforeState.source && e.target === eventData.beforeState.target)
+        );
+      }
+      break;
+      
+    case 'lock_toggled':
+      if (eventData.metadata.nodeId) {
+        if (eventData.afterState?.isLocked) {
+          state.lockedItems.add(eventData.metadata.nodeId);
+        } else {
+          state.lockedItems.delete(eventData.metadata.nodeId);
+        }
+      }
+      break;
+      
+    case 'generation':
+      // Handle bulk generation events
+      if (eventData.afterState?.results && eventData.afterState.generationType) {
+        const { generationType, results } = eventData.afterState;
+        
+        // Add nodes based on generation type
+        if (generationType === 'personas' || generationType === 'pain_points' || generationType === 'solutions') {
+          results.forEach((item: any) => {
+            if (item.node) {
+              state.nodes.push(item.node);
+            }
+            if (item.edges) {
+              state.edges.push(...item.edges);
+            }
+          });
+        }
+      }
+      break;
+  }
+  
+  // Update metadata
+  state.metadata.lastUpdated = event.timestamp;
+}
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/useVersionHistory.ts
+```ts
+import { useEffect, useCallback } from 'react';
+import { useVersionStore } from '../stores/versionStore';
+import { useCanvasStore } from '../stores/canvasStore';
+import { useWorkflowStore } from '../stores/workflowStore';
+import { Node, Edge } from 'reactflow';
+
+export const useVersionHistory = () => {
+  const { 
+    addEvent, 
+    events, 
+    currentEventIndex,
+    isPreviewMode,
+    previewEventId,
+    navigatePrevious,
+    navigateNext,
+    previewEvent,
+    exitPreview,
+    restoreToEvent,
+    getFilteredEvents,
+  } = useVersionStore();
+  
+  const { nodes, edges } = useCanvasStore();
+  const { currentProjectId } = useWorkflowStore();
+  
+  // Track node changes
+  const trackNodeChange = useCallback((
+    changeType: 'added' | 'updated' | 'deleted',
+    node: Node,
+    previousNode?: Node
+  ) => {
+    if (!currentProjectId || isPreviewMode) return;
+    
+    addEvent({
+      projectId: currentProjectId,
+      eventType: `node_${changeType}`,
+      eventData: {
+        beforeState: previousNode || null,
+        afterState: changeType === 'deleted' ? null : node,
+        changesDiff: {
+          nodeId: node.id,
+          nodeType: node.type,
+          changes: changeType,
+        },
+        metadata: {
+          triggeredBy: 'user_action',
+          nodeType: node.type || 'unknown',
+          nodeId: node.id,
+          description: `${changeType} ${node.type || 'node'}: ${node.data?.label || node.id}`,
+        },
+      },
+    });
+  }, [currentProjectId, isPreviewMode, addEvent]);
+  
+  // Track edge changes
+  const trackEdgeChange = useCallback((
+    changeType: 'added' | 'removed',
+    edge: Edge
+  ) => {
+    if (!currentProjectId || isPreviewMode) return;
+    
+    addEvent({
+      projectId: currentProjectId,
+      eventType: `edge_${changeType}`,
+      eventData: {
+        beforeState: changeType === 'removed' ? edge : null,
+        afterState: changeType === 'added' ? edge : null,
+        metadata: {
+          triggeredBy: 'user_action',
+          description: `${changeType} edge from ${edge.source} to ${edge.target}`,
+        },
+      },
+    });
+  }, [currentProjectId, isPreviewMode, addEvent]);
+  
+  // Track validation events
+  const trackValidation = useCallback((
+    nodeId: string,
+    nodeType: string,
+    success: boolean,
+    details?: any
+  ) => {
+    if (!currentProjectId || isPreviewMode) return;
+    
+    addEvent({
+      projectId: currentProjectId,
+      eventType: 'validation',
+      eventData: {
+        afterState: { nodeId, success, details },
+        metadata: {
+          triggeredBy: 'ai_validation',
+          nodeId,
+          nodeType,
+          description: `${nodeType} validation ${success ? 'succeeded' : 'failed'}`,
+        },
+      },
+    });
+  }, [currentProjectId, isPreviewMode, addEvent]);
+  
+  // Track generation events
+  const trackGeneration = useCallback((
+    generationType: string,
+    results: any[],
+    metadata?: any
+  ) => {
+    if (!currentProjectId || isPreviewMode) return;
+    
+    addEvent({
+      projectId: currentProjectId,
+      eventType: 'generation',
+      eventData: {
+        afterState: { generationType, results, count: results.length },
+        metadata: {
+          triggeredBy: 'ai_generation',
+          description: `Generated ${results.length} ${generationType}`,
+          ...metadata,
+        },
+      },
+    });
+  }, [currentProjectId, isPreviewMode, addEvent]);
+  
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      // Only handle shortcuts when not typing in an input
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+        return;
+      }
+      
+      // Navigate with arrow keys
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        navigatePrevious();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        navigateNext();
+      } else if (e.key === 'Escape' && isPreviewMode) {
+        e.preventDefault();
+        exitPreview();
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [navigatePrevious, navigateNext, isPreviewMode, exitPreview]);
+  
+  return {
+    events,
+    currentEventIndex,
+    isPreviewMode,
+    previewEventId,
+    
+    // Actions
+    trackNodeChange,
+    trackEdgeChange,
+    trackValidation,
+    trackGeneration,
+    navigatePrevious,
+    navigateNext,
+    previewEvent,
+    exitPreview,
+    restoreToEvent,
+    getFilteredEvents,
+    
+    // Computed values
+    canNavigatePrevious: currentEventIndex > 0,
+    canNavigateNext: currentEventIndex < events.length - 1,
+    totalEvents: events.length,
+  };
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/hooks/useWorkflowProgress.ts
+```ts
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useWorkflowStore } from '../stores/workflowStore';
+import { useCanvasStore } from '../stores/canvasStore';
+import { useLockStore } from '../stores/lockStore';
+import type { WorkflowStep } from '../types/workflow.types';
+
+interface WorkflowProgress {
+  currentStep: number;
+  totalSteps: number;
+  completedSteps: number[];
+  lockedSteps: number[];
+  personas: Array<{
+    id: string;
+    name: string;
+    role: string;
+    pain_degree: number;
+  }>;
+  connections: {
+    painPoints: number;
+    solutions: number;
+  };
+  documentProgress: {
+    current: number;
+    total: number;
+  };
+  canNavigate: boolean;
+  navigateToStep: (stepIndex: number) => void;
+}
+
+const stepMapping: Record<WorkflowStep, number> = {
+  'problem_input': 0,
+  'persona_discovery': 1,
+  'pain_points': 2,
+  'solution_generation': 3,
+  'user_stories': 4,
+  'architecture': 5,
+  'export': 6
+};
+
+export const useWorkflowProgress = (): WorkflowProgress => {
+  const currentWorkflowStep = useWorkflowStore(state => state.currentStep);
+  const nodes = useCanvasStore(state => state.nodes);
+  const edges = useCanvasStore(state => state.edges);
+  const lockedNodes = useLockStore(state => state.lockedItems);
+  
+  // Map workflow step to progress index
+  const currentStep = useMemo(() => {
+    return stepMapping[currentWorkflowStep] ?? 0;
+  }, [currentWorkflowStep]);
+
+  // Calculate completed steps based on node data
+  const completedSteps = useMemo(() => {
+    const completed: number[] = [];
+    
+    // Problem input is completed if we have a validated problem node
+    const problemNode = nodes.find(n => n.type === 'coreProblem' && n.data.validated);
+    if (problemNode) completed.push(0);
+    
+    // Persona discovery is completed if we have personas
+    const personaNodes = nodes.filter(n => n.type === 'persona');
+    if (personaNodes.length > 0) completed.push(1);
+    
+    // Pain points completed if we have pain point nodes
+    const painPointNodes = nodes.filter(n => n.type === 'painPoint');
+    if (painPointNodes.length > 0) completed.push(2);
+    
+    // Solutions completed if we have solution nodes
+    const solutionNodes = nodes.filter(n => n.type === 'solution');
+    if (solutionNodes.length > 0) completed.push(3);
+    
+    // User stories completed if we have user story nodes
+    const userStoryNodes = nodes.filter(n => n.type === 'userStory');
+    if (userStoryNodes.length > 0) completed.push(4);
+    
+    // Architecture completed if we have document nodes
+    const documentNodes = nodes.filter(n => n.type === 'document' && n.data.status === 'completed');
+    if (documentNodes.length > 0) completed.push(5);
+    
+    return completed;
+  }, [nodes]);
+
+  // Get locked steps based on locked nodes
+  const lockedSteps = useMemo(() => {
+    const locked: number[] = [];
+    
+    // Check if any nodes of each type are locked
+    const hasLockedProblem = nodes.some(n => n.type === 'coreProblem' && lockedNodes.has(n.id));
+    if (hasLockedProblem) locked.push(0);
+    
+    const hasLockedPersona = nodes.some(n => n.type === 'persona' && lockedNodes.has(n.id));
+    if (hasLockedPersona) locked.push(1);
+    
+    const hasLockedPainPoint = nodes.some(n => n.type === 'painPoint' && lockedNodes.has(n.id));
+    if (hasLockedPainPoint) locked.push(2);
+    
+    const hasLockedSolution = nodes.some(n => n.type === 'solution' && lockedNodes.has(n.id));
+    if (hasLockedSolution) locked.push(3);
+    
+    return locked;
+  }, [nodes, lockedNodes]);
+
+  // Extract personas
+  const personas = useMemo(() => {
+    return nodes
+      .filter(n => n.type === 'persona')
+      .map(n => ({
+        id: n.id,
+        name: String(n.data.name || 'Unknown'),
+        role: String(n.data.role || 'Unknown Role'),
+        pain_degree: Number(n.data.pain_degree || 5)
+      }));
+  }, [nodes]);
+
+  // Count connections
+  const connections = useMemo(() => {
+    const painPointNodes = nodes.filter(n => n.type === 'painPoint');
+    const solutionNodes = nodes.filter(n => n.type === 'solution');
+    
+    return {
+      painPoints: painPointNodes.length,
+      solutions: solutionNodes.length
+    };
+  }, [nodes]);
+
+  // Calculate document progress
+  const documentProgress = useMemo(() => {
+    const documentNodes = nodes.filter(n => n.type === 'document');
+    const completedDocs = documentNodes.filter(n => n.data.status === 'completed');
+    
+    return {
+      current: completedDocs.length,
+      total: Math.max(documentNodes.length, 7) // Assume 7 documents total for all steps
+    };
+  }, [nodes]);
+
+  // Navigation handler
+  const navigateToStep = useCallback((stepIndex: number) => {
+    const stepNames: WorkflowStep[] = [
+      'problem_input',
+      'persona_discovery',
+      'pain_points',
+      'solution_generation',
+      'user_stories',
+      'architecture',
+      'export'
+    ];
+    
+    if (stepIndex >= 0 && stepIndex < stepNames.length) {
+      const targetStep = stepNames[stepIndex];
+      useWorkflowStore.getState().setCurrentStep(targetStep);
+      
+      // Could also focus on relevant nodes in the canvas
+      // This would require implementing canvas navigation
+    }
+  }, []);
+
+  return {
+    currentStep,
+    totalSteps: 7,
+    completedSteps,
+    lockedSteps,
+    personas,
+    connections,
+    documentProgress,
+    canNavigate: true,
+    navigateToStep
+  };
+};
 ```
 
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/services/api/client.ts
@@ -4465,6 +20096,13 @@ class ApiClient {
 
         // Add request interceptors
         const headers = await this.addRequestInterceptors()
+        
+        // Debug logging
+        console.log('[ApiClient] Invoking edge function:', functionName, {
+          payload,
+          headers,
+          payloadStringified: JSON.stringify(payload)
+        })
         
         // Create a promise that rejects when the signal is aborted
         const requestPromise = this.supabase.functions.invoke(functionName, {
@@ -5396,6 +21034,128 @@ class ExportService {
 
 export const exportAPI = new ExportService()
 
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/services/api/goldidocs.ts
+```ts
+import { supabase } from '@/services/supabase/client';
+import type { DocumentType, DocumentStatus } from '@/components/layout/Sidebar/types';
+
+export interface GoldiDocsStatusResponse {
+  document_type: DocumentType;
+  doc_status: DocumentStatus;
+  doc_generated_at: string | null;
+  doc_version: string | null;
+}
+
+export const goldiDocsAPI = {
+  // Get GoldiDocs status for a project
+  async getStatus(projectId: string): Promise<GoldiDocsStatusResponse[]> {
+    const { data, error } = await supabase
+      .rpc('get_goldidocs_status', { p_project_id: projectId });
+
+    if (error) {
+      console.error('Error fetching GoldiDocs status:', error);
+      throw error;
+    }
+
+    return data || [];
+  },
+
+  // Get simplified status view
+  async getStatusView(projectId: string) {
+    const { data, error } = await supabase
+      .from('goldidocs_status')
+      .select('*')
+      .eq('project_id', projectId)
+      .single();
+
+    if (error) {
+      console.error('Error fetching GoldiDocs status view:', error);
+      throw error;
+    }
+
+    return data;
+  },
+
+  // Generate a document
+  async generateDocument(projectId: string, documentType: DocumentType) {
+    // This would call an edge function or backend API to generate the document
+    // For now, we'll just simulate it
+    console.log(`Generating ${documentType} document for project ${projectId}`);
+    
+    // TODO: Implement actual document generation
+    // const { data, error } = await supabase.functions.invoke(`generate-${documentType.toLowerCase()}`, {
+    //   body: { projectId }
+    // });
+
+    return { success: true };
+  },
+
+  // Get document content
+  async getDocumentContent(projectId: string, documentType: DocumentType) {
+    const tableMap: Record<DocumentType, string> = {
+      PV: 'product_vision',
+      FR: 'functional_requirements',
+      SA: 'system_architecture',
+      DF: 'data_flow_diagrams',
+      ER: 'entity_relationship_diagrams',
+      DS: 'design_systems'
+    };
+
+    const table = tableMap[documentType];
+
+    // Special handling for system_architecture
+    if (documentType === 'SA') {
+      const { data, error } = await supabase
+        .from(table)
+        .select('*')
+        .eq('project_id', projectId)
+        .order('created_at', { ascending: false })
+        .limit(1);
+
+      if (error) throw error;
+      return data?.[0];
+    }
+
+    // Standard handling for other documents
+    const { data, error } = await supabase
+      .from(table)
+      .select('*')
+      .eq('project_id', projectId)
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .single();
+
+    if (error && error.code !== 'PGRST116') {
+      console.error(`Error fetching ${documentType} content:`, error);
+      throw error;
+    }
+
+    return data;
+  },
+
+  // Queue document generation
+  async queueDocumentGeneration(projectId: string, documentType: DocumentType, priority: number = 5) {
+    const { data, error } = await supabase
+      .from('document_generation_queue')
+      .insert({
+        project_id: projectId,
+        document_type: documentType,
+        priority,
+        status: 'pending'
+      })
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error queuing document generation:', error);
+      throw error;
+    }
+
+    return data;
+  }
+}; 
 ```
 
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/services/api/personas.ts
@@ -6618,19 +22378,24 @@ export const problemApi = {
         console.log('[problemApi] Personas response status:', response.status);
         const data = await response.json();
         console.log('[problemApi] Personas response data:', data);
+        console.log('[problemApi] Response is array:', Array.isArray(data));
+        console.log('[problemApi] First persona detail:', Array.isArray(data) ? data[0] : data.personas?.[0]);
         
         if (!response.ok) {
           throw new Error(data.error?.message || `HTTP ${response.status}`);
         }
         
-        // Return the personas array from the edge function
-        return data.personas || [];
+        // Handle both response structures: direct array or object with personas property
+        const personas = Array.isArray(data) ? data : (data.personas || []);
+        console.log('[problemApi] Returning personas:', personas.length);
+        
+        return personas;
         
       } catch (error) {
         console.error('[problemApi] Generate personas failed:', error);
         
         // Return mock personas for now
-        console.log('[problemApi] Returning mock personas');
+        console.log('[problemApi] USING MOCK PERSONAS DUE TO ERROR');
         return [
           {
             id: crypto.randomUUID(),
@@ -6671,12 +22436,88 @@ export const problemApi = {
     
     generatePainPoints: async (
       projectId: string,
-      personaId: string,
-      lockedPainPointIds: string[]
+      personas: any[],
+      lockedPainPointIds: string[] = []
     ): Promise<any[]> => {
-      // TODO: Implement when you have pain points service
-      console.warn('generatePainPoints not implemented yet');
-      return [];
+      console.log('[problemApi] Generating pain points with edge function');
+      console.log('[problemApi] Project ID:', projectId);
+      console.log('[problemApi] Personas count:', personas.length);
+      
+      // Get the core problem text from the workflow store
+      const { useWorkflowStore } = await import('@/stores/workflowStore');
+      const coreProblem = useWorkflowStore.getState().coreProblem;
+      const coreProblemText = coreProblem?.description || '';
+      
+      console.log('[problemApi] Core Problem Text:', coreProblemText);
+      
+      // Get auth token
+      const { supabase } = await import('@/services/supabase/client');
+      const { data: { session } } = await supabase.auth.getSession();
+      const authToken = session?.access_token;
+      
+      if (!authToken) {
+        throw new Error('Not authenticated');
+      }
+      
+      try {
+        const response = await fetch('https://tyfmxjzcocjztocwemun.supabase.co/functions/v1/generate-pain-points', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`,
+            'x-request-id': crypto.randomUUID()
+          },
+          body: JSON.stringify({
+            projectId: projectId,
+            coreProblem: coreProblemText,
+            personas: personas,
+            lockedPainPointIds: lockedPainPointIds
+          })
+        });
+        
+        console.log('[problemApi] Pain points response status:', response.status);
+        const data = await response.json();
+        console.log('[problemApi] Pain points response data:', data);
+        
+        if (!response.ok) {
+          throw new Error(data.error?.message || `HTTP ${response.status}`);
+        }
+        
+        // Handle both response structures: direct array or object with painPoints property
+        const painPoints = Array.isArray(data) ? data : (data.painPoints || data.pain_points || []);
+        console.log('[problemApi] Returning pain points:', painPoints.length);
+        
+        return painPoints;
+        
+      } catch (error) {
+        console.error('[problemApi] Generate pain points failed:', error);
+        
+        // Return mock pain points for now
+        console.log('[problemApi] USING MOCK PAIN POINTS DUE TO ERROR');
+        return [
+          {
+            id: crypto.randomUUID(),
+            description: 'Time-consuming manual processes that slow down productivity',
+            severity: 'high',
+            impactArea: 'Operational Efficiency',
+            frequency: 'daily'
+          },
+          {
+            id: crypto.randomUUID(),
+            description: 'Lack of real-time visibility into project status and progress',
+            severity: 'medium',
+            impactArea: 'Project Management',
+            frequency: 'weekly'
+          },
+          {
+            id: crypto.randomUUID(),
+            description: 'Difficulty coordinating tasks across different teams and departments',
+            severity: 'high',
+            impactArea: 'Team Collaboration',
+            frequency: 'daily'
+          }
+        ];
+      }
     },
     
     generateSolutions: async (
@@ -6703,23 +22544,23 @@ File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/services/api/solution
 ```ts
 import { apiClient } from './client'
 import type { Solution, PainPoint, Persona, SolutionPainPointMapping } from '@/types/database.types'
+import type { CoreProblem } from '@/types/workflow.types'
 
 export interface SolutionGenerationRequest {
-  persona: Persona
+  coreProblem: CoreProblem
+  personas: Persona[]
   painPoints: PainPoint[]
-  lockedSolutions: Solution[]
-  projectId: string
-  generationBatch: string
 }
 
 export interface SolutionGenerationResponse {
-  solutions: Solution[]
-  mappings: SolutionPainPointMapping[]
-  analysisMetadata: {
-    feasibilityScores: Record<string, number>
-    complexityAnalysis: Record<string, string>
-    implementationTimeEstimates: Record<string, string>
-  }
+  solutions: Array<{
+    id: string
+    title: string
+    description: string
+    complexity: 'low' | 'medium' | 'high'
+    impact: 'low' | 'medium' | 'high'
+    aligned_personas: string[]
+  }>
 }
 
 export interface SolutionAnalysis {
@@ -6731,28 +22572,59 @@ export interface SolutionAnalysis {
 
 export class SolutionsService {
   /**
-   * Generates solutions based on selected persona and pain points
+   * Generates solutions based on core problem, personas and pain points
    */
   async generateSolutions(request: SolutionGenerationRequest): Promise<SolutionGenerationResponse> {
+    console.log('[SolutionsService] Calling generate-solutions edge function with:', {
+      coreProblem: request.coreProblem.validatedProblem || request.coreProblem.originalInput,
+      personasCount: request.personas.length,
+      painPointsCount: request.painPoints.length
+    });
+
+    const edgeFunctionPayload = {
+      coreProblem: {
+        id: request.coreProblem.id,
+        validated_problem: request.coreProblem.validatedProblem || request.coreProblem.originalInput
+      },
+      personas: request.personas.map(p => ({
+        id: p.id,
+        name: p.name,
+        role: p.demographics?.role || 'Unknown',
+        industry: p.demographics?.industry || 'Unknown',
+        description: p.description
+      })),
+      painPoints: request.painPoints.map(pp => {
+        // Handle both number and string severity types
+        const severityNum = typeof pp.severity === 'number' ? pp.severity : 
+                           pp.severity === 'high' ? 8 : pp.severity === 'medium' ? 5 : 3;
+        return {
+          id: pp.id,
+          description: pp.description,
+          severity: severityNum <= 3 ? 'low' : severityNum <= 6 ? 'medium' : 'high',
+          persona_id: pp.persona_id
+        }
+      })
+    }
+    
+    console.log('[SolutionsService] Edge function payload:', edgeFunctionPayload)
+    console.log('[SolutionsService] Payload JSON string:', JSON.stringify(edgeFunctionPayload))
+    
     const response = await apiClient.invokeEdgeFunction<SolutionGenerationResponse>(
       'generate-solutions',
-      {
-        persona: request.persona,
-        painPoints: request.painPoints,
-        lockedSolutions: request.lockedSolutions,
-        projectId: request.projectId,
-        generationBatch: request.generationBatch,
-      }
+      edgeFunctionPayload
     )
 
     if (response.error) {
+      console.error('[SolutionsService] Edge function error:', response.error);
       throw new Error(`Solution generation failed: ${response.error.message}`)
     }
 
     if (!response.data) {
+      console.error('[SolutionsService] No data in response');
       throw new Error('No solution data received')
     }
 
+    console.log('[SolutionsService] Solutions generated:', response.data.solutions);
     return response.data
   }
 
@@ -7184,8 +23056,297 @@ export const tauriAPI = {
 }
 ```
 
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/services/tauri/fileSystem.ts
+```ts
+import { invoke } from '@tauri-apps/api/core';
+import { open, save } from '@tauri-apps/plugin-dialog';
+import { readTextFile, writeTextFile, exists, mkdir } from '@tauri-apps/plugin-fs';
+import { join, appDataDir } from '@tauri-apps/api/path';
+import { Command } from '@tauri-apps/plugin-shell';
+
+interface WorkspaceFileData {
+  version: string;
+  workspaceId: string;
+  lastModified: string;
+  workflow: any;
+  metadata?: {
+    name?: string;
+    description?: string;
+    createdAt?: string;
+  };
+}
+
+export class TauriFileSystem {
+  private static readonly WORKSPACE_FILENAME = 'gauntlet-workspace.json';
+  
+  /**
+   * Check if we're running in Tauri environment
+   */
+  static isTauri(): boolean {
+    return typeof window !== 'undefined' && '__TAURI__' in window;
+  }
+
+  /**
+   * Open directory picker dialog
+   */
+  static async selectDirectory(): Promise<string | null> {
+    if (!this.isTauri()) {
+      console.warn('Not running in Tauri environment');
+      return null;
+    }
+
+    try {
+      const selected = await open({
+        directory: true,
+        multiple: false,
+        title: 'Select Workspace Directory',
+      });
+      
+      return selected as string | null;
+    } catch (error) {
+      console.error('Error selecting directory:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Save workspace data to a file in the selected directory
+   */
+  static async saveWorkspaceToDirectory(
+    directory: string,
+    workspaceId: string,
+    data: any
+  ): Promise<void> {
+    if (!this.isTauri()) {
+      throw new Error('Not running in Tauri environment');
+    }
+
+    const workspaceData: WorkspaceFileData = {
+      version: '1.0.0',
+      workspaceId,
+      lastModified: new Date().toISOString(),
+      workflow: data,
+    };
+
+    const filePath = await join(directory, this.WORKSPACE_FILENAME);
+    const content = JSON.stringify(workspaceData, null, 2);
+    
+    await writeTextFile(filePath, content);
+  }
+
+  /**
+   * Load workspace data from a directory
+   */
+  static async loadWorkspaceFromDirectory(
+    directory: string
+  ): Promise<WorkspaceFileData | null> {
+    if (!this.isTauri()) {
+      throw new Error('Not running in Tauri environment');
+    }
+
+    try {
+      const filePath = await join(directory, this.WORKSPACE_FILENAME);
+      
+      // Check if file exists
+      const fileExists = await exists(filePath);
+      if (!fileExists) {
+        return null;
+      }
+
+      const content = await readTextFile(filePath);
+      return JSON.parse(content) as WorkspaceFileData;
+    } catch (error) {
+      console.error('Error loading workspace:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Export workspace data using save dialog
+   */
+  static async exportWorkspace(
+    workspaceId: string,
+    data: any,
+    defaultFileName?: string
+  ): Promise<void> {
+    if (!this.isTauri()) {
+      throw new Error('Not running in Tauri environment');
+    }
+
+    const workspaceData: WorkspaceFileData = {
+      version: '1.0.0',
+      workspaceId,
+      lastModified: new Date().toISOString(),
+      workflow: data,
+    };
+
+    const filePath = await save({
+      defaultPath: defaultFileName || `workspace-${Date.now()}.json`,
+      filters: [{
+        name: 'JSON',
+        extensions: ['json']
+      }],
+      title: 'Export Workspace',
+    });
+
+    if (filePath) {
+      const content = JSON.stringify(workspaceData, null, 2);
+      await writeTextFile(filePath, content);
+    }
+  }
+
+  /**
+   * Import workspace data from file
+   */
+  static async importWorkspace(): Promise<WorkspaceFileData | null> {
+    if (!this.isTauri()) {
+      throw new Error('Not running in Tauri environment');
+    }
+
+    const selected = await open({
+      multiple: false,
+      filters: [{
+        name: 'JSON',
+        extensions: ['json']
+      }],
+      title: 'Import Workspace',
+    });
+
+    if (selected && typeof selected === 'string') {
+      try {
+        const content = await readTextFile(selected);
+        return JSON.parse(content) as WorkspaceFileData;
+      } catch (error) {
+        console.error('Error importing workspace:', error);
+        throw new Error('Failed to parse workspace file');
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Get app data directory for storing workspace metadata
+   */
+  static async getAppDataDirectory(): Promise<string> {
+    if (!this.isTauri()) {
+      throw new Error('Not running in Tauri environment');
+    }
+
+    const appDir = await appDataDir();
+    const workspacesDir = await join(appDir, 'workspaces');
+    
+    // Ensure directory exists
+    const dirExists = await exists(workspacesDir);
+    if (!dirExists) {
+      await mkdir(workspacesDir, { recursive: true });
+    }
+    
+    return workspacesDir;
+  }
+
+  /**
+   * Save workspace metadata (directory associations, etc.)
+   */
+  static async saveWorkspaceMetadata(
+    workspaceId: string,
+    metadata: { directory?: string; [key: string]: any }
+  ): Promise<void> {
+    if (!this.isTauri()) {
+      // Fallback to localStorage
+      localStorage.setItem(`workspace_meta_${workspaceId}`, JSON.stringify(metadata));
+      return;
+    }
+
+    const appDir = await this.getAppDataDirectory();
+    const metaPath = await join(appDir, `${workspaceId}.meta.json`);
+    await writeTextFile(metaPath, JSON.stringify(metadata, null, 2));
+  }
+
+  /**
+   * Load workspace metadata
+   */
+  static async loadWorkspaceMetadata(workspaceId: string): Promise<any | null> {
+    if (!this.isTauri()) {
+      // Fallback to localStorage
+      const data = localStorage.getItem(`workspace_meta_${workspaceId}`);
+      return data ? JSON.parse(data) : null;
+    }
+
+    try {
+      const appDir = await this.getAppDataDirectory();
+      const metaPath = await join(appDir, `${workspaceId}.meta.json`);
+      
+      const fileExists = await exists(metaPath);
+      if (!fileExists) {
+        return null;
+      }
+
+      const content = await readTextFile(metaPath);
+      return JSON.parse(content);
+    } catch (error) {
+      console.error('Error loading workspace metadata:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Open terminal at specified directory
+   */
+  static async openTerminal(directory: string): Promise<void> {
+    if (!this.isTauri()) {
+      // Fallback for browser
+      console.log('Opening terminal at:', directory);
+      alert(`Terminal would open at: ${directory}\n\nThis feature requires the desktop app.`);
+      return;
+    }
+
+    // Platform-specific terminal commands
+    const platform = await invoke<string>('get_platform');
+    
+    try {
+      switch (platform) {
+        case 'darwin': // macOS
+          await Command.create('open', ['-a', 'Terminal', directory]).execute();
+          break;
+        case 'windows':
+          await Command.create('cmd', ['/c', 'start', 'cmd', '/k', 'cd', directory]).execute();
+          break;
+        case 'linux':
+          // Try common terminal emulators
+          try {
+            await Command.create('gnome-terminal', ['--working-directory', directory]).execute();
+          } catch {
+            // Try alternative terminals
+            try {
+              await Command.create('xterm', ['-e', `cd ${directory} && bash`]).execute();
+            } catch {
+              await Command.create('konsole', ['--workdir', directory]).execute();
+            }
+          }
+          break;
+        default:
+          throw new Error(`Unsupported platform: ${platform}`);
+      }
+    } catch (error) {
+      console.error('Error opening terminal:', error);
+      throw error;
+    }
+  }
+}
+```
+
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/services/index.ts
 ```ts
+export * from './supabase/client'
+export * from './tauri/api'
+export * from './tauri/fileSystem'
+export * from './api/client'
+export * from './api/personas'
+export * from './api/problem'
+export * from './api/solutions'
+export { goldiDocsAPI } from './api/goldidocs'
+export type { GoldiDocsStatusResponse } from './api/goldidocs'
 
 ```
 
@@ -7253,6 +23414,10 @@ interface CanvasStoreState {
   // Layout
   layoutType: 'hierarchical' | 'force' | 'grid'
   nodeSpacing: { x: number; y: number }
+  
+  // Force layout state
+  forceLayoutMode: boolean
+  selectedPersonaId: string | null
 }
 
 interface CanvasActions {
@@ -7262,6 +23427,7 @@ interface CanvasActions {
   updateNode: (nodeId: string, updates: Partial<Node>) => void
   removeNode: (nodeId: string) => void
   onNodesChange: (changes: NodeChange[]) => void
+  handleNodeExpansion: (nodeId: string, heightDiff: number) => void
   
   // Edge operations
   addEdge: (edge: Edge) => void
@@ -7275,6 +23441,7 @@ interface CanvasActions {
   setViewport: (viewport: Viewport) => void
   fitView: () => void
   zoomTo: (level: number) => void
+
   
   // Selection
   selectNode: (nodeId: string) => void
@@ -7286,6 +23453,10 @@ interface CanvasActions {
   applyLayout: (layoutType: 'hierarchical' | 'force' | 'grid') => void
   calculateNodePositions: (nodes: Node[]) => Node[]
   setNodeSpacing: (spacing: { x: number; y: number }) => void
+  
+  // Force layout
+  setForceLayoutMode: (enabled: boolean) => void
+  setSelectedPersonaId: (personaId: string | null) => void
   
   // Persistence
   saveCanvasState: () => Promise<void>
@@ -7329,7 +23500,9 @@ const initialState: CanvasStoreState = {
   hoveredNodeId: null,
   isAnimating: false,
   layoutType: 'hierarchical',
-  nodeSpacing: { x: 200, y: 150 }
+  nodeSpacing: { x: 200, y: 150 },
+  forceLayoutMode: false,
+  selectedPersonaId: null
 }
 
 // Debounce utility for auto-save
@@ -7404,6 +23577,43 @@ export const useCanvasStore = create<CanvasStoreState & CanvasActions>()(
         debouncedSave()
       },
 
+      handleNodeExpansion: (nodeId, heightDiff) => {
+        set((state) => {
+          const expandedNode = state.nodes.find(n => n.id === nodeId);
+          if (!expandedNode) return state;
+          
+          // Find all nodes below the expanded node
+          const expandedNodeY = expandedNode.position.y;
+          const nodesBelow = state.nodes.filter(n => 
+            n.id !== nodeId && n.position.y > expandedNodeY
+          );
+          
+          // Update positions of nodes below
+          const updatedNodes = state.nodes.map(node => {
+            if (node.id === nodeId) {
+              // Don't update height here - let React Flow handle it
+              return node;
+            } else if (nodesBelow.some(n => n.id === node.id)) {
+              // Shift nodes below
+              return {
+                ...node,
+                position: {
+                  ...node.position,
+                  y: node.position.y + heightDiff
+                }
+              };
+            }
+            return node;
+          });
+          
+          return {
+            nodes: updatedNodes,
+            isDirty: true
+          };
+        });
+        debouncedSave();
+      },
+
       // Edge operations
       addEdge: (edge) => {
         set((state) => ({
@@ -7457,8 +23667,9 @@ export const useCanvasStore = create<CanvasStoreState & CanvasActions>()(
 
       // Viewport
       setViewport: (viewport) => {
-        set({ viewport, isDirty: true })
-        debouncedSave()
+        set({ viewport })
+        // Don't mark as dirty or trigger save for viewport changes
+        // Viewport changes are frequent and don't need to be persisted immediately
       },
 
       fitView: () => {
@@ -7470,11 +23681,12 @@ export const useCanvasStore = create<CanvasStoreState & CanvasActions>()(
 
       zoomTo: (level) => {
         set((state) => ({ 
-          viewport: { ...state.viewport, zoom: level },
-          isDirty: true
+          viewport: { ...state.viewport, zoom: level }
         }))
-        debouncedSave()
+        // Don't mark as dirty or trigger save for programmatic zoom changes
       },
+
+
 
       // Selection
       selectNode: (nodeId) => {
@@ -7769,6 +23981,23 @@ export const useCanvasStore = create<CanvasStoreState & CanvasActions>()(
         return state.nodes.filter(node => connectedNodeIds.includes(node.id))
       },
 
+      // Force layout
+      setForceLayoutMode: (enabled: boolean) => {
+        set({ forceLayoutMode: enabled })
+        if (!enabled) {
+          // Reset to hierarchical layout when disabling force mode
+          set({ selectedPersonaId: null })
+        }
+      },
+
+      setSelectedPersonaId: (personaId: string | null) => {
+        set({ selectedPersonaId: personaId })
+        if (personaId) {
+          // Enable force layout when selecting a persona
+          set({ forceLayoutMode: true })
+        }
+      },
+
       // Reset
       resetCanvas: () => {
         set({
@@ -7900,20 +24129,21 @@ export function initializeCanvasSubscriptions() {
       const workflowState = useWorkflowStore.getState()
       
       // React to step changes with appropriate layout
-      switch (currentStep) {
-        case 'persona_discovery':
-          canvasStore.applyLayout('hierarchical')
-          break
-        case 'pain_points':
-          canvasStore.applyLayout('hierarchical')
-          break
-        case 'solution_generation':
-          canvasStore.applyLayout('force')
-          break
-        case 'user_stories':
-          canvasStore.applyLayout('hierarchical')
-          break
-      }
+      // NOTE: Commented out automatic layout application to preserve custom positioning
+      // switch (currentStep) {
+      //   case 'persona_discovery':
+      //     canvasStore.applyLayout('hierarchical')
+      //     break
+      //   case 'pain_points':
+      //     canvasStore.applyLayout('hierarchical')
+      //     break
+      //   case 'solution_generation':
+      //     canvasStore.applyLayout('force')
+      //     break
+      //   case 'user_stories':
+      //     canvasStore.applyLayout('hierarchical')
+      //     break
+      // }
       
       // Sync with current workflow state
       canvasStore.syncWithWorkflow(workflowState)
@@ -8089,12 +24319,163 @@ export { useUIStore } from './uiStore'
  */ 
 ```
 
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/stores/lockStore.ts
+```ts
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
+
+export interface LockState {
+  lockedItems: Map<string, {
+    nodeId: string;
+    nodeType: string;
+    lockedAt: string;
+    lockedBy: string;
+    expiresAt?: string;
+  }>;
+  
+  // Actions
+  lockItem: (nodeId: string, nodeType: string, userId: string) => void;
+  unlockItem: (nodeId: string) => void;
+  toggleLock: (nodeId: string, nodeType: string, userId: string) => void;
+  bulkLock: (nodeIds: string[], nodeType: string, userId: string) => void;
+  bulkUnlock: (nodeIds: string[]) => void;
+  isLocked: (nodeId: string) => boolean;
+  getLockedCount: () => number;
+  getLockedItemsByType: (nodeType: string) => string[];
+  clearExpiredLocks: () => void;
+  syncWithDatabase: (locks: any[]) => void;
+}
+
+export const useLockStore = create<LockState>()(
+  devtools(
+    (set, get) => ({
+      lockedItems: new Map(),
+      
+      lockItem: (nodeId, nodeType, userId) => {
+        const now = new Date();
+        const expiresAt = new Date(now.getTime() + 24 * 60 * 60 * 1000); // 24 hours
+        
+        set((state) => {
+          const newLocks = new Map(state.lockedItems);
+          newLocks.set(nodeId, {
+            nodeId,
+            nodeType,
+            lockedAt: now.toISOString(),
+            lockedBy: userId,
+            expiresAt: expiresAt.toISOString(),
+          });
+          return { lockedItems: newLocks };
+        });
+      },
+      
+      unlockItem: (nodeId) => {
+        set((state) => {
+          const newLocks = new Map(state.lockedItems);
+          newLocks.delete(nodeId);
+          return { lockedItems: newLocks };
+        });
+      },
+      
+      toggleLock: (nodeId, nodeType, userId) => {
+        const { isLocked, lockItem, unlockItem } = get();
+        if (isLocked(nodeId)) {
+          unlockItem(nodeId);
+        } else {
+          lockItem(nodeId, nodeType, userId);
+        }
+      },
+      
+      bulkLock: (nodeIds, nodeType, userId) => {
+        const now = new Date();
+        const expiresAt = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+        
+        set((state) => {
+          const newLocks = new Map(state.lockedItems);
+          nodeIds.forEach((nodeId) => {
+            newLocks.set(nodeId, {
+              nodeId,
+              nodeType,
+              lockedAt: now.toISOString(),
+              lockedBy: userId,
+              expiresAt: expiresAt.toISOString(),
+            });
+          });
+          return { lockedItems: newLocks };
+        });
+      },
+      
+      bulkUnlock: (nodeIds) => {
+        set((state) => {
+          const newLocks = new Map(state.lockedItems);
+          nodeIds.forEach((nodeId) => {
+            newLocks.delete(nodeId);
+          });
+          return { lockedItems: newLocks };
+        });
+      },
+      
+      isLocked: (nodeId) => {
+        return get().lockedItems.has(nodeId);
+      },
+      
+      getLockedCount: () => {
+        return get().lockedItems.size;
+      },
+      
+      getLockedItemsByType: (nodeType) => {
+        const items: string[] = [];
+        get().lockedItems.forEach((lock, nodeId) => {
+          if (lock.nodeType === nodeType) {
+            items.push(nodeId);
+          }
+        });
+        return items;
+      },
+      
+      clearExpiredLocks: () => {
+        const now = new Date();
+        set((state) => {
+          const newLocks = new Map(state.lockedItems);
+          state.lockedItems.forEach((lock, nodeId) => {
+            if (lock.expiresAt && new Date(lock.expiresAt) < now) {
+              newLocks.delete(nodeId);
+            }
+          });
+          return { lockedItems: newLocks };
+        });
+      },
+      
+      syncWithDatabase: (locks) => {
+        set(() => {
+          const newLocks = new Map();
+          locks.forEach((lock) => {
+            newLocks.set(lock.nodeId, {
+              nodeId: lock.nodeId,
+              nodeType: lock.nodeType,
+              lockedAt: lock.lockedAt,
+              lockedBy: lock.lockedBy,
+              expiresAt: lock.expiresAt,
+            });
+          });
+          return { lockedItems: newLocks };
+        });
+      },
+    }),
+    {
+      name: 'lock-store',
+    }
+  )
+);
+```
+
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/stores/projectStore.ts
 ```ts
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { tauriAPI } from '@/services/tauri/api'
+import { goldiDocsAPI, type GoldiDocsStatusResponse } from '@/services/api/goldidocs'
 import type { Workspace, Project, User } from '@/types/database.types'
+import type { ProjectWithGoldiDocs } from '@/components/layout/Sidebar/types'
 
 // Import other stores for integration
 import { useWorkflowStore } from './workflowStore'
@@ -8110,7 +24491,8 @@ interface ProjectStoreState {
   activeWorkspaceId: string | null
   
   // Project data
-  projects: Project[]
+  projects: ProjectWithGoldiDocs[]
+  projectMap: Map<string, ProjectWithGoldiDocs>
   activeProjectId: string | null
   recentProjects: string[] // Project IDs
   
@@ -8161,6 +24543,7 @@ const useProjectStore = create<ProjectStore>()(
       workspaces: [],
       activeWorkspaceId: null,
       projects: [],
+      projectMap: new Map<string, ProjectWithGoldiDocs>(),
       activeProjectId: null,
       recentProjects: [],
       isLoadingWorkspaces: false,
@@ -8273,15 +24656,57 @@ const useProjectStore = create<ProjectStore>()(
         
         set({ isLoadingProjects: true })
         try {
+          // Fetch projects from API or database
           // TODO: Implement getProjects in Tauri API
-          console.warn('loadProjects not yet implemented in Tauri API')
-          set({ isLoadingProjects: false, projects: [] })
+          // For now, return empty array or mock data
+          const projects: Project[] = []
           
-          // For now, show placeholder message
-          uiStore.showInfo('Projects loading not yet implemented')
+          // Fetch GoldiDocs status for each project
+          const projectsWithGoldiDocs: ProjectWithGoldiDocs[] = await Promise.all(
+            projects.map(async (project: Project) => {
+              try {
+                const docsStatus = await goldiDocsAPI.getStatus(project.id)
+                
+                // Transform the API response to our frontend format
+                const documents = docsStatus.map((doc: GoldiDocsStatusResponse) => ({
+                  type: doc.document_type,
+                  status: doc.doc_status || 'pending',
+                  generatedAt: doc.doc_generated_at ? new Date(doc.doc_generated_at) : undefined,
+                  version: doc.doc_version ? parseInt(doc.doc_version) : 1
+                }))
+                
+                const completedCount = documents.filter(d => d.status === 'complete').length
+                
+                return {
+                  ...project,
+                  goldiDocs: {
+                    documents,
+                    totalCount: 6,
+                    completedCount
+                  }
+                }
+              } catch (error) {
+                console.error(`Error fetching GoldiDocs status for project ${project.id}:`, error)
+                // Return project without GoldiDocs data if fetch fails
+                return project as ProjectWithGoldiDocs
+              }
+            })
+          )
+          
+          // Update project map
+          const projectMap = new Map(get().projectMap)
+          projectsWithGoldiDocs.forEach(project => {
+            projectMap.set(project.id, project)
+          })
+          
+          set({ 
+            projects: projectsWithGoldiDocs,
+            projectMap,
+            isLoadingProjects: false 
+          })
         } catch (error) {
-          console.error('Failed to load projects:', error)
-          uiStore.showError('Failed to load projects', error instanceof Error ? error.message : 'Unknown error')
+          console.error('Error loading projects:', error)
+          uiStore.showError('Failed to load projects')
           set({ isLoadingProjects: false })
         }
       },
@@ -8812,16 +25237,181 @@ export type { Notification, ModalType, UIStoreState, UIActions }
 
 ```
 
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/stores/versionStore.ts
+```ts
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
+
+export interface VersionEvent {
+  id: string;
+  projectId: string;
+  eventType: 'node_added' | 'node_updated' | 'node_deleted' | 'validation' | 'generation' | 'edge_added' | 'edge_removed' | 'lock_toggled' | 'refresh';
+  timestamp: string;
+  eventData: {
+    beforeState?: any;
+    afterState?: any;
+    changesDiff?: any;
+    metadata: {
+      triggeredBy: string;
+      lockedItems?: string[];
+      description: string;
+      nodeType?: string;
+      nodeId?: string;
+    };
+  };
+}
+
+interface VersionState {
+  events: VersionEvent[];
+  currentEventIndex: number;
+  isPreviewMode: boolean;
+  previewEventId: string | null;
+  
+  // Actions
+  addEvent: (event: Omit<VersionEvent, 'id' | 'timestamp'>) => void;
+  navigateToEvent: (eventId: string) => void;
+  previewEvent: (eventId: string) => void;
+  exitPreview: () => void;
+  restoreToEvent: (eventId: string) => void;
+  navigatePrevious: () => void;
+  navigateNext: () => void;
+  
+  // Getters
+  getCurrentState: () => any;
+  getEventById: (eventId: string) => VersionEvent | undefined;
+  getFilteredEvents: (filter: string[]) => VersionEvent[];
+}
+
+export const useVersionStore = create<VersionState>()(
+  devtools(
+    (set, get) => ({
+      events: [],
+      currentEventIndex: -1,
+      isPreviewMode: false,
+      previewEventId: null,
+      
+      addEvent: (event) => {
+        const newEvent: VersionEvent = {
+          ...event,
+          id: crypto.randomUUID(),
+          timestamp: new Date().toISOString(),
+        };
+        
+        set((state) => ({
+          events: [...state.events, newEvent],
+          currentEventIndex: state.events.length,
+        }));
+      },
+      
+      navigateToEvent: (eventId) => {
+        const { events } = get();
+        const index = events.findIndex((e) => e.id === eventId);
+        if (index !== -1) {
+          set({ currentEventIndex: index });
+        }
+      },
+      
+      previewEvent: (eventId) => {
+        set({ isPreviewMode: true, previewEventId: eventId });
+      },
+      
+      exitPreview: () => {
+        set({ isPreviewMode: false, previewEventId: null });
+      },
+      
+      restoreToEvent: (eventId) => {
+        const { events } = get();
+        const index = events.findIndex((e) => e.id === eventId);
+        if (index !== -1) {
+          // Create a restore event
+          const restoreEvent: Omit<VersionEvent, 'id' | 'timestamp'> = {
+            projectId: events[index].projectId,
+            eventType: 'node_updated',
+            eventData: {
+              beforeState: events[get().currentEventIndex]?.eventData.afterState,
+              afterState: events[index].eventData.afterState,
+              metadata: {
+                triggeredBy: 'version_restore',
+                description: `Restored to version from ${new Date(events[index].timestamp).toLocaleString()}`,
+              },
+            },
+          };
+          
+          get().addEvent(restoreEvent);
+        }
+      },
+      
+      navigatePrevious: () => {
+        const { currentEventIndex } = get();
+        if (currentEventIndex > 0) {
+          set({ currentEventIndex: currentEventIndex - 1 });
+        }
+      },
+      
+      navigateNext: () => {
+        const { currentEventIndex, events } = get();
+        if (currentEventIndex < events.length - 1) {
+          set({ currentEventIndex: currentEventIndex + 1 });
+        }
+      },
+      
+      getCurrentState: () => {
+        const { events, currentEventIndex } = get();
+        if (currentEventIndex >= 0 && currentEventIndex < events.length) {
+          return events[currentEventIndex].eventData.afterState;
+        }
+        return null;
+      },
+      
+      getEventById: (eventId) => {
+        return get().events.find((e) => e.id === eventId);
+      },
+      
+      getFilteredEvents: (filter) => {
+        if (filter.length === 0) return get().events;
+        return get().events.filter((e) => filter.includes(e.eventType));
+      },
+    }),
+    {
+      name: 'version-store',
+    }
+  )
+);
+```
+
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/stores/workflowStore.ts
 ```ts
 import { create } from 'zustand'
 import { subscribeWithSelector } from 'zustand/middleware'
 import { tauriAPI } from '@/services/tauri/api'
+import { problemApi } from '@/services/api/problem'
 import type { WorkflowStep } from '@/types/workflow.types'
 
 // Import other stores for integration
 import { useCanvasStore } from './canvasStore'
 import { useUIStore } from './uiStore'
+
+// Helper functions for pain point transformation
+const mapSeverityToNumber = (severity: string): number => {
+  const severityMap: Record<string, number> = {
+    'low': 1,
+    'medium': 3,
+    'high': 4,
+    'critical': 5
+  }
+  return severityMap[severity.toLowerCase()] || 3
+}
+
+const mapFrequencyToNumber = (frequency: string): number => {
+  const frequencyMap: Record<string, number> = {
+    'rarely': 1,
+    'monthly': 2,
+    'weekly': 3,
+    'daily': 4,
+    'constantly': 5
+  }
+  return frequencyMap[frequency.toLowerCase()] || 3
+}
 
 // Import or define types (these should match your database schema)
 export interface CoreProblem {
@@ -8867,6 +25457,8 @@ export interface Solution {
   project_id: string
   title: string
   description: string
+  solution_type?: string
+  complexity?: string
   feasibility_score: number
   impact_score: number
   effort_estimate: string
@@ -8915,6 +25507,7 @@ interface WorkflowState {
   
   // Pain points data
   painPoints: PainPoint[]
+  focusedPainPointId: string | null
   
   // Solutions data
   solutions: Solution[]
@@ -8959,6 +25552,8 @@ interface WorkflowActions {
   generatePainPoints: () => Promise<void>
   regeneratePainPoints: () => Promise<void>
   togglePainPointLock: (painPointId: string) => void
+  focusOnPainPoint: (painPointId: string) => void
+  clearPainPointFocus: () => void
   
   // Solution management
   generateSolutions: () => Promise<void>
@@ -8991,6 +25586,7 @@ const initialState: WorkflowState = {
   activePersonaId: null,
   personaGenerationBatch: null,
   painPoints: [],
+  focusedPainPointId: null,
   solutions: [],
   solutionMappings: [],
   selectedSolutionIds: new Set(),
@@ -9013,6 +25609,9 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
     // Navigation
     setCurrentStep: (step) => {
       set({ currentStep: step })
+      
+      // NOTE: Canvas navigation is now handled by WorkflowCanvas component
+      // using the useCanvasNavigation hook for responsive positioning
       
       // Notify canvas store of step change
       // NOTE: Don't call syncWithWorkflow here - WorkflowCanvas handles the nodes directly
@@ -9063,6 +25662,7 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
         'persona_discovery',
         'pain_points',
         'solution_generation',
+        'focus_group',
         'user_stories',
         'architecture'
       ]
@@ -9097,6 +25697,7 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
         'persona_discovery',
         'pain_points',
         'solution_generation',
+        'focus_group',
         'user_stories',
         'architecture'
       ]
@@ -9131,22 +25732,25 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
       
       set({ isValidating: true })
       try {
-        // Call Tauri API to validate and analyze problem
-        const analysis = await tauriAPI.analyzeProblem(input)
-        // TODO: Parse analysis and create CoreProblem object
+        // Call the problem validation edge function
+        const { problemApi } = await import('@/services/api/problem')
         const projectId = get().projectId || crypto.randomUUID()
-        const coreProblem: CoreProblem = {
-          id: crypto.randomUUID(),
-          project_id: projectId,
-          description: input,
-          is_validated: true,
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
-        }
         
         // Ensure we have a project ID
         if (!get().projectId) {
           set({ projectId })
+        }
+        
+        // Call the actual problem validation API
+        const validationResult = await problemApi.validateProblem(input)
+        
+        const coreProblem: CoreProblem = {
+          id: validationResult.coreProblemId || crypto.randomUUID(), // Use the ID returned from the API, fallback to random UUID
+          project_id: projectId,
+          description: input,
+          is_validated: validationResult.isValid,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
         }
         
         set({ coreProblem, problemInput: input })
@@ -9239,7 +25843,9 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
             is_locked: false,
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
-          }))
+            // Add pain_degree to the raw persona object for WorkflowCanvas
+            pain_degree: persona.pain_degree || 3
+          } as Persona & { pain_degree?: number }))
           
           // Combine with locked personas
           const allPersonas = [...lockedPersonas, ...personas]
@@ -9262,6 +25868,15 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
           console.warn('[workflowStore] UIStore showSuccess failed:', error)
         }
         
+        // Automatically trigger pain points generation after personas are generated
+        if (personas.length > 0) {
+          console.log('[workflowStore] Auto-triggering pain points generation...')
+          setTimeout(() => {
+            const { generatePainPoints } = get()
+            generatePainPoints()
+          }, 1000) // Small delay to let UI update
+        }
+        
       } catch (error) {
         console.error('Persona generation failed:', error)
         uiStore.showError('Persona generation failed', error instanceof Error ? error.message : 'Unknown error')
@@ -9271,20 +25886,84 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
     },
 
     regeneratePersonas: async () => {
+      console.log('[workflowStore] regeneratePersonas called')
       const state = get()
-      const unlockedPersonas = state.personas.filter(p => !state.lockedItems.personas.has(p.id))
+      
+      if (!state.coreProblem || !state.projectId) {
+        console.log('[workflowStore] regeneratePersonas early return - missing coreProblem or projectId')
+        return
+      }
+      
+      const lockedPersonas = state.personas.filter(p => state.lockedItems.personas.has(p.id))
+      const unlockedPersonasCount = state.personas.length - lockedPersonas.length
+      
+      console.log('[workflowStore] Regenerating personas:', {
+        totalPersonas: state.personas.length,
+        lockedPersonas: lockedPersonas.length,
+        toRegenerate: unlockedPersonasCount
+      })
+      
       const uiStore = useUIStore.getState()
       
       set({ isGeneratingPersonas: true })
       try {
-        // TODO: Call Tauri API to regenerate unlocked personas
-        // const newPersonas = await tauriAPI.regeneratePersonas(unlockedPersonas.map(p => p.id))
-        // Update only unlocked personas
+        // Import personas API
+        const { problemApi } = await import('@/services/api/problem')
         
-        // Notify canvas store
-        const canvasStore = useCanvasStore.getState()
-        canvasStore.syncWithWorkflow(get())
-        uiStore.showSuccess(`Regenerated ${unlockedPersonas.length} personas`)
+        const batchId = crypto.randomUUID()
+        
+        // Call the edge function to generate personas, passing locked persona IDs
+        console.log('[workflowStore] Calling problemApi.generatePersonas with locked personas:', lockedPersonas.map(p => p.id))
+        const response = await problemApi.generatePersonas(
+          state.projectId,
+          state.coreProblem.id,
+          lockedPersonas.map(p => p.id)
+        )
+        console.log('[workflowStore] Regeneration response:', response)
+        
+        // Transform the response to match our Persona interface
+        const newPersonas: Persona[] = response.map((persona: any) => ({
+          id: persona.id || crypto.randomUUID(),
+          project_id: state.projectId!,
+          name: persona.name,
+          description: persona.description,
+          demographics: { 
+            industry: persona.industry || 'Unknown',
+            role: persona.role || 'Unknown',
+            ...persona.demographics 
+          },
+          psychographics: persona.psychographics || {},
+          goals: persona.goals || [],
+          frustrations: persona.frustrations || [],
+          batch_id: batchId,
+          is_locked: false,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          // Add pain_degree to the raw persona object for WorkflowCanvas
+          pain_degree: persona.pain_degree || 3
+        } as Persona & { pain_degree?: number }))
+        
+        // Combine locked personas with new personas
+        const allPersonas = [...lockedPersonas, ...newPersonas]
+        
+        set({ 
+          personas: allPersonas,
+          personaGenerationBatch: batchId
+        })
+        
+        console.log('[workflowStore] Personas regenerated:', {
+          locked: lockedPersonas.length,
+          new: newPersonas.length,
+          total: allPersonas.length
+        })
+        
+        // Notify canvas and UI stores
+        // NOTE: Don't call syncWithWorkflow here - WorkflowCanvas handles the nodes directly
+        try {
+          uiStore.showSuccess(`Regenerated ${newPersonas.length} personas (${lockedPersonas.length} locked)`)
+        } catch (error) {
+          console.warn('[workflowStore] UIStore showSuccess failed:', error)
+        }
         
       } catch (error) {
         console.error('Persona regeneration failed:', error)
@@ -9327,11 +26006,8 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
         }
       })
       
-      // Notify canvas and UI stores
-      const canvasStore = useCanvasStore.getState()
+      // Notify UI store only - WorkflowCanvas handles the visual updates
       const uiStore = useUIStore.getState()
-      
-      canvasStore.syncWithWorkflow(get())
       
       const persona = get().personas.find(p => p.id === personaId)
       const isLocked = get().lockedItems.personas.has(personaId)
@@ -9344,20 +26020,67 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
     // Pain point management
     generatePainPoints: async () => {
       const state = get()
-      if (!state.activePersonaId) return
+      if (!state.projectId || !state.coreProblem) {
+        console.warn('[workflowStore] Cannot generate pain points: missing project ID or core problem')
+        return
+      }
 
       const uiStore = useUIStore.getState()
+      const batchId = crypto.randomUUID()
       
       set({ isGeneratingPainPoints: true })
       try {
-        // TODO: Call Tauri API to generate pain points
-        // const painPoints = await tauriAPI.generatePainPoints(state.activePersonaId)
-        set({ painPoints: [] }) // TODO: Set actual pain points from API
+        console.log('[workflowStore] Generating pain points...')
+        console.log('[workflowStore] Using personas:', state.personas.length)
         
-        // Notify canvas and UI stores
-        const canvasStore = useCanvasStore.getState()
-        canvasStore.syncWithWorkflow(get())
-        uiStore.showSuccess('Pain points generated successfully')
+        // Get locked pain points
+        const lockedPainPoints = state.painPoints.filter(p => state.lockedItems.painPoints.has(p.id))
+        
+        const response = await problemApi.generatePainPoints(
+          state.projectId,
+          state.personas, // Pass all personas to the API
+          lockedPainPoints.map(p => p.id)
+        )
+        console.log('[workflowStore] problemApi.generatePainPoints response:', response)
+        
+                 // Transform the response to match our PainPoint interface
+        const painPoints: PainPoint[] = response.map((painPoint: any) => ({
+          id: painPoint.id || crypto.randomUUID(),
+          project_id: state.projectId!,
+          persona_id: '', // Pain points can be associated with multiple personas
+          title: painPoint.title || painPoint.description?.split('.')[0] || 'Untitled Pain Point',
+          description: painPoint.description,
+          severity: mapSeverityToNumber(painPoint.severity || 'medium'),
+          frequency: painPoint.frequency ? mapFrequencyToNumber(painPoint.frequency) : 3,
+          impact: painPoint.impactArea || painPoint.impact || 'General',
+          is_locked: false,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        } as PainPoint))
+        
+        // Combine with locked pain points
+        const allPainPoints = [...lockedPainPoints, ...painPoints]
+        
+        set({ 
+          painPoints: allPainPoints,
+          currentStep: 'pain_points' // Advance to pain points step
+        })
+        
+        console.log('[workflowStore] Pain points generated:', allPainPoints.length)
+        
+        // Show success message
+        try {
+          uiStore.showSuccess(`Generated ${painPoints.length} new pain points`)
+        } catch (error) {
+          console.warn('[workflowStore] UIStore showSuccess failed:', error)
+        }
+        
+        // Generate solutions after pain points are generated
+        console.log('[workflowStore] Triggering solution generation after pain points...')
+        setTimeout(() => {
+          const workflowStore = useWorkflowStore.getState()
+          workflowStore.generateSolutions()
+        }, 1000) // Small delay to ensure UI updates first
         
       } catch (error) {
         console.error('Pain point generation failed:', error)
@@ -9423,18 +26146,94 @@ export const useWorkflowStore = create<WorkflowState & WorkflowActions>()(
       )
     },
 
+    focusOnPainPoint: (painPointId) => {
+      set({ focusedPainPointId: painPointId })
+      
+      // Find the pain point and its associated persona
+      const state = get()
+      const painPoint = state.painPoints.find(p => p.id === painPointId)
+      if (painPoint) {
+        // Set the active persona to the one associated with this pain point
+        set({ activePersonaId: painPoint.persona_id })
+        
+        // Notify UI
+        const uiStore = useUIStore.getState()
+        uiStore.showInfo('Focused on pain point', painPoint.title)
+      }
+    },
+
+    clearPainPointFocus: () => {
+      set({ focusedPainPointId: null })
+      
+      // Notify UI
+      const uiStore = useUIStore.getState()
+      uiStore.showInfo('Returned to main view')
+    },
+
     // Solution management
     generateSolutions: async () => {
       const state = get()
-      if (state.painPoints.length === 0) return
+      if (!state.coreProblem || state.personas.length === 0 || state.painPoints.length === 0) {
+        console.warn('[workflowStore] Cannot generate solutions without core problem, personas, and pain points')
+        return
+      }
 
       const uiStore = useUIStore.getState()
       
       set({ isGeneratingSolutions: true })
       try {
-        // TODO: Call Tauri API to generate solutions
-        // const solutions = await tauriAPI.generateSolutions(state.painPoints.map(p => p.id))
-        set({ solutions: [], solutionMappings: [] }) // TODO: Set actual data from API
+        console.log('[workflowStore] generateSolutions called, importing solutions API...')
+        const { solutionsService } = await import('@/services/api/solutions')
+        
+        // Call the edge function with the new format
+        const response = await solutionsService.generateSolutions({
+          coreProblem: {
+            id: state.coreProblem.id,
+            projectId: state.projectId!,
+            originalInput: state.coreProblem.description,
+            validatedProblem: state.coreProblem.description, // Use description as validated problem
+            isValid: state.coreProblem.is_validated,
+            validationFeedback: '',
+            version: 1,
+            createdAt: state.coreProblem.created_at
+          },
+          personas: state.personas.map(p => ({
+            ...p,
+            behaviors: [],
+            is_selected: false
+          })) as any,
+          painPoints: state.painPoints.map(pp => ({
+            ...pp,
+            category: 'general',
+            is_selected: false
+          })) as any
+        })
+        
+        console.log('[workflowStore] Solutions response:', response)
+        
+        // Transform the response solutions to match our Solution interface
+        const solutions: Solution[] = response.solutions.map((sol, index) => ({
+          id: sol.id,
+          project_id: state.projectId!,
+          title: sol.title,
+          description: sol.description,
+          solution_type: 'feature', // Default type since edge function doesn't return it
+          complexity: sol.complexity,
+          feasibility_score: sol.complexity === 'low' ? 3 : sol.complexity === 'medium' ? 6 : 9,
+          impact_score: sol.impact === 'low' ? 3 : sol.impact === 'medium' ? 6 : 9,
+          effort_estimate: sol.complexity,
+          is_locked: false,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        }))
+        
+        set({ 
+          solutions,
+          solutionMappings: [], // No mappings in the new format
+          currentStep: 'solution_generation' // Advance to solutions step
+        })
+        
+        console.log('[workflowStore] Solutions set in store:', solutions.length)
         
         // Notify canvas and UI stores
         const canvasStore = useCanvasStore.getState()
@@ -9743,6 +26542,3123 @@ export interface User {
     created_at: string
     updated_at: string
   }
+
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[]
+
+export type Database = {
+  public: {
+    Tables: {
+      atomic_components: {
+        Row: {
+          component_level: string
+          component_name: string
+          composed_of: Json | null
+          created_at: string | null
+          description: string | null
+          id: string
+          project_id: string | null
+          props: Json | null
+        }
+        Insert: {
+          component_level: string
+          component_name: string
+          composed_of?: Json | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          project_id?: string | null
+          props?: Json | null
+        }
+        Update: {
+          component_level?: string
+          component_name?: string
+          composed_of?: Json | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          project_id?: string | null
+          props?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "atomic_components_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "atomic_components_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      canvas_states: {
+        Row: {
+          change_description: string | null
+          created_at: string | null
+          created_by: string | null
+          edges: Json
+          id: string
+          is_current: boolean | null
+          locked_items: Json | null
+          nodes: Json
+          parent_version_id: string | null
+          project_id: string | null
+          step_completed: boolean | null
+          updated_at: string | null
+          version: number
+          viewport: Json | null
+          workflow_step: string
+        }
+        Insert: {
+          change_description?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          edges: Json
+          id?: string
+          is_current?: boolean | null
+          locked_items?: Json | null
+          nodes: Json
+          parent_version_id?: string | null
+          project_id?: string | null
+          step_completed?: boolean | null
+          updated_at?: string | null
+          version?: number
+          viewport?: Json | null
+          workflow_step?: string
+        }
+        Update: {
+          change_description?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          edges?: Json
+          id?: string
+          is_current?: boolean | null
+          locked_items?: Json | null
+          nodes?: Json
+          parent_version_id?: string | null
+          project_id?: string | null
+          step_completed?: boolean | null
+          updated_at?: string | null
+          version?: number
+          viewport?: Json | null
+          workflow_step?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "canvas_states_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "canvas_states_parent_version_id_fkey"
+            columns: ["parent_version_id"]
+            isOneToOne: false
+            referencedRelation: "canvas_states"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "canvas_states_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "canvas_states_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      canvas_transitions: {
+        Row: {
+          created_at: string | null
+          from_step: string
+          id: string
+          is_active: boolean | null
+          project_id: string | null
+          to_step: string
+          transition_config: Json | null
+          transition_type: string
+        }
+        Insert: {
+          created_at?: string | null
+          from_step: string
+          id?: string
+          is_active?: boolean | null
+          project_id?: string | null
+          to_step: string
+          transition_config?: Json | null
+          transition_type: string
+        }
+        Update: {
+          created_at?: string | null
+          from_step?: string
+          id?: string
+          is_active?: boolean | null
+          project_id?: string | null
+          to_step?: string
+          transition_config?: Json | null
+          transition_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "canvas_transitions_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "canvas_transitions_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      core_problems: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_valid: boolean | null
+          original_input: string
+          project_id: string | null
+          validated_problem: string | null
+          validation_feedback: string | null
+          version: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          is_valid?: boolean | null
+          original_input: string
+          project_id?: string | null
+          validated_problem?: string | null
+          validation_feedback?: string | null
+          version?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_valid?: boolean | null
+          original_input?: string
+          project_id?: string | null
+          validated_problem?: string | null
+          validation_feedback?: string | null
+          version?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "core_problems_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "core_problems_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      data_flow_diagrams: {
+        Row: {
+          context_description: string | null
+          context_system_name: string
+          created_at: string | null
+          data_flows: Json
+          data_stores: Json
+          diagram_levels: Json | null
+          external_entities: Json
+          id: string
+          processes: Json
+          project_id: string
+          updated_at: string | null
+          version: string | null
+        }
+        Insert: {
+          context_description?: string | null
+          context_system_name: string
+          created_at?: string | null
+          data_flows: Json
+          data_stores: Json
+          diagram_levels?: Json | null
+          external_entities: Json
+          id?: string
+          processes: Json
+          project_id: string
+          updated_at?: string | null
+          version?: string | null
+        }
+        Update: {
+          context_description?: string | null
+          context_system_name?: string
+          created_at?: string | null
+          data_flows?: Json
+          data_stores?: Json
+          diagram_levels?: Json | null
+          external_entities?: Json
+          id?: string
+          processes?: Json
+          project_id?: string
+          updated_at?: string | null
+          version?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "data_flow_diagrams_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "data_flow_diagrams_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      data_flow_steps: {
+        Row: {
+          action: string
+          created_at: string | null
+          data_flow_id: string | null
+          data_payload: string | null
+          id: string
+          source: string
+          step_number: number
+          target: string
+        }
+        Insert: {
+          action: string
+          created_at?: string | null
+          data_flow_id?: string | null
+          data_payload?: string | null
+          id?: string
+          source: string
+          step_number: number
+          target: string
+        }
+        Update: {
+          action?: string
+          created_at?: string | null
+          data_flow_id?: string | null
+          data_payload?: string | null
+          id?: string
+          source?: string
+          step_number?: number
+          target?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "data_flow_steps_data_flow_id_fkey"
+            columns: ["data_flow_id"]
+            isOneToOne: false
+            referencedRelation: "data_flows"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      data_flows: {
+        Row: {
+          created_at: string | null
+          description: string
+          id: string
+          user_story_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description: string
+          id?: string
+          user_story_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string
+          id?: string
+          user_story_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "data_flows_user_story_id_fkey"
+            columns: ["user_story_id"]
+            isOneToOne: false
+            referencedRelation: "user_stories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      database_columns: {
+        Row: {
+          column_name: string
+          constraints: Json | null
+          created_at: string | null
+          data_type: string
+          id: string
+          is_foreign_key: boolean | null
+          is_primary_key: boolean | null
+          references_table: string | null
+          table_id: string | null
+        }
+        Insert: {
+          column_name: string
+          constraints?: Json | null
+          created_at?: string | null
+          data_type: string
+          id?: string
+          is_foreign_key?: boolean | null
+          is_primary_key?: boolean | null
+          references_table?: string | null
+          table_id?: string | null
+        }
+        Update: {
+          column_name?: string
+          constraints?: Json | null
+          created_at?: string | null
+          data_type?: string
+          id?: string
+          is_foreign_key?: boolean | null
+          is_primary_key?: boolean | null
+          references_table?: string | null
+          table_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "database_columns_table_id_fkey"
+            columns: ["table_id"]
+            isOneToOne: false
+            referencedRelation: "database_tables"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      database_relationships: {
+        Row: {
+          created_at: string | null
+          from_table: string
+          id: string
+          project_id: string | null
+          relationship_type: string
+          to_table: string
+        }
+        Insert: {
+          created_at?: string | null
+          from_table: string
+          id?: string
+          project_id?: string | null
+          relationship_type: string
+          to_table: string
+        }
+        Update: {
+          created_at?: string | null
+          from_table?: string
+          id?: string
+          project_id?: string | null
+          relationship_type?: string
+          to_table?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "database_relationships_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "database_relationships_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      database_tables: {
+        Row: {
+          created_at: string | null
+          id: string
+          project_id: string | null
+          table_name: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          project_id?: string | null
+          table_name: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          project_id?: string | null
+          table_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "database_tables_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "database_tables_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      demo_templates: {
+        Row: {
+          animation_sequence: Json
+          created_at: string | null
+          edges: Json
+          id: string
+          is_active: boolean | null
+          loop_duration_ms: number | null
+          nodes: Json
+          priority: number | null
+          template_name: string
+          template_type: string | null
+          updated_at: string | null
+          viewport: Json | null
+        }
+        Insert: {
+          animation_sequence: Json
+          created_at?: string | null
+          edges: Json
+          id?: string
+          is_active?: boolean | null
+          loop_duration_ms?: number | null
+          nodes: Json
+          priority?: number | null
+          template_name: string
+          template_type?: string | null
+          updated_at?: string | null
+          viewport?: Json | null
+        }
+        Update: {
+          animation_sequence?: Json
+          created_at?: string | null
+          edges?: Json
+          id?: string
+          is_active?: boolean | null
+          loop_duration_ms?: number | null
+          nodes?: Json
+          priority?: number | null
+          template_name?: string
+          template_type?: string | null
+          updated_at?: string | null
+          viewport?: Json | null
+        }
+        Relationships: []
+      }
+      design_systems: {
+        Row: {
+          accessibility_guidelines: Json | null
+          assets: Json | null
+          brand_guidelines: string | null
+          brand_name: string
+          color_palette: Json
+          components: Json
+          created_at: string | null
+          design_principles: Json
+          icon_library: string | null
+          icon_style: string | null
+          id: string
+          motion_principles: Json | null
+          project_id: string
+          spacing_system: Json
+          typography: Json
+          ui_patterns: Json | null
+          updated_at: string | null
+          version: string | null
+        }
+        Insert: {
+          accessibility_guidelines?: Json | null
+          assets?: Json | null
+          brand_guidelines?: string | null
+          brand_name: string
+          color_palette: Json
+          components: Json
+          created_at?: string | null
+          design_principles: Json
+          icon_library?: string | null
+          icon_style?: string | null
+          id?: string
+          motion_principles?: Json | null
+          project_id: string
+          spacing_system: Json
+          typography: Json
+          ui_patterns?: Json | null
+          updated_at?: string | null
+          version?: string | null
+        }
+        Update: {
+          accessibility_guidelines?: Json | null
+          assets?: Json | null
+          brand_guidelines?: string | null
+          brand_name?: string
+          color_palette?: Json
+          components?: Json
+          created_at?: string | null
+          design_principles?: Json
+          icon_library?: string | null
+          icon_style?: string | null
+          id?: string
+          motion_principles?: Json | null
+          project_id?: string
+          spacing_system?: Json
+          typography?: Json
+          ui_patterns?: Json | null
+          updated_at?: string | null
+          version?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "design_systems_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "design_systems_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      design_tokens: {
+        Row: {
+          created_at: string | null
+          id: string
+          project_id: string | null
+          token_category: string
+          token_name: string
+          token_value: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          project_id?: string | null
+          token_category: string
+          token_name: string
+          token_value: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          project_id?: string | null
+          token_category?: string
+          token_name?: string
+          token_value?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "design_tokens_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "design_tokens_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      document_drift_reports: {
+        Row: {
+          affected_documents: Json
+          detected_at: string | null
+          drift_details: Json
+          drift_severity: string | null
+          id: string
+          project_id: string | null
+          resolution_metadata: Json | null
+          resolution_method: string | null
+          resolution_status: string | null
+          resolved_at: string | null
+          resolved_by: string | null
+        }
+        Insert: {
+          affected_documents: Json
+          detected_at?: string | null
+          drift_details: Json
+          drift_severity?: string | null
+          id?: string
+          project_id?: string | null
+          resolution_metadata?: Json | null
+          resolution_method?: string | null
+          resolution_status?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+        }
+        Update: {
+          affected_documents?: Json
+          detected_at?: string | null
+          drift_details?: Json
+          drift_severity?: string | null
+          id?: string
+          project_id?: string | null
+          resolution_metadata?: Json | null
+          resolution_method?: string | null
+          resolution_status?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "document_drift_reports_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "document_drift_reports_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_drift_reports_resolved_by_fkey"
+            columns: ["resolved_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      document_generation_queue: {
+        Row: {
+          completed_at: string | null
+          created_at: string | null
+          dependencies: Json | null
+          document_type: string
+          error_message: string | null
+          id: string
+          priority: number | null
+          project_id: string | null
+          retry_count: number | null
+          started_at: string | null
+          status: string | null
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string | null
+          dependencies?: Json | null
+          document_type: string
+          error_message?: string | null
+          id?: string
+          priority?: number | null
+          project_id?: string | null
+          retry_count?: number | null
+          started_at?: string | null
+          status?: string | null
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string | null
+          dependencies?: Json | null
+          document_type?: string
+          error_message?: string | null
+          id?: string
+          priority?: number | null
+          project_id?: string | null
+          retry_count?: number | null
+          started_at?: string | null
+          status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "document_generation_queue_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "document_generation_queue_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      document_templates: {
+        Row: {
+          created_at: string | null
+          created_by: string | null
+          description: string | null
+          document_type: string
+          id: string
+          is_public: boolean | null
+          name: string
+          template_config: Json
+        }
+        Insert: {
+          created_at?: string | null
+          created_by?: string | null
+          description?: string | null
+          document_type: string
+          id?: string
+          is_public?: boolean | null
+          name: string
+          template_config: Json
+        }
+        Update: {
+          created_at?: string | null
+          created_by?: string | null
+          description?: string | null
+          document_type?: string
+          id?: string
+          is_public?: boolean | null
+          name?: string
+          template_config?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "document_templates_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      edge_function_registry: {
+        Row: {
+          created_at: string | null
+          dependencies: Json | null
+          function_name: string
+          function_url: string
+          function_version: string
+          id: string
+          input_schema: Json | null
+          is_active: boolean | null
+          max_retries: number | null
+          output_schema: Json | null
+          timeout_ms: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          dependencies?: Json | null
+          function_name: string
+          function_url: string
+          function_version: string
+          id?: string
+          input_schema?: Json | null
+          is_active?: boolean | null
+          max_retries?: number | null
+          output_schema?: Json | null
+          timeout_ms?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          dependencies?: Json | null
+          function_name?: string
+          function_url?: string
+          function_version?: string
+          id?: string
+          input_schema?: Json | null
+          is_active?: boolean | null
+          max_retries?: number | null
+          output_schema?: Json | null
+          timeout_ms?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      entity_relationship_diagrams: {
+        Row: {
+          business_rules: Json | null
+          created_at: string | null
+          data_classifications: Json | null
+          entities: Json
+          id: string
+          indexes: Json | null
+          junction_tables: Json | null
+          project_id: string
+          relationships: Json
+          updated_at: string | null
+          version: string | null
+        }
+        Insert: {
+          business_rules?: Json | null
+          created_at?: string | null
+          data_classifications?: Json | null
+          entities: Json
+          id?: string
+          indexes?: Json | null
+          junction_tables?: Json | null
+          project_id: string
+          relationships: Json
+          updated_at?: string | null
+          version?: string | null
+        }
+        Update: {
+          business_rules?: Json | null
+          created_at?: string | null
+          data_classifications?: Json | null
+          entities?: Json
+          id?: string
+          indexes?: Json | null
+          junction_tables?: Json | null
+          project_id?: string
+          relationships?: Json
+          updated_at?: string | null
+          version?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "entity_relationship_diagrams_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "entity_relationship_diagrams_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      export_history: {
+        Row: {
+          created_at: string | null
+          created_by: string | null
+          export_config: Json | null
+          export_format: string
+          export_version: string | null
+          file_path: string | null
+          file_size_bytes: number | null
+          id: string
+          included_sections: Json | null
+          project_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          created_by?: string | null
+          export_config?: Json | null
+          export_format: string
+          export_version?: string | null
+          file_path?: string | null
+          file_size_bytes?: number | null
+          id?: string
+          included_sections?: Json | null
+          project_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          created_by?: string | null
+          export_config?: Json | null
+          export_format?: string
+          export_version?: string | null
+          file_path?: string | null
+          file_size_bytes?: number | null
+          id?: string
+          included_sections?: Json | null
+          project_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "export_history_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "export_history_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "export_history_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      focus_group_sessions: {
+        Row: {
+          completed_at: string | null
+          created_at: string | null
+          discussion_results: Json | null
+          discussion_topics: Json | null
+          duration_ms: number | null
+          facilitator_config: Json | null
+          id: string
+          persona_votes: Json
+          project_id: string | null
+          session_type: string | null
+          status: string | null
+          total_votes_available: number | null
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string | null
+          discussion_results?: Json | null
+          discussion_topics?: Json | null
+          duration_ms?: number | null
+          facilitator_config?: Json | null
+          id?: string
+          persona_votes: Json
+          project_id?: string | null
+          session_type?: string | null
+          status?: string | null
+          total_votes_available?: number | null
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string | null
+          discussion_results?: Json | null
+          discussion_topics?: Json | null
+          duration_ms?: number | null
+          facilitator_config?: Json | null
+          id?: string
+          persona_votes?: Json
+          project_id?: string | null
+          session_type?: string | null
+          status?: string | null
+          total_votes_available?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "focus_group_sessions_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "focus_group_sessions_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      functional_requirements: {
+        Row: {
+          created_at: string | null
+          data_validations: Json | null
+          error_scenarios: Json | null
+          features: Json
+          id: string
+          integrations: Json | null
+          project_id: string
+          updated_at: string | null
+          user_roles: Json | null
+          version: string | null
+          workflows: Json | null
+        }
+        Insert: {
+          created_at?: string | null
+          data_validations?: Json | null
+          error_scenarios?: Json | null
+          features: Json
+          id?: string
+          integrations?: Json | null
+          project_id: string
+          updated_at?: string | null
+          user_roles?: Json | null
+          version?: string | null
+          workflows?: Json | null
+        }
+        Update: {
+          created_at?: string | null
+          data_validations?: Json | null
+          error_scenarios?: Json | null
+          features?: Json
+          id?: string
+          integrations?: Json | null
+          project_id?: string
+          updated_at?: string | null
+          user_roles?: Json | null
+          version?: string | null
+          workflows?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "functional_requirements_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "functional_requirements_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      key_solutions: {
+        Row: {
+          complexity: string | null
+          created_at: string | null
+          description: string
+          generation_batch: string | null
+          id: string
+          is_locked: boolean | null
+          is_selected: boolean | null
+          must_have_features: Json | null
+          persona_id: string | null
+          position: number
+          project_id: string | null
+          solution_type: string | null
+          title: string
+          voting_results: Json | null
+        }
+        Insert: {
+          complexity?: string | null
+          created_at?: string | null
+          description: string
+          generation_batch?: string | null
+          id?: string
+          is_locked?: boolean | null
+          is_selected?: boolean | null
+          must_have_features?: Json | null
+          persona_id?: string | null
+          position: number
+          project_id?: string | null
+          solution_type?: string | null
+          title: string
+          voting_results?: Json | null
+        }
+        Update: {
+          complexity?: string | null
+          created_at?: string | null
+          description?: string
+          generation_batch?: string | null
+          id?: string
+          is_locked?: boolean | null
+          is_selected?: boolean | null
+          must_have_features?: Json | null
+          persona_id?: string | null
+          position?: number
+          project_id?: string | null
+          solution_type?: string | null
+          title?: string
+          voting_results?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "key_solutions_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "key_solutions_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "key_solutions_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      langgraph_execution_logs: {
+        Row: {
+          created_at: string | null
+          error_message: string | null
+          execution_time_ms: number | null
+          id: string
+          input_state: Json | null
+          node_name: string
+          output_state: Json | null
+          project_id: string | null
+          retry_count: number | null
+          status: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          error_message?: string | null
+          execution_time_ms?: number | null
+          id?: string
+          input_state?: Json | null
+          node_name: string
+          output_state?: Json | null
+          project_id?: string | null
+          retry_count?: number | null
+          status?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          error_message?: string | null
+          execution_time_ms?: number | null
+          id?: string
+          input_state?: Json | null
+          node_name?: string
+          output_state?: Json | null
+          project_id?: string | null
+          retry_count?: number | null
+          status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "langgraph_execution_logs_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "langgraph_execution_logs_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      langgraph_state_events: {
+        Row: {
+          after_state: Json | null
+          before_state: Json | null
+          created_at: string | null
+          created_by: string | null
+          event_data: Json
+          event_metadata: Json | null
+          event_priority: number | null
+          event_type: string
+          id: string
+          project_id: string | null
+          sequence_number: number
+          state_diff: Json | null
+        }
+        Insert: {
+          after_state?: Json | null
+          before_state?: Json | null
+          created_at?: string | null
+          created_by?: string | null
+          event_data: Json
+          event_metadata?: Json | null
+          event_priority?: number | null
+          event_type: string
+          id?: string
+          project_id?: string | null
+          sequence_number: number
+          state_diff?: Json | null
+        }
+        Update: {
+          after_state?: Json | null
+          before_state?: Json | null
+          created_at?: string | null
+          created_by?: string | null
+          event_data?: Json
+          event_metadata?: Json | null
+          event_priority?: number | null
+          event_type?: string
+          id?: string
+          project_id?: string | null
+          sequence_number?: number
+          state_diff?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "langgraph_state_events_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "langgraph_state_events_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "langgraph_state_events_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lock_management: {
+        Row: {
+          expires_at: string | null
+          id: string
+          lock_type: string | null
+          locked_at: string | null
+          locked_by: string | null
+          project_id: string | null
+          record_id: string
+          table_name: string
+          unlock_reason: string | null
+          unlocked_at: string | null
+        }
+        Insert: {
+          expires_at?: string | null
+          id?: string
+          lock_type?: string | null
+          locked_at?: string | null
+          locked_by?: string | null
+          project_id?: string | null
+          record_id: string
+          table_name: string
+          unlock_reason?: string | null
+          unlocked_at?: string | null
+        }
+        Update: {
+          expires_at?: string | null
+          id?: string
+          lock_type?: string | null
+          locked_at?: string | null
+          locked_by?: string | null
+          project_id?: string | null
+          record_id?: string
+          table_name?: string
+          unlock_reason?: string | null
+          unlocked_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lock_management_locked_by_fkey"
+            columns: ["locked_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lock_management_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "lock_management_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pain_points: {
+        Row: {
+          created_at: string | null
+          description: string
+          generation_batch: string | null
+          id: string
+          impact_area: string | null
+          is_locked: boolean | null
+          persona_id: string | null
+          position: number
+          severity: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description: string
+          generation_batch?: string | null
+          id?: string
+          impact_area?: string | null
+          is_locked?: boolean | null
+          persona_id?: string | null
+          position: number
+          severity?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string
+          generation_batch?: string | null
+          id?: string
+          impact_area?: string | null
+          is_locked?: boolean | null
+          persona_id?: string | null
+          position?: number
+          severity?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pain_points_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "personas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      personas: {
+        Row: {
+          core_problem_id: string | null
+          created_at: string | null
+          generation_batch: string | null
+          id: string
+          industry: string
+          is_active: boolean | null
+          is_locked: boolean | null
+          name: string
+          pain_degree: number | null
+          position: number
+          role: string
+        }
+        Insert: {
+          core_problem_id?: string | null
+          created_at?: string | null
+          generation_batch?: string | null
+          id?: string
+          industry: string
+          is_active?: boolean | null
+          is_locked?: boolean | null
+          name: string
+          pain_degree?: number | null
+          position: number
+          role: string
+        }
+        Update: {
+          core_problem_id?: string | null
+          created_at?: string | null
+          generation_batch?: string | null
+          id?: string
+          industry?: string
+          is_active?: boolean | null
+          is_locked?: boolean | null
+          name?: string
+          pain_degree?: number | null
+          position?: number
+          role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "personas_core_problem_id_fkey"
+            columns: ["core_problem_id"]
+            isOneToOne: false
+            referencedRelation: "core_problems"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      product_vision: {
+        Row: {
+          assumptions: Json | null
+          constraints: Json | null
+          created_at: string | null
+          elevator_pitch: string
+          id: string
+          key_differentiators: Json | null
+          market_opportunity: string | null
+          milestones: Json | null
+          problem_statement: string
+          product_name: string
+          project_id: string
+          risks: Json | null
+          stakeholders: Json | null
+          success_metrics: Json
+          target_audience: Json
+          updated_at: string | null
+          value_propositions: Json
+          version: string | null
+          vision_statement: string
+        }
+        Insert: {
+          assumptions?: Json | null
+          constraints?: Json | null
+          created_at?: string | null
+          elevator_pitch: string
+          id?: string
+          key_differentiators?: Json | null
+          market_opportunity?: string | null
+          milestones?: Json | null
+          problem_statement: string
+          product_name: string
+          project_id: string
+          risks?: Json | null
+          stakeholders?: Json | null
+          success_metrics: Json
+          target_audience: Json
+          updated_at?: string | null
+          value_propositions: Json
+          version?: string | null
+          vision_statement: string
+        }
+        Update: {
+          assumptions?: Json | null
+          constraints?: Json | null
+          created_at?: string | null
+          elevator_pitch?: string
+          id?: string
+          key_differentiators?: Json | null
+          market_opportunity?: string | null
+          milestones?: Json | null
+          problem_statement?: string
+          product_name?: string
+          project_id?: string
+          risks?: Json | null
+          stakeholders?: Json | null
+          success_metrics?: Json
+          target_audience?: Json
+          updated_at?: string | null
+          value_propositions?: Json
+          version?: string | null
+          vision_statement?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_vision_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "product_vision_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      progress_tracking: {
+        Row: {
+          completed_at: string | null
+          created_at: string | null
+          id: string
+          is_complete: boolean | null
+          is_current: boolean | null
+          persona_circles: Json | null
+          project_id: string | null
+          step_index: number
+          step_name: string
+          ui_state: Json | null
+          updated_at: string | null
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          is_complete?: boolean | null
+          is_current?: boolean | null
+          persona_circles?: Json | null
+          project_id?: string | null
+          step_index: number
+          step_name: string
+          ui_state?: Json | null
+          updated_at?: string | null
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          is_complete?: boolean | null
+          is_current?: boolean | null
+          persona_circles?: Json | null
+          project_id?: string | null
+          step_index?: number
+          step_name?: string
+          ui_state?: Json | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "progress_tracking_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "progress_tracking_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_documents: {
+        Row: {
+          content: string | null
+          created_at: string | null
+          document_type: string
+          file_hash: string | null
+          file_path: string
+          id: string
+          is_synced: boolean | null
+          last_modified: string | null
+          project_id: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string | null
+          document_type: string
+          file_hash?: string | null
+          file_path: string
+          id?: string
+          is_synced?: boolean | null
+          last_modified?: string | null
+          project_id?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string | null
+          document_type?: string
+          file_hash?: string | null
+          file_path?: string
+          id?: string
+          is_synced?: boolean | null
+          last_modified?: string | null
+          project_id?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_documents_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "project_documents_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          created_at: string | null
+          current_step: string | null
+          id: string
+          langgraph_state: Json | null
+          name: string
+          status: string | null
+          updated_at: string | null
+          workspace_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          current_step?: string | null
+          id?: string
+          langgraph_state?: Json | null
+          name: string
+          status?: string | null
+          updated_at?: string | null
+          workspace_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          current_step?: string | null
+          id?: string
+          langgraph_state?: Json | null
+          name?: string
+          status?: string | null
+          updated_at?: string | null
+          workspace_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projects_workspace_id_fkey"
+            columns: ["workspace_id"]
+            isOneToOne: false
+            referencedRelation: "workspaces"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      react_flow_states: {
+        Row: {
+          active_animations: Json | null
+          animation_queue: Json | null
+          animation_settings: Json | null
+          canvas_locked: boolean | null
+          controls_config: Json | null
+          created_at: string | null
+          edges: Json
+          id: string
+          interaction_mode: string | null
+          minimap_config: Json | null
+          nodes: Json
+          project_id: string | null
+          selection_ids: string[] | null
+          updated_at: string | null
+          viewport: Json | null
+        }
+        Insert: {
+          active_animations?: Json | null
+          animation_queue?: Json | null
+          animation_settings?: Json | null
+          canvas_locked?: boolean | null
+          controls_config?: Json | null
+          created_at?: string | null
+          edges: Json
+          id?: string
+          interaction_mode?: string | null
+          minimap_config?: Json | null
+          nodes: Json
+          project_id?: string | null
+          selection_ids?: string[] | null
+          updated_at?: string | null
+          viewport?: Json | null
+        }
+        Update: {
+          active_animations?: Json | null
+          animation_queue?: Json | null
+          animation_settings?: Json | null
+          canvas_locked?: boolean | null
+          controls_config?: Json | null
+          created_at?: string | null
+          edges?: Json
+          id?: string
+          interaction_mode?: string | null
+          minimap_config?: Json | null
+          nodes?: Json
+          project_id?: string | null
+          selection_ids?: string[] | null
+          updated_at?: string | null
+          viewport?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "react_flow_states_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: true
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "react_flow_states_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: true
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recent_flows_cache: {
+        Row: {
+          cache_key: string
+          completion_percentage: number | null
+          created_at: string | null
+          expires_at: string | null
+          id: string
+          last_activity: string
+          problem_statement: string
+          progress_segments: Json
+          project_id: string | null
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          cache_key: string
+          completion_percentage?: number | null
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          last_activity: string
+          problem_statement: string
+          progress_segments: Json
+          project_id?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          cache_key?: string
+          completion_percentage?: number | null
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          last_activity?: string
+          problem_statement?: string
+          progress_segments?: Json
+          project_id?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recent_flows_cache_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "recent_flows_cache_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recent_flows_cache_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      share_links: {
+        Row: {
+          allow_download: boolean | null
+          created_at: string | null
+          created_by: string | null
+          current_access_count: number | null
+          expires_at: string | null
+          id: string
+          is_active: boolean | null
+          last_accessed_at: string | null
+          max_access_count: number | null
+          project_id: string | null
+          share_token: string
+          visible_sections: Json | null
+        }
+        Insert: {
+          allow_download?: boolean | null
+          created_at?: string | null
+          created_by?: string | null
+          current_access_count?: number | null
+          expires_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          last_accessed_at?: string | null
+          max_access_count?: number | null
+          project_id?: string | null
+          share_token: string
+          visible_sections?: Json | null
+        }
+        Update: {
+          allow_download?: boolean | null
+          created_at?: string | null
+          created_by?: string | null
+          current_access_count?: number | null
+          expires_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          last_accessed_at?: string | null
+          max_access_count?: number | null
+          project_id?: string | null
+          share_token?: string
+          visible_sections?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "share_links_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "share_links_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "share_links_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      solution_pain_point_mappings: {
+        Row: {
+          created_at: string | null
+          id: string
+          pain_point_id: string | null
+          relevance_score: number | null
+          solution_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          pain_point_id?: string | null
+          relevance_score?: number | null
+          solution_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          pain_point_id?: string | null
+          relevance_score?: number | null
+          solution_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "solution_pain_point_mappings_pain_point_id_fkey"
+            columns: ["pain_point_id"]
+            isOneToOne: false
+            referencedRelation: "pain_points"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "solution_pain_point_mappings_solution_id_fkey"
+            columns: ["solution_id"]
+            isOneToOne: false
+            referencedRelation: "key_solutions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sync_batches: {
+        Row: {
+          batch_type: string
+          completed_at: string | null
+          completed_operations: number | null
+          created_at: string | null
+          id: string
+          metadata: Json | null
+          status: string | null
+          total_operations: number
+        }
+        Insert: {
+          batch_type: string
+          completed_at?: string | null
+          completed_operations?: number | null
+          created_at?: string | null
+          id?: string
+          metadata?: Json | null
+          status?: string | null
+          total_operations: number
+        }
+        Update: {
+          batch_type?: string
+          completed_at?: string | null
+          completed_operations?: number | null
+          created_at?: string | null
+          id?: string
+          metadata?: Json | null
+          status?: string | null
+          total_operations?: number
+        }
+        Relationships: []
+      }
+      sync_conflicts: {
+        Row: {
+          auto_resolvable: boolean | null
+          conflict_type: string
+          detected_at: string | null
+          id: string
+          local_data: Json
+          merged_data: Json | null
+          record_id: string
+          remote_data: Json
+          resolution: string | null
+          resolution_metadata: Json | null
+          resolution_strategy: string | null
+          resolved_at: string | null
+          resolved_by: string | null
+          table_name: string
+        }
+        Insert: {
+          auto_resolvable?: boolean | null
+          conflict_type: string
+          detected_at?: string | null
+          id?: string
+          local_data: Json
+          merged_data?: Json | null
+          record_id: string
+          remote_data: Json
+          resolution?: string | null
+          resolution_metadata?: Json | null
+          resolution_strategy?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          table_name: string
+        }
+        Update: {
+          auto_resolvable?: boolean | null
+          conflict_type?: string
+          detected_at?: string | null
+          id?: string
+          local_data?: Json
+          merged_data?: Json | null
+          record_id?: string
+          remote_data?: Json
+          resolution?: string | null
+          resolution_metadata?: Json | null
+          resolution_strategy?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          table_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sync_conflicts_resolved_by_fkey"
+            columns: ["resolved_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sync_queue: {
+        Row: {
+          attempts: number | null
+          batch_id: string | null
+          batch_sequence: number | null
+          completed_at: string | null
+          created_at: string | null
+          data: Json
+          error_message: string | null
+          id: string
+          last_attempt_at: string | null
+          max_attempts: number | null
+          next_retry_at: string | null
+          operation: string
+          priority: number | null
+          record_id: string
+          status: string | null
+          table_name: string
+        }
+        Insert: {
+          attempts?: number | null
+          batch_id?: string | null
+          batch_sequence?: number | null
+          completed_at?: string | null
+          created_at?: string | null
+          data: Json
+          error_message?: string | null
+          id?: string
+          last_attempt_at?: string | null
+          max_attempts?: number | null
+          next_retry_at?: string | null
+          operation: string
+          priority?: number | null
+          record_id: string
+          status?: string | null
+          table_name: string
+        }
+        Update: {
+          attempts?: number | null
+          batch_id?: string | null
+          batch_sequence?: number | null
+          completed_at?: string | null
+          created_at?: string | null
+          data?: Json
+          error_message?: string | null
+          id?: string
+          last_attempt_at?: string | null
+          max_attempts?: number | null
+          next_retry_at?: string | null
+          operation?: string
+          priority?: number | null
+          record_id?: string
+          status?: string | null
+          table_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sync_queue_batch_id_fkey"
+            columns: ["batch_id"]
+            isOneToOne: false
+            referencedRelation: "sync_batches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      system_architecture: {
+        Row: {
+          architecture_pattern: string
+          components: Json
+          created_at: string | null
+          deployment_environments: Json
+          external_systems: Json
+          id: string
+          key_decisions: Json | null
+          pattern_justification: string | null
+          performance_targets: Json | null
+          project_id: string
+          scalability_approach: string | null
+          security_measures: Json | null
+          tech_stack: Json
+          updated_at: string | null
+          version: string | null
+        }
+        Insert: {
+          architecture_pattern: string
+          components: Json
+          created_at?: string | null
+          deployment_environments: Json
+          external_systems: Json
+          id?: string
+          key_decisions?: Json | null
+          pattern_justification?: string | null
+          performance_targets?: Json | null
+          project_id: string
+          scalability_approach?: string | null
+          security_measures?: Json | null
+          tech_stack: Json
+          updated_at?: string | null
+          version?: string | null
+        }
+        Update: {
+          architecture_pattern?: string
+          components?: Json
+          created_at?: string | null
+          deployment_environments?: Json
+          external_systems?: Json
+          id?: string
+          key_decisions?: Json | null
+          pattern_justification?: string | null
+          performance_targets?: Json | null
+          project_id?: string
+          scalability_approach?: string | null
+          security_measures?: Json | null
+          tech_stack?: Json
+          updated_at?: string | null
+          version?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "system_architecture_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "system_architecture_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ui_animation_states: {
+        Row: {
+          animation_config: Json
+          animation_type: string
+          created_at: string | null
+          duration_ms: number | null
+          element_id: string
+          element_type: string
+          end_state: Json | null
+          id: string
+          is_active: boolean | null
+          project_id: string | null
+          start_state: Json | null
+        }
+        Insert: {
+          animation_config: Json
+          animation_type: string
+          created_at?: string | null
+          duration_ms?: number | null
+          element_id: string
+          element_type: string
+          end_state?: Json | null
+          id?: string
+          is_active?: boolean | null
+          project_id?: string | null
+          start_state?: Json | null
+        }
+        Update: {
+          animation_config?: Json
+          animation_type?: string
+          created_at?: string | null
+          duration_ms?: number | null
+          element_id?: string
+          element_type?: string
+          end_state?: Json | null
+          id?: string
+          is_active?: boolean | null
+          project_id?: string | null
+          start_state?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ui_animation_states_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "ui_animation_states_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ui_components: {
+        Row: {
+          component_name: string
+          component_type: string | null
+          created_at: string | null
+          data_displayed: string | null
+          id: string
+          props: Json | null
+          screen_id: string | null
+        }
+        Insert: {
+          component_name: string
+          component_type?: string | null
+          created_at?: string | null
+          data_displayed?: string | null
+          id?: string
+          props?: Json | null
+          screen_id?: string | null
+        }
+        Update: {
+          component_name?: string
+          component_type?: string | null
+          created_at?: string | null
+          data_displayed?: string | null
+          id?: string
+          props?: Json | null
+          screen_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ui_components_screen_id_fkey"
+            columns: ["screen_id"]
+            isOneToOne: false
+            referencedRelation: "ui_screens"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ui_screens: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string
+          project_id: string | null
+          route_path: string | null
+          screen_name: string
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          project_id?: string | null
+          route_path?: string | null
+          screen_name: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          project_id?: string | null
+          route_path?: string | null
+          screen_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ui_screens_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "ui_screens_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ui_selection_states: {
+        Row: {
+          created_at: string | null
+          id: string
+          project_id: string | null
+          selected_items: Json
+          selection_metadata: Json | null
+          selection_type: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          project_id?: string | null
+          selected_items: Json
+          selection_metadata?: Json | null
+          selection_type: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          project_id?: string | null
+          selected_items?: Json
+          selection_metadata?: Json | null
+          selection_type?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ui_selection_states_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "ui_selection_states_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_stories: {
+        Row: {
+          acceptance_criteria: Json | null
+          as_a: string
+          complexity_points: number | null
+          created_at: string | null
+          edited_content: string | null
+          i_want: string
+          id: string
+          is_edited: boolean | null
+          original_content: string | null
+          position: number
+          priority: string | null
+          project_id: string | null
+          so_that: string
+          title: string
+        }
+        Insert: {
+          acceptance_criteria?: Json | null
+          as_a: string
+          complexity_points?: number | null
+          created_at?: string | null
+          edited_content?: string | null
+          i_want: string
+          id?: string
+          is_edited?: boolean | null
+          original_content?: string | null
+          position: number
+          priority?: string | null
+          project_id?: string | null
+          so_that: string
+          title: string
+        }
+        Update: {
+          acceptance_criteria?: Json | null
+          as_a?: string
+          complexity_points?: number | null
+          created_at?: string | null
+          edited_content?: string | null
+          i_want?: string
+          id?: string
+          is_edited?: boolean | null
+          original_content?: string | null
+          position?: number
+          priority?: string | null
+          project_id?: string | null
+          so_that?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_stories_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "goldidocs_status"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "user_stories_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      users: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      workspaces: {
+        Row: {
+          created_at: string | null
+          folder_path: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          folder_path?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          folder_path?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "workspaces_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+    }
+    Views: {
+      goldidocs_status: {
+        Row: {
+          completed_count: number | null
+          df_generated_at: string | null
+          df_status: string | null
+          ds_generated_at: string | null
+          ds_status: string | null
+          er_generated_at: string | null
+          er_status: string | null
+          fr_generated_at: string | null
+          fr_status: string | null
+          project_id: string | null
+          project_name: string | null
+          pv_generated_at: string | null
+          pv_status: string | null
+          sa_generated_at: string | null
+          sa_status: string | null
+          total_count: number | null
+        }
+        Relationships: []
+      }
+    }
+    Functions: {
+      get_goldidocs_status: {
+        Args: { p_project_id: string }
+        Returns: {
+          document_type: string
+          doc_status: string
+          doc_generated_at: string
+          doc_version: string
+        }[]
+      }
+      is_project_owner: {
+        Args: { project_id: string }
+        Returns: boolean
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
+}
+
+type DefaultSchema = Database[Extract<keyof Database, "public">]
+
+export type Tables<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
+    | { schema: keyof Database },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof Database
+  }
+    ? keyof (Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+        Database[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
+  ? (Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+      Database[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+      Row: infer R
+    }
+    ? R
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &
+        DefaultSchema["Views"])
+    ? (DefaultSchema["Tables"] &
+        DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
+        Row: infer R
+      }
+      ? R
+      : never
+    : never
+
+export type TablesInsert<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema["Tables"]
+    | { schema: keyof Database },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof Database
+  }
+    ? keyof Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
+  ? Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Insert: infer I
+    }
+    ? I
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
+    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
+        Insert: infer I
+      }
+      ? I
+      : never
+    : never
+
+export type TablesUpdate<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema["Tables"]
+    | { schema: keyof Database },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof Database
+  }
+    ? keyof Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
+  ? Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Update: infer U
+    }
+    ? U
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
+    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
+        Update: infer U
+      }
+      ? U
+      : never
+    : never
+
+export type Enums<
+  DefaultSchemaEnumNameOrOptions extends
+    | keyof DefaultSchema["Enums"]
+    | { schema: keyof Database },
+  EnumName extends DefaultSchemaEnumNameOrOptions extends {
+    schema: keyof Database
+  }
+    ? keyof Database[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
+    : never = never,
+> = DefaultSchemaEnumNameOrOptions extends { schema: keyof Database }
+  ? Database[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
+  : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
+    ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
+    : never
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof DefaultSchema["CompositeTypes"]
+    | { schema: keyof Database },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof Database
+  }
+    ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    : never = never,
+> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
+  ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
+    ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
+    : never
+
+export const Constants = {
+  public: {
+    Enums: {},
+  },
+} as const
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/types/documentNodes.types.ts
+```ts
+// Base DocumentNode Interface
+export interface BaseDocumentNode {
+  id: string;
+  type: DocumentType;
+  projectId: string;
+  version: string;
+  metadata: {
+    createdAt: Date;
+    updatedAt: Date;
+    author?: string;
+    status: 'draft' | 'review' | 'approved' | 'published';
+    tags?: string[];
+  };
+  validation: {
+    isComplete: boolean;
+    missingFields: string[];
+    warnings?: string[];
+  };
+}
+
+// Document Types Enum
+export enum DocumentType {
+  PRODUCT_VISION = 'product_vision',
+  FUNCTIONAL_REQUIREMENTS = 'functional_requirements',
+  SYSTEM_ARCHITECTURE = 'system_architecture',
+  DATA_FLOW_DIAGRAM = 'data_flow_diagram',
+  ENTITY_RELATIONSHIP_DIAGRAM = 'entity_relationship_diagram',
+  DESIGN_SYSTEM = 'design_system'
+}
+
+// =====================================================
+// PRODUCT VISION NODE
+// =====================================================
+export interface ProductVisionNode extends BaseDocumentNode {
+  type: DocumentType.PRODUCT_VISION;
+  
+  // Quick summary for node display
+  summary: {
+    productName: string;
+    elevatorPitch: string;
+    completionPercentage: number;
+  };
+  
+  // Core sections status
+  sections: {
+    executive: {
+      complete: boolean;
+      fields: ['productName', 'elevatorPitch', 'visionStatement'];
+    };
+    problem: {
+      complete: boolean;
+      fields: ['problemStatement', 'targetAudience', 'marketOpportunity'];
+    };
+    solution: {
+      complete: boolean;
+      fields: ['valuePropositions', 'keyDifferentiators'];
+    };
+    strategy: {
+      complete: boolean;
+      fields: ['successMetrics', 'constraints', 'assumptions', 'risks'];
+    };
+    roadmap: {
+      complete: boolean;
+      fields: ['milestones', 'stakeholders'];
+    };
+  };
+  
+  // Key metrics for dashboard
+  metrics: {
+    targetAudienceCount: number;
+    valuePropositionCount: number;
+    milestoneCount: number;
+    riskCount: number;
+  };
+  
+  // Relationships to other documents
+  relationships: {
+    feeds: DocumentType[]; // [FUNCTIONAL_REQUIREMENTS, SYSTEM_ARCHITECTURE]
+    referencedBy: DocumentType[];
+  };
+}
+
+// =====================================================
+// FUNCTIONAL REQUIREMENTS NODE
+// =====================================================
+export interface FunctionalRequirementsNode extends BaseDocumentNode {
+  type: DocumentType.FUNCTIONAL_REQUIREMENTS;
+  
+  summary: {
+    featureCount: number;
+    requirementCount: number;
+    priorityBreakdown: {
+      mustHave: number;
+      shouldHave: number;
+      niceToHave: number;
+    };
+  };
+  
+  sections: {
+    features: {
+      complete: boolean;
+      byPriority: Map<string, number>;
+      completedUserStories: number;
+      totalUserStories: number;
+    };
+    dataHandling: {
+      complete: boolean;
+      validationRuleCount: number;
+    };
+    workflows: {
+      complete: boolean;
+      workflowCount: number;
+      coveredFeatures: string[];
+    };
+    errorHandling: {
+      complete: boolean;
+      scenarioCount: number;
+      severityBreakdown: Map<string, number>;
+    };
+    integrations: {
+      complete: boolean;
+      systemCount: number;
+      externalDependencies: string[];
+    };
+  };
+  
+  coverage: {
+    featuresWithRequirements: number;
+    featuresWithAcceptanceCriteria: number;
+    requirementsTraceability: number; // % linked to product vision
+  };
+  
+  relationships: {
+    derivedFrom: ['product_vision'];
+    feeds: ['system_architecture', 'data_flow_diagram'];
+    referencedBy: DocumentType[];
+  };
+}
+
+// =====================================================
+// SYSTEM ARCHITECTURE NODE
+// =====================================================
+export interface SystemArchitectureNode extends BaseDocumentNode {
+  type: DocumentType.SYSTEM_ARCHITECTURE;
+  
+  summary: {
+    architecturePattern: string;
+    componentCount: number;
+    technologySummary: string; // "React + Node.js + PostgreSQL"
+  };
+  
+  sections: {
+    overview: {
+      complete: boolean;
+      pattern: string;
+      hasJustification: boolean;
+    };
+    context: {
+      complete: boolean;
+      externalSystemCount: number;
+      integrationPoints: string[];
+    };
+    components: {
+      complete: boolean;
+      breakdown: {
+        frontend: number;
+        backend: number;
+        database: number;
+        infrastructure: number;
+      };
+      dependencyMap: Map<string, string[]>;
+    };
+    deployment: {
+      complete: boolean;
+      environments: string[];
+      hasProductionConfig: boolean;
+    };
+    decisions: {
+      complete: boolean;
+      documentedDecisions: number;
+      criticalDecisions: string[];
+    };
+  };
+  
+  healthMetrics: {
+    componentsWithoutDependencies: number; // Potential issues
+    circularDependencies: string[];
+    securityMeasuresCoverage: number;
+    performanceTargetsDefined: boolean;
+  };
+  
+  relationships: {
+    implements: ['functional_requirements'];
+    feeds: ['data_flow_diagram', 'entity_relationship_diagram'];
+    referencedBy: DocumentType[];
+  };
+}
+
+// =====================================================
+// DATA FLOW DIAGRAM NODE
+// =====================================================
+export interface DataFlowDiagramNode extends BaseDocumentNode {
+  type: DocumentType.DATA_FLOW_DIAGRAM;
+  
+  summary: {
+    entityCount: number;
+    processCount: number;
+    dataStoreCount: number;
+    flowCount: number;
+  };
+  
+  levels: {
+    context: {
+      complete: boolean;
+      systemName: string;
+      externalEntityCount: number;
+    };
+    level1: {
+      complete: boolean;
+      processCount: number;
+      balanced: boolean; // Flows match context diagram
+    };
+    level2Plus: {
+      exists: boolean;
+      decomposedProcesses: string[];
+      maxDepth: number;
+    };
+  };
+  
+  validation: {
+    noOrphanedProcesses: boolean;
+    allFlowsValid: boolean; // Follow DFD rules
+    dataStoresProperlyConnected: boolean;
+    balancedAcrossLevels: boolean;
+  };
+  
+  complexity: {
+    averageFlowsPerProcess: number;
+    criticalPaths: Array<{
+      name: string;
+      length: number;
+      processes: string[];
+    }>;
+  };
+  
+  relationships: {
+    basedOn: ['functional_requirements', 'system_architecture'];
+    feeds: ['entity_relationship_diagram'];
+    referencedBy: DocumentType[];
+  };
+}
+
+// =====================================================
+// ENTITY RELATIONSHIP DIAGRAM NODE
+// =====================================================
+export interface EntityRelationshipDiagramNode extends BaseDocumentNode {
+  type: DocumentType.ENTITY_RELATIONSHIP_DIAGRAM;
+  
+  summary: {
+    entityCount: number;
+    relationshipCount: number;
+    attributeCount: number;
+    normalForm: '1NF' | '2NF' | '3NF' | 'BCNF';
+  };
+  
+  entities: {
+    withPrimaryKeys: number;
+    withoutRelationships: string[]; // Potential issues
+    largestEntity: {
+      name: string;
+      attributeCount: number;
+    };
+  };
+  
+  relationships: {
+    byCardinality: {
+      oneToOne: number;
+      oneToMany: number;
+      manyToMany: number;
+    };
+    junctionTablesNeeded: number;
+    cyclicRelationships: string[];
+  };
+  
+  dataIntegrity: {
+    foreignKeyCount: number;
+    uniqueConstraints: number;
+    businessRulesImplemented: number;
+    indexCount: number;
+  };
+  
+  dataClassification: {
+    hasPII: boolean;
+    sensitiveEntities: string[];
+    complianceFlags: string[]; // GDPR, HIPAA, etc.
+  };
+  
+  relationships: {
+    modeledFrom: ['data_flow_diagram', 'functional_requirements'];
+    feeds: ['system_architecture']; // For database design
+    referencedBy: DocumentType[];
+  };
+}
+
+// =====================================================
+// DESIGN SYSTEM NODE
+// =====================================================
+export interface DesignSystemNode extends BaseDocumentNode {
+  type: DocumentType.DESIGN_SYSTEM;
+  
+  summary: {
+    brandName: string;
+    componentCount: number;
+    primaryColor: string;
+    fontFamily: string;
+  };
+  
+  foundations: {
+    colors: {
+      complete: boolean;
+      paletteSize: number;
+      hasSemanticColors: boolean;
+      accessibilityCompliant: boolean;
+    };
+    typography: {
+      complete: boolean;
+      fontFamilyCount: number;
+      scaleSteps: number;
+      hasResponsiveScale: boolean;
+    };
+    spacing: {
+      complete: boolean;
+      hasConsistentScale: boolean;
+      gridDefined: boolean;
+    };
+  };
+  
+  components: {
+    byCategory: Map<string, number>;
+    withVariants: number;
+    withStates: number;
+    documentationCoverage: number; // % with examples
+  };
+  
+  maturity: {
+    hasDesignPrinciples: boolean;
+    hasAccessibilityGuidelines: boolean;
+    hasMotionPrinciples: boolean;
+    patternCount: number;
+    adoptionMetrics?: {
+      componentsInUse: number;
+      consistencyScore: number;
+    };
+  };
+  
+  assets: {
+    logoVariations: number;
+    iconCount: number;
+    illustrationCount: number;
+  };
+  
+  relationships: {
+    implements: ['product_vision']; // Brand alignment
+    usedBy: ['functional_requirements', 'system_architecture'];
+    referencedBy: DocumentType[];
+  };
+}
+
+// =====================================================
+// DOCUMENT GRAPH NODE (for visualization)
+// =====================================================
+export interface DocumentGraphNode {
+  id: string;
+  type: DocumentType;
+  label: string;
+  status: 'empty' | 'partial' | 'complete' | 'approved';
+  completionPercentage: number;
+  
+  // For graph visualization
+  position?: { x: number; y: number };
+  size?: { width: number; height: number };
+  
+  // Connections
+  dependencies: Array<{
+    targetId: string;
+    relationship: 'feeds' | 'implements' | 'basedOn' | 'references';
+    strength: 'required' | 'recommended' | 'optional';
+  }>;
+  
+  // Quick actions
+  actions: Array<{
+    label: string;
+    action: 'create' | 'edit' | 'preview' | 'export';
+    enabled: boolean;
+  }>;
+  
+  // Validation state
+  health: {
+    status: 'healthy' | 'warning' | 'error';
+    issues: string[];
+    suggestions: string[];
+  };
+}
+
+// =====================================================
+// DOCUMENT COLLECTION (Project Overview)
+// =====================================================
+export interface DocumentCollection {
+  projectId: string;
+  projectName: string;
+  
+  nodes: Map<DocumentType, DocumentGraphNode>;
+  
+  statistics: {
+    totalDocuments: number;
+    completedDocuments: number;
+    averageCompletion: number;
+    lastUpdated: Date;
+  };
+  
+  workflow: {
+    suggestedNext: DocumentType;
+    blockedDocuments: Array<{
+      document: DocumentType;
+      blockedBy: DocumentType[];
+      reason: string;
+    }>;
+  };
+  
+  qualityMetrics: {
+    traceability: number; // % of requirements traced
+    consistency: number; // Cross-document consistency
+    coverage: number; // Feature coverage
+    maturity: 'initial' | 'developing' | 'defined' | 'managed' | 'optimized';
+  };
+}
+
+// Node Data Types for React Flow
+export type ProductVisionNodeData = ProductVisionNode;
+export type FunctionalRequirementsNodeData = FunctionalRequirementsNode;
+export type SystemArchitectureNodeData = SystemArchitectureNode;
+export type DataFlowDiagramNodeData = DataFlowDiagramNode;
+export type EntityRelationshipDiagramNodeData = EntityRelationshipDiagramNode;
+export type DesignSystemNodeData = DesignSystemNode;
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/types/export.types.ts
+```ts
+export type ExportFormat = 'markdown' | 'json' | 'pdf' | 'zip';
+
+export type SharePermission = 'view' | 'comment' | 'edit';
+
+export interface ExportSection {
+  id: string;
+  name: string;
+  included: boolean;
+}
+
+export interface ExportOptions {
+  format: ExportFormat;
+  template: string;
+  sections: string[];
+  customBranding?: {
+    companyName: string;
+    logoUrl: string;
+    primaryColor: string;
+  };
+}
+
+export interface ExportHistory {
+  id: string;
+  projectId: string;
+  format: ExportFormat;
+  template: string;
+  timestamp: string;
+  fileSize?: number;
+  downloadUrl?: string;
+}
+
+export interface ShareLink {
+  id: string;
+  url: string;
+  token: string;
+  projectId: string;
+  permission: SharePermission;
+  createdAt: string;
+  expiresAt?: string;
+  accessCount: number;
+}
+
+export interface ShareOptions {
+  permission: SharePermission;
+  expiresIn?: number; // milliseconds
+}
+
+export interface AccessHistory {
+  id: string;
+  shareLinkId: string;
+  userEmail?: string;
+  permission: SharePermission;
+  accessedAt: string;
+  ipAddress?: string;
+}
 ```
 
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/types/index.ts
@@ -9752,6 +29668,22 @@ export * from './workflow.types';
 export * from './export.types';
 ```
 
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/types/tauri.d.ts
+```ts
+declare global {
+  interface Window {
+    __TAURI__?: {
+      event: {
+        listen: (event: string, callback: (event: any) => void) => Promise<() => void>;
+        emit: (event: string, payload?: any) => Promise<void>;
+      };
+    };
+  }
+}
+
+export {}; 
+```
+
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/types/workflow.types.ts
 ```ts
 export type WorkflowStep = 
@@ -9759,6 +29691,7 @@ export type WorkflowStep =
   | 'persona_discovery'
   | 'pain_points'
   | 'solution_generation'
+  | 'focus_group'
   | 'user_stories'
   | 'architecture'
   | 'export';
@@ -9847,6 +29780,702 @@ export interface UserStory {
 }
 ```
 
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/utils/exportGenerators/index.ts
+```ts
+export { markdownExporter } from './markdownExporter';
+export { jsonExporter } from './jsonExporter';
+export { pdfExporter } from './pdfExporter';
+export { zipExporter } from './zipExporter';
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/utils/exportGenerators/jsonExporter.ts
+```ts
+import type { ExportOptions } from '../../types/export.types';
+
+interface ProjectData {
+  problem: any;
+  personas: any[];
+  painPoints: any[];
+  solutions: any[];
+  userStories: any[];
+  documents: {
+    productVision?: string;
+    functionalRequirements?: string;
+    systemArchitecture?: string;
+    dataFlow?: string;
+    databaseSchema?: string;
+    designSystem?: string;
+  };
+}
+
+export const jsonExporter = async (
+  projectData: ProjectData,
+  options: ExportOptions
+): Promise<{ content: string; size: number }> => {
+  const exportData: any = {
+    metadata: {
+      exportDate: new Date().toISOString(),
+      exportVersion: '1.0.0',
+      template: options.template,
+      format: 'json'
+    }
+  };
+
+  // Add sections based on options
+  if (options.sections.includes('problem')) {
+    exportData.problem = {
+      id: projectData.problem.id,
+      content: projectData.problem.content,
+      validatedStatement: projectData.problem.validated_statement,
+      createdAt: projectData.problem.created_at,
+      updatedAt: projectData.problem.updated_at
+    };
+  }
+
+  if (options.sections.includes('personas')) {
+    exportData.personas = projectData.personas.map(persona => ({
+      id: persona.id,
+      name: persona.name,
+      role: persona.role,
+      description: persona.description,
+      painDegree: persona.pain_degree,
+      goals: persona.goals,
+      frustrations: persona.frustrations,
+      createdAt: persona.created_at
+    }));
+  }
+
+  if (options.sections.includes('painPoints')) {
+    exportData.painPoints = projectData.painPoints.map(painPoint => ({
+      id: painPoint.id,
+      title: painPoint.title,
+      description: painPoint.description,
+      severity: painPoint.severity,
+      affectedPersonas: painPoint.affected_personas || [],
+      createdAt: painPoint.created_at
+    }));
+  }
+
+  if (options.sections.includes('solutions')) {
+    exportData.solutions = projectData.solutions.map(solution => ({
+      id: solution.id,
+      title: solution.title,
+      description: solution.description,
+      votingResults: solution.voting_results || null,
+      mustHaveFeatures: solution.must_have_features || [],
+      priority: solution.priority,
+      createdAt: solution.created_at
+    }));
+  }
+
+  if (options.sections.includes('userStories')) {
+    exportData.userStories = projectData.userStories.map(story => ({
+      id: story.id,
+      asA: story.as_a,
+      iWant: story.i_want,
+      soThat: story.so_that,
+      acceptanceCriteria: story.acceptance_criteria || [],
+      priority: story.priority,
+      solutionId: story.solution_id,
+      createdAt: story.created_at
+    }));
+  }
+
+  // Add documents
+  const documents: any = {};
+  
+  if (options.sections.includes('productVision') && projectData.documents.productVision) {
+    documents.productVision = {
+      content: projectData.documents.productVision,
+      format: 'markdown'
+    };
+  }
+
+  if (options.sections.includes('requirements') && projectData.documents.functionalRequirements) {
+    documents.functionalRequirements = {
+      content: projectData.documents.functionalRequirements,
+      format: 'markdown'
+    };
+  }
+
+  if (options.sections.includes('architecture') && projectData.documents.systemArchitecture) {
+    documents.systemArchitecture = {
+      content: projectData.documents.systemArchitecture,
+      format: 'markdown'
+    };
+  }
+
+  if (options.sections.includes('dataFlow') && projectData.documents.dataFlow) {
+    documents.dataFlow = {
+      content: projectData.documents.dataFlow,
+      format: 'markdown'
+    };
+  }
+
+  if (options.sections.includes('database') && projectData.documents.databaseSchema) {
+    documents.databaseSchema = {
+      content: projectData.documents.databaseSchema,
+      format: 'sql'
+    };
+  }
+
+  if (options.sections.includes('designSystem') && projectData.documents.designSystem) {
+    documents.designSystem = {
+      content: projectData.documents.designSystem,
+      format: 'markdown'
+    };
+  }
+
+  if (Object.keys(documents).length > 0) {
+    exportData.documents = documents;
+  }
+
+  // Create relationships map for reimport
+  exportData.relationships = {
+    personaPainPoints: [],
+    painPointSolutions: [],
+    solutionUserStories: []
+  };
+
+  // Map persona to pain points
+  if (exportData.personas && exportData.painPoints) {
+    exportData.painPoints.forEach((painPoint: any) => {
+      painPoint.affectedPersonas.forEach((personaId: string) => {
+        exportData.relationships.personaPainPoints.push({
+          personaId,
+          painPointId: painPoint.id
+        });
+      });
+    });
+  }
+
+  const content = JSON.stringify(exportData, null, 2);
+  const size = new TextEncoder().encode(content).length;
+
+  return { content, size };
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/utils/exportGenerators/markdownExporter.ts
+```ts
+import type { ExportOptions } from '../../types/export.types';
+
+interface ProjectData {
+  problem: any;
+  personas: any[];
+  painPoints: any[];
+  solutions: any[];
+  userStories: any[];
+  documents: {
+    productVision?: string;
+    functionalRequirements?: string;
+    systemArchitecture?: string;
+    dataFlow?: string;
+    databaseSchema?: string;
+    designSystem?: string;
+  };
+}
+
+export const markdownExporter = async (
+  projectData: ProjectData,
+  options: ExportOptions
+): Promise<{ content: string; size: number }> => {
+  let markdown = '';
+  
+  // Add custom branding header if provided
+  if (options.customBranding?.companyName) {
+    markdown += `# ${options.customBranding.companyName}\n\n`;
+    if (options.customBranding.logoUrl) {
+      markdown += `![Logo](${options.customBranding.logoUrl})\n\n`;
+    }
+  }
+
+  // Add table of contents
+  markdown += '## Table of Contents\n\n';
+  let tocIndex = 1;
+  
+  if (options.sections.includes('problem')) {
+    markdown += `${tocIndex}. [Problem Statement](#problem-statement)\n`;
+    tocIndex++;
+  }
+  if (options.sections.includes('personas')) {
+    markdown += `${tocIndex}. [User Personas](#user-personas)\n`;
+    tocIndex++;
+  }
+  if (options.sections.includes('painPoints')) {
+    markdown += `${tocIndex}. [Pain Points](#pain-points)\n`;
+    tocIndex++;
+  }
+  if (options.sections.includes('solutions')) {
+    markdown += `${tocIndex}. [Solutions](#solutions)\n`;
+    tocIndex++;
+  }
+  if (options.sections.includes('userStories')) {
+    markdown += `${tocIndex}. [User Stories](#user-stories)\n`;
+    tocIndex++;
+  }
+  if (options.sections.includes('productVision')) {
+    markdown += `${tocIndex}. [Product Vision](#product-vision)\n`;
+    tocIndex++;
+  }
+  if (options.sections.includes('requirements')) {
+    markdown += `${tocIndex}. [Functional Requirements](#functional-requirements)\n`;
+    tocIndex++;
+  }
+  if (options.sections.includes('architecture')) {
+    markdown += `${tocIndex}. [System Architecture](#system-architecture)\n`;
+    tocIndex++;
+  }
+  if (options.sections.includes('dataFlow')) {
+    markdown += `${tocIndex}. [Data Flow](#data-flow)\n`;
+    tocIndex++;
+  }
+  if (options.sections.includes('database')) {
+    markdown += `${tocIndex}. [Database Schema](#database-schema)\n`;
+    tocIndex++;
+  }
+  if (options.sections.includes('designSystem')) {
+    markdown += `${tocIndex}. [Design System](#design-system)\n`;
+    tocIndex++;
+  }
+  
+  markdown += '\n---\n\n';
+
+  // Add content sections
+  if (options.sections.includes('problem')) {
+    markdown += '## Problem Statement\n\n';
+    markdown += `${projectData.problem.content}\n\n`;
+    if (projectData.problem.validated_statement) {
+      markdown += `**Validated Statement:** ${projectData.problem.validated_statement}\n\n`;
+    }
+  }
+
+  if (options.sections.includes('personas')) {
+    markdown += '## User Personas\n\n';
+    projectData.personas.forEach((persona, index) => {
+      markdown += `### ${index + 1}. ${persona.name}\n\n`;
+      markdown += `**Role:** ${persona.role}\n\n`;
+      markdown += `**Description:** ${persona.description}\n\n`;
+      markdown += `**Pain Degree:** ${persona.pain_degree}/10\n\n`;
+      markdown += '---\n\n';
+    });
+  }
+
+  if (options.sections.includes('painPoints')) {
+    markdown += '## Pain Points\n\n';
+    projectData.painPoints.forEach((painPoint, index) => {
+      markdown += `### ${index + 1}. ${painPoint.title}\n\n`;
+      markdown += `${painPoint.description}\n\n`;
+      markdown += `**Severity:** ${painPoint.severity}/10\n\n`;
+      if (painPoint.affected_personas?.length > 0) {
+        markdown += `**Affected Personas:** ${painPoint.affected_personas.join(', ')}\n\n`;
+      }
+      markdown += '---\n\n';
+    });
+  }
+
+  if (options.sections.includes('solutions')) {
+    markdown += '## Solutions\n\n';
+    projectData.solutions.forEach((solution, index) => {
+      markdown += `### ${index + 1}. ${solution.title}\n\n`;
+      markdown += `${solution.description}\n\n`;
+      if (solution.voting_results?.total_votes) {
+        markdown += `**Total Votes:** ${solution.voting_results.total_votes}\n\n`;
+      }
+      if (solution.must_have_features?.length > 0) {
+        markdown += '**Must-Have Features:**\n';
+        solution.must_have_features.forEach((feature: string) => {
+          markdown += `- ${feature}\n`;
+        });
+        markdown += '\n';
+      }
+      markdown += '---\n\n';
+    });
+  }
+
+  if (options.sections.includes('userStories')) {
+    markdown += '## User Stories\n\n';
+    projectData.userStories.forEach((story, index) => {
+      markdown += `### Story ${index + 1}\n\n`;
+      markdown += `**As a** ${story.as_a}\n\n`;
+      markdown += `**I want** ${story.i_want}\n\n`;
+      markdown += `**So that** ${story.so_that}\n\n`;
+      if (story.acceptance_criteria?.length > 0) {
+        markdown += '**Acceptance Criteria:**\n';
+        story.acceptance_criteria.forEach((criteria: string) => {
+          markdown += `- ${criteria}\n`;
+        });
+        markdown += '\n';
+      }
+      markdown += '---\n\n';
+    });
+  }
+
+  // Add generated documents
+  if (options.sections.includes('productVision') && projectData.documents.productVision) {
+    markdown += '## Product Vision\n\n';
+    markdown += projectData.documents.productVision + '\n\n';
+  }
+
+  if (options.sections.includes('requirements') && projectData.documents.functionalRequirements) {
+    markdown += '## Functional Requirements\n\n';
+    markdown += projectData.documents.functionalRequirements + '\n\n';
+  }
+
+  if (options.sections.includes('architecture') && projectData.documents.systemArchitecture) {
+    markdown += '## System Architecture\n\n';
+    markdown += projectData.documents.systemArchitecture + '\n\n';
+  }
+
+  if (options.sections.includes('dataFlow') && projectData.documents.dataFlow) {
+    markdown += '## Data Flow\n\n';
+    markdown += projectData.documents.dataFlow + '\n\n';
+  }
+
+  if (options.sections.includes('database') && projectData.documents.databaseSchema) {
+    markdown += '## Database Schema\n\n';
+    markdown += '```sql\n';
+    markdown += projectData.documents.databaseSchema;
+    markdown += '\n```\n\n';
+  }
+
+  if (options.sections.includes('designSystem') && projectData.documents.designSystem) {
+    markdown += '## Design System\n\n';
+    markdown += projectData.documents.designSystem + '\n\n';
+  }
+
+  // Add footer
+  markdown += '\n---\n\n';
+  markdown += `*Generated with GoldiDocs on ${new Date().toLocaleDateString()}*\n`;
+
+  const content = markdown;
+  const size = new TextEncoder().encode(content).length;
+
+  return { content, size };
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/utils/exportGenerators/pdfExporter.ts
+```ts
+import type { ExportOptions } from '../../types/export.types';
+
+interface ProjectData {
+  problem: any;
+  personas: any[];
+  painPoints: any[];
+  solutions: any[];
+  userStories: any[];
+  documents: {
+    productVision?: string;
+    functionalRequirements?: string;
+    systemArchitecture?: string;
+    dataFlow?: string;
+    databaseSchema?: string;
+    designSystem?: string;
+  };
+}
+
+export const pdfExporter = async (
+  projectData: ProjectData,
+  options: ExportOptions
+): Promise<{ content: string; size: number }> => {
+  // In a real implementation, this would use a PDF generation library
+  // like jsPDF or puppeteer to create a properly formatted PDF
+  // For now, we'll create a base64 encoded placeholder
+  
+  const pdfContent = {
+    title: options.customBranding?.companyName || 'Project Documentation',
+    primaryColor: options.customBranding?.primaryColor || '#2563EB',
+    logoUrl: options.customBranding?.logoUrl,
+    sections: [],
+    metadata: {
+      createdAt: new Date().toISOString(),
+      template: options.template,
+      pageCount: 0
+    }
+  };
+
+  // Add sections
+  if (options.sections.includes('problem')) {
+    pdfContent.sections.push({
+      type: 'problem',
+      title: 'Problem Statement',
+      content: projectData.problem
+    });
+  }
+
+  if (options.sections.includes('personas')) {
+    pdfContent.sections.push({
+      type: 'personas',
+      title: 'User Personas',
+      content: projectData.personas
+    });
+  }
+
+  if (options.sections.includes('painPoints')) {
+    pdfContent.sections.push({
+      type: 'painPoints',
+      title: 'Pain Points',
+      content: projectData.painPoints
+    });
+  }
+
+  if (options.sections.includes('solutions')) {
+    pdfContent.sections.push({
+      type: 'solutions',
+      title: 'Solutions',
+      content: projectData.solutions
+    });
+  }
+
+  if (options.sections.includes('userStories')) {
+    pdfContent.sections.push({
+      type: 'userStories',
+      title: 'User Stories',
+      content: projectData.userStories
+    });
+  }
+
+  // Add documents
+  Object.entries(projectData.documents).forEach(([key, value]) => {
+    if (value && options.sections.includes(key.replace('Document', ''))) {
+      pdfContent.sections.push({
+        type: key,
+        title: formatDocumentTitle(key),
+        content: value
+      });
+    }
+  });
+
+  // Calculate page count (rough estimate)
+  pdfContent.metadata.pageCount = Math.ceil(pdfContent.sections.length * 2.5);
+
+  // In a real implementation, this would be the actual PDF binary data
+  // For now, we'll create a JSON representation that would be converted to PDF
+  const content = JSON.stringify(pdfContent);
+  const size = new TextEncoder().encode(content).length;
+
+  // Note: In production, you would use a library to generate actual PDF binary
+  // and return it as base64 or ArrayBuffer
+  return { content, size };
+};
+
+function formatDocumentTitle(key: string): string {
+  const titles: Record<string, string> = {
+    productVision: 'Product Vision',
+    functionalRequirements: 'Functional Requirements',
+    systemArchitecture: 'System Architecture',
+    dataFlow: 'Data Flow Diagram',
+    databaseSchema: 'Database Schema',
+    designSystem: 'Design System'
+  };
+  return titles[key] || key;
+}
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/utils/exportGenerators/zipExporter.ts
+```ts
+import type { ExportOptions } from '../../types/export.types';
+import { markdownExporter } from './markdownExporter';
+
+interface ProjectData {
+  problem: any;
+  personas: any[];
+  painPoints: any[];
+  solutions: any[];
+  userStories: any[];
+  documents: {
+    productVision?: string;
+    functionalRequirements?: string;
+    systemArchitecture?: string;
+    dataFlow?: string;
+    databaseSchema?: string;
+    designSystem?: string;
+  };
+}
+
+export const zipExporter = async (
+  projectData: ProjectData,
+  options: ExportOptions
+): Promise<{ content: string; size: number }> => {
+  // In a real implementation, this would use a ZIP library like JSZip
+  // to create an actual ZIP file with all documents and assets
+  
+  const zipContents: Record<string, string> = {};
+
+  // Create README.md
+  const readmeOptions = { ...options, sections: options.sections };
+  const { content: readmeContent } = await markdownExporter(projectData, readmeOptions);
+  zipContents['README.md'] = readmeContent;
+
+  // Create individual markdown files for each section
+  if (options.sections.includes('problem')) {
+    zipContents['01-problem-statement.md'] = createProblemDocument(projectData.problem);
+  }
+
+  if (options.sections.includes('personas')) {
+    zipContents['02-user-personas.md'] = createPersonasDocument(projectData.personas);
+  }
+
+  if (options.sections.includes('painPoints')) {
+    zipContents['03-pain-points.md'] = createPainPointsDocument(projectData.painPoints);
+  }
+
+  if (options.sections.includes('solutions')) {
+    zipContents['04-solutions.md'] = createSolutionsDocument(projectData.solutions);
+  }
+
+  if (options.sections.includes('userStories')) {
+    zipContents['05-user-stories.md'] = createUserStoriesDocument(projectData.userStories);
+  }
+
+  // Add generated documents
+  if (options.sections.includes('productVision') && projectData.documents.productVision) {
+    zipContents['documents/product-vision.md'] = projectData.documents.productVision;
+  }
+
+  if (options.sections.includes('requirements') && projectData.documents.functionalRequirements) {
+    zipContents['documents/functional-requirements.md'] = projectData.documents.functionalRequirements;
+  }
+
+  if (options.sections.includes('architecture') && projectData.documents.systemArchitecture) {
+    zipContents['documents/system-architecture.md'] = projectData.documents.systemArchitecture;
+  }
+
+  if (options.sections.includes('dataFlow') && projectData.documents.dataFlow) {
+    zipContents['documents/data-flow.md'] = projectData.documents.dataFlow;
+  }
+
+  if (options.sections.includes('database') && projectData.documents.databaseSchema) {
+    zipContents['database/schema.sql'] = projectData.documents.databaseSchema;
+  }
+
+  if (options.sections.includes('designSystem') && projectData.documents.designSystem) {
+    zipContents['design/design-system.md'] = projectData.documents.designSystem;
+  }
+
+  // Create manifest.json
+  zipContents['manifest.json'] = JSON.stringify({
+    exportDate: new Date().toISOString(),
+    version: '1.0.0',
+    projectData: {
+      problemId: projectData.problem.id,
+      personaCount: projectData.personas.length,
+      painPointCount: projectData.painPoints.length,
+      solutionCount: projectData.solutions.length,
+      userStoryCount: projectData.userStories.length
+    },
+    files: Object.keys(zipContents)
+  }, null, 2);
+
+  // In a real implementation, this would be compressed into a ZIP file
+  // For now, we'll return a JSON representation
+  const content = JSON.stringify(zipContents);
+  const size = new TextEncoder().encode(content).length;
+
+  return { content, size };
+};
+
+function createProblemDocument(problem: any): string {
+  return `# Problem Statement
+
+${problem.content}
+
+${problem.validated_statement ? `## Validated Statement\n\n${problem.validated_statement}` : ''}
+
+---
+
+*Created: ${new Date(problem.created_at).toLocaleDateString()}*
+`;
+}
+
+function createPersonasDocument(personas: any[]): string {
+  let content = '# User Personas\n\n';
+  
+  personas.forEach((persona, index) => {
+    content += `## ${index + 1}. ${persona.name}
+
+**Role:** ${persona.role}
+
+**Description:** ${persona.description}
+
+**Pain Degree:** ${persona.pain_degree}/10
+
+${persona.goals ? `### Goals\n${persona.goals}` : ''}
+
+${persona.frustrations ? `### Frustrations\n${persona.frustrations}` : ''}
+
+---
+
+`;
+  });
+  
+  return content;
+}
+
+function createPainPointsDocument(painPoints: any[]): string {
+  let content = '# Pain Points\n\n';
+  
+  painPoints.forEach((painPoint, index) => {
+    content += `## ${index + 1}. ${painPoint.title}
+
+${painPoint.description}
+
+**Severity:** ${painPoint.severity}/10
+
+${painPoint.affected_personas?.length > 0 ? `**Affected Personas:** ${painPoint.affected_personas.join(', ')}` : ''}
+
+---
+
+`;
+  });
+  
+  return content;
+}
+
+function createSolutionsDocument(solutions: any[]): string {
+  let content = '# Solutions\n\n';
+  
+  solutions.forEach((solution, index) => {
+    content += `## ${index + 1}. ${solution.title}
+
+${solution.description}
+
+${solution.voting_results?.total_votes ? `**Total Votes:** ${solution.voting_results.total_votes}` : ''}
+
+${solution.must_have_features?.length > 0 ? `### Must-Have Features\n${solution.must_have_features.map((f: string) => `- ${f}`).join('\n')}` : ''}
+
+---
+
+`;
+  });
+  
+  return content;
+}
+
+function createUserStoriesDocument(userStories: any[]): string {
+  let content = '# User Stories\n\n';
+  
+  userStories.forEach((story, index) => {
+    content += `## Story ${index + 1}
+
+**As a** ${story.as_a}
+
+**I want** ${story.i_want}
+
+**So that** ${story.so_that}
+
+${story.acceptance_criteria?.length > 0 ? `### Acceptance Criteria\n${story.acceptance_criteria.map((c: string) => `- ${c}`).join('\n')}` : ''}
+
+---
+
+`;
+  });
+  
+  return content;
+}
+```
+
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/utils/animations.ts
 ```ts
 import { Node, Edge } from '@xyflow/react';
@@ -9886,9 +30515,1573 @@ export function cn(...inputs: ClassValue[]) {
 }
 ```
 
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/utils/documentFormatters.ts
+```ts
+// Document formatting utilities
+
+export interface DocumentMetadata {
+  title: string;
+  createdAt: Date;
+  updatedAt: Date;
+  version: string;
+  type: 'product-vision' | 'functional-requirements' | 'system-architecture' | 'data-flow' | 'design-system' | 'database-schema';
+}
+
+export interface TableOfContentsItem {
+  id: string;
+  title: string;
+  level: number;
+  children: TableOfContentsItem[];
+}
+
+/**
+ * Extract table of contents from markdown content
+ */
+export function extractTableOfContents(markdown: string): TableOfContentsItem[] {
+  const lines = markdown.split('\n');
+  const toc: TableOfContentsItem[] = [];
+  const stack: TableOfContentsItem[] = [];
+  let idCounter = 0;
+
+  lines.forEach((line) => {
+    const match = line.match(/^(#{1,6})\s+(.+)$/);
+    if (match) {
+      const level = match[1].length;
+      const title = match[2];
+      const id = `heading-${++idCounter}`;
+
+      const item: TableOfContentsItem = {
+        id,
+        title,
+        level,
+        children: [],
+      };
+
+      // Find parent based on level
+      while (stack.length > 0 && stack[stack.length - 1].level >= level) {
+        stack.pop();
+      }
+
+      if (stack.length === 0) {
+        toc.push(item);
+      } else {
+        stack[stack.length - 1].children.push(item);
+      }
+
+      stack.push(item);
+    }
+  });
+
+  return toc;
+}
+
+/**
+ * Format markdown for export
+ */
+export function formatMarkdownForExport(markdown: string, metadata: DocumentMetadata): string {
+  const header = `---
+title: ${metadata.title}
+type: ${metadata.type}
+version: ${metadata.version}
+created: ${metadata.createdAt.toISOString()}
+updated: ${metadata.updatedAt.toISOString()}
+---
+
+`;
+
+  return header + markdown;
+}
+
+/**
+ * Convert markdown to HTML for PDF export
+ */
+export function markdownToHtml(markdown: string): string {
+  // This is a simplified version - in production, use a proper markdown parser
+  let html = markdown;
+
+  // Headers
+  html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+  html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+  html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+
+  // Bold
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+  // Italic
+  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+
+  // Links
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+
+  // Code blocks
+  html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code class="language-$1">$2</code></pre>');
+
+  // Inline code
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+  // Lists
+  html = html.replace(/^\* (.+)$/gim, '<li>$1</li>');
+  html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+
+  // Paragraphs
+  html = html.replace(/\n\n/g, '</p><p>');
+  html = '<p>' + html + '</p>';
+
+  return html;
+}
+
+/**
+ * Generate PDF-ready HTML with styling
+ */
+export function generatePdfHtml(content: string, metadata: DocumentMetadata): string {
+  const html = markdownToHtml(content);
+  
+  return `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>${metadata.title}</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    h1 { font-size: 2.5em; margin-bottom: 0.5em; color: #111; }
+    h2 { font-size: 2em; margin-top: 1.5em; margin-bottom: 0.5em; color: #111; }
+    h3 { font-size: 1.5em; margin-top: 1em; margin-bottom: 0.5em; color: #111; }
+    code {
+      background: #f4f4f4;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 16px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+    }
+    blockquote {
+      border-left: 4px solid #ddd;
+      margin: 0;
+      padding-left: 16px;
+      color: #666;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 1em 0;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background: #f4f4f4;
+      font-weight: bold;
+    }
+    @media print {
+      body { margin: 0; padding: 20px; }
+      pre { white-space: pre-wrap; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>${metadata.title}</h1>
+    <p><small>Version: ${metadata.version} | Updated: ${metadata.updatedAt.toLocaleDateString()}</small></p>
+  </header>
+  ${html}
+</body>
+</html>
+  `;
+}
+
+/**
+ * Get file extension for document type
+ */
+export function getDocumentExtension(type: DocumentMetadata['type']): string {
+  switch (type) {
+    case 'database-schema':
+      return 'sql';
+    default:
+      return 'md';
+  }
+}
+
+/**
+ * Get formatted filename for document
+ */
+export function getDocumentFilename(metadata: DocumentMetadata): string {
+  const date = metadata.updatedAt.toISOString().split('T')[0];
+  const extension = getDocumentExtension(metadata.type);
+  return `${metadata.type}-${date}.${extension}`;
+}
+```
+
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/utils/index.ts
 ```ts
 
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/utils/nodeMeasurer.ts
+```ts
+import { useCallback } from 'react';
+import { Node } from '@xyflow/react';
+
+interface NodeMeasurements {
+  width: number;
+  height: number;
+  actualPosition: { x: number; y: number };
+  boundingRect: DOMRect | null;
+}
+
+interface CenteringCalculation {
+  targetX: number;
+  targetY: number;
+  optimalZoom: number;
+  requiredPadding: number;
+}
+
+export class NodeMeasurer {
+  private static instance: NodeMeasurer;
+  private measurementCache = new Map<string, NodeMeasurements>();
+
+  static getInstance(): NodeMeasurer {
+    if (!NodeMeasurer.instance) {
+      NodeMeasurer.instance = new NodeMeasurer();
+    }
+    return NodeMeasurer.instance;
+  }
+
+  // Measure actual DOM dimensions of a node
+  measureNode(nodeId: string): NodeMeasurements | null {
+    // Check cache first
+    if (this.measurementCache.has(nodeId)) {
+      return this.measurementCache.get(nodeId)!;
+    }
+
+    const nodeElement = document.querySelector(`[data-id="${nodeId}"]`);
+    if (!nodeElement) return null;
+
+    const rect = nodeElement.getBoundingClientRect();
+    const measurements: NodeMeasurements = {
+      width: rect.width,
+      height: rect.height,
+      actualPosition: { x: rect.left, y: rect.top },
+      boundingRect: rect
+    };
+
+    // Cache for performance
+    this.measurementCache.set(nodeId, measurements);
+    
+    // Clear cache after 5 seconds to handle dynamic content
+    setTimeout(() => {
+      this.measurementCache.delete(nodeId);
+    }, 5000);
+
+    return measurements;
+  }
+
+  // Calculate optimal centering for CoreProblemNode
+  calculateCenteringForProblemNode(
+    nodeId: string = 'core-problem'
+  ): CenteringCalculation | null {
+    const measurements = this.measureNode(nodeId);
+    if (!measurements) return null;
+
+    // Get viewport dimensions accounting for UI elements
+    const sidebar = document.querySelector('[data-sidebar]');
+    const header = document.querySelector('[data-header]');
+    
+    const sidebarWidth = sidebar?.getBoundingClientRect().width || 256;
+    const headerHeight = header?.getBoundingClientRect().height || 80;
+    
+    const availableWidth = window.innerWidth - sidebarWidth;
+    const availableHeight = window.innerHeight - headerHeight;
+
+    // Calculate optimal zoom based on content and screen size
+    const contentToScreenRatio = Math.min(
+      availableWidth / (measurements.width * 2), // 2x for breathing room
+      availableHeight / (measurements.height * 2)
+    );
+    
+    const optimalZoom = Math.max(0.5, Math.min(1.8, contentToScreenRatio));
+
+    // Calculate center position in available space
+    const centerX = sidebarWidth + (availableWidth / 2);
+    const centerY = headerHeight + (availableHeight / 2);
+
+    // Account for zoom level in positioning
+    const zoomedNodeWidth = measurements.width * optimalZoom;
+    const zoomedNodeHeight = measurements.height * optimalZoom;
+
+    const targetX = centerX - (zoomedNodeWidth / 2);
+    const targetY = centerY - (zoomedNodeHeight / 2);
+
+    // Dynamic padding based on screen size and content
+    const requiredPadding = Math.max(
+      60, // Minimum padding
+      Math.min(availableWidth, availableHeight) * 0.1 // 10% of smaller dimension
+    );
+
+    return {
+      targetX,
+      targetY,
+      optimalZoom,
+      requiredPadding
+    };
+  }
+
+  // Get smart positioning for Step 1 that adapts to content length
+  getStep1Positioning(): CenteringCalculation | null {
+    const calculation = this.calculateCenteringForProblemNode();
+    if (!calculation) return null;
+
+    // Check if CoreProblemNode has content to adjust zoom accordingly
+    const problemElement = document.querySelector('[data-id="core-problem"]');
+    const textContent = problemElement?.textContent || '';
+    
+    // Adjust zoom based on text length (longer content = zoom out slightly)
+    const textLengthFactor = Math.max(0.8, Math.min(1.2, 100 / textContent.length));
+    calculation.optimalZoom *= textLengthFactor;
+
+    return calculation;
+  }
+
+  // Clear cache when nodes change
+  clearCache(nodeId?: string): void {
+    if (nodeId) {
+      this.measurementCache.delete(nodeId);
+    } else {
+      this.measurementCache.clear();
+    }
+  }
+}
+
+// React hook wrapper for the measurer
+export const useNodeMeasurer = () => {
+  const measurer = NodeMeasurer.getInstance();
+
+  const measureAndCenter = useCallback((nodeId: string = 'core-problem') => {
+    // Clear cache to get fresh measurements
+    measurer.clearCache(nodeId);
+    
+    // Small delay to ensure DOM is updated
+    setTimeout(() => {
+      const calculation = measurer.getStep1Positioning();
+      if (calculation) {
+        return calculation;
+      }
+    }, 50);
+  }, [measurer]);
+
+  return {
+    measureNode: measurer.measureNode.bind(measurer),
+    calculateCentering: measurer.calculateCenteringForProblemNode.bind(measurer),
+    getStep1Positioning: measurer.getStep1Positioning.bind(measurer),
+    clearCache: measurer.clearCache.bind(measurer),
+    measureAndCenter
+  };
+}; 
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/utils/performanceProfiler.ts
+```ts
+// Performance profiling utilities for React components and functions
+
+interface ProfilerData {
+  id: string;
+  phase: 'mount' | 'update';
+  actualDuration: number;
+  baseDuration: number;
+  startTime: number;
+  commitTime: number;
+  interactions: Set<any>;
+}
+
+interface FunctionProfile {
+  name: string;
+  calls: number;
+  totalTime: number;
+  avgTime: number;
+  minTime: number;
+  maxTime: number;
+  lastCalled: number;
+}
+
+class PerformanceProfiler {
+  private componentProfiles: Map<string, ProfilerData[]> = new Map();
+  private functionProfiles: Map<string, FunctionProfile> = new Map();
+  private marks: Map<string, number> = new Map();
+  private isEnabled: boolean = false;
+
+  constructor() {
+    // Enable in development only
+    this.isEnabled = process.env.NODE_ENV === 'development';
+  }
+
+  // React Profiler callback
+  onRenderCallback = (
+    id: string,
+    phase: 'mount' | 'update',
+    actualDuration: number,
+    baseDuration: number,
+    startTime: number,
+    commitTime: number,
+    interactions: Set<any>
+  ) => {
+    if (!this.isEnabled) return;
+
+    const data: ProfilerData = {
+      id,
+      phase,
+      actualDuration,
+      baseDuration,
+      startTime,
+      commitTime,
+      interactions,
+    };
+
+    if (!this.componentProfiles.has(id)) {
+      this.componentProfiles.set(id, []);
+    }
+    
+    const profiles = this.componentProfiles.get(id)!;
+    profiles.push(data);
+    
+    // Keep only last 100 profiles per component
+    if (profiles.length > 100) {
+      profiles.shift();
+    }
+
+    // Log slow renders
+    if (actualDuration > 16.67) { // More than one frame (60fps)
+      console.warn(`Slow render detected in ${id}:`, {
+        phase,
+        duration: actualDuration.toFixed(2) + 'ms',
+        baseline: baseDuration.toFixed(2) + 'ms',
+      });
+    }
+  };
+
+  // Mark performance start
+  mark(name: string) {
+    if (!this.isEnabled) return;
+    this.marks.set(name, performance.now());
+  }
+
+  // Measure performance between marks
+  measure(name: string, startMark: string, endMark?: string): number | null {
+    if (!this.isEnabled) return null;
+
+    const startTime = this.marks.get(startMark);
+    if (!startTime) {
+      console.warn(`Mark "${startMark}" not found`);
+      return null;
+    }
+
+    const endTime = endMark ? this.marks.get(endMark) : performance.now();
+    if (!endTime) {
+      console.warn(`Mark "${endMark}" not found`);
+      return null;
+    }
+
+    const duration = endTime - startTime;
+
+    // Clean up marks
+    this.marks.delete(startMark);
+    if (endMark) {
+      this.marks.delete(endMark);
+    }
+
+    // Store in Performance API
+    if ('measure' in performance) {
+      try {
+        performance.measure(name, {
+          start: startTime,
+          end: endTime,
+        });
+      } catch (e) {
+        // Fallback for older browsers
+      }
+    }
+
+    return duration;
+  }
+
+  // Profile a function
+  profileFunction<T extends (...args: any[]) => any>(
+    name: string,
+    fn: T
+  ): T {
+    if (!this.isEnabled) return fn;
+
+    return ((...args: Parameters<T>) => {
+      const start = performance.now();
+      
+      try {
+        const result = fn(...args);
+        
+        // Handle async functions
+        if (result instanceof Promise) {
+          return result.finally(() => {
+            this.recordFunctionProfile(name, performance.now() - start);
+          });
+        }
+        
+        this.recordFunctionProfile(name, performance.now() - start);
+        return result;
+      } catch (error) {
+        this.recordFunctionProfile(name, performance.now() - start);
+        throw error;
+      }
+    }) as T;
+  }
+
+  // Record function profile data
+  private recordFunctionProfile(name: string, duration: number) {
+    const existing = this.functionProfiles.get(name);
+    
+    if (existing) {
+      existing.calls++;
+      existing.totalTime += duration;
+      existing.avgTime = existing.totalTime / existing.calls;
+      existing.minTime = Math.min(existing.minTime, duration);
+      existing.maxTime = Math.max(existing.maxTime, duration);
+      existing.lastCalled = Date.now();
+    } else {
+      this.functionProfiles.set(name, {
+        name,
+        calls: 1,
+        totalTime: duration,
+        avgTime: duration,
+        minTime: duration,
+        maxTime: duration,
+        lastCalled: Date.now(),
+      });
+    }
+
+    // Log slow function calls
+    if (duration > 50) {
+      console.warn(`Slow function call "${name}": ${duration.toFixed(2)}ms`);
+    }
+  }
+
+  // Get component stats
+  getComponentStats(id: string) {
+    const profiles = this.componentProfiles.get(id);
+    if (!profiles || profiles.length === 0) return null;
+
+    const durations = profiles.map(p => p.actualDuration);
+    const total = durations.reduce((a, b) => a + b, 0);
+    
+    return {
+      id,
+      renderCount: profiles.length,
+      totalTime: total,
+      avgTime: total / profiles.length,
+      minTime: Math.min(...durations),
+      maxTime: Math.max(...durations),
+      mountCount: profiles.filter(p => p.phase === 'mount').length,
+      updateCount: profiles.filter(p => p.phase === 'update').length,
+    };
+  }
+
+  // Get all component stats
+  getAllComponentStats() {
+    const stats: ReturnType<typeof this.getComponentStats>[] = [];
+    
+    this.componentProfiles.forEach((_, id) => {
+      const stat = this.getComponentStats(id);
+      if (stat) stats.push(stat);
+    });
+
+    // Sort by total time descending
+    return stats.sort((a, b) => b!.totalTime - a!.totalTime);
+  }
+
+  // Get function stats
+  getFunctionStats(name?: string) {
+    if (name) {
+      return this.functionProfiles.get(name);
+    }
+    
+    // Return all function stats sorted by total time
+    return Array.from(this.functionProfiles.values())
+      .sort((a, b) => b.totalTime - a.totalTime);
+  }
+
+  // Clear all profiles
+  clear() {
+    this.componentProfiles.clear();
+    this.functionProfiles.clear();
+    this.marks.clear();
+  }
+
+  // Export profile data
+  exportData() {
+    return {
+      timestamp: Date.now(),
+      components: this.getAllComponentStats(),
+      functions: this.getFunctionStats(),
+    };
+  }
+
+  // Create a performance report
+  generateReport() {
+    const componentStats = this.getAllComponentStats();
+    const functionStats = this.getFunctionStats();
+
+    console.group('🎯 Performance Report');
+    
+    console.group('📊 Component Render Performance');
+    console.table(componentStats.slice(0, 10).map(stat => ({
+      Component: stat!.id,
+      'Renders': stat!.renderCount,
+      'Avg Time (ms)': stat!.avgTime.toFixed(2),
+      'Total Time (ms)': stat!.totalTime.toFixed(2),
+      'Max Time (ms)': stat!.maxTime.toFixed(2),
+    })));
+    console.groupEnd();
+
+    console.group('⚡ Function Performance');
+    console.table((functionStats as FunctionProfile[]).slice(0, 10).map(stat => ({
+      Function: stat.name,
+      Calls: stat.calls,
+      'Avg Time (ms)': stat.avgTime.toFixed(2),
+      'Total Time (ms)': stat.totalTime.toFixed(2),
+      'Max Time (ms)': stat.maxTime.toFixed(2),
+    })));
+    console.groupEnd();
+
+    console.groupEnd();
+  }
+}
+
+// Singleton instance
+export const profiler = new PerformanceProfiler();
+
+// HOC for profiling React components
+export function withProfiler<P extends object>(
+  Component: React.ComponentType<P>,
+  id?: string
+): React.ComponentType<P> {
+  const displayName = id || Component.displayName || Component.name || 'Component';
+  
+  const ProfiledComponent = React.forwardRef<any, P>((props, ref) => {
+    return (
+      <React.Profiler id={displayName} onRender={profiler.onRenderCallback}>
+        <Component {...props} ref={ref} />
+      </React.Profiler>
+    );
+  });
+
+  ProfiledComponent.displayName = `withProfiler(${displayName})`;
+  
+  return ProfiledComponent;
+}
+
+// Decorator for profiling class methods
+export function profileMethod(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+  const originalMethod = descriptor.value;
+  const className = target.constructor.name;
+  const methodName = `${className}.${propertyKey}`;
+
+  descriptor.value = profiler.profileFunction(methodName, originalMethod);
+  
+  return descriptor;
+}
+
+// Utility to profile async operations
+export async function profileAsync<T>(
+  name: string,
+  operation: () => Promise<T>
+): Promise<T> {
+  profiler.mark(`${name}-start`);
+  
+  try {
+    const result = await operation();
+    const duration = profiler.measure(name, `${name}-start`);
+    
+    if (duration && duration > 100) {
+      console.warn(`Slow async operation "${name}": ${duration.toFixed(2)}ms`);
+    }
+    
+    return result;
+  } catch (error) {
+    profiler.measure(name, `${name}-start`);
+    throw error;
+  }
+}
+
+// React Hook for component performance tracking
+export function usePerformanceTracking(componentName: string) {
+  const renderCount = useRef(0);
+  const mountTime = useRef(performance.now());
+
+  useEffect(() => {
+    renderCount.current++;
+    
+    return () => {
+      const lifetime = performance.now() - mountTime.current;
+      console.debug(`${componentName} unmounted after ${renderCount.current} renders and ${lifetime.toFixed(2)}ms`);
+    };
+  }, [componentName]);
+
+  useEffect(() => {
+    profiler.mark(`${componentName}-render-start`);
+    
+    return () => {
+      const duration = profiler.measure(
+        `${componentName}-render`,
+        `${componentName}-render-start`
+      );
+      
+      if (duration && duration > 16.67) {
+        console.warn(`Slow render in ${componentName}: ${duration.toFixed(2)}ms`);
+      }
+    };
+  });
+}
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/utils/progressCalculations.ts
+```ts
+import type { Node } from '@xyflow/react';
+import type { WorkflowStep } from '../types/workflow.types';
+
+interface ProgressMetrics {
+  percentage: number;
+  completedSteps: number;
+  totalSteps: number;
+  currentStepProgress: number;
+  estimatedTimeRemaining: number; // in minutes
+}
+
+interface StepRequirements {
+  minNodes?: number;
+  requiredNodeTypes?: string[];
+  validationRequired?: boolean;
+}
+
+const stepRequirements: Record<WorkflowStep, StepRequirements> = {
+  'problem_input': {
+    minNodes: 1,
+    requiredNodeTypes: ['coreProblem'],
+    validationRequired: true
+  },
+  'persona_discovery': {
+    minNodes: 3,
+    requiredNodeTypes: ['persona']
+  },
+  'pain_points': {
+    minNodes: 5,
+    requiredNodeTypes: ['painPoint']
+  },
+  'solution_mapping': {
+    minNodes: 3,
+    requiredNodeTypes: ['solution']
+  },
+  'documentation': {
+    minNodes: 5,
+    requiredNodeTypes: ['document']
+  }
+};
+
+const stepTimeEstimates: Record<WorkflowStep, number> = {
+  'problem_input': 2,    // minutes
+  'persona_discovery': 3,
+  'pain_points': 5,
+  'solution_mapping': 7,
+  'documentation': 15
+};
+
+export const calculateWorkflowProgress = (
+  currentStep: WorkflowStep,
+  nodes: Node[]
+): ProgressMetrics => {
+  const steps: WorkflowStep[] = [
+    'problem_input',
+    'persona_discovery',
+    'pain_points',
+    'solution_mapping',
+    'documentation'
+  ];
+
+  const currentStepIndex = steps.indexOf(currentStep);
+  const totalSteps = steps.length;
+
+  // Calculate completed steps
+  let completedSteps = 0;
+  for (let i = 0; i < currentStepIndex; i++) {
+    if (isStepComplete(steps[i], nodes)) {
+      completedSteps++;
+    }
+  }
+
+  // Calculate current step progress
+  const currentStepProgress = calculateStepProgress(currentStep, nodes);
+
+  // Overall percentage
+  const percentage = Math.round(
+    ((completedSteps + currentStepProgress) / totalSteps) * 100
+  );
+
+  // Estimated time remaining
+  const estimatedTimeRemaining = calculateTimeRemaining(currentStep, steps, nodes);
+
+  return {
+    percentage,
+    completedSteps,
+    totalSteps,
+    currentStepProgress,
+    estimatedTimeRemaining
+  };
+};
+
+export const isStepComplete = (step: WorkflowStep, nodes: Node[]): boolean => {
+  const requirements = stepRequirements[step];
+  if (!requirements) return false;
+
+  const relevantNodes = nodes.filter(node => 
+    requirements.requiredNodeTypes?.includes(node.type || '')
+  );
+
+  // Check minimum nodes
+  if (requirements.minNodes && relevantNodes.length < requirements.minNodes) {
+    return false;
+  }
+
+  // Check validation for problem input
+  if (step === 'problem_input' && requirements.validationRequired) {
+    const problemNode = nodes.find(n => n.type === 'coreProblem');
+    return problemNode?.data?.validated === true;
+  }
+
+  // Check if all documents are complete
+  if (step === 'documentation') {
+    const documentNodes = nodes.filter(n => n.type === 'document');
+    const completedDocs = documentNodes.filter(n => n.data?.status === 'completed');
+    return completedDocs.length >= (requirements.minNodes || 0);
+  }
+
+  return relevantNodes.length >= (requirements.minNodes || 0);
+};
+
+export const calculateStepProgress = (step: WorkflowStep, nodes: Node[]): number => {
+  const requirements = stepRequirements[step];
+  if (!requirements || !requirements.requiredNodeTypes) return 0;
+
+  const relevantNodes = nodes.filter(node => 
+    requirements.requiredNodeTypes?.includes(node.type || '')
+  );
+
+  const minRequired = requirements.minNodes || 1;
+  const progress = Math.min(relevantNodes.length / minRequired, 1);
+
+  // Special handling for documentation step
+  if (step === 'documentation') {
+    const documentNodes = nodes.filter(n => n.type === 'document');
+    const completedDocs = documentNodes.filter(n => n.data?.status === 'completed');
+    const inProgressDocs = documentNodes.filter(n => n.data?.status === 'processing');
+    
+    if (documentNodes.length === 0) return 0;
+    
+    // Give partial credit for in-progress docs
+    const completedWeight = completedDocs.length;
+    const inProgressWeight = inProgressDocs.length * 0.5;
+    
+    return Math.min((completedWeight + inProgressWeight) / minRequired, 1);
+  }
+
+  return progress;
+};
+
+export const calculateTimeRemaining = (
+  currentStep: WorkflowStep,
+  allSteps: WorkflowStep[],
+  nodes: Node[]
+): number => {
+  const currentIndex = allSteps.indexOf(currentStep);
+  let totalTime = 0;
+
+  // Add remaining time for current step
+  const currentStepProgress = calculateStepProgress(currentStep, nodes);
+  const currentStepTime = stepTimeEstimates[currentStep] || 0;
+  totalTime += currentStepTime * (1 - currentStepProgress);
+
+  // Add time for all remaining steps
+  for (let i = currentIndex + 1; i < allSteps.length; i++) {
+    totalTime += stepTimeEstimates[allSteps[i]] || 0;
+  }
+
+  return Math.round(totalTime);
+};
+
+export const getStepStats = (
+  step: WorkflowStep,
+  nodes: Node[],
+  edges: any[]
+): { label: string; value: string | number }[] => {
+  const stats: { label: string; value: string | number }[] = [];
+
+  switch (step) {
+    case 'persona_discovery':
+      const personas = nodes.filter(n => n.type === 'persona');
+      if (personas.length > 0) {
+        const avgPain = personas.reduce((sum, p) => sum + (p.data.pain_degree || 0), 0) / personas.length;
+        stats.push(
+          { label: 'Personas', value: personas.length },
+          { label: 'Avg Pain', value: avgPain.toFixed(1) }
+        );
+      }
+      break;
+
+    case 'pain_points':
+      const painPoints = nodes.filter(n => n.type === 'painPoint');
+      const painConnections = edges.filter(e => 
+        nodes.find(n => n.id === e.target && n.type === 'painPoint')
+      );
+      stats.push(
+        { label: 'Pain Points', value: painPoints.length },
+        { label: 'Connections', value: painConnections.length }
+      );
+      break;
+
+    case 'solution_mapping':
+      const solutions = nodes.filter(n => n.type === 'solution');
+      const votedSolutions = solutions.filter(s => s.data.voting_results?.total_votes > 0);
+      stats.push(
+        { label: 'Solutions', value: solutions.length },
+        { label: 'Voted', value: votedSolutions.length }
+      );
+      break;
+
+    case 'documentation':
+      const documents = nodes.filter(n => n.type === 'document');
+      const completedDocs = documents.filter(d => d.data.status === 'completed');
+      stats.push(
+        { label: 'Documents', value: `${completedDocs.length}/${documents.length}` },
+        { label: 'Progress', value: `${Math.round((completedDocs.length / Math.max(documents.length, 1)) * 100)}%` }
+      );
+      break;
+  }
+
+  return stats;
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/utils/shareTokenGenerator.ts
+```ts
+/**
+ * Generates a secure share token for project sharing
+ * Uses crypto.randomUUID for security with a custom prefix
+ */
+export const generateShareToken = (): string => {
+  // Generate a base UUID
+  const uuid = crypto.randomUUID();
+  
+  // Create a custom prefix for easy identification
+  const prefix = 'prob';
+  
+  // Remove hyphens and take a portion of the UUID for a cleaner token
+  const cleanUuid = uuid.replace(/-/g, '');
+  
+  // Create the final token with prefix and shortened UUID
+  // Format: prob_XXXXXXXXXXXXXXXX (16 characters after prefix)
+  const token = `${prefix}_${cleanUuid.substring(0, 16)}`;
+  
+  return token;
+};
+
+/**
+ * Validates a share token format
+ */
+export const validateShareToken = (token: string): boolean => {
+  // Check if token matches expected format
+  const tokenRegex = /^prob_[a-f0-9]{16}$/;
+  return tokenRegex.test(token);
+};
+
+/**
+ * Extracts the token ID from a full share URL
+ */
+export const extractTokenFromUrl = (url: string): string | null => {
+  try {
+    const urlObj = new URL(url);
+    const pathParts = urlObj.pathname.split('/');
+    const shareIndex = pathParts.indexOf('share');
+    
+    if (shareIndex !== -1 && pathParts[shareIndex + 1]) {
+      const token = pathParts[shareIndex + 1];
+      return validateShareToken(token) ? token : null;
+    }
+    
+    return null;
+  } catch {
+    return null;
+  }
+};
+
+/**
+ * Generates a short-lived preview token for temporary access
+ */
+export const generatePreviewToken = (expiryMinutes: number = 30): {
+  token: string;
+  expiresAt: Date;
+} => {
+  const token = `preview_${crypto.randomUUID().split('-')[0]}`;
+  const expiresAt = new Date();
+  expiresAt.setMinutes(expiresAt.getMinutes() + expiryMinutes);
+  
+  return { token, expiresAt };
+};
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/utils/syntaxHighlighting.ts
+```ts
+// Syntax highlighting utilities for code blocks
+
+export interface HighlightToken {
+  type: 'keyword' | 'string' | 'comment' | 'number' | 'operator' | 'function' | 'variable' | 'plain';
+  value: string;
+}
+
+/**
+ * Simple syntax highlighter for common languages
+ */
+export function highlightCode(code: string, language: string): HighlightToken[] {
+  switch (language.toLowerCase()) {
+    case 'javascript':
+    case 'js':
+    case 'typescript':
+    case 'ts':
+      return highlightJavaScript(code);
+    case 'sql':
+      return highlightSQL(code);
+    case 'json':
+      return highlightJSON(code);
+    case 'css':
+      return highlightCSS(code);
+    case 'html':
+    case 'xml':
+      return highlightHTML(code);
+    default:
+      return [{ type: 'plain', value: code }];
+  }
+}
+
+function highlightJavaScript(code: string): HighlightToken[] {
+  const tokens: HighlightToken[] = [];
+  const keywords = /\b(const|let|var|function|return|if|else|for|while|do|switch|case|break|continue|class|extends|new|this|super|import|export|default|from|async|await|try|catch|finally|throw|typeof|instanceof|void|delete|in|of)\b/g;
+  const strings = /(["'`])(?:(?=(\\?))\2.)*?\1/g;
+  const comments = /(\/\/.*$|\/\*[\s\S]*?\*\/)/gm;
+  const numbers = /\b\d+(\.\d+)?\b/g;
+  const functions = /\b([a-zA-Z_$][a-zA-Z0-9_$]*)\s*\(/g;
+
+  // Create a map of all matches
+  const matches: Array<{ start: number; end: number; type: HighlightToken['type']; value: string }> = [];
+
+  // Find all matches
+  let match;
+  while ((match = comments.exec(code)) !== null) {
+    matches.push({ start: match.index, end: match.index + match[0].length, type: 'comment', value: match[0] });
+  }
+  while ((match = strings.exec(code)) !== null) {
+    matches.push({ start: match.index, end: match.index + match[0].length, type: 'string', value: match[0] });
+  }
+  while ((match = keywords.exec(code)) !== null) {
+    matches.push({ start: match.index, end: match.index + match[0].length, type: 'keyword', value: match[0] });
+  }
+  while ((match = numbers.exec(code)) !== null) {
+    matches.push({ start: match.index, end: match.index + match[0].length, type: 'number', value: match[0] });
+  }
+  while ((match = functions.exec(code)) !== null) {
+    const funcName = match[1];
+    matches.push({ start: match.index, end: match.index + funcName.length, type: 'function', value: funcName });
+  }
+
+  // Sort matches by start position
+  matches.sort((a, b) => a.start - b.start);
+
+  // Build tokens
+  let lastEnd = 0;
+  for (const match of matches) {
+    // Skip overlapping matches
+    if (match.start < lastEnd) continue;
+
+    // Add plain text before this match
+    if (match.start > lastEnd) {
+      tokens.push({ type: 'plain', value: code.slice(lastEnd, match.start) });
+    }
+
+    // Add the matched token
+    tokens.push({ type: match.type, value: match.value });
+    lastEnd = match.end;
+  }
+
+  // Add remaining plain text
+  if (lastEnd < code.length) {
+    tokens.push({ type: 'plain', value: code.slice(lastEnd) });
+  }
+
+  return tokens;
+}
+
+function highlightSQL(code: string): HighlightToken[] {
+  const tokens: HighlightToken[] = [];
+  const keywords = /\b(SELECT|FROM|WHERE|JOIN|INNER|LEFT|RIGHT|OUTER|ON|GROUP BY|ORDER BY|HAVING|LIMIT|OFFSET|INSERT|INTO|VALUES|UPDATE|SET|DELETE|CREATE|TABLE|DATABASE|DROP|ALTER|ADD|COLUMN|PRIMARY KEY|FOREIGN KEY|REFERENCES|INDEX|UNIQUE|NOT NULL|DEFAULT|AUTO_INCREMENT|IF EXISTS|AS|DISTINCT|AND|OR|NOT|IN|BETWEEN|LIKE|IS|NULL|CASE|WHEN|THEN|ELSE|END)\b/gi;
+  const strings = /'([^']*)'/g;
+  const comments = /(--.*$|\/\*[\s\S]*?\*\/)/gm;
+  const numbers = /\b\d+(\.\d+)?\b/g;
+
+  const matches: Array<{ start: number; end: number; type: HighlightToken['type']; value: string }> = [];
+
+  let match;
+  while ((match = comments.exec(code)) !== null) {
+    matches.push({ start: match.index, end: match.index + match[0].length, type: 'comment', value: match[0] });
+  }
+  while ((match = strings.exec(code)) !== null) {
+    matches.push({ start: match.index, end: match.index + match[0].length, type: 'string', value: match[0] });
+  }
+  while ((match = keywords.exec(code)) !== null) {
+    matches.push({ start: match.index, end: match.index + match[0].length, type: 'keyword', value: match[0] });
+  }
+  while ((match = numbers.exec(code)) !== null) {
+    matches.push({ start: match.index, end: match.index + match[0].length, type: 'number', value: match[0] });
+  }
+
+  matches.sort((a, b) => a.start - b.start);
+
+  let lastEnd = 0;
+  for (const match of matches) {
+    if (match.start < lastEnd) continue;
+    if (match.start > lastEnd) {
+      tokens.push({ type: 'plain', value: code.slice(lastEnd, match.start) });
+    }
+    tokens.push({ type: match.type, value: match.value });
+    lastEnd = match.end;
+  }
+
+  if (lastEnd < code.length) {
+    tokens.push({ type: 'plain', value: code.slice(lastEnd) });
+  }
+
+  return tokens;
+}
+
+function highlightJSON(code: string): HighlightToken[] {
+  const tokens: HighlightToken[] = [];
+  const strings = /"([^"]*)"/g;
+  const numbers = /\b\d+(\.\d+)?\b/g;
+  const booleans = /\b(true|false|null)\b/g;
+
+  const matches: Array<{ start: number; end: number; type: HighlightToken['type']; value: string }> = [];
+
+  let match;
+  while ((match = strings.exec(code)) !== null) {
+    matches.push({ start: match.index, end: match.index + match[0].length, type: 'string', value: match[0] });
+  }
+  while ((match = numbers.exec(code)) !== null) {
+    matches.push({ start: match.index, end: match.index + match[0].length, type: 'number', value: match[0] });
+  }
+  while ((match = booleans.exec(code)) !== null) {
+    matches.push({ start: match.index, end: match.index + match[0].length, type: 'keyword', value: match[0] });
+  }
+
+  matches.sort((a, b) => a.start - b.start);
+
+  let lastEnd = 0;
+  for (const match of matches) {
+    if (match.start < lastEnd) continue;
+    if (match.start > lastEnd) {
+      tokens.push({ type: 'plain', value: code.slice(lastEnd, match.start) });
+    }
+    tokens.push({ type: match.type, value: match.value });
+    lastEnd = match.end;
+  }
+
+  if (lastEnd < code.length) {
+    tokens.push({ type: 'plain', value: code.slice(lastEnd) });
+  }
+
+  return tokens;
+}
+
+function highlightCSS(code: string): HighlightToken[] {
+  const tokens: HighlightToken[] = [];
+  const selectors = /([.#]?[a-zA-Z][a-zA-Z0-9-_]*|:[a-zA-Z-]+|\[[^\]]+\])/g;
+  const properties = /([a-zA-Z-]+)(?=\s*:)/g;
+  const values = /:\s*([^;]+)/g;
+  const comments = /\/\*[\s\S]*?\*\//g;
+
+  const matches: Array<{ start: number; end: number; type: HighlightToken['type']; value: string }> = [];
+
+  let match;
+  while ((match = comments.exec(code)) !== null) {
+    matches.push({ start: match.index, end: match.index + match[0].length, type: 'comment', value: match[0] });
+  }
+
+  matches.sort((a, b) => a.start - b.start);
+
+  let lastEnd = 0;
+  for (const match of matches) {
+    if (match.start < lastEnd) continue;
+    if (match.start > lastEnd) {
+      tokens.push({ type: 'plain', value: code.slice(lastEnd, match.start) });
+    }
+    tokens.push({ type: match.type, value: match.value });
+    lastEnd = match.end;
+  }
+
+  if (lastEnd < code.length) {
+    tokens.push({ type: 'plain', value: code.slice(lastEnd) });
+  }
+
+  return tokens;
+}
+
+function highlightHTML(code: string): HighlightToken[] {
+  const tokens: HighlightToken[] = [];
+  const tags = /<\/?[a-zA-Z][a-zA-Z0-9]*[^>]*>/g;
+  const attributes = /\s([a-zA-Z-]+)(?==)/g;
+  const strings = /=["']([^"']*)/g;
+  const comments = /<!--[\s\S]*?-->/g;
+
+  const matches: Array<{ start: number; end: number; type: HighlightToken['type']; value: string }> = [];
+
+  let match;
+  while ((match = comments.exec(code)) !== null) {
+    matches.push({ start: match.index, end: match.index + match[0].length, type: 'comment', value: match[0] });
+  }
+  while ((match = tags.exec(code)) !== null) {
+    matches.push({ start: match.index, end: match.index + match[0].length, type: 'keyword', value: match[0] });
+  }
+
+  matches.sort((a, b) => a.start - b.start);
+
+  let lastEnd = 0;
+  for (const match of matches) {
+    if (match.start < lastEnd) continue;
+    if (match.start > lastEnd) {
+      tokens.push({ type: 'plain', value: code.slice(lastEnd, match.start) });
+    }
+    tokens.push({ type: match.type, value: match.value });
+    lastEnd = match.end;
+  }
+
+  if (lastEnd < code.length) {
+    tokens.push({ type: 'plain', value: code.slice(lastEnd) });
+  }
+
+  return tokens;
+}
+
+/**
+ * Get CSS class for token type
+ */
+export function getTokenClass(type: HighlightToken['type']): string {
+  const classMap: Record<HighlightToken['type'], string> = {
+    keyword: 'text-blue-400',
+    string: 'text-green-500',
+    comment: 'text-gray-500 italic',
+    number: 'text-yellow-500',
+    operator: 'text-gray-300',
+    function: 'text-purple-400',
+    variable: 'text-orange-400',
+    plain: 'text-gray-300',
+  };
+
+  return classMap[type] || 'text-gray-300';
+}
+```
+
+File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/utils/workspaceStorage.ts
+```ts
+import { WorkflowState } from '@/stores/workflowStore';
+import { TauriFileSystem } from '@/services/tauri/fileSystem';
+
+interface WorkspaceStorageConfig {
+  workspaceId: string;
+  directory: string;
+}
+
+interface WorkspaceData {
+  version: string;
+  workspaceId: string;
+  lastModified: string;
+  workflow: Partial<WorkflowState>;
+  metadata?: {
+    name?: string;
+    description?: string;
+    createdAt?: string;
+  };
+}
+
+export class WorkspaceStorage {
+  private static readonly STORAGE_VERSION = '1.0.0';
+  private static readonly FILENAME = 'gauntlet-workspace.json';
+
+  /**
+   * Save workspace data to a file in the selected directory
+   * Uses Tauri API when available, falls back to localStorage
+   */
+  static async saveWorkspace(
+    config: WorkspaceStorageConfig,
+    workflowState: Partial<WorkflowState>
+  ): Promise<void> {
+    const workspaceData: WorkspaceData = {
+      version: this.STORAGE_VERSION,
+      workspaceId: config.workspaceId,
+      lastModified: new Date().toISOString(),
+      workflow: workflowState,
+    };
+
+    try {
+      // Use Tauri API if available
+      if (TauriFileSystem.isTauri()) {
+        await TauriFileSystem.saveWorkspaceToDirectory(
+          config.directory,
+          config.workspaceId,
+          workflowState
+        );
+        
+        // Also save metadata
+        await TauriFileSystem.saveWorkspaceMetadata(config.workspaceId, {
+          directory: config.directory,
+          lastSaved: new Date().toISOString(),
+        });
+      } else {
+        // Fallback to localStorage for web
+        const key = `workspace_data_${config.workspaceId}`;
+        localStorage.setItem(key, JSON.stringify(workspaceData));
+        localStorage.setItem(`workspace_dir_${config.workspaceId}`, config.directory);
+      }
+      
+      console.log('[WorkspaceStorage] Saved workspace data:', {
+        workspaceId: config.workspaceId,
+        directory: config.directory,
+      });
+    } catch (error) {
+      console.error('[WorkspaceStorage] Error saving workspace:', error);
+      throw new Error('Failed to save workspace data');
+    }
+  }
+
+  /**
+   * Load workspace data from the selected directory
+   */
+  static async loadWorkspace(
+    config: WorkspaceStorageConfig
+  ): Promise<WorkspaceData | null> {
+    try {
+      // Use Tauri API if available
+      if (TauriFileSystem.isTauri()) {
+        const data = await TauriFileSystem.loadWorkspaceFromDirectory(config.directory);
+        
+        if (data) {
+          // Validate version compatibility
+          if (data.version !== this.STORAGE_VERSION) {
+            console.warn('[WorkspaceStorage] Version mismatch:', {
+              stored: data.version,
+              current: this.STORAGE_VERSION,
+            });
+          }
+        }
+        
+        return data;
+      } else {
+        // Fallback to localStorage
+        const key = `workspace_data_${config.workspaceId}`;
+        const data = localStorage.getItem(key);
+        
+        if (!data) {
+          return null;
+        }
+
+        const workspaceData = JSON.parse(data) as WorkspaceData;
+        
+        // Validate version compatibility
+        if (workspaceData.version !== this.STORAGE_VERSION) {
+          console.warn('[WorkspaceStorage] Version mismatch:', {
+            stored: workspaceData.version,
+            current: this.STORAGE_VERSION,
+          });
+        }
+
+        return workspaceData;
+      }
+    } catch (error) {
+      console.error('[WorkspaceStorage] Error loading workspace:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Export workspace data as a downloadable file
+   */
+  static async exportWorkspace(
+    workspaceId: string,
+    workflowState: Partial<WorkflowState>,
+    filename?: string
+  ): Promise<void> {
+    // Use Tauri API if available
+    if (TauriFileSystem.isTauri()) {
+      await TauriFileSystem.exportWorkspace(
+        workspaceId,
+        workflowState,
+        filename || `workspace-${workspaceId}-${new Date().toISOString().split('T')[0]}.json`
+      );
+    } else {
+      // Fallback to browser download
+      const workspaceData: WorkspaceData = {
+        version: this.STORAGE_VERSION,
+        workspaceId,
+        lastModified: new Date().toISOString(),
+        workflow: workflowState,
+      };
+
+      const blob = new Blob([JSON.stringify(workspaceData, null, 2)], {
+        type: 'application/json',
+      });
+      
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename || `${this.FILENAME}`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+  }
+
+  /**
+   * Import workspace data from a file
+   */
+  static async importWorkspace(file?: File): Promise<WorkspaceData | null> {
+    // Use Tauri API if available
+    if (TauriFileSystem.isTauri()) {
+      const data = await TauriFileSystem.importWorkspace();
+      
+      if (data) {
+        // Validate the imported data
+        if (!data.version || !data.workspaceId || !data.workflow) {
+          throw new Error('Invalid workspace file format');
+        }
+      }
+      
+      return data;
+    } else if (file) {
+      // Fallback to FileReader for browser
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        
+        reader.onload = (e) => {
+          try {
+            const content = e.target?.result as string;
+            const data = JSON.parse(content) as WorkspaceData;
+            
+            // Validate the imported data
+            if (!data.version || !data.workspaceId || !data.workflow) {
+              throw new Error('Invalid workspace file format');
+            }
+            
+            resolve(data);
+          } catch (error) {
+            reject(new Error('Failed to parse workspace file'));
+          }
+        };
+        
+        reader.onerror = () => reject(new Error('Failed to read file'));
+        reader.readAsText(file);
+      });
+    }
+    
+    return null;
+  }
+
+  /**
+   * Get the directory path for a workspace
+   */
+  static async getWorkspaceDirectory(workspaceId: string): Promise<string | null> {
+    if (TauriFileSystem.isTauri()) {
+      const metadata = await TauriFileSystem.loadWorkspaceMetadata(workspaceId);
+      return metadata?.directory || null;
+    }
+    
+    return localStorage.getItem(`workspace_dir_${workspaceId}`);
+  }
+
+  /**
+   * Check if File System Access API is available
+   */
+  static isFileSystemAccessSupported(): boolean {
+    return 'showDirectoryPicker' in window;
+  }
+
+  /**
+   * Use File System Access API to select a directory (Chrome/Edge only)
+   */
+  static async selectDirectory(): Promise<FileSystemDirectoryHandle | null> {
+    if (!this.isFileSystemAccessSupported()) {
+      console.warn('[WorkspaceStorage] File System Access API not supported');
+      return null;
+    }
+
+    try {
+      // @ts-ignore - TypeScript doesn't know about this API yet
+      const dirHandle = await window.showDirectoryPicker({
+        mode: 'readwrite',
+      });
+      return dirHandle;
+    } catch (error) {
+      // User cancelled or error occurred
+      console.log('[WorkspaceStorage] Directory selection cancelled or failed:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Save workspace using File System Access API
+   */
+  static async saveWorkspaceToFileSystem(
+    dirHandle: FileSystemDirectoryHandle,
+    workspaceId: string,
+    workflowState: Partial<WorkflowState>
+  ): Promise<void> {
+    try {
+      const workspaceData: WorkspaceData = {
+        version: this.STORAGE_VERSION,
+        workspaceId,
+        lastModified: new Date().toISOString(),
+        workflow: workflowState,
+      };
+
+      // Create or overwrite the workspace file
+      const fileHandle = await dirHandle.getFileHandle(this.FILENAME, { create: true });
+      const writable = await fileHandle.createWritable();
+      await writable.write(JSON.stringify(workspaceData, null, 2));
+      await writable.close();
+      
+      console.log('[WorkspaceStorage] Saved to file system');
+    } catch (error) {
+      console.error('[WorkspaceStorage] Error saving to file system:', error);
+      throw error;
+    }
+  }
+}
 ```
 
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/App.css
@@ -10010,32 +32203,330 @@ button {
   }
 }
 
+/* Ensure full height inheritance for React Flow */
+.react-flow__container {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* Gold flash animation */
+
+/* Custom scrollbar styles for progress steps */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thumb-obsidian-600 {
+  scrollbar-color: #4a5568 transparent;
+}
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+.scrollbar-thin::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: rgba(26, 32, 44, 0.5); /* obsidian-800 with transparency */
+  border-radius: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #4a5568; /* obsidian-600 */
+  border-radius: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #718096; /* obsidian-500 */
+}
+
+/* Ensure progress steps container allows horizontal scrolling */
+.overflow-x-auto {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Add padding to the bottom of scrollable area on macOS to account for scroll bar */
+@supports (-webkit-appearance: none) {
+  .overflow-x-auto {
+    padding-bottom: 8px;
+  }
+}
+
 ```
 
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/App.tsx
 ```tsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { ReactFlowProvider } from '@xyflow/react';
-import { ConnectedSidebar } from '@/components/layout/Sidebar/ConnectedSidebar';
-import { ConnectedProgressBar } from '@/components/layout/ProgressBar/ConnectedProgressBar';
-import { WorkflowCanvas } from '@/components/workflow/WorkflowCanvas';
-import { AuthForm } from '@/components/auth/AuthForm';
+import { ConnectedSidebar } from '@/components/layout/Sidebar';
+import { ProgressSteps } from '@/components/common/LoadingStates';
+import { PainPointDropdown } from '@/components/common';
+import { WorkflowCanvas } from '@/components/workflow';
+import { DemoCanvas } from '@/components/DemoCanvas';
 import { AuthDebug } from '@/components/debug/AuthDebug';
+import { PerformanceOverlay } from '@/components/PerformanceMonitor';
 import { useWorkflowStore } from '@/stores/workflowStore';
 import { useUIStore } from '@/stores/uiStore';
+import { useCanvasNavigation } from '@/hooks/useCanvasNavigation';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/services/supabase/client';
+import type { WorkflowStep } from '@/types/workflow.types';
 import './App.css';
 
-function App() {
+// Container component that positions dropdown relative to step 3
+function PainPointDropdownContainer({ 
+  onPainPointSelect, 
+  onGoToProblem 
+}: {
+  onPainPointSelect: (painPointId: string) => void;
+  onGoToProblem: () => void;
+}) {
+  const [position, setPosition] = useState({ top: 0, left: 0 });
+
+  useEffect(() => {
+    const positionDropdown = () => {
+      const step3Element = document.querySelector('[data-step-index="2"]');
+      if (step3Element) {
+        const rect = step3Element.getBoundingClientRect();
+        const progressContainer = document.querySelector('.bg-obsidian-800');
+        const containerRect = progressContainer?.getBoundingClientRect();
+        
+        if (containerRect) {
+          setPosition({
+            top: rect.bottom - containerRect.top + 8, // 8px gap below step 3
+            left: rect.left - containerRect.left + (rect.width / 2) // Center align with step 3
+          });
+        }
+      }
+    };
+
+    // Position immediately
+    positionDropdown();
+    
+    // Reposition on window resize
+    window.addEventListener('resize', positionDropdown);
+    return () => window.removeEventListener('resize', positionDropdown);
+  }, []);
+
+  return (
+    <div 
+      className="absolute z-50 transform -translate-x-1/2"
+      style={{ top: position.top, left: position.left }}
+      data-pain-point-dropdown
+    >
+      <PainPointDropdown
+        onPainPointSelect={onPainPointSelect}
+        onGoToProblem={onGoToProblem}
+        className="shadow-2xl"
+      />
+    </div>
+  );
+}
+
+// Component that uses canvas navigation inside ReactFlowProvider
+function AppContent() {
+  const { currentStep, setCurrentStep } = useWorkflowStore();
+  const { goToStep1, goToStep2, goToStep } = useCanvasNavigation();
+  const [showPainPointDropdown, setShowPainPointDropdown] = useState(false);
+
+  // Map workflow step to progress step index
+  const getProgressStepIndex = (step: string): number => {
+    const stepMap: Record<string, number> = {
+      'problem_input': 0,
+      'persona_discovery': 1,
+      'pain_points': 2,
+      'solution_generation': 3,
+      'focus_group': 4,
+      'user_stories': 5,
+      'architecture': 6 // Maps to our "documentation" step
+    };
+    return stepMap[step] || 0;
+  };
+
+  // Map progress step index back to workflow step
+  const getWorkflowStep = (stepIndex: number): WorkflowStep => {
+    const stepMap: Record<number, WorkflowStep> = {
+      0: 'problem_input',
+      1: 'persona_discovery',
+      2: 'pain_points',
+      3: 'solution_generation',
+      4: 'focus_group',
+      5: 'user_stories',
+      6: 'architecture'
+    };
+    return stepMap[stepIndex] || 'problem_input';
+  };
+
+  // Handle step click for navigation
+  const handleStepClick = (stepIndex: number) => {
+    console.log('[App] Step clicked:', stepIndex);
+    console.log('[App] Available navigation functions:', { goToStep1: typeof goToStep1, goToStep2: typeof goToStep2, goToStep: typeof goToStep });
+    
+    // Special handling for Step 3 (Pain Points) - show dropdown instead of immediate navigation
+    if (stepIndex === 2) {
+      console.log('[App] Pain Points step clicked - showing dropdown');
+      setShowPainPointDropdown(true);
+      return;
+    }
+    
+    // Update workflow step
+    const workflowStep = getWorkflowStep(stepIndex);
+    setCurrentStep(workflowStep);
+    
+    // Navigate canvas based on step
+    navigateToStep(stepIndex);
+  };
+
+  // Handle pain point selection from dropdown
+  const handlePainPointSelect = (painPointId: string) => {
+    console.log('[App] Pain point selected:', painPointId);
+    setShowPainPointDropdown(false);
+    
+    // Update workflow step to pain_points and navigate
+    setCurrentStep('pain_points');
+    goToStep(3);
+  };
+
+  // Handle "Enter Problem" CTA from dropdown
+  const handleGoToProblem = () => {
+    console.log('[App] Going back to problem step');
+    setShowPainPointDropdown(false);
+    
+    // Navigate to Step 1 (Problem) - let the automatic navigation handle the smooth transition
+    setCurrentStep('problem_input');
+    // Removed direct goToStep1() call to prevent double navigation and jarring transition
+  };
+
+  // Navigate canvas to appropriate view based on step index
+  const navigateToStep = (stepIndex: number) => {
+    switch (stepIndex) {
+      case 0: // Problem
+        console.log('[App] Calling goToStep1...');
+        goToStep1();
+        break;
+      case 1: // Persona
+      case 2: // Pain Points - use same view as Personas
+        console.log('[App] Calling goToStep2 for Personas/Pain Points view...');
+        goToStep2();
+        break;
+      case 3: // Solutions
+        goToStep(4);
+        break;
+      case 4: // Focus Group
+        goToStep(5); // Navigate to focus group view
+        break;
+      case 5: // User Stories
+      case 6: // Documentation
+        // Use step 4 layout for remaining steps for now
+        goToStep(4);
+        break;
+      default:
+        goToStep1();
+    }
+  };
+
+  // Watch for workflow step changes and automatically navigate canvas
+  useEffect(() => {
+    const stepIndex = getProgressStepIndex(currentStep);
+    console.log('[App] Workflow step changed to:', currentStep, '-> step index:', stepIndex);
+    console.log('[App] Automatically navigating canvas to match workflow step');
+    
+    // Slightly longer delay to ensure smooth transitions, especially from dropdown interactions
+    setTimeout(() => {
+      navigateToStep(stepIndex);
+    }, 300);
+  }, [currentStep]);
+
+  // Close pain point dropdown when clicking elsewhere or when no selection is made
+  useEffect(() => {
+    if (showPainPointDropdown) {
+      const handleClickOutside = (event: MouseEvent) => {
+        const dropdown = document.querySelector('[data-pain-point-dropdown]');
+        const step3Element = document.querySelector('[data-step-index="2"]');
+        
+        if (dropdown && !dropdown.contains(event.target as Node) && 
+            step3Element && !step3Element.contains(event.target as Node)) {
+          console.log('[App] Clicking outside pain point dropdown - showing Step 2 view');
+          setShowPainPointDropdown(false);
+          // Fallback to Step 2 behavior when no pain point is selected
+          setCurrentStep('persona_discovery');
+          goToStep2();
+        }
+      };
+
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [showPainPointDropdown, goToStep2, setCurrentStep]);
+
+  return (
+    <div className="flex h-screen bg-gray-900">
+      {/* Fixed Progress Bar at top of screen */}
+      <div className="fixed top-0 left-64 right-0 z-50 bg-obsidian-800 border-b border-obsidian-700">
+        <div className="overflow-x-auto overflow-y-hidden py-8 px-12 scrollbar-thin scrollbar-thumb-obsidian-600 scrollbar-track-obsidian-800">
+          <ProgressSteps 
+            currentStep={getProgressStepIndex(currentStep)}
+            variant="horizontal"
+            size="md"
+            className="max-w-none inline-flex"
+            onStepClick={handleStepClick}
+          />
+        </div>
+        
+        {/* Pain Point Dropdown Overlay */}
+        {showPainPointDropdown && (
+          <PainPointDropdownContainer
+            onPainPointSelect={handlePainPointSelect}
+            onGoToProblem={handleGoToProblem}
+          />
+        )}
+      </div>
+
+      {/* Sidebar */}
+      <div className="fixed left-0 top-0 bottom-0 w-64 z-40">
+        <ConnectedSidebar />
+      </div>
+
+      {/* Main Content - adjusted for fixed sidebar and progress bar */}
+      <div className="ml-64 flex-1 flex flex-col pt-24"> {/* Added ml-64 for sidebar offset */}
+        {/* Canvas */}
+        <div className="flex-1 relative overflow-hidden"> {/* Added overflow-hidden */}
+          <WorkflowCanvas />
+        </div>
+      </div>
+      
+      {/* Debug component for development */}
+      <AuthDebug />
+    </div>
+  );
+}
+
+export default function App() {
+  console.log('[App] Component mounting...');
+  
   const { user, loading: authLoading } = useAuth();
-  const { resetWorkflow, setProjectId } = useWorkflowStore();
+  const { resetWorkflow, setProjectId, projectId } = useWorkflowStore();
   const [isInitializing, setIsInitializing] = useState(false);
   const [initError, setInitError] = useState<string | null>(null);
+  const [showPerformanceOverlay, setShowPerformanceOverlay] = useState(false);
+  const [workspaceInitialized, setWorkspaceInitialized] = useState(false);
+  const initializingRef = React.useRef(false);
+
+  console.log('[App] Initial render state:', {
+    user: user?.email,
+    authLoading,
+    isInitializing,
+    showPerformanceOverlay
+  });
 
   useEffect(() => {
     const initializeWorkspace = async () => {
-      if (!user) return;
+      if (!user || workspaceInitialized || initializingRef.current) return;
+      
+      initializingRef.current = true;
       
       try {
         setIsInitializing(true);
@@ -10143,21 +32634,54 @@ function App() {
         // Set the project ID in the workflow store
         setProjectId(projectId);
         console.log('[App] Workspace initialization complete');
+        console.log('[App] Final state after init:', {
+          user: user.id,
+          workspaceId,
+          projectId,
+          isInitializing,
+          initError
+        });
         
+        setWorkspaceInitialized(true);
       } catch (error) {
         console.error('[App] Workspace initialization error:', error);
         setInitError(error instanceof Error ? error.message : 'Failed to initialize workspace');
       } finally {
+        console.log('[App] Setting isInitializing to false');
         setIsInitializing(false);
+        // Don't reset initializingRef here - keep it true to prevent re-runs
       }
     };
     
-    // Reset workflow when user changes
-    if (user) {
-      resetWorkflow();
+    // Initialize workspace when user changes
+    if (user && !workspaceInitialized) {
+      // Only reset workflow if we don't have a project ID or if the user actually changed
+      // This prevents resetting the workflow on every re-render
+      const currentProjectId = useWorkflowStore.getState().projectId;
+      
+      if (!currentProjectId) {
+        console.log('[App] No project ID found, resetting workflow');
+        resetWorkflow();
+      } else {
+        console.log('[App] Project ID exists, preserving workflow state:', currentProjectId);
+      }
+      
       initializeWorkspace();
     }
-  }, [user, resetWorkflow, setProjectId]);
+  }, [user?.id]); // Use user.id instead of user object to prevent re-renders
+
+  // Add keyboard shortcut for performance overlay
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key === 'P') {
+        e.preventDefault();
+        setShowPerformanceOverlay(prev => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   // Show auth loading state
   if (authLoading) {
@@ -10171,9 +32695,9 @@ function App() {
     );
   }
 
-  // Show auth form if not authenticated
+  // Show demo canvas if not authenticated
   if (!user) {
-    return <AuthForm />;
+    return <DemoCanvas className="h-screen" />;
   }
 
   // Show workspace initialization loading
@@ -10205,58 +32729,116 @@ function App() {
     );
   }
 
+  console.log('[App] Rendering main app with user:', user.id, 'projectId:', useWorkflowStore.getState().projectId);
+
   return (
     <ReactFlowProvider>
-      <div className="flex h-screen bg-gray-900">
-        {/* Sidebar */}
-        <ConnectedSidebar />
-
-        {/* Main Content */}
-        <div className="flex-1 flex flex-col">
-          {/* Progress Bar */}
-          <ConnectedProgressBar />
-
-          {/* Canvas */}
-          <div className="flex-1 relative">
-            <WorkflowCanvas />
-          </div>
-        </div>
-        
-        {/* Debug component for development */}
-        <AuthDebug />
-      </div>
+      <AppContent />
+      
+      {/* Performance Monitor Overlay */}
+      <PerformanceOverlay 
+        isOpen={showPerformanceOverlay}
+        onClose={() => setShowPerformanceOverlay(false)}
+      />
     </ReactFlowProvider>
   );
 }
-
-export default App;
 ```
 
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/index.css
 ```css
 @import "tailwindcss";
 @import "./components/ExportModal/ExportModal.css";
+@import "./components/DemoCanvas/DemoCanvas.css";
 
 /* Design Tokens as CSS Variables */
 :root {
-  /* Colors - Direct values for dark theme */
-  --color-background: #111827; /* gray-900 */
-  --color-surface: #1f2937; /* gray-800 */
-  --color-surface-hover: #374151; /* gray-700 */
-  --color-border: #374151; /* gray-700 */
-  --color-text-primary: #ffffff; /* white */
-  --color-text-secondary: #9ca3af; /* gray-400 */
+  /* Obsidian Scale (Primary Dark) */
+  --color-obsidian-50: #F8F9FA;   /* Ultra light for text on dark */
+  --color-obsidian-100: #E9ECEF;  /* Light text/borders */
+  --color-obsidian-200: #CED4DA;  /* Medium light borders */
+  --color-obsidian-300: #ADB5BD;  /* Secondary text */
+  --color-obsidian-400: #6C757D;  /* Muted text */
+  --color-obsidian-500: #495057;  /* Medium contrast */
+  --color-obsidian-600: #343A40;  /* Dark surfaces */
+  --color-obsidian-700: #212529;  /* Darker surfaces */
+  --color-obsidian-800: #16191C;  /* Card backgrounds */
+  --color-obsidian-900: #0B1215;  /* Main Background */
+  --color-obsidian-950: #050708;  /* Deepest black */
+
+  /* Gold Scale (Primary Accent) */
+  --color-gold-50: #FFFEF7;    /* Ultra light gold tint */
+  --color-gold-100: #FFF9E6;   /* Light gold backgrounds */
+  --color-gold-200: #FFF1CC;   /* Subtle gold highlights */
+  --color-gold-300: #FFE499;   /* Light gold accents */
+  --color-gold-400: #FFD966;   /* Medium gold */
+  --color-gold-500: #FFD700;   /* Standard Gold (Primary) */
+  --color-gold-600: #D4AF37;   /* Metallic Gold (Secondary) */
+  --color-gold-700: #B8941F;   /* Dark gold */
+  --color-gold-800: #9C7A0C;   /* Darker gold */
+  --color-gold-900: #7A5F00;   /* Deep gold */
+  --color-gold-950: #4D3D00;   /* Darkest gold */
+
+  /* Slate Scale (Neutral Greys) */
+  --color-slate-50: #F8FAFC;   /* Light text on dark */
+  --color-slate-100: #F1F5F9;  /* Very light borders */
+  --color-slate-200: #E2E8F0;  /* Light borders */
+  --color-slate-300: #CBD5E1;  /* Medium borders */
+  --color-slate-400: #94A3B8;  /* Secondary text */
+  --color-slate-500: #64748B;  /* Muted text */
+  --color-slate-600: #475569;  /* Dark text */
+  --color-slate-700: #334155;  /* Surface borders */
+  --color-slate-800: #1E293B;  /* Dark surfaces */
+  --color-slate-900: #0F172A;  /* Very dark surfaces */
+
+  /* Core Design Tokens (Obsidian Theme) */
+  --color-background: var(--color-obsidian-900); /* Main background */
+  --color-surface: var(--color-obsidian-800); /* Card backgrounds */
+  --color-surface-hover: var(--color-obsidian-700); /* Hover states */
+  --color-border: var(--color-obsidian-700); /* Border color */
+  --color-text-primary: var(--color-obsidian-50); /* Primary text */
+  --color-text-secondary: var(--color-slate-400); /* Secondary text */
   
   /* Accent colors (Gold) */
-  --color-accent-500: #F59E0B; /* Main Accent Gold */
-  --color-accent-600: #D97706;
-  --color-accent-700: #B45309;
+  --color-accent-500: var(--color-gold-500); /* Main Accent Gold */
+  --color-accent-600: var(--color-gold-600); /* Metallic Gold */
+  --color-accent-700: var(--color-gold-700); /* Dark Gold */
   
-  /* Node colors */
-  --color-node-problem: #6B7280;
-  --color-node-persona: #14B8A6;
-  --color-node-pain: #F97316;
-  --color-node-solution: #3B82F6;
+  /* Semantic Colors */
+  --color-success-500: #22C55E;   /* Green for success states */
+  --color-success-600: #16A34A;   /* Darker green */
+  --color-warning-500: var(--color-gold-500);   /* Gold for warnings */
+  --color-warning-600: var(--color-gold-600);   /* Metallic gold */
+  --color-error-500: #EF4444;     /* Red for errors */
+  --color-error-600: #DC2626;     /* Darker red */
+  --color-info-500: #3B82F6;      /* Blue for info */
+  --color-info-600: #2563EB;      /* Darker blue */
+  
+  /* Node colors (Obsidian Theme) */
+  --color-node-problem: #EF4444;   /* Red for problems */
+  --color-node-persona: #8B5CF6;   /* Purple for personas */
+  --color-node-pain: #F97316;      /* Orange for pain points */
+  --color-node-solution: var(--color-gold-500);  /* Gold for solutions */
+  --color-node-story: #3B82F6;     /* Blue for user stories */
+  --color-node-core: var(--color-gold-600);      /* Metallic gold for core problems */
+
+  /* Shadows (Obsidian Theme) */
+  --shadow-sm: 0 1px 2px 0 rgba(5, 7, 8, 0.3);
+  --shadow-base: 0 1px 3px 0 rgba(5, 7, 8, 0.4), 0 1px 2px 0 rgba(5, 7, 8, 0.2);
+  --shadow-md: 0 4px 6px -1px rgba(5, 7, 8, 0.4), 0 2px 4px -1px rgba(5, 7, 8, 0.2);
+  --shadow-lg: 0 10px 15px -3px rgba(5, 7, 8, 0.4), 0 4px 6px -2px rgba(5, 7, 8, 0.2);
+  --shadow-xl: 0 20px 25px -5px rgba(5, 7, 8, 0.5), 0 10px 10px -5px rgba(5, 7, 8, 0.3);
+  --shadow-2xl: 0 25px 50px -12px rgba(5, 7, 8, 0.6);
+
+  /* Glow effects */
+  --shadow-glow-gold: 0 0 20px rgba(255, 215, 0, 0.4);
+  --shadow-glow-metallic: 0 0 20px rgba(212, 175, 55, 0.3);
+  --shadow-glow-success: 0 0 20px rgba(34, 197, 94, 0.3);
+  --shadow-glow-error: 0 0 20px rgba(239, 68, 68, 0.3);
+
+  /* Obsidian-specific shadows */
+  --shadow-obsidian-inset: inset 0 2px 4px rgba(5, 7, 8, 0.8);
+  --shadow-obsidian-deep: 0 8px 32px rgba(5, 7, 8, 0.8);
   
   /* Spacing */
   --space-xs: 0.25rem; /* 1 */
@@ -10277,6 +32859,13 @@ File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/index.css
   --duration-base: 300ms;
   --duration-slow: 500ms;
   --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Transform variables */
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0deg;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
 }
 
 /* Reset and base styles */
@@ -10295,27 +32884,51 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html, body {
+  height: 100%;
+}
+
 #root {
+  height: 100%;
   min-height: 100vh;
 }
 
 /* Utility classes for Tailwind v4 */
 @layer base {
-  /* Colors */
-  .bg-gray-900 { background-color: #111827; }
-  .bg-gray-800 { background-color: #1f2937; }
-  .bg-gray-700 { background-color: #374151; }
-  .bg-gray-600 { background-color: #4b5563; }
-  .bg-gray-500 { background-color: #6b7280; }
+  /* Colors - Obsidian Theme */
+  .bg-obsidian-950 { background-color: var(--color-obsidian-950); }
+  .bg-obsidian-900 { background-color: var(--color-obsidian-900); }
+  .bg-obsidian-800 { background-color: var(--color-obsidian-800); }
+  .bg-obsidian-700 { background-color: var(--color-obsidian-700); }
+  .bg-obsidian-600 { background-color: var(--color-obsidian-600); }
+  .bg-obsidian-500 { background-color: var(--color-obsidian-500); }
+  .bg-obsidian-800\/95 { background-color: rgba(22, 25, 28, 0.95); }
   
-  .text-white { color: #ffffff; }
-  .text-gray-200 { color: #e5e7eb; }
-  .text-gray-300 { color: #d1d5db; }
-  .text-gray-400 { color: #9ca3af; }
-  .text-gray-500 { color: #6b7280; }
+  /* Legacy gray classes mapped to obsidian */
+  .bg-gray-900 { background-color: var(--color-obsidian-900); }
+  .bg-gray-800 { background-color: var(--color-obsidian-800); }
+  .bg-gray-700 { background-color: var(--color-obsidian-700); }
+  .bg-gray-600 { background-color: var(--color-obsidian-600); }
+  .bg-gray-500 { background-color: var(--color-obsidian-500); }
   
-  .border-gray-700 { border-color: #374151; }
-  .border-gray-600 { border-color: #4b5563; }
+  .text-white { color: var(--color-obsidian-50); }
+  .text-obsidian-50 { color: var(--color-obsidian-50); }
+  .text-obsidian-100 { color: var(--color-obsidian-100); }
+  .text-obsidian-300 { color: var(--color-obsidian-300); }
+  .text-slate-400 { color: var(--color-slate-400); }
+  
+  /* Legacy gray text classes mapped to obsidian/slate */
+  .text-gray-200 { color: var(--color-obsidian-100); }
+  .text-gray-300 { color: var(--color-obsidian-300); }
+  .text-gray-400 { color: var(--color-slate-400); }
+  .text-gray-500 { color: var(--color-slate-500); }
+  
+  .border-obsidian-700 { border-color: var(--color-obsidian-700); }
+  .border-slate-700 { border-color: var(--color-slate-700); }
+  
+  /* Legacy gray border classes mapped to obsidian */
+  .border-gray-700 { border-color: var(--color-obsidian-700); }
+  .border-gray-600 { border-color: var(--color-obsidian-600); }
   
   /* Layout */
   .flex { display: flex; }
@@ -10323,26 +32936,43 @@ html, body {
   .flex-col { flex-direction: column; }
   .flex-shrink-0 { flex-shrink: 0; }
   .items-center { align-items: center; }
+  .items-start { align-items: flex-start; }
   .justify-between { justify-content: space-between; }
+  .text-center { text-align: center; }
+  .text-left { text-align: left; }
   .gap-2 { gap: 0.5rem; }
   .gap-3 { gap: 0.75rem; }
+  .gap-8 { gap: 2rem; }
   
   /* Spacing */
   .p-2 { padding: 0.5rem; }
   .p-3 { padding: 0.75rem; }
   .p-4 { padding: 1rem; }
+  .pl-6 { padding-left: 1.5rem; }
   .p-6 { padding: 1.5rem; }
   .p-8 { padding: 2rem; }
   .px-4 { padding-left: 1rem; padding-right: 1rem; }
   .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .px-8 { padding-left: 2rem; padding-right: 2rem; }
+  .px-12 { padding-left: 3rem; padding-right: 3rem; }
   .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
   .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+  .py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+  .mt-1 { margin-top: 0.25rem; }
   .mt-2 { margin-top: 0.5rem; }
   .mt-4 { margin-top: 1rem; }
+  .mb-1 { margin-bottom: 0.25rem; }
+  .mb-2 { margin-bottom: 0.5rem; }
+  .mb-3 { margin-bottom: 0.75rem; }
+  .mb-4 { margin-bottom: 1rem; }
   .mb-6 { margin-bottom: 1.5rem; }
   .ml-4 { margin-left: 1rem; }
+  .mx-auto { margin-left: auto; margin-right: auto; }
+  .px-1\.5 { padding-left: 0.375rem; padding-right: 0.375rem; }
+  .py-0\.5 { padding-top: 0.125rem; padding-bottom: 0.125rem; }
   .space-y-1 > * + * { margin-top: 0.25rem; }
   .space-y-2 > * + * { margin-top: 0.5rem; }
+  .space-y-3 > * + * { margin-top: 0.75rem; }
   
   /* Sizing */
   .h-screen { height: 100vh; }
@@ -10352,6 +32982,22 @@ html, body {
   .w-80 { width: 20rem; }
   .min-h-screen { min-height: 100vh; }
   .max-w-2xl { max-width: 42rem; }
+  .max-w-xs { max-width: 20rem; }
+  .max-h-96 { max-height: 24rem; }
+  .w-64 { width: 16rem; }
+  .w-0 { width: 0; }
+  .h-0 { height: 0; }
+  .w-2 { width: 0.5rem; }
+  .h-2 { height: 0.5rem; }
+  .w-4 { width: 1rem; }
+  .h-4 { height: 1rem; }
+  .w-8 { width: 2rem; }
+  .h-8 { height: 2rem; }
+  .w-\[280px\] { width: 280px; }
+  .h-\[160px\] { height: 160px; }
+  .w-\[336px\] { width: 336px; }
+  .h-\[240px\] { height: 240px; }
+  .h-px { height: 1px; }
   
   /* Position */
   .relative { position: relative; }
@@ -10359,8 +33005,15 @@ html, body {
   .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
   .top-0 { top: 0; }
   .left-0 { left: 0; }
+  .top-2 { top: 0.5rem; }
+  .left-2 { left: 0.5rem; }
   .top-4 { top: 1rem; }
+  .right-0 { right: 0; }
+  .bottom-0 { bottom: 0; }
   .right-4 { right: 1rem; }
+  .top-8 { top: 2rem; }
+  .top-full { top: 100%; }
+  .left-1\/2 { left: 50%; }
   
   /* Display */
   .hidden { display: none; }
@@ -10378,6 +33031,8 @@ html, body {
   .font-semibold { font-weight: 600; }
   .font-mono { font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace; }
   .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .leading-relaxed { line-height: 1.625; }
+  .italic { font-style: italic; }
   
   /* Borders */
   .border { border-width: 1px; }
@@ -10391,12 +33046,42 @@ html, body {
   .rounded-lg { border-radius: 0.5rem; }
   .rounded-xl { border-radius: 0.75rem; }
   .rounded-full { border-radius: 9999px; }
+  .rounded-bl-sm { border-bottom-left-radius: 0.125rem; }
   
-  /* Effects */
-  .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
-  .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
-  .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+  /* Border styles for triangles */
+  .border-l-\[16px\] { border-left-width: 16px; }
+  .border-b-\[16px\] { border-bottom-width: 16px; }
+  .border-l-transparent { border-left-color: transparent; }
+  .border-b-gold-600\/20 { border-bottom-color: rgba(212, 175, 55, 0.2); }
+  
+  /* Effects - Obsidian Theme */
+  .shadow-sm { box-shadow: var(--shadow-sm); }
+  .shadow-base { box-shadow: var(--shadow-base); }
+  .shadow-md { box-shadow: var(--shadow-md); }
+  .shadow-lg { box-shadow: var(--shadow-lg); }
+  .shadow-xl { box-shadow: var(--shadow-xl); }
+  .shadow-2xl { box-shadow: var(--shadow-2xl); }
+  
+  /* Glow effects */
+  .shadow-glow-gold { box-shadow: var(--shadow-glow-gold); }
+  .shadow-glow-metallic { box-shadow: var(--shadow-glow-metallic); }
+  .shadow-glow-success { box-shadow: var(--shadow-glow-success); }
+  .shadow-glow-error { box-shadow: var(--shadow-glow-error); }
+  .shadow-gold-500\/10 { box-shadow: 0 10px 15px -3px rgba(255, 215, 0, 0.1); }
+  .shadow-gold-500\/20 { box-shadow: 0 20px 25px -5px rgba(255, 215, 0, 0.2); }
+  
+  /* Obsidian-specific shadows */
+  .shadow-obsidian-inset { box-shadow: var(--shadow-obsidian-inset); }
+  .shadow-obsidian-deep { box-shadow: var(--shadow-obsidian-deep); }
+  
   .opacity-50 { opacity: 0.5; }
+  
+  /* Backdrop filters */
+  .backdrop-blur-sm { backdrop-filter: blur(4px); }
+  .backdrop-blur { backdrop-filter: blur(8px); }
+  .backdrop-blur-md { backdrop-filter: blur(12px); }
+  .backdrop-blur-lg { backdrop-filter: blur(16px); }
+  .backdrop-blur-xl { backdrop-filter: blur(24px); }
   
   /* Z-index */
   .z-10 { z-index: 10; }
@@ -10410,6 +33095,16 @@ html, body {
   .pointer-events-none { pointer-events: none; }
   .pointer-events-auto { pointer-events: auto; }
   
+  /* Transform utilities */
+  .transform { transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+  .translate-x-1\/2 { --tw-translate-x: 50%; }
+  .-translate-x-1\/2 { --tw-translate-x: -50%; }
+  .translate-y-1\/2 { --tw-translate-y: 50%; }
+  .-translate-y-1\/2 { --tw-translate-y: -50%; }
+  .rotate-180 { --tw-rotate: 180deg; }
+  .min-w-0 { min-width: 0px; }
+  .h-full { height: 100%; }
+  
   /* Transitions */
   .transition-all { transition-property: all; }
   .transition-colors { transition-property: background-color, border-color, color, fill, stroke; }
@@ -10418,42 +33113,105 @@ html, body {
   .duration-300 { transition-duration: 300ms; }
   .duration-fast { transition-duration: var(--duration-fast); }
   
-  /* Custom colors */
-  .bg-red-600 { background-color: #dc2626; }
-  .bg-red-900\/30 { background-color: rgb(127 29 29 / 0.3); }
-  .bg-blue-400 { background-color: #60a5fa; }
-  .bg-blue-500 { background-color: #3b82f6; }
-  .bg-blue-600 { background-color: #2563eb; }
-  .bg-blue-700 { background-color: #1d4ed8; }
-  .bg-green-500 { background-color: #10b981; }
-  .bg-yellow-500 { background-color: #f59e0b; }
+  /* Custom colors - Obsidian/Gold Theme */
+  .bg-red-600 { background-color: var(--color-error-600); }
+  .bg-red-900\/30 { background-color: rgb(220 38 38 / 0.3); }
+  .bg-blue-400 { background-color: var(--color-gold-400); }
+  .bg-blue-500 { background-color: var(--color-gold-500); }
+  .bg-blue-600 { background-color: var(--color-gold-600); }
+  .bg-blue-700 { background-color: var(--color-gold-700); }
+  .bg-green-500 { background-color: var(--color-success-500); }
+  .bg-yellow-500 { background-color: var(--color-warning-500); }
+  .bg-amber-600 { background-color: #D97706; }
+  .bg-amber-700 { background-color: #B45309; }
+  .bg-teal-600 { background-color: #0D9488; }
+  .bg-teal-700 { background-color: #0F766E; }
+  .bg-orange-500 { background-color: #F97316; }
+  .bg-orange-900\/50 { background-color: rgb(194 65 12 / 0.5); }
+  .bg-yellow-900\/50 { background-color: rgb(133 77 14 / 0.5); }
+  .bg-red-500 { background-color: #EF4444; }
+  .bg-red-900\/50 { background-color: rgb(153 27 27 / 0.5); }
+  .bg-gray-900\/50 { background-color: rgb(17 24 39 / 0.5); }
+  
+  /* Gold background utilities */
+  .bg-gold-500 { background-color: var(--color-gold-500); }
+  .bg-gold-600 { background-color: var(--color-gold-600); }
+  .bg-gold-700 { background-color: var(--color-gold-700); }
+  .bg-gold-600\/20 { background-color: rgba(212, 175, 55, 0.2); }
+  .bg-gold-600\/30 { background-color: rgba(212, 175, 55, 0.3); }
+  
+  /* Accent colors (mapped to gold) */
   .bg-accent-500 { background-color: var(--color-accent-500); }
   .bg-accent-600 { background-color: var(--color-accent-600); }
-  .bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)); }
-  .from-gray-800 { --tw-gradient-from: #1f2937; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
-  .to-gray-900 { --tw-gradient-to: #111827; }
+  .bg-accent-700 { background-color: var(--color-accent-700); }
   
-  .text-red-400 { color: #f87171; }
-  .text-blue-400 { color: #60a5fa; }
+  /* Gradients - Obsidian theme */
+  .bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)); }
+  .from-obsidian-800 { --tw-gradient-from: var(--color-obsidian-800); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+  .to-obsidian-900 { --tw-gradient-to: var(--color-obsidian-900); }
+  .from-gray-800 { --tw-gradient-from: var(--color-obsidian-800); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+  .to-gray-900 { --tw-gradient-to: var(--color-obsidian-900); }
+  
+  .text-red-400 { color: var(--color-error-400); }
+  .text-red-500 { color: var(--color-error-500); }
+  .text-blue-400 { color: var(--color-gold-400); }
+  .text-blue-500 { color: var(--color-gold-500); }
+  
+  /* Gold text utilities */
+  .text-gold-500 { color: var(--color-gold-500); }
+  .text-gold-600 { color: var(--color-gold-600); }
+  .text-gold-700 { color: var(--color-gold-700); }
+  .text-gold-500\/50 { color: rgba(255, 215, 0, 0.5); }
+  
+  /* Accent text colors (mapped to gold) */
   .text-accent-500 { color: var(--color-accent-500); }
   .text-accent-600 { color: var(--color-accent-600); }
+  .text-accent-700 { color: var(--color-accent-700); }
   
-  .border-red-500 { border-color: #ef4444; }
-  .border-red-700 { border-color: #b91c1c; }
-  .border-green-500 { border-color: #10b981; }
-  .border-blue-500 { border-color: #3b82f6; }
-  .border-yellow-500 { border-color: #f59e0b; }
+  /* Success/Warning/Error text */
+  .text-success-500 { color: var(--color-success-500); }
+  .text-warning-500 { color: var(--color-warning-500); }
+  .text-error-500 { color: var(--color-error-500); }
+  .text-red-300 { color: #FCA5A5; }
+  .text-orange-300 { color: #FDBA74; }
+  .text-yellow-300 { color: #FDE047; }
+  .text-gray-500 { color: var(--color-slate-500); }
+  
+  .border-red-500 { border-color: var(--color-error-500); }
+  .border-red-700 { border-color: var(--color-error-600); }
+  .border-green-500 { border-color: var(--color-success-500); }
+  .border-blue-500 { border-color: var(--color-info-500); }
+  .border-yellow-500 { border-color: var(--color-warning-500); }
+  
+  /* Gold border utilities */
+  .border-gold-500 { border-color: var(--color-gold-500); }
+  .border-gold-600 { border-color: var(--color-gold-600); }
+  .border-gold-700 { border-color: var(--color-gold-700); }
+  .border-gold-600\/50 { border-color: rgba(212, 175, 55, 0.5); }
+  .border-gold-500\/50 { border-color: rgba(255, 215, 0, 0.5); }
+  
+  /* Accent border colors (mapped to gold) */
   .border-accent-500 { border-color: var(--color-accent-500); }
   .border-accent-600 { border-color: var(--color-accent-600); }
+  .border-accent-700 { border-color: var(--color-accent-700); }
   
   /* Focus states */
-  .focus\:border-blue-500:focus { border-color: #3b82f6; }
+  .focus\:border-blue-500:focus { border-color: var(--color-gold-500); }
   .focus\:outline-none:focus { outline: 2px solid transparent; outline-offset: 2px; }
   
-  /* Hover states */
-  .hover\:bg-gray-700:hover { background-color: #374151; }
-  .hover\:bg-blue-700:hover { background-color: #1d4ed8; }
-  .hover\:text-white:hover { color: #ffffff; }
+  /* Hover states - Obsidian Theme */
+  .hover\:bg-obsidian-700:hover { background-color: var(--color-obsidian-700); }
+  .hover\:bg-obsidian-600:hover { background-color: var(--color-obsidian-600); }
+  .hover\:bg-gold-600:hover { background-color: var(--color-gold-600); }
+  .hover\:bg-gold-700:hover { background-color: var(--color-gold-700); }
+  
+  /* Legacy hover states mapped to obsidian */
+  .hover\:bg-gray-700:hover { background-color: var(--color-obsidian-700); }
+  .hover\:bg-blue-700:hover { background-color: var(--color-gold-700); }
+  .hover\:text-white:hover { color: var(--color-obsidian-50); }
+  .hover\:text-gold-400:hover { color: var(--color-gold-400); }
+  .hover\:bg-amber-700:hover { background-color: #B45309; }
+  .hover\:bg-teal-700:hover { background-color: #0F766E; }
   
   /* Disabled states */
   .disabled\:opacity-50:disabled { opacity: 0.5; }
@@ -10475,13 +33233,111 @@ html, body {
   }
   
   @keyframes goldFlash {
-    0% { box-shadow: 0 0 0 0 var(--color-accent-500); }
-    25% { box-shadow: 0 0 20px 10px rgba(245, 158, 11, 0.4); }
-    50% { box-shadow: 0 0 30px 15px rgba(245, 158, 11, 0.6); }
-    75% { box-shadow: 0 0 20px 10px rgba(245, 158, 11, 0.4); }
-    100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+    0% { 
+      background-color: rgba(255, 215, 0, 0);
+    }
+    50% { 
+      background-color: rgba(255, 215, 0, 0.3);
+    }
+    100% { 
+      background-color: rgba(255, 215, 0, 0);
+    }
+  }
+  
+  /* Pulse glow animation */
+  .animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+  
+  @keyframes pulseGlow {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+    }
+    50% {
+      opacity: 0.8;
+      box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+    }
+  }
+
+  /* Ethereal float animation for pain point skeletons */
+  .ethereal-float {
+    animation: etherealFloat 4s ease-in-out infinite;
+  }
+
+  @keyframes etherealFloat {
+    0%, 100% {
+      transform: translateY(0px);
+      filter: brightness(1);
+    }
+    50% {
+      transform: translateY(-8px);
+      filter: brightness(1.1);
+    }
+  }
+
+  /* Ethereal glow for pain points */
+  .ethereal-glow {
+    animation: etherealGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes etherealGlow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(249, 115, 22, 0.3),
+                  0 0 40px rgba(249, 115, 22, 0.1);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(249, 115, 22, 0.5),
+                  0 0 60px rgba(249, 115, 22, 0.2);
+    }
+  }
+
+  /* Gold pulse border animation for refreshing nodes */
+  .gold-pulse-border {
+    position: relative;
+    overflow: visible;
+  }
+
+  .gold-pulse-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(45deg, #FFD700, #FFA500, #FFD700);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    animation: gold-border-pulse 1.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes gold-border-pulse {
+    0%, 100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.02);
+    }
   }
 }
+
+/* High-priority utility classes (outside @layer to ensure they apply) */
+.px-8 { padding-left: 2rem !important; padding-right: 2rem !important; }
+.px-12 { padding-left: 3rem !important; padding-right: 3rem !important; }
+.py-8 { padding-top: 2rem !important; padding-bottom: 2rem !important; }
+.gap-8 { gap: 2rem !important; }
+
+/* Interactive utilities for clickable elements */
+.hover\:scale-110:hover { transform: scale(1.1) !important; }
+.hover\:shadow-lg:hover { box-shadow: var(--shadow-lg) !important; }
+.focus\:outline-none:focus { outline: none !important; }
+.focus\:ring-2:focus { box-shadow: 0 0 0 2px var(--color-accent-500) !important; }
+.focus\:ring-offset-2:focus { box-shadow: 0 0 0 2px var(--color-accent-500), 0 0 0 4px var(--color-obsidian-800) !important; }
+.focus\:ring-offset-obsidian-800:focus { /* Combined with ring-offset-2 above */ }
+.focus\:ring-accent-500:focus { /* Combined with ring-2 above */ }
 
 /* Component styles */
 .btn {
@@ -10514,22 +33370,27 @@ html, body {
   border: 0;
 }
 
+/* Label nodes should always be on top */
+.react-flow__node-label {
+  z-index: 100 !important;
+}
+
 .react-flow__handle {
   width: 12px;
   height: 12px;
-  background: #4b5563;
-  border: 2px solid #111827;
+  background: var(--color-slate-600);
+  border: 2px solid var(--color-obsidian-800);
 }
 
 .react-flow__edge-path {
-  stroke: #4b5563;
+  stroke: var(--color-slate-600);
   stroke-width: 2;
 }
 
 /* Gradients for nodes */
 .gradient-problem {
-  background: linear-gradient(135deg, var(--color-gray-800), var(--color-gray-700));
-  border: 1px solid var(--color-gray-600);
+  background: linear-gradient(135deg, var(--color-obsidian-800), var(--color-obsidian-700));
+  border: 1px solid var(--color-gold-600);
 }
 
 /* Skeleton shimmer animation */
@@ -10551,9 +33412,9 @@ html, body {
   position: relative;
   overflow: hidden;
   background: linear-gradient(90deg, 
-    rgba(75, 85, 99, 0.5) 0%, 
-    rgba(107, 114, 128, 0.7) 50%, 
-    rgba(75, 85, 99, 0.5) 100%
+    rgba(5, 7, 8, 0.5) 0%, 
+    rgba(11, 18, 21, 0.7) 50%, 
+    rgba(5, 7, 8, 0.5) 100%
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
@@ -10569,16 +33430,18 @@ html, body {
 }
 
 .gradient-persona {
-  background: linear-gradient(135deg, var(--color-gray-800), var(--color-gray-700));
-  border: 1px solid var(--color-gray-600);
+  background: linear-gradient(135deg, var(--color-obsidian-800), var(--color-obsidian-700));
+  border: 1px solid var(--color-slate-600);
 }
 
 .gradient-pain {
-  background: linear-gradient(135deg, #f97316, #ea580c);
+  background: linear-gradient(135deg, var(--color-obsidian-800), var(--color-obsidian-700));
+  border: 1px solid var(--color-gold-700);
 }
 
 .gradient-solution {
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  background: linear-gradient(135deg, var(--color-gold-600), var(--color-gold-700));
+  border: 1px solid var(--color-gold-800);
 }
 
 /* Canvas node base styles */
@@ -10587,13 +33450,39 @@ html, body {
   padding: 1rem;
   border-radius: 0.5rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  animation: nodeAppear 0.3s ease-out;
+}
+
+@keyframes nodeAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .canvas-node:hover {
   transform: translateY(-2px);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Disable hover effects while dragging */
+.react-flow__node-dragging .canvas-node:hover {
+  transform: none;
+}
+
+/* Ensure draggable nodes have proper cursor */
+.react-flow__node-draggable {
+  cursor: grab;
+}
+
+.react-flow__node-dragging {
+  cursor: grabbing;
 }
 
 /* Scrollbar styles */
@@ -10603,16 +33492,16 @@ html, body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1f2937;
+  background: var(--color-obsidian-800);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #4b5563;
+  background: var(--color-obsidian-600);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #6b7280;
+  background: var(--color-obsidian-500);
 }
 
 /* Sidebar Component Styles - Following Design System */
@@ -10622,14 +33511,14 @@ html, body {
   font-size: 1.25rem; /* text-xl */
   font-weight: 600;
   line-height: 1.5;
-  color: white;
+  color: var(--color-obsidian-50);
 }
 
 .body-sm {
   font-size: 0.875rem; /* text-sm */
   font-weight: 400;
   line-height: 1.5;
-  color: #9CA3AF; /* gray-400 */
+  color: var(--color-slate-400);
 }
 
 /* Icons from Design System */
@@ -10652,18 +33541,18 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #1F2937; /* gray-800 */
-  color: #9CA3AF; /* gray-400 */
+  background: var(--color-obsidian-800);
+  color: var(--color-slate-400);
   border-radius: 0.5rem; /* radius-lg */
-  border: 1px solid #374151; /* gray-700 */
+  border: 1px solid var(--color-obsidian-700);
   transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 }
 
 .btn-icon:hover {
-  background: #374151; /* gray-700 */
-  color: white;
-  border-color: #4B5563; /* gray-600 */
+  background: var(--color-obsidian-700);
+  color: var(--color-obsidian-50);
+  border-color: var(--color-obsidian-600);
 }
 
 .btn-icon--small {
@@ -10675,8 +33564,8 @@ html, body {
 .sidebar {
   width: 256px;
   height: 100vh;
-  background: #1F2937; /* gray-800 */
-  border-right: 1px solid #374151; /* gray-700 */
+  background: var(--color-obsidian-800);
+  border-right: 1px solid var(--color-obsidian-700);
   display: flex;
   flex-direction: column;
 }
@@ -10684,7 +33573,7 @@ html, body {
 .sidebar-header {
   height: 64px;
   padding: 1rem;
-  border-bottom: 1px solid #374151; /* gray-700 */
+  border-bottom: 1px solid var(--color-obsidian-700);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10698,13 +33587,13 @@ html, body {
 
 .sidebar-footer {
   padding: 1rem;
-  border-top: 1px solid #374151; /* gray-700 */
+  border-top: 1px solid var(--color-obsidian-700);
 }
 
 .sidebar-item {
   padding: 0.5rem 0.75rem;
   border-radius: 0.375rem; /* radius-md */
-  color: #D1D5DB; /* gray-300 */
+  color: var(--color-obsidian-300);
   transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   display: flex;
@@ -10718,12 +33607,12 @@ html, body {
 }
 
 .sidebar-item:hover {
-  background: #374151; /* gray-700 */
-  color: white;
+  background: var(--color-obsidian-700);
+  color: var(--color-obsidian-50);
 }
 
 .sidebar-item--active {
-  background: #374151; /* gray-700 */
+  background: var(--color-obsidian-700);
   color: white;
 }
 
@@ -10772,7 +33661,7 @@ html, body {
   gap: 0.75rem;
   margin-top: 0.5rem;
   font-size: 0.75rem;
-  color: #6B7280; /* gray-500 */
+  color: var(--color-slate-500);
 }
 
 .workspace-meta-item {
@@ -10780,7 +33669,7 @@ html, body {
 }
 
 .workspace-meta-separator {
-  color: #4B5563; /* gray-600 */
+  color: var(--color-slate-600);
 }
 
 /* Project List Styles */
@@ -10788,7 +33677,7 @@ html, body {
   margin-left: 1.5rem;
   margin-top: 0.25rem;
   padding-left: 0.75rem;
-  border-left: 1px solid #374151; /* gray-700 */
+  border-left: 1px solid var(--color-slate-700);
 }
 
 .project-item {
@@ -10799,7 +33688,7 @@ html, body {
   padding: 0.375rem 0.5rem;
   margin-bottom: 0.125rem;
   border-radius: 0.375rem; /* radius-md */
-  color: #9CA3AF; /* gray-400 */
+  color: var(--color-slate-400);
   background: transparent;
   border: none;
   font-size: 0.875rem;
@@ -10814,7 +33703,7 @@ html, body {
 }
 
 .project-item--active {
-  background: #374151; /* gray-700 */
+  background: var(--color-slate-700);
   color: white;
 }
 
@@ -10834,15 +33723,15 @@ html, body {
 }
 
 .status-dot--draft {
-  background-color: #6B7280; /* gray-500 */
+  background-color: var(--color-slate-500);
 }
 
 .status-dot--progress {
-  background-color: #F59E0B; /* yellow-500 */
+  background-color: var(--color-warning-500);
 }
 
 .status-dot--completed {
-  background-color: #10B981; /* green-500 */
+  background-color: var(--color-success-500);
 }
 
 /* Version Timeline Controls */
@@ -11228,14 +34117,14 @@ html, body {
   position: relative;
   padding: 1rem;
   background: rgba(31, 41, 55, 0.5); /* gray-800/50 */
-  border: 1px solid #374151; /* gray-700 */
+  border: 1px solid var(--color-slate-700);
   border-radius: 0.5rem;
   transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 }
 
 .project-card:hover {
-  border-color: #4B5563; /* gray-600 */
+  border-color: var(--color-slate-600);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   transform: translateY(-1px);
 }
@@ -11259,16 +34148,16 @@ kbd {
   padding: 0.125rem 0.375rem;
   font-size: 0.75rem;
   font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
-  background: #374151; /* gray-700 */
-  border: 1px solid #4B5563; /* gray-600 */
+  background: var(--color-slate-700);
+  border: 1px solid var(--color-slate-600);
   border-radius: 0.25rem;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 2px #1F2937;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 2px var(--color-slate-800);
 }
 
 /* Sidebar scroll behavior */
 .sidebar-content {
   scrollbar-width: thin;
-  scrollbar-color: #4B5563 #1F2937;
+  scrollbar-color: var(--color-obsidian-600) var(--color-obsidian-800);
 }
 
 .sidebar-content::-webkit-scrollbar {
@@ -11276,16 +34165,16 @@ kbd {
 }
 
 .sidebar-content::-webkit-scrollbar-track {
-  background: #1F2937;
+  background: var(--color-obsidian-800);
 }
 
 .sidebar-content::-webkit-scrollbar-thumb {
-  background: #4B5563;
+  background: var(--color-obsidian-600);
   border-radius: 3px;
 }
 
 .sidebar-content::-webkit-scrollbar-thumb:hover {
-  background: #6B7280;
+  background: var(--color-obsidian-500);
 }
 
 /* Drag and drop styles */
@@ -11295,8 +34184,8 @@ kbd {
 }
 
 .project-card.drag-over {
-  border-color: #3B82F6; /* blue-500 */
-  background: rgba(59, 130, 246, 0.1);
+  border-color: var(--color-gold-500);
+  background: rgba(255, 215, 0, 0.1);
 }
 
 /* Context menu */
@@ -11317,12 +34206,12 @@ kbd {
 
 /* Multi-select styles */
 .project-card.selected {
-  background: rgba(59, 130, 246, 0.1);
-  border-color: #3B82F6;
+  background: rgba(255, 215, 0, 0.1);
+  border-color: var(--color-gold-500);
 }
 
 .project-card.focused {
-  outline: 2px solid #3B82F6;
+  outline: 2px solid var(--color-gold-500);
   outline-offset: 2px;
 }
 
@@ -11390,8 +34279,8 @@ kbd {
   left: 50%;
   transform: translateX(-50%);
   padding: 0.25rem 0.5rem;
-  background: #1F2937;
-  border: 1px solid #374151;
+  background: var(--color-obsidian-800);
+  border: 1px solid var(--color-obsidian-700);
   border-radius: 0.25rem;
   font-size: 0.75rem;
   white-space: nowrap;
@@ -11407,8 +34296,8 @@ kbd {
 /* Search input focus styles */
 .search-input:focus {
   outline: none;
-  border-color: #3B82F6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: var(--color-gold-500);
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
 }
 
 /* Smooth height transitions for expanding sections */
@@ -11419,10 +34308,712 @@ kbd {
 
 /* Fuse.js search highlighting */
 mark {
-  background: rgba(245, 158, 11, 0.3);
-  color: #FCD34D;
+  background: rgba(255, 215, 0, 0.3);
+  color: var(--color-gold-300);
   padding: 0 0.125rem;
   border-radius: 0.125rem;
+}
+
+/* Lock System Styles */
+.lock-indicator {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(245, 158, 11, 0.2);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-accent-500);
+}
+
+.lock-indicator-icon {
+  color: var(--color-accent-500);
+}
+
+.lock-tooltip {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  margin-bottom: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-fast) var(--ease-default);
+}
+
+.lock-indicator:hover .lock-tooltip {
+  opacity: 1;
+}
+
+.lock-tooltip p {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+}
+
+.lock-tooltip-time {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+}
+
+/* Lock Button */
+.lock-button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-base);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-default);
+  z-index: 10;
+}
+
+.lock-button:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.lock-button--locked {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: var(--color-accent-500);
+}
+
+.lock-icon {
+  color: var(--color-text-secondary);
+}
+
+.lock-icon--locked {
+  color: var(--color-accent-500);
+}
+
+/* Lock Tooltip Container */
+.lock-tooltip-container {
+  position: absolute;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.lock-tooltip-container--top {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: var(--space-sm);
+}
+
+.lock-tooltip-container--bottom {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: var(--space-sm);
+}
+
+.lock-tooltip-container--left {
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: var(--space-sm);
+}
+
+.lock-tooltip-container--right {
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: var(--space-sm);
+}
+
+.lock-tooltip-content {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-xl);
+  min-width: 200px;
+}
+
+.lock-tooltip-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-accent-500);
+  margin-bottom: var(--space-sm);
+}
+
+.lock-tooltip-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.lock-tooltip-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+}
+
+.lock-tooltip-expiry {
+  margin-top: var(--space-sm);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+}
+
+/* Bulk Lock Controls */
+.bulk-lock-controls {
+  position: fixed;
+  bottom: var(--space-xl);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-md) var(--space-lg);
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  z-index: 40;
+}
+
+.bulk-lock-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+}
+
+.bulk-lock-icon {
+  color: var(--color-primary-500);
+}
+
+.bulk-lock-count {
+  font-weight: var(--font-medium);
+}
+
+.bulk-lock-locked {
+  color: var(--color-accent-500);
+}
+
+.bulk-lock-actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.bulk-lock-button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-md);
+  background: var(--color-gray-700);
+  border: 1px solid var(--color-gray-600);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-default);
+}
+
+.bulk-lock-button:hover {
+  background: var(--color-gray-600);
+  transform: translateY(-1px);
+}
+
+.bulk-lock-button--unlock {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: var(--color-accent-600);
+  color: var(--color-accent-500);
+}
+
+.bulk-lock-button--unlock:hover {
+  background: rgba(245, 158, 11, 0.2);
+}
+
+.bulk-lock-total {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+}
+
+/* Refresh Button */
+.refresh-button {
+  width: 60px;
+  height: 60px;
+  background: var(--color-primary-600);
+  border: none;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-xl);
+  cursor: pointer;
+  transition: all var(--duration-base) var(--ease-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+}
+
+.refresh-button:hover {
+  background: var(--color-primary-700);
+  box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.refresh-button-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.refresh-button-icon {
+  color: white;
+}
+
+.refresh-button-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--color-accent-500);
+  border: 2px solid var(--color-surface);
+  border-radius: var(--radius-full);
+  padding: 2px 6px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  color: white;
+  min-width: 24px;
+  justify-content: center;
+}
+
+.refresh-button-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Refresh Modal */
+.refresh-modal {
+  width: 500px;
+  max-width: 90vw;
+}
+
+.refresh-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+}
+
+.refresh-modal-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.refresh-modal-title h2 {
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.refresh-modal-icon {
+  color: var(--color-primary-500);
+}
+
+.refresh-modal-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid var(--color-accent-600);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+  font-size: var(--text-sm);
+  color: var(--color-accent-500);
+}
+
+.refresh-modal-content {
+  margin-bottom: var(--space-lg);
+}
+
+.refresh-modal-description {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-lg);
+}
+
+.refresh-modal-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid var(--color-error-600);
+  border-radius: var(--radius-md);
+  margin-top: var(--space-lg);
+  font-size: var(--text-sm);
+  color: var(--color-error-500);
+}
+
+.refresh-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+}
+
+.refresh-modal-errors {
+  margin-top: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.refresh-error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--color-error-500);
+}
+
+/* Refresh Progress */
+.refresh-progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.refresh-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.refresh-progress-header h3 {
+  font-size: var(--text-lg);
+  font-weight: var(--font-medium);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.refresh-progress-count {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.refresh-progress-bar {
+  height: 8px;
+  background: var(--color-gray-700);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.refresh-progress-fill {
+  height: 100%;
+  background: var(--color-primary-500);
+  border-radius: var(--radius-full);
+}
+
+.refresh-progress-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+}
+
+.refresh-progress-step {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+}
+
+.refresh-progress-steps {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.refresh-progress-step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Regeneration Options */
+.regeneration-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.regeneration-option {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-default);
+}
+
+.regeneration-option:hover {
+  border-color: var(--color-gray-600);
+  background: rgba(55, 65, 81, 0.2);
+}
+
+.regeneration-option--selected {
+  border-color: var(--color-primary-500);
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.regeneration-option-label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+}
+
+.regeneration-option-checkbox {
+  display: none;
+}
+
+.regeneration-option-content {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.regeneration-option-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.regeneration-option-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+}
+
+.regeneration-option-text h4 {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.regeneration-option-text p {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.regeneration-option-locked {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  background: rgba(245, 158, 11, 0.1);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  color: var(--color-accent-500);
+}
+
+.regeneration-option-check {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary-500);
+  color: white;
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+}
+
+/* Selection Box */
+.selection-box {
+  position: absolute;
+  border: 2px dashed var(--color-primary-500);
+  background: rgba(59, 130, 246, 0.1);
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* Node locked state */
+.canvas-node--locked {
+  border: 2px solid var(--color-accent-500) !important;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+}
+
+/* Problem Node Specific Styles */
+.problem-textarea {
+  /* Sizing */
+  width: 100%;
+  min-height: 96px;
+  padding: 8px 12px !important; /* 8px top/bottom, 12px left/right - Override reset */
+  
+  /* Typography */
+  font-size: 14px;
+  line-height: 1.5;
+  color: #fff;
+  
+  /* Background & Border */
+  background: rgba(22, 25, 28, 0.8);
+  border: 1px solid #495057;
+  border-radius: 8px;
+  
+  /* Effects */
+  transition: all 300ms ease-out;
+  resize: none;
+}
+
+.problem-textarea:focus {
+  outline: none;
+  border-color: #6C757D;
+  box-shadow: none;
+}
+
+.problem-textarea::placeholder {
+  color: #6C757D;
+  opacity: 1;
+}
+
+/* Gold CTA Button */
+.btn-gold {
+  /* Sizing */
+  padding: var(--space-3) var(--space-6) !important;
+  min-width: 140px;
+  height: 48px;
+  
+  /* Typography */
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  
+  /* Colors */
+  background: var(--color-gold-600);
+  color: var(--color-obsidian-950);
+  
+  /* Border & Shape */
+  border: none;
+  border-radius: var(--radius-lg);
+  
+  /* Layout */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  
+  /* Effects */
+  transition: all var(--duration-base) var(--ease-out);
+  cursor: pointer;
+  box-shadow: var(--shadow-base);
+}
+
+.btn-gold:hover {
+  background: var(--color-gold-700);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-gold:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-base);
+}
+
+.btn-gold:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Problem Node Container Spacing */
+.problem-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md); /* 1rem = 16px spacing between flex items */
+}
+
+/* Quote Node Styles */
+.quote-node {
+  animation: fadeInQuote 0.5s ease-out;
+}
+
+@keyframes fadeInQuote {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Focus Group Edge Label */
+.focus-group-quote {
+  pointer-events: auto;
+  cursor: default;
+}
+
+.focus-group-quote:hover {
+  z-index: 1000;
+}
+
+/* Ensure problem nodes respect max-width */
+.react-flow__node-problem .canvas-node,
+.react-flow__node-coreProblem .canvas-node {
+  max-width: 500px !important;
+  min-width: 400px !important;
+  width: 450px !important;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Ensure problem input container doesn't overflow */
+.problem-input-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Ensure ring styles don't affect node dimensions */
+.react-flow__node .ring-2 {
+  box-sizing: border-box;
+}
+
+.react-flow__node .ring-accent-500 {
+  --tw-ring-color: var(--color-accent-500);
 }
 ```
 
@@ -11430,18 +35021,68 @@ File: /Users/hutch/Documents/projects/gauntlet/p3/prob/src/main.tsx
 ```tsx
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
+import App from "./App.tsx";
 import "./index.css";
 import { initializeCanvasSubscriptions } from "./stores/canvasStore";
 
 // Don't initialize canvas subscriptions - WorkflowCanvas manages nodes directly
 // initializeCanvasSubscriptions();
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
+console.log('[main.tsx] Starting application...');
+
+// Add global error handler
+window.addEventListener('error', (event) => {
+  console.error('[main.tsx] Global error:', event.error);
+});
+
+window.addEventListener('unhandledrejection', (event) => {
+  console.error('[main.tsx] Unhandled promise rejection:', event.reason);
+});
+
+// Simple error boundary
+class ErrorBoundary extends React.Component<{children: React.ReactNode}, {hasError: boolean}> {
+  constructor(props: {children: React.ReactNode}) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error('[ErrorBoundary] Caught error:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ padding: '20px', color: 'red', backgroundColor: 'white' }}>
+          <h1>Something went wrong.</h1>
+          <p>Check the console for details.</p>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+const rootElement = document.getElementById("root");
+console.log('[main.tsx] Root element found:', rootElement);
+
+if (rootElement) {
+  ReactDOM.createRoot(rootElement).render(
+    <React.StrictMode>
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
+    </React.StrictMode>,
+  );
+  console.log('[main.tsx] React app rendered');
+} else {
+  console.error('[main.tsx] Root element not found!');
+}
 
 ```
 
@@ -11456,296 +35097,303 @@ File: /Users/hutch/Documents/projects/gauntlet/p3/prob/supabase/functions/genera
 // supabase/functions/generate-pain-points/index.ts
 import { serve } from "std/http/server.ts"
 import { createClient } from "@supabase/supabase-js"
-import { StateGraph } from "@langchain/langgraph"
 import { OpenAI } from "openai"
 
-const openai = new OpenAI({
-  apiKey: Deno.env.get('OPENAI_API_KEY')
-})
-
-const supabaseUrl = Deno.env.get('SUPABASE_URL')!
-const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
-const supabase = createClient(supabaseUrl, supabaseKey)
-
-interface PainPointGenerationState {
-  projectId: string
-  personaId: string
-  persona?: any
-  coreProblem?: string
-  lockedPainPointIds: string[]
-  existingPainPoints?: any[]
-  newPainPoints?: any[]
-  generationBatch?: string
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-request-id',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS'
 }
-
-// Node: Load persona and problem context
-async function loadContext(state: PainPointGenerationState) {
-  // Get persona details
-  const { data: persona } = await supabase
-    .from('personas')
-    .select(`
-      *,
-      core_problems!inner(
-        validated_problem
-      )
-    `)
-    .eq('id', state.personaId)
-    .single()
-  
-  // Get existing pain points
-  const { data: existingPainPoints } = await supabase
-    .from('pain_points')
-    .select('*')
-    .eq('persona_id', state.personaId)
-    .order('position')
-  
-  return {
-    ...state,
-    persona,
-    coreProblem: persona.core_problems.validated_problem,
-    existingPainPoints: existingPainPoints || [],
-    generationBatch: crypto.randomUUID()
-  }
-}
-
-// Node: Generate pain points specific to the persona
-async function generatePainPoints(state: PainPointGenerationState) {
-  const { persona, coreProblem, existingPainPoints, lockedPainPointIds } = state
-  
-  const lockedPainPoints = existingPainPoints?.filter(pp => 
-    lockedPainPointIds.includes(pp.id)
-  ) || []
-  
-  const painPointsToGenerate = 3 - lockedPainPoints.length
-  
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4-turbo-preview",
-    messages: [
-      {
-        role: "system",
-        content: `You are an expert at understanding user pain points in specific contexts.
-        Generate pain points that are specific, actionable, and directly related to the persona's role and industry.`
-      },
-      {
-        role: "user",
-        content: `Core Problem: "${coreProblem}"
-        
-        Persona: ${persona.name}
-        Industry: ${persona.industry}
-        Role: ${persona.role}
-        Pain Level: ${persona.pain_degree}/5
-        
-        ${lockedPainPoints.length > 0 ? `Keep these existing pain points: ${JSON.stringify(lockedPainPoints.map(pp => pp.description))}` : ''}
-        
-        Generate ${painPointsToGenerate} specific pain points this persona experiences.
-        
-        Return as JSON:
-        {
-          "painPoints": [
-            {
-              "description": "Specific pain point description",
-              "severity": "Critical|High|Medium",
-              "impactArea": "Operations|Productivity|Revenue|Customer Experience|Compliance"
-            }
-          ]
-        }`
-      }
-    ],
-    response_format: { type: "json_object" }
-  })
-  
-  const { painPoints } = JSON.parse(completion.choices[0].message.content!)
-  
-  return {
-    ...state,
-    newPainPoints: painPoints
-  }
-}
-
-// Node: Validate pain point relevance
-async function validateRelevance(state: PainPointGenerationState) {
-  const { newPainPoints, persona, coreProblem } = state
-  
-  // Ensure pain points are specific and relevant
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4-turbo-preview",
-    messages: [
-      {
-        role: "system",
-        content: `Validate that pain points are specific and directly relevant to the persona and problem.`
-      },
-      {
-        role: "user",
-        content: `Validate these pain points:
-        ${JSON.stringify(newPainPoints)}
-        
-        For persona: ${persona.name} (${persona.role} in ${persona.industry})
-        Problem: ${coreProblem}
-        
-        If any are too generic or not relevant, provide improved versions.
-        Return the validated/improved pain points in the same JSON format.`
-      }
-    ],
-    response_format: { type: "json_object" }
-  })
-  
-  const { painPoints } = JSON.parse(completion.choices[0].message.content!)
-  
-  return {
-    ...state,
-    newPainPoints: painPoints
-  }
-}
-
-// Node: Save pain points to database
-async function savePainPoints(state: PainPointGenerationState) {
-  const { personaId, newPainPoints, lockedPainPointIds, generationBatch, projectId } = state
-  
-  // Delete non-locked pain points
-  if (lockedPainPointIds.length > 0) {
-    await supabase
-      .from('pain_points')
-      .delete()
-      .eq('persona_id', personaId)
-      .not('id', 'in', `(${lockedPainPointIds.join(',')})`)
-  } else {
-    await supabase
-      .from('pain_points')
-      .delete()
-      .eq('persona_id', personaId)
-  }
-  
-  // Insert new pain points
-  const painPointsToInsert = newPainPoints!.map((painPoint, index) => ({
-    persona_id: personaId,
-    description: painPoint.description,
-    severity: painPoint.severity,
-    impact_area: painPoint.impactArea,
-    position: index + lockedPainPointIds.length,
-    is_locked: false,
-    generation_batch: generationBatch
-  }))
-  
-  const { data: insertedPainPoints, error } = await supabase
-    .from('pain_points')
-    .insert(painPointsToInsert)
-    .select()
-  
-  if (error) throw error
-  
-  // Update persona to active
-  await supabase
-    .from('personas')
-    .update({ is_active: true })
-    .eq('id', personaId)
-  
-  // Deactivate other personas
-  await supabase
-    .from('personas')
-    .update({ is_active: false })
-    .eq('core_problem_id', state.persona!.core_problem_id)
-    .neq('id', personaId)
-  
-  // Log event
-  await supabase.from('langgraph_state_events').insert({
-    project_id: projectId,
-    event_type: 'pain_points_generated',
-    event_data: {
-      personaId,
-      generationBatch,
-      painPointCount: insertedPainPoints.length,
-      lockedCount: lockedPainPointIds.length
-    },
-    sequence_number: await getNextSequenceNumber(projectId)
-  })
-  
-  return {
-    ...state,
-    insertedPainPoints
-  }
-}
-
-// Helper function
-async function getNextSequenceNumber(projectId: string): Promise<number> {
-  const { data } = await supabase
-    .from('langgraph_state_events')
-    .select('sequence_number')
-    .eq('project_id', projectId)
-    .order('sequence_number', { ascending: false })
-    .limit(1)
-    .single()
-  
-  return (data?.sequence_number || 0) + 1
-}
-
-// Create the workflow
-const workflow = new StateGraph<PainPointGenerationState>({
-  channels: {
-    projectId: null,
-    personaId: null,
-    persona: null,
-    coreProblem: null,
-    lockedPainPointIds: null,
-    existingPainPoints: null,
-    newPainPoints: null,
-    generationBatch: null,
-    insertedPainPoints: null
-  }
-})
-
-// Add nodes
-workflow.addNode("loadContext", loadContext)
-workflow.addNode("generatePainPoints", generatePainPoints)
-workflow.addNode("validateRelevance", validateRelevance)
-workflow.addNode("savePainPoints", savePainPoints)
-
-// Define the flow
-workflow.setEntryPoint("loadContext")
-workflow.addEdge("loadContext", "generatePainPoints")
-workflow.addEdge("generatePainPoints", "validateRelevance")
-workflow.addEdge("validateRelevance", "savePainPoints")
-workflow.setFinishPoint("savePainPoints")
-
-const app = workflow.compile()
 
 serve(async (req) => {
+  // Handle CORS preflight
+  if (req.method === 'OPTIONS') {
+    return new Response('ok', { headers: corsHeaders })
+  }
+  
   try {
-    const { projectId, personaId, lockedPainPointIds = [] } = await req.json()
+    console.log('Generate pain points function started')
     
-    const startTime = Date.now()
+    // Initialize clients
+    const openaiKey = Deno.env.get('OPENAI_API_KEY')
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')
+    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')
     
-    // Execute the workflow
-    const result = await app.invoke({
-      projectId,
-      personaId,
-      lockedPainPointIds
-    })
+    if (!openaiKey || !supabaseUrl || !supabaseServiceKey) {
+      console.error('Missing required environment variables')
+      return new Response(JSON.stringify({ 
+        error: { message: 'Service configuration error', code: 'CONFIG_ERROR' }
+      }), { 
+        status: 500, 
+        headers: { ...corsHeaders, "Content-Type": "application/json" }
+      })
+    }
     
-    // Get all pain points
+    const openai = new OpenAI({ apiKey: openaiKey })
+    const supabase = createClient(supabaseUrl, supabaseServiceKey)
+    
+    // Parse request
+    const { projectId, personaId, personas, lockedPainPointIds = [] } = await req.json()
+    
+    // Handle both API patterns: single personaId or personas array
+    let activePersonaId = personaId
+    if (!activePersonaId && personas && personas.length > 0) {
+      activePersonaId = personas[0].id
+    }
+    
+    if (!projectId || !activePersonaId) {
+      return new Response(JSON.stringify({ 
+        error: { message: 'Missing required fields', code: 'INVALID_REQUEST' }
+      }), { 
+        status: 400, 
+        headers: { ...corsHeaders, "Content-Type": "application/json" }
+      })
+    }
+    
+    console.log('Processing persona:', activePersonaId)
+    
+    // Step 1: Load persona and problem context
+    const { data: persona, error: personaError } = await supabase
+      .from('personas')
+      .select(`
+        *,
+        core_problems!inner(
+          validated_problem
+        )
+      `)
+      .eq('id', activePersonaId)
+      .single()
+    
+    if (personaError || !persona) {
+      console.error('Error loading persona:', personaError)
+      throw new Error('Failed to load persona data')
+    }
+    
+    const coreProblem = persona.core_problems.validated_problem
+    console.log('Core problem:', coreProblem?.substring(0, 50) + '...')
+    
+    // Step 2: Get existing pain points
+    const { data: existingPainPoints = [] } = await supabase
+      .from('pain_points')
+      .select('*')
+      .eq('persona_id', activePersonaId)
+      .order('position')
+    
+    const lockedPainPoints = (existingPainPoints || []).filter(pp => 
+      lockedPainPointIds.includes(pp.id)
+    )
+    
+    const painPointsToGenerate = 7 - lockedPainPoints.length
+    console.log('Generating', painPointsToGenerate, 'pain points')
+    
+    // Step 3: Generate pain points
+ 
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4-turbo-preview",
+      messages: [
+        {
+          role: "system",
+          content: `You are an expert at identifying specific, actionable pain points that personas experience with particular problems.
+  
+          CRITICAL REQUIREMENT: Every pain point MUST be directly related to how the persona experiences the specified core problem in their daily work/life. Do not generate generic pain points - only those that stem from or connect to the core problem.
+  
+          Pain points should be:
+          - Specific manifestations of the core problem for this persona
+          - Written as single sentence descriptions of the pain point itself
+          - Never mention the persona by name or use pronouns (he/she/they)
+          - Detailed problems they actually face, not vague statements
+          - Actionable (something that could theoretically be solved)
+          - Realistic for their role, industry, and demographics
+          - Varied in severity and impact areas`
+        },
+        {
+          role: "user",
+          content: `Generate ${painPointsToGenerate} pain points that specifically show how this persona experiences the core problem:
+  
+          CORE PROBLEM TO ADDRESS: "${coreProblem}"
+          
+          Persona Details:
+          - Name: ${persona.name}
+          - Role: ${persona.role} in ${persona.industry}
+          - Demographics: ${JSON.stringify(persona.demographics)}
+          - Psychographics: ${JSON.stringify(persona.psychographics)}
+          
+          AVOID duplicating these existing pain points:
+          ${lockedPainPoints.map((p)=>p.description).join('\n')}
+          
+          INSTRUCTIONS:
+          1. Each pain point MUST directly relate to "${coreProblem}"
+          2. Think about how someone in their specific role/industry would experience this problem
+          3. Consider their demographics and psychographics when crafting pain points
+          4. Write each pain point as a single sentence describing the problem itself
+          5. NEVER mention the persona by name or use pronouns (he/she/they/their/etc.)
+          6. Make each pain point specific to their daily work/life context
+          7. Vary the severity and impact areas across the pain points
+          
+          Return a JSON object with a 'painPoints' array. Each pain point should have:
+          - description: single sentence describing the pain point itself (NO persona names or pronouns)
+          - severity: low/medium/high/critical  
+          - impactArea: category of impact (time, money, productivity, stress, reputation, growth, efficiency, etc.)
+          
+          Example format:
+          {
+            "painPoints": [
+              {
+                "description": "Manual tracking of customer interactions across multiple platforms takes 3+ hours daily due to lack of centralized visibility",
+                "severity": "high",
+                "impactArea": "time"
+              }
+            ]
+          }`
+        }
+      ],
+      response_format: {
+        type: "json_object"
+      }
+    });
+    
+    const { painPoints } = JSON.parse(completion.choices[0].message.content!);
+
+    console.log('Generated', painPoints.length, 'pain points')
+    
+    // Step 4: Delete non-locked pain points
+    if (lockedPainPointIds.length > 0) {
+      await supabase
+        .from('pain_points')
+        .delete()
+        .eq('persona_id', activePersonaId)
+        .not('id', 'in', `(${lockedPainPointIds.join(',')})`)
+    } else {
+      await supabase
+        .from('pain_points')
+        .delete()
+        .eq('persona_id', activePersonaId)
+    }
+    
+    // Step 5: Insert new pain points
+    const generationBatch = crypto.randomUUID()
+    const painPointsToInsert = painPoints.map((painPoint: any, index: number) => ({
+      persona_id: activePersonaId,
+      description: painPoint.description,
+      severity: painPoint.severity,
+      impact_area: painPoint.impactArea,
+      position: index + lockedPainPointIds.length,
+      is_locked: false,
+      generation_batch: generationBatch
+    }))
+    
+    const { data: insertedPainPoints, error: insertError } = await supabase
+      .from('pain_points')
+      .insert(painPointsToInsert)
+      .select()
+    
+    if (insertError) {
+      console.error('Error inserting pain points:', insertError)
+      throw new Error('Failed to save pain points')
+    }
+    
+    console.log('Inserted', insertedPainPoints?.length, 'pain points')
+    
+    // Step 6: Update persona to active
+    await supabase
+      .from('personas')
+      .update({ is_active: true })
+      .eq('id', activePersonaId)
+    
+    // Deactivate ALL other personas globally
+    await supabase
+      .from('personas')
+      .update({ is_active: false })
+      .neq('id', activePersonaId)
+    
+    // Get all pain points for response
     const { data: allPainPoints } = await supabase
       .from('pain_points')
       .select('*')
-      .eq('persona_id', personaId)
+      .eq('persona_id', activePersonaId)
       .order('position')
     
-    // Log execution
-    await supabase.from('langgraph_execution_logs').insert({
-      project_id: projectId,
-      node_name: 'generate_pain_points_workflow',
-      input_state: { projectId, personaId, lockedPainPointIds },
-      output_state: { painPointCount: allPainPoints?.length },
-      status: 'success',
-      execution_time_ms: Date.now() - startTime
+    console.log('Returning', allPainPoints?.length, 'total pain points')
+    
+    // Step 7: Automatically trigger generate-solutions
+    console.log('Triggering generate-solutions for persona:', activePersonaId)
+    try {
+      // Load all required data for generate-solutions
+      
+      // Get core problem details
+      const { data: coreProblemData } = await supabase
+        .from('core_problems')
+        .select('*')
+        .eq('id', persona.core_problem_id)
+        .single()
+      
+      // Get all personas for this project
+      const { data: allPersonas } = await supabase
+        .from('personas')
+        .select('*')
+        .eq('core_problem_id', persona.core_problem_id)
+        .order('position')
+      
+      // Get all pain points for all personas
+      const personaIds = allPersonas?.map(p => p.id) || []
+      const { data: allPainPointsForSolutions } = await supabase
+        .from('pain_points')
+        .select('*')
+        .in('persona_id', personaIds)
+      
+      console.log('Preparing data for generate-solutions:')
+      console.log('- Core problem:', coreProblemData?.validated_problem?.substring(0, 50) + '...')
+      console.log('- Personas count:', allPersonas?.length)
+      console.log('- Pain points count:', allPainPointsForSolutions?.length)
+      
+      // Call generate-solutions with the correct data structure
+      const solutionsResponse = await supabase.functions.invoke('generate-solutions', {
+        body: { 
+          coreProblem: {
+            id: coreProblemData?.id || persona.core_problem_id,
+            validated_problem: coreProblemData?.validated_problem || coreProblem
+          },
+          personas: allPersonas?.map(p => ({
+            id: p.id,
+            name: p.name,
+            role: p.role,
+            industry: p.industry,
+            description: p.description || `${p.role} in ${p.industry}`
+          })) || [],
+          painPoints: allPainPointsForSolutions?.map(pp => ({
+            id: pp.id,
+            description: pp.description,
+            severity: pp.severity,
+            persona_id: pp.persona_id
+          })) || []
+        }
+      })
+      
+      if (solutionsResponse.error) {
+        console.error('Failed to generate solutions:', solutionsResponse.error)
+        // Don't throw - pain points were successful, log the solutions error
+      } else {
+        console.log('Successfully triggered solutions generation:', solutionsResponse.data?.solutions?.length || 0, 'solutions')
+      }
+    } catch (solutionError) {
+      console.error('Error calling generate-solutions:', solutionError)
+      // Don't throw - pain points were successful, just log the error
+    }
+    
+    return new Response(JSON.stringify({ painPoints: allPainPoints || [] }), {
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
     })
     
-    return new Response(JSON.stringify({ painPoints: allPainPoints }), {
-      headers: { "Content-Type": "application/json" },
-    })
   } catch (error) {
     console.error('Error in generate-pain-points:', error)
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ 
+      error: {
+        message: error.message || 'Internal server error',
+        code: 'INTERNAL_ERROR'
+      }
+    }), {
       status: 500,
-      headers: { "Content-Type": "application/json" },
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
     })
   }
 })
@@ -11813,7 +35461,7 @@ serve(async (req) => {
       messages: [
         {
           role: "system",
-          content: `You are a persona generator. Create diverse personas that would experience the given problem.`
+          content: `You are a persona generator. Create diverse personas that would experience the given problem. IMPORTANT: Always include all required fields in your response.`
         },
         {
           role: "user",
@@ -11821,34 +35469,99 @@ serve(async (req) => {
           
           Generate 5 diverse personas who would face this problem.
           
+          IMPORTANT: Each persona MUST have ALL of these fields:
+          - name: A punny name that captures the essence of the persona (max 3 words, letters and spaces only, NO special characters)
+          - industry: The industry they work in
+          - role: Their job title
+          - description: Brief description of who they are and why they face this problem
+          - painDegree: A number from 1 to 5 indicating how severely they experience this problem
+          
           Return as JSON:
           {
             "personas": [
               {
-                "name": "Full Name",
-                "industry": "Industry Name",
-                "role": "Job Title",
-                "description": "Brief description of who they are and why they face this problem",
-                "painDegree": 1-5
+                "name": "Punny name (REQUIRED - max 3 words, letters and spaces only)",
+                "industry": "Industry Name (REQUIRED)",
+                "role": "Job Title (REQUIRED)",
+                "description": "Brief description (REQUIRED)",
+                "painDegree": 3
               }
             ]
           }`
         }
       ],
-      response_format: { type: "json_object" }
+      response_format: { type: "json_object" },
+      temperature: 0.7
     })
     
-    const result = JSON.parse(completion.choices[0].message.content!)
+    const aiResponse = completion.choices[0].message.content!
+    console.log('AI Response:', aiResponse)
+    
+    let result;
+    try {
+      result = JSON.parse(aiResponse)
+    } catch (parseError) {
+      console.error('Failed to parse AI response:', parseError)
+      throw new Error('Invalid AI response format')
+    }
+    
+    // Validate the AI response structure
+    if (!result.personas || !Array.isArray(result.personas)) {
+      console.error('Invalid AI response structure:', result)
+      throw new Error('AI response missing personas array')
+    }
+    
+    // Validate and clean each persona
+    const validatedPersonas = result.personas.map((persona: any, index: number) => {
+      // Validate required fields
+      if (!persona.name || typeof persona.name !== 'string' || persona.name.trim() === '') {
+        console.error(`Persona ${index} missing or invalid name:`, persona)
+        throw new Error(`Persona ${index} is missing a valid name`)
+      }
+      
+      if (!persona.industry || typeof persona.industry !== 'string' || persona.industry.trim() === '') {
+        console.error(`Persona ${index} missing or invalid industry:`, persona)
+        throw new Error(`Persona ${index} is missing a valid industry`)
+      }
+      
+      if (!persona.role || typeof persona.role !== 'string' || persona.role.trim() === '') {
+        console.error(`Persona ${index} missing or invalid role:`, persona)
+        throw new Error(`Persona ${index} is missing a valid role`)
+      }
+      
+      // Clean the name - remove any special characters and ensure max 3 words
+      const cleanedName = persona.name
+        .replace(/[^a-zA-Z\s]/g, '') // Remove non-letter characters
+        .trim()
+        .split(/\s+/) // Split by whitespace
+        .slice(0, 3) // Max 3 words
+        .join(' ')
+      
+      if (!cleanedName) {
+        throw new Error(`Persona ${index} has an invalid name after cleaning: ${persona.name}`)
+      }
+      
+      return {
+        name: cleanedName,
+        industry: persona.industry.trim(),
+        role: persona.role.trim(),
+        description: persona.description || '',
+        painDegree: Math.min(5, Math.max(1, parseInt(persona.painDegree) || 3))
+      }
+    })
+    
+    console.log('Validated personas:', validatedPersonas)
+    
     const generationBatch = crypto.randomUUID()
     
     // Store personas in database
-    const personasToInsert = result.personas.map((persona: any, index: number) => ({
+    const personasToInsert = validatedPersonas.map((persona: any, index: number) => ({
       id: crypto.randomUUID(),
       core_problem_id: coreProblemId,
       name: persona.name,
       industry: persona.industry,
       role: persona.role,
-      pain_degree: persona.painDegree || 3,
+      pain_degree: persona.painDegree,
       position: index + 1,
       is_locked: false,
       is_active: false,
@@ -11857,7 +35570,7 @@ serve(async (req) => {
     
     console.log('Inserting personas into database...')
     console.log('Core problem ID:', coreProblemId)
-    console.log('Personas to insert:', personasToInsert.length)
+    console.log('Personas to insert:', JSON.stringify(personasToInsert, null, 2))
     
     const { data: insertedPersonas, error: insertError } = await supabase
       .from('personas')
@@ -11896,14 +35609,16 @@ serve(async (req) => {
     }
     
     console.log('Personas stored successfully:', insertedPersonas?.length)
+    console.log('First inserted persona:', insertedPersonas?.[0])
     
     // Format response to match frontend expectations
-    const formattedPersonas = insertedPersonas.map((persona: any) => ({
+    const formattedPersonas = insertedPersonas?.map((persona: any) => ({
       id: persona.id,
       name: persona.name,
       industry: persona.industry,
       role: persona.role,
-      description: result.personas.find((p: any) => p.name === persona.name)?.description || '',
+      description: validatedPersonas.find((p: any) => p.name === persona.name)?.description || '',
+      pain_degree: persona.pain_degree,
       demographics: {
         industry: persona.industry,
         role: persona.role
@@ -11917,7 +35632,7 @@ serve(async (req) => {
       updated_at: persona.created_at
     }))
     
-    return new Response(JSON.stringify(formattedPersonas), {
+    return new Response(JSON.stringify({ personas: formattedPersonas || [] }), {
       headers: { 
         "Content-Type": "application/json",
         ...corsHeaders
@@ -11946,436 +35661,285 @@ File: /Users/hutch/Documents/projects/gauntlet/p3/prob/supabase/functions/genera
 ```ts
 // supabase/functions/generate-solutions/index.ts
 import { serve } from "std/http/server.ts"
-import { createClient } from "@supabase/supabase-js"
-import { StateGraph } from "@langchain/langgraph"
 import { OpenAI } from "openai"
 
-const openai = new OpenAI({
-  apiKey: Deno.env.get('OPENAI_API_KEY')
-})
-
-const supabaseUrl = Deno.env.get('SUPABASE_URL')!
-const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
-const supabase = createClient(supabaseUrl, supabaseKey)
-
-interface SolutionGenerationState {
-  projectId: string
-  personaId: string
-  persona?: any
-  coreProblem?: string
-  painPoints?: any[]
-  lockedSolutionIds: string[]
-  existingSolutions?: any[]
-  newSolutions?: any[]
-  solutionMappings?: any[]
-  generationBatch?: string
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-request-id',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS'
 }
 
-// Node: Load context including persona and pain points
-async function loadContext(state: SolutionGenerationState) {
-  // Get persona with core problem
-  const { data: persona } = await supabase
-    .from('personas')
-    .select(`
-      *,
-      core_problems!inner(
-        validated_problem
+interface CoreProblem {
+  id: string
+  validated_problem: string
+}
+
+interface Persona {
+  id: string
+  name: string
+  role: string
+  industry: string
+  description?: string
+}
+
+interface PainPoint {
+  id: string
+  description: string
+  severity: string
+  persona_id: string
+}
+
+interface GenerateSolutionsRequest {
+  coreProblem: CoreProblem
+  personas: Persona[]
+  painPoints: PainPoint[]
+}
+
+interface Solution {
+  id: string
+  title: string
+  description: string
+  complexity: "low" | "medium" | "high"
+  impact: "low" | "medium" | "high"
+  aligned_personas: string[]
+}
+
+serve(async (req) => {
+  // Handle CORS preflight
+  if (req.method === 'OPTIONS') {
+    return new Response('ok', { headers: corsHeaders })
+  }
+  
+  try {
+    console.log('Generate solutions function started')
+    console.log('Request method:', req.method)
+    console.log('Request headers:', JSON.stringify(Object.fromEntries(req.headers.entries())))
+    console.log('Request URL:', req.url)
+    
+    // Initialize OpenAI client
+    const openaiKey = Deno.env.get('OPENAI_API_KEY')
+    if (!openaiKey) {
+      console.error('Missing OpenAI API key')
+      return new Response(
+        JSON.stringify({ error: { message: 'Service configuration error', code: 'CONFIG_ERROR' } }), 
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       )
-    `)
-    .eq('id', state.personaId)
-    .single()
-  
-  // Get pain points
-  const { data: painPoints } = await supabase
-    .from('pain_points')
-    .select('*')
-    .eq('persona_id', state.personaId)
-    .order('position')
-  
-  // Get existing solutions
-  const { data: existingSolutions } = await supabase
-    .from('key_solutions')
-    .select('*')
-    .eq('persona_id', state.personaId)
-    .order('position')
-  
-  return {
-    ...state,
-    persona,
-    coreProblem: persona.core_problems.validated_problem,
-    painPoints: painPoints || [],
-    existingSolutions: existingSolutions || [],
-    generationBatch: crypto.randomUUID()
-  }
-}
-
-// Node: Generate solutions that address the pain points
-async function generateSolutions(state: SolutionGenerationState) {
-  const { persona, coreProblem, painPoints, existingSolutions, lockedSolutionIds } = state
-  
-  const lockedSolutions = existingSolutions?.filter(s => 
-    lockedSolutionIds.includes(s.id)
-  ) || []
-  
-  const solutionsToGenerate = 5 - lockedSolutions.length
-  
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4-turbo-preview",
-    messages: [
-      {
-        role: "system",
-        content: `You are an expert product strategist and solution architect.
-        Generate innovative software solutions that directly address the identified pain points.
-        Solutions should be specific, implementable, and valuable.`
-      },
-      {
-        role: "user",
-        content: `Core Problem: "${coreProblem}"
-        
-        Persona: ${persona.name} (${persona.role} in ${persona.industry})
-        
-        Pain Points:
-        ${painPoints?.map((pp, i) => `${i + 1}. [${pp.severity}] ${pp.description}`).join('\n') || 'None'}
-        
-        ${lockedSolutions.length > 0 ? `Keep these existing solutions: ${JSON.stringify(lockedSolutions.map(s => s.title))}` : ''}
-        
-        Generate ${solutionsToGenerate} software solutions.
-        
-        Return as JSON:
-        {
-          "solutions": [
-            {
-              "title": "Solution title",
-              "description": "How this solution works and what it accomplishes",
-              "solutionType": "Feature|Integration|Automation|Analytics|Platform",
-              "complexity": "Low|Medium|High",
-              "addressedPainPoints": [0, 1, 2] // indices of pain points this solution addresses
-            }
-          ]
-        }`
-      }
-    ],
-    response_format: { type: "json_object" }
-  })
-  
-  const { solutions } = JSON.parse(completion.choices[0].message.content!)
-  
-  return {
-    ...state,
-    newSolutions: solutions
-  }
-}
-
-// Node: Calculate solution-pain point relevance scores
-async function calculateRelevanceScores(state: SolutionGenerationState) {
-  const { newSolutions, painPoints } = state
-  
-  const mappings: any[] = []
-  
-  for (const solution of newSolutions!) {
-    for (const painPointIndex of solution.addressedPainPoints) {
-      const painPoint = painPoints![painPointIndex]
-      if (!painPoint) continue
-      
-      // Calculate relevance score using GPT-4
-      const completion = await openai.chat.completions.create({
-        model: "gpt-4-turbo-preview",
-        messages: [
-          {
-            role: "system",
-            content: `Rate how well a solution addresses a specific pain point on a scale of 0.0 to 1.0.`
-          },
-          {
-            role: "user",
-            content: `Pain Point: ${painPoint.description}
-            Solution: ${solution.title} - ${solution.description}
-            
-            Rate the relevance (0.0-1.0) and explain briefly.
-            Return as JSON: { "score": 0.0-1.0, "reasoning": "brief explanation" }`
-          }
-        ],
-        response_format: { type: "json_object" }
-      })
-      
-      const { score } = JSON.parse(completion.choices[0].message.content!)
-      
-      mappings.push({
-        solution,
-        painPointId: painPoint.id,
-        relevanceScore: score
-      })
     }
-  }
-  
-  return {
-    ...state,
-    solutionMappings: mappings
-  }
-}
-
-// Node: Ensure solution diversity and coverage
-async function ensureCoverage(state: SolutionGenerationState) {
-  const { newSolutions, painPoints, solutionMappings } = state
-  
-  // Check if all pain points are addressed
-  const addressedPainPointIds = new Set(solutionMappings!.map(m => m.painPointId))
-  const unaddressedPainPoints = painPoints!.filter(pp => !addressedPainPointIds.has(pp.id))
-  
-  if (unaddressedPainPoints.length > 0) {
-    // Generate additional solution for unaddressed pain points
+    
+    const openai = new OpenAI({ apiKey: openaiKey })
+    
+    // Parse request body with better error handling
+    let requestBody: GenerateSolutionsRequest;
+    let rawBody: string = '';
+    try {
+      // First, try to read the body as text to log it
+      const bodyClone = req.clone()
+      rawBody = await bodyClone.text()
+      console.log('Raw request body:', rawBody)
+      console.log('Body length:', rawBody.length)
+      
+      // Check if body is empty
+      if (!rawBody || rawBody.trim() === '') {
+        console.error('Empty request body received')
+        return new Response(
+          JSON.stringify({ 
+            error: { 
+              message: 'Empty request body. Expected JSON with coreProblem, personas, and painPoints fields', 
+              code: 'EMPTY_REQUEST_BODY'
+            }
+          }), 
+          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        )
+      }
+      
+      // Now parse the original request
+      requestBody = await req.json()
+      console.log('Parsed request body:', JSON.stringify(requestBody))
+    } catch (parseError) {
+      console.error('Error parsing request body:', parseError)
+      console.error('Raw body that failed to parse:', rawBody)
+      return new Response(
+        JSON.stringify({ 
+          error: { 
+            message: `Invalid JSON in request body: ${parseError.message}. Body received: ${rawBody.substring(0, 200)}${rawBody.length > 200 ? '...' : ''}`, 
+            code: 'INVALID_REQUEST_BODY'
+          }
+        }), 
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      )
+    }
+    
+    const { coreProblem, personas, painPoints } = requestBody
+    
+    // Validate required fields with detailed logging
+    if (!coreProblem) {
+      console.error('Missing coreProblem in request')
+      return new Response(
+        JSON.stringify({ error: { message: 'Missing required field: coreProblem', code: 'MISSING_CORE_PROBLEM' } }), 
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      )
+    }
+    
+    if (!personas) {
+      console.error('Missing personas in request')
+      return new Response(
+        JSON.stringify({ error: { message: 'Missing required field: personas', code: 'MISSING_PERSONAS' } }), 
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      )
+    }
+    
+    if (!painPoints) {
+      console.error('Missing painPoints in request')
+      return new Response(
+        JSON.stringify({ error: { message: 'Missing required field: painPoints', code: 'MISSING_PAIN_POINTS' } }), 
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      )
+    }
+    
+    if (!Array.isArray(personas) || personas.length === 0) {
+      console.error('Invalid personas array:', personas)
+      return new Response(
+        JSON.stringify({ error: { message: 'At least one persona is required', code: 'INVALID_PERSONAS' } }), 
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      )
+    }
+    
+    if (!Array.isArray(painPoints)) {
+      console.error('Invalid painPoints array:', painPoints)
+      return new Response(
+        JSON.stringify({ error: { message: 'painPoints must be an array', code: 'INVALID_PAIN_POINTS' } }), 
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      )
+    }
+    
+    console.log(`Processing request for ${personas.length} personas and ${painPoints.length} pain points`)
+    console.log('Core problem:', coreProblem.validated_problem)
+    console.log('First persona:', JSON.stringify(personas[0]))
+    
+    // Group pain points by persona for better context
+    const painPointsByPersona = painPoints.reduce((acc, pp) => {
+      if (!acc[pp.persona_id]) {
+        acc[pp.persona_id] = []
+      }
+      acc[pp.persona_id].push(pp)
+      return acc
+    }, {} as Record<string, PainPoint[]>)
+    
+    // Generate solutions using OpenAI
     const completion = await openai.chat.completions.create({
       model: "gpt-4-turbo-preview",
       messages: [
         {
           role: "system",
-          content: `Generate a solution that specifically addresses unaddressed pain points.`
+          content: `You are an expert product strategist and solution architect.
+          Generate innovative software solutions that directly address the identified pain points across multiple personas.
+          Each solution should align with exactly 2 personas who would benefit most from it.
+          
+          Solutions should be:
+          - Specific software features or capabilities
+          - Technically feasible to implement
+          - Clearly valuable to the aligned personas
+          - Different from each other (diverse approaches)
+          - Appropriately scoped (not too broad or narrow)
+          
+          CRITICAL REQUIREMENTS:
+          1. Generate exactly 5 solutions
+          2. Each solution must align with exactly 2 personas (use their names)
+          3. Each solution must address pain points from the aligned personas
+          4. Vary complexity and impact levels across solutions
+          5. Ensure solutions are complementary and cover different aspects of the problem`
         },
         {
           role: "user",
-          content: `These pain points are not well addressed:
-          ${unaddressedPainPoints.map(pp => pp.description).join('\n')}
+          content: `Generate 5 software solutions for this problem context:
+
+          CORE PROBLEM: "${coreProblem.validated_problem}"
           
-          Generate one comprehensive solution that addresses these.
-          Use the same JSON format as before.`
+          PERSONAS:
+          ${personas.map(p => `- ${p.name} (${p.role} in ${p.industry})`).join('\n')}
+          
+          PAIN POINTS BY PERSONA:
+          ${personas.map(persona => {
+            const personaPainPoints = painPointsByPersona[persona.id] || []
+            return `${persona.name}:
+            ${personaPainPoints.map(pp => `  • [${pp.severity}] ${pp.description}`).join('\n')}`
+          }).join('\n\n')}
+          
+          INSTRUCTIONS:
+          1. Each solution must address pain points from its 2 aligned personas
+          2. Use exact persona names from the list above
+          3. Vary complexity: include low, medium, and high complexity solutions
+          4. Vary impact: include different impact levels (low, medium, high)
+          5. Make solutions complementary - they should work together as a cohesive product suite
+          6. Focus on practical, implementable software solutions
+          
+          Return a JSON object with this exact structure:
+          {
+            "solutions": [
+              {
+                "id": "sol_1",
+                "title": "Clear, specific solution title",
+                "description": "Detailed explanation of how this solution works and what value it provides to the aligned personas",
+                "complexity": "low|medium|high",
+                "impact": "low|medium|high",
+                "aligned_personas": ["Persona Name 1", "Persona Name 2"]
+              }
+            ]
+          }
+          
+          Ensure each solution has a unique id (sol_1, sol_2, sol_3, sol_4, sol_5).`
         }
       ],
       response_format: { type: "json_object" }
     })
     
-    const { solutions } = JSON.parse(completion.choices[0].message.content!)
+    const result = JSON.parse(completion.choices[0].message.content!)
     
-    // Add the new solution and its mappings
-    newSolutions!.push(solutions[0])
-    
-    for (const pp of unaddressedPainPoints) {
-      solutionMappings!.push({
-        solution: solutions[0],
-        painPointId: pp.id,
-        relevanceScore: 0.8 // Default high relevance for targeted solution
-      })
+    if (!result.solutions || !Array.isArray(result.solutions)) {
+      throw new Error('Invalid response format from AI')
     }
-  }
-  
-  return state
-}
-
-// Node: Save solutions and mappings to database
-async function saveSolutions(state: SolutionGenerationState) {
-  const { projectId, personaId, newSolutions, solutionMappings, lockedSolutionIds, generationBatch } = state
-  
-  // Delete non-locked solutions and their mappings
-  if (lockedSolutionIds.length > 0) {
-    const { data: solutionsToDelete } = await supabase
-      .from('key_solutions')
-      .select('id')
-      .eq('persona_id', personaId)
-      .not('id', 'in', `(${lockedSolutionIds.join(',')})`)
     
-    if (solutionsToDelete && solutionsToDelete.length > 0) {
-      const idsToDelete = solutionsToDelete.map(s => s.id)
+    // Validate solution structure
+    const validatedSolutions: Solution[] = result.solutions.map((solution: any, index: number) => {
+      if (!solution.id) {
+        solution.id = `sol_${index + 1}`
+      }
       
-      // Delete mappings first
-      await supabase
-        .from('solution_pain_point_mappings')
-        .delete()
-        .in('solution_id', idsToDelete)
+      // Ensure aligned_personas is an array of exactly 2 strings
+      if (!Array.isArray(solution.aligned_personas) || solution.aligned_personas.length !== 2) {
+        console.warn(`Solution ${solution.id} has invalid aligned_personas, using first 2 personas`)
+        solution.aligned_personas = [personas[0].name, personas[1] ? personas[1].name : personas[0].name]
+      }
       
-      // Then delete solutions
-      await supabase
-        .from('key_solutions')
-        .delete()
-        .in('id', idsToDelete)
-    }
-  } else {
-    // Delete all mappings for this persona's solutions
-    const { data: allSolutions } = await supabase
-      .from('key_solutions')
-      .select('id')
-      .eq('persona_id', personaId)
-    
-    if (allSolutions && allSolutions.length > 0) {
-      await supabase
-        .from('solution_pain_point_mappings')
-        .delete()
-        .in('solution_id', allSolutions.map(s => s.id))
-    }
-    
-    // Delete all solutions
-    await supabase
-      .from('key_solutions')
-      .delete()
-      .eq('persona_id', personaId)
-  }
-  
-  // Insert new solutions
-  const solutionsToInsert = newSolutions!.map((solution, index) => ({
-    project_id: projectId,
-    persona_id: personaId,
-    title: solution.title,
-    description: solution.description,
-    solution_type: solution.solutionType,
-    complexity: solution.complexity,
-    position: index + lockedSolutionIds.length,
-    is_locked: false,
-    is_selected: false,
-    generation_batch: generationBatch
-  }))
-  
-  const { data: insertedSolutions, error } = await supabase
-    .from('key_solutions')
-    .insert(solutionsToInsert)
-    .select()
-  
-  if (error) throw error
-  
-  // Create solution ID map
-  const solutionIdMap = new Map()
-  insertedSolutions.forEach((sol, index) => {
-    solutionIdMap.set(newSolutions![index], sol.id)
-  })
-  
-  // Insert mappings
-  const mappingsToInsert = solutionMappings!
-    .filter(m => solutionIdMap.has(m.solution))
-    .map(m => ({
-      solution_id: solutionIdMap.get(m.solution),
-      pain_point_id: m.painPointId,
-      relevance_score: m.relevanceScore
-    }))
-  
-  await supabase
-    .from('solution_pain_point_mappings')
-    .insert(mappingsToInsert)
-  
-  // Update project status
-  await supabase
-    .from('projects')
-    .update({ 
-      current_step: 'solution_discovery',
-      status: 'solution_discovery'
-    })
-    .eq('id', projectId)
-  
-  // Log event
-  await supabase.from('langgraph_state_events').insert({
-    project_id: projectId,
-    event_type: 'solutions_generated',
-    event_data: {
-      personaId,
-      generationBatch,
-      solutionCount: insertedSolutions.length,
-      mappingCount: mappingsToInsert.length,
-      lockedCount: lockedSolutionIds.length
-    },
-    sequence_number: await getNextSequenceNumber(projectId)
-  })
-  
-  return {
-    ...state,
-    insertedSolutions,
-    insertedMappings: mappingsToInsert
-  }
-}
-
-// Helper function
-async function getNextSequenceNumber(projectId: string): Promise<number> {
-  const { data } = await supabase
-    .from('langgraph_state_events')
-    .select('sequence_number')
-    .eq('project_id', projectId)
-    .order('sequence_number', { ascending: false })
-    .limit(1)
-    .single()
-  
-  return (data?.sequence_number || 0) + 1
-}
-
-// Create the workflow
-const workflow = new StateGraph<SolutionGenerationState>({
-  channels: {
-    projectId: null,
-    personaId: null,
-    persona: null,
-    coreProblem: null,
-    painPoints: null,
-    lockedSolutionIds: null,
-    existingSolutions: null,
-    newSolutions: null,
-    solutionMappings: null,
-    generationBatch: null,
-    insertedSolutions: null,
-    insertedMappings: null
-  }
-})
-
-// Add nodes
-workflow.addNode("loadContext", loadContext)
-workflow.addNode("generateSolutions", generateSolutions)
-workflow.addNode("calculateRelevanceScores", calculateRelevanceScores)
-workflow.addNode("ensureCoverage", ensureCoverage)
-workflow.addNode("saveSolutions", saveSolutions)
-
-// Define the flow
-workflow.setEntryPoint("loadContext")
-workflow.addEdge("loadContext", "generateSolutions")
-workflow.addEdge("generateSolutions", "calculateRelevanceScores")
-workflow.addEdge("calculateRelevanceScores", "ensureCoverage")
-workflow.addEdge("ensureCoverage", "saveSolutions")
-workflow.setFinishPoint("saveSolutions")
-
-const app = workflow.compile()
-
-serve(async (req) => {
-  try {
-    const { projectId, personaId, lockedSolutionIds = [] } = await req.json()
-    
-    const startTime = Date.now()
-    
-    // Execute the workflow
-    const result = await app.invoke({
-      projectId,
-      personaId,
-      lockedSolutionIds
+      return {
+        id: solution.id,
+        title: solution.title || `Solution ${index + 1}`,
+        description: solution.description || 'No description provided',
+        complexity: solution.complexity || 'medium',
+        impact: solution.impact || 'medium',
+        aligned_personas: solution.aligned_personas
+      }
     })
     
-    // Get all solutions with mappings
-    const { data: allSolutions } = await supabase
-      .from('key_solutions')
-      .select(`
-        *,
-        solution_pain_point_mappings(
-          pain_point_id,
-          relevance_score
-        )
-      `)
-      .eq('persona_id', personaId)
-      .order('position')
+    console.log(`Successfully generated ${validatedSolutions.length} solutions`)
     
-    // Log execution
-    await supabase.from('langgraph_execution_logs').insert({
-      project_id: projectId,
-      node_name: 'generate_solutions_workflow',
-      input_state: { projectId, personaId, lockedSolutionIds },
-      output_state: { 
-        solutionCount: allSolutions?.length,
-        mappingCount: result.insertedMappings?.length
-      },
-      status: 'success',
-      execution_time_ms: Date.now() - startTime
-    })
+    return new Response(
+      JSON.stringify({ solutions: validatedSolutions }), 
+      { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    )
     
-    return new Response(JSON.stringify({ 
-      solutions: allSolutions,
-      mappings: result.insertedMappings
-    }), {
-      headers: { "Content-Type": "application/json" },
-    })
   } catch (error) {
     console.error('Error in generate-solutions:', error)
-    return new Response(JSON.stringify({ error: error.message }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    })
+    console.error('Error stack:', error.stack)
+    return new Response(
+      JSON.stringify({ 
+        error: { 
+          message: error.message || 'Internal server error', 
+          code: 'GENERATION_ERROR' 
+        }
+      }), 
+      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    )
   }
 })
 ```
@@ -13342,7 +36906,7 @@ serve(async (req) => {
 
 File: /Users/hutch/Documents/projects/gauntlet/p3/prob/supabase/functions/problem-validation/index.ts
 ```ts
-// supabase/functions/validate-problem/index.ts
+// supabase/functions/problem-validation/index.ts
 import { serve } from "std/http/server.ts"
 import { createClient } from "@supabase/supabase-js"
 import { OpenAI } from "openai"
@@ -14032,7 +37596,8 @@ File: /Users/hutch/Documents/projects/gauntlet/p3/prob/supabase/import_map.json
     "imports": {
         "std/": "https://deno.land/std@0.224.0/",
         "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2",
-        "@langchain/langgraph": "https://esm.sh/@langchain/langgraph@0.0.25",
+        "@langchain/langgraph": "https://esm.sh/@langchain/langgraph@0.2.0",
+        "langsmith": "https://esm.sh/langsmith@0.1.69",
         "openai": "https://esm.sh/openai@4",
         "zod": "https://deno.land/x/zod@v3.23.8/mod.ts"
     }

@@ -780,4 +780,129 @@ impl Queries {
         
         Ok(ids)
     }
+
+    // LangGraph tool support functions
+    pub fn execute_query(&self, query: &str, params: &[String]) -> Result<Vec<serde_json::Value>> {
+        let conn = self.pool.get()?;
+        let mut stmt = conn.prepare(query)?;
+        
+        let column_count = stmt.column_count();
+        let column_names: Vec<String> = (0..column_count)
+            .map(|i| stmt.column_name(i).unwrap().to_string())
+            .collect();
+        
+        let rows = stmt.query_map(rusqlite::params_from_iter(params), |row| {
+            let mut obj = serde_json::Map::new();
+            for (i, col_name) in column_names.iter().enumerate() {
+                let value: serde_json::Value = match row.get_raw(i).data_type() {
+                    rusqlite::types::Type::Null => serde_json::Value::Null,
+                    rusqlite::types::Type::Integer => {
+                        serde_json::Value::Number(serde_json::Number::from(row.get::<_, i64>(i)?))
+                    }
+                    rusqlite::types::Type::Real => {
+                        serde_json::Value::Number(serde_json::Number::from_f64(row.get::<_, f64>(i)?).unwrap())
+                    }
+                    rusqlite::types::Type::Text => {
+                        serde_json::Value::String(row.get::<_, String>(i)?)
+                    }
+                    rusqlite::types::Type::Blob => {
+                        let bytes: Vec<u8> = row.get(i)?;
+                        serde_json::Value::String(base64::encode(bytes))
+                    }
+                };
+                obj.insert(col_name.clone(), value);
+            }
+            Ok(serde_json::Value::Object(obj))
+        })?.collect::<Result<Vec<_>, _>>()?;
+        
+        Ok(rows)
+    }
+
+    pub fn get_problem_with_context(&self, problem_id: Option<String>) -> Result<serde_json::Value> {
+        let conn = self.pool.get()?;
+        
+        if let Some(id) = problem_id {
+            // Get specific problem with full context
+            let mut stmt = conn.prepare(
+                "SELECT p.id, p.name, p.status, p.current_step, 
+                        cp.original_input, cp.validated_problem, cp.is_valid,
+                        COUNT(DISTINCT pe.id) as persona_count,
+                        COUNT(DISTINCT s.id) as solution_count
+                 FROM projects p
+                 LEFT JOIN core_problems cp ON p.id = cp.project_id 
+                 LEFT JOIN personas pe ON cp.id = pe.core_problem_id
+                 LEFT JOIN key_solutions s ON p.id = s.project_id
+                 WHERE p.id = ?1 
+                 GROUP BY p.id"
+            )?;
+            
+            let context = stmt.query_row(params![id], |row| {
+                Ok(serde_json::json!({
+                    "project_id": row.get::<_, String>(0)?,
+                    "project_name": row.get::<_, String>(1)?,
+                    "status": row.get::<_, String>(2)?,
+                    "current_step": row.get::<_, String>(3)?,
+                    "original_input": row.get::<_, Option<String>>(4)?,
+                    "validated_problem": row.get::<_, Option<String>>(5)?,
+                    "is_valid": row.get::<_, Option<i32>>(6)?,
+                    "persona_count": row.get::<_, i32>(7)?,
+                    "solution_count": row.get::<_, i32>(8)?,
+                }))
+            })?;
+            
+            Ok(context)
+        } else {
+            // Get all projects summary
+            let mut stmt = conn.prepare(
+                "SELECT p.id, p.name, p.status, p.current_step,
+                        COUNT(DISTINCT pe.id) as persona_count,
+                        COUNT(DISTINCT s.id) as solution_count
+                 FROM projects p
+                 LEFT JOIN core_problems cp ON p.id = cp.project_id
+                 LEFT JOIN personas pe ON cp.id = pe.core_problem_id
+                 LEFT JOIN key_solutions s ON p.id = s.project_id
+                 GROUP BY p.id
+                 ORDER BY p.updated_at DESC"
+            )?;
+            
+            let projects = stmt.query_map([], |row| {
+                Ok(serde_json::json!({
+                    "project_id": row.get::<_, String>(0)?,
+                    "project_name": row.get::<_, String>(1)?,
+                    "status": row.get::<_, String>(2)?,
+                    "current_step": row.get::<_, String>(3)?,
+                    "persona_count": row.get::<_, i32>(4)?,
+                    "solution_count": row.get::<_, i32>(5)?,
+                }))
+            })?.collect::<Result<Vec<_>, _>>()?;
+            
+            Ok(serde_json::json!({
+                "projects": projects
+            }))
+        }
+    }
+
+    pub fn save_ai_generation_result(
+        &self, 
+        project_id: String, 
+        result_type: String, 
+        content: String, 
+        metadata: Option<String>
+    ) -> Result<()> {
+        let conn = self.pool.get()?;
+        conn.execute(
+            "INSERT INTO langgraph_state_events (id, project_id, event_type, event_data, event_metadata, sequence_number, created_by) 
+             VALUES (?1, ?2, ?3, ?4, ?5, 
+                     (SELECT COALESCE(MAX(sequence_number), 0) + 1 FROM langgraph_state_events WHERE project_id = ?2), 
+                     'ai_agent')",
+            params![
+                format!("{}_{}", uuid::Uuid::new_v4(), chrono::Utc::now().timestamp()),
+                project_id,
+                result_type,
+                content,
+                metadata,
+            ],
+        )?;
+        Ok(())
+    }
 }
